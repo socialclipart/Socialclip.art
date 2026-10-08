@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050505">
+<meta name="description" content="SocialClip Art & Media — Design, Digital, Social Media, Foto, Video und Marketing.">
 <title>SocialClip — Art & Media</title>
 
 <style>
@@ -33,26 +34,30 @@ a{
   text-decoration:none;
 }
 
-button{
+button,input,textarea{
   font:inherit;
 }
 
 :root{
   --bg:#050505;
-  --soft:#a7a39b;
-  --line:rgba(255,255,255,.13);
   --white:#f4f1ea;
+  --soft:#99958d;
+  --dim:#62605b;
+  --line:rgba(255,255,255,.13);
+  --line-soft:rgba(255,255,255,.07);
 }
 
-/* FILM LOOK */
+/* =========================
+   CINEMATIC BASE
+========================= */
 
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  pointer-events:none;
   z-index:9990;
-  opacity:.055;
+  pointer-events:none;
+  opacity:.035;
   background-image:
     repeating-radial-gradient(
       circle at 20% 30%,
@@ -63,15 +68,31 @@ body::before{
     );
 }
 
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:9985;
+  pointer-events:none;
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      transparent 25%,
+      rgba(0,0,0,.72) 100%
+    );
+}
+
 .vignette{
   position:fixed;
   inset:0;
   pointer-events:none;
   z-index:9980;
-  box-shadow:inset 0 0 180px rgba(0,0,0,.9);
+  box-shadow:inset 0 0 180px rgba(0,0,0,.95);
 }
 
-/* HEADER */
+/* =========================
+   TOP BAR
+========================= */
 
 .topbar{
   position:fixed;
@@ -79,88 +100,121 @@ body::before{
   left:0;
   width:100%;
   z-index:9000;
+
   display:flex;
   justify-content:space-between;
   align-items:center;
+
   padding:18px 28px;
-  border-bottom:1px solid rgba(255,255,255,.1);
-  background:rgba(5,5,5,.72);
-  backdrop-filter:blur(14px);
+
+  border-bottom:1px solid rgba(255,255,255,.09);
+
+  background:rgba(5,5,5,.62);
+  backdrop-filter:blur(18px);
+
+  transition:
+    background .5s ease,
+    border-color .5s ease;
+}
+
+.topbar.scrolled{
+  background:rgba(5,5,5,.9);
+  border-color:rgba(255,255,255,.16);
 }
 
 .logo{
-  font-size:14px;
+  font-size:13px;
   letter-spacing:.2em;
   font-weight:700;
 }
 
 .logo span{
-  color:#8f8b84;
+  color:#77736c;
   font-weight:400;
 }
 
 .clock{
   text-align:right;
-  font-size:11px;
-  letter-spacing:.14em;
-  color:#c9c5bc;
+  font-size:9px;
+  letter-spacing:.16em;
+  color:#8f8b84;
 }
 
 .clock strong{
   display:block;
-  color:#fff;
-  font-size:13px;
+  color:#f4f1ea;
+  font-size:12px;
   margin-bottom:3px;
+  letter-spacing:.12em;
 }
 
-/* FILM INFO */
+/* =========================
+   DIGITAL FILM MARKERS
+========================= */
+
+.progress{
+  position:fixed;
+  top:71px;
+  left:0;
+  width:0%;
+  height:1px;
+  z-index:9001;
+  background:#fff;
+  box-shadow:0 0 10px rgba(255,255,255,.45);
+}
 
 .scene-info{
   position:fixed;
   left:28px;
-  bottom:28px;
+  bottom:27px;
   z-index:8000;
-  font-size:10px;
+
+  color:rgba(255,255,255,.45);
+
+  font-size:9px;
   letter-spacing:.2em;
-  color:rgba(255,255,255,.55);
 }
 
 .rec{
-  display:inline-flex;
+  display:flex;
   align-items:center;
   gap:7px;
 }
 
 .rec-dot{
-  width:6px;
-  height:6px;
+  width:5px;
+  height:5px;
   border-radius:50%;
   background:#fff;
+  box-shadow:0 0 8px rgba(255,255,255,.7);
 }
 
-.progress{
-  position:fixed;
-  top:72px;
-  left:0;
-  height:1px;
-  width:0%;
-  background:#fff;
-  z-index:9001;
-  transition:width .1s linear;
-}
-
-/* INTRO */
+/* =========================
+   INTRO
+========================= */
 
 .intro{
   position:fixed;
   inset:0;
   z-index:7000;
-  background:#050505;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   overflow:hidden;
-  transition:opacity 1.3s ease,visibility 1.3s ease;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #151515 0,
+      #080808 38%,
+      #050505 75%
+    );
+
+  transition:
+    opacity 1.5s cubic-bezier(.77,0,.18,1),
+    visibility 1.5s;
 }
 
 .intro.hide{
@@ -171,57 +225,122 @@ body::before{
 
 .intro-grid{
   position:absolute;
-  inset:-20%;
+  inset:-25%;
+
   background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    linear-gradient(
+      rgba(255,255,255,.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.035) 1px,
+      transparent 1px
+    );
+
   background-size:70px 70px;
-  transform:perspective(700px) rotateX(58deg) scale(1.6);
+
+  transform:
+    perspective(750px)
+    rotateX(58deg)
+    scale(1.7);
+
   transform-origin:center bottom;
-  opacity:.55;
+
+  opacity:.42;
 }
 
 .intro-light{
   position:absolute;
-  width:35vw;
-  height:35vw;
-  min-width:250px;
-  min-height:250px;
+
+  width:45vw;
+  height:45vw;
+
+  min-width:280px;
+  min-height:280px;
+
   border-radius:50%;
-  background:radial-gradient(
-    circle,
-    rgba(255,255,255,.12),
-    rgba(255,255,255,0) 70%
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.09),
+      rgba(255,255,255,0) 68%
+    );
+
+  filter:blur(22px);
+}
+
+.intro-line{
+  position:absolute;
+  width:70vw;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.25),
+    transparent
   );
-  filter:blur(20px);
+  transform:rotate(-17deg);
+  opacity:.45;
+}
+
+.intro-corner{
+  position:absolute;
+  font-size:8px;
+  letter-spacing:.25em;
+  color:#65615b;
+}
+
+.intro-corner.one{
+  top:110px;
+  left:28px;
+}
+
+.intro-corner.two{
+  top:110px;
+  right:28px;
+}
+
+.intro-corner.three{
+  bottom:28px;
+  right:28px;
 }
 
 .intro-content{
   position:relative;
-  z-index:3;
+  z-index:4;
+
   width:min(1000px,90%);
   text-align:center;
 }
 
 .intro-label{
-  font-size:10px;
-  letter-spacing:.35em;
-  color:#89857e;
   margin-bottom:30px;
+
+  font-size:9px;
+  letter-spacing:.38em;
+  color:#77736c;
 }
 
 .intro-title{
-  font-size:clamp(45px,8vw,110px);
-  line-height:.9;
-  letter-spacing:-.055em;
+  font-size:
+    clamp(48px,8vw,112px);
+
+  line-height:.88;
+  letter-spacing:-.065em;
   font-weight:800;
 }
 
 .intro-title span{
   display:block;
+
   opacity:0;
-  transform:translateY(25px);
-  transition:opacity .9s ease,transform .9s ease;
+  transform:translateY(28px);
+
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(.22,1,.36,1);
 }
 
 .intro-title span.show{
@@ -231,18 +350,31 @@ body::before{
 
 .intro-copy{
   margin:38px auto 0;
-  max-width:620px;
-  color:#9d9991;
+
+  max-width:650px;
+
+  min-height:55px;
+
+  color:#918d85;
+
   font-size:15px;
   line-height:1.8;
-  min-height:55px;
+
+  transition:
+    opacity .6s ease,
+    transform .6s ease;
 }
 
 .intro-final{
   margin-top:35px;
+
   opacity:0;
   transform:translateY(15px);
-  transition:opacity 1s ease,transform 1s ease;
+
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+
   pointer-events:none;
 }
 
@@ -253,52 +385,89 @@ body::before{
 }
 
 .enter{
-  border:1px solid rgba(255,255,255,.35);
-  background:transparent;
+  position:relative;
+
+  border:1px solid rgba(255,255,255,.3);
+
+  background:rgba(255,255,255,.015);
+
   color:#fff;
-  padding:15px 24px;
+
+  padding:16px 25px;
+
   cursor:pointer;
-  letter-spacing:.18em;
-  font-size:10px;
-  transition:.35s ease;
+
+  font-size:9px;
+  letter-spacing:.2em;
+
+  overflow:hidden;
+
+  transition:
+    background .35s ease,
+    color .35s ease,
+    border-color .35s ease;
+}
+
+.enter::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+
+  background:rgba(255,255,255,.12);
+
+  transition:left .5s ease;
+}
+
+.enter:hover::before{
+  left:100%;
 }
 
 .enter:hover{
   background:#fff;
   color:#050505;
+  border-color:#fff;
 }
 
-/* SECTIONS */
+/* =========================
+   CINEMATIC CUT
+========================= */
+
+.film-cut{
+  position:fixed;
+  inset:0;
+  z-index:9500;
+
+  background:#fff;
+
+  pointer-events:none;
+
+  transform:scaleY(0);
+
+  transform-origin:center;
+
+  transition:
+    transform .65s cubic-bezier(.77,0,.18,1);
+}
+
+.film-cut.active{
+  transform:scaleY(1);
+}
+
+/* =========================
+   GENERAL SECTIONS
+========================= */
 
 section{
   position:relative;
+
   min-height:100vh;
-  padding:130px 7vw;
-}
 
-.section-label{
-  font-size:10px;
-  letter-spacing:.3em;
-  color:#77736c;
-  margin-bottom:25px;
-}
-
-.big-title{
-  font-size:clamp(48px,9vw,140px);
-  line-height:.88;
-  letter-spacing:-.065em;
-  max-width:1100px;
-}
-
-.big-title span{
-  color:#77736c;
-}
-
-.text{
-  max-width:650px;
-  color:#aaa69e;
-  line-height:1.8;
-  font-size:16px;
+  padding:
+    135px
+    7vw;
 }
 
 .center{
@@ -307,310 +476,580 @@ section{
   justify-content:center;
 }
 
-/* HERO */
+.section-label{
+  margin-bottom:25px;
+
+  font-size:9px;
+  letter-spacing:.32em;
+
+  color:#69655f;
+}
+
+.big-title{
+  max-width:1150px;
+
+  font-size:
+    clamp(48px,9vw,145px);
+
+  line-height:.86;
+
+  letter-spacing:-.07em;
+}
+
+.big-title span{
+  color:#77736c;
+}
+
+.text{
+  max-width:650px;
+
+  color:#9b978f;
+
+  font-size:15px;
+  line-height:1.9;
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
   min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+
   padding-top:160px;
+
+  background:
+    radial-gradient(
+      circle at 75% 35%,
+      rgba(255,255,255,.035),
+      transparent 30%
+    );
 }
 
 .hero-small{
   margin-top:40px;
-  font-size:11px;
-  letter-spacing:.22em;
-  color:#8c8880;
+
+  color:#68645e;
+
+  font-size:9px;
+  letter-spacing:.25em;
 }
 
-/* CATEGORIES */
+/* =========================
+   CINEMATIC CHAPTER LINE
+========================= */
+
+.chapter-line{
+  display:flex;
+  align-items:center;
+  gap:15px;
+
+  margin-bottom:35px;
+
+  color:#65615b;
+
+  font-size:8px;
+  letter-spacing:.25em;
+}
+
+.chapter-line::before{
+  content:"";
+
+  width:45px;
+  height:1px;
+
+  background:#77736c;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
 
 .categories{
   border-top:1px solid var(--line);
 }
 
 .category-grid{
-  margin-top:70px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
+
+  margin-top:75px;
+
   border-top:1px solid var(--line);
   border-left:1px solid var(--line);
 }
 
 .category{
-  min-height:260px;
+  min-height:275px;
+
   padding:35px;
-  border-right:1px solid var(--line);
-  border-bottom:1px solid var(--line);
+
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  transition:background .4s ease,transform .4s ease;
+
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+
+  transition:
+    background .45s ease,
+    transform .45s ease;
 }
 
 .category:hover{
-  background:#0c0c0c;
-  transform:translateY(-4px);
+  background:#0b0b0b;
+  transform:translateY(-5px);
 }
 
 .category-number{
-  color:#66625b;
-  font-size:10px;
+  color:#5d5953;
+
+  font-size:9px;
   letter-spacing:.2em;
 }
 
 .category h3{
-  font-size:30px;
-  letter-spacing:-.04em;
+  font-size:31px;
+  font-weight:500;
+  letter-spacing:-.045em;
 }
 
 .category p{
-  color:#77736c;
-  line-height:1.6;
-  font-size:13px;
+  max-width:330px;
+
+  color:#74706a;
+
+  font-size:12px;
+  line-height:1.7;
 }
 
-/* SERVICES */
+/* =========================
+   SERVICES
+========================= */
 
 .services{
   border-top:1px solid var(--line);
 }
 
 .service-list{
-  margin-top:60px;
+  margin-top:65px;
 }
 
 .service{
   display:grid;
-  grid-template-columns:80px 1fr auto;
+  grid-template-columns:75px 1fr auto;
+
   gap:25px;
   align-items:center;
-  padding:27px 0;
+
+  padding:28px 0;
+
   border-bottom:1px solid var(--line);
-  transition:padding .4s ease;
+
+  transition:
+    padding .4s ease,
+    background .4s ease;
 }
 
 .service:hover{
-  padding-left:15px;
-  padding-right:15px;
+  padding-left:16px;
+  padding-right:16px;
+
   background:rgba(255,255,255,.025);
 }
 
 .service-number{
-  color:#5f5b55;
-  font-size:11px;
+  color:#5d5953;
+  font-size:10px;
 }
 
 .service h3{
-  font-size:clamp(20px,3vw,35px);
-  font-weight:500;
-  letter-spacing:-.03em;
+  font-size:
+    clamp(20px,3vw,36px);
+
+  font-weight:400;
+
+  letter-spacing:-.035em;
 }
 
 .service-arrow{
   color:#77736c;
+  font-size:16px;
 }
 
-/* MANIFESTO */
+/* =========================
+   MANIFESTO
+========================= */
 
 .manifesto{
-  background:#0a0a0a;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      #101010,
+      #080808 55%,
+      #050505
+    );
 }
 
 .manifesto-text{
-  max-width:1100px;
-  font-size:clamp(38px,6vw,88px);
-  line-height:1;
-  letter-spacing:-.05em;
+  max-width:1150px;
+
+  font-size:
+    clamp(38px,6vw,90px);
+
+  line-height:.98;
+
+  letter-spacing:-.055em;
 }
 
 .manifesto-text span{
   color:#77736c;
 }
 
-/* VISUAL WORLD */
+/* =========================
+   VISUAL WORLD
+========================= */
 
 .visual-world{
   overflow:hidden;
 }
 
 .visual-grid{
-  margin-top:70px;
   display:grid;
-  grid-template-columns:1.3fr .7fr;
+
+  grid-template-columns:
+    1.3fr .7fr;
+
   gap:18px;
+
+  margin-top:70px;
 }
 
 .visual-card{
-  min-height:430px;
   position:relative;
+
+  min-height:440px;
+
   overflow:hidden;
+
   border:1px solid var(--line);
+
   background:
-    radial-gradient(circle at 30% 30%,rgba(255,255,255,.18),transparent 25%),
-    radial-gradient(circle at 70% 70%,rgba(255,255,255,.08),transparent 30%),
-    linear-gradient(135deg,#111,#050505 60%);
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(255,255,255,.16),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 75% 70%,
+      rgba(255,255,255,.07),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #151515,
+      #050505 65%
+    );
 }
 
 .visual-card:nth-child(2){
   min-height:280px;
+
   background:
-    linear-gradient(120deg,transparent 35%,rgba(255,255,255,.1)),
-    linear-gradient(25deg,#080808,#171717);
+    linear-gradient(
+      125deg,
+      transparent 25%,
+      rgba(255,255,255,.1)
+    ),
+    linear-gradient(
+      25deg,
+      #070707,
+      #191919
+    );
 }
 
 .visual-card:nth-child(3){
   min-height:280px;
+
   background:
-    radial-gradient(ellipse at 70% 30%,rgba(255,255,255,.12),transparent 20%),
-    linear-gradient(145deg,#151515,#050505);
+    radial-gradient(
+      ellipse at 70% 30%,
+      rgba(255,255,255,.14),
+      transparent 22%
+    ),
+    linear-gradient(
+      145deg,
+      #151515,
+      #050505
+    );
+}
+
+.visual-card::before{
+  content:"";
+
+  position:absolute;
+  width:180%;
+  height:1px;
+
+  left:-40%;
+  top:50%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.15),
+      transparent
+    );
+
+  transform:rotate(-25deg);
 }
 
 .visual-card::after{
   content:"";
+
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,.08),
-    transparent
-  );
-  transform:translateX(-100%);
-  transition:transform 1s ease;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(255,255,255,.08),
+      transparent 70%
+    );
+
+  transform:translateX(-110%);
+
+  transition:
+    transform 1.2s ease;
 }
 
 .visual-card:hover::after{
-  transform:translateX(100%);
+  transform:translateX(110%);
 }
 
 .visual-word{
   position:absolute;
+
   left:25px;
-  bottom:22px;
-  font-size:11px;
-  letter-spacing:.25em;
+  bottom:23px;
+
+  font-size:9px;
+  letter-spacing:.28em;
+
   color:#aaa69e;
 }
 
-/* MAKE VISIBLE */
+/* =========================
+   MAKE VISIBLE
+========================= */
 
 .make-visible{
   min-height:90vh;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   text-align:center;
 }
 
 .make-visible h2{
-  font-size:clamp(60px,12vw,180px);
-  line-height:.8;
-  letter-spacing:-.08em;
+  font-size:
+    clamp(60px,12vw,185px);
+
+  line-height:.78;
+
+  letter-spacing:-.085em;
 }
 
 .make-visible p{
-  margin:35px auto 0;
   max-width:550px;
-  color:#8b877f;
-  line-height:1.7;
+
+  margin:38px auto 0;
+
+  color:#85817a;
+
+  font-size:14px;
+  line-height:1.8;
 }
 
-/* INSTAGRAM */
+/* =========================
+   INSTAGRAM
+========================= */
 
 .instagram{
   border-top:1px solid var(--line);
 }
 
 .instagram-box{
-  margin-top:60px;
-  border:1px solid var(--line);
-  padding:50px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+
   gap:30px;
+
+  margin-top:65px;
+
+  padding:50px;
+
+  border:1px solid var(--line);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.035),
+      transparent
+    );
 }
 
 .instagram-box strong{
-  font-size:clamp(25px,4vw,50px);
-  letter-spacing:-.04em;
+  font-size:
+    clamp(25px,4vw,52px);
+
+  font-weight:400;
+
+  letter-spacing:-.045em;
 }
 
 .instagram-box a{
-  border:1px solid rgba(255,255,255,.3);
-  padding:14px 20px;
-  font-size:10px;
-  letter-spacing:.18em;
+  padding:15px 21px;
+
+  border:1px solid rgba(255,255,255,.25);
+
+  font-size:9px;
+  letter-spacing:.2em;
+
+  transition:.35s ease;
 }
 
-/* CONTACT */
+.instagram-box a:hover{
+  background:#fff;
+  color:#050505;
+}
+
+/* =========================
+   CONTACT
+========================= */
 
 .contact{
-  background:#090909;
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255,255,255,.035),
+      transparent 28%
+    ),
+    #080808;
 }
 
 .contact-form{
   max-width:750px;
-  margin-top:60px;
+
+  margin-top:65px;
 }
 
 .field{
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 
 .field input,
 .field textarea{
   width:100%;
-  background:transparent;
-  color:#fff;
+
+  padding:18px 0;
+
   border:0;
   border-bottom:1px solid rgba(255,255,255,.2);
-  padding:18px 0;
+
   outline:none;
-  font-size:16px;
+
+  background:transparent;
+
+  color:#fff;
+
+  font-size:15px;
+
+  transition:
+    border-color .35s ease;
+}
+
+.field input:focus,
+.field textarea:focus{
+  border-color:#fff;
 }
 
 .field textarea{
   min-height:150px;
+
   resize:vertical;
 }
 
 .submit{
   margin-top:20px;
-  background:#fff;
-  color:#050505;
-  border:0;
+
   padding:16px 25px;
+
+  border:0;
+
+  background:#fff;
+
+  color:#050505;
+
   cursor:pointer;
-  font-size:10px;
+
+  font-size:9px;
   letter-spacing:.2em;
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
 }
 
-/* FOOTER */
+.submit:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 10px 35px rgba(255,255,255,.1);
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-  border-top:1px solid var(--line);
-  padding:45px 7vw;
   display:flex;
   justify-content:space-between;
+
   gap:30px;
-  color:#77736c;
-  font-size:10px;
-  letter-spacing:.15em;
+
+  padding:45px 7vw;
+
+  border-top:1px solid var(--line);
+
+  color:#66625c;
+
+  font-size:9px;
+  letter-spacing:.16em;
 }
 
 footer strong{
   color:#fff;
 }
 
-/* REVEAL */
+/* =========================
+   REVEAL
+========================= */
 
 .reveal{
   opacity:0;
-  transform:translateY(35px);
-  transition:opacity 1s ease,transform 1s ease;
+
+  transform:
+    translateY(45px);
+
+  transition:
+    opacity 1.1s cubic-bezier(.22,1,.36,1),
+    transform 1.1s cubic-bezier(.22,1,.36,1);
 }
 
 .reveal.visible{
@@ -618,22 +1057,33 @@ footer strong{
   transform:translateY(0);
 }
 
-/* COOKIE */
+/* =========================
+   COOKIE
+========================= */
 
 .cookie{
   position:fixed;
+
   left:20px;
   right:20px;
   bottom:20px;
+
   z-index:10000;
-  background:rgba(12,12,12,.96);
-  border:1px solid rgba(255,255,255,.16);
-  padding:22px;
+
   display:none;
-  gap:20px;
+
   align-items:center;
   justify-content:space-between;
-  backdrop-filter:blur(15px);
+
+  gap:20px;
+
+  padding:22px;
+
+  border:1px solid rgba(255,255,255,.16);
+
+  background:rgba(12,12,12,.96);
+
+  backdrop-filter:blur(18px);
 }
 
 .cookie.show{
@@ -642,25 +1092,33 @@ footer strong{
 
 .cookie p{
   max-width:650px;
+
   color:#aaa69e;
-  font-size:12px;
+
+  font-size:11px;
   line-height:1.6;
 }
 
 .cookie-buttons{
   display:flex;
   gap:10px;
+
   flex-shrink:0;
 }
 
 .cookie button{
   padding:12px 15px;
+
   border:1px solid rgba(255,255,255,.25);
+
   background:transparent;
+
   color:#fff;
-  font-size:9px;
-  letter-spacing:.12em;
+
   cursor:pointer;
+
+  font-size:8px;
+  letter-spacing:.13em;
 }
 
 .cookie button.accept{
@@ -668,7 +1126,9 @@ footer strong{
   color:#050505;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:800px){
 
@@ -676,12 +1136,25 @@ footer strong{
     padding:15px 18px;
   }
 
+  .logo{
+    font-size:10px;
+    letter-spacing:.15em;
+  }
+
+  .logo span{
+    display:none;
+  }
+
   .clock{
-    font-size:9px;
+    font-size:8px;
   }
 
   .clock strong{
-    font-size:11px;
+    font-size:10px;
+  }
+
+  .progress{
+    top:62px;
   }
 
   .scene-info{
@@ -690,7 +1163,9 @@ footer strong{
   }
 
   section{
-    padding:105px 20px;
+    padding:
+      105px
+      20px;
   }
 
   .hero{
@@ -698,11 +1173,32 @@ footer strong{
   }
 
   .intro-title{
-    font-size:clamp(48px,15vw,85px);
+    font-size:
+      clamp(46px,14vw,84px);
   }
 
   .intro-copy{
-    font-size:14px;
+    max-width:330px;
+    font-size:13px;
+  }
+
+  .intro-corner{
+    font-size:7px;
+  }
+
+  .intro-corner.one{
+    top:88px;
+    left:18px;
+  }
+
+  .intro-corner.two{
+    top:88px;
+    right:18px;
+  }
+
+  .intro-corner.three{
+    bottom:18px;
+    right:18px;
   }
 
   .category-grid{
@@ -710,7 +1206,7 @@ footer strong{
   }
 
   .category{
-    min-height:210px;
+    min-height:220px;
   }
 
   .service{
@@ -729,13 +1225,14 @@ footer strong{
   .visual-card,
   .visual-card:nth-child(2),
   .visual-card:nth-child(3){
-    min-height:260px;
+    min-height:270px;
   }
 
   .instagram-box{
-    padding:30px 20px;
     flex-direction:column;
     align-items:flex-start;
+
+    padding:30px 20px;
   }
 
   footer{
@@ -746,6 +1243,7 @@ footer strong{
     left:10px;
     right:10px;
     bottom:10px;
+
     flex-direction:column;
     align-items:flex-start;
   }
@@ -765,8 +1263,12 @@ footer strong{
 
 <div class="vignette"></div>
 
+<!-- FILM CUT -->
+<div class="film-cut" id="filmCut"></div>
+
 <!-- HEADER -->
-<header class="topbar">
+<header class="topbar" id="topbar">
+
   <div class="logo">
     SOCIALCLIP <span>ART & MEDIA</span>
   </div>
@@ -775,6 +1277,7 @@ footer strong{
     <strong id="liveClock">--:--:--</strong>
     <span id="liveDate">--.--.----</span>
   </div>
+
 </header>
 
 <div class="progress" id="progress"></div>
@@ -786,21 +1289,46 @@ footer strong{
   </span>
 </div>
 
-<!-- INTRO -->
+<!-- =========================
+     INTRO
+========================= -->
+
 <div class="intro" id="intro">
 
   <div class="intro-grid"></div>
+
   <div class="intro-light"></div>
+
+  <div class="intro-line"></div>
+
+  <div class="intro-corner one">
+    SC 001 / OPENING
+  </div>
+
+  <div class="intro-corner two">
+    ART · MEDIA · DIGITAL
+  </div>
+
+  <div class="intro-corner three">
+    SOCIALCLIP / 2026
+  </div>
 
   <div class="intro-content">
 
     <div class="intro-label">
-      ART · MEDIA · DIGITAL
+      A DIGITAL FILM BY SOCIALCLIP
     </div>
 
     <div class="intro-title">
-      <span id="intro1">Eine digitale Reise</span>
-      <span id="intro2">beginnt.</span>
+
+      <span id="intro1">
+        Eine digitale Reise
+      </span>
+
+      <span id="intro2">
+        beginnt.
+      </span>
+
     </div>
 
     <div class="intro-copy" id="introCopy">
@@ -808,19 +1336,31 @@ footer strong{
     </div>
 
     <div class="intro-final" id="introFinal">
-      <button class="enter" id="enterButton">
+
+      <button
+        class="enter"
+        id="enterButton"
+      >
         DIGITALE WELT BETRETEN →
       </button>
+
     </div>
 
   </div>
+
 </div>
 
 <main>
 
-<!-- HERO -->
+<!-- =========================
+     SCENE 02
+========================= -->
+
 <section class="hero center">
-  <div class="section-label reveal">SCENE 02 / SOCIALCLIP</div>
+
+  <div class="chapter-line reveal">
+    SCENE 02 / THE BEGINNING
+  </div>
 
   <h1 class="big-title reveal">
     IDEEN<br>
@@ -828,21 +1368,30 @@ footer strong{
     WIRKUNG.
   </h1>
 
-  <p class="text reveal" style="margin-top:45px;">
-    SocialClip verbindet Design, digitale Lösungen, Social Media,
-    Foto, Video und Marketing zu einer visuellen Welt,
-    die Marken sichtbar macht.
+  <p
+    class="text reveal"
+    style="margin-top:45px;"
+  >
+    SocialClip verbindet Design, digitale Lösungen,
+    Social Media, Foto, Video und Marketing zu einer
+    visuellen Welt, die Marken sichtbar macht.
   </p>
 
   <div class="hero-small reveal">
     ART & MEDIA · ERLANGEN · GERMANY
   </div>
+
 </section>
 
-<!-- CATEGORIES -->
+<!-- =========================
+     SCENE 03
+========================= -->
+
 <section class="categories">
 
-  <div class="section-label reveal">SCENE 03 / WAS WIR MACHEN</div>
+  <div class="chapter-line reveal">
+    SCENE 03 / WHAT WE CREATE
+  </div>
 
   <h2 class="big-title reveal">
     DEINE<br>
@@ -853,61 +1402,119 @@ footer strong{
   <div class="category-grid">
 
     <div class="category reveal">
-      <div class="category-number">01 / WEB</div>
-      <h3>Web</h3>
+
+      <div class="category-number">
+        01 / WEB
+      </div>
+
+      <h3>
+        Web
+      </h3>
+
       <p>
-        Webseiten und digitale Auftritte, die nicht nach Vorlage aussehen.
+        Webseiten und digitale Auftritte,
+        die nicht nach Vorlage aussehen.
       </p>
+
     </div>
 
     <div class="category reveal">
-      <div class="category-number">02 / DESIGN</div>
-      <h3>Design</h3>
+
+      <div class="category-number">
+        02 / DESIGN
+      </div>
+
+      <h3>
+        Design
+      </h3>
+
       <p>
-        Logos, Flyer, Visitenkarten und visuelle Identitäten.
+        Logos, Flyer, Visitenkarten und
+        visuelle Identitäten.
       </p>
+
     </div>
 
     <div class="category reveal">
-      <div class="category-number">03 / SOCIAL</div>
-      <h3>Social Media</h3>
+
+      <div class="category-number">
+        03 / SOCIAL
+      </div>
+
+      <h3>
+        Social Media
+      </h3>
+
       <p>
-        Inhalte, Strategien und Marketing für digitale Aufmerksamkeit.
+        Inhalte, Strategien und Marketing
+        für digitale Aufmerksamkeit.
       </p>
+
     </div>
 
     <div class="category reveal">
-      <div class="category-number">04 / MEDIA</div>
-      <h3>Foto & Video</h3>
+
+      <div class="category-number">
+        04 / MEDIA
+      </div>
+
+      <h3>
+        Foto & Video
+      </h3>
+
       <p>
-        Bild und Bewegung für Marken, Produkte und Geschichten.
+        Bild und Bewegung für Marken,
+        Produkte und Geschichten.
       </p>
+
     </div>
 
     <div class="category reveal">
-      <div class="category-number">05 / MARKETING</div>
-      <h3>Marketing</h3>
+
+      <div class="category-number">
+        05 / MARKETING
+      </div>
+
+      <h3>
+        Marketing
+      </h3>
+
       <p>
-        Neukundengewinnung, Strategie und digitale Kampagnen.
+        Neukundengewinnung, Strategie
+        und digitale Kampagnen.
       </p>
+
     </div>
 
     <div class="category reveal">
-      <div class="category-number">06 / DIGITAL</div>
-      <h3>Digitale Lösungen</h3>
+
+      <div class="category-number">
+        06 / DIGITAL
+      </div>
+
+      <h3>
+        Digitale Lösungen
+      </h3>
+
       <p>
-        Programmierung, virtuelle Assistenz und individuelle Lösungen.
+        Programmierung, virtuelle Assistenz
+        und individuelle Lösungen.
       </p>
+
     </div>
 
   </div>
+
 </section>
 
-<!-- SERVICES -->
+<!-- =========================
+     SCENE 04
+========================= -->
+
 <section class="services">
 
-  <div class="section-label reveal">
-    SCENE 04 / LEISTUNGEN
+  <div class="chapter-line reveal">
+    SCENE 04 / SERVICES
   </div>
 
   <h2 class="big-title reveal">
@@ -1003,21 +1610,33 @@ footer strong{
     </div>
 
   </div>
+
 </section>
 
-<!-- MANIFESTO -->
+<!-- =========================
+     SCENE 05
+========================= -->
+
 <section class="manifesto center">
 
-  <div class="section-label reveal">
-    SCENE 05 / PHILOSOPHIE
+  <div class="chapter-line reveal">
+    SCENE 05 / THE IDEA
   </div>
 
   <p class="manifesto-text reveal">
+
     AUS EINER IDEE WIRD ETWAS,
-    <span>DAS MAN SEHEN KANN.</span>
+
+    <span>
+      DAS MAN SEHEN KANN.
+    </span>
+
   </p>
 
-  <p class="text reveal" style="margin-top:50px;">
+  <p
+    class="text reveal"
+    style="margin-top:50px;"
+  >
     Ein Bild wird zur Geschichte.
     Eine Geschichte wird zu Aufmerksamkeit.
     Aufmerksamkeit wird zu Bewegung.
@@ -1025,11 +1644,14 @@ footer strong{
 
 </section>
 
-<!-- VISUAL WORLD -->
+<!-- =========================
+     SCENE 06
+========================= -->
+
 <section class="visual-world">
 
-  <div class="section-label reveal">
-    SCENE 06 / VISUELLE WELT
+  <div class="chapter-line reveal">
+    SCENE 06 / VISUAL WORLD
   </div>
 
   <h2 class="big-title reveal">
@@ -1041,27 +1663,37 @@ footer strong{
   <div class="visual-grid">
 
     <div class="visual-card reveal">
-      <div class="visual-word">DIGITAL FORM</div>
+      <div class="visual-word">
+        DIGITAL FORM
+      </div>
     </div>
 
     <div class="visual-card reveal">
-      <div class="visual-word">VISUAL STORY</div>
+      <div class="visual-word">
+        VISUAL STORY
+      </div>
     </div>
 
     <div class="visual-card reveal">
-      <div class="visual-word">CREATIVE MEDIA</div>
+      <div class="visual-word">
+        CREATIVE MEDIA
+      </div>
     </div>
 
   </div>
 
 </section>
 
-<!-- MAKE VISIBLE -->
+<!-- =========================
+     SCENE 07
+========================= -->
+
 <section class="make-visible">
 
   <div>
-    <div class="section-label reveal">
-      SCENE 07 / FINALE
+
+    <div class="chapter-line reveal">
+      SCENE 07 / THE MOMENT
     </div>
 
     <h2 class="reveal">
@@ -1070,17 +1702,24 @@ footer strong{
     </h2>
 
     <p class="reveal">
-      Deine Idee verdient mehr als nur einen Platz im Internet.
-      Lass sie entstehen. Lass sie wachsen. Lass sie sichtbar werden.
+      Deine Idee verdient mehr als nur einen
+      Platz im Internet.
+      Lass sie entstehen.
+      Lass sie wachsen.
+      Lass sie sichtbar werden.
     </p>
+
   </div>
 
 </section>
 
-<!-- INSTAGRAM -->
+<!-- =========================
+     SCENE 08
+========================= -->
+
 <section class="instagram">
 
-  <div class="section-label reveal">
+  <div class="chapter-line reveal">
     SCENE 08 / SOCIALCLIP.ART
   </div>
 
@@ -1091,7 +1730,9 @@ footer strong{
 
   <div class="instagram-box reveal">
 
-    <strong>@socialclip.art</strong>
+    <strong>
+      @socialclip.art
+    </strong>
 
     <a
       href="https://www.instagram.com/socialclip.art/"
@@ -1105,11 +1746,14 @@ footer strong{
 
 </section>
 
-<!-- CONTACT -->
+<!-- =========================
+     SCENE 09
+========================= -->
+
 <section class="contact">
 
-  <div class="section-label reveal">
-    SCENE 09 / KONTAKT
+  <div class="chapter-line reveal">
+    SCENE 09 / YOUR STORY
   </div>
 
   <h2 class="big-title reveal">
@@ -1125,32 +1769,41 @@ footer strong{
   >
 
     <div class="field">
+
       <input
         type="text"
         name="name"
         placeholder="Dein Name"
         required
       >
+
     </div>
 
     <div class="field">
+
       <input
         type="email"
         name="email"
         placeholder="Deine E-Mail"
         required
       >
+
     </div>
 
     <div class="field">
+
       <textarea
         name="message"
         placeholder="Erzähl uns von deiner Idee..."
         required
       ></textarea>
+
     </div>
 
-    <button class="submit" type="submit">
+    <button
+      class="submit"
+      type="submit"
+    >
       NACHRICHT SENDEN →
     </button>
 
@@ -1160,16 +1813,24 @@ footer strong{
 
 </main>
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
   <div>
-    <strong>SOCIALCLIP</strong><br><br>
+    <strong>SOCIALCLIP</strong>
+    <br><br>
     ART · MEDIA · DIGITAL
   </div>
 
   <div>
-    LOCAL TIME<br><br>
-    <strong id="footerClock">--:--:--</strong>
+    LOCAL TIME
+    <br><br>
+    <strong id="footerClock">
+      --:--:--
+    </strong>
   </div>
 
   <div>
@@ -1178,22 +1839,34 @@ footer strong{
 
 </footer>
 
-<!-- COOKIE -->
-<div class="cookie" id="cookie">
+<!-- =========================
+     COOKIE
+========================= -->
+
+<div
+  class="cookie"
+  id="cookie"
+>
 
   <p>
-    Wir verwenden notwendige Cookies, damit diese Website technisch
-    funktioniert. Weitere Cookies werden nur mit deiner Zustimmung gesetzt.
+    Wir verwenden notwendige Cookies,
+    damit diese Website technisch funktioniert.
+    Weitere Cookies werden nur mit deiner Zustimmung gesetzt.
   </p>
 
   <div class="cookie-buttons">
+
     <button id="necessary">
       NUR NOTWENDIGE
     </button>
 
-    <button class="accept" id="accept">
+    <button
+      class="accept"
+      id="accept"
+    >
       ALLE AKZEPTIEREN
     </button>
+
   </div>
 
 </div>
@@ -1201,165 +1874,330 @@ footer strong{
 <script>
 
 /* =========================================
-   SOCIALCLIP FILM ENGINE
-   ========================================= */
+   SOCIALCLIP CINEMATIC ENGINE
+========================================= */
 
-/* LIVE CLOCK */
+
+/* =========================
+   LIVE CLOCK
+========================= */
 
 function updateClock(){
 
   const now = new Date();
 
-  const time = now.toLocaleTimeString("de-DE",{
-    hour:"2-digit",
-    minute:"2-digit",
-    second:"2-digit"
-  });
+  const time =
+    now.toLocaleTimeString(
+      "de-DE",
+      {
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit"
+      }
+    );
 
-  const date = now.toLocaleDateString("de-DE",{
-    day:"2-digit",
-    month:"2-digit",
-    year:"numeric"
-  });
+  const date =
+    now.toLocaleDateString(
+      "de-DE",
+      {
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+      }
+    );
 
-  document.getElementById("liveClock").textContent = time;
-  document.getElementById("liveDate").textContent = date;
-  document.getElementById("footerClock").textContent = time;
+  document.getElementById(
+    "liveClock"
+  ).textContent = time;
+
+  document.getElementById(
+    "liveDate"
+  ).textContent = date;
+
+  document.getElementById(
+    "footerClock"
+  ).textContent = time;
+
 }
 
 updateClock();
-setInterval(updateClock,1000);
+
+setInterval(
+  updateClock,
+  1000
+);
 
 
-/* INTRO */
+/* =========================
+   INTRO
+========================= */
 
-const intro = document.getElementById("intro");
-const intro1 = document.getElementById("intro1");
-const intro2 = document.getElementById("intro2");
-const introCopy = document.getElementById("introCopy");
-const introFinal = document.getElementById("introFinal");
-const enterButton = document.getElementById("enterButton");
+const intro =
+  document.getElementById("intro");
+
+const intro1 =
+  document.getElementById("intro1");
+
+const intro2 =
+  document.getElementById("intro2");
+
+const introCopy =
+  document.getElementById("introCopy");
+
+const introFinal =
+  document.getElementById("introFinal");
+
+const enterButton =
+  document.getElementById("enterButton");
 
 const introTexts = [
+
   "Alles beginnt mit einer Idee.",
+
   "Ein Gedanke. Ein Bild. Eine Vision.",
+
   "Wir geben dieser Idee eine Form.",
+
   "Wir verbinden Design mit Bewegung.",
+
   "Aus Aufmerksamkeit wird Wirkung.",
+
   "Willkommen bei SocialClip."
+
 ];
 
 let introStep = 0;
 
 function runIntro(){
 
-  intro1.classList.add("show");
+  setTimeout(()=>{
+    intro1.classList.add("show");
+  },500);
 
   setTimeout(()=>{
     intro2.classList.add("show");
-  },700);
+  },1200);
 
   function nextText(){
 
-    if(introStep < introTexts.length){
+    if(
+      introStep <
+      introTexts.length
+    ){
 
       introCopy.style.opacity = "0";
+      introCopy.style.transform =
+        "translateY(8px)";
 
       setTimeout(()=>{
 
-        introCopy.textContent = introTexts[introStep];
+        introCopy.textContent =
+          introTexts[introStep];
+
         introCopy.style.opacity = "1";
+        introCopy.style.transform =
+          "translateY(0)";
 
         introStep++;
 
       },400);
 
-      setTimeout(nextText,1800);
+      setTimeout(
+        nextText,
+        1850
+      );
 
     }else{
 
       setTimeout(()=>{
-        introFinal.classList.add("show");
+
+        introFinal.classList.add(
+          "show"
+        );
+
       },700);
 
     }
+
   }
 
-  setTimeout(nextText,1300);
+  setTimeout(
+    nextText,
+    1700
+  );
+
 }
 
 runIntro();
 
 
-/* ENTER WEBSITE */
+/* =========================
+   ENTER FILM
+========================= */
 
-enterButton.addEventListener("click",()=>{
+enterButton.addEventListener(
+  "click",
+  ()=>{
 
-  enterButton.disabled = true;
+    enterButton.disabled = true;
 
-  intro.classList.add("hide");
+    const filmCut =
+      document.getElementById(
+        "filmCut"
+      );
 
-  document.body.classList.remove("locked");
+    filmCut.classList.add(
+      "active"
+    );
 
-  setTimeout(()=>{
-    intro.remove();
-  },1400);
+    setTimeout(()=>{
 
-});
+      intro.classList.add(
+        "hide"
+      );
+
+      document.body.classList.remove(
+        "locked"
+      );
+
+    },500);
+
+    setTimeout(()=>{
+
+      filmCut.classList.remove(
+        "active"
+      );
+
+    },950);
+
+    setTimeout(()=>{
+
+      intro.remove();
+
+    },1600);
+
+  }
+);
 
 
-/* SCROLL REVEAL */
+/* =========================
+   REVEAL ENGINE
+========================= */
 
 const revealElements =
-  document.querySelectorAll(".reveal");
+  document.querySelectorAll(
+    ".reveal"
+  );
 
-const observer =
+const revealObserver =
   new IntersectionObserver(
     (entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add("visible");
+
+      entries.forEach(
+        entry=>{
+
+          if(
+            entry.isIntersecting
+          ){
+
+            entry.target.classList.add(
+              "visible"
+            );
+
+            revealObserver.unobserve(
+              entry.target
+            );
+
+          }
+
         }
-      });
+      );
+
     },
     {
       threshold:.12
     }
   );
 
-revealElements.forEach(el=>{
-  observer.observe(el);
-});
+revealElements.forEach(
+  element=>{
+    revealObserver.observe(
+      element
+    );
+  }
+);
 
 
-/* SCENE COUNTER */
+/* =========================
+   SCENE DIRECTOR
+========================= */
 
 const scenes =
-  document.querySelectorAll("section");
+  document.querySelectorAll(
+    "main section"
+  );
 
 const sceneNumber =
-  document.getElementById("sceneNumber");
+  document.getElementById(
+    "sceneNumber"
+  );
+
+const topbar =
+  document.getElementById(
+    "topbar"
+  );
 
 function updateScene(){
 
-  let current = 1;
+  let currentScene = 2;
 
-  scenes.forEach((scene,index)=>{
+  scenes.forEach(
+    (scene,index)=>{
 
-    const rect = scene.getBoundingClientRect();
+      const rect =
+        scene.getBoundingClientRect();
 
-    if(rect.top < window.innerHeight * .55){
-      current = index + 2;
+      if(
+        rect.top <
+        window.innerHeight * .55
+      ){
+
+        currentScene =
+          index + 2;
+
+      }
+
     }
-
-  });
+  );
 
   sceneNumber.textContent =
-    "SCENE " + String(current).padStart(2,"0");
+    "SCENE " +
+    String(
+      currentScene
+    ).padStart(2,"0");
+
+  if(
+    window.scrollY > 60
+  ){
+
+    topbar.classList.add(
+      "scrolled"
+    );
+
+  }else{
+
+    topbar.classList.remove(
+      "scrolled"
+    );
+
+  }
+
 }
 
 
-/* SCROLL PROGRESS */
+/* =========================
+   SCROLL PROGRESS
+========================= */
 
 function updateProgress(){
 
@@ -1367,33 +2205,90 @@ function updateProgress(){
     window.scrollY;
 
   const height =
-    document.documentElement.scrollHeight -
+    document.documentElement
+      .scrollHeight -
     window.innerHeight;
 
   const percentage =
     height > 0
-      ? (scrollTop / height) * 100
+      ? (
+          scrollTop /
+          height
+        ) * 100
       : 0;
 
-  document.getElementById("progress")
-    .style.width = percentage + "%";
+  document.getElementById(
+    "progress"
+  ).style.width =
+    percentage + "%";
 
   updateScene();
+
 }
 
 window.addEventListener(
   "scroll",
   updateProgress,
-  {passive:true}
+  {
+    passive:true
+  }
 );
 
 updateProgress();
 
 
-/* COOKIE */
+/* =========================
+   SUBTLE PARALLAX
+   Only for cinematic layers
+========================= */
+
+const introGrid =
+  document.querySelector(
+    ".intro-grid"
+  );
+
+window.addEventListener(
+  "mousemove",
+  event=>{
+
+    if(!introGrid){
+      return;
+    }
+
+    const x =
+      (
+        event.clientX /
+        window.innerWidth -
+        .5
+      ) * 8;
+
+    const y =
+      (
+        event.clientY /
+        window.innerHeight -
+        .5
+      ) * 5;
+
+    introGrid.style.transform =
+      `
+      perspective(750px)
+      rotateX(${58 + y}deg)
+      rotateY(${x}deg)
+      scale(1.7)
+      `;
+
+  }
+);
+
+
+/* =========================
+   COOKIE
+========================= */
 
 const cookie =
-  document.getElementById("cookie");
+  document.getElementById(
+    "cookie"
+  );
 
 const savedConsent =
   localStorage.getItem(
@@ -1401,72 +2296,125 @@ const savedConsent =
   );
 
 if(!savedConsent){
+
   setTimeout(()=>{
-    cookie.classList.add("show");
-  },1500);
+
+    cookie.classList.add(
+      "show"
+    );
+
+  },2200);
+
 }
 
-document.getElementById("necessary")
-  .addEventListener("click",()=>{
+document
+  .getElementById(
+    "necessary"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
 
-    localStorage.setItem(
-      "socialclip_cookie_consent",
-      "necessary"
-    );
+      localStorage.setItem(
+        "socialclip_cookie_consent",
+        "necessary"
+      );
 
-    cookie.classList.remove("show");
+      cookie.classList.remove(
+        "show"
+      );
 
-  });
+    }
+  );
 
-document.getElementById("accept")
-  .addEventListener("click",()=>{
+document
+  .getElementById(
+    "accept"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
 
-    localStorage.setItem(
-      "socialclip_cookie_consent",
-      "accepted"
-    );
+      localStorage.setItem(
+        "socialclip_cookie_consent",
+        "accepted"
+      );
 
-    cookie.classList.remove("show");
+      cookie.classList.remove(
+        "show"
+      );
 
-  });
+    }
+  );
 
 
-/* MOBILE TOUCH FEEL */
+/* =========================
+   MOBILE TOUCH
+========================= */
 
 let touchStartY = 0;
 
 window.addEventListener(
   "touchstart",
-  e=>{
+  event=>{
+
     touchStartY =
-      e.changedTouches[0].screenY;
+      event.changedTouches[0]
+        .screenY;
+
   },
-  {passive:true}
+  {
+    passive:true
+  }
 );
 
 window.addEventListener(
   "touchend",
-  e=>{
+  event=>{
 
     const touchEndY =
-      e.changedTouches[0].screenY;
+      event.changedTouches[0]
+        .screenY;
 
     const distance =
-      touchStartY - touchEndY;
+      touchStartY -
+      touchEndY;
 
-    if(Math.abs(distance) > 80){
+    /*
+      Nur sehr leichte Unterstützung.
+      Kein erzwungenes Scrollen bei
+      normalen Berührungen.
+    */
+
+    if(
+      Math.abs(distance) > 140
+    ){
 
       window.scrollBy({
-        top:distance > 0
-          ? window.innerHeight * .25
-          : -window.innerHeight * .25,
+        top:
+          distance > 0
+            ? window.innerHeight * .18
+            : -window.innerHeight * .18,
+
         behavior:"smooth"
       });
 
     }
 
   },
-  {passive:true}
+  {
+    passive:true
+  }
+);
+
+
+/* =========================
+   FILM START
+========================= */
+
+window.scrollTo(
+  0,
+  0
 );
 
 </script>
