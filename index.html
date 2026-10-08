@@ -4,18 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SocialClip — Digital Villa</title>
-<meta name="description" content="SocialClip Art & Media — Creative Digital Studio in Erlangen. Social Media, Design, Film, AI & Digital Art.">
+<title>SocialClip — Art & Media</title>
+
+<meta name="description"
+content="SocialClip Art & Media — Social Media, Design, Film, digitale Kunst und AI in Erlangen.">
 
 <style>
+
+/* =========================================================
+   SOCIALCLIP — DIGITAL EXPERIENCE
+   ========================================================= */
+
 :root{
-  --bg:#050608;
-  --panel:rgba(255,255,255,.055);
-  --line:rgba(255,255,255,.11);
-  --text:#f5f7fa;
-  --muted:#9ca3af;
-  --accent:#9ef01a;
-  --accent2:#65e8ff;
+  --bg:#070812;
+  --bg2:#0b1020;
+
+  --white:#f8fbff;
+  --muted:#9da7ba;
+
+  --cyan:#54eaff;
+  --blue:#6477ff;
+  --purple:#a855f7;
+  --pink:#ff4fd8;
+  --green:#baff3c;
+  --orange:#ff9b54;
+
+  --line:rgba(255,255,255,.12);
+
+  --glass:rgba(255,255,255,.055);
 }
 
 *{
@@ -29,12 +45,40 @@ html{
 }
 
 body{
+
   background:
-    radial-gradient(circle at 50% 15%,rgba(101,232,255,.08),transparent 30%),
-    radial-gradient(circle at 80% 70%,rgba(158,240,26,.05),transparent 25%),
-    var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+
+    radial-gradient(
+      circle at 20% 15%,
+      rgba(84,234,255,.13),
+      transparent 27%
+    ),
+
+    radial-gradient(
+      circle at 80% 25%,
+      rgba(168,85,247,.12),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 50% 85%,
+      rgba(255,79,216,.08),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      135deg,
+      var(--bg),
+      var(--bg2)
+    );
+
+  color:var(--white);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   overflow-x:hidden;
 }
 
@@ -43,592 +87,1390 @@ a{
   text-decoration:none;
 }
 
-button{
-  font:inherit;
+
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
+
+.background-glow{
+
+  position:fixed;
+
+  width:500px;
+  height:500px;
+
+  border-radius:50%;
+
+  filter:blur(100px);
+
+  opacity:.13;
+
+  pointer-events:none;
+
+  z-index:-1;
+
+  animation:
+    backgroundMove 14s ease-in-out infinite;
 }
 
-/* ================= HEADER ================= */
+.glow-one{
+
+  top:-180px;
+  left:-150px;
+
+  background:var(--cyan);
+}
+
+.glow-two{
+
+  right:-200px;
+  top:35%;
+
+  background:var(--purple);
+
+  animation-delay:3s;
+}
+
+.glow-three{
+
+  bottom:-250px;
+  left:30%;
+
+  background:var(--pink);
+
+  animation-delay:6s;
+}
+
+@keyframes backgroundMove{
+
+  0%,100%{
+    transform:translate(0,0);
+  }
+
+  50%{
+    transform:translate(80px,-50px);
+  }
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 header{
+
   position:fixed;
+
   top:0;
   left:0;
+
   width:100%;
+
   z-index:1000;
-  padding:22px 5vw;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  background:linear-gradient(
-    to bottom,
-    rgba(5,6,8,.9),
-    rgba(5,6,8,.2)
-  );
-  backdrop-filter:blur(12px);
+
+  padding:
+    21px
+    5vw;
+
+  background:
+    rgba(7,8,18,.58);
+
+  backdrop-filter:
+    blur(22px);
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.06);
 }
 
 .logo{
+
   font-size:20px;
-  font-weight:800;
-  letter-spacing:-.5px;
+
+  font-weight:900;
+
+  letter-spacing:-1px;
 }
 
 .logo span{
-  color:var(--accent);
+
+  color:var(--cyan);
+
+  text-shadow:
+    0 0 20px
+    rgba(84,234,255,.55);
 }
 
 nav{
+
   display:flex;
+
   gap:30px;
 }
 
 nav a{
+
   font-size:13px;
-  color:#c9ced6;
+
+  color:#b6bfce;
+
   transition:.3s;
 }
 
 nav a:hover{
+
   color:white;
+
+  text-shadow:
+    0 0 15px
+    rgba(84,234,255,.7);
 }
 
 .menu{
+
   display:none;
-  font-size:24px;
+
   cursor:pointer;
+
+  font-size:24px;
 }
 
-/* ================= HERO ================= */
+
+/* =========================================================
+   HERO
+   ========================================================= */
 
 .hero{
+
   min-height:100vh;
-  position:relative;
+
   display:flex;
-  align-items:center;
+
   justify-content:center;
+
+  align-items:center;
+
   text-align:center;
-  padding:120px 20px 60px;
+
+  position:relative;
+
+  padding:
+    140px
+    20px
+    80px;
+
   overflow:hidden;
 }
 
-.hero-grid{
+.grid{
+
   position:absolute;
+
   inset:0;
+
   background-image:
-    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:60px 60px;
-  mask-image:linear-gradient(to bottom,black,transparent);
+
+    linear-gradient(
+      rgba(84,234,255,.035)
+      1px,
+      transparent 1px
+    ),
+
+    linear-gradient(
+      90deg,
+      rgba(168,85,247,.035)
+      1px,
+      transparent 1px
+    );
+
+  background-size:
+    65px
+    65px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent
+    );
 }
 
 .hero-content{
+
   position:relative;
+
   z-index:5;
-  max-width:900px;
+
+  width:100%;
+
+  max-width:1150px;
 }
 
-.eyebrow{
+
+/* =========================================================
+   SPOTLIGHTS
+   ========================================================= */
+
+.brand-stage{
+
+  position:relative;
+
   display:inline-block;
-  padding:8px 14px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  color:#b8c0ca;
-  font-size:11px;
-  letter-spacing:2px;
+
+  margin-bottom:32px;
+
+  padding:
+    70px
+    30px
+    10px;
+}
+
+.spotlight{
+
+  position:absolute;
+
+  top:0;
+
+  width:5px;
+
+  height:125px;
+
+  transform-origin:
+    top center;
+
+  pointer-events:none;
+
+  opacity:.8;
+
+  filter:
+    blur(.2px);
+}
+
+.spotlight::after{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+
+  left:50%;
+
+  width:170px;
+
+  height:360px;
+
+  transform:
+    translateX(-50%);
+
+  clip-path:
+    polygon(
+      48% 0,
+      52% 0,
+      100% 100%,
+      0 100%
+    );
+
+  opacity:.16;
+
+  filter:blur(7px);
+}
+
+.spotlight-left{
+
+  left:25%;
+
+  background:
+    var(--cyan);
+
+  box-shadow:
+    0 0 15px
+    var(--cyan),
+    0 0 40px
+    var(--cyan);
+
+  transform:
+    rotate(-17deg);
+
+  animation:
+    spotlightLeft
+    4s
+    ease-in-out
+    infinite;
+}
+
+.spotlight-left::after{
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--cyan),
+      transparent
+    );
+}
+
+.spotlight-right{
+
+  right:25%;
+
+  background:
+    var(--pink);
+
+  box-shadow:
+    0 0 15px
+    var(--pink),
+    0 0 40px
+    var(--pink);
+
+  transform:
+    rotate(17deg);
+
+  animation:
+    spotlightRight
+    4.5s
+    ease-in-out
+    infinite;
+}
+
+.spotlight-right::after{
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--pink),
+      transparent
+    );
+}
+
+@keyframes spotlightLeft{
+
+  0%,100%{
+    transform:rotate(-20deg);
+  }
+
+  50%{
+    transform:rotate(-7deg);
+  }
+
+}
+
+@keyframes spotlightRight{
+
+  0%,100%{
+    transform:rotate(20deg);
+  }
+
+  50%{
+    transform:rotate(7deg);
+  }
+
+}
+
+
+/* =========================================================
+   BRAND NAME
+   ========================================================= */
+
+.brand-name{
+
+  font-size:
+    clamp(
+      58px,
+      12vw,
+      155px
+    );
+
+  font-weight:1000;
+
+  line-height:.78;
+
+  letter-spacing:-9px;
+
+  position:relative;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      white 0%,
+      var(--cyan) 28%,
+      white 48%,
+      var(--pink) 72%,
+      var(--green) 100%
+    );
+
+  background-size:
+    250%
+    100%;
+
+  -webkit-background-clip:text;
+
+  background-clip:text;
+
+  color:transparent;
+
+  animation:
+    brandColor
+    7s
+    ease-in-out
+    infinite;
+}
+
+@keyframes brandColor{
+
+  0%,100%{
+    background-position:0% 50%;
+  }
+
+  50%{
+    background-position:100% 50%;
+  }
+
+}
+
+.badge{
+
+  display:inline-block;
+
+  margin-bottom:20px;
+
+  padding:
+    8px
+    15px;
+
+  border:
+    1px solid
+    var(--line);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(255,255,255,.04);
+
+  color:#b9c1ce;
+
+  font-size:10px;
+
+  letter-spacing:3px;
+
   text-transform:uppercase;
-  background:rgba(255,255,255,.035);
-  margin-bottom:25px;
 }
 
 .hero h1{
-  font-size:clamp(55px,10vw,135px);
-  line-height:.82;
-  letter-spacing:-7px;
-  font-weight:900;
+
+  font-size:
+    clamp(
+      42px,
+      7vw,
+      85px
+    );
+
+  line-height:.9;
+
+  letter-spacing:-5px;
+
+  margin-top:20px;
 }
 
 .hero h1 span{
+
   display:block;
-  background:linear-gradient(
-    90deg,
-    white,
-    var(--accent2),
-    var(--accent)
-  );
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      white,
+      var(--pink)
+    );
+
   -webkit-background-clip:text;
+
   background-clip:text;
+
   color:transparent;
 }
 
-.hero p{
-  max-width:620px;
-  margin:35px auto;
+.hero-text{
+
+  max-width:680px;
+
+  margin:
+    30px
+    auto;
+
   color:var(--muted);
-  line-height:1.7;
+
+  line-height:1.75;
+
   font-size:16px;
 }
 
-.hero-buttons{
+.buttons{
+
   display:flex;
+
   justify-content:center;
+
   gap:12px;
+
   flex-wrap:wrap;
 }
 
 .btn{
-  padding:15px 24px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  transition:.3s;
+
+  padding:
+    15px
+    25px;
+
+  border-radius:
+    999px;
+
+  border:
+    1px solid
+    var(--line);
+
   font-size:13px;
-  cursor:pointer;
+
+  transition:.3s;
 }
 
-.btn-primary{
+.btn:hover{
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 15px 45px
+    rgba(84,234,255,.12);
+}
+
+.primary{
+
   background:white;
+
   color:#050608;
-  border-color:white;
 }
 
-.btn-primary:hover{
-  transform:translateY(-3px);
-  box-shadow:0 15px 40px rgba(255,255,255,.12);
+.secondary{
+
+  background:
+    rgba(255,255,255,.045);
 }
 
-.btn-dark{
-  background:rgba(255,255,255,.04);
-}
 
-.btn-dark:hover{
-  background:rgba(255,255,255,.09);
-}
+/* =========================================================
+   DIGITAL CORE
+   ========================================================= */
 
-/* ================= VILLA ================= */
+.core-area{
 
-.villa-wrap{
-  position:relative;
-  width:min(900px,95vw);
-  height:480px;
-  margin:65px auto 0;
+  height:500px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
   perspective:1200px;
+
+  position:relative;
 }
 
-.villa{
+.core{
+
+  width:270px;
+
+  height:270px;
+
+  position:relative;
+
+  transform-style:
+    preserve-3d;
+
+  transition:
+    transform .12s ease-out;
+}
+
+.core-glow{
+
   position:absolute;
+
+  inset:-130px;
+
+  border-radius:50%;
+
+  background:
+
+    radial-gradient(
+      circle,
+      rgba(84,234,255,.24),
+      rgba(168,85,247,.12),
+      transparent 65%
+    );
+
+  filter:blur(20px);
+
+  animation:
+    corePulse
+    5s
+    ease-in-out
+    infinite;
+}
+
+.core-ball{
+
+  position:absolute;
+
+  inset:35px;
+
+  border-radius:50%;
+
+  background:
+
+    radial-gradient(
+      circle at 32% 25%,
+      white 0%,
+      var(--cyan) 3%,
+      rgba(84,234,255,.45) 12%,
+      rgba(80,50,180,.4) 30%,
+      rgba(10,12,25,.95) 65%,
+      #020305 100%
+    );
+
+  box-shadow:
+
+    0 0 35px
+    rgba(84,234,255,.55),
+
+    0 0 90px
+    rgba(168,85,247,.25),
+
+    inset
+    -30px -30px
+    60px
+    rgba(0,0,0,.8);
+
+  transform:
+    translateZ(50px);
+
+  animation:
+    coreFloat
+    5s
+    ease-in-out
+    infinite;
+}
+
+.ring{
+
+  position:absolute;
+
   left:50%;
   top:50%;
-  width:480px;
-  height:270px;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(255,255,255,.25);
+
+  transform-style:
+    preserve-3d;
+}
+
+.ring-one{
+
+  width:310px;
+  height:100px;
+
   transform:
     translate(-50%,-50%)
-    rotateX(60deg)
-    rotateZ(-8deg)
-    translateZ(0);
-  transform-style:preserve-3d;
-  transition:transform .15s ease-out;
+    rotateX(70deg);
+
+  border-color:
+    rgba(84,234,255,.65);
+
+  animation:
+    ringOne
+    8s
+    linear
+    infinite;
 }
 
-.floor{
-  position:absolute;
-  width:480px;
-  height:270px;
-  background:
-    linear-gradient(135deg,
-      rgba(255,255,255,.12),
-      rgba(255,255,255,.025));
-  border:1px solid rgba(255,255,255,.18);
-  box-shadow:
-    0 0 80px rgba(101,232,255,.08),
-    inset 0 0 60px rgba(255,255,255,.03);
-  transform:translateZ(0);
-}
+.ring-two{
 
-.house{
-  position:absolute;
-  left:75px;
-  top:45px;
-  width:330px;
-  height:170px;
-  background:linear-gradient(
-    135deg,
-    rgba(40,45,53,.95),
-    rgba(10,12,16,.98)
-  );
-  border:1px solid rgba(255,255,255,.18);
-  transform:translateZ(35px);
-  box-shadow:0 30px 60px rgba(0,0,0,.5);
-}
+  width:360px;
+  height:120px;
 
-.roof{
-  position:absolute;
-  left:50px;
-  top:15px;
-  width:380px;
-  height:55px;
-  background:
-    linear-gradient(135deg,
-    rgba(101,232,255,.2),
-    rgba(158,240,26,.08));
-  border:1px solid rgba(255,255,255,.2);
   transform:
-    translateZ(70px)
-    skewX(-18deg);
+    translate(-50%,-50%)
+    rotateY(70deg);
+
+  border-color:
+    rgba(255,79,216,.5);
+
+  animation:
+    ringTwo
+    11s
+    linear
+    infinite reverse;
 }
 
-.window{
-  position:absolute;
-  width:70px;
-  height:80px;
-  top:45px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(101,232,255,.7),
-      rgba(101,232,255,.05)
-    );
-  border:1px solid rgba(255,255,255,.3);
-  box-shadow:0 0 35px rgba(101,232,255,.2);
+.ring-three{
+
+  width:410px;
+  height:150px;
+
+  transform:
+    translate(-50%,-50%)
+    rotateX(65deg)
+    rotateZ(55deg);
+
+  border-color:
+    rgba(186,255,60,.45);
+
+  animation:
+    ringThree
+    15s
+    linear
+    infinite;
 }
 
-.w1{left:25px}
-.w2{left:130px}
-.w3{right:25px}
+@keyframes ringOne{
 
-.door{
-  position:absolute;
-  bottom:0;
-  left:calc(50% - 25px);
-  width:50px;
-  height:100px;
-  background:linear-gradient(
-    to bottom,
-    rgba(158,240,26,.45),
-    rgba(20,25,20,.9)
-  );
-  border:1px solid rgba(158,240,26,.6);
-  box-shadow:0 0 30px rgba(158,240,26,.18);
-}
-
-.pool{
-  position:absolute;
-  right:15px;
-  bottom:25px;
-  width:150px;
-  height:75px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(101,232,255,.55),
-      rgba(20,80,100,.25)
-    );
-  border:1px solid rgba(101,232,255,.35);
-  transform:translateZ(5px);
-  box-shadow:0 0 40px rgba(101,232,255,.15);
-}
-
-.light{
-  position:absolute;
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  background:var(--accent);
-  box-shadow:
-    0 0 15px var(--accent),
-    0 0 35px var(--accent);
-  transform:translateZ(100px);
-}
-
-.l1{left:80px;top:50px}
-.l2{right:80px;top:50px}
-.l3{left:240px;bottom:20px}
-
-.orb{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(2px);
-  pointer-events:none;
-}
-
-.orb.one{
-  width:180px;
-  height:180px;
-  background:rgba(101,232,255,.08);
-  top:10%;
-  left:5%;
-  animation:float 7s ease-in-out infinite;
-}
-
-.orb.two{
-  width:250px;
-  height:250px;
-  background:rgba(158,240,26,.05);
-  right:0;
-  bottom:5%;
-  animation:float 9s ease-in-out infinite reverse;
-}
-
-@keyframes float{
-  50%{
-    transform:translateY(-30px);
+  from{
+    transform:
+      translate(-50%,-50%)
+      rotateX(70deg)
+      rotateZ(0deg);
   }
+
+  to{
+    transform:
+      translate(-50%,-50%)
+      rotateX(70deg)
+      rotateZ(360deg);
+  }
+
 }
 
-/* ================= SECTION ================= */
+@keyframes ringTwo{
+
+  from{
+    transform:
+      translate(-50%,-50%)
+      rotateY(70deg)
+      rotateZ(0deg);
+  }
+
+  to{
+    transform:
+      translate(-50%,-50%)
+      rotateY(70deg)
+      rotateZ(360deg);
+  }
+
+}
+
+@keyframes ringThree{
+
+  from{
+    transform:
+      translate(-50%,-50%)
+      rotateX(65deg)
+      rotateZ(55deg);
+  }
+
+  to{
+    transform:
+      translate(-50%,-50%)
+      rotateX(65deg)
+      rotateZ(415deg);
+  }
+
+}
+
+@keyframes coreFloat{
+
+  50%{
+    transform:
+      translateZ(75px)
+      scale(1.06);
+  }
+
+}
+
+@keyframes corePulse{
+
+  50%{
+    transform:scale(1.18);
+    opacity:.75;
+  }
+
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
 
 section{
-  padding:130px 6vw;
+
+  padding:
+    130px
+    6vw;
 }
 
-.section-head{
-  max-width:800px;
-  margin-bottom:60px;
-}
+.label{
 
-.section-label{
-  color:var(--accent);
-  font-size:11px;
+  color:var(--cyan);
+
+  font-size:10px;
+
   letter-spacing:3px;
+
   text-transform:uppercase;
-  margin-bottom:15px;
+
+  margin-bottom:18px;
 }
 
-.section-head h2{
-  font-size:clamp(40px,6vw,80px);
-  letter-spacing:-4px;
+.section-title{
+
+  font-size:
+    clamp(
+      42px,
+      6vw,
+      80px
+    );
+
+  letter-spacing:-5px;
+
   line-height:.95;
 }
 
-.section-head p{
-  margin-top:25px;
+.section-text{
+
+  max-width:620px;
+
   color:var(--muted);
-  max-width:600px;
-  line-height:1.7;
+
+  line-height:1.8;
+
+  margin-top:25px;
 }
 
-/* ================= ROOMS ================= */
 
-.rooms{
+/* =========================================================
+   SERVICES
+   ========================================================= */
+
+.services{
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:15px;
+
+  margin-top:60px;
 }
 
-.room{
-  min-height:300px;
-  border:1px solid var(--line);
-  background:linear-gradient(
-    145deg,
-    rgba(255,255,255,.07),
-    rgba(255,255,255,.015)
-  );
-  padding:28px;
+.card{
+
+  min-height:310px;
+
+  padding:30px;
+
+  border:
+    1px solid
+    var(--line);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(84,234,255,.07),
+      rgba(168,85,247,.035)
+    );
+
   position:relative;
+
   overflow:hidden;
+
   transition:.4s;
 }
 
-.room:hover{
-  transform:translateY(-8px);
-  border-color:rgba(255,255,255,.25);
+.card:nth-child(2){
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(168,85,247,.09),
+      rgba(255,79,216,.035)
+    );
 }
 
-.room-number{
+.card:nth-child(3){
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,79,216,.08),
+      rgba(255,155,84,.035)
+    );
+}
+
+.card:nth-child(4){
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(186,255,60,.08),
+      rgba(84,234,255,.035)
+    );
+}
+
+.card:hover{
+
+  transform:
+    translateY(-9px)
+    scale(1.015);
+
+  border-color:
+    rgba(255,255,255,.3);
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.25);
+}
+
+.card-number{
+
+  color:#6d7582;
+
   font-size:11px;
-  color:#6f7783;
 }
 
-.room-icon{
+.card-icon{
+
   font-size:38px;
-  margin:55px 0 25px;
+
+  margin:
+    55px 0
+    25px;
 }
 
-.room h3{
+.card h3{
+
   font-size:24px;
+
   margin-bottom:12px;
 }
 
-.room p{
+.card p{
+
   color:var(--muted);
+
   font-size:14px;
-  line-height:1.6;
+
+  line-height:1.65;
 }
 
-.room::after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  right:-100px;
-  bottom:-100px;
-  background:rgba(101,232,255,.08);
-  filter:blur(20px);
-}
 
-/* ================= SERVICES ================= */
-
-.services{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  border-top:1px solid var(--line);
-}
-
-.service{
-  padding:35px 10px;
-  border-bottom:1px solid var(--line);
-}
-
-.service:nth-child(odd){
-  border-right:1px solid var(--line);
-  padding-right:35px;
-}
-
-.service:nth-child(even){
-  padding-left:35px;
-}
-
-.service h3{
-  font-size:28px;
-  margin-bottom:12px;
-}
-
-.service p{
-  color:var(--muted);
-  line-height:1.7;
-  max-width:500px;
-}
-
-/* ================= ABOUT ================= */
+/* =========================================================
+   ABOUT
+   ========================================================= */
 
 .about{
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:80px;
+
   align-items:center;
 }
 
 .about h2{
-  font-size:clamp(45px,6vw,85px);
+
+  font-size:
+    clamp(
+      45px,
+      6vw,
+      85px
+    );
+
   line-height:.9;
+
   letter-spacing:-5px;
 }
 
-.about-text{
+.about-copy{
+
   color:var(--muted);
+
   line-height:1.8;
 }
 
-.about-text p+p{
+.about-copy p+p{
+
   margin-top:20px;
 }
 
-/* ================= CONTACT ================= */
 
-.contact{
-  border:1px solid var(--line);
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+.contact-section{
+
+  padding-bottom:150px;
+}
+
+.contact-box{
+
+  max-width:1050px;
+
+  margin:auto;
+
+  padding:75px;
+
+  border:
+    1px solid
+    var(--line);
+
   background:
-    radial-gradient(circle at 80% 20%,rgba(101,232,255,.08),transparent 30%),
-    rgba(255,255,255,.025);
-  padding:80px 7vw;
-  text-align:center;
+
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(84,234,255,.12),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 85% 90%,
+      rgba(255,79,216,.1),
+      transparent 30%
+    ),
+
+    rgba(255,255,255,.035);
 }
 
-.contact h2{
-  font-size:clamp(45px,7vw,100px);
+.contact-box h2{
+
+  font-size:
+    clamp(
+      45px,
+      7vw,
+      90px
+    );
+
   letter-spacing:-5px;
+
+  line-height:.9;
+
+  margin-bottom:20px;
 }
 
-.contact p{
+.contact-box > p{
+
   color:var(--muted);
-  margin:25px auto 35px;
+
   max-width:600px;
+
   line-height:1.7;
+
+  margin-bottom:45px;
 }
 
-.contact-mail{
-  display:inline-block;
-  font-size:clamp(18px,3vw,30px);
-  border-bottom:1px solid var(--accent);
-  padding-bottom:7px;
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.contact-form{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:18px;
 }
 
-/* ================= LEGAL ================= */
+.field{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:8px;
+}
+
+.field.full{
+
+  grid-column:
+    1 / -1;
+}
+
+.field label{
+
+  color:#a0a8b5;
+
+  font-size:10px;
+
+  letter-spacing:1.5px;
+
+  text-transform:uppercase;
+}
+
+.field input,
+.field textarea{
+
+  width:100%;
+
+  padding:17px;
+
+  border:
+    1px solid
+    var(--line);
+
+  border-radius:9px;
+
+  background:
+    rgba(0,0,0,.18);
+
+  color:white;
+
+  outline:none;
+
+  font-family:inherit;
+
+  transition:.3s;
+}
+
+.field textarea{
+
+  min-height:160px;
+
+  resize:vertical;
+}
+
+.field input::placeholder,
+.field textarea::placeholder{
+
+  color:#646d7a;
+}
+
+.field input:focus,
+.field textarea:focus{
+
+  border-color:
+    var(--cyan);
+
+  box-shadow:
+    0 0 30px
+    rgba(84,234,255,.08);
+}
+
+.form-button{
+
+  margin-top:10px;
+
+  padding:
+    16px
+    28px;
+
+  border:0;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      white
+    );
+
+  color:#050608;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.form-button:hover{
+
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 15px 45px
+    rgba(84,234,255,.18);
+}
+
+.form-note{
+
+  color:#68717f;
+
+  font-size:11px;
+
+  margin-top:15px;
+}
+
+
+/* =========================================================
+   LEGAL
+   ========================================================= */
 
 .legal{
+
   max-width:900px;
+
   margin:auto;
 }
 
 .legal article{
-  border-top:1px solid var(--line);
-  padding:50px 0;
+
+  padding:
+    50px 0;
+
+  border-top:
+    1px solid
+    var(--line);
 }
 
 .legal h3{
+
   font-size:28px;
+
   margin-bottom:20px;
 }
 
 .legal p{
+
   color:var(--muted);
+
   line-height:1.8;
+
   margin-bottom:15px;
 }
 
-.legal strong{
-  color:white;
-}
 
-/* ================= FOOTER ================= */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 footer{
-  border-top:1px solid var(--line);
-  padding:30px 6vw;
+
+  padding:
+    30px 6vw;
+
+  border-top:
+    1px solid
+    var(--line);
+
   display:flex;
+
   justify-content:space-between;
+
   gap:20px;
+
   flex-wrap:wrap;
-  color:#737b87;
+
+  color:#68717e;
+
   font-size:12px;
 }
 
-/* ================= COOKIE ================= */
+
+/* =========================================================
+   COOKIE
+   ========================================================= */
 
 .cookie{
+
   position:fixed;
+
   left:20px;
-  right:20px;
   bottom:20px;
+
   z-index:2000;
+
   max-width:650px;
+
   padding:20px;
-  border:1px solid var(--line);
-  background:rgba(10,12,15,.94);
-  backdrop-filter:blur(20px);
-  box-shadow:0 20px 70px rgba(0,0,0,.5);
+
   display:flex;
+
   align-items:center;
+
   gap:20px;
+
+  background:
+    rgba(8,10,18,.95);
+
+  border:
+    1px solid
+    var(--line);
+
+  backdrop-filter:
+    blur(20px);
+
+  box-shadow:
+    0 20px 70px
+    rgba(0,0,0,.55);
 }
 
 .cookie p{
-  color:#aeb5bf;
-  font-size:12px;
-  line-height:1.5;
+
   flex:1;
+
+  color:#adb5c2;
+
+  font-size:12px;
+
+  line-height:1.5;
 }
 
 .cookie button{
+
   border:0;
-  background:white;
-  color:#050608;
-  padding:11px 17px;
+
+  padding:
+    11px
+    18px;
+
   border-radius:999px;
+
+  background:white;
+
+  color:#050608;
+
   cursor:pointer;
+
   white-space:nowrap;
 }
 
-/* ================= MOBILE ================= */
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media(max-width:850px){
 
@@ -640,174 +1482,288 @@ footer{
     display:block;
   }
 
-  header{
-    padding:18px 20px;
-  }
+  .services{
 
-  .hero{
-    padding-top:110px;
-  }
-
-  .hero h1{
-    letter-spacing:-4px;
-  }
-
-  .villa-wrap{
-    height:350px;
-    transform:scale(.72);
-    margin-top:20px;
-  }
-
-  .rooms{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
   }
 
   .about{
-    grid-template-columns:1fr;
-    gap:40px;
+
+    grid-template-columns:
+      1fr;
+
+    gap:45px;
   }
 
-  .services{
-    grid-template-columns:1fr;
+  .contact-box{
+
+    padding:
+      50px 28px;
   }
 
-  .service:nth-child(odd){
-    border-right:0;
-    padding-right:10px;
-  }
-
-  .service:nth-child(even){
-    padding-left:10px;
-  }
-
-  section{
-    padding:90px 20px;
-  }
 }
 
 @media(max-width:550px){
 
+  header{
+
+    padding:
+      18px 20px;
+  }
+
+  .hero{
+
+    padding-top:
+      110px;
+  }
+
+  .brand-stage{
+
+    padding:
+      60px
+      5px
+      5px;
+  }
+
+  .brand-name{
+
+    font-size:
+      57px;
+
+    letter-spacing:
+      -5px;
+  }
+
   .hero h1{
-    font-size:58px;
+
+    font-size:
+      46px;
+
+    letter-spacing:
+      -3px;
   }
 
-  .hero p{
-    font-size:14px;
+  .hero-text{
+
+    font-size:
+      14px;
   }
 
-  .villa-wrap{
-    transform:scale(.52);
-    height:270px;
-    margin-left:-5%;
-    width:110%;
+  .spotlight{
+
+    height:
+      90px;
   }
 
-  .rooms{
-    grid-template-columns:1fr;
+  .spotlight::after{
+
+    width:
+      100px;
+
+    height:
+      230px;
   }
 
-  .room{
-    min-height:240px;
+  .core-area{
+
+    height:
+      350px;
   }
 
-  .contact{
-    padding:60px 25px;
+  .core{
+
+    transform:
+      scale(.62);
+  }
+
+  .services{
+
+    grid-template-columns:
+      1fr;
+  }
+
+  section{
+
+    padding:
+      90px 20px;
+  }
+
+  .contact-form{
+
+    grid-template-columns:
+      1fr;
+  }
+
+  .field.full{
+
+    grid-column:
+      auto;
   }
 
   .cookie{
-    flex-direction:column;
-    align-items:stretch;
+
+    left:15px;
+    right:15px;
+    bottom:15px;
+
+    flex-direction:
+      column;
+
+    align-items:
+      stretch;
   }
 
   .cookie button{
+
     width:100%;
   }
 
   footer{
-    flex-direction:column;
+
+    flex-direction:
+      column;
   }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- BACKGROUND -->
+
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+<div class="background-glow glow-three"></div>
+
+
+<!-- HEADER -->
+
 <header>
-  <a href="#" class="logo">SOCIAL<span>CLIP</span></a>
+
+  <a href="#" class="logo">
+    SOCIAL<span>CLIP</span>
+  </a>
 
   <nav>
-    <a href="#villa">Villa</a>
-    <a href="#rooms">Rooms</a>
-    <a href="#services">Services</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+
+    <a href="#services">
+      Services
+    </a>
+
+    <a href="#about">
+      About
+    </a>
+
+    <a href="#contact">
+      Kontakt
+    </a>
+
+    <a href="#legal">
+      Legal
+    </a>
+
   </nav>
 
-  <div class="menu">☰</div>
+  <div class="menu">
+    ☰
+  </div>
+
 </header>
 
 
 <!-- HERO -->
 
-<main>
-
 <section class="hero">
 
-  <div class="hero-grid"></div>
-
-  <div class="orb one"></div>
-  <div class="orb two"></div>
+  <div class="grid"></div>
 
   <div class="hero-content">
 
-    <div class="eyebrow">
-      ART · MEDIA · DIGITAL
+
+    <div class="brand-stage">
+
+      <!-- TWO LIGHTS -->
+
+      <div class="spotlight spotlight-left"></div>
+
+      <div class="spotlight spotlight-right"></div>
+
+
+      <div class="badge">
+        ART · MEDIA · DIGITAL
+      </div>
+
+
+      <div class="brand-name">
+        SOCIALCLIP
+      </div>
+
     </div>
+
 
     <h1>
-      ENTER THE
-      <span>DIGITAL VILLA.</span>
+
+      WE CREATE
+
+      <span>
+        DIGITAL IMPACT.
+      </span>
+
     </h1>
 
-    <p>
-      Willkommen bei SocialClip Art & Media.
-      Eine kreative digitale Umgebung für Social Media,
-      Design, Film, digitale Kunst und neue Technologien.
+
+    <p class="hero-text">
+
+      SocialClip Art & Media verbindet
+      Social Media, Design, Film, digitale Kunst
+      und neue Technologien zu modernen
+      digitalen Erlebnissen.
+
     </p>
 
-    <div class="hero-buttons">
-      <a class="btn btn-primary" href="#villa">
-        Villa betreten
-      </a>
 
-      <a class="btn btn-dark" href="#contact">
+    <div class="buttons">
+
+      <a
+        href="#contact"
+        class="btn primary"
+      >
         Projekt starten
       </a>
+
+      <a
+        href="#services"
+        class="btn secondary"
+      >
+        Entdecken
+      </a>
+
     </div>
 
-    <div class="villa-wrap" id="villa">
 
-      <div class="villa" id="villaModel">
+    <!-- MOVING DIGITAL CORE -->
 
-        <div class="floor"></div>
+    <div class="core-area">
 
-        <div class="house">
+      <div
+        class="core"
+        id="core"
+      >
 
-          <div class="window w1"></div>
-          <div class="window w2"></div>
-          <div class="window w3"></div>
+        <div class="core-glow"></div>
 
-          <div class="door"></div>
+        <div class="core-ball"></div>
 
-        </div>
+        <div class="ring ring-one"></div>
 
-        <div class="roof"></div>
+        <div class="ring ring-two"></div>
 
-        <div class="pool"></div>
-
-        <div class="light l1"></div>
-        <div class="light l2"></div>
-        <div class="light l3"></div>
+        <div class="ring ring-three"></div>
 
       </div>
 
@@ -818,126 +1774,127 @@ footer{
 </section>
 
 
-<!-- ROOMS -->
-
-<section id="rooms">
-
-  <div class="section-head">
-
-    <div class="section-label">
-      Explore
-    </div>
-
-    <h2>
-      Four rooms.<br>
-      One creative world.
-    </h2>
-
-    <p>
-      Die Digital Villa ist dein Einstieg in die Welt von SocialClip.
-      Jeder Bereich steht für einen Teil unserer kreativen Arbeit.
-    </p>
-
-  </div>
-
-
-  <div class="rooms">
-
-    <article class="room">
-      <div class="room-number">01</div>
-      <div class="room-icon">◉</div>
-      <h3>Social Room</h3>
-      <p>
-        Social-Media-Konzepte, Content und digitale Kommunikation,
-        die Marken sichtbar machen.
-      </p>
-    </article>
-
-    <article class="room">
-      <div class="room-number">02</div>
-      <div class="room-icon">✦</div>
-      <h3>Design Studio</h3>
-      <p>
-        Visuelle Identitäten, Grafiken, digitale Kunst und
-        kreative Markenwelten.
-      </p>
-    </article>
-
-    <article class="room">
-      <div class="room-number">03</div>
-      <div class="room-icon">▶</div>
-      <h3>Film Studio</h3>
-      <p>
-        Video, Motion, Short-Form Content und visuelles
-        Storytelling für digitale Plattformen.
-      </p>
-    </article>
-
-    <article class="room">
-      <div class="room-number">04</div>
-      <div class="room-icon">⌬</div>
-      <h3>AI Lounge</h3>
-      <p>
-        Neue Ideen mit künstlicher Intelligenz,
-        Automatisierung und experimentellen Workflows.
-      </p>
-    </article>
-
-  </div>
-
-</section>
-
-
 <!-- SERVICES -->
 
 <section id="services">
 
-  <div class="section-head">
-
-    <div class="section-label">
-      What we do
-    </div>
-
-    <h2>
-      Ideas into<br>
-      digital impact.
-    </h2>
-
+  <div class="label">
+    What we do
   </div>
+
+  <h2 class="section-title">
+
+    Ideas into<br>
+    digital impact.
+
+  </h2>
+
+  <p class="section-text">
+
+    Von der ersten Idee bis zum fertigen
+    digitalen Auftritt.
+
+  </p>
+
 
   <div class="services">
 
-    <article class="service">
-      <h3>Social Media</h3>
+
+    <article class="card">
+
+      <div class="card-number">
+        01
+      </div>
+
+      <div class="card-icon">
+        ◉
+      </div>
+
+      <h3>
+        Social Media
+      </h3>
+
       <p>
-        Content-Konzepte, Social Posts, Reels und digitale
-        Strategien für einen professionellen Auftritt.
+
+        Content, Reels, Social Posts und
+        kreative Social-Media-Konzepte.
+
       </p>
+
     </article>
 
-    <article class="service">
-      <h3>Creative Design</h3>
+
+    <article class="card">
+
+      <div class="card-number">
+        02
+      </div>
+
+      <div class="card-icon">
+        ✦
+      </div>
+
+      <h3>
+        Design
+      </h3>
+
       <p>
-        Grafisches Design, Branding, digitale Visuals und
-        kreative Kampagnen.
+
+        Grafiken, Visuals, Branding und
+        digitale Gestaltung.
+
       </p>
+
     </article>
 
-    <article class="service">
-      <h3>Video & Film</h3>
+
+    <article class="card">
+
+      <div class="card-number">
+        03
+      </div>
+
+      <div class="card-icon">
+        ▶
+      </div>
+
+      <h3>
+        Film & Media
+      </h3>
+
       <p>
-        Filmische Inhalte, Short-Form Videos, Editing und
-        visuelles Storytelling.
+
+        Video, Editing, Short-Form Content
+        und visuelles Storytelling.
+
       </p>
+
     </article>
 
-    <article class="service">
-      <h3>Digital & AI</h3>
+
+    <article class="card">
+
+      <div class="card-number">
+        04
+      </div>
+
+      <div class="card-icon">
+        ⌬
+      </div>
+
+      <h3>
+        AI & Digital
+      </h3>
+
       <p>
-        Experimentelle digitale Projekte, AI-Workflows und
-        neue kreative Technologien.
+
+        Kreative digitale Projekte und
+        moderne AI-Workflows.
+
       </p>
+
     </article>
+
 
   </div>
 
@@ -950,35 +1907,50 @@ footer{
 
   <div class="about">
 
+
     <div>
-      <div class="section-label">
+
+      <div class="label">
         About SocialClip
       </div>
 
       <h2>
+
         Creativity<br>
         without limits.
+
       </h2>
-    </div>
-
-    <div class="about-text">
-
-      <p>
-        SocialClip Art & Media verbindet kreative Gestaltung,
-        digitale Medien und moderne Technologie.
-      </p>
-
-      <p>
-        Unser Ziel ist es, aus Ideen digitale Erlebnisse zu machen,
-        die nicht nur gut aussehen, sondern im Kopf bleiben.
-      </p>
-
-      <p>
-        Von Social Media über Design bis zu Film und
-        experimentellen digitalen Projekten.
-      </p>
 
     </div>
+
+
+    <div class="about-copy">
+
+      <p>
+
+        SocialClip Art & Media steht für
+        kreative digitale Projekte,
+        moderne Medien und visuelle Ideen.
+
+      </p>
+
+      <p>
+
+        Wir verbinden Design, Social Media,
+        Film und Technologie, um Inhalte
+        zu schaffen, die auffallen.
+
+      </p>
+
+      <p>
+
+        Aus einer Idee wird ein
+        digitales Erlebnis.
+
+      </p>
+
+    </div>
+
 
   </div>
 
@@ -987,30 +1959,130 @@ footer{
 
 <!-- CONTACT -->
 
-<section id="contact">
+<section
+  id="contact"
+  class="contact-section"
+>
 
-  <div class="contact">
+  <div class="contact-box">
 
-    <div class="section-label">
+
+    <div class="label">
       Start a project
     </div>
 
+
     <h2>
+
       Let's create<br>
       something.
+
     </h2>
 
+
     <p>
-      Du hast eine Idee, ein Projekt oder möchtest einfach
-      wissen, was möglich ist? Schreib uns.
+
+      Erzähl uns von deinem Projekt.
+      Wir melden uns direkt bei dir.
+
     </p>
 
-    <a
-      class="contact-mail"
-      href="mailto:alin.mircea04@gmail.com"
+
+    <!-- FORMSPREE -->
+
+    <form
+      class="contact-form"
+      action="https://formspree.io/f/xwlvlqwg"
+      method="POST"
     >
-      alin.mircea04@gmail.com
-    </a>
+
+
+      <div class="field">
+
+        <label>
+          Name
+        </label>
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Dein Name"
+          required
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          E-Mail
+        </label>
+
+        <input
+          type="email"
+          name="email"
+          placeholder="deine@email.de"
+          required
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          Betreff
+        </label>
+
+        <input
+          type="text"
+          name="subject"
+          placeholder="Worum geht es?"
+          required
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          Nachricht
+        </label>
+
+        <textarea
+          name="message"
+          placeholder="Erzähl uns kurz von deinem Projekt..."
+          required
+        ></textarea>
+
+      </div>
+
+
+      <div class="field full">
+
+        <button
+          class="form-button"
+          type="submit"
+        >
+
+          Nachricht senden →
+
+        </button>
+
+        <div class="form-note">
+
+          Deine Nachricht wird sicher über
+          Formspree übermittelt.
+
+        </div>
+
+      </div>
+
+
+    </form>
+
 
   </div>
 
@@ -1023,24 +2095,41 @@ footer{
 
   <div class="legal">
 
+
     <article>
 
-      <h3>Impressum</h3>
+      <h3>
+        Impressum
+      </h3>
 
       <p>
-        <strong>SocialClip Art & Media</strong>
+
+        <strong>
+          SocialClip Art & Media
+        </strong>
+
       </p>
 
       <p>
+
         Inhaber: Alin Mircea<br>
+
         Donato-Polli str 38<br>
+
         91056 Erlangen<br>
+
         Deutschland
+
       </p>
 
       <p>
-        Telefon: 017646188101<br>
-        E-Mail: alin.mircea04@gmail.com
+
+        Telefon:
+        017646188101<br>
+
+        E-Mail:
+        alin.mircea04@gmail.com
+
       </p>
 
     </article>
@@ -1048,45 +2137,63 @@ footer{
 
     <article>
 
-      <h3>Datenschutz</h3>
+      <h3>
+        Datenschutz
+      </h3>
 
       <p>
-        Der Schutz deiner persönlichen Daten ist uns wichtig.
-        Diese Website verarbeitet personenbezogene Daten nur,
-        soweit dies für den Betrieb und die Kommunikation
-        erforderlich ist.
+
+        Der Schutz personenbezogener Daten
+        ist uns wichtig.
+
       </p>
 
       <p>
-        Bei einer Kontaktaufnahme per E-Mail werden die von dir
-        übermittelten Informationen ausschließlich zur Bearbeitung
-        deiner Anfrage verwendet.
+
+        Wenn du uns über das Kontaktformular
+        kontaktierst, werden die von dir
+        eingegebenen Informationen zur
+        Bearbeitung deiner Anfrage verwendet.
+
       </p>
 
       <p>
-        Diese Website verwendet keine externen Analyse- oder
-        Marketing-Tracker.
+
+        Die Übermittlung des Kontaktformulars
+        erfolgt über Formspree.
+
       </p>
 
     </article>
+
 
   </div>
 
 </section>
 
-</main>
 
+<!-- FOOTER -->
 
 <footer>
 
   <div>
+
     © 2026 SocialClip Art & Media
+
   </div>
 
   <div>
-    <a href="#legal">Impressum</a>
+
+    <a href="#legal">
+      Impressum
+    </a>
+
     &nbsp; · &nbsp;
-    <a href="#legal">Datenschutz</a>
+
+    <a href="#legal">
+      Datenschutz
+    </a>
+
   </div>
 
 </footer>
@@ -1094,15 +2201,24 @@ footer{
 
 <!-- COOKIE -->
 
-<div class="cookie" id="cookie">
+<div
+  class="cookie"
+  id="cookie"
+>
 
   <p>
-    Diese Website verwendet ausschließlich technisch notwendige
-    Funktionen. Mit „Verstanden“ bestätigst du den Hinweis.
+
+    Diese Website verwendet ausschließlich
+    technisch notwendige Funktionen.
+
   </p>
 
-  <button onclick="acceptCookies()">
+  <button
+    onclick="acceptCookies()"
+  >
+
     Verstanden
+
   </button>
 
 </div>
@@ -1110,103 +2226,159 @@ footer{
 
 <script>
 
-/* ================= COOKIE ================= */
+/* =========================================================
+   COOKIE
+   ========================================================= */
 
 function acceptCookies(){
 
   localStorage.setItem(
-    "socialclip_cookie_notice",
+    "socialclip_cookie",
     "accepted"
   );
 
-  document.getElementById("cookie").style.display="none";
+  document
+    .getElementById("cookie")
+    .style.display="none";
+
 }
 
 if(
-  localStorage.getItem("socialclip_cookie_notice")
+  localStorage.getItem("socialclip_cookie")
   === "accepted"
 ){
-  document.getElementById("cookie").style.display="none";
+
+  document
+    .getElementById("cookie")
+    .style.display="none";
+
 }
 
 
-/* ================= VILLA PARALLAX ================= */
+/* =========================================================
+   MOVING CORE — MOUSE
+   ========================================================= */
 
-const villa =
-  document.getElementById("villaModel");
-
-function moveVilla(x,y){
-
-  const rotateX = 60 + y * 4;
-  const rotateZ = -8 + x * 5;
-
-  villa.style.transform =
-    `translate(-50%,-50%)
-     rotateX(${rotateX}deg)
-     rotateZ(${rotateZ}deg)`;
-}
+const core =
+  document.getElementById("core");
 
 
-/* DESKTOP */
+document.addEventListener(
+  "mousemove",
+  function(event){
 
-document.addEventListener("mousemove",(e)=>{
+    const x =
+      (event.clientX /
+      window.innerWidth) - .5;
 
-  const x =
-    (e.clientX / window.innerWidth) - .5;
+    const y =
+      (event.clientY /
+      window.innerHeight) - .5;
 
-  const y =
-    (e.clientY / window.innerHeight) - .5;
+    core.style.transform =
 
-  moveVilla(x,y);
-
-});
-
-
-/* MOBILE */
-
-document.addEventListener("touchmove",(e)=>{
-
-  if(!e.touches.length) return;
-
-  const touch=e.touches[0];
-
-  const x =
-    (touch.clientX / window.innerWidth) - .5;
-
-  const y =
-    (touch.clientY / window.innerHeight) - .5;
-
-  moveVilla(x,y);
-
-},{passive:true});
-
-
-/* ================= MENU ================= */
-
-document.querySelector(".menu")
-.addEventListener("click",()=>{
-
-  const nav=document.querySelector("nav");
-
-  if(nav.style.display==="flex"){
-
-    nav.style.display="none";
-
-  }else{
-
-    nav.style.display="flex";
-    nav.style.position="absolute";
-    nav.style.top="70px";
-    nav.style.right="20px";
-    nav.style.flexDirection="column";
-    nav.style.padding="20px";
-    nav.style.background="rgba(8,10,13,.96)";
-    nav.style.border="1px solid rgba(255,255,255,.1)";
-    nav.style.borderRadius="15px";
+      `
+      rotateX(${y * -25}deg)
+      rotateY(${x * 35}deg)
+      rotateZ(${x * 8}deg)
+      `;
 
   }
+);
 
-});
+
+/* =========================================================
+   MOVING CORE — TOUCH
+   ========================================================= */
+
+document.addEventListener(
+  "touchmove",
+  function(event){
+
+    if(!event.touches.length)
+      return;
+
+    const touch =
+      event.touches[0];
+
+    const x =
+      (touch.clientX /
+      window.innerWidth) - .5;
+
+    const y =
+      (touch.clientY /
+      window.innerHeight) - .5;
+
+    core.style.transform =
+
+      `
+      rotateX(${y * -25}deg)
+      rotateY(${x * 35}deg)
+      rotateZ(${x * 8}deg)
+      `;
+
+  },
+  {
+    passive:true
+  }
+);
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+const menu =
+  document.querySelector(".menu");
+
+const nav =
+  document.querySelector("nav");
+
+
+menu.addEventListener(
+  "click",
+  function(){
+
+    if(
+      nav.style.display === "flex"
+    ){
+
+      nav.style.display =
+        "none";
+
+    }else{
+
+      nav.style.display =
+        "flex";
+
+      nav.style.position =
+        "absolute";
+
+      nav.style.top =
+        "70px";
+
+      nav.style.right =
+        "20px";
+
+      nav.style.flexDirection =
+        "column";
+
+      nav.style.padding =
+        "20px";
+
+      nav.style.background =
+        "rgba(8,10,18,.97)";
+
+      nav.style.border =
+        "1px solid rgba(255,255,255,.12)";
+
+      nav.style.borderRadius =
+        "15px";
+
+    }
+
+  }
+);
 
 </script>
 
