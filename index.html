@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="SocialClip Art & Media – Digital, Design, Social Media, Foto, Video und kreative Lösungen."
+    content="SocialClip Art & Media – Webdesign, Social Media, Branding, Foto, Video und digitale Lösungen aus Erlangen."
   >
 
   <style>
@@ -19,10 +19,11 @@
     }
 
     :root {
-      --bg: #050505;
+      --bg: #030303;
       --text: #f5f5f5;
-      --muted: #8d8d8d;
-      --line: rgba(255,255,255,.1);
+      --muted: #858585;
+      --dark: #444;
+      --line: rgba(255,255,255,.10);
       --glass: rgba(255,255,255,.055);
     }
 
@@ -37,69 +38,133 @@
       overflow-x: hidden;
     }
 
+    body.menu-open {
+      overflow: hidden;
+    }
+
     a {
       color: inherit;
       text-decoration: none;
     }
 
-    /* ---------- BACKGROUND ---------- */
+    button {
+      font: inherit;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
 
     .background {
       position: fixed;
       inset: 0;
       pointer-events: none;
       overflow: hidden;
-      z-index: -1;
+      z-index: -2;
+    }
+
+    .grid {
+      position: absolute;
+      inset: 0;
+      opacity: .13;
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
     }
 
     .orb {
       position: absolute;
-      width: 500px;
-      height: 500px;
       border-radius: 50%;
-      filter: blur(120px);
-      opacity: .18;
-      animation: float 12s ease-in-out infinite alternate;
+      filter: blur(100px);
+      pointer-events: none;
     }
 
     .orb.one {
-      background: #ffffff;
-      top: -250px;
-      right: -150px;
+      width: 520px;
+      height: 520px;
+      background: #fff;
+      opacity: .11;
+      top: -280px;
+      right: -170px;
+      animation: floatOne 12s ease-in-out infinite alternate;
     }
 
     .orb.two {
-      background: #777;
-      bottom: -300px;
-      left: -200px;
-      animation-delay: -5s;
+      width: 450px;
+      height: 450px;
+      background: #888;
+      opacity: .12;
+      bottom: -250px;
+      left: -180px;
+      animation: floatTwo 15s ease-in-out infinite alternate;
     }
 
-    @keyframes float {
+    @keyframes floatOne {
       from {
-        transform: translate(0, 0) scale(1);
+        transform: translate3d(0,0,0) scale(1);
       }
-
       to {
-        transform: translate(-60px, 50px) scale(1.15);
+        transform: translate3d(-80px,70px,0) scale(1.15);
       }
     }
 
-    /* ---------- HEADER ---------- */
+    @keyframes floatTwo {
+      from {
+        transform: translate3d(0,0,0) scale(1);
+      }
+      to {
+        transform: translate3d(70px,-60px,0) scale(1.2);
+      }
+    }
+
+    /* =========================
+       CURSOR LIGHT
+    ========================= */
+
+    .cursor-light {
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,.10) 0%,
+        rgba(255,255,255,.035) 35%,
+        transparent 70%
+      );
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+
+    @media (hover:hover) {
+      .cursor-light {
+        opacity: 1;
+      }
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      padding: 22px 6%;
+      padding: 20px 6%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 100;
-      background: rgba(5,5,5,.65);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      z-index: 1000;
+      background: rgba(3,3,3,.60);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
     }
 
     .logo {
@@ -114,20 +179,34 @@
 
     nav {
       display: flex;
-      gap: 30px;
+      align-items: center;
+      gap: 28px;
     }
 
     nav a {
-      color: #999;
+      color: #888;
       font-size: 13px;
       transition: .3s;
     }
 
     nav a:hover {
-      color: white;
+      color: #fff;
     }
 
-    /* ---------- HERO ---------- */
+    .menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+      color: white;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
       min-height: 100vh;
@@ -135,82 +214,177 @@
       align-items: center;
       padding: 150px 7% 100px;
       position: relative;
+      perspective: 1200px;
     }
 
     .hero-content {
-      max-width: 1100px;
+      width: 100%;
+      max-width: 1250px;
+      position: relative;
+      z-index: 2;
     }
 
     .tag {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 14px;
+      padding: 9px 15px;
       border: 1px solid var(--line);
       border-radius: 100px;
       background: var(--glass);
       color: #aaa;
       font-size: 12px;
       margin-bottom: 30px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      animation: fadeUp .8s ease both;
     }
 
     .dot {
       width: 7px;
       height: 7px;
-      background: white;
+      background: #fff;
       border-radius: 50%;
-      box-shadow: 0 0 15px white;
+      box-shadow: 0 0 18px #fff;
     }
 
     h1 {
-      font-size: clamp(60px, 10vw, 150px);
-      line-height: .88;
-      letter-spacing: -8px;
+      font-size: clamp(62px, 11vw, 155px);
+      line-height: .84;
+      letter-spacing: -9px;
       max-width: 1100px;
-      margin-bottom: 40px;
+      margin-bottom: 45px;
+      animation: fadeUp 1s .1s ease both;
     }
 
     h1 .muted {
-      color: #555;
+      color: #484848;
     }
 
     .hero-description {
-      max-width: 600px;
+      max-width: 620px;
       color: #929292;
       font-size: 19px;
       line-height: 1.7;
       margin-bottom: 40px;
+      animation: fadeUp 1s .2s ease both;
     }
 
     .hero-buttons {
       display: flex;
-      gap: 15px;
+      gap: 14px;
       flex-wrap: wrap;
+      animation: fadeUp 1s .3s ease both;
     }
 
     .button {
-      padding: 15px 23px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 24px;
       border-radius: 100px;
       background: white;
       color: black;
       font-size: 14px;
-      font-weight: 700;
-      transition: .3s;
+      font-weight: 800;
+      border: 1px solid white;
+      transition: .35s;
+      cursor: pointer;
     }
 
     .button:hover {
       transform: translateY(-4px);
-      box-shadow: 0 15px 40px rgba(255,255,255,.15);
+      box-shadow: 0 18px 50px rgba(255,255,255,.16);
     }
 
     .button.secondary {
-      background: transparent;
+      background: rgba(255,255,255,.025);
       color: white;
-      border: 1px solid var(--line);
+      border-color: var(--line);
+      backdrop-filter: blur(10px);
     }
 
-    /* ---------- MARQUEE ---------- */
+    /* =========================
+       3D ORB
+    ========================= */
+
+    .hero-visual {
+      position: absolute;
+      right: 7%;
+      top: 50%;
+      width: 380px;
+      height: 380px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .orb3d {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(
+          circle at 32% 25%,
+          rgba(255,255,255,.95) 0%,
+          rgba(255,255,255,.40) 5%,
+          rgba(130,130,130,.20) 20%,
+          rgba(30,30,30,.90) 55%,
+          #020202 76%
+        );
+      box-shadow:
+        inset -40px -35px 90px rgba(0,0,0,.95),
+        inset 25px 20px 60px rgba(255,255,255,.16),
+        0 0 90px rgba(255,255,255,.08);
+      animation: orbSpin 14s linear infinite;
+      transform-style: preserve-3d;
+    }
+
+    .orb3d::before,
+    .orb3d::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      transform: rotateX(70deg) rotateZ(25deg);
+    }
+
+    .orb3d::after {
+      transform: rotateY(70deg) rotateZ(-20deg);
+      border-color: rgba(255,255,255,.08);
+    }
+
+    .orb-ring {
+      position: absolute;
+      inset: -12%;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 50%;
+      transform: rotateX(70deg) rotateY(15deg);
+      animation: ringSpin 8s linear infinite;
+    }
+
+    @keyframes orbSpin {
+      from {
+        transform: rotateY(0deg) rotateX(0deg);
+      }
+      to {
+        transform: rotateY(360deg) rotateX(20deg);
+      }
+    }
+
+    @keyframes ringSpin {
+      from {
+        transform: rotateX(70deg) rotateY(15deg) rotateZ(0);
+      }
+      to {
+        transform: rotateX(70deg) rotateY(15deg) rotateZ(360deg);
+      }
+    }
+
+    /* =========================
+       MARQUEE
+    ========================= */
 
     .marquee {
       border-top: 1px solid var(--line);
@@ -218,14 +392,14 @@
       overflow: hidden;
       white-space: nowrap;
       padding: 25px 0;
-      color: #555;
-      font-size: 14px;
-      letter-spacing: 3px;
+      color: #4b4b4b;
+      font-size: 13px;
+      letter-spacing: 4px;
     }
 
     .marquee-track {
       display: inline-block;
-      animation: marquee 25s linear infinite;
+      animation: marquee 28s linear infinite;
     }
 
     .marquee span {
@@ -236,17 +410,19 @@
       from {
         transform: translateX(0);
       }
-
       to {
         transform: translateX(-50%);
       }
     }
 
-    /* ---------- SECTIONS ---------- */
+    /* =========================
+       SECTIONS
+    ========================= */
 
     section {
-      padding: 140px 7%;
+      padding: 150px 7%;
       border-bottom: 1px solid var(--line);
+      position: relative;
     }
 
     .label {
@@ -258,14 +434,16 @@
     }
 
     h2 {
-      font-size: clamp(42px, 7vw, 90px);
-      line-height: .95;
+      font-size: clamp(45px, 7vw, 92px);
+      line-height: .94;
       letter-spacing: -5px;
       max-width: 1000px;
       margin-bottom: 70px;
     }
 
-    /* ---------- SERVICES ---------- */
+    /* =========================
+       SERVICES
+    ========================= */
 
     .services {
       display: grid;
@@ -274,37 +452,39 @@
     }
 
     .card {
-      min-height: 280px;
+      min-height: 300px;
       padding: 35px;
       border: 1px solid var(--line);
-      border-radius: 22px;
-      background: linear-gradient(
-        145deg,
-        rgba(255,255,255,.07),
-        rgba(255,255,255,.015)
-      );
-      transition: .4s;
+      border-radius: 24px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.075),
+          rgba(255,255,255,.012)
+        );
+      transition: transform .4s ease, border-color .4s ease;
       position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
     }
 
     .card::before {
       content: "";
       position: absolute;
-      width: 180px;
-      height: 180px;
+      width: 220px;
+      height: 220px;
       background: white;
       border-radius: 50%;
-      filter: blur(100px);
+      filter: blur(110px);
       opacity: 0;
-      right: -80px;
-      top: -80px;
+      right: -100px;
+      top: -100px;
       transition: .5s;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(255,255,255,.25);
+      transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+      border-color: rgba(255,255,255,.24);
     }
 
     .card:hover::before {
@@ -314,7 +494,7 @@
     .number {
       color: #555;
       font-size: 12px;
-      margin-bottom: 80px;
+      margin-bottom: 95px;
     }
 
     .card h3 {
@@ -325,15 +505,17 @@
     .card p {
       color: #777;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    /* ---------- ABOUT ---------- */
+    /* =========================
+       ABOUT
+    ========================= */
 
     .about-text {
-      max-width: 1000px;
-      color: #999;
-      font-size: clamp(24px, 4vw, 42px);
+      max-width: 1050px;
+      color: #8c8c8c;
+      font-size: clamp(25px, 4vw, 45px);
       line-height: 1.35;
     }
 
@@ -341,11 +523,13 @@
       color: white;
     }
 
-    /* ---------- BIG CTA ---------- */
+    /* =========================
+       CONTACT
+    ========================= */
 
     .cta {
       text-align: center;
-      padding: 180px 7%;
+      padding: 190px 7%;
     }
 
     .cta h2 {
@@ -358,45 +542,254 @@
       color: #777;
       max-width: 600px;
       margin: 0 auto 40px;
+      line-height: 1.7;
     }
 
-    /* ---------- FOOTER ---------- */
+    /* =========================
+       LEGAL
+    ========================= */
+
+    .legal {
+      background: rgba(255,255,255,.018);
+    }
+
+    .legal-container {
+      max-width: 900px;
+    }
+
+    .legal h2 {
+      margin-bottom: 45px;
+    }
+
+    .legal h3 {
+      font-size: 22px;
+      margin: 35px 0 12px;
+    }
+
+    .legal p,
+    .legal li {
+      color: #858585;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .legal ul {
+      margin: 15px 0 15px 20px;
+    }
+
+    .legal a {
+      color: white;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       padding: 30px 7%;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       color: #555;
+      font-size: 12px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links button {
+      border: 0;
+      background: none;
+      color: #555;
+      cursor: pointer;
       font-size: 12px;
     }
 
-    /* ---------- MOBILE ---------- */
+    .footer-links button:hover {
+      color: white;
+    }
+
+    /* =========================
+       COOKIE BANNER
+    ========================= */
+
+    .cookie-banner {
+      position: fixed;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      max-width: 900px;
+      margin: auto;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 20px;
+      background: rgba(10,10,10,.90);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      box-shadow: 0 20px 80px rgba(0,0,0,.5);
+      z-index: 2000;
+      display: none;
+    }
+
+    .cookie-banner.show {
+      display: block;
+      animation: cookieIn .5s ease both;
+    }
+
+    .cookie-title {
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .cookie-text {
+      color: #888;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-button {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color: white;
+      border-radius: 100px;
+      padding: 10px 17px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .cookie-button.primary {
+      background: white;
+      color: black;
+      border-color: white;
+      font-weight: 700;
+    }
+
+    @keyframes cookieIn {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 1000px) {
+
+      .hero-visual {
+        width: 280px;
+        height: 280px;
+        right: 3%;
+        opacity: .65;
+      }
+
+      .services {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
     @media (max-width: 800px) {
 
       header {
-        padding: 18px 5%;
+        padding: 17px 5%;
       }
 
       nav {
-        display: none;
+        position: fixed;
+        inset: 74px 0 0 0;
+        background: rgba(3,3,3,.96);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        transform: translateX(100%);
+        transition: .4s;
+      }
+
+      nav.open {
+        transform: translateX(0);
+      }
+
+      nav a {
+        font-size: 22px;
+        color: #aaa;
+      }
+
+      .menu-button {
+        display: block;
       }
 
       .hero {
         padding: 140px 5% 100px;
+        min-height: 100svh;
+      }
+
+      .hero-visual {
+        width: 210px;
+        height: 210px;
+        top: 25%;
+        right: -40px;
+        opacity: .4;
       }
 
       h1 {
-        font-size: clamp(55px, 17vw, 100px);
-        letter-spacing: -5px;
+        font-size: clamp(57px, 17vw, 100px);
+        letter-spacing: -6px;
+        position: relative;
       }
 
       .hero-description {
         font-size: 17px;
+        max-width: 560px;
       }
 
       section {
-        padding: 100px 5%;
+        padding: 105px 5%;
       }
 
       h2 {
@@ -409,25 +802,44 @@
       }
 
       .card {
-        min-height: 240px;
+        min-height: 250px;
       }
 
       .number {
-        margin-bottom: 60px;
+        margin-bottom: 65px;
       }
 
       .about-text {
-        font-size: 25px;
+        font-size: 26px;
       }
 
       .cta {
-        padding: 120px 5%;
+        padding: 130px 5%;
       }
 
       footer {
         padding: 25px 5%;
         flex-direction: column;
-        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .cookie-banner {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        padding: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
@@ -435,28 +847,44 @@
 
 <body>
 
+  <!-- BACKGROUND -->
+
   <div class="background">
+    <div class="grid"></div>
     <div class="orb one"></div>
     <div class="orb two"></div>
   </div>
 
+  <div class="cursor-light" id="cursorLight"></div>
+
+
+  <!-- HEADER -->
 
   <header>
 
-    <a href="#" class="logo">
+    <a href="#top" class="logo">
       SocialClip<span>.</span>
     </a>
 
-    <nav>
+    <nav id="navigation">
       <a href="#services">Leistungen</a>
       <a href="#about">Über uns</a>
       <a href="#contact">Kontakt</a>
+      <a href="#impressum">Impressum</a>
     </nav>
+
+    <button
+      class="menu-button"
+      id="menuButton"
+      aria-label="Menü öffnen"
+    >
+      ☰
+    </button>
 
   </header>
 
 
-  <main>
+  <main id="top">
 
     <!-- HERO -->
 
@@ -490,6 +918,15 @@
             Leistungen ansehen
           </a>
 
+        </div>
+
+      </div>
+
+
+      <div class="hero-visual" aria-hidden="true">
+
+        <div class="orb3d">
+          <div class="orb-ring"></div>
         </div>
 
       </div>
@@ -528,19 +965,24 @@
 
     <section id="services">
 
-      <div class="label">
-        01 · Services
+      <div class="reveal">
+
+        <div class="label">
+          01 · Services
+        </div>
+
+        <h2>
+          Digital.<br>
+          Creative.<br>
+          Different.
+        </h2>
+
       </div>
 
-      <h2>
-        Digital.<br>
-        Creative.<br>
-        Different.
-      </h2>
 
       <div class="services">
 
-        <article class="card">
+        <article class="card reveal">
           <div class="number">01</div>
           <h3>Websites</h3>
           <p>
@@ -549,7 +991,7 @@
           </p>
         </article>
 
-        <article class="card">
+        <article class="card reveal">
           <div class="number">02</div>
           <h3>Social Media</h3>
           <p>
@@ -558,7 +1000,7 @@
           </p>
         </article>
 
-        <article class="card">
+        <article class="card reveal">
           <div class="number">03</div>
           <h3>Branding</h3>
           <p>
@@ -567,7 +1009,7 @@
           </p>
         </article>
 
-        <article class="card">
+        <article class="card reveal">
           <div class="number">04</div>
           <h3>Foto & Video</h3>
           <p>
@@ -576,7 +1018,7 @@
           </p>
         </article>
 
-        <article class="card">
+        <article class="card reveal">
           <div class="number">05</div>
           <h3>AI & Automation</h3>
           <p>
@@ -585,7 +1027,7 @@
           </p>
         </article>
 
-        <article class="card">
+        <article class="card reveal">
           <div class="number">06</div>
           <h3>Creative Projects</h3>
           <p>
@@ -603,17 +1045,21 @@
 
     <section id="about">
 
-      <div class="label">
-        02 · About
-      </div>
+      <div class="reveal">
 
-      <p class="about-text">
-        <strong>SocialClip</strong> verbindet
-        Kreativität, Design und Technologie,
-        um digitale Erlebnisse zu schaffen,
-        die nicht einfach nur gut aussehen —
-        <strong>sondern im Kopf bleiben.</strong>
-      </p>
+        <div class="label">
+          02 · About
+        </div>
+
+        <p class="about-text">
+          <strong>SocialClip</strong> verbindet
+          Kreativität, Design und Technologie,
+          um digitale Erlebnisse zu schaffen,
+          die nicht einfach nur gut aussehen —
+          <strong>sondern im Kopf bleiben.</strong>
+        </p>
+
+      </div>
 
     </section>
 
@@ -622,32 +1068,208 @@
 
     <section id="contact" class="cta">
 
-      <div class="label">
-        03 · Let's talk
+      <div class="reveal">
+
+        <div class="label">
+          03 · Let's talk
+        </div>
+
+        <h2>
+          Have an idea?<br>
+          Let's make it real.
+        </h2>
+
+        <p>
+          Du hast ein Projekt, eine Idee oder möchtest
+          einfach wissen, was möglich ist?
+          Schreib uns.
+        </p>
+
+        <a
+          href="mailto:alin.mircea04@gmail.com"
+          class="button"
+        >
+          Kontakt aufnehmen →
+        </a>
+
       </div>
 
-      <h2>
-        Have an idea?<br>
-        Let's make it real.
-      </h2>
+    </section>
 
-      <p>
-        Du hast ein Projekt, eine Idee oder möchtest
-        einfach wissen, was möglich ist?
-        Schreib uns.
-      </p>
 
-      <a
-        href="mailto:alin.mircea04@gmail.com"
-        class="button"
-      >
-        Kontakt aufnehmen →
-      </a>
+    <!-- IMPRESSUM -->
+
+    <section id="impressum" class="legal">
+
+      <div class="legal-container reveal">
+
+        <div class="label">
+          04 · Rechtliches
+        </div>
+
+        <h2>Impressum</h2>
+
+        <h3>Angaben gemäß § 5 TMG</h3>
+
+        <p>
+          SocialClip Art & Media
+        </p>
+
+        <p>
+          Inhaber: Alin Mircea
+        </p>
+
+        <p>
+          Donato-Polli-Straße 38<br>
+          91056 Erlangen<br>
+          Deutschland
+        </p>
+
+        <h3>Kontakt</h3>
+
+        <p>
+          Telefon:
+          <a href="tel:+4917646188101">
+            0176 46188101
+          </a>
+        </p>
+
+        <p>
+          E-Mail:
+          <a href="mailto:alin.mircea04@gmail.com">
+            alin.mircea04@gmail.com
+          </a>
+        </p>
+
+        <h3>Verantwortlich für den Inhalt</h3>
+
+        <p>
+          Alin Mircea<br>
+          Donato-Polli-Straße 38<br>
+          91056 Erlangen
+        </p>
+
+        <h3>Hinweis</h3>
+
+        <p>
+          Die Inhalte dieser Website wurden mit größtmöglicher
+          Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit
+          und Aktualität der Inhalte kann jedoch keine Gewähr
+          übernommen werden.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- DATENSCHUTZ -->
+
+    <section id="datenschutz" class="legal">
+
+      <div class="legal-container reveal">
+
+        <div class="label">
+          05 · Datenschutz
+        </div>
+
+        <h2>Datenschutz</h2>
+
+        <h3>1. Verantwortlicher</h3>
+
+        <p>
+          Verantwortlich für die Datenverarbeitung auf dieser
+          Website ist:
+        </p>
+
+        <p>
+          Alin Mircea<br>
+          Donato-Polli-Straße 38<br>
+          91056 Erlangen<br>
+          Deutschland
+        </p>
+
+        <p>
+          E-Mail:
+          <a href="mailto:alin.mircea04@gmail.com">
+            alin.mircea04@gmail.com
+          </a>
+        </p>
+
+        <h3>2. Allgemeine Hinweise</h3>
+
+        <p>
+          Der Schutz deiner persönlichen Daten ist uns wichtig.
+          Personenbezogene Daten werden auf dieser Website nur
+          verarbeitet, soweit dies zur Bereitstellung der Website
+          oder zur Kontaktaufnahme erforderlich ist.
+        </p>
+
+        <h3>3. Hosting</h3>
+
+        <p>
+          Diese Website wird über GitHub Pages veröffentlicht.
+          Beim Aufruf der Website können technisch notwendige
+          Verbindungsdaten verarbeitet werden, die für die
+          Bereitstellung und Sicherheit der Website erforderlich
+          sind.
+        </p>
+
+        <h3>4. Kontaktaufnahme</h3>
+
+        <p>
+          Wenn du uns per E-Mail kontaktierst, werden die von dir
+          übermittelten Angaben ausschließlich zur Bearbeitung
+          deiner Anfrage und für die damit verbundene Kommunikation
+          verwendet.
+        </p>
+
+        <h3>5. Cookies und Tracking</h3>
+
+        <p>
+          Diese Website verwendet derzeit keine optionalen
+          Tracking-, Analyse- oder Marketing-Cookies.
+        </p>
+
+        <p>
+          Es werden auf dieser Website keine Dienste wie Google
+          Analytics, Meta Pixel oder vergleichbare
+          Tracking-Technologien eingesetzt.
+        </p>
+
+        <h3>6. Lokaler Speicher</h3>
+
+        <p>
+          Die Website kann die Information, dass der Hinweis
+          bezüglich Cookies und Datenschutz bereits bestätigt
+          wurde, lokal im Browser speichern. Hierfür wird
+          LocalStorage verwendet. Diese Information wird nicht
+          an uns übertragen.
+        </p>
+
+        <h3>7. Deine Rechte</h3>
+
+        <p>
+          Du hast im Rahmen der gesetzlichen Vorschriften
+          insbesondere das Recht auf Auskunft über deine
+          personenbezogenen Daten sowie gegebenenfalls auf
+          Berichtigung, Löschung oder Einschränkung der
+          Verarbeitung.
+        </p>
+
+        <p>
+          Bei Fragen zum Datenschutz kannst du dich jederzeit
+          über die oben angegebene E-Mail-Adresse an uns wenden.
+        </p>
+
+      </div>
 
     </section>
 
   </main>
 
+
+  <!-- FOOTER -->
 
   <footer>
 
@@ -655,11 +1277,242 @@
       © 2026 SocialClip Art & Media
     </span>
 
-    <span>
-      Erlangen · Deutschland
-    </span>
+    <div class="footer-links">
+
+      <a href="#impressum">
+        Impressum
+      </a>
+
+      <a href="#datenschutz">
+        Datenschutz
+      </a>
+
+      <button id="cookieSettings">
+        Cookie-Einstellungen
+      </button>
+
+    </div>
 
   </footer>
+
+
+  <!-- COOKIE BANNER -->
+
+  <div
+    class="cookie-banner"
+    id="cookieBanner"
+    role="dialog"
+    aria-label="Datenschutz-Hinweis"
+  >
+
+    <div class="cookie-title">
+      Datenschutz & Cookies
+    </div>
+
+    <div class="cookie-text">
+      Diese Website verwendet derzeit keine optionalen
+      Tracking- oder Marketing-Cookies. Für die Darstellung
+      der Website sind technisch notwendige Funktionen
+      erforderlich. Mehr Informationen findest du in unserer
+      Datenschutzerklärung.
+    </div>
+
+    <div class="cookie-actions">
+
+      <button
+        class="cookie-button primary"
+        id="acceptCookies"
+      >
+        Verstanden
+      </button>
+
+      <a
+        href="#datenschutz"
+        class="cookie-button"
+        id="privacyButton"
+      >
+        Datenschutz
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    const menuButton = document.getElementById("menuButton");
+    const navigation = document.getElementById("navigation");
+
+    menuButton.addEventListener("click", () => {
+
+      navigation.classList.toggle("open");
+      document.body.classList.toggle("menu-open");
+
+      if (navigation.classList.contains("open")) {
+        menuButton.textContent = "×";
+        menuButton.setAttribute("aria-label", "Menü schließen");
+      } else {
+        menuButton.textContent = "☰";
+        menuButton.setAttribute("aria-label", "Menü öffnen");
+      }
+
+    });
+
+
+    document.querySelectorAll("nav a").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        navigation.classList.remove("open");
+        document.body.classList.remove("menu-open");
+
+        menuButton.textContent = "☰";
+
+      });
+
+    });
+
+
+    /* =========================
+       CURSOR LIGHT
+    ========================= */
+
+    const cursorLight = document.getElementById("cursorLight");
+
+    document.addEventListener("mousemove", event => {
+
+      cursorLight.style.left = event.clientX + "px";
+      cursorLight.style.top = event.clientY + "px";
+
+    });
+
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+              observer.unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+
+    revealElements.forEach(element => {
+      observer.observe(element);
+    });
+
+
+    /* =========================
+       3D HERO PARALLAX
+    ========================= */
+
+    const orb = document.querySelector(".orb3d");
+
+    if (window.matchMedia("(hover:hover)").matches) {
+
+      document.addEventListener("mousemove", event => {
+
+        const x =
+          (event.clientX / window.innerWidth - .5) * 20;
+
+        const y =
+          (event.clientY / window.innerHeight - .5) * 20;
+
+        orb.style.transform =
+          `rotateY(${x}deg) rotateX(${-y}deg)`;
+
+      });
+
+    }
+
+
+    /* =========================
+       COOKIE NOTICE
+    ========================= */
+
+    const cookieBanner =
+      document.getElementById("cookieBanner");
+
+    const acceptCookies =
+      document.getElementById("acceptCookies");
+
+    const cookieSettings =
+      document.getElementById("cookieSettings");
+
+    const privacyButton =
+      document.getElementById("privacyButton");
+
+
+    function showCookieBanner() {
+      cookieBanner.classList.add("show");
+    }
+
+
+    function hideCookieBanner() {
+      cookieBanner.classList.remove("show");
+      localStorage.setItem(
+        "socialclip_cookie_notice",
+        "confirmed"
+      );
+    }
+
+
+    if (
+      localStorage.getItem(
+        "socialclip_cookie_notice"
+      ) !== "confirmed"
+    ) {
+
+      setTimeout(showCookieBanner, 1000);
+
+    }
+
+
+    acceptCookies.addEventListener(
+      "click",
+      hideCookieBanner
+    );
+
+
+    cookieSettings.addEventListener(
+      "click",
+      showCookieBanner
+    );
+
+
+    privacyButton.addEventListener(
+      "click",
+      () => {
+        cookieBanner.classList.remove("show");
+      }
+    );
+
+  </script>
 
 </body>
 </html>
