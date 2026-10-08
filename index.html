@@ -1,329 +1,1247 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SocialClip.art | Online Dienste</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'] },
-                    colors: {
-                        neonCyan: '#00f3ff',
-                        neonPurple: '#bc13fe',
-                        darkBg: '#050511'
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body { background-color: #050511; color: #ffffff; overflow-x: hidden; scroll-behavior: smooth; }
-        
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(90deg, #ffffff, #bc13fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+<title>SocialClip — Art & Media</title>
 
-        .blob {
-            position: absolute; filter: blur(120px); z-index: -1; opacity: 0.3;
-            animation: float 12s infinite ease-in-out alternate;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(-40px) scale(1.2); }
-        }
+<meta name="description" content="SocialClip Art & Media — Creative Digital Studio aus Erlangen.">
 
-        /* Coole Hover-Effekte für die Service-Karten */
-        .service-card {
-            transition: all 0.4s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(188, 19, 254, 0.3);
-            border-color: rgba(188, 19, 254, 0.5);
-        }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050511; }
-        ::-webkit-scrollbar-thumb { background: #bc13fe; border-radius: 4px; }
-    </style>
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #020303;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 75% 20%, rgba(255,255,255,.08), transparent 30%),
+    radial-gradient(circle at 20% 80%, rgba(120,140,160,.06), transparent 35%);
+  z-index: -3;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .035;
+  z-index: 20;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      #fff 3px
+    );
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  padding: 0 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: rgba(2,3,3,.65);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: #777;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  color: #888;
+  font-size: 13px;
+  transition: .3s;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 100px 7%;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 5;
+  max-width: 650px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 15px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 50px;
+  background: rgba(255,255,255,.04);
+  color: #aaa;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.badge i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 15px #fff;
+}
+
+.hero h1 {
+  font-size: clamp(60px, 10vw, 145px);
+  line-height: .82;
+  letter-spacing: -9px;
+  margin-bottom: 35px;
+}
+
+.hero h1 span {
+  color: #555;
+}
+
+.hero p {
+  max-width: 540px;
+  color: #888;
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 35px;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 23px;
+  border-radius: 50px;
+  background: #fff;
+  color: #000;
+  font-size: 13px;
+  font-weight: bold;
+  transition: .3s;
+}
+
+.button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(255,255,255,.15);
+}
+
+.button.dark {
+  background: rgba(255,255,255,.04);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.13);
+}
+
+/* =========================
+   VILLA
+========================= */
+
+.villa-stage {
+  position: absolute;
+  width: 620px;
+  height: 520px;
+  right: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  perspective: 1100px;
+}
+
+.villa {
+  position: absolute;
+  width: 520px;
+  height: 330px;
+  left: 50%;
+  top: 50%;
+  transform:
+    translate(-50%,-50%)
+    rotateX(58deg)
+    rotateZ(-2deg);
+  transform-style: preserve-3d;
+  transition: transform .15s ease-out;
+}
+
+/* ground */
+
+.ground {
+  position: absolute;
+  width: 570px;
+  height: 390px;
+  left: -25px;
+  top: -25px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.07),
+      rgba(255,255,255,.015)
+    );
+  border: 1px solid rgba(255,255,255,.1);
+  transform: translateZ(-20px);
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.7);
+}
+
+/* house body */
+
+.house {
+  position: absolute;
+  width: 420px;
+  height: 220px;
+  left: 50px;
+  top: 55px;
+  background:
+    linear-gradient(
+      135deg,
+      #16191a,
+      #080909
+    );
+  border: 1px solid rgba(255,255,255,.16);
+  transform: translateZ(50px);
+  box-shadow:
+    30px 40px 70px rgba(0,0,0,.7);
+}
+
+/* roof */
+
+.roof {
+  position: absolute;
+  width: 450px;
+  height: 250px;
+  left: 35px;
+  top: 35px;
+  border: 1px solid rgba(255,255,255,.15);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.08),
+      rgba(0,0,0,.5)
+    );
+  transform:
+    translateZ(170px)
+    rotateX(-8deg);
+}
+
+/* glass walls */
+
+.glass {
+  position: absolute;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.25),
+      rgba(100,120,130,.04)
+    );
+  border: 1px solid rgba(255,255,255,.2);
+  box-shadow:
+    inset 0 0 30px rgba(255,255,255,.04),
+    0 0 30px rgba(255,255,255,.03);
+}
+
+.glass.one {
+  width: 160px;
+  height: 145px;
+  left: 80px;
+  top: 105px;
+  transform: translateZ(62px);
+}
+
+.glass.two {
+  width: 160px;
+  height: 145px;
+  left: 260px;
+  top: 105px;
+  transform: translateZ(62px);
+}
+
+.glass.three {
+  width: 280px;
+  height: 75px;
+  left: 120px;
+  top: 205px;
+  transform: translateZ(63px);
+}
+
+/* lights */
+
+.light {
+  position: absolute;
+  width: 90px;
+  height: 8px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow:
+    0 0 15px #fff,
+    0 0 45px rgba(255,255,255,.6);
+  transform: translateZ(72px);
+  opacity: .8;
+}
+
+.light.one {
+  left: 105px;
+  top: 225px;
+}
+
+.light.two {
+  left: 290px;
+  top: 225px;
+}
+
+.light.three {
+  left: 200px;
+  top: 285px;
+  width: 120px;
+}
+
+/* pool */
+
+.pool {
+  position: absolute;
+  width: 270px;
+  height: 95px;
+  left: 125px;
+  top: 305px;
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255,255,255,.15),
+      rgba(80,90,100,.06)
+    );
+  border: 1px solid rgba(255,255,255,.13);
+  transform: translateZ(8px);
+  box-shadow:
+    inset 0 0 40px rgba(255,255,255,.05);
+}
+
+.pool::after {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border-top: 1px solid rgba(255,255,255,.18);
+}
+
+/* trees */
+
+.tree {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #171a1b;
+  box-shadow:
+    0 0 30px rgba(255,255,255,.05);
+  transform: translateZ(20px);
+}
+
+.tree::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 30px;
+  background: #252525;
+  left: 14px;
+  top: 27px;
+}
+
+.tree.a {
+  left: 20px;
+  top: 250px;
+}
+
+.tree.b {
+  right: 15px;
+  top: 260px;
+}
+
+.tree.c {
+  right: 65px;
+  top: 330px;
+}
+
+/* floating rings */
+
+.ring {
+  position: absolute;
+  width: 470px;
+  height: 470px;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 50%;
+  left: 75px;
+  top: 25px;
+  transform:
+    rotateX(65deg)
+    rotateZ(20deg);
+  animation: spin 16s linear infinite;
+}
+
+.ring.two {
+  width: 350px;
+  height: 350px;
+  left: 135px;
+  top: 85px;
+  animation-duration: 10s;
+  animation-direction: reverse;
+}
+
+@keyframes spin {
+  from {
+    transform:
+      rotateX(65deg)
+      rotateZ(0deg);
+  }
+  to {
+    transform:
+      rotateX(65deg)
+      rotateZ(360deg);
+  }
+}
+
+/* =========================
+   SECTION
+========================= */
+
+section:not(.hero) {
+  padding: 150px 7%;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.label {
+  color: #555;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+h2 {
+  font-size: clamp(45px, 7vw, 90px);
+  line-height: .9;
+  letter-spacing: -6px;
+  margin-bottom: 60px;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+}
+
+.card {
+  min-height: 280px;
+  padding: 32px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.1);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.06),
+      rgba(255,255,255,.015)
+    );
+  transition: .4s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255,255,255,.25);
+}
+
+.card small {
+  color: #555;
+}
+
+.card h3 {
+  margin-top: 80px;
+  margin-bottom: 12px;
+  font-size: 25px;
+}
+
+.card p {
+  color: #777;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about {
+  max-width: 1000px;
+}
+
+.about p {
+  color: #888;
+  font-size: clamp(25px,4vw,45px);
+  line-height: 1.35;
+}
+
+.about strong {
+  color: #fff;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact {
+  text-align: center;
+}
+
+.contact p {
+  color: #777;
+  max-width: 600px;
+  margin: -20px auto 35px;
+  line-height: 1.7;
+}
+
+/* =========================
+   LEGAL
+========================= */
+
+.legal {
+  background: #050606;
+}
+
+.legal-content {
+  max-width: 850px;
+}
+
+.legal h3 {
+  margin: 35px 0 12px;
+  font-size: 20px;
+}
+
+.legal p {
+  color: #858585;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+
+.legal a {
+  text-decoration: underline;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  padding: 30px 7%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  color: #555;
+  font-size: 12px;
+}
+
+footer div {
+  display: flex;
+  gap: 20px;
+}
+
+/* =========================
+   COOKIE
+========================= */
+
+.cookie {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  max-width: 850px;
+  margin: auto;
+  padding: 22px;
+  background: rgba(10,10,10,.94);
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  display: none;
+}
+
+.cookie.show {
+  display: block;
+}
+
+.cookie strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.cookie p {
+  color: #888;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.cookie button {
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 30px;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+  nav {
+    display: none;
+  }
+
+  .hero {
+    min-height: 100svh;
+    padding: 130px 6% 70px;
+    align-items: flex-start;
+  }
+
+  .hero-text {
+    z-index: 10;
+  }
+
+  .hero h1 {
+    font-size: clamp(55px,16vw,100px);
+    letter-spacing: -6px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .villa-stage {
+    width: 450px;
+    height: 400px;
+    right: -110px;
+    top: 65%;
+    opacity: .65;
+    transform: translateY(-50%) scale(.72);
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+  }
+
+  section:not(.hero) {
+    padding: 100px 6%;
+  }
+
+  h2 {
+    letter-spacing: -4px;
+  }
+
+  footer {
+    padding: 25px 6%;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .hero {
+    min-height: 900px;
+  }
+
+  .villa-stage {
+    right: -160px;
+    top: 67%;
+    transform: translateY(-50%) scale(.58);
+  }
+
+  .hero h1 {
+    font-size: 64px;
+  }
+
+  .cookie {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+}
+</style>
 </head>
-<body class="relative min-h-screen flex flex-col">
 
-    <!-- Hintergrund Blobs -->
-    <div class="blob bg-neonPurple w-[500px] h-[500px] rounded-full top-0 left-0"></div>
-    <div class="blob bg-neonCyan w-[400px] h-[400px] rounded-full bottom-0 right-0"></div>
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass py-4 px-6 md:px-12 flex justify-between items-center top-0">
-        <div class="text-2xl font-bold tracking-widest uppercase">
-            SocialClip<span class="text-neonPurple">.art</span>
-        </div>
-        <div class="hidden md:flex space-x-8 text-sm font-semibold tracking-wider">
-            <a href="#home" class="hover:text-neonCyan transition duration-300">HOME</a>
-            <a href="#services" class="hover:text-neonPurple transition duration-300">SERVICES</a>
-            <a href="#contact" class="hover:text-neonCyan transition duration-300">KONTAKT</a>
-        </div>
-    </nav>
+<div class="noise"></div>
 
-    <!-- Hero Section -->
-    <section id="home" class="pt-32 pb-16 px-4 flex flex-col items-center text-center relative z-10">
-        <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tight">
-            ONLINE <br><span class="gradient-text">DIENSTE</span>
-        </h1>
-        <p class="text-neonCyan tracking-[0.3em] font-semibold mb-8 text-sm md:text-base">
-            PROFESSIONELL. MODERN. EFFEKTIV.
-        </p>
-        <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl">
-            Deine Marke verdient mehr als nur eine Präsenz – <span class="text-neonPurple font-bold">sie verdient Wirkung.</span>
-        </p>
-    </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-16 px-4 md:px-12 max-w-7xl mx-auto relative z-10">
-        <div class="inline-block border border-neonPurple/50 text-neonPurple px-6 py-2 rounded-full mb-10 text-sm font-bold tracking-widest glass">
-            UNSER SERVICE BEINHALTET:
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <!-- Web & Code -->
-            <div class="glass p-8 rounded-2xl service-card">
-                <i class="fas fa-globe text-3xl text-neonCyan mb-4"></i>
-                <h3 class="text-xl font-bold mb-4">Web & Code</h3>
-                <ul class="space-y-3 text-gray-400">
-                    <li><i class="fas fa-check text-neonPurple mr-2"></i> Webseiten erstellen</li>
-                    <li><i class="fas fa-check text-neonPurple mr-2"></i> Programmieren</li>
-                </ul>
-            </div>
+<!-- HEADER -->
 
-            <!-- KI & Automatisierung -->
-            <div class="glass p-8 rounded-2xl service-card">
-                <i class="fas fa-robot text-3xl text-neonPurple mb-4"></i>
-                <h3 class="text-xl font-bold mb-4">KI & Automatisierung</h3>
-                <ul class="space-y-3 text-gray-400">
-                    <li><i class="fas fa-check text-neonCyan mr-2"></i> KI Assistent</li>
-                    <li><i class="fas fa-check text-neonCyan mr-2"></i> KI Anrufbeantworter</li>
-                    <li><i class="fas fa-check text-neonCyan mr-2"></i> Virtuellen Assistenten</li>
-                </ul>
-            </div>
+<header>
 
-            <!-- Design & Media -->
-            <div class="glass p-8 rounded-2xl service-card">
-                <i class="fas fa-camera-retro text-3xl text-neonCyan mb-4"></i>
-                <h3 class="text-xl font-bold mb-4">Design & Media</h3>
-                <ul class="space-y-3 text-gray-400">
-                    <li><i class="fas fa-check text-neonPurple mr-2"></i> Logo erstellen</li>
-                    <li><i class="fas fa-check text-neonPurple mr-2"></i> Video & Photo Editor</li>
-                </ul>
-            </div>
+  <a href="#home" class="logo">
+    SocialClip<span>.</span>
+  </a>
 
-            <!-- Marketing -->
-            <div class="glass p-8 rounded-2xl service-card">
-                <i class="fas fa-chart-line text-3xl text-neonPurple mb-4"></i>
-                <h3 class="text-xl font-bold mb-4">Marketing</h3>
-                <ul class="space-y-3 text-gray-400">
-                    <li><i class="fas fa-check text-neonCyan mr-2"></i> Online Marketing</li>
-                    <li><i class="fas fa-check text-neonCyan mr-2"></i> Social Media Assistant</li>
-                </ul>
-            </div>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Kontakt</a>
+    <a href="#impressum">Impressum</a>
+  </nav>
 
-            <!-- Print & Business -->
-            <div class="glass p-8 rounded-2xl service-card md:col-span-2 lg:col-span-2">
-                <i class="fas fa-print text-3xl text-neonCyan mb-4"></i>
-                <h3 class="text-xl font-bold mb-4">Print & Business</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <ul class="space-y-3 text-gray-400">
-                        <li><i class="fas fa-check text-neonPurple mr-2"></i> Flyer erstellen</li>
-                        <li><i class="fas fa-check text-neonPurple mr-2"></i> Visitenkarten erstellen</li>
-                    </ul>
-                    <ul class="space-y-3 text-gray-400">
-                        <li><i class="fas fa-check text-neonPurple mr-2"></i> Lebenslauf erstellen</li>
-                        <li><i class="fas fa-check text-neonPurple mr-2"></i> Speisekarte erstellen</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+</header>
 
-        <!-- Trust Badges -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-            <div class="glass p-6 rounded-2xl flex items-center border-l-4 border-l-neonCyan">
-                <i class="fas fa-rocket text-4xl text-neonCyan mr-6"></i>
-                <div>
-                    <h4 class="font-bold text-lg text-neonCyan uppercase">Schnell</h4>
-                    <p class="text-sm text-gray-400">Pünktlich & effizient für dein Projekt.</p>
-                </div>
-            </div>
-            <div class="glass p-6 rounded-2xl flex items-center border-l-4 border-l-neonPurple">
-                <i class="fas fa-shield-alt text-4xl text-neonPurple mr-6"></i>
-                <div>
-                    <h4 class="font-bold text-lg text-neonPurple uppercase">Zuverlässig</h4>
-                    <p class="text-sm text-gray-400">Wir halten, was wir versprechen.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Kontakt Section -->
-    <section id="contact" class="py-16 px-4 relative z-10 flex-grow">
-        <div class="max-w-4xl mx-auto glass rounded-3xl p-8 md:p-12">
-            <h2 class="text-3xl font-bold mb-8 text-center uppercase">Projekt <span class="text-neonPurple">Starten</span></h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 text-center md:text-left">
-                <div class="glass p-6 rounded-xl">
-                    <i class="fas fa-phone-alt text-2xl text-neonCyan mb-3"></i>
-                    <h4 class="text-sm text-gray-400 mb-1">RUF UNS AN</h4>
-                    <p class="text-xl font-bold">0176 46188101</p>
-                </div>
-                <div class="glass p-6 rounded-xl">
-                    <i class="fas fa-envelope text-2xl text-neonPurple mb-3"></i>
-                    <h4 class="text-sm text-gray-400 mb-1">SCHREIB UNS EINE E-MAIL</h4>
-                    <p class="text-lg font-bold">alin.mircea04@...</p>
-                </div>
-            </div>
+<!-- HERO -->
 
-            <form action="#" method="POST" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="text" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neonCyan transition" placeholder="Dein Name">
-                    <input type="email" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neonPurple transition" placeholder="Deine E-Mail">
-                </div>
-                <textarea rows="4" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neonCyan transition" placeholder="Erzähl uns von deinem Projekt..."></textarea>
-                <button type="submit" class="w-full py-4 bg-gradient-to-r from-neonCyan to-neonPurple text-white font-bold rounded-xl hover:opacity-90 transition shadow-[0_0_20px_rgba(0,243,255,0.3)]">
-                    Nachricht Senden <i class="fas fa-paper-plane ml-2"></i>
-                </button>
-            </form>
-        </div>
-    </section>
+<section class="hero" id="home">
 
-    <!-- Footer mit Impressum & Datenschutz -->
-    <footer class="glass mt-auto py-8 px-6 text-center text-sm text-gray-500 border-t border-white/10 relative z-10">
-        <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-4">
-            <a href="#" class="hover:text-neonCyan transition">Impressum</a>
-            <span class="hidden md:inline text-white/20">|</span>
-            <a href="#" class="hover:text-neonPurple transition">Datenschutz</a>
-        </div>
-        <p>&copy; 2024 SocialClip.art. Alle Rechte vorbehalten.</p>
-    </footer>
+  <div class="hero-text">
 
-    <!-- KI Chat Widget -->
-    <div id="ai-chat-widget" class="fixed bottom-24 right-6 z-50">
-        <div id="chat-window" class="hidden glass border border-white/10 rounded-2xl w-80 h-96 mb-4 flex flex-col overflow-hidden shadow-[0_0_30px_rgba(188,19,254,0.3)] transition-all transform origin-bottom-right">
-            <div class="bg-white/5 p-4 border-b border-white/10 flex justify-between items-center">
-                <span class="font-bold text-neonPurple"><i class="fas fa-robot mr-2"></i> SocialClip KI</span>
-                <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 text-sm">
-                <div class="bg-white/10 p-3 rounded-lg rounded-tl-none inline-block max-w-[80%]">
-                    Willkommen bei SocialClip.art! Suchst du nach einer neuen Website, einem KI-Assistenten oder Social Media Betreuung?
-                </div>
-            </div>
-            <div class="p-3 border-t border-white/10 flex gap-2">
-                <input type="text" id="chat-input" class="flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-neonPurple" placeholder="Frag mich etwas...">
-                <button onclick="sendChatMessage()" class="bg-neonPurple/20 text-neonPurple p-2 rounded-lg hover:bg-neonPurple hover:text-white transition">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-        <button onclick="toggleChat()" class="float-right w-14 h-14 bg-darkBg border-2 border-neonPurple rounded-full flex justify-center items-center text-neonPurple hover:bg-neonPurple hover:text-white transition shadow-[0_0_20px_#bc13fe]">
-            <i class="fas fa-comment-dots text-2xl"></i>
-        </button>
+    <div class="badge">
+      <i></i>
+      SocialClip Art & Media · Erlangen
     </div>
 
-    <!-- Cookie Banner -->
-    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full glass z-50 p-4 border-t border-white/10 transform translate-y-full transition-transform duration-500 flex flex-col md:flex-row justify-between items-center px-4 md:px-12 gap-4">
-        <div class="text-sm text-gray-300">
-            <i class="fas fa-cookie-bite text-neonCyan mr-2 text-lg"></i>
-            Wir nutzen Cookies für die beste Performance. 
-            <a href="#" class="text-neonPurple hover:underline font-bold">Datenschutz lesen</a>.
-        </div>
-        <div class="flex gap-4">
-            <button onclick="acceptCookies()" class="px-8 py-2 bg-gradient-to-r from-neonCyan to-neonPurple text-white text-sm font-bold rounded-lg hover:opacity-90 transition shadow-[0_0_15px_rgba(0,243,255,0.4)]">
-                Geht klar!
-            </button>
-        </div>
+    <h1>
+      Digital<br>
+      <span>Villa.</span>
+    </h1>
+
+    <p>
+      Willkommen bei SocialClip — einem kreativen
+      digitalen Studio, in dem Design, Technologie,
+      Social Media und visuelle Ideen zusammenkommen.
+    </p>
+
+    <div class="buttons">
+
+      <a href="#services" class="button">
+        Entdecken →
+      </a>
+
+      <a href="#contact" class="button dark">
+        Projekt starten
+      </a>
+
     </div>
 
-    <!-- Interaktive Scripts -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if (!localStorage.getItem('cookiesAccepted')) {
-                setTimeout(() => {
-                    document.getElementById('cookie-banner').classList.remove('translate-y-full');
-                }, 1500);
-            }
-        });
+  </div>
 
-        function acceptCookies() {
-            localStorage.setItem('cookiesAccepted', 'true');
-            document.getElementById('cookie-banner').classList.add('translate-y-full');
-        }
 
-        function toggleChat() {
-            document.getElementById('chat-window').classList.toggle('hidden');
-        }
+  <!-- 3D VILLA -->
 
-        function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const message = input.value.trim();
-            if(!message) return;
-            const chatMessages = document.getElementById('chat-messages');
-            
-            chatMessages.innerHTML += `
-                <div class="text-right">
-                    <div class="bg-neonPurple/20 text-white border border-neonPurple/30 p-3 rounded-lg rounded-tr-none inline-block max-w-[80%] text-left">
-                        ${message}
-                    </div>
-                </div>
-            `;
-            input.value = '';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+  <div class="villa-stage" id="villaStage">
 
-            setTimeout(() => {
-                chatMessages.innerHTML += `
-                    <div>
-                        <div class="bg-white/10 p-3 rounded-lg rounded-tl-none inline-block max-w-[80%]">
-                            <i class="fas fa-circle-notch fa-spin text-neonCyan mr-2"></i> <em>Tippt...</em>
-                        </div>
-                    </div>
-                `;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+    <div class="ring"></div>
+    <div class="ring two"></div>
 
-                setTimeout(() => {
-                    chatMessages.lastElementChild.remove();
-                    chatMessages.innerHTML += `
-                        <div>
-                            <div class="bg-white/10 p-3 rounded-lg rounded-tl-none inline-block max-w-[80%]">
-                                Verstanden! Über unser Kontaktformular kannst du uns direkt eine detaillierte Anfrage dazu schicken.
-                            </div>
-                        </div>
-                    `;
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }, 1200);
-            }, 400);
-        }
+    <div class="villa" id="villa">
 
-        document.getElementById('chat-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') sendChatMessage();
-        });
-    </script>
+      <div class="ground"></div>
+
+      <div class="house"></div>
+
+      <div class="roof"></div>
+
+      <div class="glass one"></div>
+      <div class="glass two"></div>
+      <div class="glass three"></div>
+
+      <div class="light one"></div>
+      <div class="light two"></div>
+      <div class="light three"></div>
+
+      <div class="pool"></div>
+
+      <div class="tree a"></div>
+      <div class="tree b"></div>
+      <div class="tree c"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section id="services">
+
+  <div class="label">
+    01 · Services
+  </div>
+
+  <h2>
+    What we<br>
+    create.
+  </h2>
+
+  <div class="services">
+
+    <div class="card">
+      <small>01</small>
+      <h3>Web Design</h3>
+      <p>
+        Moderne Websites, Landingpages und digitale
+        Erlebnisse mit einem starken visuellen Auftritt.
+      </p>
+    </div>
+
+    <div class="card">
+      <small>02</small>
+      <h3>Social Media</h3>
+      <p>
+        Kreativer Content, Social-Media-Konzepte und
+        digitale Strategien für mehr Sichtbarkeit.
+      </p>
+    </div>
+
+    <div class="card">
+      <small>03</small>
+      <h3>Branding</h3>
+      <p>
+        Logos, visuelle Identitäten und Designs,
+        die einer Marke Charakter geben.
+      </p>
+    </div>
+
+    <div class="card">
+      <small>04</small>
+      <h3>Photo & Video</h3>
+      <p>
+        Visuelle Inhalte für Unternehmen,
+        Social Media und digitale Projekte.
+      </p>
+    </div>
+
+    <div class="card">
+      <small>05</small>
+      <h3>AI & Automation</h3>
+      <p>
+        Intelligente digitale Lösungen und moderne
+        Automatisierung für kreative Projekte.
+      </p>
+    </div>
+
+    <div class="card">
+      <small>06</small>
+      <h3>Creative</h3>
+      <p>
+        Besondere Ideen, digitale Experimente und
+        individuelle Projekte ohne Standardlösung.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+  <div class="about">
+
+    <div class="label">
+      02 · About
+    </div>
+
+    <h2>
+      More than<br>
+      a website.
+    </h2>
+
+    <p>
+      <strong>SocialClip</strong> verbindet
+      Kreativität, Design und Technologie.
+      Wir entwickeln digitale Erlebnisse,
+      die nicht nur funktionieren,
+      sondern <strong>im Kopf bleiben.</strong>
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="contact">
+
+  <div class="label">
+    03 · Contact
+  </div>
+
+  <h2>
+    Let's create<br>
+    something.
+  </h2>
+
+  <p>
+    Du hast eine Idee, ein Projekt oder möchtest
+    einfach sehen, was digital möglich ist?
+  </p>
+
+  <a
+    class="button"
+    href="mailto:alin.mircea04@gmail.com"
+  >
+    Kontakt aufnehmen →
+  </a>
+
+</section>
+
+
+<!-- IMPRESSUM -->
+
+<section id="impressum" class="legal">
+
+  <div class="legal-content">
+
+    <div class="label">
+      04 · Rechtliches
+    </div>
+
+    <h2>Impressum</h2>
+
+    <h3>Angaben gemäß § 5 TMG</h3>
+
+    <p>
+      SocialClip Art & Media
+    </p>
+
+    <p>
+      Inhaber: Alin Mircea
+    </p>
+
+    <p>
+      Donato-Polli-Straße 38<br>
+      91056 Erlangen<br>
+      Deutschland
+    </p>
+
+    <h3>Kontakt</h3>
+
+    <p>
+      Telefon:
+      <a href="tel:+4917646188101">
+        0176 46188101
+      </a>
+    </p>
+
+    <p>
+      E-Mail:
+      <a href="mailto:alin.mircea04@gmail.com">
+        alin.mircea04@gmail.com
+      </a>
+    </p>
+
+    <h3>Verantwortlich für den Inhalt</h3>
+
+    <p>
+      Alin Mircea<br>
+      Donato-Polli-Straße 38<br>
+      91056 Erlangen
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- DATENSCHUTZ -->
+
+<section id="datenschutz" class="legal">
+
+  <div class="legal-content">
+
+    <div class="label">
+      05 · Datenschutz
+    </div>
+
+    <h2>Datenschutz</h2>
+
+    <h3>Verantwortlicher</h3>
+
+    <p>
+      Alin Mircea<br>
+      Donato-Polli-Straße 38<br>
+      91056 Erlangen<br>
+      Deutschland
+    </p>
+
+    <p>
+      E-Mail:
+      <a href="mailto:alin.mircea04@gmail.com">
+        alin.mircea04@gmail.com
+      </a>
+    </p>
+
+    <h3>Allgemeine Hinweise</h3>
+
+    <p>
+      Der Schutz deiner persönlichen Daten ist uns wichtig.
+      Personenbezogene Daten werden nur verarbeitet,
+      soweit dies für den Betrieb dieser Website oder
+      zur Bearbeitung von Anfragen erforderlich ist.
+    </p>
+
+    <h3>Kontaktaufnahme</h3>
+
+    <p>
+      Wenn du uns per E-Mail kontaktierst, werden deine
+      Angaben zur Bearbeitung deiner Anfrage und zur
+      damit verbundenen Kommunikation verwendet.
+    </p>
+
+    <h3>Cookies und Tracking</h3>
+
+    <p>
+      Diese Website verwendet derzeit keine optionalen
+      Tracking-, Analyse- oder Marketing-Cookies.
+      Es werden keine Dienste wie Google Analytics oder
+      vergleichbare Tracking-Technologien eingesetzt.
+    </p>
+
+    <h3>LocalStorage</h3>
+
+    <p>
+      Die Website kann lokal im Browser speichern, dass
+      der Datenschutz-Hinweis bereits bestätigt wurde.
+      Diese Information wird nicht an SocialClip übertragen.
+    </p>
+
+    <h3>Deine Rechte</h3>
+
+    <p>
+      Du hast im Rahmen der gesetzlichen Vorschriften
+      insbesondere Rechte auf Auskunft, Berichtigung,
+      Löschung und gegebenenfalls Einschränkung der
+      Verarbeitung deiner personenbezogenen Daten.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <span>
+    © 2026 SocialClip Art & Media
+  </span>
+
+  <div>
+
+    <a href="#impressum">
+      Impressum
+    </a>
+
+    <a href="#datenschutz">
+      Datenschutz
+    </a>
+
+  </div>
+
+</footer>
+
+
+<!-- COOKIE -->
+
+<div class="cookie" id="cookie">
+
+  <strong>
+    Datenschutz & Cookies
+  </strong>
+
+  <p>
+    Diese Website verwendet derzeit keine optionalen
+    Tracking- oder Marketing-Cookies. Der Hinweis dient
+    der Information. Weitere Informationen findest du
+    in der Datenschutzerklärung.
+  </p>
+
+  <button id="cookieAccept">
+    Verstanden
+  </button>
+
+</div>
+
+
+<script>
+
+/* =========================
+   3D VILLA MOUSE
+========================= */
+
+const villa = document.getElementById("villa");
+const stage = document.getElementById("villaStage");
+
+if (window.matchMedia("(hover: hover)").matches) {
+
+  document.addEventListener("mousemove", function(e) {
+
+    const x =
+      (e.clientX / window.innerWidth - .5);
+
+    const y =
+      (e.clientY / window.innerHeight - .5);
+
+    const rotateY = x * 18;
+    const rotateX = 58 - y * 12;
+
+    villa.style.transform =
+      "translate(-50%,-50%) rotateX(" +
+      rotateX +
+      "deg) rotateZ(" +
+      (x * -5) +
+      "deg)";
+
+    stage.style.transform =
+      "translateY(-50%) translateX(" +
+      (x * 15) +
+      "px)";
+
+  });
+
+}
+
+
+/* =========================
+   TOUCH PARALLAX
+========================= */
+
+let startX = 0;
+let startY = 0;
+
+document.addEventListener("touchstart", function(e) {
+
+  if (!e.touches.length) return;
+
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+
+});
+
+document.addEventListener("touchmove", function(e) {
+
+  if (!e.touches.length) return;
+
+  const x =
+    (e.touches[0].clientX - startX) / 20;
+
+  const y =
+    (e.touches[0].clientY - startY) / 20;
+
+  villa.style.transform =
+    "translate(-50%,-50%) rotateX(" +
+    (58 - y) +
+    "deg) rotateZ(" +
+    (-x) +
+    "deg)";
+
+});
+
+
+/* =========================
+   COOKIE
+========================= */
+
+const cookie = document.getElementById("cookie");
+const cookieAccept = document.getElementById("cookieAccept");
+
+if (
+  localStorage.getItem("socialclip_cookie_notice")
+  !== "confirmed"
+) {
+
+  setTimeout(function() {
+    cookie.classList.add("show");
+  }, 1200);
+
+}
+
+cookieAccept.addEventListener("click", function() {
+
+  localStorage.setItem(
+    "socialclip_cookie_notice",
+    "confirmed"
+  );
+
+  cookie.classList.remove("show");
+
+});
+
+</script>
+
 </body>
 </html>
