@@ -3,30 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description"
-content="SocialClip Art & Media – Webseiten, Design, Social Media, Marketing, Foto, Video und digitale Lösungen.">
-
+<meta name="theme-color" content="#050505">
 <title>SocialClip — Art & Media</title>
 
 <style>
-
-/* =========================================================
-   SOCIALCLIP — CINEMATIC WEBSITE
-========================================================= */
-
-:root{
-  --bg:#050505;
-  --white:#f5f5f5;
-  --muted:rgba(245,245,245,.48);
-  --line:rgba(255,255,255,.14);
-  --film:rgba(255,255,255,.035);
-}
-
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
 }
 
 html{
@@ -34,59 +18,10 @@ html{
 }
 
 body{
-  background:var(--bg);
-  color:var(--white);
+  background:#050505;
+  color:#f4f1ea;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
-}
-
-/* FILM GRAIN */
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:-50%;
-  z-index:8000;
-  pointer-events:none;
-
-  opacity:.055;
-
-  background-image:
-    repeating-radial-gradient(
-      circle at 0 0,
-      transparent 0,
-      rgba(255,255,255,.7) 1px,
-      transparent 2px
-    );
-
-  background-size:4px 4px;
-
-  animation:grain .25s steps(2) infinite;
-}
-
-@keyframes grain{
-  0%{transform:translate(0,0)}
-  25%{transform:translate(2%,-1%)}
-  50%{transform:translate(-1%,2%)}
-  75%{transform:translate(1%,1%)}
-  100%{transform:translate(0,0)}
-}
-
-/* CINEMATIC VIGNETTE */
-
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:7999;
-  pointer-events:none;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 48%,
-      rgba(0,0,0,.55) 100%
-    );
 }
 
 body.locked{
@@ -102,1455 +37,689 @@ button{
   font:inherit;
 }
 
-/* =========================================================
-   GLOBAL
-========================================================= */
-
-.container{
-  width:min(1200px,calc(100% - 50px));
-  margin:auto;
+:root{
+  --bg:#050505;
+  --soft:#a7a39b;
+  --line:rgba(255,255,255,.13);
+  --white:#f4f1ea;
 }
 
-section{
-  position:relative;
+/* FILM LOOK */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9990;
+  opacity:.055;
+  background-image:
+    repeating-radial-gradient(
+      circle at 20% 30%,
+      #fff 0,
+      #fff 1px,
+      transparent 1px,
+      transparent 4px
+    );
 }
 
-.kicker{
-  font-size:10px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  opacity:.45;
+.vignette{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9980;
+  box-shadow:inset 0 0 180px rgba(0,0,0,.9);
 }
 
-/* =========================================================
-   FIXED FILM HEADER
-========================================================= */
+/* HEADER */
 
-.film-header{
+.topbar{
   position:fixed;
   top:0;
   left:0;
   width:100%;
-
-  height:76px;
-
-  z-index:5000;
-
+  z-index:9000;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-
-  padding:0 30px;
-
-  background:linear-gradient(
-    to bottom,
-    rgba(0,0,0,.75),
-    rgba(0,0,0,0)
-  );
-
-  pointer-events:none;
+  align-items:center;
+  padding:18px 28px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  background:rgba(5,5,5,.72);
+  backdrop-filter:blur(14px);
 }
 
-.brand{
-  font-size:12px;
-  letter-spacing:.18em;
-  font-weight:bold;
+.logo{
+  font-size:14px;
+  letter-spacing:.2em;
+  font-weight:700;
 }
 
-.brand span{
-  margin-left:8px;
-  font-size:8px;
-  opacity:.45;
-  font-weight:normal;
+.logo span{
+  color:#8f8b84;
+  font-weight:400;
 }
 
 .clock{
   text-align:right;
+  font-size:11px;
+  letter-spacing:.14em;
+  color:#c9c5bc;
 }
 
-.clock-label{
+.clock strong{
   display:block;
-  font-size:7px;
-  letter-spacing:.25em;
-  opacity:.35;
+  color:#fff;
+  font-size:13px;
   margin-bottom:3px;
 }
 
-.clock-time{
-  font-size:11px;
-  letter-spacing:.14em;
+/* FILM INFO */
+
+.scene-info{
+  position:fixed;
+  left:28px;
+  bottom:28px;
+  z-index:8000;
+  font-size:10px;
+  letter-spacing:.2em;
+  color:rgba(255,255,255,.55);
 }
 
-/* =========================================================
-   FIXED SCENE INDICATOR
-========================================================= */
-
-.scene-indicator{
-  position:fixed;
-  left:30px;
-  bottom:30px;
-
-  z-index:5000;
-
-  display:flex;
+.rec{
+  display:inline-flex;
   align-items:center;
-  gap:12px;
-
-  font-size:8px;
-  letter-spacing:.25em;
-
-  opacity:.6;
-  pointer-events:none;
+  gap:7px;
 }
 
-.scene-dot{
-  width:7px;
-  height:7px;
-
+.rec-dot{
+  width:6px;
+  height:6px;
   border-radius:50%;
-
   background:#fff;
-
-  box-shadow:
-    0 0 0 0 rgba(255,255,255,.5);
-
-  animation:recPulse 1.7s infinite;
 }
 
-@keyframes recPulse{
-  0%{
-    box-shadow:0 0 0 0 rgba(255,255,255,.4);
-  }
-  70%{
-    box-shadow:0 0 0 8px rgba(255,255,255,0);
-  }
-  100%{
-    box-shadow:0 0 0 0 rgba(255,255,255,0);
-  }
-}
-
-.scene-progress{
+.progress{
   position:fixed;
-  right:30px;
-  bottom:30px;
-
-  z-index:5000;
-
-  width:120px;
+  top:72px;
+  left:0;
   height:1px;
-
-  background:rgba(255,255,255,.15);
-
-  pointer-events:none;
-}
-
-.scene-progress-bar{
   width:0%;
-  height:100%;
   background:#fff;
+  z-index:9001;
+  transition:width .1s linear;
 }
 
-/* =========================================================
-   OPENING — FILM INTRO
-========================================================= */
+/* INTRO */
 
-.opening{
+.intro{
   position:fixed;
   inset:0;
-
-  z-index:4000;
-
-  background:#020202;
-
+  z-index:7000;
+  background:#050505;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   overflow:hidden;
-
-  transition:
-    opacity 1.3s ease,
-    visibility 1.3s ease;
+  transition:opacity 1.3s ease,visibility 1.3s ease;
 }
 
-.opening.hide{
+.intro.hide{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
 }
 
-.opening-grid{
+.intro-grid{
   position:absolute;
-  inset:0;
-
-  opacity:.14;
-
+  inset:-20%;
   background-image:
-    linear-gradient(
-      rgba(255,255,255,.08) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.08) 1px,
-      transparent 1px
-    );
-
-  background-size:90px 90px;
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:70px 70px;
+  transform:perspective(700px) rotateX(58deg) scale(1.6);
+  transform-origin:center bottom;
+  opacity:.55;
 }
 
-.opening-light{
+.intro-light{
   position:absolute;
-
-  width:650px;
-  height:650px;
-
-  left:50%;
-  top:50%;
-
-  transform:translate(-50%,-50%);
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.11),
-      transparent 65%
-    );
-
-  filter:blur(40px);
+  width:35vw;
+  height:35vw;
+  min-width:250px;
+  min-height:250px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(255,255,255,.12),
+    rgba(255,255,255,0) 70%
+  );
+  filter:blur(20px);
 }
 
-.opening-frame{
-  position:absolute;
-  inset:35px;
-
-  border:1px solid rgba(255,255,255,.08);
-}
-
-.opening-frame::before{
-  content:"";
-
-  position:absolute;
-
-  width:80px;
-  height:1px;
-
-  background:#fff;
-
-  left:0;
-  top:0;
-}
-
-.opening-frame::after{
-  content:"";
-
-  position:absolute;
-
-  width:80px;
-  height:1px;
-
-  background:#fff;
-
-  right:0;
-  bottom:0;
-}
-
-.opening-top{
-  position:absolute;
-
-  top:55px;
-  left:55px;
-
-  font-size:8px;
-  letter-spacing:.28em;
-
-  opacity:.4;
-}
-
-.opening-bottom{
-  position:absolute;
-
-  bottom:55px;
-  right:55px;
-
-  font-size:8px;
-  letter-spacing:.28em;
-
-  opacity:.4;
-}
-
-.opening-content{
-  position:absolute;
-  inset:0;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-
-  padding:30px;
-}
-
-.opening-step{
-  position:absolute;
-
+.intro-content{
+  position:relative;
+  z-index:3;
   width:min(1000px,90%);
-
-  opacity:0;
-
-  transform:translateY(30px) scale(.98);
-
-  transition:
-    opacity 1s ease,
-    transform 1.2s cubic-bezier(.2,.7,.2,1);
+  text-align:center;
 }
 
-.opening-step.active{
-  opacity:1;
-  transform:translateY(0) scale(1);
-}
-
-.opening-small{
+.intro-label{
   font-size:10px;
   letter-spacing:.35em;
-  text-transform:uppercase;
-
-  opacity:.45;
-
-  margin-bottom:25px;
+  color:#89857e;
+  margin-bottom:30px;
 }
 
-.opening-title{
-  font-size:clamp(55px,11vw,155px);
-
-  line-height:.8;
-
-  letter-spacing:-.075em;
-
-  text-transform:uppercase;
+.intro-title{
+  font-size:clamp(45px,8vw,110px);
+  line-height:.9;
+  letter-spacing:-.055em;
+  font-weight:800;
 }
 
-.opening-title em{
-  font-style:normal;
-  opacity:.25;
+.intro-title span{
+  display:block;
+  opacity:0;
+  transform:translateY(25px);
+  transition:opacity .9s ease,transform .9s ease;
 }
 
-.opening-copy{
+.intro-title span.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.intro-copy{
+  margin:38px auto 0;
   max-width:620px;
-
-  margin:30px auto 0;
-
-  font-size:14px;
+  color:#9d9991;
+  font-size:15px;
   line-height:1.8;
-
-  opacity:.5;
+  min-height:55px;
 }
 
-.opening-tags{
-  margin-top:30px;
-
-  display:flex;
-  justify-content:center;
-  gap:30px;
-  flex-wrap:wrap;
+.intro-final{
+  margin-top:35px;
+  opacity:0;
+  transform:translateY(15px);
+  transition:opacity 1s ease,transform 1s ease;
+  pointer-events:none;
 }
 
-.opening-tags span{
-  font-size:9px;
-  letter-spacing:.25em;
-  opacity:.4;
+.intro-final.show{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
 }
 
 .enter{
-  margin-top:35px;
-
-  padding:16px 25px;
-
-  color:#fff;
-  background:transparent;
-
   border:1px solid rgba(255,255,255,.35);
-
+  background:transparent;
+  color:#fff;
+  padding:15px 24px;
   cursor:pointer;
-
-  font-size:9px;
-  letter-spacing:.25em;
-
-  transition:.4s;
+  letter-spacing:.18em;
+  font-size:10px;
+  transition:.35s ease;
 }
 
 .enter:hover{
   background:#fff;
-  color:#000;
-}
-
-/* =========================================================
-   FILM TRANSITION
-========================================================= */
-
-.film-cut{
-  position:fixed;
-  inset:0;
-
-  z-index:7000;
-
-  background:#000;
-
-  transform:scaleY(0);
-
-  transform-origin:bottom;
-
-  pointer-events:none;
-}
-
-.film-cut.play{
-  animation:filmCut 1.3s cubic-bezier(.77,0,.18,1);
-}
-
-@keyframes filmCut{
-
-  0%{
-    transform:scaleY(0);
-  }
-
-  45%{
-    transform:scaleY(1);
-  }
-
-  55%{
-    transform:scaleY(1);
-  }
-
-  100%{
-    transform:scaleY(0);
-    transform-origin:top;
-  }
-
-}
-
-/* =========================================================
-   OPENING SECTION
-========================================================= */
-
-.hero{
-  min-height:100vh;
-
-  display:flex;
-  align-items:center;
-
-  padding:160px 0 100px;
-
-  overflow:hidden;
-}
-
-.hero-number{
-  position:absolute;
-
-  right:-20px;
-  bottom:30px;
-
-  font-size:clamp(180px,30vw,500px);
-
-  line-height:.7;
-
-  color:rgba(255,255,255,.025);
-
-  letter-spacing:-.1em;
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-}
-
-.hero-title{
-  font-size:clamp(70px,13vw,190px);
-
-  line-height:.76;
-
-  letter-spacing:-.085em;
-
-  text-transform:uppercase;
-}
-
-.hero-title span{
-  display:block;
-}
-
-.hero-title .soft{
-  opacity:.2;
-}
-
-.hero-sub{
-  max-width:520px;
-
-  margin-top:50px;
-
-  font-size:15px;
-
-  line-height:1.8;
-
-  opacity:.5;
-}
-
-/* =========================================================
-   CHAPTER INTRO
-========================================================= */
-
-.chapter{
-  min-height:80vh;
-
-  display:flex;
-  align-items:center;
-
-  border-top:1px solid var(--line);
-
-  padding:120px 0;
-}
-
-.chapter-layout{
-  display:grid;
-
-  grid-template-columns:140px 1fr;
-
-  gap:50px;
-}
-
-.chapter-number{
-  font-size:10px;
-  letter-spacing:.25em;
-  opacity:.4;
-}
-
-.chapter-title{
-  font-size:clamp(55px,10vw,140px);
-
-  line-height:.8;
-
-  letter-spacing:-.07em;
-
-  text-transform:uppercase;
-}
-
-.chapter-text{
-  max-width:600px;
-
-  margin-top:45px;
-
-  font-size:16px;
-
-  line-height:1.8;
-
-  opacity:.5;
-}
-
-/* =========================================================
-   CATEGORIES
-========================================================= */
-
-.categories{
-  padding:100px 0 150px;
-}
-
-.category-list{
-  margin-top:60px;
-
-  border-top:1px solid var(--line);
-}
-
-.category{
-  position:relative;
-
-  display:grid;
-
-  grid-template-columns:90px 1.2fr 1.5fr 60px;
-
-  align-items:center;
-
-  gap:30px;
-
-  padding:38px 0;
-
-  border-bottom:1px solid var(--line);
-
-  overflow:hidden;
-
-  transition:.5s;
-}
-
-.category::before{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:#f5f5f5;
-
-  transform:translateY(101%);
-
-  transition:.6s cubic-bezier(.77,0,.18,1);
-
-  z-index:-1;
-}
-
-.category:hover{
-  color:#000;
-}
-
-.category:hover::before{
-  transform:translateY(0);
-}
-
-.category-no{
-  font-size:9px;
-  opacity:.4;
-}
-
-.category h3{
-  font-size:clamp(35px,5vw,75px);
-
-  letter-spacing:-.055em;
-
-  text-transform:uppercase;
-}
-
-.category p{
-  max-width:420px;
-
-  font-size:12px;
-
-  line-height:1.7;
-
-  opacity:.45;
-}
-
-.category-arrow{
-  text-align:right;
-  font-size:25px;
-}
-
-/* =========================================================
-   SERVICES
-========================================================= */
-
-.services{
-  background:#eee;
-
   color:#050505;
-
-  padding:140px 0;
 }
 
-.services-header{
-  display:flex;
+/* SECTIONS */
 
-  justify-content:space-between;
-
-  align-items:flex-end;
-
-  gap:40px;
-
-  margin-bottom:80px;
-}
-
-.services-title{
-  font-size:clamp(65px,11vw,155px);
-
-  line-height:.76;
-
-  letter-spacing:-.08em;
-
-  text-transform:uppercase;
-}
-
-.services-intro{
-  max-width:360px;
-
-  font-size:13px;
-
-  line-height:1.8;
-
-  opacity:.55;
-}
-
-.services-grid{
-  display:grid;
-
-  grid-template-columns:repeat(2,1fr);
-
-  border-top:1px solid rgba(0,0,0,.18);
-
-  border-left:1px solid rgba(0,0,0,.18);
-}
-
-.service{
-  min-height:270px;
-
-  padding:30px;
-
-  border-right:1px solid rgba(0,0,0,.18);
-
-  border-bottom:1px solid rgba(0,0,0,.18);
-
+section{
   position:relative;
-
-  transition:.45s;
-}
-
-.service:hover{
-  background:#050505;
-  color:#fff;
-}
-
-.service-no{
-  font-size:9px;
-  opacity:.4;
-}
-
-.service h3{
-  position:absolute;
-
-  left:30px;
-  bottom:30px;
-
-  font-size:clamp(30px,4vw,60px);
-
-  line-height:.85;
-
-  letter-spacing:-.06em;
-
-  text-transform:uppercase;
-}
-
-/* =========================================================
-   CINEMATIC MANIFESTO
-========================================================= */
-
-.manifesto{
   min-height:100vh;
-
-  display:flex;
-  align-items:center;
-
-  padding:150px 0;
+  padding:130px 7vw;
 }
 
-.manifesto-inner{
-  max-width:1150px;
-}
-
-.manifesto-line{
-  font-size:clamp(38px,6.5vw,92px);
-
-  line-height:.95;
-
-  letter-spacing:-.06em;
-
+.section-label{
+  font-size:10px;
+  letter-spacing:.3em;
+  color:#77736c;
   margin-bottom:25px;
 }
 
-.manifesto-line.dim{
-  color:rgba(255,255,255,.18);
+.big-title{
+  font-size:clamp(48px,9vw,140px);
+  line-height:.88;
+  letter-spacing:-.065em;
+  max-width:1100px;
 }
 
-/* =========================================================
-   VISUAL CHAPTER
-========================================================= */
-
-.visual{
-  padding:130px 0 170px;
+.big-title span{
+  color:#77736c;
 }
 
-.visual-heading{
-  margin-bottom:70px;
+.text{
+  max-width:650px;
+  color:#aaa69e;
+  line-height:1.8;
+  font-size:16px;
 }
 
-.visual-heading h2{
-  margin-top:20px;
+.center{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
 
-  font-size:clamp(60px,11vw,150px);
+/* HERO */
 
-  line-height:.75;
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding-top:160px;
+}
 
-  letter-spacing:-.08em;
+.hero-small{
+  margin-top:40px;
+  font-size:11px;
+  letter-spacing:.22em;
+  color:#8c8880;
+}
 
-  text-transform:uppercase;
+/* CATEGORIES */
+
+.categories{
+  border-top:1px solid var(--line);
+}
+
+.category-grid{
+  margin-top:70px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+}
+
+.category{
+  min-height:260px;
+  padding:35px;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:background .4s ease,transform .4s ease;
+}
+
+.category:hover{
+  background:#0c0c0c;
+  transform:translateY(-4px);
+}
+
+.category-number{
+  color:#66625b;
+  font-size:10px;
+  letter-spacing:.2em;
+}
+
+.category h3{
+  font-size:30px;
+  letter-spacing:-.04em;
+}
+
+.category p{
+  color:#77736c;
+  line-height:1.6;
+  font-size:13px;
+}
+
+/* SERVICES */
+
+.services{
+  border-top:1px solid var(--line);
+}
+
+.service-list{
+  margin-top:60px;
+}
+
+.service{
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  gap:25px;
+  align-items:center;
+  padding:27px 0;
+  border-bottom:1px solid var(--line);
+  transition:padding .4s ease;
+}
+
+.service:hover{
+  padding-left:15px;
+  padding-right:15px;
+  background:rgba(255,255,255,.025);
+}
+
+.service-number{
+  color:#5f5b55;
+  font-size:11px;
+}
+
+.service h3{
+  font-size:clamp(20px,3vw,35px);
+  font-weight:500;
+  letter-spacing:-.03em;
+}
+
+.service-arrow{
+  color:#77736c;
+}
+
+/* MANIFESTO */
+
+.manifesto{
+  background:#0a0a0a;
+}
+
+.manifesto-text{
+  max-width:1100px;
+  font-size:clamp(38px,6vw,88px);
+  line-height:1;
+  letter-spacing:-.05em;
+}
+
+.manifesto-text span{
+  color:#77736c;
+}
+
+/* VISUAL WORLD */
+
+.visual-world{
+  overflow:hidden;
 }
 
 .visual-grid{
+  margin-top:70px;
   display:grid;
-
-  grid-template-columns:1fr 1fr;
-
+  grid-template-columns:1.3fr .7fr;
   gap:18px;
 }
 
 .visual-card{
+  min-height:430px;
   position:relative;
-
-  min-height:500px;
-
   overflow:hidden;
-
-  background:#111;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(circle at 30% 30%,rgba(255,255,255,.18),transparent 25%),
+    radial-gradient(circle at 70% 70%,rgba(255,255,255,.08),transparent 30%),
+    linear-gradient(135deg,#111,#050505 60%);
 }
 
 .visual-card:nth-child(2){
-  margin-top:100px;
+  min-height:280px;
+  background:
+    linear-gradient(120deg,transparent 35%,rgba(255,255,255,.1)),
+    linear-gradient(25deg,#080808,#171717);
 }
 
 .visual-card:nth-child(3){
-  margin-top:-40px;
+  min-height:280px;
+  background:
+    radial-gradient(ellipse at 70% 30%,rgba(255,255,255,.12),transparent 20%),
+    linear-gradient(145deg,#151515,#050505);
 }
 
-.visual-card:nth-child(4){
-  margin-top:70px;
-}
-
-.visual-art{
+.visual-card::after{
+  content:"";
   position:absolute;
   inset:0;
-
-  transition:transform 1.2s cubic-bezier(.2,.7,.2,1);
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.08),
+    transparent
+  );
+  transform:translateX(-100%);
+  transition:transform 1s ease;
 }
 
-.visual-card:hover .visual-art{
-  transform:scale(1.07);
+.visual-card:hover::after{
+  transform:translateX(100%);
 }
 
-.art1{
-  background:
-    radial-gradient(
-      circle at 30% 35%,
-      #aaa 0,
-      transparent 17%
-    ),
-    radial-gradient(
-      circle at 75% 70%,
-      #333 0,
-      transparent 30%
-    ),
-    linear-gradient(
-      135deg,
-      #050505,
-      #555,
-      #090909
-    );
-}
-
-.art2{
-  background:
-    linear-gradient(
-      125deg,
-      transparent 38%,
-      rgba(255,255,255,.25) 39%,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 70% 30%,
-      #888,
-      transparent 20%
-    ),
-    #101010;
-}
-
-.art3{
-  background:
-    repeating-linear-gradient(
-      45deg,
-      #111 0,
-      #111 22px,
-      #252525 22px,
-      #252525 23px
-    );
-}
-
-.art4{
-  background:
-    radial-gradient(
-      circle at center,
-      #aaa 0 2%,
-      transparent 3%
-    ),
-    radial-gradient(
-      circle at center,
-      transparent 8%,
-      #555 9%,
-      transparent 10%
-    ),
-    radial-gradient(
-      circle at center,
-      transparent 23%,
-      #292929 24%,
-      transparent 25%
-    ),
-    #050505;
-}
-
-.visual-label{
+.visual-word{
   position:absolute;
-
   left:25px;
-  bottom:25px;
-
-  z-index:2;
-
-  font-size:8px;
+  bottom:22px;
+  font-size:11px;
   letter-spacing:.25em;
-  opacity:.55;
+  color:#aaa69e;
 }
 
-/* =========================================================
-   MAKE IT VISIBLE
-========================================================= */
+/* MAKE VISIBLE */
 
-.visible-section{
-  min-height:100vh;
-
+.make-visible{
+  min-height:90vh;
   display:flex;
-
   align-items:center;
   justify-content:center;
-
   text-align:center;
-
-  padding:120px 20px;
 }
 
-.visible-title{
-  font-size:clamp(65px,14vw,190px);
-
-  line-height:.72;
-
-  letter-spacing:-.085em;
-
-  text-transform:uppercase;
+.make-visible h2{
+  font-size:clamp(60px,12vw,180px);
+  line-height:.8;
+  letter-spacing:-.08em;
 }
 
-.visible-copy{
-  max-width:520px;
-
-  margin:40px auto 0;
-
-  font-size:14px;
-
-  line-height:1.8;
-
-  opacity:.5;
+.make-visible p{
+  margin:35px auto 0;
+  max-width:550px;
+  color:#8b877f;
+  line-height:1.7;
 }
 
-/* =========================================================
-   INSTAGRAM
-========================================================= */
+/* INSTAGRAM */
 
 .instagram{
-  padding:130px 0;
-
-  background:#0b0b0b;
+  border-top:1px solid var(--line);
 }
 
-.instagram-header{
+.instagram-box{
+  margin-top:60px;
+  border:1px solid var(--line);
+  padding:50px;
   display:flex;
-
   justify-content:space-between;
-
-  align-items:flex-end;
-
-  margin-bottom:70px;
+  align-items:center;
+  gap:30px;
 }
 
-.instagram-title{
-  font-size:clamp(60px,11vw,150px);
-
-  line-height:.75;
-
-  letter-spacing:-.08em;
-
-  text-transform:uppercase;
+.instagram-box strong{
+  font-size:clamp(25px,4vw,50px);
+  letter-spacing:-.04em;
 }
 
-.instagram-link{
-  font-size:9px;
-
-  letter-spacing:.25em;
-
-  padding-bottom:8px;
-
-  border-bottom:1px solid rgba(255,255,255,.35);
+.instagram-box a{
+  border:1px solid rgba(255,255,255,.3);
+  padding:14px 20px;
+  font-size:10px;
+  letter-spacing:.18em;
 }
 
-.instagram-grid{
-  display:grid;
-
-  grid-template-columns:repeat(3,1fr);
-
-  gap:8px;
-}
-
-.instagram-card{
-  aspect-ratio:1;
-
-  overflow:hidden;
-
-  position:relative;
-}
-
-.instagram-art{
-  width:100%;
-  height:100%;
-
-  transition:transform .8s ease;
-}
-
-.instagram-card:hover .instagram-art{
-  transform:scale(1.08);
-}
-
-.i1{
-  background:
-    radial-gradient(circle at 40% 35%,#aaa,transparent 15%),
-    linear-gradient(135deg,#111,#555,#111);
-}
-
-.i2{
-  background:
-    linear-gradient(
-      135deg,
-      #050505 45%,
-      #888 46%,
-      #222 55%
-    );
-}
-
-.i3{
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #111 0 15px,
-      #444 15px 16px
-    );
-}
-
-.i4{
-  background:
-    radial-gradient(
-      circle,
-      #888 0 5%,
-      transparent 6%
-    ),
-    #151515;
-}
-
-.i5{
-  background:
-    linear-gradient(
-      45deg,
-      #111 48%,
-      #777 49%,
-      #111 51%
-    );
-}
-
-.i6{
-  background:
-    radial-gradient(
-      circle at 70% 30%,
-      #999,
-      transparent 20%
-    ),
-    #080808;
-}
-
-/* =========================================================
-   CONTACT
-========================================================= */
+/* CONTACT */
 
 .contact{
-  padding:160px 0;
-}
-
-.contact-layout{
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:90px;
-}
-
-.contact-title{
-  margin-top:20px;
-
-  font-size:clamp(65px,11vw,150px);
-
-  line-height:.75;
-
-  letter-spacing:-.08em;
-
-  text-transform:uppercase;
-}
-
-.contact-copy{
-  max-width:430px;
-
-  margin-top:40px;
-
-  font-size:14px;
-
-  line-height:1.8;
-
-  opacity:.5;
+  background:#090909;
 }
 
 .contact-form{
-  display:flex;
-
-  flex-direction:column;
-
-  gap:20px;
+  max-width:750px;
+  margin-top:60px;
 }
 
-.contact-form input,
-.contact-form textarea{
+.field{
+  margin-bottom:20px;
+}
+
+.field input,
+.field textarea{
   width:100%;
-
-  padding:18px 0;
-
-  color:#fff;
-
   background:transparent;
-
+  color:#fff;
   border:0;
-
-  border-bottom:1px solid var(--line);
-
+  border-bottom:1px solid rgba(255,255,255,.2);
+  padding:18px 0;
   outline:none;
-
-  font-size:13px;
+  font-size:16px;
 }
 
-.contact-form textarea{
-  min-height:170px;
-
+.field textarea{
+  min-height:150px;
   resize:vertical;
 }
 
-.contact-form button{
-  align-self:flex-start;
-
-  margin-top:15px;
-
-  padding:17px 25px;
-
-  color:#000;
-
+.submit{
+  margin-top:20px;
   background:#fff;
-
+  color:#050505;
   border:0;
-
+  padding:16px 25px;
   cursor:pointer;
-
-  font-size:9px;
-
-  letter-spacing:.25em;
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-  border-top:1px solid var(--line);
-
-  padding:45px 30px;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:flex-end;
-}
-
-.footer-brand{
-  font-size:11px;
-
-  letter-spacing:.18em;
-}
-
-.footer-meta{
-  text-align:right;
-
-  font-size:8px;
-
-  line-height:2;
-
-  letter-spacing:.18em;
-
-  opacity:.35;
-}
-
-/* =========================================================
-   COOKIE
-========================================================= */
-
-.cookie{
-  position:fixed;
-
-  left:20px;
-  right:20px;
-  bottom:20px;
-
-  z-index:9000;
-
-  padding:22px;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:30px;
-
-  background:rgba(12,12,12,.95);
-
-  border:1px solid rgba(255,255,255,.15);
-
-  backdrop-filter:blur(20px);
-
-  transform:translateY(150%);
-
-  transition:.7s;
-}
-
-.cookie.show{
-  transform:translateY(0);
-}
-
-.cookie-text{
-  max-width:650px;
-}
-
-.cookie-text strong{
-  display:block;
-
-  margin-bottom:7px;
-
   font-size:10px;
-
   letter-spacing:.2em;
 }
 
-.cookie-text p{
-  font-size:10px;
+/* FOOTER */
 
-  line-height:1.6;
-
-  opacity:.5;
-}
-
-.cookie-buttons{
+footer{
+  border-top:1px solid var(--line);
+  padding:45px 7vw;
   display:flex;
-
-  gap:10px;
-}
-
-.cookie-buttons button{
-  padding:12px 16px;
-
-  color:#fff;
-
-  background:transparent;
-
-  border:1px solid rgba(255,255,255,.25);
-
-  cursor:pointer;
-
-  font-size:8px;
-
+  justify-content:space-between;
+  gap:30px;
+  color:#77736c;
+  font-size:10px;
   letter-spacing:.15em;
 }
 
-.cookie-buttons .accept{
-  color:#000;
-
-  background:#fff;
+footer strong{
+  color:#fff;
 }
 
-/* =========================================================
-   REVEAL
-========================================================= */
+/* REVEAL */
 
 .reveal{
   opacity:0;
-
-  transform:translateY(45px);
-
-  transition:
-    opacity 1s ease,
-    transform 1s cubic-bezier(.2,.7,.2,1);
+  transform:translateY(35px);
+  transition:opacity 1s ease,transform 1s ease;
 }
 
 .reveal.visible{
   opacity:1;
-
   transform:translateY(0);
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
+/* COOKIE */
+
+.cookie{
+  position:fixed;
+  left:20px;
+  right:20px;
+  bottom:20px;
+  z-index:10000;
+  background:rgba(12,12,12,.96);
+  border:1px solid rgba(255,255,255,.16);
+  padding:22px;
+  display:none;
+  gap:20px;
+  align-items:center;
+  justify-content:space-between;
+  backdrop-filter:blur(15px);
+}
+
+.cookie.show{
+  display:flex;
+}
+
+.cookie p{
+  max-width:650px;
+  color:#aaa69e;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.cookie-buttons{
+  display:flex;
+  gap:10px;
+  flex-shrink:0;
+}
+
+.cookie button{
+  padding:12px 15px;
+  border:1px solid rgba(255,255,255,.25);
+  background:transparent;
+  color:#fff;
+  font-size:9px;
+  letter-spacing:.12em;
+  cursor:pointer;
+}
+
+.cookie button.accept{
+  background:#fff;
+  color:#050505;
+}
+
+/* MOBILE */
 
 @media(max-width:800px){
 
-  body::before{
-    opacity:.035;
+  .topbar{
+    padding:15px 18px;
   }
 
-  .container{
-    width:calc(100% - 30px);
-  }
-
-  .film-header{
-    height:65px;
-
-    padding:0 17px;
-  }
-
-  .brand{
-    font-size:10px;
-  }
-
-  .brand span{
-    display:none;
-  }
-
-  .clock-label{
-    font-size:6px;
-  }
-
-  .clock-time{
+  .clock{
     font-size:9px;
   }
 
-  .scene-indicator{
-    left:17px;
+  .clock strong{
+    font-size:11px;
+  }
+
+  .scene-info{
+    left:18px;
     bottom:18px;
-
-    font-size:7px;
   }
 
-  .scene-progress{
-    right:17px;
-    bottom:21px;
-
-    width:80px;
-  }
-
-  .opening-grid{
-    background-size:45px 45px;
-  }
-
-  .opening-frame{
-    inset:18px;
-  }
-
-  .opening-top{
-    top:35px;
-    left:35px;
-  }
-
-  .opening-bottom{
-    bottom:35px;
-    right:35px;
-  }
-
-  .opening-title{
-    font-size:clamp(45px,14vw,80px);
-  }
-
-  .opening-copy{
-    font-size:12px;
+  section{
+    padding:105px 20px;
   }
 
   .hero{
-    min-height:100svh;
-
-    padding:130px 0 80px;
+    padding-top:130px;
   }
 
-  .hero-title{
-    font-size:clamp(65px,18vw,120px);
+  .intro-title{
+    font-size:clamp(48px,15vw,85px);
   }
 
-  .hero-sub{
-    font-size:13px;
+  .intro-copy{
+    font-size:14px;
   }
 
-  .chapter{
-    min-height:auto;
-
-    padding:100px 0;
-  }
-
-  .chapter-layout{
+  .category-grid{
     grid-template-columns:1fr;
-
-    gap:25px;
-  }
-
-  .chapter-title{
-    font-size:clamp(55px,16vw,100px);
   }
 
   .category{
-    grid-template-columns:40px 1fr 35px;
-
-    gap:10px;
-
-    padding:28px 0;
-  }
-
-  .category p{
-    display:none;
-  }
-
-  .category h3{
-    font-size:31px;
-  }
-
-  .services{
-    padding:100px 0;
-  }
-
-  .services-header{
-    display:block;
-  }
-
-  .services-intro{
-    margin-top:30px;
-  }
-
-  .services-grid{
-    grid-template-columns:1fr;
+    min-height:210px;
   }
 
   .service{
-    min-height:190px;
+    grid-template-columns:35px 1fr;
+    gap:15px;
   }
 
-  .service h3{
-    font-size:36px;
-  }
-
-  .manifesto{
-    min-height:auto;
-
-    padding:120px 0;
-  }
-
-  .manifesto-line{
-    font-size:38px;
-  }
-
-  .visual{
-    padding:100px 0;
+  .service-arrow{
+    display:none;
   }
 
   .visual-grid{
@@ -1559,1516 +728,745 @@ footer{
 
   .visual-card,
   .visual-card:nth-child(2),
-  .visual-card:nth-child(3),
-  .visual-card:nth-child(4){
-    min-height:330px;
-
-    margin:0;
+  .visual-card:nth-child(3){
+    min-height:260px;
   }
 
-  .visible-section{
-    min-height:85vh;
-  }
-
-  .instagram{
-    padding:100px 0;
-  }
-
-  .instagram-header{
-    display:block;
-  }
-
-  .instagram-link{
-    display:inline-block;
-
-    margin-top:30px;
-  }
-
-  .instagram-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .contact{
-    padding:110px 0;
-  }
-
-  .contact-layout{
-    grid-template-columns:1fr;
-
-    gap:60px;
+  .instagram-box{
+    padding:30px 20px;
+    flex-direction:column;
+    align-items:flex-start;
   }
 
   footer{
-    display:block;
-
-    padding:30px 15px;
-  }
-
-  .footer-meta{
-    margin-top:20px;
-
-    text-align:left;
+    flex-direction:column;
   }
 
   .cookie{
     left:10px;
     right:10px;
     bottom:10px;
-
-    display:block;
-
-    padding:18px;
+    flex-direction:column;
+    align-items:flex-start;
   }
 
   .cookie-buttons{
-    margin-top:15px;
+    width:100%;
   }
 
-  .cookie-buttons button{
+  .cookie button{
     flex:1;
   }
 }
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms!important;
-
-    animation-iteration-count:1!important;
-
-    scroll-behavior:auto!important;
-
-    transition-duration:.01ms!important;
-  }
-
-}
-
 </style>
 </head>
 
-
 <body class="locked">
 
+<div class="vignette"></div>
 
-<!-- =======================================================
-     FILM CUT
-======================================================= -->
-
-<div class="film-cut" id="filmCut"></div>
-
-
-<!-- =======================================================
-     FIXED HEADER
-======================================================= -->
-
-<header class="film-header">
-
-  <div class="brand">
-    SOCIALCLIP
-    <span>ART & MEDIA</span>
+<!-- HEADER -->
+<header class="topbar">
+  <div class="logo">
+    SOCIALCLIP <span>ART & MEDIA</span>
   </div>
 
   <div class="clock">
-
-    <span class="clock-label">
-      LOCAL TIME
-    </span>
-
-    <span class="clock-time" id="liveClock">
-      00:00:00
-    </span>
-
+    <strong id="liveClock">--:--:--</strong>
+    <span id="liveDate">--.--.----</span>
   </div>
-
 </header>
 
+<div class="progress" id="progress"></div>
 
-<!-- =======================================================
-     SCENE INDICATOR
-======================================================= -->
-
-<div class="scene-indicator">
-
-  <span class="scene-dot"></span>
-
-  <span>
-    SCENE <strong id="sceneNumber">01</strong>
+<div class="scene-info">
+  <span class="rec">
+    <span class="rec-dot"></span>
+    SOCIALCLIP / <span id="sceneNumber">SCENE 01</span>
   </span>
-
 </div>
 
-<div class="scene-progress">
-  <div
-    class="scene-progress-bar"
-    id="sceneProgress"
-  ></div>
-</div>
+<!-- INTRO -->
+<div class="intro" id="intro">
 
+  <div class="intro-grid"></div>
+  <div class="intro-light"></div>
 
-<!-- =======================================================
-     OPENING FILM
-======================================================= -->
+  <div class="intro-content">
 
-<div class="opening" id="opening">
-
-  <div class="opening-grid"></div>
-
-  <div class="opening-light"></div>
-
-  <div class="opening-frame"></div>
-
-  <div class="opening-top">
-    SOCIALCLIP / ART & MEDIA
-  </div>
-
-  <div class="opening-bottom">
-    ERLANGEN · GERMANY
-  </div>
-
-
-  <div class="opening-content">
-
-
-    <!-- SCENE 01 -->
-
-    <div class="opening-step active">
-
-      <div class="opening-small">
-        Eine digitale Reise beginnt
-      </div>
-
-      <div class="opening-title">
-        Alles beginnt<br>
-        mit einer <em>Idee.</em>
-      </div>
-
+    <div class="intro-label">
+      ART · MEDIA · DIGITAL
     </div>
 
-
-    <!-- SCENE 02 -->
-
-    <div class="opening-step">
-
-      <div class="opening-small">
-        Der erste Gedanke
-      </div>
-
-      <div class="opening-title">
-        Ein Gedanke.<br>
-        Ein Bild.<br>
-        Eine <em>Vision.</em>
-      </div>
-
+    <div class="intro-title">
+      <span id="intro1">Eine digitale Reise</span>
+      <span id="intro2">beginnt.</span>
     </div>
 
-
-    <!-- SCENE 03 -->
-
-    <div class="opening-step">
-
-      <div class="opening-small">
-        Aus Gedanken wird Form
-      </div>
-
-      <div class="opening-title">
-        FORM.<br>
-        DESIGN.<br>
-        BEWEGUNG.<br>
-        WIRKUNG.
-      </div>
-
+    <div class="intro-copy" id="introCopy">
+      Alles beginnt mit einer Idee.
     </div>
 
-
-    <!-- SCENE 04 -->
-
-    <div class="opening-step">
-
-      <div class="opening-small">
-        Art · Media · Digital
-      </div>
-
-      <div class="opening-title">
-        SOCIALCLIP
-      </div>
-
-      <div class="opening-copy">
-        Wir verbinden Kreativität, Technologie und
-        digitale Kommunikation zu einer Welt,
-        die deine Idee sichtbar macht.
-      </div>
-
-    </div>
-
-
-    <!-- SCENE 05 -->
-
-    <div class="opening-step">
-
-      <div class="opening-small">
-        Schön, dass du hier bist.
-      </div>
-
-      <div class="opening-title">
-        HALLO.
-      </div>
-
-      <div class="opening-copy">
-        Willkommen bei SocialClip.
-      </div>
-
-    </div>
-
-
-    <!-- SCENE 06 -->
-
-    <div class="opening-step">
-
-      <div class="opening-small">
-        Deine digitale Welt
-      </div>
-
-      <div class="opening-title">
-        DEINE IDEE.<br>
-        UNSERE <em>WELT.</em>
-      </div>
-
-      <div class="opening-copy">
-        Webseiten, Design, Social Media,
-        Marketing, Foto, Video und digitale Lösungen.
-      </div>
-
-      <div class="opening-tags">
-        <span>WEB</span>
-        <span>DESIGN</span>
-        <span>SOCIAL</span>
-        <span>MEDIA</span>
-        <span>DIGITAL</span>
-      </div>
-
-      <button
-        class="enter"
-        id="enterBtn"
-      >
+    <div class="intro-final" id="introFinal">
+      <button class="enter" id="enterButton">
         DIGITALE WELT BETRETEN →
       </button>
-
     </div>
 
   </div>
-
 </div>
-
-
-<!-- =======================================================
-     MAIN FILM
-======================================================= -->
 
 <main>
 
+<!-- HERO -->
+<section class="hero center">
+  <div class="section-label reveal">SCENE 02 / SOCIALCLIP</div>
 
-<!-- =======================================================
-     SCENE 01 — OPENING
-======================================================= -->
+  <h1 class="big-title reveal">
+    IDEEN<br>
+    <span>WERDEN</span><br>
+    WIRKUNG.
+  </h1>
 
-<section class="hero" id="top">
+  <p class="text reveal" style="margin-top:45px;">
+    SocialClip verbindet Design, digitale Lösungen, Social Media,
+    Foto, Video und Marketing zu einer visuellen Welt,
+    die Marken sichtbar macht.
+  </p>
 
-  <div class="hero-number">
-    01
+  <div class="hero-small reveal">
+    ART & MEDIA · ERLANGEN · GERMANY
   </div>
-
-  <div class="container">
-
-    <div class="hero-content">
-
-      <div class="kicker reveal">
-        SCENE 01 / DIE IDEE
-      </div>
-
-      <h1 class="hero-title reveal">
-
-        <span>DEINE</span>
-        <span>IDEEN</span>
-        <span class="soft">WERDEN</span>
-        <span>WIRKUNG.</span>
-
-      </h1>
-
-      <p class="hero-sub reveal">
-
-        Jede digitale Welt beginnt mit einem Gedanken.
-        Wir geben diesem Gedanken Form, Bild, Bewegung
-        und eine eigene Identität.
-
-      </p>
-
-    </div>
-
-  </div>
-
 </section>
 
-
-<!-- =======================================================
-     SCENE 02 — SOCIALCLIP
-======================================================= -->
-
-<section class="chapter">
-
-  <div class="container">
-
-    <div class="chapter-layout">
-
-      <div class="chapter-number reveal">
-        SCENE 02
-      </div>
-
-      <div>
-
-        <div class="kicker reveal">
-          SocialClip / Art & Media
-        </div>
-
-        <h2 class="chapter-title reveal">
-          WIR<br>
-          MACHEN<br>
-          IDEEN<br>
-          SICHTBAR.
-        </h2>
-
-        <p class="chapter-text reveal">
-
-          SocialClip verbindet Design, digitale Medien,
-          Technologie und Marketing.
-
-          <br><br>
-
-          Nicht als klassische Agentur.
-          Sondern als kreativer Partner für Menschen,
-          Marken und Unternehmen, die etwas bewegen wollen.
-
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     SCENE 03 — CATEGORIES
-======================================================= -->
-
+<!-- CATEGORIES -->
 <section class="categories">
 
-  <div class="container">
+  <div class="section-label reveal">SCENE 03 / WAS WIR MACHEN</div>
 
-    <div class="kicker reveal">
-      SCENE 03 / UNSERE WELT
+  <h2 class="big-title reveal">
+    DEINE<br>
+    <span>DIGITALE</span><br>
+    WELT.
+  </h2>
+
+  <div class="category-grid">
+
+    <div class="category reveal">
+      <div class="category-number">01 / WEB</div>
+      <h3>Web</h3>
+      <p>
+        Webseiten und digitale Auftritte, die nicht nach Vorlage aussehen.
+      </p>
     </div>
 
-    <div class="category-list">
+    <div class="category reveal">
+      <div class="category-number">02 / DESIGN</div>
+      <h3>Design</h3>
+      <p>
+        Logos, Flyer, Visitenkarten und visuelle Identitäten.
+      </p>
+    </div>
 
+    <div class="category reveal">
+      <div class="category-number">03 / SOCIAL</div>
+      <h3>Social Media</h3>
+      <p>
+        Inhalte, Strategien und Marketing für digitale Aufmerksamkeit.
+      </p>
+    </div>
 
-      <a
-        href="#services"
-        class="category reveal"
-      >
+    <div class="category reveal">
+      <div class="category-number">04 / MEDIA</div>
+      <h3>Foto & Video</h3>
+      <p>
+        Bild und Bewegung für Marken, Produkte und Geschichten.
+      </p>
+    </div>
 
-        <div class="category-no">
-          01
-        </div>
+    <div class="category reveal">
+      <div class="category-number">05 / MARKETING</div>
+      <h3>Marketing</h3>
+      <p>
+        Neukundengewinnung, Strategie und digitale Kampagnen.
+      </p>
+    </div>
 
-        <h3>
-          WEB
-        </h3>
+    <div class="category reveal">
+      <div class="category-number">06 / DIGITAL</div>
+      <h3>Digitale Lösungen</h3>
+      <p>
+        Programmierung, virtuelle Assistenz und individuelle Lösungen.
+      </p>
+    </div>
 
-        <p>
-          Webseiten und digitale Auftritte,
-          die eine Geschichte erzählen.
-        </p>
+  </div>
+</section>
 
-        <div class="category-arrow">
-          ↗
-        </div>
+<!-- SERVICES -->
+<section class="services">
 
-      </a>
+  <div class="section-label reveal">
+    SCENE 04 / LEISTUNGEN
+  </div>
 
+  <h2 class="big-title reveal">
+    WAS WIR<br>
+    <span>FÜR DICH</span><br>
+    MACHEN.
+  </h2>
 
-      <a
-        href="#services"
-        class="category reveal"
-      >
+  <div class="service-list">
 
-        <div class="category-no">
-          02
-        </div>
+    <div class="service reveal">
+      <div class="service-number">01</div>
+      <h3>Webseiten erstellen</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-        <h3>
-          DESIGN
-        </h3>
+    <div class="service reveal">
+      <div class="service-number">02</div>
+      <h3>Flyer erstellen</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-        <p>
-          Logos, Flyer, Visitenkarten
-          und visuelle Identitäten.
-        </p>
+    <div class="service reveal">
+      <div class="service-number">03</div>
+      <h3>Online Marketing</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-        <div class="category-arrow">
-          ↗
-        </div>
+    <div class="service reveal">
+      <div class="service-number">04</div>
+      <h3>Visitenkarten erstellen</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-      </a>
+    <div class="service reveal">
+      <div class="service-number">05</div>
+      <h3>Social Media Assistant</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
+    <div class="service reveal">
+      <div class="service-number">06</div>
+      <h3>Logo erstellen</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-      <a
-        href="#services"
-        class="category reveal"
-      >
+    <div class="service reveal">
+      <div class="service-number">07</div>
+      <h3>Video & Photo Editor</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-        <div class="category-no">
-          03
-        </div>
+    <div class="service reveal">
+      <div class="service-number">08</div>
+      <h3>Lebenslauf erstellen</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-        <h3>
-          SOCIAL
-        </h3>
+    <div class="service reveal">
+      <div class="service-number">09</div>
+      <h3>Speisekarte erstellen</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-        <p>
-          Social Media, Content und TikTok
-          für mehr Aufmerksamkeit.
-        </p>
+    <div class="service reveal">
+      <div class="service-number">10</div>
+      <h3>Virtueller Assistent</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-        <div class="category-arrow">
-          ↗
-        </div>
+    <div class="service reveal">
+      <div class="service-number">11</div>
+      <h3>Programmierung</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-      </a>
+    <div class="service reveal">
+      <div class="service-number">12</div>
+      <h3>Neukundengewinnung</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
+    <div class="service reveal">
+      <div class="service-number">13</div>
+      <h3>Strategieentwicklung</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-      <a
-        href="#services"
-        class="category reveal"
-      >
+    <div class="service reveal">
+      <div class="service-number">14</div>
+      <h3>TikTok Marketing</h3>
+      <div class="service-arrow">→</div>
+    </div>
 
-        <div class="category-no">
-          04
-        </div>
+  </div>
+</section>
 
-        <h3>
-          MEDIA
-        </h3>
+<!-- MANIFESTO -->
+<section class="manifesto center">
 
-        <p>
-          Foto, Video und Editing
-          für digitale Geschichten.
-        </p>
+  <div class="section-label reveal">
+    SCENE 05 / PHILOSOPHIE
+  </div>
 
-        <div class="category-arrow">
-          ↗
-        </div>
+  <p class="manifesto-text reveal">
+    AUS EINER IDEE WIRD ETWAS,
+    <span>DAS MAN SEHEN KANN.</span>
+  </p>
 
-      </a>
+  <p class="text reveal" style="margin-top:50px;">
+    Ein Bild wird zur Geschichte.
+    Eine Geschichte wird zu Aufmerksamkeit.
+    Aufmerksamkeit wird zu Bewegung.
+  </p>
 
+</section>
 
-      <a
-        href="#services"
-        class="category reveal"
-      >
+<!-- VISUAL WORLD -->
+<section class="visual-world">
 
-        <div class="category-no">
-          05
-        </div>
+  <div class="section-label reveal">
+    SCENE 06 / VISUELLE WELT
+  </div>
 
-        <h3>
-          MARKETING
-        </h3>
+  <h2 class="big-title reveal">
+    FORM.<br>
+    <span>LICHT.</span><br>
+    WIRKUNG.
+  </h2>
 
-        <p>
-          Strategien und Neukundengewinnung
-          für nachhaltiges Wachstum.
-        </p>
+  <div class="visual-grid">
 
-        <div class="category-arrow">
-          ↗
-        </div>
+    <div class="visual-card reveal">
+      <div class="visual-word">DIGITAL FORM</div>
+    </div>
 
-      </a>
+    <div class="visual-card reveal">
+      <div class="visual-word">VISUAL STORY</div>
+    </div>
 
-
-      <a
-        href="#services"
-        class="category reveal"
-      >
-
-        <div class="category-no">
-          06
-        </div>
-
-        <h3>
-          DIGITAL
-        </h3>
-
-        <p>
-          Programmierung und digitale Lösungen
-          für moderne Unternehmen.
-        </p>
-
-        <div class="category-arrow">
-          ↗
-        </div>
-
-      </a>
-
+    <div class="visual-card reveal">
+      <div class="visual-word">CREATIVE MEDIA</div>
     </div>
 
   </div>
 
 </section>
 
-
-<!-- =======================================================
-     SCENE 04 — SERVICES
-======================================================= -->
-
-<section
-  class="services"
-  id="services"
->
-
-  <div class="container">
-
-    <div class="services-header">
-
-      <div class="services-title reveal">
-
-        WAS<br>
-        WIR<br>
-        MACHEN.
-
-      </div>
-
-      <div class="services-intro reveal">
-
-        14 Leistungen.
-        Eine digitale Welt.
-
-        <br><br>
-
-        Von der ersten Idee bis zum fertigen
-        Auftritt begleiten wir dein Projekt.
-
-      </div>
-
-    </div>
-
-
-    <div class="services-grid">
-
-
-      <div class="service reveal">
-        <div class="service-no">01 / WEB</div>
-        <h3>
-          Webseiten<br>
-          erstellen
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">02 / DESIGN</div>
-        <h3>
-          Flyer<br>
-          erstellen
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">03 / MARKETING</div>
-        <h3>
-          Online<br>
-          Marketing
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">04 / DESIGN</div>
-        <h3>
-          Visitenkarten<br>
-          erstellen
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">05 / SOCIAL</div>
-        <h3>
-          Social Media<br>
-          Assistant
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">06 / BRANDING</div>
-        <h3>
-          Logo<br>
-          erstellen
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">07 / MEDIA</div>
-        <h3>
-          Video &<br>
-          Photo Editor
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">08 / BUSINESS</div>
-        <h3>
-          Lebenslauf<br>
-          erstellen
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">09 / DESIGN</div>
-        <h3>
-          Speisekarte<br>
-          erstellen
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">10 / DIGITAL</div>
-        <h3>
-          Virtuellen<br>
-          Assistenten
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">11 / TECH</div>
-        <h3>
-          Programmierung
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">12 / SALES</div>
-        <h3>
-          Neukunden-<br>
-          gewinnung
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">13 / STRATEGIE</div>
-        <h3>
-          Strategie-<br>
-          entwicklung
-        </h3>
-      </div>
-
-
-      <div class="service reveal">
-        <div class="service-no">14 / SOCIAL</div>
-        <h3>
-          TikTok<br>
-          Marketing
-        </h3>
-      </div>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     SCENE 05 — MANIFESTO
-======================================================= -->
-
-<section class="manifesto">
-
-  <div class="container">
-
-    <div class="manifesto-inner">
-
-      <div class="kicker reveal">
-        SCENE 05 / DER GEDANKE
-      </div>
-
-      <div
-        class="manifesto-line reveal"
-        style="margin-top:40px;"
-      >
-        Aus einer Idee wird etwas,
-      </div>
-
-      <div class="manifesto-line dim reveal">
-        das man sehen kann.
-      </div>
-
-      <div class="manifesto-line reveal">
-        Ein Bild wird zur Geschichte.
-      </div>
-
-      <div class="manifesto-line dim reveal">
-        Eine Geschichte wird zu Aufmerksamkeit.
-      </div>
-
-      <div class="manifesto-line reveal">
-        Aufmerksamkeit wird zu Bewegung.
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     SCENE 06 — VISUAL
-======================================================= -->
-
-<section class="visual">
-
-  <div class="container">
-
-    <div class="visual-heading">
-
-      <div class="kicker reveal">
-        SCENE 06 / VISUAL WORLD
-      </div>
-
-      <h2 class="reveal">
-        MACH ES<br>
-        SICHTBAR.
-      </h2>
-
-    </div>
-
-
-    <div class="visual-grid">
-
-
-      <div class="visual-card reveal">
-
-        <div class="visual-art art1"></div>
-
-        <div class="visual-label">
-          FORM / 001
-        </div>
-
-      </div>
-
-
-      <div class="visual-card reveal">
-
-        <div class="visual-art art2"></div>
-
-        <div class="visual-label">
-          MOVEMENT / 002
-        </div>
-
-      </div>
-
-
-      <div class="visual-card reveal">
-
-        <div class="visual-art art3"></div>
-
-        <div class="visual-label">
-          DIGITAL / 003
-        </div>
-
-      </div>
-
-
-      <div class="visual-card reveal">
-
-        <div class="visual-art art4"></div>
-
-        <div class="visual-label">
-          VISION / 004
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     SCENE 07 — VISIBLE
-======================================================= -->
-
-<section class="visible-section">
+<!-- MAKE VISIBLE -->
+<section class="make-visible">
 
   <div>
-
-    <div class="kicker reveal">
-      SCENE 07 / THE MOMENT
+    <div class="section-label reveal">
+      SCENE 07 / FINALE
     </div>
 
-    <h2 class="visible-title reveal">
+    <h2 class="reveal">
       MACH ES<br>
       SICHTBAR.
     </h2>
 
-    <p class="visible-copy reveal">
-
-      Deine Idee verdient mehr als nur
-      einen Platz im Internet.
-
-      <br><br>
-
-      Lass sie entstehen.
-      Lass sie wachsen.
-      Lass sie sichtbar werden.
-
+    <p class="reveal">
+      Deine Idee verdient mehr als nur einen Platz im Internet.
+      Lass sie entstehen. Lass sie wachsen. Lass sie sichtbar werden.
     </p>
+  </div>
+
+</section>
+
+<!-- INSTAGRAM -->
+<section class="instagram">
+
+  <div class="section-label reveal">
+    SCENE 08 / SOCIALCLIP.ART
+  </div>
+
+  <h2 class="big-title reveal">
+    FOLLOW<br>
+    <span>THE STORY.</span>
+  </h2>
+
+  <div class="instagram-box reveal">
+
+    <strong>@socialclip.art</strong>
+
+    <a
+      href="https://www.instagram.com/socialclip.art/"
+      target="_blank"
+      rel="noopener"
+    >
+      INSTAGRAM ÖFFNEN →
+    </a>
 
   </div>
 
 </section>
 
+<!-- CONTACT -->
+<section class="contact">
 
-<!-- =======================================================
-     SCENE 08 — INSTAGRAM
-======================================================= -->
-
-<section
-  class="instagram"
-  id="instagram"
->
-
-  <div class="container">
-
-    <div class="instagram-header">
-
-      <div class="instagram-title reveal">
-        SOCIAL<br>
-        CLIP.
-      </div>
-
-      <a
-        class="instagram-link reveal"
-        href="https://www.instagram.com/socialclip.art/"
-        target="_blank"
-        rel="noopener"
-      >
-        INSTAGRAM ÖFFNEN ↗
-      </a>
-
-    </div>
-
-
-    <div class="instagram-grid">
-
-
-      <a
-        class="instagram-card reveal"
-        href="https://www.instagram.com/socialclip.art/"
-        target="_blank"
-        rel="noopener"
-      >
-        <div class="instagram-art i1"></div>
-      </a>
-
-
-      <a
-        class="instagram-card reveal"
-        href="https://www.instagram.com/socialclip.art/"
-        target="_blank"
-        rel="noopener"
-      >
-        <div class="instagram-art i2"></div>
-      </a>
-
-
-      <a
-        class="instagram-card reveal"
-        href="https://www.instagram.com/socialclip.art/"
-        target="_blank"
-        rel="noopener"
-      >
-        <div class="instagram-art i3"></div>
-      </a>
-
-
-      <a
-        class="instagram-card reveal"
-        href="https://www.instagram.com/socialclip.art/"
-        target="_blank"
-        rel="noopener"
-      >
-        <div class="instagram-art i4"></div>
-      </a>
-
-
-      <a
-        class="instagram-card reveal"
-        href="https://www.instagram.com/socialclip.art/"
-        target="_blank"
-        rel="noopener"
-      >
-        <div class="instagram-art i5"></div>
-      </a>
-
-
-      <a
-        class="instagram-card reveal"
-        href="https://www.instagram.com/socialclip.art/"
-        target="_blank"
-        rel="noopener"
-      >
-        <div class="instagram-art i6"></div>
-      </a>
-
-
-    </div>
-
+  <div class="section-label reveal">
+    SCENE 09 / KONTAKT
   </div>
 
-</section>
+  <h2 class="big-title reveal">
+    ERZÄHLEN<br>
+    <span>WIR DEINE</span><br>
+    GESCHICHTE?
+  </h2>
 
+  <form
+    class="contact-form reveal"
+    action="https://formspree.io/f/xwlvlqwg"
+    method="POST"
+  >
 
-<!-- =======================================================
-     SCENE 09 — CONTACT
-======================================================= -->
-
-<section
-  class="contact"
-  id="contact"
->
-
-  <div class="container">
-
-    <div class="contact-layout">
-
-
-      <div>
-
-        <div class="kicker reveal">
-          SCENE 09 / NEXT STEP
-        </div>
-
-        <div class="contact-title reveal">
-          LASS UNS<br>
-          REDEN.
-        </div>
-
-        <div class="contact-copy reveal">
-
-          Du hast eine Idee, ein Projekt
-          oder einfach eine Frage?
-
-          <br><br>
-
-          Schreib uns.
-
-          Vielleicht beginnt genau hier
-          die nächste Szene.
-
-        </div>
-
-      </div>
-
-
-      <form
-        class="contact-form reveal"
-        action="https://formspree.io/f/xwlvlqwg"
-        method="POST"
+    <div class="field">
+      <input
+        type="text"
+        name="name"
+        placeholder="Dein Name"
+        required
       >
-
-        <input
-          type="text"
-          name="name"
-          placeholder="DEIN NAME"
-          required
-        >
-
-        <input
-          type="email"
-          name="email"
-          placeholder="DEINE E-MAIL"
-          required
-        >
-
-        <input
-          type="text"
-          name="subject"
-          placeholder="THEMA"
-        >
-
-        <textarea
-          name="message"
-          placeholder="ERZÄHL UNS VON DEINER IDEE..."
-          required
-        ></textarea>
-
-        <button type="submit">
-          NACHRICHT SENDEN →
-        </button>
-
-      </form>
-
-
     </div>
 
-  </div>
+    <div class="field">
+      <input
+        type="email"
+        name="email"
+        placeholder="Deine E-Mail"
+        required
+      >
+    </div>
+
+    <div class="field">
+      <textarea
+        name="message"
+        placeholder="Erzähl uns von deiner Idee..."
+        required
+      ></textarea>
+    </div>
+
+    <button class="submit" type="submit">
+      NACHRICHT SENDEN →
+    </button>
+
+  </form>
 
 </section>
-
 
 </main>
 
-
-<!-- =======================================================
-     FOOTER
-======================================================= -->
-
 <footer>
 
-  <div class="footer-brand">
-    SOCIALCLIP — ART & MEDIA
+  <div>
+    <strong>SOCIALCLIP</strong><br><br>
+    ART · MEDIA · DIGITAL
   </div>
 
-  <div class="footer-meta">
+  <div>
+    LOCAL TIME<br><br>
+    <strong id="footerClock">--:--:--</strong>
+  </div>
 
-    <div>
-      LOCAL TIME ·
-      <span id="footerClock">
-        00:00:00
-      </span>
-    </div>
-
-    <div>
-      © <span id="year"></span>
-      SOCIALCLIP
-    </div>
-
-    <div>
-      ERLANGEN · GERMANY
-    </div>
-
+  <div>
+    © 2026 SOCIALCLIP
   </div>
 
 </footer>
 
+<!-- COOKIE -->
+<div class="cookie" id="cookie">
 
-<!-- =======================================================
-     COOKIE
-======================================================= -->
-
-<div
-  class="cookie"
-  id="cookieBanner"
->
-
-  <div class="cookie-text">
-
-    <strong>
-      COOKIES & DATENSCHUTZ
-    </strong>
-
-    <p>
-      Wir verwenden notwendige Cookies,
-      damit diese Website funktioniert.
-      Optionale Tracking-Cookies werden aktuell
-      nicht eingesetzt.
-    </p>
-
-  </div>
-
+  <p>
+    Wir verwenden notwendige Cookies, damit diese Website technisch
+    funktioniert. Weitere Cookies werden nur mit deiner Zustimmung gesetzt.
+  </p>
 
   <div class="cookie-buttons">
-
-    <button id="necessaryCookies">
+    <button id="necessary">
       NUR NOTWENDIGE
     </button>
 
-    <button
-      class="accept"
-      id="acceptCookies"
-    >
+    <button class="accept" id="accept">
       ALLE AKZEPTIEREN
     </button>
-
   </div>
 
 </div>
 
-
 <script>
 
-/* =========================================================
-   OPENING FILM
-========================================================= */
+/* =========================================
+   SOCIALCLIP FILM ENGINE
+   ========================================= */
 
-const opening =
-  document.getElementById("opening");
-
-const openingSteps =
-  document.querySelectorAll(".opening-step");
-
-const enterBtn =
-  document.getElementById("enterBtn");
-
-const filmCut =
-  document.getElementById("filmCut");
-
-let openingIndex = 0;
-
-
-/* Intro bewusst langsam */
-
-const openingTimer =
-  setInterval(()=>{
-
-    openingIndex++;
-
-    if(openingIndex >= openingSteps.length){
-
-      clearInterval(openingTimer);
-
-      return;
-
-    }
-
-    openingSteps.forEach(
-      (step,index)=>{
-
-        step.classList.toggle(
-          "active",
-          index === openingIndex
-        );
-
-      }
-    );
-
-  },2400);
-
-
-/* =========================================================
-   ENTER
-========================================================= */
-
-enterBtn.addEventListener(
-  "click",
-  ()=>{
-
-    enterBtn.disabled = true;
-
-    filmCut.classList.add("play");
-
-    setTimeout(()=>{
-
-      opening.classList.add("hide");
-
-      document.body.classList.remove("locked");
-
-      window.scrollTo({
-        top:0,
-        behavior:"instant"
-      });
-
-    },600);
-
-    setTimeout(()=>{
-
-      opening.style.pointerEvents="none";
-
-    },1300);
-
-  }
-);
-
-
-/* =========================================================
-   LIVE CLOCK
-========================================================= */
+/* LIVE CLOCK */
 
 function updateClock(){
 
-  const now =
-    new Date();
+  const now = new Date();
 
-  const time =
-    now.toLocaleTimeString(
-      "de-DE",
-      {
-        hour:"2-digit",
-        minute:"2-digit",
-        second:"2-digit"
-      }
-    );
+  const time = now.toLocaleTimeString("de-DE",{
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit"
+  });
 
-  document.getElementById(
-    "liveClock"
-  ).textContent = time;
+  const date = now.toLocaleDateString("de-DE",{
+    day:"2-digit",
+    month:"2-digit",
+    year:"numeric"
+  });
 
-  document.getElementById(
-    "footerClock"
-  ).textContent = time;
-
+  document.getElementById("liveClock").textContent = time;
+  document.getElementById("liveDate").textContent = date;
+  document.getElementById("footerClock").textContent = time;
 }
 
 updateClock();
-
-setInterval(
-  updateClock,
-  1000
-);
+setInterval(updateClock,1000);
 
 
-/* =========================================================
-   YEAR
-========================================================= */
+/* INTRO */
 
-document.getElementById(
-  "year"
-).textContent =
-  new Date().getFullYear();
+const intro = document.getElementById("intro");
+const intro1 = document.getElementById("intro1");
+const intro2 = document.getElementById("intro2");
+const introCopy = document.getElementById("introCopy");
+const introFinal = document.getElementById("introFinal");
+const enterButton = document.getElementById("enterButton");
+
+const introTexts = [
+  "Alles beginnt mit einer Idee.",
+  "Ein Gedanke. Ein Bild. Eine Vision.",
+  "Wir geben dieser Idee eine Form.",
+  "Wir verbinden Design mit Bewegung.",
+  "Aus Aufmerksamkeit wird Wirkung.",
+  "Willkommen bei SocialClip."
+];
+
+let introStep = 0;
+
+function runIntro(){
+
+  intro1.classList.add("show");
+
+  setTimeout(()=>{
+    intro2.classList.add("show");
+  },700);
+
+  function nextText(){
+
+    if(introStep < introTexts.length){
+
+      introCopy.style.opacity = "0";
+
+      setTimeout(()=>{
+
+        introCopy.textContent = introTexts[introStep];
+        introCopy.style.opacity = "1";
+
+        introStep++;
+
+      },400);
+
+      setTimeout(nextText,1800);
+
+    }else{
+
+      setTimeout(()=>{
+        introFinal.classList.add("show");
+      },700);
+
+    }
+  }
+
+  setTimeout(nextText,1300);
+}
+
+runIntro();
 
 
-/* =========================================================
-   REVEAL
-========================================================= */
+/* ENTER WEBSITE */
+
+enterButton.addEventListener("click",()=>{
+
+  enterButton.disabled = true;
+
+  intro.classList.add("hide");
+
+  document.body.classList.remove("locked");
+
+  setTimeout(()=>{
+    intro.remove();
+  },1400);
+
+});
+
+
+/* SCROLL REVEAL */
 
 const revealElements =
   document.querySelectorAll(".reveal");
 
-const revealObserver =
+const observer =
   new IntersectionObserver(
-    entries=>{
-
-      entries.forEach(
-        entry=>{
-
-          if(entry.isIntersecting){
-
-            entry.target
-              .classList
-              .add("visible");
-
-          }
-
+    (entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
         }
-      );
-
+      });
     },
     {
       threshold:.12
     }
   );
 
-
-revealElements.forEach(
-  element=>{
-    revealObserver.observe(element);
-  }
-);
+revealElements.forEach(el=>{
+  observer.observe(el);
+});
 
 
-/* =========================================================
-   SCENE COUNTER
-========================================================= */
+/* SCENE COUNTER */
+
+const scenes =
+  document.querySelectorAll("section");
 
 const sceneNumber =
   document.getElementById("sceneNumber");
 
-const sceneProgress =
-  document.getElementById("sceneProgress");
-
-
-const scenes = [
-  {id:"top",number:"01"},
-  {id:"services",number:"04"},
-  {id:"instagram",number:"08"},
-  {id:"contact",number:"09"}
-];
-
-
 function updateScene(){
+
+  let current = 1;
+
+  scenes.forEach((scene,index)=>{
+
+    const rect = scene.getBoundingClientRect();
+
+    if(rect.top < window.innerHeight * .55){
+      current = index + 2;
+    }
+
+  });
+
+  sceneNumber.textContent =
+    "SCENE " + String(current).padStart(2,"0");
+}
+
+
+/* SCROLL PROGRESS */
+
+function updateProgress(){
 
   const scrollTop =
     window.scrollY;
 
-  const maxScroll =
+  const height =
     document.documentElement.scrollHeight -
     window.innerHeight;
 
   const percentage =
-    maxScroll > 0
-      ? (scrollTop / maxScroll) * 100
+    height > 0
+      ? (scrollTop / height) * 100
       : 0;
 
-  sceneProgress.style.width =
-    percentage + "%";
+  document.getElementById("progress")
+    .style.width = percentage + "%";
 
-
-  let current = "01";
-
-  scenes.forEach(
-    scene=>{
-
-      const element =
-        document.getElementById(scene.id);
-
-      if(!element) return;
-
-      const position =
-        element.offsetTop;
-
-      if(
-        scrollTop + window.innerHeight*.35
-        >= position
-      ){
-
-        current =
-          scene.number;
-
-      }
-
-    }
-  );
-
-
-  sceneNumber.textContent =
-    current;
-
+  updateScene();
 }
-
 
 window.addEventListener(
   "scroll",
-  updateScene,
+  updateProgress,
   {passive:true}
 );
 
-updateScene();
+updateProgress();
 
 
-/* =========================================================
-   COOKIE
-========================================================= */
+/* COOKIE */
 
-const cookieBanner =
-  document.getElementById(
-    "cookieBanner"
+const cookie =
+  document.getElementById("cookie");
+
+const savedConsent =
+  localStorage.getItem(
+    "socialclip_cookie_consent"
   );
 
-const acceptCookies =
-  document.getElementById(
-    "acceptCookies"
-  );
-
-const necessaryCookies =
-  document.getElementById(
-    "necessaryCookies"
-  );
-
-const cookieKey =
-  "socialclip_cookie_consent";
-
-
-if(
-  !localStorage.getItem(cookieKey)
-){
-
-  setTimeout(
-    ()=>{
-      cookieBanner.classList.add(
-        "show"
-      );
-    },
-    3000
-  );
-
+if(!savedConsent){
+  setTimeout(()=>{
+    cookie.classList.add("show");
+  },1500);
 }
 
+document.getElementById("necessary")
+  .addEventListener("click",()=>{
 
-function saveCookieChoice(choice){
-
-  localStorage.setItem(
-    cookieKey,
-    choice
-  );
-
-  cookieBanner.classList.remove(
-    "show"
-  );
-
-}
-
-
-acceptCookies.addEventListener(
-  "click",
-  ()=>{
-    saveCookieChoice(
-      "accepted"
-    );
-  }
-);
-
-
-necessaryCookies.addEventListener(
-  "click",
-  ()=>{
-    saveCookieChoice(
+    localStorage.setItem(
+      "socialclip_cookie_consent",
       "necessary"
     );
-  }
+
+    cookie.classList.remove("show");
+
+  });
+
+document.getElementById("accept")
+  .addEventListener("click",()=>{
+
+    localStorage.setItem(
+      "socialclip_cookie_consent",
+      "accepted"
+    );
+
+    cookie.classList.remove("show");
+
+  });
+
+
+/* MOBILE TOUCH FEEL */
+
+let touchStartY = 0;
+
+window.addEventListener(
+  "touchstart",
+  e=>{
+    touchStartY =
+      e.changedTouches[0].screenY;
+  },
+  {passive:true}
 );
 
+window.addEventListener(
+  "touchend",
+  e=>{
 
-/* =========================================================
-   ESC
-========================================================= */
+    const touchEndY =
+      e.changedTouches[0].screenY;
 
-document.addEventListener(
-  "keydown",
-  event=>{
+    const distance =
+      touchStartY - touchEndY;
 
-    if(
-      event.key === "Escape" &&
-      !opening.classList.contains("hide")
-    ){
+    if(Math.abs(distance) > 80){
 
-      enterBtn.click();
+      window.scrollBy({
+        top:distance > 0
+          ? window.innerHeight * .25
+          : -window.innerHeight * .25,
+        behavior:"smooth"
+      });
 
     }
 
-  }
+  },
+  {passive:true}
 );
 
 </script>
