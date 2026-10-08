@@ -5,40 +5,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SocialClip — Art & Media</title>
-
-<meta
-    name="description"
-    content="SocialClip — Design, Digital, Social Media, Marketing, Programmierung und kreative Ideen."
->
+<title>SOCIALCLIP — Art & Media</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap"
-    rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 
 <style>
 
 /* =========================================================
-   BASIS
+   GRUNDLAGE
 ========================================================= */
 
 :root{
-    --black:#050505;
-    --white:#f4f1eb;
-    --muted:#aaa69e;
-    --gold:#c9b28a;
-    --line:rgba(244,241,235,.13);
+    --black:#030303;
+    --white:#f5f2eb;
+    --gold:#c9ae7a;
+    --gray:#77736c;
 }
 
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 html{
@@ -46,13 +37,13 @@ html{
 }
 
 body{
-    background:var(--black);
+    background:#030303;
     color:var(--white);
-    font-family:"Inter",sans-serif;
+    font-family:Inter,sans-serif;
     overflow-x:hidden;
 }
 
-body.locked{
+body.lock{
     overflow:hidden;
 }
 
@@ -61,12 +52,16 @@ a{
     text-decoration:none;
 }
 
+button{
+    font-family:inherit;
+}
+
 
 /* =========================================================
    INTRO
 ========================================================= */
 
-.intro{
+#intro{
     position:fixed;
     inset:0;
     z-index:99999;
@@ -80,87 +75,77 @@ a{
     overflow:hidden;
 
     transition:
-        opacity 1.4s ease,
-        visibility 1.4s ease;
+        opacity 1.5s ease,
+        visibility 1.5s ease;
 }
 
-.intro.hide{
+#intro.out{
     opacity:0;
     visibility:hidden;
     pointer-events:none;
 }
 
-
-/* Licht */
-
 .intro-light{
     position:absolute;
 
-    width:600px;
-    height:600px;
+    width:700px;
+    height:700px;
 
     border-radius:50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(201,178,138,.20),
-            rgba(201,178,138,.06) 30%,
-            transparent 70%
+            rgba(201,174,122,.22),
+            rgba(201,174,122,.06) 28%,
+            transparent 68%
         );
 
-    filter:blur(30px);
+    filter:blur(25px);
 
-    animation:introLight 4s ease forwards;
+    animation:introLight 5s ease forwards;
 }
 
-
-/* dünne Kreise */
-
-.intro-circle{
+.intro-ring{
     position:absolute;
 
-    width:260px;
-    height:260px;
+    width:250px;
+    height:250px;
 
-    border:1px solid rgba(201,178,138,.18);
+    border:1px solid rgba(201,174,122,.25);
 
     border-radius:50%;
 
-    opacity:0;
-
-    animation:introCircle 4s ease forwards;
+    animation:ring 5s ease forwards;
 }
 
-.intro-circle.two{
+.intro-ring.r2{
     width:500px;
     height:500px;
-    animation-delay:.5s;
+    animation-delay:.3s;
 }
-
-
-/* Inhalt */
 
 .intro-content{
     position:relative;
-    z-index:2;
+    z-index:3;
 
     text-align:center;
 
     opacity:0;
 
-    transform:translateY(25px);
+    transform:translateY(30px);
 
     animation:
-        introContent 1.4s
-        .4s cubic-bezier(.16,1,.3,1)
+        introIn 1.5s
+        .5s
+        cubic-bezier(.16,1,.3,1)
         forwards;
 }
 
 .intro-welcome{
     font-size:9px;
 
-    letter-spacing:7px;
+    letter-spacing:8px;
 
     text-transform:uppercase;
 
@@ -169,50 +154,51 @@ a{
     margin-bottom:25px;
 }
 
-.intro-title{
+.intro-logo{
     font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(55px,11vw,150px);
 
     font-weight:300;
 
-    line-height:.85;
+    font-size:
+        clamp(65px,13vw,180px);
 
-    letter-spacing:.04em;
+    line-height:.75;
+
+    letter-spacing:.05em;
 }
 
-.intro-title span{
+.intro-logo span{
     color:var(--gold);
 }
 
 .intro-sub{
-    margin-top:28px;
+    margin-top:30px;
 
-    font-size:9px;
+    font-size:8px;
 
-    letter-spacing:6px;
+    letter-spacing:7px;
 
     text-transform:uppercase;
 
-    color:rgba(244,241,235,.45);
+    color:#777;
 }
 
 .intro-line{
     position:absolute;
 
-    bottom:55px;
+    bottom:50px;
+
     left:50%;
 
     width:0;
+
     height:1px;
 
-    background:rgba(244,241,235,.5);
+    background:#777;
 
     transform:translateX(-50%);
 
-    animation:
-        introLine 2.5s 1s ease forwards;
+    animation:lineIn 3s 1s ease forwards;
 }
 
 
@@ -220,70 +206,380 @@ a{
    NAVIGATION
 ========================================================= */
 
-.nav{
+nav{
     position:fixed;
+
+    z-index:900;
 
     top:0;
     left:0;
 
     width:100%;
 
-    z-index:1000;
-
-    padding:28px 5vw;
+    padding:25px 35px;
 
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
+
+    align-items:center;
 
     mix-blend-mode:difference;
 }
 
-.nav-logo{
+.logo{
     font-family:"Cormorant Garamond",serif;
 
     font-size:27px;
 
-    letter-spacing:.08em;
+    letter-spacing:.1em;
 }
 
-.nav-logo span{
+.logo span{
     color:var(--gold);
 }
 
-.nav-menu{
+.nav-right{
     display:flex;
 
     gap:30px;
 
-    font-size:9px;
+    font-size:8px;
 
     text-transform:uppercase;
 
-    letter-spacing:3px;
+    letter-spacing:4px;
 }
 
-.nav-menu a{
-    opacity:.65;
+.nav-right a{
+    opacity:.6;
 
     transition:.3s;
 }
 
-.nav-menu a:hover{
+.nav-right a:hover{
     opacity:1;
 }
 
 
 /* =========================================================
-   HOME
+   EXPERIENCE
 ========================================================= */
 
-.home{
-    min-height:100vh;
+.experience{
+    position:relative;
+
+    height:650vh;
+
+    background:#030303;
+}
+
+
+/* =========================================================
+   STICKY WORLD
+========================================================= */
+
+.world{
+    position:sticky;
+
+    top:0;
+
+    height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.world-bg{
+    position:absolute;
+
+    inset:-20%;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(201,174,122,.10),
+            transparent 22%
+        ),
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(100,100,255,.05),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(255,255,255,.04),
+            transparent 20%
+        );
+
+    transition:
+        transform .15s linear;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.grid{
+    position:absolute;
+
+    width:150vw;
+    height:150vh;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:100px 100px;
+
+    transform:
+        perspective(700px)
+        rotateX(65deg)
+        translateY(30%);
+
+    opacity:.25;
+
+    transition:
+        transform .15s linear;
+}
+
+
+/* =========================================================
+   FLOATING ORB
+========================================================= */
+
+.orb-wrap{
+    position:absolute;
+
+    width:min(42vw,550px);
+    height:min(42vw,550px);
+
+    transition:
+        transform .15s linear;
+}
+
+.orb{
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
 
     position:relative;
+
+    background:
+
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(255,255,255,.9),
+            rgba(255,255,255,.18) 5%,
+            transparent 12%
+        ),
+
+        radial-gradient(
+            circle at 35% 30%,
+            #d8c9ad,
+            #81745f 25%,
+            #29251f 55%,
+            #050505 72%
+        );
+
+    box-shadow:
+
+        inset -30px -30px 80px rgba(0,0,0,.9),
+
+        inset 25px 20px 50px rgba(255,255,255,.15),
+
+        0 0 100px rgba(201,174,122,.15);
+
+    animation:
+        float 7s ease-in-out infinite;
+}
+
+.orb::before{
+    content:"";
+
+    position:absolute;
+
+    inset:-15px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(201,174,122,.22);
+
+    animation:
+        orbit 15s linear infinite;
+}
+
+.orb::after{
+    content:"";
+
+    position:absolute;
+
+    width:20%;
+    height:20%;
+
+    top:17%;
+    left:22%;
+
+    border-radius:50%;
+
+    background:white;
+
+    filter:blur(20px);
+
+    opacity:.35;
+}
+
+
+/* =========================================================
+   CENTER BRAND
+========================================================= */
+
+.center-brand{
+    position:absolute;
+
+    z-index:10;
+
+    text-align:center;
+
+    pointer-events:none;
+
+    transition:
+        transform .15s linear,
+        opacity .15s linear;
+}
+
+.center-brand small{
+    font-size:8px;
+
+    letter-spacing:7px;
+
+    color:var(--gold);
+
+    text-transform:uppercase;
+}
+
+.center-brand h1{
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:
+        clamp(70px,14vw,190px);
+
+    font-weight:300;
+
+    line-height:.7;
+
+    letter-spacing:.03em;
+
+    margin-top:20px;
+}
+
+.center-brand h1 span{
+    color:var(--gold);
+}
+
+
+/* =========================================================
+   FLYING WORDS
+========================================================= */
+
+.flying-word{
+    position:absolute;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:
+        clamp(55px,9vw,130px);
+
+    font-weight:300;
+
+    white-space:nowrap;
+
+    opacity:0;
+
+    transition:
+        transform .15s linear,
+        opacity .15s linear;
+}
+
+.word1{
+    left:5vw;
+    top:20%;
+}
+
+.word2{
+    right:5vw;
+    top:25%;
+}
+
+.word3{
+    left:8vw;
+    bottom:18%;
+}
+
+.word4{
+    right:7vw;
+    bottom:20%;
+}
+
+.flying-word span{
+    color:var(--gold);
+}
+
+
+/* =========================================================
+   SMALL LABELS
+========================================================= */
+
+.scene-label{
+    position:absolute;
+
+    font-size:8px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    color:#666;
+
+    opacity:0;
+
+    transition:
+        opacity .2s,
+        transform .2s;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.service-object{
+    position:absolute;
+
+    width:230px;
+
+    height:140px;
+
+    border:1px solid rgba(201,174,122,.25);
 
     display:flex;
 
@@ -291,599 +587,142 @@ a{
 
     justify-content:center;
 
-    overflow:hidden;
-}
-
-
-/* Hintergrund */
-
-.home-bg{
-    position:absolute;
-
-    inset:-10%;
-
-    background:
-        linear-gradient(
-            120deg,
-            rgba(0,0,0,.8),
-            rgba(0,0,0,.15),
-            rgba(0,0,0,.8)
-        ),
-        url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2200&q=85")
-        center/cover;
-
-    transform:scale(1.08);
-
-    filter:saturate(.6);
-
-    transition:
-        transform 1.5s cubic-bezier(.16,1,.3,1);
-}
-
-
-/* großes Zentrum */
-
-.home-center{
-    position:relative;
-
-    z-index:2;
-
     text-align:center;
 
-    width:90%;
+    opacity:0;
+
+    transform:scale(.6);
+
+    transition:
+        opacity .2s,
+        transform .2s;
 }
 
-.home-small{
-    font-size:9px;
-
-    letter-spacing:7px;
-
-    text-transform:uppercase;
-
-    color:var(--gold);
-
-    margin-bottom:25px;
-}
-
-.home-title{
+.service-object strong{
     font-family:"Cormorant Garamond",serif;
 
-    font-size:
-        clamp(75px,15vw,210px);
-
-    line-height:.72;
+    font-size:30px;
 
     font-weight:300;
-
-    letter-spacing:-.02em;
 }
 
-.home-title em{
-    font-style:normal;
+.service-object small{
+    display:block;
 
-    color:var(--gold);
+    margin-top:8px;
+
+    color:#777;
+
+    font-size:7px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
 }
 
-.home-subtitle{
-    margin-top:40px;
-
-    color:rgba(244,241,235,.6);
-
-    font-size:13px;
-
-    line-height:1.8;
-
-    max-width:500px;
-
-    margin-left:auto;
-    margin-right:auto;
+.so1{
+    left:8%;
+    top:25%;
 }
 
-.home-scroll{
+.so2{
+    right:8%;
+    top:30%;
+}
+
+.so3{
+    left:12%;
+    bottom:22%;
+}
+
+.so4{
+    right:12%;
+    bottom:18%;
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.scroll-indicator{
     position:absolute;
 
-    bottom:35px;
+    bottom:30px;
 
     left:50%;
 
     transform:translateX(-50%);
 
-    font-size:8px;
+    z-index:20;
+
+    text-align:center;
+
+    font-size:7px;
 
     letter-spacing:5px;
 
     text-transform:uppercase;
 
-    color:rgba(255,255,255,.45);
+    color:#777;
+
+    transition:opacity .3s;
 }
 
-.home-scroll::after{
+.scroll-indicator::after{
     content:"";
 
     display:block;
 
+    height:45px;
+
     width:1px;
-    height:55px;
 
-    background:rgba(255,255,255,.35);
+    background:#777;
 
-    margin:15px auto 0;
+    margin:12px auto 0;
 }
 
 
 /* =========================================================
-   INTRO STATEMENT
+   INSTAGRAM SCENE
 ========================================================= */
-
-.statement{
-    min-height:100vh;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:15vh 7vw;
-
-    position:relative;
-}
-
-.statement-text{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(55px,9vw,125px);
-
-    line-height:.85;
-
-    font-weight:300;
-
-    text-align:center;
-
-    max-width:1200px;
-}
-
-.statement-text .gold{
-    color:var(--gold);
-}
-
-
-/* =========================================================
-   VISUAL BREAK
-========================================================= */
-
-.visual{
-    height:85vh;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.visual img{
-    width:100%;
-    height:120%;
-
-    object-fit:cover;
-
-    filter:saturate(.65);
-
-    transform:translateY(-8%);
-
-    transition:
-        transform 1.2s cubic-bezier(.16,1,.3,1);
-}
-
-.visual-overlay{
-    position:absolute;
-
-    inset:0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,.05),
-            rgba(0,0,0,.75)
-        );
-}
-
-.visual-text{
-    position:absolute;
-
-    left:6vw;
-    bottom:7vh;
-
-    z-index:2;
-}
-
-.visual-text small{
-    font-size:9px;
-
-    letter-spacing:5px;
-
-    text-transform:uppercase;
-
-    color:var(--gold);
-}
-
-.visual-text h2{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(55px,9vw,120px);
-
-    font-weight:300;
-
-    line-height:.8;
-
-    margin-top:15px;
-}
-
-
-/* =========================================================
-   WAS WIR MACHEN
-========================================================= */
-
-.explore{
-    padding:18vh 6vw;
-}
-
-.explore-top{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-end;
-
-    margin-bottom:100px;
-}
-
-.explore-top h2{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(60px,9vw,125px);
-
-    font-weight:300;
-
-    line-height:.8;
-}
-
-.explore-top p{
-    max-width:300px;
-
-    color:var(--muted);
-
-    font-size:13px;
-
-    line-height:1.8;
-}
-
-
-/* kreative Karten */
-
-.explore-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:15px;
-}
-
-.explore-card{
-    min-height:430px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    border:1px solid var(--line);
-
-    transition:
-        transform .7s cubic-bezier(.16,1,.3,1),
-        border-color .5s;
-}
-
-.explore-card:hover{
-    transform:translateY(-12px);
-
-    border-color:
-        rgba(201,178,138,.45);
-}
-
-.explore-card:nth-child(2){
-    margin-top:70px;
-}
-
-.explore-card:nth-child(3){
-    margin-top:140px;
-}
-
-.explore-card-bg{
-    position:absolute;
-
-    inset:0;
-
-    background-size:cover;
-
-    background-position:center;
-
-    filter:saturate(.55);
-
-    transition:
-        transform 1s cubic-bezier(.16,1,.3,1);
-}
-
-.explore-card:hover .explore-card-bg{
-    transform:scale(1.08);
-}
-
-.explore-card:nth-child(1)
-.explore-card-bg{
-    background-image:
-        url("https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=85");
-}
-
-.explore-card:nth-child(2)
-.explore-card-bg{
-    background-image:
-        url("https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=85");
-}
-
-.explore-card:nth-child(3)
-.explore-card-bg{
-    background-image:
-        url("https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?auto=format&fit=crop&w=1200&q=85");
-}
-
-.explore-card::after{
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        linear-gradient(
-            transparent 30%,
-            rgba(0,0,0,.9)
-        );
-}
-
-.explore-card-content{
-    position:absolute;
-
-    left:25px;
-    right:25px;
-    bottom:25px;
-
-    z-index:2;
-}
-
-.explore-card-number{
-    color:var(--gold);
-
-    font-size:9px;
-
-    letter-spacing:4px;
-}
-
-.explore-card h3{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:45px;
-
-    font-weight:300;
-
-    margin-top:10px;
-}
-
-.explore-card p{
-    color:rgba(255,255,255,.6);
-
-    font-size:11px;
-
-    line-height:1.7;
-
-    margin-top:10px;
-}
-
-
-/* =========================================================
-   SERVICES - HORIZONTAL SCROLL LOOK
-========================================================= */
-
-.services{
-    padding:18vh 0;
-
-    overflow:hidden;
-}
-
-.services-title{
-    padding:0 6vw;
-
-    margin-bottom:70px;
-}
-
-.services-title small{
-    color:var(--gold);
-
-    font-size:9px;
-
-    letter-spacing:5px;
-
-    text-transform:uppercase;
-}
-
-.services-title h2{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(65px,10vw,140px);
-
-    font-weight:300;
-
-    line-height:.8;
-
-    margin-top:20px;
-}
-
-.service-track{
-    display:flex;
-
-    gap:20px;
-
-    width:max-content;
-
-    padding-left:6vw;
-
-    animation:
-        slowMove 35s
-        linear infinite;
-}
-
-.service-pill{
-    padding:25px 35px;
-
-    border:1px solid var(--line);
-
-    border-radius:100px;
-
-    white-space:nowrap;
-
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:35px;
-
-    font-weight:300;
-
-    transition:.4s;
-}
-
-.service-pill:hover{
-    background:var(--white);
-
-    color:#000;
-
-    border-color:var(--white);
-}
-
-
-/* =========================================================
-   INSTAGRAM
-========================================================= */
-
-.instagram{
-    min-height:120vh;
-
-    padding:16vh 6vw;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:8vw;
-
-    align-items:center;
-
-    background:#080808;
-}
-
-.instagram-copy small{
-    color:var(--gold);
-
-    font-size:9px;
-
-    letter-spacing:5px;
-
-    text-transform:uppercase;
-}
-
-.instagram-copy h2{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(70px,10vw,145px);
-
-    line-height:.75;
-
-    font-weight:300;
-
-    margin-top:25px;
-}
-
-.instagram-copy h2 span{
-    color:var(--gold);
-}
-
-.instagram-copy p{
-    color:var(--muted);
-
-    max-width:430px;
-
-    line-height:1.8;
-
-    font-size:13px;
-
-    margin-top:35px;
-}
-
-.instagram-link{
-    display:inline-block;
-
-    margin-top:35px;
-
-    border-bottom:1px solid var(--gold);
-
-    padding-bottom:8px;
-
-    font-size:9px;
-
-    letter-spacing:4px;
-
-    text-transform:uppercase;
-}
-
-
-/* Phone */
-
-.phone-area{
-    display:flex;
-
-    justify-content:center;
-
-    perspective:1000px;
-}
 
 .phone{
-    width:300px;
+    position:absolute;
 
-    height:610px;
+    width:260px;
 
-    border:8px solid #181818;
+    height:530px;
 
-    border-radius:42px;
+    border:7px solid #1a1a1a;
+
+    border-radius:38px;
+
+    background:#f8f8f8;
 
     overflow:hidden;
 
-    background:#fff;
-
     box-shadow:
-        0 50px 100px rgba(0,0,0,.6);
+        0 50px 100px rgba(0,0,0,.7);
+
+    opacity:0;
 
     transform:
-        rotateY(-12deg)
-        rotateX(3deg);
+        translateY(150px)
+        rotateY(-30deg)
+        rotateX(8deg)
+        scale(.8);
 
     transition:
-        transform .5s;
+        opacity .2s,
+        transform .2s;
 }
 
 .phone-top{
-    height:65px;
+    height:60px;
+
+    color:#111;
 
     display:flex;
 
@@ -891,67 +730,39 @@ a{
 
     justify-content:space-between;
 
-    padding:0 15px 12px;
+    padding:10px;
 
-    color:#111;
-
-    font-size:12px;
+    font-size:10px;
 
     border-bottom:1px solid #ddd;
 }
 
-.phone-feed{
-    height:calc(100% - 65px);
-
-    overflow:hidden;
+.feed{
+    height:100%;
 
     color:#111;
 }
 
-.phone-feed-track{
-    animation:
-        feedMove 16s ease-in-out infinite;
-}
-
-.post-user{
-    padding:12px;
-
-    font-size:10px;
-
-    font-weight:600;
-}
-
-.post-image{
-    height:270px;
+.feed-image{
+    height:230px;
 
     background-size:cover;
 
     background-position:center;
 }
 
-.post-image.a{
+.feed-image.i1{
     background-image:
-        url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=700&q=85");
+        url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=700&q=85");
 }
 
-.post-image.b{
+.feed-image.i2{
     background-image:
         url("https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=700&q=85");
 }
 
-.post-image.c{
-    background-image:
-        url("https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=700&q=85");
-}
-
-.post-icons{
-    padding:12px;
-
-    font-size:15px;
-}
-
-.post-text{
-    padding:0 12px 20px;
+.feed-text{
+    padding:15px;
 
     font-size:10px;
 
@@ -960,11 +771,13 @@ a{
 
 
 /* =========================================================
-   DIGITAL STATEMENT
+   FINAL SCENE
 ========================================================= */
 
-.digital{
-    min-height:100vh;
+.final{
+    position:absolute;
+
+    inset:0;
 
     display:flex;
 
@@ -974,104 +787,101 @@ a{
 
     text-align:center;
 
-    padding:15vh 7vw;
+    opacity:0;
 
-    position:relative;
+    transform:scale(.8);
+
+    transition:
+        opacity .2s,
+        transform .2s;
+
+    pointer-events:none;
 }
 
-.digital::before{
-    content:"";
-
-    position:absolute;
-
-    width:500px;
-    height:500px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(201,178,138,.09),
-            transparent 70%
-        );
-
-    filter:blur(20px);
-}
-
-.digital-content{
-    position:relative;
-    z-index:2;
-}
-
-.digital h2{
+.final h2{
     font-family:"Cormorant Garamond",serif;
 
     font-size:
-        clamp(65px,12vw,170px);
+        clamp(70px,12vw,170px);
 
     font-weight:300;
 
-    line-height:.78;
+    line-height:.75;
 }
 
-.digital h2 span{
+.final h2 span{
     color:var(--gold);
+}
+
+.final p{
+    margin-top:35px;
+
+    color:#777;
+
+    font-size:11px;
 }
 
 
 /* =========================================================
-   KONTAKT
+   CONTACT
 ========================================================= */
 
 .contact{
-    min-height:80vh;
+    min-height:100vh;
 
-    padding:15vh 6vw;
+    background:var(--white);
+
+    color:#050505;
 
     display:flex;
 
     align-items:center;
 
-    justify-content:space-between;
+    justify-content:center;
+
+    padding:10vw;
+}
+
+.contact-inner{
+    width:100%;
+
+    max-width:1200px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
 
     gap:10vw;
-
-    background:var(--white);
-
-    color:#050505;
 }
 
-.contact-title small{
-    font-size:9px;
-
-    letter-spacing:5px;
-
-    text-transform:uppercase;
-
-    color:#8f7650;
-}
-
-.contact-title h2{
+.contact h2{
     font-family:"Cormorant Garamond",serif;
 
     font-size:
-        clamp(70px,11vw,155px);
+        clamp(70px,10vw,140px);
 
     font-weight:300;
 
     line-height:.75;
-
-    margin-top:20px;
 }
 
-.contact-title h2 span{
-    color:#9a815b;
+.contact h2 span{
+    color:#9b8050;
 }
 
-.contact-form{
-    width:min(450px,100%);
+.contact p{
+    margin-top:35px;
 
+    max-width:400px;
+
+    color:#777;
+
+    line-height:1.8;
+
+    font-size:13px;
+}
+
+form{
     display:flex;
 
     flex-direction:column;
@@ -1079,53 +889,52 @@ a{
     gap:20px;
 }
 
-.contact-form input,
-.contact-form textarea{
+input,
+textarea{
+    background:none;
+
     border:none;
 
-    border-bottom:
-        1px solid rgba(0,0,0,.25);
-
-    background:transparent;
+    border-bottom:1px solid rgba(0,0,0,.25);
 
     padding:15px 0;
+
+    font-size:13px;
 
     outline:none;
 
     color:#000;
-
-    font-size:13px;
 }
 
-.contact-form textarea{
-    min-height:120px;
+textarea{
+    min-height:130px;
 
     resize:vertical;
 }
 
-.contact-form button{
+button{
+    background:#050505;
+
+    color:white;
+
+    border:1px solid #050505;
+
+    padding:20px;
+
     margin-top:15px;
-
-    border:1px solid #000;
-
-    background:#000;
-
-    color:#fff;
-
-    padding:18px;
 
     cursor:pointer;
 
-    text-transform:uppercase;
-
-    letter-spacing:4px;
-
     font-size:8px;
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
 
     transition:.4s;
 }
 
-.contact-form button:hover{
+button:hover{
     background:transparent;
 
     color:#000;
@@ -1137,40 +946,38 @@ a{
 ========================================================= */
 
 footer{
-    padding:70px 6vw 30px;
+    background:#030303;
 
-    background:#050505;
+    padding:80px 5vw 30px;
 }
 
-.footer-big{
+.footer-logo{
     font-family:"Cormorant Garamond",serif;
 
     font-size:
-        clamp(80px,16vw,220px);
+        clamp(80px,18vw,250px);
 
-    line-height:.7;
+    line-height:.65;
 
     font-weight:300;
-
-    letter-spacing:-.03em;
 }
 
-.footer-big span{
+.footer-logo span{
     color:var(--gold);
 }
 
 .footer-bottom{
     margin-top:100px;
 
-    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.12);
 
-    border-top:1px solid var(--line);
+    padding-top:20px;
 
     display:flex;
 
     justify-content:space-between;
 
-    color:#777;
+    color:#666;
 
     font-size:8px;
 
@@ -1181,53 +988,32 @@ footer{
 
 
 /* =========================================================
-   REVEAL
-========================================================= */
-
-.reveal{
-    opacity:0;
-
-    transform:translateY(60px);
-
-    transition:
-        opacity 1.2s cubic-bezier(.16,1,.3,1),
-        transform 1.2s cubic-bezier(.16,1,.3,1);
-}
-
-.reveal.visible{
-    opacity:1;
-
-    transform:translateY(0);
-}
-
-
-/* =========================================================
    ANIMATIONEN
 ========================================================= */
 
 @keyframes introLight{
 
     0%{
+        transform:scale(.3);
         opacity:0;
-        transform:scale(.4);
     }
 
     45%{
-        opacity:1;
         transform:scale(1);
+        opacity:1;
     }
 
     100%{
-        opacity:.65;
-        transform:scale(1.15);
+        transform:scale(1.2);
+        opacity:.6;
     }
 }
 
-@keyframes introCircle{
+@keyframes ring{
 
     0%{
         opacity:0;
-        transform:scale(.5);
+        transform:scale(.4);
     }
 
     30%{
@@ -1236,11 +1022,11 @@ footer{
 
     100%{
         opacity:0;
-        transform:scale(2.5);
+        transform:scale(2.7);
     }
 }
 
-@keyframes introContent{
+@keyframes introIn{
 
     to{
         opacity:1;
@@ -1248,40 +1034,32 @@ footer{
     }
 }
 
-@keyframes introLine{
+@keyframes lineIn{
 
     to{
         width:180px;
     }
 }
 
-@keyframes slowMove{
+@keyframes float{
 
-    from{
-        transform:translateX(0);
+    0%,100%{
+        transform:translateY(0) rotate(0);
     }
 
-    to{
-        transform:translateX(-35%);
+    50%{
+        transform:translateY(-25px) rotate(3deg);
     }
 }
 
-@keyframes feedMove{
+@keyframes orbit{
 
-    0%,20%{
-        transform:translateY(0);
+    from{
+        transform:rotate(0);
     }
 
-    35%,50%{
-        transform:translateY(-285px);
-    }
-
-    65%,80%{
-        transform:translateY(-570px);
-    }
-
-    100%{
-        transform:translateY(0);
+    to{
+        transform:rotate(360deg);
     }
 }
 
@@ -1292,132 +1070,77 @@ footer{
 
 @media(max-width:800px){
 
-    .nav{
-        padding:20px 5vw;
+    nav{
+        padding:20px;
     }
 
-    .nav-menu{
+    .nav-right{
         display:none;
     }
 
-    .home-title{
+    .experience{
+        height:500vh;
+    }
+
+    .orb-wrap{
+        width:280px;
+        height:280px;
+    }
+
+    .center-brand h1{
         font-size:75px;
     }
 
-    .home-subtitle{
-        font-size:12px;
-
-        max-width:320px;
+    .flying-word{
+        font-size:65px;
     }
 
-    .statement{
-        min-height:75vh;
-
-        padding:
-            12vh 7vw;
+    .word1{
+        top:14%;
+        left:-20%;
     }
 
-    .statement-text{
-        font-size:60px;
+    .word2{
+        top:30%;
+        right:-20%;
     }
 
-    .visual{
-        height:65vh;
+    .word3{
+        bottom:25%;
+        left:-15%;
     }
 
-    .explore{
-        padding:14vh 5vw;
+    .word4{
+        bottom:12%;
+        right:-15%;
     }
 
-    .explore-top{
-        display:block;
-
-        margin-bottom:60px;
+    .service-object{
+        width:170px;
+        height:105px;
     }
 
-    .explore-top p{
-        margin-top:30px;
-    }
-
-    .explore-grid{
-        grid-template-columns:1fr;
-    }
-
-    .explore-card,
-    .explore-card:nth-child(2),
-    .explore-card:nth-child(3){
-        margin-top:0;
-
-        min-height:430px;
-    }
-
-    .services{
-        padding:14vh 0;
-    }
-
-    .services-title{
-        padding:0 5vw;
-    }
-
-    .service-pill{
-        font-size:28px;
-
-        padding:
-            20px 28px;
-    }
-
-    .instagram{
-        grid-template-columns:1fr;
-
-        padding:
-            14vh 5vw;
-    }
-
-    .instagram-copy h2{
-        font-size:75px;
-    }
-
-    .phone-area{
-        margin-top:50px;
+    .service-object strong{
+        font-size:22px;
     }
 
     .phone{
-        width:280px;
-
-        height:570px;
-    }
-
-    .digital{
-        min-height:75vh;
-    }
-
-    .digital h2{
-        font-size:70px;
+        width:230px;
+        height:470px;
     }
 
     .contact{
-        display:block;
-
-        padding:
-            13vh 5vw;
+        padding:80px 25px;
     }
 
-    .contact-title h2{
-        font-size:80px;
-    }
-
-    .contact-form{
-        margin-top:70px;
+    .contact-inner{
+        grid-template-columns:1fr;
     }
 
     .footer-bottom{
         display:block;
 
-        line-height:2.5;
-    }
-
-    .footer-big{
-        font-size:95px;
+        line-height:3;
     }
 
 }
@@ -1427,20 +1150,19 @@ footer{
 </head>
 
 
-<body class="locked">
+<body class="lock">
 
 
-<!-- ======================================================
+<!-- =========================================================
      INTRO
-====================================================== -->
+========================================================= -->
 
-<div class="intro" id="intro">
+<div id="intro">
 
     <div class="intro-light"></div>
 
-    <div class="intro-circle"></div>
-
-    <div class="intro-circle two"></div>
+    <div class="intro-ring"></div>
+    <div class="intro-ring r2"></div>
 
     <div class="intro-content">
 
@@ -1448,7 +1170,7 @@ footer{
             Willkommen bei
         </div>
 
-        <div class="intro-title">
+        <div class="intro-logo">
             SOCIAL<span>CLIP</span>
         </div>
 
@@ -1463,24 +1185,20 @@ footer{
 </div>
 
 
-<!-- ======================================================
-     NAVIGATION
-====================================================== -->
+<!-- =========================================================
+     NAV
+========================================================= -->
 
-<nav class="nav">
+<nav>
 
-    <a href="#home" class="nav-logo">
+    <a href="#top" class="logo">
         SOCIAL<span>CLIP</span>
     </a>
 
-    <div class="nav-menu">
+    <div class="nav-right">
 
-        <a href="#explore">
-            Entdecken
-        </a>
-
-        <a href="#instagram">
-            Instagram
+        <a href="#experience">
+            Experience
         </a>
 
         <a href="#contact">
@@ -1492,346 +1210,179 @@ footer{
 </nav>
 
 
-<!-- ======================================================
-     HOME
-====================================================== -->
+<!-- =========================================================
+     EXPERIENCE
+========================================================= -->
 
-<section class="home" id="home">
+<section
+    class="experience"
+    id="experience"
+>
 
-    <div class="home-bg" id="homeBg"></div>
 
-    <div class="home-center reveal">
+    <div class="world">
 
-        <div class="home-small">
-            Art · Media · Digital
-        </div>
+        <div
+            class="world-bg"
+            id="worldBg"
+        ></div>
 
-        <h1 class="home-title">
 
-            Make<br>
-            <em>it visible.</em>
+        <div
+            class="grid"
+            id="grid"
+        ></div>
 
-        </h1>
 
-        <p class="home-subtitle">
+        <!-- ZENTRALES OBJEKT -->
 
-            Ideen. Design. Digital.
-            Social Media. Technologie.
-
-            Alles, was aus einer Idee
-            etwas Sichtbares macht.
-
-        </p>
-
-    </div>
-
-    <div class="home-scroll">
-        Scroll
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     STATEMENT
-====================================================== -->
-
-<section class="statement">
-
-    <div class="statement-text reveal">
-
-        Du hast<br>
-        eine Idee.<br><br>
-
-        Wir machen sie<br>
-
-        <span class="gold">
-            sichtbar.
-        </span>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     VISUAL
-====================================================== -->
-
-<section class="visual">
-
-    <img
-        id="visualImage"
-        src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=85"
-        alt="Creative Space"
-    >
-
-    <div class="visual-overlay"></div>
-
-    <div class="visual-text reveal">
-
-        <small>
-            SocialClip
-        </small>
-
-        <h2>
-            Create<br>
-            something<br>
-            different.
-        </h2>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     ENTDECKEN
-====================================================== -->
-
-<section class="explore" id="explore">
-
-    <div class="explore-top reveal">
-
-        <h2>
-            Was<br>
-            steckt<br>
-            dahinter?
-        </h2>
-
-        <p>
-
-            Nicht alles muss in eine
-            Schublade passen.
-
-            SocialClip verbindet kreative,
-            digitale und technische Ideen.
-
-        </p>
-
-    </div>
-
-
-    <div class="explore-grid">
-
-
-        <div class="explore-card reveal">
-
-            <div class="explore-card-bg"></div>
-
-            <div class="explore-card-content">
-
-                <div class="explore-card-number">
-                    01 · CREATE
-                </div>
-
-                <h3>
-                    Design
-                </h3>
-
-                <p>
-                    Logos, Flyer, Webseiten,
-                    Visitenkarten, Speisekarten
-                    und visuelle Konzepte.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="explore-card reveal">
-
-            <div class="explore-card-bg"></div>
-
-            <div class="explore-card-content">
-
-                <div class="explore-card-number">
-                    02 · CONNECT
-                </div>
-
-                <h3>
-                    Social
-                </h3>
-
-                <p>
-                    Instagram, TikTok,
-                    Social Media und
-                    Content mit einer Idee dahinter.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="explore-card reveal">
-
-            <div class="explore-card-bg"></div>
-
-            <div class="explore-card-content">
-
-                <div class="explore-card-number">
-                    03 · BUILD
-                </div>
-
-                <h3>
-                    Digital
-                </h3>
-
-                <p>
-                    Programmierung, Webseiten,
-                    digitale Systeme und
-                    individuelle Lösungen.
-                </p>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     SERVICES
-====================================================== -->
-
-<section class="services">
-
-    <div class="services-title reveal">
-
-        <small>
-            Mehr als nur Design
-        </small>
-
-        <h2>
-            Alles,
-            was deine
-            Idee braucht.
-        </h2>
-
-    </div>
-
-
-    <div class="service-track">
-
-        <div class="service-pill">
-            Webseiten
-        </div>
-
-        <div class="service-pill">
-            Programmierung
-        </div>
-
-        <div class="service-pill">
-            Logo Design
-        </div>
-
-        <div class="service-pill">
-            Flyer
-        </div>
-
-        <div class="service-pill">
-            Visitenkarten
-        </div>
-
-        <div class="service-pill">
-            Online Marketing
-        </div>
-
-        <div class="service-pill">
-            Social Media
-        </div>
-
-        <div class="service-pill">
-            TikTok Marketing
-        </div>
-
-        <div class="service-pill">
-            Neukundengewinnung
-        </div>
-
-        <div class="service-pill">
-            Strategie
-        </div>
-
-        <div class="service-pill">
-            Foto & Video
-        </div>
-
-        <div class="service-pill">
-            Lebenslauf
-        </div>
-
-        <div class="service-pill">
-            Speisekarten
-        </div>
-
-        <div class="service-pill">
-            Virtueller Assistent
-        </div>
-
-        <div class="service-pill">
-            Social Media Assistant
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     INSTAGRAM
-====================================================== -->
-
-<section class="instagram" id="instagram">
-
-
-    <div class="instagram-copy reveal">
-
-        <small>
-            @socialclip.art
-        </small>
-
-        <h2>
-
-            Scroll.<br>
-            Stop.<br>
-
-            <span>
-                Remember.
-            </span>
-
-        </h2>
-
-        <p>
-
-            Dein Social Media Auftritt
-            soll nicht einfach nur existieren.
-
-            Er soll auffallen.
-
-        </p>
-
-        <a
-            href="https://www.instagram.com/socialclip.art/"
-            target="_blank"
-            rel="noopener"
-            class="instagram-link"
+        <div
+            class="orb-wrap"
+            id="orbWrap"
         >
-            Instagram öffnen ↗
-        </a>
 
-    </div>
+            <div class="orb"></div>
+
+        </div>
 
 
-    <div class="phone-area reveal">
+        <!-- BRAND -->
 
-        <div class="phone">
+        <div
+            class="center-brand"
+            id="brand"
+        >
 
+            <small>
+                Willkommen bei
+            </small>
+
+            <h1>
+                SOCIAL<span>CLIP</span>
+            </h1>
+
+        </div>
+
+
+        <!-- WÖRTER -->
+
+        <div
+            class="flying-word word1"
+            id="word1"
+        >
+            CREATE<span>.</span>
+        </div>
+
+        <div
+            class="flying-word word2"
+            id="word2"
+        >
+            DIGITAL<span>.</span>
+        </div>
+
+        <div
+            class="flying-word word3"
+            id="word3"
+        >
+            SOCIAL<span>.</span>
+        </div>
+
+        <div
+            class="flying-word word4"
+            id="word4"
+        >
+            GROW<span>.</span>
+        </div>
+
+
+        <!-- SERVICES -->
+
+        <div
+            class="service-object so1"
+            id="so1"
+        >
+
+            <div>
+
+                <strong>
+                    Webseiten
+                </strong>
+
+                <small>
+                    Design · Entwicklung
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="service-object so2"
+            id="so2"
+        >
+
+            <div>
+
+                <strong>
+                    Social Media
+                </strong>
+
+                <small>
+                    Instagram · TikTok
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="service-object so3"
+            id="so3"
+        >
+
+            <div>
+
+                <strong>
+                    Design
+                </strong>
+
+                <small>
+                    Logo · Flyer · Brand
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="service-object so4"
+            id="so4"
+        >
+
+            <div>
+
+                <strong>
+                    Wachstum
+                </strong>
+
+                <small>
+                    Strategie · Kunden
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- INSTAGRAM PHONE -->
+
+        <div
+            class="phone"
+            id="phone"
+        >
 
             <div class="phone-top">
 
@@ -1840,73 +1391,32 @@ footer{
                 </span>
 
                 <span>
-                    ♡　✈
+                    @socialclip.art
                 </span>
 
             </div>
 
+            <div class="feed">
 
-            <div class="phone-feed">
+                <div class="feed-image i1"></div>
 
-                <div class="phone-feed-track">
+                <div class="feed-text">
 
+                    <strong>
+                        socialclip.art
+                    </strong>
 
-                    <div class="post">
+                    <br><br>
 
-                        <div class="post-user">
-                            socialclip.art
-                        </div>
+                    Ideen werden sichtbar.
 
-                        <div class="post-image a"></div>
+                </div>
 
-                        <div class="post-icons">
-                            ♡　○　↗
-                        </div>
+                <div class="feed-image i2"></div>
 
-                        <div class="post-text">
-                            Ideen werden sichtbar.
-                        </div>
+                <div class="feed-text">
 
-                    </div>
-
-
-                    <div class="post">
-
-                        <div class="post-user">
-                            socialclip.art
-                        </div>
-
-                        <div class="post-image b"></div>
-
-                        <div class="post-icons">
-                            ♡　○　↗
-                        </div>
-
-                        <div class="post-text">
-                            Design. Digital. Social.
-                        </div>
-
-                    </div>
-
-
-                    <div class="post">
-
-                        <div class="post-user">
-                            socialclip.art
-                        </div>
-
-                        <div class="post-image c"></div>
-
-                        <div class="post-icons">
-                            ♡　○　↗
-                        </div>
-
-                        <div class="post-text">
-                            Make it visible.
-                        </div>
-
-                    </div>
-
+                    Design · Media · Digital
 
                 </div>
 
@@ -1914,107 +1424,132 @@ footer{
 
         </div>
 
+
+        <!-- FINAL -->
+
+        <div
+            class="final"
+            id="final"
+        >
+
+            <div>
+
+                <h2>
+
+                    Mach deine<br>
+
+                    <span>
+                        Idee sichtbar.
+                    </span>
+
+                </h2>
+
+                <p>
+                    SocialClip · Art · Media · Digital
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="scroll-indicator"
+            id="scrollIndicator"
+        >
+            Scroll
+        </div>
+
     </div>
 
 </section>
 
 
-<!-- ======================================================
-     DIGITAL
-====================================================== -->
-
-<section class="digital">
-
-    <div class="digital-content reveal">
-
-        <h2>
-
-            From<br>
-            <span>idea</span><br>
-            to<br>
-            impact.
-
-        </h2>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
+<!-- =========================================================
      KONTAKT
-====================================================== -->
+========================================================= -->
 
-<section class="contact" id="contact">
+<section
+    class="contact"
+    id="contact"
+>
+
+    <div class="contact-inner">
+
+        <div>
+
+            <h2>
+
+                Was darf<br>
+
+                <span>
+                    entstehen?
+                </span>
+
+            </h2>
+
+            <p>
+
+                Du hast eine Idee,
+                ein Projekt oder einfach
+                eine Frage?
+
+                Schreib uns.
+
+            </p>
+
+        </div>
 
 
-    <div class="contact-title reveal">
+        <form
+            action="https://formspree.io/f/xwlvlqwg"
+            method="POST"
+        >
 
-        <small>
-            Dein nächster Schritt
-        </small>
+            <input
+                type="text"
+                name="name"
+                placeholder="Dein Name"
+                required
+            >
 
-        <h2>
+            <input
+                type="email"
+                name="email"
+                placeholder="Deine E-Mail"
+                required
+            >
 
-            Lass uns<br>
-            <span>
-                etwas
-            </span><br>
-            machen.
+            <input
+                type="text"
+                name="subject"
+                placeholder="Projekt / Idee"
+            >
 
-        </h2>
+            <textarea
+                name="message"
+                placeholder="Erzähl uns davon..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Projekt starten
+            </button>
+
+        </form>
 
     </div>
-
-
-    <form
-        class="contact-form reveal"
-        action="https://formspree.io/f/xwlvlqwg"
-        method="POST"
-    >
-
-        <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            required
-        >
-
-        <input
-            type="email"
-            name="email"
-            placeholder="E-Mail"
-            required
-        >
-
-        <input
-            type="text"
-            name="subject"
-            placeholder="Worum geht es?"
-        >
-
-        <textarea
-            name="message"
-            placeholder="Erzähl mir deine Idee..."
-            required
-        ></textarea>
-
-        <button type="submit">
-            Nachricht senden
-        </button>
-
-    </form>
 
 </section>
 
 
-<!-- ======================================================
+<!-- =========================================================
      FOOTER
-====================================================== -->
+========================================================= -->
 
 <footer>
 
-    <div class="footer-big">
+    <div class="footer-logo">
 
         SOCIAL<span>CLIP</span>
 
@@ -2031,161 +1566,450 @@ footer{
             Erlangen · Deutschland
         </span>
 
+        <a
+            href="https://www.instagram.com/socialclip.art/"
+            target="_blank"
+        >
+            Instagram ↗
+        </a>
+
     </div>
 
 </footer>
 
 
-<!-- ======================================================
-     JAVASCRIPT
-====================================================== -->
-
 <script>
 
-
-/* ======================================================
+/* =========================================================
    INTRO
-====================================================== */
-
-const intro =
-    document.getElementById("intro");
-
+========================================================= */
 
 setTimeout(() => {
 
-    intro.classList.add("hide");
+    document
+        .getElementById("intro")
+        .classList.add("out");
 
-    document.body.classList.remove("locked");
+    document.body.classList.remove("lock");
 
-}, 5200);
-
-
-/* ======================================================
-   REVEAL
-====================================================== */
-
-const reveals =
-    document.querySelectorAll(".reveal");
+},5200);
 
 
-const revealObserver =
-    new IntersectionObserver(
+/* =========================================================
+   ELEMENTE
+========================================================= */
 
-        entries => {
+const experience =
+    document.getElementById("experience");
 
-            entries.forEach(entry => {
+const orb =
+    document.getElementById("orbWrap");
 
-                if(entry.isIntersecting){
+const brand =
+    document.getElementById("brand");
 
-                    entry.target.classList.add(
-                        "visible"
-                    );
+const grid =
+    document.getElementById("grid");
 
-                    revealObserver.unobserve(
-                        entry.target
-                    );
+const bg =
+    document.getElementById("worldBg");
 
-                }
+const word1 =
+    document.getElementById("word1");
 
-            });
+const word2 =
+    document.getElementById("word2");
 
-        },
+const word3 =
+    document.getElementById("word3");
 
-        {
-            threshold:.12
-        }
+const word4 =
+    document.getElementById("word4");
 
-    );
+const so1 =
+    document.getElementById("so1");
 
+const so2 =
+    document.getElementById("so2");
 
-reveals.forEach(
-    element =>
-        revealObserver.observe(element)
-);
+const so3 =
+    document.getElementById("so3");
 
-
-/* ======================================================
-   HOME PARALLAX
-====================================================== */
-
-const homeBg =
-    document.getElementById("homeBg");
-
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        const y =
-            window.scrollY;
-
-        if(
-            y <
-            window.innerHeight
-        ){
-
-            homeBg.style.transform =
-                `scale(1.08)
-                 translateY(${y*.12}px)`;
-
-        }
-
-    }
-);
-
-
-/* ======================================================
-   VISUAL PARALLAX
-====================================================== */
-
-const visualImage =
-    document.getElementById(
-        "visualImage"
-    );
-
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        const rect =
-            visualImage.getBoundingClientRect();
-
-        const h =
-            window.innerHeight;
-
-        if(
-            rect.top < h &&
-            rect.bottom > 0
-        ){
-
-            const progress =
-                (h - rect.top) /
-                (h + rect.height);
-
-            visualImage.style.transform =
-                `translateY(${(progress-.5)*-100}px)`;
-
-        }
-
-    }
-);
-
-
-/* ======================================================
-   PHONE 3D
-====================================================== */
+const so4 =
+    document.getElementById("so4");
 
 const phone =
-    document.querySelector(".phone");
+    document.getElementById("phone");
 
+const finalScene =
+    document.getElementById("final");
+
+const scrollIndicator =
+    document.getElementById(
+        "scrollIndicator"
+    );
+
+
+/* =========================================================
+   SCROLL EXPERIENCE
+========================================================= */
+
+function clamp(
+    value,
+    min,
+    max
+){
+
+    return Math.max(
+        min,
+        Math.min(max,value)
+    );
+
+}
+
+
+function updateExperience(){
+
+    const rect =
+        experience.getBoundingClientRect();
+
+    const total =
+        experience.offsetHeight -
+        window.innerHeight;
+
+    let progress =
+        -rect.top / total;
+
+    progress =
+        clamp(progress,0,1);
+
+
+    /* --------------------------------
+       ORB
+    -------------------------------- */
+
+    let scale =
+        1 +
+        progress * 1.8;
+
+    let rotate =
+        progress * 700;
+
+    let x =
+        Math.sin(progress * Math.PI * 3)
+        * 180;
+
+    let y =
+        Math.cos(progress * Math.PI * 2)
+        * 80;
+
+    orb.style.transform =
+        `
+        translate(${x}px,${y}px)
+        scale(${scale})
+        rotate(${rotate}deg)
+        `;
+
+
+    /* --------------------------------
+       BRAND
+    -------------------------------- */
+
+    let brandOpacity =
+        clamp(
+            1 - progress * 5,
+            0,
+            1
+        );
+
+    brand.style.opacity =
+        brandOpacity;
+
+    brand.style.transform =
+        `
+        scale(${1 + progress * 1.5})
+        translateY(${progress * -100}px)
+        `;
+
+
+    /* --------------------------------
+       GRID
+    -------------------------------- */
+
+    grid.style.transform =
+        `
+        perspective(700px)
+        rotateX(65deg)
+        translateY(${30 - progress * 80}%)
+        scale(${1 + progress})
+        `;
+
+
+    /* --------------------------------
+       BACKGROUND
+    -------------------------------- */
+
+    bg.style.transform =
+        `
+        scale(${1 + progress*.5})
+        rotate(${progress*8}deg)
+        `;
+
+
+    /* --------------------------------
+       WORD 1
+       CREATE
+    -------------------------------- */
+
+    let p1 =
+        clamp(
+            (progress-.08)/.15,
+            0,
+            1
+        );
+
+    word1.style.opacity =
+        p1;
+
+    word1.style.transform =
+        `
+        translate(${p1*250}px,
+                   ${p1*-120}px)
+        rotate(${-p1*10}deg)
+        `;
+
+
+    /* --------------------------------
+       WORD 2
+       DIGITAL
+    -------------------------------- */
+
+    let p2 =
+        clamp(
+            (progress-.22)/.15,
+            0,
+            1
+        );
+
+    word2.style.opacity =
+        p2;
+
+    word2.style.transform =
+        `
+        translate(${-p2*260}px,
+                   ${p2*120}px)
+        rotate(${p2*10}deg)
+        `;
+
+
+    /* --------------------------------
+       WORD 3
+       SOCIAL
+    -------------------------------- */
+
+    let p3 =
+        clamp(
+            (progress-.38)/.15,
+            0,
+            1
+        );
+
+    word3.style.opacity =
+        p3;
+
+    word3.style.transform =
+        `
+        translate(${p3*280}px,
+                   ${p3*-100}px)
+        rotate(${p3*8}deg)
+        `;
+
+
+    /* --------------------------------
+       WORD 4
+       GROW
+    -------------------------------- */
+
+    let p4 =
+        clamp(
+            (progress-.52)/.15,
+            0,
+            1
+        );
+
+    word4.style.opacity =
+        p4;
+
+    word4.style.transform =
+        `
+        translate(${-p4*300}px,
+                   ${p4*100}px)
+        rotate(${-p4*8}deg)
+        `;
+
+
+    /* --------------------------------
+       SERVICE 1
+    -------------------------------- */
+
+    animateService(
+        so1,
+        progress,
+        .14,
+        .27,
+        -100,
+        50
+    );
+
+
+    /* --------------------------------
+       SERVICE 2
+    -------------------------------- */
+
+    animateService(
+        so2,
+        progress,
+        .27,
+        .40,
+        100,
+        -60
+    );
+
+
+    /* --------------------------------
+       SERVICE 3
+    -------------------------------- */
+
+    animateService(
+        so3,
+        progress,
+        .43,
+        .56,
+        -120,
+        -40
+    );
+
+
+    /* --------------------------------
+       SERVICE 4
+    -------------------------------- */
+
+    animateService(
+        so4,
+        progress,
+        .56,
+        .69,
+        120,
+        50
+    );
+
+
+    /* --------------------------------
+       PHONE
+    -------------------------------- */
+
+    let phoneP =
+        clamp(
+            (progress-.65)/.17,
+            0,
+            1
+        );
+
+    phone.style.opacity =
+        phoneP;
+
+    phone.style.transform =
+        `
+        translateY(${150-phoneP*150}px)
+        rotateY(${-30+phoneP*30}deg)
+        rotateX(${8-phoneP*8}deg)
+        scale(${.8+phoneP*.2})
+        `;
+
+
+    /* --------------------------------
+       FINAL
+    -------------------------------- */
+
+    let finalP =
+        clamp(
+            (progress-.82)/.15,
+            0,
+            1
+        );
+
+    finalScene.style.opacity =
+        finalP;
+
+    finalScene.style.transform =
+        `
+        scale(${.8+finalP*.2})
+        `;
+
+
+    /* --------------------------------
+       SCROLL TEXT
+    -------------------------------- */
+
+    scrollIndicator.style.opacity =
+        progress < .05 ? "1" : "0";
+
+}
+
+
+function animateService(
+    element,
+    progress,
+    start,
+    end,
+    x,
+    y
+){
+
+    let p =
+        clamp(
+            (progress-start)/
+            (end-start),
+            0,
+            1
+        );
+
+    element.style.opacity =
+        p;
+
+    element.style.transform =
+        `
+        translate(${x*(1-p)}px,
+                   ${y*(1-p)}px)
+        scale(${.6+.4*p})
+        `;
+
+}
+
+
+/* =========================================================
+   SCROLL EVENT
+========================================================= */
+
+window.addEventListener(
+    "scroll",
+    updateExperience,
+    {
+        passive:true
+    }
+);
+
+
+/* =========================================================
+   MOUSE MOVEMENT
+========================================================= */
 
 document.addEventListener(
     "mousemove",
     event => {
 
         if(
-            window.innerWidth <= 800
+            window.innerWidth < 800
         ){
             return;
         }
@@ -2195,90 +2019,58 @@ document.addEventListener(
                 event.clientX /
                 window.innerWidth
                 -.5
-            ) * 15;
+            );
 
         const y =
             (
                 event.clientY /
                 window.innerHeight
                 -.5
-            ) * 10;
+            );
 
-        phone.style.transform =
-            `rotateY(${-12+x}deg)
-             rotateX(${3-y}deg)`;
+        orb.style.marginLeft =
+            `${x*20}px`;
 
-    }
-);
+        orb.style.marginTop =
+            `${y*20}px`;
 
+        bg.style.marginLeft =
+            `${x*10}px`;
 
-/* ======================================================
-   SERVICE TRACK PAUSE
-====================================================== */
-
-const track =
-    document.querySelector(
-        ".service-track"
-    );
-
-
-track.addEventListener(
-    "mouseenter",
-    () => {
-
-        track.style.animationPlayState =
-            "paused";
+        bg.style.marginTop =
+            `${y*10}px`;
 
     }
 );
 
 
-track.addEventListener(
-    "mouseleave",
-    () => {
+/* =========================================================
+   TOUCH / MOBILE
+========================================================= */
 
-        track.style.animationPlayState =
-            "running";
+let touchStart = 0;
 
+window.addEventListener(
+    "touchstart",
+    e => {
+
+        touchStart =
+            e.touches[0].clientY;
+
+    },
+    {
+        passive:true
     }
 );
 
 
-/* ======================================================
-   SMOOTH LINKS
-====================================================== */
+/* =========================================================
+   START
+========================================================= */
 
-document.querySelectorAll(
-    'a[href^="#"]'
-).forEach(link => {
-
-    link.addEventListener(
-        "click",
-        event => {
-
-            const target =
-                document.querySelector(
-                    link.getAttribute("href")
-                );
-
-            if(target){
-
-                event.preventDefault();
-
-                target.scrollIntoView({
-                    behavior:"smooth"
-                });
-
-            }
-
-        }
-    );
-
-});
-
+updateExperience();
 
 </script>
-
 
 </body>
 </html>
