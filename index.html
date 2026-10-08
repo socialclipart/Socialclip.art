@@ -2382,6 +2382,16 @@ footer strong{
     gap:55px;
   }
 }
+
+/* Schmale Handys (z. B. 360px Android): Uhr weg,
+   sonst stößt der Schriftzug an den Button */
+
+@media(max-width:380px){
+
+  .clock{
+    display:none;
+  }
+}
 </style>
 </head>
 
@@ -3008,26 +3018,26 @@ footer strong{
 
     <div class="contact-item">
       <span>TELEFON</span>
-      <a href="tel:+49000000000"><span class="fill">0176 46188101</span></a>
+      <a href="tel:+4917646188101">0176 46188101</a>
     </div>
 
     <div class="contact-item">
       <span>E-MAIL</span>
-      <a href="mailto:socialclip.art@gmail.com"><span class="fill">[info@socialclip.art]</span></a>
+      <a href="mailto:socialclip.art@gmail.com">socialclip.art@gmail.com</a>
     </div>
 
+    <!-- Kein Studio: nur der Ort, die volle Anschrift steht im Impressum -->
     <div class="contact-item">
-      <span>STUDIO</span>
+      <span>STANDORT</span>
       <p>
-        <span class="fill">Donato-Polli Str</span><br>
-        <span class="fill">91056</span> Erlangen
+        91056 Erlangen
       </p>
     </div>
 
     <div class="contact-item">
-      <span>ÖFFNUNGSZEITEN</span>
+      <span>TERMINE</span>
       <p>
-        <span class="fill">[Mo bis Fr, 09:00 bis 18:00]</span>
+        Nach Vereinbarung
       </p>
     </div>
 
