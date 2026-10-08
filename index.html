@@ -8,14 +8,285 @@
 
   <meta
     name="description"
-    content="SocialClip Art & Media – Websites, Social Media, Design, Foto, Video und digitale Lösungen."
+    content="SocialClip Art & Media – Webdesign, Social Media, Design, Foto, Video und digitale Lösungen aus Erlangen."
   >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #080808;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(8, 8, 8, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid #222;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #777;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: #aaa;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 7% 80px;
+      background:
+        radial-gradient(circle at 80% 20%, #252525 0%, transparent 35%),
+        radial-gradient(circle at 20% 80%, #181818 0%, transparent 35%),
+        #080808;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 12px;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(50px, 9vw, 110px);
+      line-height: 0.95;
+      letter-spacing: -5px;
+      margin-bottom: 35px;
+    }
+
+    h1 span {
+      color: #777;
+    }
+
+    .hero-text {
+      max-width: 650px;
+      color: #aaa;
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 26px;
+      background: #fff;
+      color: #000;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      background: #ddd;
+    }
+
+    section {
+      padding: 120px 7%;
+      border-top: 1px solid #1c1c1c;
+    }
+
+    .section-label {
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(38px, 6vw, 70px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 60px;
+      max-width: 900px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: #252525;
+      border: 1px solid #252525;
+    }
+
+    .service {
+      background: #080808;
+      padding: 45px;
+      min-height: 230px;
+      transition: 0.3s;
+    }
+
+    .service:hover {
+      background: #111;
+    }
+
+    .service-number {
+      color: #555;
+      font-size: 13px;
+      margin-bottom: 35px;
+    }
+
+    .service h3 {
+      font-size: 27px;
+      margin-bottom: 12px;
+    }
+
+    .service p {
+      color: #888;
+      max-width: 450px;
+    }
+
+    .about {
+      max-width: 950px;
+    }
+
+    .about p {
+      color: #aaa;
+      font-size: 24px;
+      line-height: 1.6;
+    }
+
+    .contact {
+      text-align: center;
+      padding-top: 160px;
+      padding-bottom: 160px;
+    }
+
+    .contact h2 {
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 30px;
+    }
+
+    .contact-text {
+      color: #888;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      font-size: 18px;
+    }
+
+    footer {
+      padding: 30px 7%;
+      border-top: 1px solid #222;
+      display: flex;
+      justify-content: space-between;
+      color: #555;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 18px 5%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 130px 5% 80px;
+      }
+
+      h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero-text {
+        font-size: 17px;
+      }
+
+      section {
+        padding: 90px 5%;
+      }
+
+      h2 {
+        margin-bottom: 40px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .service {
+        padding: 32px;
+        min-height: auto;
+      }
+
+      .about p {
+        font-size: 19px;
+      }
+
+      .contact {
+        padding-top: 100px;
+        padding-bottom: 100px;
+      }
+
+      footer {
+        padding: 25px 5%;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
   <header>
-    <a href="/">SocialClip</a>
+    <a href="#" class="logo">
+      SocialClip<span>.</span>
+    </a>
 
     <nav>
       <a href="#leistungen">Leistungen</a>
@@ -27,109 +298,152 @@
 
   <main>
 
-    <section>
-      <p>SocialClip Art & Media · Erlangen</p>
+    <section class="hero">
 
-      <h1>
-        Digitale Ideen.<br>
-        Sichtbar gemacht.
-      </h1>
+      <div class="hero-content">
 
-      <p>
-        Wir entwickeln Websites, Social-Media-Inhalte,
-        Designs, Foto- und Videolösungen für Unternehmen.
-      </p>
+        <div class="eyebrow">
+          SocialClip Art & Media · Erlangen
+        </div>
 
-      <a href="#kontakt">
-        Projekt starten
-      </a>
+        <h1>
+          Digitale Ideen.<br>
+          <span>Sichtbar gemacht.</span>
+        </h1>
+
+        <p class="hero-text">
+          Wir entwickeln moderne digitale Auftritte,
+          kreative Inhalte und Lösungen für Unternehmen,
+          Marken und Menschen mit Visionen.
+        </p>
+
+        <a href="#kontakt" class="button">
+          Projekt starten →
+        </a>
+
+      </div>
+
     </section>
 
 
     <section id="leistungen">
 
-      <p>Was wir machen</p>
+      <div class="section-label">
+        Was wir machen
+      </div>
 
       <h2>
-        Dein digitaler Auftritt.
+        Alles für deinen digitalen Auftritt.
       </h2>
 
-      <article>
-        <h3>Websites</h3>
-        <p>
-          Moderne Websites und Landingpages
-          für einen professionellen Auftritt.
-        </p>
-      </article>
+      <div class="services">
 
-      <article>
-        <h3>Social Media</h3>
-        <p>
-          Content und Social Media für mehr
-          Sichtbarkeit und Reichweite.
-        </p>
-      </article>
+        <article class="service">
+          <div class="service-number">01</div>
+          <h3>Websites</h3>
+          <p>
+            Moderne Websites, Landingpages und digitale
+            Auftritte, die professionell wirken.
+          </p>
+        </article>
 
-      <article>
-        <h3>Design & Branding</h3>
-        <p>
-          Logos, Branding und Designs,
-          die zu deiner Marke passen.
-        </p>
-      </article>
+        <article class="service">
+          <div class="service-number">02</div>
+          <h3>Social Media</h3>
+          <p>
+            Kreativer Content und Social-Media-Lösungen
+            für mehr Sichtbarkeit und Reichweite.
+          </p>
+        </article>
 
-      <article>
-        <h3>Foto & Video</h3>
-        <p>
-          Visuelle Inhalte für Website,
-          Social Media und dein Unternehmen.
-        </p>
-      </article>
+        <article class="service">
+          <div class="service-number">03</div>
+          <h3>Design & Branding</h3>
+          <p>
+            Logos, visuelle Identitäten und Designs,
+            die deiner Marke ein klares Gesicht geben.
+          </p>
+        </article>
 
-      <article>
-        <h3>KI & Automatisierung</h3>
-        <p>
-          Digitale Lösungen, die Prozesse
-          einfacher und effizienter machen.
-        </p>
-      </article>
+        <article class="service">
+          <div class="service-number">04</div>
+          <h3>Foto & Video</h3>
+          <p>
+            Visuelle Inhalte für Websites, Social Media,
+            Unternehmen und digitale Projekte.
+          </p>
+        </article>
+
+        <article class="service">
+          <div class="service-number">05</div>
+          <h3>KI & Automatisierung</h3>
+          <p>
+            Moderne digitale Lösungen, die Prozesse
+            vereinfachen und neue Möglichkeiten schaffen.
+          </p>
+        </article>
+
+        <article class="service">
+          <div class="service-number">06</div>
+          <h3>Digitale Projekte</h3>
+          <p>
+            Von der ersten Idee bis zur fertigen Umsetzung –
+            gemeinsam entwickeln wir etwas Besonderes.
+          </p>
+        </article>
+
+      </div>
 
     </section>
 
 
     <section id="ueber-uns">
 
-      <p>Über SocialClip</p>
+      <div class="section-label">
+        Über SocialClip
+      </div>
 
-      <h2>
-        Kreativität trifft digitale Lösungen.
-      </h2>
+      <div class="about">
 
-      <p>
-        SocialClip Art & Media verbindet Design,
-        digitale Medien und moderne Technologien,
-        um Unternehmen professionell sichtbar zu machen.
-      </p>
+        <h2>
+          Kreativität trifft Technologie.
+        </h2>
+
+        <p>
+          SocialClip Art & Media verbindet Design,
+          digitale Medien und moderne Technologien,
+          um Unternehmen professionell sichtbar zu machen.
+          Dabei geht es nicht nur darum, etwas Schönes
+          zu erstellen – sondern darum, etwas zu schaffen,
+          das funktioniert.
+        </p>
+
+      </div>
 
     </section>
 
 
-    <section id="kontakt">
+    <section id="kontakt" class="contact">
 
-      <p>Kontakt</p>
+      <div class="section-label">
+        Kontakt
+      </div>
 
       <h2>
-        Lass uns dein Projekt besprechen.
+        Lass uns etwas starten.
       </h2>
 
-      <p>
-        Du hast eine Idee oder möchtest erstmal
-        herausfinden, was für dein Unternehmen
-        sinnvoll ist?
+      <p class="contact-text">
+        Du hast eine Idee, ein Projekt oder möchtest
+        einfach wissen, was digital für dein Unternehmen
+        möglich ist?
       </p>
 
-      <a href="mailto:alin.mircea04@gmail.com">
-        Kontakt aufnehmen
+      <a
+        href="mailto:alin.mircea04@gmail.com"
+        class="button"
+      >
+        Kontakt aufnehmen →
       </a>
 
     </section>
@@ -138,7 +452,15 @@
 
 
   <footer>
-    <p>© SocialClip Art & Media · Erlangen</p>
+
+    <div>
+      © 2026 SocialClip Art & Media
+    </div>
+
+    <div>
+      Erlangen · Deutschland
+    </div>
+
   </footer>
 
 </body>
