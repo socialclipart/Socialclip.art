@@ -6,4121 +6,3048 @@
 
 <title>SocialClip — Art · Media · Digital</title>
 
+<meta name="description" content="SocialClip — Webseiten, Design, Social Media, Video, Marketing und digitale Lösungen.">
+<meta name="theme-color" content="#050505">
+
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    background:#050505;
-    color:#fff;
-    font-family:Arial,Helvetica,sans-serif;
-    overflow-x:hidden;
+  background:#050505;
+  color:#f5f5f5;
+  font-family:Arial, Helvetica, sans-serif;
+  overflow-x:hidden;
 }
 
 body.locked{
-    overflow:hidden;
-}
-
-button,
-a{
-    font:inherit;
+  overflow:hidden;
 }
 
 a{
-    color:inherit;
-    text-decoration:none;
+  color:inherit;
+  text-decoration:none;
 }
 
-/* =====================================================
+button{
+  font:inherit;
+}
+
+img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+:root{
+  --bg:#050505;
+  --white:#f5f5f5;
+  --muted:#9b9b9b;
+  --line:rgba(255,255,255,.12);
+  --soft:rgba(255,255,255,.05);
+}
+
+::selection{
+  background:#fff;
+  color:#000;
+}
+
+
+/* =========================================================
    INTRO
-===================================================== */
+========================================================= */
 
 #intro{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    background:#030303;
-    overflow:hidden;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    transition:
-        opacity 1.8s ease,
-        visibility 1.8s ease;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#050505;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:opacity 1.4s ease, visibility 1.4s ease;
 }
 
-#intro.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
+#intro.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
 }
 
-.intro-background{
-    position:absolute;
-    inset:-20%;
-
-    background:
-        radial-gradient(
-            circle at 50% 48%,
-            rgba(255,255,255,.14),
-            transparent 18%
-        ),
-        radial-gradient(
-            circle at 15% 80%,
-            rgba(120,150,255,.06),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(255,255,255,.05),
-            transparent 30%
-        );
-
-    animation:introBreath 8s ease-in-out infinite;
+.intro-bg{
+  position:absolute;
+  inset:-20%;
+  background:
+    radial-gradient(circle at 50% 45%,
+      rgba(255,255,255,.12),
+      transparent 20%),
+    radial-gradient(circle at 20% 70%,
+      rgba(255,255,255,.06),
+      transparent 25%),
+    radial-gradient(circle at 80% 20%,
+      rgba(255,255,255,.05),
+      transparent 25%);
+  filter:blur(30px);
+  animation:introBreath 8s ease-in-out infinite;
 }
 
 @keyframes introBreath{
-    0%,100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.12);
-    }
-}
-
-.intro-noise{
-    position:absolute;
-    inset:0;
-    opacity:.035;
-    pointer-events:none;
-
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255,255,255,.15) 0px,
-            transparent 1px,
-            transparent 4px
-        );
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
 }
 
 .intro-grid{
-    position:absolute;
-    width:140vw;
-    height:140vh;
-    left:-20vw;
-    top:-15vh;
-
-    opacity:.08;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.15) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.15) 1px,
-            transparent 1px
-        );
-
-    background-size:90px 90px;
-
-    transform:
-        perspective(900px)
-        rotateX(67deg)
-        translateY(25%);
-
-    animation:gridMove 14s linear infinite;
+  position:absolute;
+  inset:-50%;
+  opacity:.12;
+  background-image:
+    linear-gradient(rgba(255,255,255,.15) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.15) 1px,transparent 1px);
+  background-size:80px 80px;
+  transform:perspective(500px) rotateX(65deg);
+  animation:gridMove 18s linear infinite;
 }
 
 @keyframes gridMove{
-    from{
-        transform:
-            perspective(900px)
-            rotateX(67deg)
-            translateY(25%);
-    }
-
-    to{
-        transform:
-            perspective(900px)
-            rotateX(67deg)
-            translateY(8%);
-    }
+  from{transform:perspective(500px) rotateX(65deg) translateY(0)}
+  to{transform:perspective(500px) rotateX(65deg) translateY(80px)}
 }
 
 .intro-light{
-    position:absolute;
-
-    width:70vw;
-    height:70vw;
-    max-width:800px;
-    max-height:800px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.18),
-            rgba(255,255,255,.04) 28%,
-            transparent 65%
-        );
-
-    filter:blur(25px);
-
-    animation:lightPulse 6s ease-in-out infinite;
+  position:absolute;
+  width:55vw;
+  height:55vw;
+  max-width:800px;
+  max-height:800px;
+  border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(255,255,255,.14),
+    rgba(255,255,255,.03) 35%,
+    transparent 70%);
+  filter:blur(25px);
+  animation:lightFloat 7s ease-in-out infinite;
 }
 
-@keyframes lightPulse{
-
-    0%,100%{
-        transform:scale(.85);
-        opacity:.45;
-    }
-
-    50%{
-        transform:scale(1.12);
-        opacity:.8;
-    }
-}
-
-.intro-ring{
-    position:absolute;
-
-    width:55vw;
-    height:55vw;
-
-    max-width:700px;
-    max-height:700px;
-
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:50%;
-
-    animation:ringRotate 18s linear infinite;
-}
-
-.intro-ring::before,
-.intro-ring::after{
-    content:"";
-
-    position:absolute;
-    inset:10%;
-
-    border:1px solid rgba(255,255,255,.06);
-    border-radius:50%;
-}
-
-.intro-ring::after{
-    inset:25%;
-}
-
-@keyframes ringRotate{
-    from{
-        transform:rotate(0deg) scale(1);
-    }
-
-    to{
-        transform:rotate(360deg) scale(1.04);
-    }
+@keyframes lightFloat{
+  0%,100%{transform:translate(-5%,-3%) scale(1)}
+  50%{transform:translate(5%,4%) scale(1.12)}
 }
 
 .intro-lines{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
+  position:absolute;
+  inset:0;
+  pointer-events:none;
 }
 
-.intro-lines span{
-    position:absolute;
-
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.35),
-            transparent
-        );
-
-    opacity:0;
-
-    animation:introLine 7s ease-in-out infinite;
+.intro-lines::before,
+.intro-lines::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:1px;
+  height:100%;
+  background:linear-gradient(
+    transparent,
+    rgba(255,255,255,.18),
+    transparent
+  );
 }
 
-.intro-lines span:nth-child(1){
-    width:70%;
-    top:28%;
-    left:-10%;
+.intro-lines::after{
+  transform:rotate(90deg);
 }
-
-.intro-lines span:nth-child(2){
-    width:55%;
-    top:67%;
-    right:-10%;
-    animation-delay:1.5s;
-}
-
-.intro-lines span:nth-child(3){
-    width:80%;
-    top:45%;
-    left:10%;
-    animation-delay:3s;
-}
-
-@keyframes introLine{
-
-    0%,100%{
-        opacity:0;
-        transform:translateX(-20%);
-    }
-
-    25%,70%{
-        opacity:.7;
-    }
-
-    50%{
-        transform:translateX(25%);
-    }
-}
-
-.intro-particles{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-}
-
-.intro-particle{
-    position:absolute;
-
-    width:2px;
-    height:2px;
-
-    border-radius:50%;
-    background:#fff;
-
-    opacity:.3;
-
-    animation:
-        particleFloat
-        8s
-        ease-in-out
-        infinite;
-}
-
-@keyframes particleFloat{
-
-    0%,100%{
-        transform:translateY(0) scale(1);
-        opacity:.15;
-    }
-
-    50%{
-        transform:translateY(-50px) scale(1.8);
-        opacity:.7;
-    }
-}
-
-/* =====================================================
-   INTRO CONTENT
-===================================================== */
 
 .intro-content{
-    position:relative;
-
-    z-index:10;
-
-    width:min(900px,90vw);
-
-    text-align:center;
-
-    pointer-events:none;
+  position:relative;
+  z-index:10;
+  width:min(1000px,90%);
+  text-align:center;
 }
 
-.intro-stage{
-    min-height:280px;
+.intro-step{
+  min-height:280px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 1s ease, transform 1s ease;
+}
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+.intro-step.active{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .intro-small{
-    font-size:11px;
-
-    letter-spacing:.45em;
-    text-transform:uppercase;
-
-    color:rgba(255,255,255,.45);
-
-    margin-bottom:30px;
-
-    opacity:0;
-
-    animation:
-        fadeUp
-        1.5s
-        ease
-        forwards;
+  font-size:12px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:#888;
+  margin-bottom:30px;
 }
 
-.intro-title{
-    font-size:
-        clamp(
-            38px,
-            7vw,
-            100px
-        );
-
-    font-weight:300;
-
-    letter-spacing:-.05em;
-
-    line-height:.95;
-
-    opacity:0;
+.intro-step h1{
+  font-size:clamp(42px,8vw,110px);
+  line-height:.9;
+  letter-spacing:-.06em;
+  font-weight:600;
 }
 
-.intro-title.show{
-    animation:
-        fadeUp
-        1.4s
-        ease
-        forwards;
+.intro-step p{
+  margin-top:25px;
+  color:#aaa;
+  font-size:clamp(15px,2vw,20px);
+  line-height:1.6;
 }
-
-.intro-subtitle{
-    margin-top:25px;
-
-    font-size:
-        clamp(
-            17px,
-            2vw,
-            25px
-        );
-
-    line-height:1.5;
-
-    color:rgba(255,255,255,.68);
-
-    opacity:0;
-}
-
-.intro-subtitle.show{
-    animation:
-        fadeUp
-        .9s
-        ease
-        forwards;
-}
-
-@keyframes fadeUp{
-
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* =====================================================
-   INTRO WORDS
-===================================================== */
 
 .intro-word{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%)
-        scale(.85);
-
-    width:100vw;
-
-    text-align:center;
-
-    font-size:
-        clamp(
-            70px,
-            16vw,
-            230px
-        );
-
-    font-weight:700;
-
-    letter-spacing:-.08em;
-
-    white-space:nowrap;
-
-    opacity:0;
-
-    pointer-events:none;
+  font-size:clamp(55px,13vw,180px);
+  line-height:.8;
+  letter-spacing:-.08em;
+  font-weight:700;
+  opacity:.9;
 }
-
-.intro-word.show{
-
-    animation:
-        wordAppear
-        2.4s
-        ease
-        forwards;
-}
-
-@keyframes wordAppear{
-
-    0%{
-        opacity:0;
-
-        transform:
-            translate(-50%,-50%)
-            scale(.85);
-
-        filter:blur(18px);
-    }
-
-    30%{
-        opacity:.95;
-        filter:blur(0);
-    }
-
-    75%{
-        opacity:.95;
-    }
-
-    100%{
-        opacity:0;
-
-        transform:
-            translate(-50%,-50%)
-            scale(1.18);
-
-        filter:blur(8px);
-    }
-}
-
-/* =====================================================
-   BRAND
-===================================================== */
 
 .intro-brand{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    text-align:center;
-
-    opacity:0;
-
-    pointer-events:none;
+  font-size:clamp(50px,11vw,150px);
+  font-weight:700;
+  letter-spacing:-.08em;
 }
 
-.intro-brand.show{
-
-    animation:
-        brandIn
-        2.2s
-        ease
-        forwards;
+.intro-subbrand{
+  margin-top:20px;
+  letter-spacing:.45em;
+  font-size:12px;
+  color:#999;
 }
-
-.intro-brand-name{
-
-    font-size:
-        clamp(
-            55px,
-            12vw,
-            170px
-        );
-
-    font-weight:700;
-
-    letter-spacing:-.08em;
-}
-
-.intro-brand-sub{
-
-    margin-top:15px;
-
-    font-size:12px;
-
-    letter-spacing:.55em;
-
-    color:rgba(255,255,255,.55);
-}
-
-@keyframes brandIn{
-
-    0%{
-        opacity:0;
-
-        transform:
-            translate(-50%,-50%)
-            scale(.8);
-
-        filter:blur(20px);
-    }
-
-    35%{
-        opacity:1;
-        filter:blur(0);
-    }
-
-    75%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-
-        transform:
-            translate(-50%,-50%)
-            scale(1.08);
-    }
-}
-
-/* =====================================================
-   FINAL INTRO
-===================================================== */
 
 .intro-final{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:100;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    opacity:0;
-
-    pointer-events:none;
+  pointer-events:none;
 }
 
-.intro-final.show{
-
-    animation:
-        finalAppear
-        1.5s
-        ease
-        forwards;
-
-    pointer-events:auto;
-}
-
-.intro-final h2{
-
-    font-size:
-        clamp(
-            38px,
-            6vw,
-            82px
-        );
-
-    font-weight:300;
-
-    letter-spacing:-.04em;
-}
-
-.intro-final p{
-
-    margin-top:20px;
-
-    color:rgba(255,255,255,.65);
-
-    font-size:18px;
-
-    line-height:1.7;
+.intro-final.active{
+  pointer-events:auto;
 }
 
 .enter-button{
-
-    position:relative;
-
-    z-index:1000;
-
-    margin-top:42px;
-
-    padding:18px 32px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.3);
-
-    background:
-        rgba(255,255,255,.05);
-
-    color:#fff;
-
-    cursor:pointer;
-
-    pointer-events:auto;
-
-    letter-spacing:.16em;
-
-    font-size:11px;
-
-    transition:
-        .5s ease;
-
-    backdrop-filter:blur(15px);
-
-    -webkit-backdrop-filter:blur(15px);
+  margin-top:35px;
+  padding:18px 30px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  border-radius:100px;
+  cursor:pointer;
+  letter-spacing:.16em;
+  font-size:12px;
+  transition:.4s ease;
+  backdrop-filter:blur(15px);
 }
 
 .enter-button:hover{
-
-    background:#fff;
-
-    color:#000;
-
-    transform:
-        translateY(-4px)
-        scale(1.03);
-
-    box-shadow:
-        0 20px 80px
-        rgba(255,255,255,.18);
+  background:#fff;
+  color:#000;
+  transform:translateY(-3px);
 }
 
-@keyframes finalAppear{
 
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* =====================================================
-   TRANSITION
-===================================================== */
+/* =========================================================
+   CINEMATIC TRANSITION
+========================================================= */
 
 #transition{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:11000;
-
-    background:#fff;
-
-    color:#000;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    pointer-events:none;
+  position:fixed;
+  inset:0;
+  z-index:9998;
+  background:#050505;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:opacity .8s ease;
 }
 
 #transition.active{
-
-    visibility:visible;
-
-    animation:
-        transitionScene
-        2.6s
-        ease
-        forwards;
+  opacity:1;
+  visibility:visible;
 }
 
-.transition-logo{
-
-    font-size:
-        clamp(
-            50px,
-            12vw,
-            160px
-        );
-
-    font-weight:700;
-
-    letter-spacing:-.08em;
+.transition-content{
+  text-align:center;
+  transform:scale(.8);
+  transition:transform 2s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes transitionScene{
-
-    0%{
-        opacity:0;
-        transform:scale(.8);
-    }
-
-    15%{
-        opacity:1;
-        transform:scale(1);
-    }
-
-    55%{
-        opacity:1;
-        transform:scale(1.15);
-    }
-
-    100%{
-        opacity:0;
-        transform:scale(3);
-    }
+#transition.active .transition-content{
+  transform:scale(1.5);
 }
 
-/* =====================================================
-   CURSOR
-===================================================== */
-
-.cursor-light{
-
-    position:fixed;
-
-    width:300px;
-    height:300px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.08),
-            transparent 65%
-        );
-
-    transform:
-        translate(-50%,-50%);
-
-    pointer-events:none;
-
-    z-index:20;
-
-    mix-blend-mode:screen;
+.transition-brand{
+  font-size:clamp(50px,12vw,170px);
+  font-weight:700;
+  letter-spacing:-.08em;
 }
 
-/* =====================================================
-   NAV
-===================================================== */
+.transition-line{
+  width:0;
+  height:1px;
+  background:#fff;
+  margin:25px auto;
+  transition:width 1.5s ease;
+}
+
+#transition.active .transition-line{
+  width:60vw;
+}
+
+.transition-sub{
+  color:#888;
+  letter-spacing:.4em;
+  font-size:11px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 .nav{
-
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-
-    z-index:100;
-
-    padding:
-        25px
-        4vw;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    mix-blend-mode:difference;
+  position:fixed;
+  z-index:1000;
+  top:0;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:25px 40px;
+  mix-blend-mode:difference;
 }
 
 .logo{
-
-    font-size:18px;
-
-    font-weight:700;
-
-    letter-spacing:-.04em;
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-.04em;
 }
 
-.nav-links{
-
-    display:flex;
-
-    gap:30px;
-
-    font-size:11px;
-
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
+.nav-right{
+  display:flex;
+  gap:30px;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
 }
 
-.nav-links a{
-
-    opacity:.7;
-
-    transition:.3s;
+.nav-right a{
+  opacity:.7;
+  transition:.3s;
 }
 
-.nav-links a:hover{
-    opacity:1;
+.nav-right a:hover{
+  opacity:1;
 }
 
-/* =====================================================
+
+/* =========================================================
    HERO
-===================================================== */
+========================================================= */
 
 .hero{
-
-    min-height:100vh;
-
-    position:relative;
-
-    display:flex;
-
-    align-items:center;
-
-    overflow:hidden;
-
-    padding:
-        0
-        5vw;
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:120px 5vw;
 }
 
 .hero-bg{
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at 75% 50%,
-            rgba(255,255,255,.09),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 20% 80%,
-            rgba(100,130,255,.06),
-            transparent 30%
-        );
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(255,255,255,.08),
+      transparent 35%);
 }
 
 .hero-grid{
-
-    position:absolute;
-
-    inset:0;
-
-    opacity:.08;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.12) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.12) 1px,
-            transparent 1px
-        );
-
-    background-size:100px 100px;
-
-    transform:
-        perspective(800px)
-        rotateX(60deg)
-        scale(1.5);
-
-    transform-origin:center bottom;
+  position:absolute;
+  inset:-20%;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:100px 100px;
+  transform:perspective(700px) rotateX(60deg);
+  opacity:.5;
 }
 
 .hero-content{
-
-    position:relative;
-
-    z-index:2;
-
-    max-width:1200px;
+  position:relative;
+  z-index:2;
+  width:100%;
 }
 
-.hero-kicker{
-
-    font-size:11px;
-
-    letter-spacing:.4em;
-
-    color:rgba(255,255,255,.45);
-
-    margin-bottom:35px;
+.hero-label{
+  color:#888;
+  font-size:12px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  margin-bottom:30px;
 }
 
 .hero-title{
-
-    font-size:
-        clamp(
-            70px,
-            14vw,
-            190px
-        );
-
-    line-height:.78;
-
-    letter-spacing:-.08em;
-
-    font-weight:700;
+  font-size:clamp(65px,13vw,190px);
+  line-height:.78;
+  letter-spacing:-.08em;
+  font-weight:700;
 }
 
 .hero-title span{
-    display:block;
+  display:block;
 }
 
-.hero-title .outline{
+.hero-title span:nth-child(2){
+  margin-left:8vw;
+}
 
-    color:transparent;
+.hero-title span:nth-child(3){
+  margin-left:16vw;
+}
 
-    -webkit-text-stroke:
-        1px
-        rgba(255,255,255,.5);
+.hero-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-top:80px;
 }
 
 .hero-description{
-
-    margin-top:55px;
-
-    max-width:500px;
-
-    color:rgba(255,255,255,.58);
-
-    font-size:17px;
-
-    line-height:1.7;
+  max-width:420px;
+  color:#999;
+  line-height:1.7;
+  font-size:15px;
 }
 
-/* =====================================================
+.scroll-note{
+  font-size:10px;
+  letter-spacing:.3em;
+  color:#777;
+}
+
+
+/* =========================================================
    MARQUEE
-===================================================== */
+========================================================= */
 
 .marquee{
-
-    overflow:hidden;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.1);
-
-    padding:24px 0;
-
-    white-space:nowrap;
+  overflow:hidden;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:22px 0;
+  white-space:nowrap;
 }
 
 .marquee-track{
-
-    display:inline-block;
-
-    animation:
-        marquee
-        25s
-        linear
-        infinite;
+  display:inline-block;
+  animation:marquee 25s linear infinite;
 }
 
 .marquee span{
-
-    font-size:
-        clamp(
-            30px,
-            5vw,
-            70px
-        );
-
-    font-weight:300;
-
-    letter-spacing:-.04em;
-
-    margin-right:70px;
-}
-
-.marquee .dot{
-
-    font-size:18px;
-
-    opacity:.4;
+  font-size:clamp(30px,5vw,80px);
+  letter-spacing:-.05em;
+  margin-right:60px;
 }
 
 @keyframes marquee{
-
-    from{
-        transform:translateX(0);
-    }
-
-    to{
-        transform:translateX(-50%);
-    }
+  to{transform:translateX(-50%)}
 }
 
-/* =====================================================
+
+/* =========================================================
    SCENES
-===================================================== */
+========================================================= */
 
 .scene{
-
-    min-height:110vh;
-
-    position:relative;
-
-    overflow:hidden;
-
-    display:flex;
-
-    align-items:center;
-
-    padding:
-        12vw
-        6vw;
+  min-height:100vh;
+  position:relative;
+  padding:150px 7vw;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
 }
 
 .scene-number{
-
-    position:absolute;
-
-    top:40px;
-    left:6vw;
-
-    font-size:11px;
-
-    letter-spacing:.3em;
-
-    color:rgba(255,255,255,.3);
+  position:absolute;
+  top:40px;
+  left:7vw;
+  color:#666;
+  font-size:11px;
+  letter-spacing:.25em;
 }
 
 .scene-content{
-
-    width:100%;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr
-        1fr;
-
-    gap:8vw;
-
-    align-items:center;
-}
-
-.scene-title{
-
-    font-size:
-        clamp(
-            70px,
-            12vw,
-            170px
-        );
-
-    line-height:.78;
-
-    letter-spacing:-.08em;
-}
-
-.scene-title span{
-    display:block;
-}
-
-.scene-title .thin{
-    font-weight:300;
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10vw;
+  align-items:center;
 }
 
 .scene-label{
-
-    font-size:11px;
-
-    letter-spacing:.35em;
-
-    color:rgba(255,255,255,.4);
-
-    margin-bottom:30px;
+  color:#777;
+  font-size:11px;
+  letter-spacing:.35em;
+  margin-bottom:30px;
 }
 
-.scene-text{
-
-    max-width:520px;
-
-    margin-top:35px;
+.scene h2{
+  font-size:clamp(55px,9vw,130px);
+  line-height:.82;
+  letter-spacing:-.07em;
 }
 
-.scene-text p{
-
-    font-size:20px;
-
-    line-height:1.7;
-
-    color:rgba(255,255,255,.6);
+.scene h2 span{
+  color:#777;
 }
 
-/* =====================================================
-   VISUAL
-===================================================== */
-
-.visual{
-
-    position:relative;
-
-    height:500px;
-
-    overflow:hidden;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    background:#080808;
+.scene-copy{
+  margin-top:40px;
+  color:#999;
+  line-height:1.8;
+  max-width:450px;
 }
 
-.visual::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(255,255,255,.12),
-            transparent 45%
-        );
+.scene-visual{
+  min-height:500px;
+  position:relative;
 }
 
-.visual-lines{
 
-    position:absolute;
+/* CREATE */
 
-    inset:0;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.08) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.08) 1px,
-            transparent 1px
-        );
-
-    background-size:55px 55px;
-
-    transform:
-        perspective(700px)
-        rotateX(60deg)
-        scale(1.5);
-
-    transform-origin:center bottom;
+.create-visual{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  transform:rotate(-4deg);
 }
 
-.visual-word{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    font-size:
-        clamp(
-            70px,
-            11vw,
-            150px
-        );
-
-    font-weight:700;
-
-    letter-spacing:-.08em;
-
-    white-space:nowrap;
+.design-card{
+  height:260px;
+  border:1px solid var(--line);
+  background:
+    linear-gradient(135deg,
+      rgba(255,255,255,.12),
+      rgba(255,255,255,.02));
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:.5s;
 }
 
-.visual-small{
-
-    position:absolute;
-
-    bottom:25px;
-    left:25px;
-
-    font-size:10px;
-
-    letter-spacing:.3em;
-
-    color:rgba(255,255,255,.45);
+.design-card:hover{
+  transform:translateY(-15px) rotate(2deg);
+  background:rgba(255,255,255,.08);
 }
 
-/* =====================================================
-   BROWSER
-===================================================== */
+.design-card strong{
+  font-size:30px;
+}
+
+.design-card small{
+  color:#888;
+}
+
+
+/* DIGITAL */
 
 .browser{
-
-    position:absolute;
-
-    width:78%;
-    height:70%;
-
-    left:11%;
-    top:15%;
-
-    background:#111;
-
-    border:
-        1px solid
-        rgba(255,255,255,.2);
-
-    box-shadow:
-        0 40px 100px
-        rgba(0,0,0,.7);
-
-    transform:
-        perspective(900px)
-        rotateY(-8deg)
-        rotateX(4deg);
-
-    transition:1s ease;
-}
-
-.browser:hover{
-
-    transform:
-        perspective(900px)
-        rotateY(0)
-        rotateX(0)
-        translateY(-10px);
+  position:absolute;
+  width:100%;
+  height:420px;
+  border:1px solid var(--line);
+  background:#090909;
+  box-shadow:0 40px 100px rgba(0,0,0,.6);
+  transform:rotateY(-12deg) rotateX(5deg);
 }
 
 .browser-top{
-
-    height:34px;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.1);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    padding:0 12px;
+  height:40px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:0 15px;
 }
 
-.browser-dot{
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#555;
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#555;
 }
 
 .browser-body{
-    padding:25px;
+  height:calc(100% - 40px);
+  display:grid;
+  grid-template-columns:35% 65%;
 }
 
-.browser-heading{
+.browser-sidebar{
+  border-right:1px solid var(--line);
+  padding:30px;
+}
 
-    font-size:45px;
+.browser-sidebar div{
+  height:8px;
+  width:70%;
+  background:#222;
+  margin-bottom:15px;
+}
 
-    letter-spacing:-.06em;
+.browser-main{
+  padding:40px;
+}
 
-    margin-bottom:25px;
+.browser-title{
+  width:70%;
+  height:50px;
+  background:#222;
+  margin-bottom:30px;
 }
 
 .browser-line{
-
-    height:5px;
-
-    background:
-        rgba(255,255,255,.12);
-
-    margin-bottom:12px;
+  width:100%;
+  height:8px;
+  background:#171717;
+  margin-bottom:12px;
 }
 
-.browser-line:nth-child(2){
-    width:75%;
-}
 
-.browser-line:nth-child(3){
-    width:55%;
-}
+/* MEDIA */
 
-.browser-boxes{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:10px;
-
-    margin-top:35px;
-}
-
-.browser-box{
-
-    height:100px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-}
-
-/* =====================================================
-   MEDIA
-===================================================== */
-
-.media-wall{
-
-    position:relative;
-
-    height:550px;
+.media-visual{
+  position:relative;
+  height:500px;
 }
 
 .media-frame{
-
-    position:absolute;
-
-    width:52%;
-    height:65%;
-
-    border:
-        1px solid
-        rgba(255,255,255,.2);
-
-    background:#101010;
-
-    overflow:hidden;
-}
-
-.media-frame::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        linear-gradient(
-            135deg,
-            transparent 40%,
-            rgba(255,255,255,.12),
-            transparent 60%
-        );
-
-    animation:
-        sweep
-        4s
-        ease-in-out
-        infinite;
-}
-
-@keyframes sweep{
-
-    from{
-        transform:translateX(-100%);
-    }
-
-    to{
-        transform:translateX(100%);
-    }
+  position:absolute;
+  width:55%;
+  height:65%;
+  border:1px solid var(--line);
+  overflow:hidden;
+  background:#111;
 }
 
 .media-frame:nth-child(1){
-
-    left:0;
-    top:10%;
-
-    transform:rotate(-6deg);
+  left:0;
+  top:20%;
+  transform:rotate(-7deg);
 }
 
 .media-frame:nth-child(2){
-
-    right:2%;
-    top:0;
-
-    transform:rotate(5deg);
+  right:0;
+  top:0;
+  transform:rotate(6deg);
 }
 
 .media-frame:nth-child(3){
-
-    left:22%;
-    bottom:0;
-
-    transform:rotate(-2deg);
+  left:22%;
+  bottom:0;
+  transform:rotate(-2deg);
 }
 
-.media-inner{
-
-    width:100%;
-    height:100%;
-
-    background:
-        radial-gradient(
-            circle at 40% 40%,
-            rgba(255,255,255,.2),
-            transparent 25%
-        ),
-        linear-gradient(
-            135deg,
-            #181818,
-            #050505
-        );
+.media-frame::after{
+  content:"VIDEO / PHOTO";
+  position:absolute;
+  bottom:15px;
+  left:15px;
+  font-size:9px;
+  letter-spacing:.2em;
 }
 
-/* =====================================================
-   SOCIAL
-===================================================== */
 
-.social-stage{
-
-    position:relative;
-
-    height:600px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-}
+/* SOCIAL */
 
 .phone{
-
-    position:relative;
-
-    width:280px;
-    height:560px;
-
-    border:
-        8px solid
-        #171717;
-
-    border-radius:38px;
-
-    background:#050505;
-
-    box-shadow:
-        0 40px 100px
-        rgba(0,0,0,.8),
-        0 0 80px
-        rgba(255,255,255,.05);
-
-    overflow:hidden;
-
-    transform:rotate(-7deg);
-
-    transition:1s ease;
+  width:280px;
+  height:560px;
+  border:7px solid #181818;
+  border-radius:38px;
+  background:#050505;
+  margin:auto;
+  overflow:hidden;
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.8),
+    0 0 80px rgba(255,255,255,.04);
 }
 
-.phone:hover{
-
-    transform:
-        rotate(0deg)
-        translateY(-20px);
+.phone-top{
+  height:35px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.phone-notch{
-
-    position:absolute;
-
-    top:8px;
-    left:50%;
-
-    transform:
-        translateX(-50%);
-
-    width:90px;
-    height:22px;
-
-    background:#111;
-
-    border-radius:20px;
-
-    z-index:4;
+.phone-camera{
+  width:90px;
+  height:20px;
+  background:#000;
+  border-radius:20px;
 }
 
 .feed{
-
-    position:absolute;
-
-    inset:0;
-
-    padding-top:50px;
-
-    overflow:hidden;
+  height:100%;
+  overflow:hidden;
 }
 
-.feed-header{
-
-    height:45px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 15px;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.1);
+.feed-item{
+  height:250px;
+  border-top:1px solid #222;
+  position:relative;
+  background:
+    radial-gradient(circle at 30% 30%,#333,transparent 40%),
+    linear-gradient(135deg,#111,#050505);
 }
 
-.feed-logo{
-
-    font-weight:700;
-
-    font-size:13px;
+.feed-item span{
+  position:absolute;
+  bottom:15px;
+  left:15px;
+  font-size:11px;
+  letter-spacing:.15em;
 }
 
-.feed-post{
 
-    height:210px;
+/* GROW */
 
-    margin:12px;
-
-    background:
-        radial-gradient(
-            circle at 50% 35%,
-            rgba(255,255,255,.22),
-            transparent 25%
-        ),
-        linear-gradient(
-            135deg,
-            #202020,
-            #070707
-        );
-
-    position:relative;
-
-    overflow:hidden;
+.grow-visual{
+  position:relative;
+  height:500px;
 }
 
-.feed-post::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:180%;
-
-    height:2px;
-
-    background:
-        rgba(255,255,255,.3);
-
-    transform:rotate(-35deg);
-
-    left:-50%;
-    top:50%;
-
-    animation:
-        feedLight
-        3s
-        linear
-        infinite;
+.grow-line{
+  position:absolute;
+  left:5%;
+  right:5%;
+  bottom:20%;
+  height:2px;
+  background:#222;
 }
 
-@keyframes feedLight{
-
-    from{
-        transform:
-            rotate(-35deg)
-            translateX(-50%);
-    }
-
-    to{
-        transform:
-            rotate(-35deg)
-            translateX(50%);
-    }
+.grow-arrow{
+  position:absolute;
+  left:10%;
+  bottom:22%;
+  width:75%;
+  height:3px;
+  background:#fff;
+  transform-origin:left;
+  transform:rotate(-27deg);
 }
 
-.feed-caption{
-
-    padding:
-        0 14px
-        20px;
-
-    font-size:11px;
-
-    color:
-        rgba(255,255,255,.5);
+.grow-arrow::after{
+  content:"";
+  position:absolute;
+  right:-5px;
+  top:-8px;
+  width:18px;
+  height:18px;
+  border-top:3px solid #fff;
+  border-right:3px solid #fff;
+  transform:rotate(45deg);
 }
 
-/* =====================================================
-   GROWTH
-===================================================== */
-
-.growth-visual{
-
-    height:500px;
-
-    position:relative;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.15);
-
-    border-left:
-        1px solid
-        rgba(255,255,255,.15);
+.grow-word{
+  position:absolute;
+  right:0;
+  top:20%;
+  font-size:clamp(70px,12vw,180px);
+  letter-spacing:-.1em;
+  color:#181818;
 }
 
-.growth-line{
 
-    position:absolute;
-
-    width:90%;
-    height:4px;
-
-    left:5%;
-    bottom:18%;
-
-    background:#fff;
-
-    transform-origin:left;
-
-    transform:rotate(-25deg);
-
-    box-shadow:
-        0 0 30px
-        rgba(255,255,255,.25);
-}
-
-.growth-arrow{
-
-    position:absolute;
-
-    right:4%;
-    top:3%;
-
-    font-size:70px;
-
-    transform:rotate(-25deg);
-}
-
-.growth-point{
-
-    position:absolute;
-
-    width:9px;
-    height:9px;
-
-    background:#fff;
-
-    border-radius:50%;
-
-    box-shadow:
-        0 0 25px
-        rgba(255,255,255,.5);
-}
-
-.growth-point:nth-child(1){
-    left:20%;
-    bottom:34%;
-}
-
-.growth-point:nth-child(2){
-    left:42%;
-    bottom:47%;
-}
-
-.growth-point:nth-child(3){
-    left:62%;
-    bottom:61%;
-}
-
-.growth-point:nth-child(4){
-    left:80%;
-    bottom:77%;
-}
-
-/* =====================================================
+/* =========================================================
    SERVICES
-===================================================== */
+========================================================= */
 
 .services{
-
-    position:relative;
-
-    padding:
-        15vw
-        5vw;
-
-    overflow:hidden;
+  position:relative;
+  padding:180px 7vw;
+  border-top:1px solid var(--line);
 }
 
-.services-head{
-
-    margin-bottom:100px;
+.services-header{
+  margin-bottom:100px;
 }
 
-.services-head small{
-
-    font-size:11px;
-
-    letter-spacing:.35em;
-
-    color:
-        rgba(255,255,255,.35);
+.services-header h2{
+  font-size:clamp(60px,11vw,160px);
+  letter-spacing:-.08em;
+  line-height:.8;
 }
 
-.services-head h2{
-
-    margin-top:25px;
-
-    font-size:
-        clamp(
-            60px,
-            12vw,
-            160px
-        );
-
-    line-height:.8;
-
-    letter-spacing:-.08em;
+.services-header p{
+  margin-top:30px;
+  color:#777;
+  max-width:500px;
+  line-height:1.7;
 }
 
 .service-list{
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.15);
+  border-top:1px solid var(--line);
 }
 
 .service{
-
-    position:relative;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    min-height:110px;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.12);
-
-    padding:
-        20px
-        10px;
-
-    overflow:hidden;
-
-    transition:.5s ease;
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:32px 10px;
+  border-bottom:1px solid var(--line);
+  transition:.4s ease;
+  overflow:hidden;
 }
 
 .service::before{
-
-    content:"";
-
-    position:absolute;
-
-    left:-100%;
-    top:0;
-
-    width:100%;
-    height:100%;
-
-    background:#fff;
-
-    transition:.5s ease;
-
-    z-index:0;
+  content:"";
+  position:absolute;
+  inset:0;
+  background:#fff;
+  transform:translateX(-101%);
+  transition:.5s ease;
+  z-index:0;
 }
 
 .service:hover::before{
-    left:0;
+  transform:translateX(0);
 }
 
 .service:hover{
-
-    color:#000;
-
-    padding-left:30px;
+  color:#000;
+  padding-left:30px;
 }
 
-.service-name{
-
-    position:relative;
-
-    z-index:1;
-
-    font-size:
-        clamp(
-            25px,
-            4vw,
-            55px
-        );
-
-    font-weight:300;
-
-    letter-spacing:-.04em;
+.service > *{
+  position:relative;
+  z-index:1;
 }
 
 .service-number{
+  width:50px;
+  color:#777;
+  font-size:11px;
+}
 
-    position:relative;
-
-    z-index:1;
-
-    font-size:11px;
-
-    letter-spacing:.2em;
-
-    opacity:.5;
+.service-name{
+  flex:1;
+  font-size:clamp(22px,4vw,55px);
+  letter-spacing:-.05em;
 }
 
 .service-arrow{
-
-    position:relative;
-
-    z-index:1;
-
-    font-size:22px;
+  font-size:25px;
 }
 
-/* =====================================================
+
+/* =========================================================
    MANIFESTO
-===================================================== */
+========================================================= */
 
 .manifesto{
-
-    min-height:90vh;
-
-    padding:
-        15vw
-        8vw;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    position:relative;
-
-    overflow:hidden;
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  padding:120px 7vw;
+  position:relative;
+  overflow:hidden;
 }
 
 .manifesto::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:600px;
-    height:600px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.08),
-            transparent 65%
-        );
-
-    filter:blur(30px);
+  content:"";
+  position:absolute;
+  width:60vw;
+  height:60vw;
+  border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(255,255,255,.06),
+    transparent 70%);
+  left:20%;
+  top:10%;
+  filter:blur(30px);
 }
 
-.manifesto-content{
-
-    position:relative;
-
-    max-width:1100px;
+.manifesto h2{
+  position:relative;
+  font-size:clamp(50px,10vw,150px);
+  letter-spacing:-.08em;
+  line-height:.85;
+  max-width:1200px;
 }
 
-.manifesto p{
-
-    font-size:
-        clamp(
-            35px,
-            6vw,
-            85px
-        );
-
-    line-height:1;
-
-    letter-spacing:-.06em;
-
-    font-weight:300;
+.manifesto h2 span{
+  color:#666;
 }
 
-.manifesto strong{
-    font-weight:700;
+
+/* =========================================================
+   VISUAL WORLD
+========================================================= */
+
+.visual-world{
+  position:relative;
+  padding:180px 5vw 0;
+  overflow:hidden;
 }
 
-/* =====================================================
+.visual-intro{
+  max-width:1000px;
+  margin:0 auto 130px;
+}
+
+.eyebrow{
+  display:block;
+  color:#777;
+  font-size:10px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  margin-bottom:30px;
+}
+
+.visual-intro h2{
+  font-size:clamp(50px,9vw,140px);
+  line-height:.82;
+  letter-spacing:-.08em;
+}
+
+.visual-intro h2 span{
+  color:#666;
+  display:block;
+}
+
+.visual-intro p{
+  max-width:550px;
+  margin-top:45px;
+  color:#888;
+  line-height:1.8;
+  font-size:16px;
+}
+
+
+/* GALLERY */
+
+.visual-gallery{
+  min-height:1100px;
+  position:relative;
+  max-width:1400px;
+  margin:auto;
+}
+
+.visual-image{
+  position:absolute;
+  overflow:hidden;
+  background:#111;
+  border:1px solid rgba(255,255,255,.12);
+  transition:transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.visual-image img{
+  filter:grayscale(100%);
+  transition:transform 1s ease, filter 1s ease;
+}
+
+.visual-image:hover img{
+  transform:scale(1.08);
+  filter:grayscale(0%);
+}
+
+.visual-image span{
+  position:absolute;
+  left:20px;
+  bottom:20px;
+  font-size:10px;
+  letter-spacing:.25em;
+  background:rgba(0,0,0,.6);
+  padding:8px 12px;
+  backdrop-filter:blur(10px);
+}
+
+.image-one{
+  width:42%;
+  height:420px;
+  left:2%;
+  top:0;
+  transform:rotate(-4deg);
+}
+
+.image-two{
+  width:32%;
+  height:330px;
+  right:4%;
+  top:80px;
+  transform:rotate(5deg);
+}
+
+.image-three{
+  width:35%;
+  height:390px;
+  left:30%;
+  top:330px;
+  transform:rotate(2deg);
+  z-index:2;
+}
+
+.image-four{
+  width:28%;
+  height:330px;
+  left:3%;
+  top:650px;
+  transform:rotate(6deg);
+}
+
+.image-five{
+  width:40%;
+  height:370px;
+  right:2%;
+  top:690px;
+  transform:rotate(-4deg);
+}
+
+
+/* STATEMENT */
+
+.visual-statement{
+  max-width:1100px;
+  margin:100px auto 200px;
+  text-align:center;
+}
+
+.visual-statement > p{
+  font-size:clamp(25px,4vw,55px);
+  line-height:1.05;
+  letter-spacing:-.04em;
+}
+
+.visual-brand{
+  margin-top:100px;
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+  color:#777;
+  font-size:11px;
+  letter-spacing:.2em;
+}
+
+.visual-logo{
+  margin-top:100px;
+  font-size:clamp(40px,8vw,110px);
+  font-weight:700;
+  letter-spacing:-.08em;
+}
+
+.visual-logo small{
+  display:block;
+  margin-top:15px;
+  font-size:10px;
+  letter-spacing:.4em;
+  color:#777;
+}
+
+
+/* MAKE VISIBLE */
+
+.make-visible{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border-top:1px solid var(--line);
+}
+
+.make-visible h2{
+  font-size:clamp(70px,14vw,210px);
+  line-height:.78;
+  letter-spacing:-.09em;
+}
+
+.make-visible h2 span{
+  display:block;
+  color:#666;
+}
+
+.make-visible > p{
+  margin-top:50px;
+  color:#888;
+  font-size:18px;
+}
+
+.final-lines{
+  line-height:2;
+  color:#aaa!important;
+  font-size:14px!important;
+}
+
+.visual-button{
+  margin-top:45px;
+  padding:20px 30px;
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:100px;
+  font-size:11px;
+  letter-spacing:.2em;
+  transition:.4s;
+}
+
+.visual-button:hover{
+  background:#fff;
+  color:#000;
+  transform:scale(1.05);
+}
+
+
+/* =========================================================
    INSTAGRAM
-===================================================== */
+========================================================= */
 
 .instagram{
-
-    padding:
-        12vw
-        5vw;
-
-    position:relative;
+  padding:180px 7vw;
+  border-top:1px solid var(--line);
 }
 
-.instagram-head{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:end;
-
-    margin-bottom:70px;
+.instagram-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:80px;
 }
 
-.instagram-head h2{
-
-    font-size:
-        clamp(
-            60px,
-            11vw,
-            150px
-        );
-
-    line-height:.8;
-
-    letter-spacing:-.08em;
+.instagram-header h2{
+  font-size:clamp(55px,10vw,140px);
+  letter-spacing:-.08em;
+  line-height:.8;
 }
 
-.instagram-head a{
-
-    font-size:11px;
-
-    letter-spacing:.2em;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.3);
-
-    padding-bottom:8px;
+.instagram-header a{
+  border-bottom:1px solid #777;
+  padding-bottom:8px;
+  font-size:11px;
+  letter-spacing:.2em;
 }
 
 .instagram-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:15px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
 }
 
-.instagram-item{
-
-    aspect-ratio:1/1;
-
-    background:
-        radial-gradient(
-            circle at 50% 40%,
-            rgba(255,255,255,.18),
-            transparent 28%
-        ),
-        linear-gradient(
-            135deg,
-            #1b1b1b,
-            #060606
-        );
-
-    position:relative;
-
-    overflow:hidden;
-
-    transition:.7s ease;
+.instagram-card{
+  aspect-ratio:1;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%,#333,transparent 30%),
+    linear-gradient(135deg,#111,#050505);
+  border:1px solid var(--line);
 }
 
-.instagram-item::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-100%;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent,
-            rgba(255,255,255,.16),
-            transparent
-        );
-
-    transform:rotate(20deg);
-
-    transition:1s;
+.instagram-card::after{
+  content:"SOCIALCLIP";
+  position:absolute;
+  left:15px;
+  bottom:15px;
+  font-size:10px;
+  letter-spacing:.2em;
 }
 
-.instagram-item:hover{
 
-    transform:
-        translateY(-10px);
-}
-
-.instagram-item:hover::after{
-    inset:100%;
-}
-
-.instagram-number{
-
-    position:absolute;
-
-    left:15px;
-    bottom:15px;
-
-    font-size:10px;
-
-    letter-spacing:.2em;
-
-    color:
-        rgba(255,255,255,.4);
-}
-
-/* =====================================================
-   FINAL
-===================================================== */
-
-.final{
-
-    min-height:100vh;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.final-bg{
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(255,255,255,.1),
-            transparent 35%
-        );
-}
-
-.final-content{
-
-    position:relative;
-
-    z-index:2;
-}
-
-.final-kicker{
-
-    font-size:11px;
-
-    letter-spacing:.4em;
-
-    color:
-        rgba(255,255,255,.4);
-
-    margin-bottom:40px;
-}
-
-.final h2{
-
-    font-size:
-        clamp(
-            70px,
-            15vw,
-            220px
-        );
-
-    line-height:.75;
-
-    letter-spacing:-.09em;
-}
-
-.final h2 span{
-    display:block;
-}
-
-.final h2 .outline{
-
-    color:transparent;
-
-    -webkit-text-stroke:
-        1px
-        rgba(255,255,255,.5);
-}
-
-.final p{
-
-    margin:
-        50px
-        auto;
-
-    max-width:500px;
-
-    color:
-        rgba(255,255,255,.55);
-
-    font-size:18px;
-
-    line-height:1.6;
-}
-
-.cta{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:25px;
-
-    padding:
-        20px
-        30px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.25);
-
-    transition:.5s;
-}
-
-.cta:hover{
-
-    background:#fff;
-
-    color:#000;
-
-    transform:
-        translateY(-5px);
-}
-
-/* =====================================================
+/* =========================================================
    CONTACT
-===================================================== */
+========================================================= */
 
 .contact{
-
-    padding:
-        12vw
-        7vw;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.1);
+  padding:180px 7vw;
+  border-top:1px solid var(--line);
 }
 
 .contact-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr
-        1fr;
-
-    gap:10vw;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10vw;
 }
 
 .contact h2{
-
-    font-size:
-        clamp(
-            60px,
-            10vw,
-            140px
-        );
-
-    line-height:.8;
-
-    letter-spacing:-.08em;
+  font-size:clamp(60px,10vw,140px);
+  line-height:.8;
+  letter-spacing:-.08em;
 }
 
-.contact-info{
-    padding-top:20px;
-}
-
-.contact-info p{
-
-    color:
-        rgba(255,255,255,.5);
-
-    line-height:1.7;
-
-    max-width:450px;
+.contact p{
+  color:#888;
+  margin-top:35px;
+  max-width:450px;
+  line-height:1.8;
 }
 
 .contact-form{
-    margin-top:50px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
 }
 
-.field{
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.2);
-
-    margin-bottom:30px;
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid #333;
+  padding:18px 5px;
+  color:#fff;
+  outline:none;
+  font-size:15px;
 }
 
-.field input,
-.field textarea{
-
-    width:100%;
-
-    background:transparent;
-
-    border:0;
-
-    outline:none;
-
-    color:#fff;
-
-    padding:
-        15px
-        0;
-
-    font-size:17px;
-
-    resize:none;
+.contact-form textarea{
+  min-height:150px;
+  resize:vertical;
 }
 
-.field textarea{
-    height:120px;
+.contact-form button{
+  margin-top:20px;
+  padding:20px;
+  border:1px solid #555;
+  background:transparent;
+  color:#fff;
+  cursor:pointer;
+  letter-spacing:.2em;
+  transition:.4s;
 }
 
-.field input::placeholder,
-.field textarea::placeholder{
-
-    color:
-        rgba(255,255,255,.3);
+.contact-form button:hover{
+  background:#fff;
+  color:#000;
 }
 
-.form-button{
 
-    border:
-        1px solid
-        rgba(255,255,255,.25);
-
-    background:transparent;
-
-    color:#fff;
-
-    padding:
-        17px
-        30px;
-
-    cursor:pointer;
-
-    transition:.4s;
-}
-
-.form-button:hover{
-
-    background:#fff;
-
-    color:#000;
-}
-
-/* =====================================================
+/* =========================================================
    FOOTER
-===================================================== */
+========================================================= */
 
 footer{
-
-    padding:
-        40px
-        5vw;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.1);
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    color:
-        rgba(255,255,255,.4);
-
-    font-size:11px;
-
-    letter-spacing:.12em;
+  padding:50px 7vw;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  color:#666;
+  font-size:10px;
+  letter-spacing:.15em;
 }
 
-.footer-logo{
 
-    color:#fff;
-
-    font-size:16px;
-
-    font-weight:700;
-}
-
-/* =====================================================
+/* =========================================================
    REVEAL
-===================================================== */
+========================================================= */
 
 .reveal{
-
-    opacity:0;
-
-    transform:
-        translateY(60px);
-
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease;
+  opacity:0;
+  transform:translateY(50px);
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(.2,.8,.2,1);
 }
 
 .reveal.visible{
-
-    opacity:1;
-
-    transform:
-        translateY(0);
+  opacity:1;
+  transform:translateY(0);
 }
 
-/* =====================================================
+
+/* =========================================================
+   CURSOR LIGHT
+========================================================= */
+
+.cursor-light{
+  position:fixed;
+  z-index:999;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle,
+    rgba(255,255,255,.07),
+    transparent 70%);
+  transform:translate(-50%,-50%);
+  mix-blend-mode:screen;
+}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+.particle{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:#fff;
+  border-radius:50%;
+  opacity:.25;
+  pointer-events:none;
+  z-index:1;
+}
+
+
+/* =========================================================
    MOBILE
-===================================================== */
+========================================================= */
 
-@media(max-width:800px){
+@media(max-width:700px){
 
-    .nav{
-        padding:20px;
-    }
+  body{
+    font-size:14px;
+  }
 
-    .nav-links{
-        display:none;
-    }
+  .nav{
+    padding:20px;
+  }
 
-    .cursor-light{
-        display:none;
-    }
+  .nav-right{
+    gap:14px;
+    font-size:9px;
+  }
 
-    .hero{
-        padding:0 20px;
-    }
+  .nav-right a:nth-child(2){
+    display:none;
+  }
 
-    .hero-title{
-        font-size:22vw;
-    }
+  /* INTRO */
 
-    .hero-description{
+  .intro-grid{
+    background-size:45px 45px;
+  }
 
-        font-size:15px;
+  .intro-light{
+    width:100vw;
+    height:100vw;
+  }
 
-        margin-top:40px;
-    }
+  .intro-content{
+    width:88%;
+  }
 
-    .scene{
+  .intro-step{
+    min-height:380px;
+  }
 
-        min-height:auto;
+  .intro-small{
+    font-size:9px;
+    letter-spacing:.25em;
+    margin-bottom:22px;
+  }
 
-        padding:
-            120px
-            20px;
-    }
+  .intro-step h1{
+    font-size:clamp(42px,13vw,70px);
+    line-height:.9;
+  }
 
-    .scene-content{
+  .intro-step p{
+    font-size:15px;
+    line-height:1.5;
+    max-width:310px;
+  }
 
-        grid-template-columns:1fr;
+  .intro-word{
+    font-size:18vw;
+  }
 
-        gap:60px;
-    }
+  .intro-brand{
+    font-size:18vw;
+  }
 
-    .scene-title{
+  .intro-subbrand{
+    font-size:8px;
+    letter-spacing:.3em;
+  }
 
-        font-size:22vw;
-    }
+  .enter-button{
+    padding:18px 20px;
+    font-size:9px;
+    width:100%;
+    max-width:300px;
+  }
 
-    .visual{
-        height:380px;
-    }
+  /* HERO */
 
-    .browser{
-        width:88%;
-        left:6%;
-    }
+  .hero{
+    min-height:100svh;
+    padding:110px 22px 70px;
+    align-items:flex-end;
+  }
 
-    .media-wall{
-        height:420px;
-    }
+  .hero-grid{
+    inset:-50%;
+    background-size:50px 50px;
+  }
 
-    .social-stage{
-        height:600px;
-    }
+  .hero-title{
+    font-size:19vw;
+    line-height:.82;
+  }
 
-    .services{
-        padding:
-            130px
-            20px;
-    }
+  .hero-title span:nth-child(2){
+    margin-left:3vw;
+  }
 
-    .service{
-        min-height:90px;
-    }
+  .hero-title span:nth-child(3){
+    margin-left:6vw;
+  }
 
-    .service-name{
-        font-size:25px;
-    }
+  .hero-bottom{
+    display:block;
+    margin-top:50px;
+  }
 
-    .service-arrow{
-        display:none;
-    }
+  .hero-description{
+    font-size:13px;
+    line-height:1.7;
+  }
 
-    .instagram{
+  .scroll-note{
+    margin-top:35px;
+  }
 
-        padding:
-            120px
-            20px;
-    }
+  /* MARQUEE */
 
-    .instagram-head{
-        display:block;
-    }
+  .marquee{
+    padding:15px 0;
+  }
 
-    .instagram-head a{
+  .marquee span{
+    font-size:34px;
+    margin-right:30px;
+  }
 
-        display:inline-block;
+  /* SCENES */
 
-        margin-top:35px;
-    }
+  .scene{
+    min-height:auto;
+    padding:120px 22px;
+  }
 
-    .instagram-grid{
+  .scene-content{
+    grid-template-columns:1fr;
+    gap:70px;
+  }
 
-        grid-template-columns:
-            1fr
-            1fr;
-    }
+  .scene h2{
+    font-size:18vw;
+  }
 
-    .contact{
+  .scene-copy{
+    margin-top:25px;
+    font-size:14px;
+  }
 
-        padding:
-            120px
-            20px;
-    }
+  .scene-visual{
+    min-height:380px;
+  }
 
-    .contact-grid{
+  .create-visual{
+    transform:none;
+  }
 
-        grid-template-columns:1fr;
+  .design-card{
+    height:190px;
+    padding:18px;
+  }
 
-        gap:80px;
-    }
+  .design-card strong{
+    font-size:20px;
+  }
 
-    footer{
+  .browser{
+    height:300px;
+    transform:none;
+  }
 
-        padding:
-            30px
-            20px;
+  .browser-sidebar{
+    padding:15px;
+  }
 
-        flex-direction:column;
+  .browser-main{
+    padding:20px;
+  }
 
-        gap:15px;
+  .media-visual{
+    height:380px;
+  }
 
-        text-align:center;
-    }
+  .media-frame{
+    width:65%;
+    height:55%;
+  }
 
-    .intro-grid{
-        background-size:60px 60px;
-    }
+  .phone{
+    width:235px;
+    height:470px;
+  }
 
-    .intro-ring{
+  .feed-item{
+    height:210px;
+  }
 
-        width:90vw;
-        height:90vw;
-    }
+  .grow-visual{
+    height:350px;
+  }
 
-    .intro-word{
+  /* SERVICES */
 
-        font-size:23vw;
-    }
+  .services{
+    padding:120px 22px;
+  }
 
-    .intro-final p{
-        font-size:16px;
-        padding:0 20px;
-    }
+  .services-header{
+    margin-bottom:60px;
+  }
 
-    .enter-button{
-        padding:18px 22px;
-        font-size:10px;
-    }
+  .services-header h2{
+    font-size:19vw;
+  }
+
+  .service{
+    padding:23px 0;
+  }
+
+  .service-name{
+    font-size:20px;
+  }
+
+  .service-number{
+    width:35px;
+  }
+
+  .service-arrow{
+    font-size:18px;
+  }
+
+  /* MANIFESTO */
+
+  .manifesto{
+    min-height:70vh;
+    padding:100px 22px;
+  }
+
+  .manifesto h2{
+    font-size:15vw;
+  }
+
+  /* VISUAL WORLD */
+
+  .visual-world{
+    padding:120px 20px 0;
+  }
+
+  .visual-intro{
+    margin-bottom:70px;
+  }
+
+  .visual-intro h2{
+    font-size:15vw;
+  }
+
+  .visual-intro p{
+    font-size:14px;
+    margin-top:30px;
+  }
+
+  .visual-gallery{
+    min-height:auto;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+  }
+
+  .visual-image{
+    position:relative;
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:1/1.08;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    transform:none!important;
+  }
+
+  .visual-image:nth-child(even){
+    transform:translateX(10px)!important;
+  }
+
+  .visual-image:nth-child(odd){
+    transform:translateX(-5px)!important;
+  }
+
+  .visual-image span{
+    font-size:9px;
+  }
+
+  .visual-statement{
+    margin:100px auto 120px;
+  }
+
+  .visual-statement > p{
+    font-size:25px;
+    line-height:1.15;
+  }
+
+  .visual-brand{
+    margin-top:60px;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .visual-logo{
+    margin-top:60px;
+    font-size:16vw;
+  }
+
+  .visual-logo small{
+    font-size:7px;
+  }
+
+  .make-visible{
+    min-height:80svh;
+  }
+
+  .make-visible h2{
+    font-size:20vw;
+  }
+
+  .make-visible > p{
+    font-size:15px;
+    max-width:320px;
+  }
+
+  .final-lines{
+    font-size:13px!important;
+  }
+
+  /* INSTAGRAM */
+
+  .instagram{
+    padding:120px 22px;
+  }
+
+  .instagram-header{
+    display:block;
+    margin-bottom:50px;
+  }
+
+  .instagram-header h2{
+    font-size:18vw;
+  }
+
+  .instagram-header a{
+    display:inline-block;
+    margin-top:30px;
+  }
+
+  .instagram-grid{
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+
+  /* CONTACT */
+
+  .contact{
+    padding:120px 22px;
+  }
+
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:70px;
+  }
+
+  .contact h2{
+    font-size:18vw;
+  }
+
+  /* FOOTER */
+
+  footer{
+    padding:30px 22px;
+    display:block;
+    line-height:2;
+  }
+
+  /* HIDE DESKTOP CURSOR EFFECT */
+
+  .cursor-light{
+    display:none;
+  }
 }
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media(max-width:380px){
+
+  .intro-step h1{
+    font-size:40px;
+  }
+
+  .intro-word{
+    font-size:20vw;
+  }
+
+  .hero-title{
+    font-size:20vw;
+  }
+
+  .phone{
+    width:215px;
+    height:430px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
+
+}
+
 </style>
 </head>
 
+
 <body class="locked">
 
-<!-- =====================================================
+
+<!-- ========================================================
      INTRO
-===================================================== -->
+========================================================= -->
 
 <section id="intro">
 
-    <div class="intro-background"></div>
+  <div class="intro-bg"></div>
+  <div class="intro-grid"></div>
+  <div class="intro-light"></div>
+  <div class="intro-lines"></div>
 
-    <div class="intro-noise"></div>
+  <div class="intro-content">
 
-    <div class="intro-grid"></div>
+    <div class="intro-step active" data-step="0">
+      <div class="intro-small">
+        SOCIALCLIP / EINE DIGITALE REISE
+      </div>
 
-    <div class="intro-light"></div>
+      <h1>
+        Eine digitale<br>
+        Reise beginnt.
+      </h1>
 
-    <div class="intro-ring"></div>
-
-    <div class="intro-lines">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-
-    <div
-        class="intro-particles"
-        id="introParticles">
-    </div>
-
-
-    <div class="intro-content">
-
-        <div class="intro-stage">
-
-            <div class="intro-small">
-                Eine digitale Reise beginnt
-            </div>
-
-            <div
-                class="intro-title"
-                id="introTitle">
-
-                Alles beginnt<br>
-                mit einer Idee.
-
-            </div>
-
-            <div
-                class="intro-subtitle"
-                id="introSubtitle">
-
-                Ein Gedanke. Ein Bild. Eine Vision.
-
-            </div>
-
-        </div>
-
+      <p>
+        Alles beginnt mit einer Idee.<br>
+        Ein Gedanke. Ein Bild. Eine Vision.
+      </p>
     </div>
 
 
-    <div
-        class="intro-word"
-        id="word1">
+    <div class="intro-step" data-step="1">
+      <div class="intro-small">
+        EINE IDEE
+      </div>
 
+      <div class="intro-word">
         FORM
+      </div>
 
+      <p>
+        Eine Idee bekommt eine Form.
+      </p>
     </div>
 
 
-    <div
-        class="intro-word"
-        id="word2">
+    <div class="intro-step" data-step="2">
+      <div class="intro-small">
+        FORM
+      </div>
 
+      <div class="intro-word">
         DESIGN
+      </div>
 
+      <p>
+        Form wird zu Design.
+      </p>
     </div>
 
 
-    <div
-        class="intro-word"
-        id="word3">
+    <div class="intro-step" data-step="3">
+      <div class="intro-small">
+        DESIGN
+      </div>
 
+      <div class="intro-word">
         BEWEGUNG
+      </div>
 
+      <p>
+        Design wird zu Bewegung.
+      </p>
     </div>
 
 
-    <div
-        class="intro-word"
-        id="word4">
+    <div class="intro-step" data-step="4">
+      <div class="intro-small">
+        BEWEGUNG
+      </div>
 
+      <div class="intro-word">
         WIRKUNG
+      </div>
+
+      <p>
+        Bewegung wird zu Aufmerksamkeit.<br>
+        Aufmerksamkeit wird zu Wirkung.
+      </p>
+    </div>
+
+
+    <div class="intro-step" data-step="5">
+
+      <div class="intro-brand">
+        SOCIALCLIP
+      </div>
+
+      <div class="intro-subbrand">
+        ART · MEDIA · DIGITAL
+      </div>
 
     </div>
 
 
-    <div
-        class="intro-brand"
-        id="introBrand">
+    <div class="intro-step intro-final" data-step="6">
 
-        <div class="intro-brand-name">
-            SOCIALCLIP
-        </div>
+      <div class="intro-small">
+        SCHÖN, DASS DU HIER BIST
+      </div>
 
-        <div class="intro-brand-sub">
-            ART · MEDIA · DIGITAL
-        </div>
+      <h1>
+        Hallo.
+      </h1>
 
-    </div>
+      <p>
+        Willkommen bei SocialClip.<br>
+        Wir haben eine digitale Welt für dich vorbereitet.
+      </p>
 
-
-    <!-- WICHTIG:
-         Dieser Bereich liegt ganz oben
-         und kann jetzt sicher geklickt werden.
-    -->
-
-    <div
-        class="intro-final"
-        id="introFinal">
-
-        <h2>
-            Hallo.
-        </h2>
-
-        <p>
-            Schön, dass du hier bist.<br>
-            Willkommen bei SocialClip.
-        </p>
-
-        <button
-            type="button"
-            class="enter-button"
-            id="enterButton">
-
-            DIGITALE WELT BETRETEN →
-
-        </button>
+      <button class="enter-button" id="enterButton">
+        DIGITALE WELT BETRETEN →
+      </button>
 
     </div>
+
+  </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- ========================================================
      TRANSITION
-===================================================== -->
+========================================================= -->
 
 <section id="transition">
 
-    <div class="transition-logo">
-        SOCIALCLIP
+  <div class="transition-content">
+
+    <div class="transition-brand">
+      SOCIALCLIP
     </div>
+
+    <div class="transition-line"></div>
+
+    <div class="transition-sub">
+      ART · MEDIA · DIGITAL
+    </div>
+
+  </div>
 
 </section>
 
 
-<!-- =====================================================
-     WEBSITE
-===================================================== -->
+<!-- ========================================================
+     NAV
+========================================================= -->
 
-<div id="website">
+<nav class="nav">
 
-    <div
-        class="cursor-light"
-        id="cursorLight">
+  <a href="#" class="logo">
+    SOCIALCLIP
+  </a>
+
+  <div class="nav-right">
+    <a href="#leistungen">Leistungen</a>
+    <a href="#instagram">Instagram</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+
+</nav>
+
+
+<!-- ========================================================
+     HERO
+========================================================= -->
+
+<header class="hero">
+
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+
+    <div class="hero-label">
+      SOCIALCLIP / ART · MEDIA · DIGITAL
     </div>
 
+    <h1 class="hero-title">
+      <span>IDEEN</span>
+      <span>WERDEN</span>
+      <span>WIRKUNG.</span>
+    </h1>
 
-    <!-- NAVIGATION -->
+    <div class="hero-bottom">
 
-    <nav class="nav">
+      <p class="hero-description">
+        Wir entwickeln digitale Erlebnisse,
+        Designs und Inhalte, die Menschen erreichen,
+        Marken sichtbar machen und Ideen in Bewegung bringen.
+      </p>
 
-        <a
-            href="#"
-            class="logo">
-
-            SOCIALCLIP
-
-        </a>
-
-        <div class="nav-links">
-
-            <a href="#leistungen">
-                Leistungen
-            </a>
-
-            <a href="#instagram">
-                Social Media
-            </a>
-
-            <a href="#kontakt">
-                Kontakt
-            </a>
-
-        </div>
-
-    </nav>
-
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-        <div class="hero-bg"></div>
-
-        <div class="hero-grid"></div>
-
-        <div class="hero-content reveal">
-
-            <div class="hero-kicker">
-                ART · MEDIA · DIGITAL
-            </div>
-
-            <h1 class="hero-title">
-
-                <span>
-                    IDEEN
-                </span>
-
-                <span class="outline">
-                    WERDEN
-                </span>
-
-                <span>
-                    WIRKUNG.
-                </span>
-
-            </h1>
-
-            <p class="hero-description">
-
-                SocialClip verbindet Gestaltung,
-                digitale Technologien, Social Media
-                und Marketing zu digitalen Erlebnissen,
-                die nicht einfach nur gut aussehen –
-                sondern etwas bewirken.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- MARQUEE -->
-
-    <div class="marquee">
-
-        <div class="marquee-track">
-
-            <span>WEBSEITEN</span>
-            <span class="dot">✦</span>
-
-            <span>DESIGN</span>
-            <span class="dot">✦</span>
-
-            <span>SOCIAL MEDIA</span>
-            <span class="dot">✦</span>
-
-            <span>MARKETING</span>
-            <span class="dot">✦</span>
-
-            <span>VIDEO</span>
-            <span class="dot">✦</span>
-
-            <span>STRATEGIE</span>
-            <span class="dot">✦</span>
-
-            <span>WEBSEITEN</span>
-            <span class="dot">✦</span>
-
-            <span>DESIGN</span>
-            <span class="dot">✦</span>
-
-        </div>
+      <div class="scroll-note">
+        SCROLLEN / ENTDECKEN ↓
+      </div>
 
     </div>
 
+  </div>
 
-    <!-- ERSTELLEN -->
+</header>
 
-    <section class="scene reveal">
 
-        <div class="scene-number">
-            01 / ERSTELLEN
-        </div>
+<!-- ========================================================
+     MARQUEE
+========================================================= -->
 
-        <div class="scene-content">
+<div class="marquee">
 
-            <div>
+  <div class="marquee-track">
 
-                <div class="scene-label">
-                    IDEE → GESTALTUNG
-                </div>
+    <span>WEB DESIGN</span>
+    <span>SOCIAL MEDIA</span>
+    <span>DESIGN</span>
+    <span>VIDEO</span>
+    <span>MARKETING</span>
+    <span>STRATEGIE</span>
 
-                <h2 class="scene-title">
+    <span>WEB DESIGN</span>
+    <span>SOCIAL MEDIA</span>
+    <span>DESIGN</span>
+    <span>VIDEO</span>
+    <span>MARKETING</span>
+    <span>STRATEGIE</span>
 
-                    <span>
-                        ERSCHAFFEN.
-                    </span>
-
-                    <span class="thin">
-                        GESTALTEN.
-                    </span>
-
-                </h2>
-
-            </div>
-
-            <div class="visual">
-
-                <div class="visual-lines"></div>
-
-                <div class="visual-word">
-                    IDEE
-                </div>
-
-                <div class="visual-small">
-                    VON DER IDEE ZUR FORM
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- DIGITAL -->
-
-    <section class="scene reveal">
-
-        <div class="scene-number">
-            02 / DIGITAL
-        </div>
-
-        <div class="scene-content">
-
-            <div class="visual">
-
-                <div class="browser">
-
-                    <div class="browser-top">
-
-                        <span class="browser-dot"></span>
-                        <span class="browser-dot"></span>
-                        <span class="browser-dot"></span>
-
-                    </div>
-
-                    <div class="browser-body">
-
-                        <div class="browser-heading">
-                            DIGITAL
-                        </div>
-
-                        <div class="browser-line"></div>
-                        <div class="browser-line"></div>
-
-                        <div class="browser-boxes">
-
-                            <div class="browser-box"></div>
-                            <div class="browser-box"></div>
-                            <div class="browser-box"></div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div>
-
-                <div class="scene-label">
-                    DIGITALE ERLEBNISSE
-                </div>
-
-                <h2 class="scene-title">
-
-                    <span>
-                        DIGITAL.
-                    </span>
-
-                    <span class="thin">
-                        INTERAKTIV.
-                    </span>
-
-                </h2>
-
-                <div class="scene-text">
-
-                    <p>
-                        Webseiten, digitale Auftritte
-                        und individuelle Programmierungen,
-                        die nicht nach Vorlage aussehen.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- MEDIA -->
-
-    <section class="scene reveal">
-
-        <div class="scene-number">
-            03 / MEDIA
-        </div>
-
-        <div class="scene-content">
-
-            <div>
-
-                <div class="scene-label">
-                    BILD · VIDEO · BEWEGUNG
-                </div>
-
-                <h2 class="scene-title">
-
-                    <span>
-                        BILD
-                    </span>
-
-                    <span class="thin">
-                        WIRD
-                    </span>
-
-                    <span>
-                        BEWEGUNG.
-                    </span>
-
-                </h2>
-
-            </div>
-
-            <div class="media-wall">
-
-                <div class="media-frame">
-                    <div class="media-inner"></div>
-                </div>
-
-                <div class="media-frame">
-                    <div class="media-inner"></div>
-                </div>
-
-                <div class="media-frame">
-                    <div class="media-inner"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- SOCIAL -->
-
-    <section class="scene reveal">
-
-        <div class="scene-number">
-            04 / SOCIAL
-        </div>
-
-        <div class="scene-content">
-
-            <div class="social-stage">
-
-                <div class="phone">
-
-                    <div class="phone-notch"></div>
-
-                    <div class="feed">
-
-                        <div class="feed-header">
-
-                            <div class="feed-logo">
-                                SOCIALCLIP
-                            </div>
-
-                            <div>
-                                ···
-                            </div>
-
-                        </div>
-
-                        <div class="feed-post"></div>
-
-                        <div class="feed-caption">
-                            Ideen sichtbar machen.
-                        </div>
-
-                        <div class="feed-post"></div>
-
-                        <div class="feed-caption">
-                            Digital. Kreativ. Social.
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div>
-
-                <div class="scene-label">
-                    SOCIAL MEDIA
-                </div>
-
-                <h2 class="scene-title">
-
-                    <span>
-                        SICHTBAR
-                    </span>
-
-                    <span class="thin">
-                        WERDEN.
-                    </span>
-
-                </h2>
-
-                <div class="scene-text">
-
-                    <p>
-                        Social Media, Content und digitale
-                        Kommunikation werden zu einer
-                        Geschichte, die Menschen
-                        entdecken möchten.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- WACHSTUM -->
-
-    <section class="scene reveal">
-
-        <div class="scene-number">
-            05 / WACHSTUM
-        </div>
-
-        <div class="scene-content">
-
-            <div>
-
-                <div class="scene-label">
-                    MARKETING · STRATEGIE · NEUKUNDEN
-                </div>
-
-                <h2 class="scene-title">
-
-                    <span>
-                        MEHR
-                    </span>
-
-                    <span class="thin">
-                        ALS
-                    </span>
-
-                    <span>
-                        SICHTBARKEIT.
-                    </span>
-
-                </h2>
-
-            </div>
-
-            <div class="growth-visual">
-
-                <div class="growth-line"></div>
-
-                <div class="growth-arrow">
-                    ↗
-                </div>
-
-                <div class="growth-point"></div>
-                <div class="growth-point"></div>
-                <div class="growth-point"></div>
-                <div class="growth-point"></div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- LEISTUNGEN -->
-
-    <section
-        class="services"
-        id="leistungen">
-
-        <div class="services-head reveal">
-
-            <small>
-                WAS WIR MACHEN
-            </small>
-
-            <h2>
-                LEISTUNGEN.
-            </h2>
-
-        </div>
-
-        <div class="service-list">
-
-            <div class="service reveal">
-                <span class="service-number">01</span>
-                <span class="service-name">
-                    Webseiten erstellen
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">02</span>
-                <span class="service-name">
-                    Flyer erstellen
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">03</span>
-                <span class="service-name">
-                    Online Marketing
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">04</span>
-                <span class="service-name">
-                    Visitenkarten erstellen
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">05</span>
-                <span class="service-name">
-                    Social Media Assistant
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">06</span>
-                <span class="service-name">
-                    Logo erstellen
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">07</span>
-                <span class="service-name">
-                    Video &amp; Foto Editor
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">08</span>
-                <span class="service-name">
-                    Lebenslauf erstellen
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">09</span>
-                <span class="service-name">
-                    Speisekarte erstellen
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">10</span>
-                <span class="service-name">
-                    Virtueller Assistent
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">11</span>
-                <span class="service-name">
-                    Programmierung
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">12</span>
-                <span class="service-name">
-                    Neukundengewinnung
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">13</span>
-                <span class="service-name">
-                    Strategieentwicklung
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-            <div class="service reveal">
-                <span class="service-number">14</span>
-                <span class="service-name">
-                    TikTok Marketing
-                </span>
-                <span class="service-arrow">↗</span>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- MANIFEST -->
-
-    <section class="manifesto reveal">
-
-        <div class="manifesto-content">
-
-            <p>
-                Wir machen nicht einfach
-                <strong>Werbung.</strong>
-                Wir machen Ideen
-                <strong>sichtbar.</strong>
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- INSTAGRAM -->
-
-    <section
-        class="instagram"
-        id="instagram">
-
-        <div class="instagram-head reveal">
-
-            <h2>
-                SOCIAL<br>
-                <span style="font-weight:300;">
-                    CLIP.
-                </span>
-            </h2>
-
-            <a
-                href="https://www.instagram.com/socialclip.art/"
-                target="_blank"
-                rel="noopener">
-
-                INSTAGRAM BESUCHEN →
-
-            </a>
-
-        </div>
-
-        <div class="instagram-grid">
-
-            <a
-                href="https://www.instagram.com/socialclip.art/"
-                target="_blank"
-                rel="noopener"
-                class="instagram-item reveal">
-
-                <span class="instagram-number">
-                    01 / INSTAGRAM
-                </span>
-
-            </a>
-
-            <a
-                href="https://www.instagram.com/socialclip.art/"
-                target="_blank"
-                rel="noopener"
-                class="instagram-item reveal">
-
-                <span class="instagram-number">
-                    02 / CONTENT
-                </span>
-
-            </a>
-
-            <a
-                href="https://www.instagram.com/socialclip.art/"
-                target="_blank"
-                rel="noopener"
-                class="instagram-item reveal">
-
-                <span class="instagram-number">
-                    03 / SOCIAL
-                </span>
-
-            </a>
-
-            <a
-                href="https://www.instagram.com/socialclip.art/"
-                target="_blank"
-                rel="noopener"
-                class="instagram-item reveal">
-
-                <span class="instagram-number">
-                    04 / DESIGN
-                </span>
-
-            </a>
-
-            <a
-                href="https://www.instagram.com/socialclip.art/"
-                target="_blank"
-                rel="noopener"
-                class="instagram-item reveal">
-
-                <span class="instagram-number">
-                    05 / MEDIA
-                </span>
-
-            </a>
-
-            <a
-                href="https://www.instagram.com/socialclip.art/"
-                target="_blank"
-                rel="noopener"
-                class="instagram-item reveal">
-
-                <span class="instagram-number">
-                    06 / IDEEN
-                </span>
-
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- FINAL -->
-
-    <section class="final reveal">
-
-        <div class="final-bg"></div>
-
-        <div class="final-content">
-
-            <div class="final-kicker">
-                BEREIT FÜR ETWAS NEUES?
-            </div>
-
-            <h2>
-
-                <span>
-                    MACH ES
-                </span>
-
-                <span class="outline">
-                    SICHTBAR.
-                </span>
-
-            </h2>
-
-            <p>
-
-                Deine Idee muss nicht aussehen
-                wie alles andere.
-                Lass uns etwas daraus machen,
-                das man nicht vergisst.
-
-            </p>
-
-            <a
-                href="#kontakt"
-                class="cta">
-
-                PROJEKT STARTEN →
-
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- KONTAKT -->
-
-    <section
-        class="contact"
-        id="kontakt">
-
-        <div class="contact-grid">
-
-            <div class="reveal">
-
-                <h2>
-
-                    LASS UNS<br>
-                    REDEN.
-
-                </h2>
-
-            </div>
-
-            <div class="contact-info reveal">
-
-                <p>
-
-                    Du hast eine Idee, ein Projekt
-                    oder möchtest einfach wissen,
-                    was möglich ist?
-
-                    Schreib uns.
-
-                    Gemeinsam machen wir daraus
-                    etwas Besonderes.
-
-                </p>
-
-
-                <form
-                    class="contact-form"
-                    action="https://formspree.io/f/xwlvlqwg"
-                    method="POST">
-
-                    <div class="field">
-
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Dein Name"
-                            required>
-
-                    </div>
-
-                    <div class="field">
-
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Deine E-Mail"
-                            required>
-
-                    </div>
-
-                    <div class="field">
-
-                        <textarea
-                            name="message"
-                            placeholder="Erzähl uns von deiner Idee..."
-                            required></textarea>
-
-                    </div>
-
-                    <button
-                        type="submit"
-                        class="form-button">
-
-                        NACHRICHT SENDEN →
-
-                    </button>
-
-                </form>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <div class="footer-logo">
-            SOCIALCLIP
-        </div>
-
-        <div>
-            ART · MEDIA · DIGITAL
-        </div>
-
-        <div>
-            © 2026 SOCIALCLIP
-        </div>
-
-    </footer>
+  </div>
 
 </div>
 
 
+<!-- ========================================================
+     CREATE
+========================================================= -->
+
+<section class="scene reveal">
+
+  <div class="scene-number">
+    01 / CREATE
+  </div>
+
+  <div class="scene-content">
+
+    <div>
+
+      <div class="scene-label">
+        IDEE → FORM
+      </div>
+
+      <h2>
+        CREATE<br>
+        <span>YOUR WORLD.</span>
+      </h2>
+
+      <p class="scene-copy">
+        Logos, Flyer, Visitenkarten, Speisekarten,
+        Lebensläufe und komplette visuelle Auftritte.
+        Wir geben deiner Idee eine Form, die zu dir passt.
+      </p>
+
+    </div>
+
+    <div class="scene-visual create-visual">
+
+      <div class="design-card">
+        <strong>LOGO</strong>
+        <small>BRAND IDENTITY</small>
+      </div>
+
+      <div class="design-card">
+        <strong>FLYER</strong>
+        <small>PRINT DESIGN</small>
+      </div>
+
+      <div class="design-card">
+        <strong>CARD</strong>
+        <small>BUSINESS</small>
+      </div>
+
+      <div class="design-card">
+        <strong>MENU</strong>
+        <small>EDITORIAL</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     DIGITAL
+========================================================= -->
+
+<section class="scene reveal">
+
+  <div class="scene-number">
+    02 / DIGITAL
+  </div>
+
+  <div class="scene-content">
+
+    <div class="scene-visual">
+
+      <div class="browser">
+
+        <div class="browser-top">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+
+        <div class="browser-body">
+
+          <div class="browser-sidebar">
+
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+
+          </div>
+
+          <div class="browser-main">
+
+            <div class="browser-title"></div>
+
+            <div class="browser-line"></div>
+            <div class="browser-line"></div>
+            <div class="browser-line"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div class="scene-label">
+        DIGITAL EXPERIENCE
+      </div>
+
+      <h2>
+        DIGITAL<br>
+        <span>MATTERS.</span>
+      </h2>
+
+      <p class="scene-copy">
+        Moderne Webseiten, Programmierung und
+        digitale Lösungen, die nicht nur funktionieren,
+        sondern sich auch richtig anfühlen.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     MEDIA
+========================================================= -->
+
+<section class="scene reveal">
+
+  <div class="scene-number">
+    03 / MEDIA
+  </div>
+
+  <div class="scene-content">
+
+    <div>
+
+      <div class="scene-label">
+        VIDEO · PHOTO · EDITING
+      </div>
+
+      <h2>
+        MAKE<br>
+        <span>MOTION.</span>
+      </h2>
+
+      <p class="scene-copy">
+        Foto, Video und Editing für Inhalte,
+        die nicht einfach vorbeiscrollen.
+      </p>
+
+    </div>
+
+    <div class="scene-visual media-visual">
+
+      <div class="media-frame"></div>
+      <div class="media-frame"></div>
+      <div class="media-frame"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     SOCIAL
+========================================================= -->
+
+<section class="scene reveal">
+
+  <div class="scene-number">
+    04 / SOCIAL
+  </div>
+
+  <div class="scene-content">
+
+    <div class="scene-visual">
+
+      <div class="phone">
+
+        <div class="phone-top">
+          <div class="phone-camera"></div>
+        </div>
+
+        <div class="feed">
+
+          <div class="feed-item">
+            <span>SOCIALCLIP / 01</span>
+          </div>
+
+          <div class="feed-item">
+            <span>SOCIALCLIP / 02</span>
+          </div>
+
+          <div class="feed-item">
+            <span>SOCIALCLIP / 03</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div class="scene-label">
+        SOCIAL MEDIA
+      </div>
+
+      <h2>
+        BE<br>
+        <span>VISIBLE.</span>
+      </h2>
+
+      <p class="scene-copy">
+        Social Media Assistant, TikTok Marketing,
+        Content und digitale Strategien,
+        die deine Marke dort zeigen, wo Menschen sind.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     GROW
+========================================================= -->
+
+<section class="scene reveal">
+
+  <div class="scene-number">
+    05 / GROW
+  </div>
+
+  <div class="scene-content">
+
+    <div>
+
+      <div class="scene-label">
+        MARKETING · STRATEGIE · GROWTH
+      </div>
+
+      <h2>
+        GROW<br>
+        <span>FORWARD.</span>
+      </h2>
+
+      <p class="scene-copy">
+        Online Marketing, Neukundengewinnung
+        und Strategieentwicklung — damit aus
+        Sichtbarkeit echte Bewegung entsteht.
+      </p>
+
+    </div>
+
+    <div class="scene-visual grow-visual">
+
+      <div class="grow-word">
+        GROW
+      </div>
+
+      <div class="grow-line"></div>
+      <div class="grow-arrow"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     SERVICES
+========================================================= -->
+
+<section class="services" id="leistungen">
+
+  <div class="services-header reveal">
+
+    <div class="eyebrow">
+      WAS WIR MACHEN
+    </div>
+
+    <h2>
+      14 WEGE.<br>
+      EINE IDEE.
+    </h2>
+
+    <p>
+      Von der ersten Idee bis zur digitalen Umsetzung.
+      Alles, was deine Marke braucht, an einem Ort.
+    </p>
+
+  </div>
+
+
+  <div class="service-list">
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">01</span>
+      <span class="service-name">Webseiten erstellen</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">02</span>
+      <span class="service-name">Flyer erstellen</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">03</span>
+      <span class="service-name">Online Marketing</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">04</span>
+      <span class="service-name">Visitenkarten erstellen</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">05</span>
+      <span class="service-name">Social Media Assistant</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">06</span>
+      <span class="service-name">Logo erstellen</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">07</span>
+      <span class="service-name">Video & Photo Editor</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">08</span>
+      <span class="service-name">Lebenslauf erstellen</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">09</span>
+      <span class="service-name">Speisekarte erstellen</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">10</span>
+      <span class="service-name">Virtueller Assistent</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">11</span>
+      <span class="service-name">Programmierung</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">12</span>
+      <span class="service-name">Neukundengewinnung</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">13</span>
+      <span class="service-name">Strategieentwicklung</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+    <a class="service reveal" href="#kontakt">
+      <span class="service-number">14</span>
+      <span class="service-name">TikTok Marketing</span>
+      <span class="service-arrow">↗</span>
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     MANIFESTO
+========================================================= -->
+
+<section class="manifesto reveal">
+
+  <h2>
+    NICHT NUR EINE
+    <span>WEBSITE.</span><br><br>
+
+    NICHT NUR EIN
+    <span>LOGO.</span><br><br>
+
+    EINE DIGITALE
+    <span>IDENTITÄT.</span>
+  </h2>
+
+</section>
+
+
+<!-- ========================================================
+     VISUAL WORLD
+========================================================= -->
+
+<section class="visual-world">
+
+  <div class="visual-intro reveal">
+
+    <span class="eyebrow">
+      SOCIALCLIP / VISUAL WORLD
+    </span>
+
+    <h2>
+      AUS EINER IDEE WIRD ETWAS,
+      <span>DAS MAN SEHEN KANN.</span>
+    </h2>
+
+    <p>
+      Ein Bild wird zur Geschichte.
+      Eine Geschichte wird zu Aufmerksamkeit.
+      Aufmerksamkeit wird zu Bewegung.
+    </p>
+
+  </div>
+
+
+  <div class="visual-gallery">
+
+    <!--
+      HIER DEINE ECHTEN BILDER EINSETZEN.
+
+      Beispiel:
+      bilder/design.jpg
+      bilder/social.jpg
+      bilder/foto.jpg
+      bilder/web.jpg
+      bilder/video.jpg
+    -->
+
+    <div class="visual-image image-one reveal">
+      <img src="bilder/design.jpg" alt="SocialClip Design">
+      <span>DESIGN</span>
+    </div>
+
+    <div class="visual-image image-two reveal">
+      <img src="bilder/social.jpg" alt="Social Media Content">
+      <span>SOCIAL MEDIA</span>
+    </div>
+
+    <div class="visual-image image-three reveal">
+      <img src="bilder/foto.jpg" alt="SocialClip Photography">
+      <span>PHOTOGRAPHY</span>
+    </div>
+
+    <div class="visual-image image-four reveal">
+      <img src="bilder/web.jpg" alt="SocialClip Webdesign">
+      <span>DIGITAL</span>
+    </div>
+
+    <div class="visual-image image-five reveal">
+      <img src="bilder/video.jpg" alt="SocialClip Video">
+      <span>VIDEO</span>
+    </div>
+
+  </div>
+
+
+  <div class="visual-statement reveal">
+
+    <p>
+      Wir verbinden Design, Social Media,
+      Webseiten, Foto, Video und Marketing
+      zu etwas, das nicht einfach nur gesehen wird —
+      sondern im Kopf bleibt.
+    </p>
+
+
+    <div class="visual-brand">
+
+      <span>DEINE IDEE.</span>
+      <span>DEINE MARKE.</span>
+      <span>DEINE DIGITALE WELT.</span>
+
+    </div>
+
+
+    <div class="visual-logo">
+
+      SOCIALCLIP
+
+      <small>
+        ART · MEDIA · DIGITAL
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <!-- ======================================================
+       MACH ES SICHTBAR
+  ======================================================= -->
+
+  <div class="make-visible reveal">
+
+    <span class="eyebrow">
+      DER NÄCHSTE SCHRITT
+    </span>
+
+    <h2>
+      MACH ES
+      <span>SICHTBAR.</span>
+    </h2>
+
+    <p>
+      Deine Idee verdient mehr als nur einen Platz im Internet.
+    </p>
+
+    <p class="final-lines">
+      Lass sie entstehen.<br>
+      Lass sie wachsen.<br>
+      Lass sie sichtbar werden.
+    </p>
+
+    <a href="#kontakt" class="visual-button">
+      DIGITALE WELT BETRETEN →
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     INSTAGRAM
+========================================================= -->
+
+<section class="instagram" id="instagram">
+
+  <div class="instagram-header reveal">
+
+    <div>
+
+      <div class="eyebrow">
+        SOCIALCLIP / INSTAGRAM
+      </div>
+
+      <h2>
+        FOLLOW<br>
+        THE WORLD.
+      </h2>
+
+    </div>
+
+    <a
+      href="https://www.instagram.com/socialclip.art/"
+      target="_blank"
+      rel="noopener"
+    >
+      @SOCIALCLIP.ART ↗
+    </a>
+
+  </div>
+
+
+  <div class="instagram-grid">
+
+    <a
+      href="https://www.instagram.com/socialclip.art/"
+      target="_blank"
+      rel="noopener"
+      class="instagram-card reveal"
+    ></a>
+
+    <a
+      href="https://www.instagram.com/socialclip.art/"
+      target="_blank"
+      rel="noopener"
+      class="instagram-card reveal"
+    ></a>
+
+    <a
+      href="https://www.instagram.com/socialclip.art/"
+      target="_blank"
+      rel="noopener"
+      class="instagram-card reveal"
+    ></a>
+
+    <a
+      href="https://www.instagram.com/socialclip.art/"
+      target="_blank"
+      rel="noopener"
+      class="instagram-card reveal"
+    ></a>
+
+    <a
+      href="https://www.instagram.com/socialclip.art/"
+      target="_blank"
+      rel="noopener"
+      class="instagram-card reveal"
+    ></a>
+
+    <a
+      href="https://www.instagram.com/socialclip.art/"
+      target="_blank"
+      rel="noopener"
+      class="instagram-card reveal"
+    ></a>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     CONTACT
+========================================================= -->
+
+<section class="contact" id="kontakt">
+
+  <div class="contact-grid">
+
+    <div class="reveal">
+
+      <div class="eyebrow">
+        START A PROJECT
+      </div>
+
+      <h2>
+        LASS UNS
+        <span>STARTEN.</span>
+      </h2>
+
+      <p>
+        Du hast eine Idee?
+        Wir machen daraus etwas,
+        das sichtbar wird.
+      </p>
+
+    </div>
+
+
+    <form
+      class="contact-form reveal"
+      action="https://formspree.io/f/xwlvlqwg"
+      method="POST"
+    >
+
+      <input
+        type="text"
+        name="name"
+        placeholder="Dein Name"
+        required
+      >
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Deine E-Mail"
+        required
+      >
+
+      <input
+        type="text"
+        name="subject"
+        placeholder="Worum geht es?"
+      >
+
+      <textarea
+        name="message"
+        placeholder="Erzähl uns von deiner Idee..."
+        required
+      ></textarea>
+
+      <button type="submit">
+        ANFRAGE SENDEN →
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+  <span>
+    © 2026 SOCIALCLIP ART & MEDIA
+  </span>
+
+  <span>
+    ERLANGEN · GERMANY
+  </span>
+
+</footer>
+
+
+<!-- ========================================================
+     CURSOR
+========================================================= -->
+
+<div class="cursor-light" id="cursorLight"></div>
+
+
 <script>
 
-/* =====================================================
-   PARTIKEL
-===================================================== */
+/* =========================================================
+   INTRO SEQUENCE
+========================================================= */
 
-const particleContainer =
-    document.getElementById(
-        "introParticles"
-    );
+const intro = document.getElementById("intro");
+const steps = document.querySelectorAll(".intro-step");
+const enterButton = document.getElementById("enterButton");
+const transition = document.getElementById("transition");
 
-for(let i = 0; i < 55; i++){
+let currentStep = 0;
 
-    const particle =
-        document.createElement("div");
+function showStep(index){
 
-    particle.className =
-        "intro-particle";
+  steps.forEach((step,i)=>{
+    step.classList.toggle("active",i === index);
+  });
 
-    particle.style.left =
-        Math.random() * 100 + "%";
-
-    particle.style.top =
-        Math.random() * 100 + "%";
-
-    particle.style.animationDelay =
-        Math.random() * 7 + "s";
-
-    particle.style.animationDuration =
-        5 + Math.random() * 8 + "s";
-
-    particleContainer.appendChild(
-        particle
-    );
 }
 
+function runIntro(){
 
-/* =====================================================
-   INTRO ELEMENTE
-===================================================== */
+  if(currentStep < steps.length - 1){
 
-const intro =
-    document.getElementById("intro");
+    currentStep++;
 
-const introTitle =
-    document.getElementById(
-        "introTitle"
-    );
+    showStep(currentStep);
 
-const introSubtitle =
-    document.getElementById(
-        "introSubtitle"
-    );
+    setTimeout(runIntro,2200);
 
-const words = [
+  }
 
-    document.getElementById("word1"),
-    document.getElementById("word2"),
-    document.getElementById("word3"),
-    document.getElementById("word4")
+}
 
-];
+setTimeout(runIntro,2600);
 
-const introBrand =
-    document.getElementById(
-        "introBrand"
-    );
 
-const introFinal =
-    document.getElementById(
-        "introFinal"
-    );
+/* =========================================================
+   ENTER BUTTON
+========================================================= */
 
-const enterButton =
-    document.getElementById(
-        "enterButton"
-    );
+enterButton.addEventListener("click",()=>{
 
-const transition =
-    document.getElementById(
-        "transition"
-    );
+  enterButton.disabled = true;
 
+  transition.classList.add("active");
 
-/* =====================================================
-   INTRO ABLAUF
-===================================================== */
+  intro.style.pointerEvents = "none";
 
-setTimeout(() => {
+  setTimeout(()=>{
 
-    introTitle.classList.add(
-        "show"
-    );
+    intro.classList.add("hidden");
 
-},1000);
+    document.body.classList.remove("locked");
 
+  },1600);
 
-setTimeout(() => {
+  setTimeout(()=>{
 
-    introSubtitle.classList.add(
-        "show"
-    );
+    transition.classList.remove("active");
 
-},2300);
+  },3000);
 
+});
 
-setTimeout(() => {
 
-    introTitle.classList.remove(
-        "show"
-    );
+/* =========================================================
+   REVEAL ON SCROLL
+========================================================= */
 
-    introSubtitle.classList.remove(
-        "show"
-    );
+const observer = new IntersectionObserver(
+  entries => {
 
-    words[0].classList.add(
-        "show"
-    );
+    entries.forEach(entry => {
 
-},5000);
+      if(entry.isIntersecting){
 
+        entry.target.classList.add("visible");
 
-setTimeout(() => {
+      }
 
-    words[0].classList.remove(
-        "show"
-    );
+    });
 
-    words[1].classList.add(
-        "show"
-    );
-
-},7500);
-
-
-setTimeout(() => {
-
-    words[1].classList.remove(
-        "show"
-    );
-
-    words[2].classList.add(
-        "show"
-    );
-
-},10000);
-
-
-setTimeout(() => {
-
-    words[2].classList.remove(
-        "show"
-    );
-
-    words[3].classList.add(
-        "show"
-    );
-
-},12500);
-
-
-setTimeout(() => {
-
-    words[3].classList.remove(
-        "show"
-    );
-
-    introBrand.classList.add(
-        "show"
-    );
-
-},15000);
-
-
-setTimeout(() => {
-
-    introBrand.classList.remove(
-        "show"
-    );
-
-    introFinal.classList.add(
-        "show"
-    );
-
-},18000);
-
-
-/* =====================================================
-   BUTTON — DIGITALE WELT BETRETEN
-===================================================== */
-
-enterButton.addEventListener(
-    "click",
-    function(){
-
-        /* Button sofort deaktivieren,
-           damit kein Doppelklick möglich ist */
-
-        enterButton.disabled = true;
-
-        /* Intro ausblenden */
-
-        introFinal.style.pointerEvents =
-            "none";
-
-        /* Übergang starten */
-
-        transition.classList.add(
-            "active"
-        );
-
-        /* Nach kurzer Kamerafahrt
-           Intro komplett entfernen */
-
-        setTimeout(() => {
-
-            intro.classList.add(
-                "hide"
-            );
-
-            document.body.classList.remove(
-                "locked"
-            );
-
-            window.scrollTo(
-                0,
-                0
-            );
-
-        },1600);
-
-
-        setTimeout(() => {
-
-            transition.classList.remove(
-                "active"
-            );
-
-        },2800);
-
-    }
+  },
+  {
+    threshold:.12
+  }
 );
 
-
-/* =====================================================
-   CURSOR
-===================================================== */
-
-const cursor =
-    document.getElementById(
-        "cursorLight"
-    );
-
-window.addEventListener(
-    "mousemove",
-    e => {
-
-        cursor.style.left =
-            e.clientX + "px";
-
-        cursor.style.top =
-            e.clientY + "px";
-
-    }
-);
+document.querySelectorAll(".reveal").forEach(el=>{
+  observer.observe(el);
+});
 
 
-/* =====================================================
-   SCROLL REVEAL
-===================================================== */
+/* =========================================================
+   CURSOR LIGHT
+========================================================= */
 
-const revealElements =
-    document.querySelectorAll(
-        ".reveal"
-    );
+const cursorLight =
+  document.getElementById("cursorLight");
 
-const observer =
-    new IntersectionObserver(
+window.addEventListener("mousemove",(e)=>{
 
-        entries => {
+  cursorLight.style.left = e.clientX + "px";
+  cursorLight.style.top = e.clientY + "px";
 
-            entries.forEach(
-                entry => {
-
-                    if(
-                        entry.isIntersecting
-                    ){
-
-                        entry.target.classList.add(
-                            "visible"
-                        );
-
-                    }
-
-                }
-            );
-
-        },
-
-        {
-            threshold:.12
-        }
-
-    );
+});
 
 
-revealElements.forEach(
-    element => {
-
-        observer.observe(
-            element
-        );
-
-    }
-);
-
-
-/* =====================================================
+/* =========================================================
    HERO PARALLAX
-===================================================== */
+========================================================= */
 
-window.addEventListener(
-    "scroll",
-    () => {
+const heroTitle =
+  document.querySelector(".hero-title");
 
-        const scroll =
-            window.scrollY;
+window.addEventListener("scroll",()=>{
 
-        const heroGrid =
-            document.querySelector(
-                ".hero-grid"
-            );
+  if(!heroTitle) return;
 
-        if(heroGrid){
+  const y = window.scrollY;
 
-            heroGrid.style.transform =
+  if(y < window.innerHeight){
 
-                `
-                perspective(800px)
-                rotateX(60deg)
-                scale(1.5)
-                translateY(${scroll * .08}px)
-                `;
+    heroTitle.style.transform =
+      `translateY(${y * .12}px)`;
 
-        }
+  }
 
-    }
-);
+});
 
 
-/* =====================================================
+/* =========================================================
+   VISUAL GALLERY PARALLAX
+========================================================= */
+
+const galleryImages =
+  document.querySelectorAll(".visual-image");
+
+window.addEventListener("scroll",()=>{
+
+  if(window.innerWidth <= 700) return;
+
+  const scroll = window.scrollY;
+
+  galleryImages.forEach((image,index)=>{
+
+    const speed =
+      (index % 2 === 0 ? .025 : -.02);
+
+    image.style.marginTop =
+      `${scroll * speed}px`;
+
+  });
+
+});
+
+
+/* =========================================================
    PHONE PARALLAX
-===================================================== */
+========================================================= */
 
 const phone =
-    document.querySelector(
-        ".phone"
+  document.querySelector(".phone");
+
+window.addEventListener("scroll",()=>{
+
+  if(!phone) return;
+
+  if(window.innerWidth <= 700) return;
+
+  const rect =
+    phone.getBoundingClientRect();
+
+  const center =
+    window.innerHeight / 2;
+
+  const distance =
+    rect.top + rect.height / 2 - center;
+
+  phone.style.transform =
+    `translateY(${distance * -.04}px)`;
+
+});
+
+
+/* =========================================================
+   SERVICE MOUSE EFFECT
+========================================================= */
+
+document.querySelectorAll(".service").forEach(service=>{
+
+  service.addEventListener("mousemove",(e)=>{
+
+    const rect =
+      service.getBoundingClientRect();
+
+    const x =
+      e.clientX - rect.left;
+
+    service.style.setProperty(
+      "--mouse-x",
+      x + "px"
     );
 
-window.addEventListener(
-    "scroll",
-    () => {
+  });
 
-        if(!phone) return;
-
-        const rect =
-            phone.getBoundingClientRect();
-
-        const center =
-            window.innerHeight / 2;
-
-        const difference =
-            rect.top - center;
-
-        const rotation =
-            Math.max(
-                -12,
-                Math.min(
-                    12,
-                    difference * -.015
-                )
-            );
-
-        const movement =
-            Math.max(
-                -30,
-                Math.min(
-                    30,
-                    difference * -.05
-                )
-            );
-
-        phone.style.transform =
-
-            `
-            rotate(${rotation - 2}deg)
-            translateY(${movement}px)
-            `;
-
-    }
-);
+});
 
 
-/* =====================================================
-   SERVICE EFFEKT
-===================================================== */
+/* =========================================================
+   PARTICLES
+========================================================= */
 
-document
-    .querySelectorAll(".service")
-    .forEach(
-        service => {
+function createParticles(){
 
-            service.addEventListener(
-                "mousemove",
-                event => {
+  for(let i=0;i<35;i++){
 
-                    const rect =
-                        service.getBoundingClientRect();
+    const particle =
+      document.createElement("div");
 
-                    const x =
-                        event.clientX -
-                        rect.left;
+    particle.className = "particle";
 
-                    service.style.setProperty(
-                        "--mouse-x",
-                        x / rect.width
-                    );
+    particle.style.left =
+      Math.random()*100 + "%";
 
-                }
-            );
+    particle.style.top =
+      Math.random()*100 + "%";
 
-        }
-    );
+    particle.style.opacity =
+      Math.random()*.35;
 
+    particle.style.transform =
+      `scale(${Math.random()*2})`;
 
-/* =====================================================
-   INTRO NICHT MIT MAUSRAD ÜBERSPRINGEN
-===================================================== */
+    document.body.appendChild(particle);
 
-window.addEventListener(
-    "wheel",
-    event => {
+  }
 
-        if(
-            document.body.classList.contains(
-                "locked"
-            )
-        ){
+}
 
-            event.preventDefault();
-
-        }
-
-    },
-    {
-        passive:false
-    }
-);
+createParticles();
 
 
-/* =====================================================
-   ENTER-TASTE
-===================================================== */
+/* =========================================================
+   MOBILE TOUCH DEPTH
+========================================================= */
 
-document.addEventListener(
-    "keydown",
-    event => {
+let touchStart = 0;
 
-        if(
+window.addEventListener("touchstart",(e)=>{
 
-            event.key === "Enter" &&
+  touchStart =
+    e.touches[0].clientY;
 
-            document.body.classList.contains(
-                "locked"
-            ) &&
+},{passive:true});
 
-            introFinal.classList.contains(
-                "show"
-            )
 
-        ){
+window.addEventListener("touchmove",(e)=>{
 
-            enterButton.click();
+  const current =
+    e.touches[0].clientY;
 
-        }
+  const difference =
+    touchStart - current;
 
-    }
-);
+  if(Math.abs(difference) > 5){
+
+    document.documentElement.style
+      .setProperty(
+        "--touch-depth",
+        Math.min(Math.abs(difference),40) + "px"
+      );
+
+  }
+
+},{passive:true});
+
+
+/* =========================================================
+   PREVENT EMPTY IMAGE ICONS FROM LOOKING BAD
+========================================================= */
+
+document.querySelectorAll(".visual-image img")
+.forEach(img=>{
+
+  img.addEventListener("error",()=>{
+
+    img.style.display="none";
+
+    img.parentElement.style.background =
+      "radial-gradient(circle at 30% 30%, #333, transparent 40%), linear-gradient(135deg,#161616,#050505)";
+
+  });
+
+});
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.querySelectorAll("footer span:first-child")
+.forEach(el=>{
+
+  el.innerHTML =
+    `© ${new Date().getFullYear()} SOCIALCLIP ART & MEDIA`;
+
+});
 
 </script>
 
