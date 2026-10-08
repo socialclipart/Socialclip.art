@@ -1118,4 +1118,2218 @@ nav{
 
 .make-visible h2 .outline{
   color:transparent;
-  -webkit
+  -webkit-text-stroke:1px rgba(255,255,255,.5);
+}
+
+.make-visible p{
+  margin-top:50px;
+  max-width:560px;
+  color:#888;
+  line-height:1.8;
+  font-size:16px;
+}
+
+.big-cta{
+  display:inline-flex;
+  margin-top:45px;
+  border-bottom:1px solid #777;
+  padding-bottom:10px;
+  font-size:11px;
+  letter-spacing:.25em;
+  transition:
+    padding .3s ease,
+    border-color .3s ease;
+}
+
+.big-cta:hover{
+  padding-right:25px;
+  border-color:#fff;
+}
+
+/* =========================================================
+   INSTAGRAM
+   ========================================================= */
+
+.instagram{
+  background:#080808;
+  border-top:1px solid var(--line);
+}
+
+.instagram-head{
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  align-items:end;
+  margin-bottom:60px;
+}
+
+.instagram-head h2{
+  font-size:
+    clamp(42px,7vw,100px);
+  letter-spacing:-.07em;
+  line-height:.85;
+}
+
+.instagram-head p{
+  color:#777;
+  max-width:400px;
+  line-height:1.7;
+}
+
+.instagram-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(3,1fr);
+  gap:12px;
+}
+
+.insta-card{
+  aspect-ratio:1;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  background:#111;
+  display:block;
+}
+
+.insta-art{
+  position:absolute;
+  inset:0;
+  transition:transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.insta-card:hover .insta-art{
+  transform:scale(1.08);
+}
+
+.insta-art.one{
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      #555,
+      transparent 18%
+    ),
+    linear-gradient(
+      135deg,
+      #1b1b1b,
+      #050505
+    );
+}
+
+.insta-art.two{
+  background:
+    linear-gradient(
+      130deg,
+      #050505 20%,
+      #292929 21% 40%,
+      #080808 41%
+    );
+}
+
+.insta-art.three{
+  background:
+    radial-gradient(
+      ellipse at center,
+      #383838,
+      #060606 60%
+    );
+}
+
+.insta-art.four{
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #080808 0 16px,
+      #1c1c1c 17px 18px
+    );
+}
+
+.insta-art.five{
+  background:
+    linear-gradient(
+      145deg,
+      #252525,
+      #060606 65%
+    );
+}
+
+.insta-art.six{
+  background:
+    radial-gradient(
+      circle at 70% 35%,
+      #414141,
+      transparent 20%
+    ),
+    #080808;
+}
+
+.insta-number{
+  position:absolute;
+  top:15px;
+  right:16px;
+  color:#777;
+  font-size:9px;
+  z-index:3;
+}
+
+.insta-text{
+  position:absolute;
+  bottom:18px;
+  left:18px;
+  color:#bbb;
+  font-size:9px;
+  letter-spacing:.22em;
+  z-index:3;
+}
+
+.instagram-button{
+  display:inline-flex;
+  margin-top:40px;
+  padding:16px 22px;
+  border:1px solid rgba(255,255,255,.2);
+  font-size:10px;
+  letter-spacing:.2em;
+  transition:
+    background .3s ease,
+    color .3s ease;
+}
+
+.instagram-button:hover{
+  background:#fff;
+  color:#050505;
+}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+.contact{
+  border-top:1px solid var(--line);
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:
+    1fr 1fr;
+  gap:10vw;
+}
+
+.contact-title{
+  font-size:
+    clamp(48px,8vw,120px);
+  line-height:.84;
+  letter-spacing:-.075em;
+}
+
+.contact-copy{
+  margin-top:35px;
+  color:#777;
+  max-width:430px;
+  line-height:1.8;
+}
+
+.contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  border:0;
+  border-bottom:1px solid rgba(255,255,255,.16);
+  background:transparent;
+  color:#fff;
+  padding:18px 0;
+  outline:none;
+  resize:vertical;
+}
+
+.contact-form textarea{
+  min-height:150px;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{
+  color:#555;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+  border-color:#fff;
+}
+
+.submit-button{
+  align-self:flex-start;
+  border:1px solid rgba(255,255,255,.25);
+  background:transparent;
+  color:#fff;
+  padding:17px 25px;
+  cursor:pointer;
+  font-size:10px;
+  letter-spacing:.2em;
+  margin-top:15px;
+  transition:
+    background .3s ease,
+    color .3s ease;
+}
+
+.submit-button:hover{
+  background:#fff;
+  color:#000;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer{
+  padding:70px 6vw 35px;
+  border-top:1px solid var(--line);
+}
+
+.footer-inner{
+  max-width:var(--max);
+  margin:auto;
+}
+
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:start;
+  gap:40px;
+}
+
+.footer-logo{
+  font-size:25px;
+  letter-spacing:.1em;
+  font-weight:700;
+}
+
+.footer-tag{
+  color:#666;
+  font-size:9px;
+  letter-spacing:.25em;
+  margin-top:10px;
+}
+
+.footer-links{
+  display:flex;
+  gap:25px;
+}
+
+.footer-links a{
+  color:#666;
+  font-size:10px;
+}
+
+.footer-bottom{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:40px;
+  align-items:end;
+  margin-top:100px;
+  color:#444;
+  font-size:9px;
+  letter-spacing:.12em;
+}
+
+/* =========================================================
+   LIVE CLOCK
+   ========================================================= */
+
+.live-time{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  text-align:center;
+  min-width:120px;
+}
+
+.live-time-label{
+  color:#555;
+  font-size:8px;
+  letter-spacing:.28em;
+}
+
+#liveClock{
+  color:#aaa;
+  font-size:12px;
+  letter-spacing:.12em;
+  font-variant-numeric:tabular-nums;
+}
+
+#liveDate{
+  color:#444;
+  font-size:8px;
+  letter-spacing:.12em;
+}
+
+/* =========================================================
+   COOKIE BANNER
+   ========================================================= */
+
+.cookie-banner{
+  position:fixed;
+  left:22px;
+  right:22px;
+  bottom:22px;
+  z-index:7000;
+
+  max-width:760px;
+
+  padding:22px 24px;
+
+  background:rgba(12,12,12,.92);
+  border:1px solid rgba(255,255,255,.14);
+
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.45);
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+
+  transform:translateY(130%);
+  opacity:0;
+
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1),
+    opacity .5s ease;
+}
+
+.cookie-banner.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.cookie-content{
+  flex:1;
+}
+
+.cookie-label{
+  color:#777;
+  font-size:8px;
+  letter-spacing:.3em;
+  margin-bottom:8px;
+}
+
+.cookie-text{
+  color:#aaa;
+  font-size:11px;
+  line-height:1.6;
+}
+
+.cookie-text a{
+  color:#fff;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+.cookie-actions{
+  display:flex;
+  gap:8px;
+  flex-shrink:0;
+}
+
+.cookie-button{
+  border:1px solid rgba(255,255,255,.2);
+  background:transparent;
+  color:#aaa;
+  padding:12px 15px;
+  cursor:pointer;
+  font-size:8px;
+  letter-spacing:.16em;
+  transition:
+    background .25s ease,
+    color .25s ease,
+    border-color .25s ease;
+}
+
+.cookie-button:hover{
+  border-color:#fff;
+  color:#fff;
+}
+
+.cookie-button.accept{
+  background:#fff;
+  color:#050505;
+  border-color:#fff;
+}
+
+.cookie-button.accept:hover{
+  background:#ddd;
+}
+
+/* =========================================================
+   REVEAL
+   ========================================================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(45px);
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+.particle{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:#fff;
+  border-radius:50%;
+  opacity:.15;
+  pointer-events:none;
+  z-index:1;
+  animation:particleFloat linear infinite;
+}
+
+@keyframes particleFloat{
+  from{
+    transform:translateY(110vh);
+  }
+  to{
+    transform:translateY(-10vh);
+  }
+}
+
+/* =========================================================
+   CURSOR LIGHT
+   ========================================================= */
+
+.cursor-light{
+  position:fixed;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:999;
+  transform:translate(-50%,-50%);
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.045),
+      transparent 65%
+    );
+  mix-blend-mode:screen;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:800px){
+
+  nav{
+    height:64px;
+    padding:0 20px;
+  }
+
+  .nav-links{
+    gap:15px;
+  }
+
+  .nav-links a{
+    font-size:8px;
+  }
+
+  .nav-links a:nth-child(2){
+    display:none;
+  }
+
+  .hero{
+    min-height:100svh;
+    padding:
+      110px 22px
+      60px;
+  }
+
+  .hero h1{
+    font-size:
+      clamp(58px,17vw,105px);
+  }
+
+  .hero-bottom{
+    margin-top:55px;
+    display:block;
+  }
+
+  .hero-bottom p{
+    font-size:14px;
+  }
+
+  .scroll-note{
+    display:block;
+    margin-top:30px;
+  }
+
+  .section{
+    padding:
+      100px 22px;
+  }
+
+  .section-label{
+    margin-bottom:35px;
+  }
+
+  .scene{
+    min-height:auto;
+    padding:
+      100px 0;
+  }
+
+  .scene-content{
+    grid-template-columns:1fr;
+    gap:45px;
+  }
+
+  .scene-visual{
+    min-height:320px;
+  }
+
+  .service{
+    grid-template-columns:
+      40px 1fr auto;
+    gap:15px;
+    padding:22px 0;
+  }
+
+  .service:hover{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .service-name{
+    font-size:22px;
+  }
+
+  .visual-intro{
+    display:block;
+    margin-bottom:45px;
+  }
+
+  .visual-intro p{
+    margin-top:30px;
+  }
+
+  .visual-gallery{
+    grid-template-columns:1fr 1fr;
+    grid-auto-rows:190px;
+    gap:8px;
+  }
+
+  .visual-card:nth-child(1){
+    grid-row:span 2;
+  }
+
+  .visual-card:nth-child(4){
+    grid-column:span 2;
+  }
+
+  .instagram-head{
+    display:block;
+  }
+
+  .instagram-head p{
+    margin-top:30px;
+  }
+
+  .instagram-grid{
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:60px;
+  }
+
+  .footer-top{
+    display:block;
+  }
+
+  .footer-links{
+    margin-top:35px;
+  }
+
+  .footer-bottom{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:18px;
+    margin-top:70px;
+  }
+
+  .live-time{
+    order:-1;
+    text-align:left;
+  }
+
+  .cursor-light{
+    display:none;
+  }
+
+  .intro-grid{
+    background-size:55px 55px;
+  }
+
+  .intro-word{
+    font-size:
+      clamp(48px,15vw,90px);
+  }
+
+  .intro-final h1{
+    font-size:
+      clamp(38px,11vw,70px);
+  }
+
+  .intro-final p{
+    font-size:14px;
+  }
+
+  .enter-button{
+    padding:16px 20px;
+  }
+
+  /* COOKIE MOBILE */
+
+  .cookie-banner{
+    left:12px;
+    right:12px;
+    bottom:12px;
+    padding:18px;
+    display:block;
+  }
+
+  .cookie-actions{
+    margin-top:16px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .cookie-button{
+    width:100%;
+  }
+
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:.001ms !important;
+  }
+
+}
+
+</style>
+</head>
+
+<body class="locked">
+
+<!-- ======================================================
+     INTRO
+     ====================================================== -->
+
+<div id="intro">
+
+  <div class="intro-bg"></div>
+  <div class="intro-grid"></div>
+  <div class="intro-light"></div>
+
+  <div class="intro-lines">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="intro-content">
+
+    <div class="intro-step active">
+      <small>Eine digitale Reise beginnt</small>
+
+      <div class="intro-word">
+        <span>ALLES</span>
+        <span class="dim">BEGINNT</span>
+        <span>MIT EINER IDEE.</span>
+      </div>
+    </div>
+
+    <div class="intro-step">
+      <small>Ein Gedanke · Ein Bild · Eine Vision</small>
+
+      <div class="intro-word">
+        <span>IDEEN</span>
+        <span class="dim">WERDEN</span>
+        <span>WIRKUNG.</span>
+      </div>
+    </div>
+
+    <div class="intro-step">
+      <small>SocialClip</small>
+
+      <div class="intro-word">
+        <span>FORM.</span>
+        <span>DESIGN.</span>
+        <span>BEWEGUNG.</span>
+      </div>
+    </div>
+
+    <div class="intro-step">
+      <small>Art · Media · Digital</small>
+
+      <div class="intro-word">
+        <span class="dim">AUFMERKSAMKEIT.</span>
+        <span>WIRKUNG.</span>
+        <span>WACHSTUM.</span>
+      </div>
+    </div>
+
+    <div class="intro-step">
+
+      <div class="intro-brand">
+        SOCIALCLIP
+      </div>
+
+      <div class="intro-brand-sub">
+        ART · MEDIA · DIGITAL
+      </div>
+
+    </div>
+
+    <div class="intro-step intro-final">
+
+      <h1>
+        Hallo.<br>
+        Schön, dass du hier bist.
+      </h1>
+
+      <p>
+        Willkommen bei SocialClip.<br>
+        Wir haben eine digitale Welt für dich vorbereitet.
+      </p>
+
+      <button
+        type="button"
+        class="enter-button"
+        id="enterButton"
+      >
+        DIGITALE WELT BETRETEN →
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="transition"></div>
+
+<!-- ======================================================
+     NAVIGATION
+     ====================================================== -->
+
+<nav>
+
+  <a href="#top" class="nav-logo">
+    SOCIALCLIP
+  </a>
+
+  <div class="nav-links">
+
+    <a href="#services">
+      LEISTUNGEN
+    </a>
+
+    <a href="#instagram">
+      INSTAGRAM
+    </a>
+
+    <a href="#contact">
+      KONTAKT
+    </a>
+
+  </div>
+
+</nav>
+
+<main id="top">
+
+<!-- ======================================================
+     HERO
+     ====================================================== -->
+
+<section class="hero">
+
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content reveal">
+
+    <div class="hero-kicker">
+      SOCIALCLIP · ART · MEDIA · DIGITAL
+    </div>
+
+    <h1>
+      <span>IDEEN</span>
+      <span class="outline">WERDEN</span>
+      <span>WIRKUNG.</span>
+    </h1>
+
+    <div class="hero-bottom">
+
+      <p>
+        Wir entwickeln digitale Erlebnisse,
+        Markenauftritte und Inhalte, die nicht
+        einfach nur gesehen werden.
+        Sie sollen etwas auslösen.
+      </p>
+
+      <div class="scroll-note">
+        SCROLLEN ↓
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ======================================================
+     MARQUEE
+     ====================================================== -->
+
+<div class="marquee">
+
+  <div class="marquee-track">
+
+    <span>
+      ART <b class="dot">·</b>
+      MEDIA <b class="dot">·</b>
+      DIGITAL
+    </span>
+
+    <span>
+      ART <b class="dot">·</b>
+      MEDIA <b class="dot">·</b>
+      DIGITAL
+    </span>
+
+    <span>
+      ART <b class="dot">·</b>
+      MEDIA <b class="dot">·</b>
+      DIGITAL
+    </span>
+
+    <span>
+      ART <b class="dot">·</b>
+      MEDIA <b class="dot">·</b>
+      DIGITAL
+    </span>
+
+  </div>
+
+</div>
+
+<!-- ======================================================
+     INTRO TEXT
+     ====================================================== -->
+
+<section class="section reveal">
+
+  <div class="section-inner">
+
+    <div class="section-label">
+      01 / DIE IDEE
+    </div>
+
+    <h2 class="section-title">
+      AUS EINER IDEE WIRD
+      <span class="muted">
+        ETWAS, DAS MAN SEHEN KANN.
+      </span>
+    </h2>
+
+    <p class="section-copy">
+      Ein Bild wird zur Geschichte.
+      Eine Geschichte wird zu Aufmerksamkeit.
+      Aufmerksamkeit wird zu Bewegung.
+      Wir verbinden Design, Social Media,
+      Webseiten, Foto, Video und Marketing
+      zu etwas, das nicht einfach nur gesehen
+      wird — sondern im Kopf bleibt.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- ======================================================
+     SCENES
+     ====================================================== -->
+
+<section class="section scene reveal">
+
+  <div class="section-inner scene-content">
+
+    <div>
+
+      <div class="scene-number">
+        02 / CREATE
+      </div>
+
+      <h2>
+        ERSCHAFFEN.
+      </h2>
+
+      <p style="margin-top:35px;">
+        Aus Gedanken werden Formen.
+        Aus Formen werden Designs.
+        Aus Designs entsteht eine Identität,
+        die zu deiner Marke passt.
+      </p>
+
+    </div>
+
+    <div class="scene-visual"></div>
+
+  </div>
+
+</section>
+
+<section class="section scene reveal">
+
+  <div class="section-inner scene-content">
+
+    <div class="scene-visual"></div>
+
+    <div>
+
+      <div class="scene-number">
+        03 / DIGITAL
+      </div>
+
+      <h2>
+        DIGITAL.
+      </h2>
+
+      <p style="margin-top:35px;">
+        Webseiten, digitale Lösungen und
+        Programmierung werden zu einem Erlebnis.
+        Schnell, modern und auf dem Smartphone
+        genauso stark wie auf dem großen Bildschirm.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section scene reveal">
+
+  <div class="section-inner scene-content">
+
+    <div>
+
+      <div class="scene-number">
+        04 / MEDIA
+      </div>
+
+      <h2>
+        BEWEGUNG.
+      </h2>
+
+      <p style="margin-top:35px;">
+        Foto, Video und Content erzählen
+        Geschichten, die nicht stillstehen.
+        Wir bringen deine Inhalte in Bewegung.
+      </p>
+
+    </div>
+
+    <div class="scene-visual"></div>
+
+  </div>
+
+</section>
+
+<section class="section scene reveal">
+
+  <div class="section-inner scene-content">
+
+    <div class="scene-visual"></div>
+
+    <div>
+
+      <div class="scene-number">
+        05 / SOCIAL
+      </div>
+
+      <h2>
+        SICHTBAR.
+      </h2>
+
+      <p style="margin-top:35px;">
+        Social Media wird zur Bühne.
+        Mit Strategie, Content und Marketing
+        bringen wir deine Marke dorthin,
+        wo Menschen aufmerksam werden.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section scene reveal">
+
+  <div class="section-inner scene-content">
+
+    <div>
+
+      <div class="scene-number">
+        06 / GROW
+      </div>
+
+      <h2>
+        WACHSEN.
+      </h2>
+
+      <p style="margin-top:35px;">
+        Sichtbarkeit ist kein Zufall.
+        Wir verbinden Kreativität und Strategie,
+        damit aus Aufmerksamkeit echte Chancen
+        und neue Kunden entstehen.
+      </p>
+
+    </div>
+
+    <div class="scene-visual"></div>
+
+  </div>
+
+</section>
+
+<!-- ======================================================
+     SERVICES
+     ====================================================== -->
+
+<section
+  class="section services reveal"
+  id="services"
+>
+
+  <div class="section-inner">
+
+    <div class="section-label">
+      07 / WAS WIR MACHEN
+    </div>
+
+    <h2 class="section-title">
+      DEINE IDEE.<br>
+      UNSERE WERKZEUGE.
+    </h2>
+
+    <div class="service-list">
+
+      <a href="#contact" class="service">
+        <span class="service-number">01</span>
+        <span class="service-name">Webseiten erstellen</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">02</span>
+        <span class="service-name">Flyer erstellen</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">03</span>
+        <span class="service-name">Online Marketing</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">04</span>
+        <span class="service-name">Visitenkarten erstellen</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">05</span>
+        <span class="service-name">Social Media Assistant</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">06</span>
+        <span class="service-name">Logo erstellen</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">07</span>
+        <span class="service-name">Video &amp; Photo Editor</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">08</span>
+        <span class="service-name">Lebenslauf erstellen</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">09</span>
+        <span class="service-name">Speisekarte erstellen</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">10</span>
+        <span class="service-name">Virtuellen Assistenten</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">11</span>
+        <span class="service-name">Programmierung</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">12</span>
+        <span class="service-name">Neukundengewinnung</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">13</span>
+        <span class="service-name">Strategieentwicklung</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+      <a href="#contact" class="service">
+        <span class="service-number">14</span>
+        <span class="service-name">TikTok Marketing</span>
+        <span class="service-arrow">↗</span>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ======================================================
+     MANIFESTO
+     ====================================================== -->
+
+<section class="section manifesto reveal">
+
+  <div class="section-inner">
+
+    <div class="section-label">
+      08 / UNSERE SICHT
+    </div>
+
+    <h2>
+      <span>NICHT NUR</span>
+      <span class="thin">SCHÖN.</span>
+      <span>SONDERN</span>
+      <span>WIRKSAM.</span>
+    </h2>
+
+  </div>
+
+</section>
+
+<!-- ======================================================
+     VISUAL WORLD
+     ====================================================== -->
+
+<section class="section visual-world reveal">
+
+  <div class="section-inner">
+
+    <div class="visual-intro">
+
+      <div>
+
+        <div class="section-label">
+          09 / VISUAL WORLD
+        </div>
+
+        <h2>
+          BILDER,<br>
+          DIE ETWAS<br>
+          <span style="color:#555;">
+            AUSLÖSEN.
+          </span>
+        </h2>
+
+      </div>
+
+      <p>
+        Design, Social Media, Fotografie,
+        Webseiten und Video treffen aufeinander.
+        Eine visuelle Welt für deine Marke —
+        reduziert, modern und mit Charakter.
+      </p>
+
+    </div>
+
+    <div class="visual-gallery">
+
+      <a href="#contact" class="visual-card">
+
+        <div class="visual-art art-design"></div>
+
+        <span class="visual-index">
+          01
+        </span>
+
+        <span class="visual-label">
+          DESIGN
+        </span>
+
+      </a>
+
+      <a href="#instagram" class="visual-card">
+
+        <div class="visual-art art-social"></div>
+
+        <span class="visual-index">
+          02
+        </span>
+
+        <span class="visual-label">
+          SOCIAL
+        </span>
+
+      </a>
+
+      <a href="#contact" class="visual-card">
+
+        <div class="visual-art art-photo"></div>
+
+        <span class="visual-index">
+          03
+        </span>
+
+        <span class="visual-label">
+          PHOTO
+        </span>
+
+      </a>
+
+      <a href="#contact" class="visual-card">
+
+        <div class="visual-art art-web"></div>
+
+        <span class="visual-index">
+          04
+        </span>
+
+        <span class="visual-label">
+          WEB
+        </span>
+
+      </a>
+
+      <a href="#contact" class="visual-card">
+
+        <div class="visual-art art-video"></div>
+
+        <span class="visual-index">
+          05
+        </span>
+
+        <span class="visual-label">
+          VIDEO
+        </span>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ======================================================
+     MACH ES SICHTBAR
+     ====================================================== -->
+
+<section class="section make-visible reveal">
+
+  <div class="section-inner make-visible-content">
+
+    <div class="section-label">
+      10 / YOUR WORLD
+    </div>
+
+    <h2>
+      <span>DEINE IDEE.</span>
+      <span class="outline">DEINE MARKE.</span>
+      <span>MACH ES SICHTBAR.</span>
+    </h2>
+
+    <p>
+      Deine Idee verdient mehr als nur einen Platz
+      im Internet. Lass sie entstehen.
+      Lass sie wachsen. Lass sie sichtbar werden.
+    </p>
+
+    <a href="#contact" class="big-cta">
+      PROJEKT STARTEN →
+    </a>
+
+  </div>
+
+</section>
+
+<!-- ======================================================
+     INSTAGRAM
+     ====================================================== -->
+
+<section
+  class="section instagram reveal"
+  id="instagram"
+>
+
+  <div class="section-inner">
+
+    <div class="instagram-head">
+
+      <div>
+
+        <div class="section-label">
+          11 / SOCIALCLIP.ART
+        </div>
+
+        <h2>
+          FOLGE<br>
+          UNSERER<br>
+          <span style="color:#555;">
+            WELT.
+          </span>
+        </h2>
+
+      </div>
+
+      <p>
+        Ein kleiner Blick hinter die digitale Welt
+        von SocialClip. Design, Projekte, Ideen,
+        Content und neue Arbeiten.
+      </p>
+
+    </div>
+
+    <div class="instagram-grid">
+
+      <a
+        class="insta-card"
+        href="https://www.instagram.com/socialclip.art/"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="insta-art one"></div>
+        <span class="insta-number">01</span>
+        <span class="insta-text">SOCIALCLIP</span>
+      </a>
+
+      <a
+        class="insta-card"
+        href="https://www.instagram.com/socialclip.art/"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="insta-art two"></div>
+        <span class="insta-number">02</span>
+        <span class="insta-text">ART</span>
+      </a>
+
+      <a
+        class="insta-card"
+        href="https://www.instagram.com/socialclip.art/"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="insta-art three"></div>
+        <span class="insta-number">03</span>
+        <span class="insta-text">MEDIA</span>
+      </a>
+
+      <a
+        class="insta-card"
+        href="https://www.instagram.com/socialclip.art/"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="insta-art four"></div>
+        <span class="insta-number">04</span>
+        <span class="insta-text">DIGITAL</span>
+      </a>
+
+      <a
+        class="insta-card"
+        href="https://www.instagram.com/socialclip.art/"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="insta-art five"></div>
+        <span class="insta-number">05</span>
+        <span class="insta-text">CREATE</span>
+      </a>
+
+      <a
+        class="insta-card"
+        href="https://www.instagram.com/socialclip.art/"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="insta-art six"></div>
+        <span class="insta-number">06</span>
+        <span class="insta-text">FOLLOW</span>
+      </a>
+
+    </div>
+
+    <a
+      class="instagram-button"
+      href="https://www.instagram.com/socialclip.art/"
+      target="_blank"
+      rel="noopener"
+    >
+      INSTAGRAM BESUCHEN →
+    </a>
+
+  </div>
+
+</section>
+
+<!-- ======================================================
+     CONTACT
+     ====================================================== -->
+
+<section
+  class="section contact reveal"
+  id="contact"
+>
+
+  <div class="section-inner">
+
+    <div class="contact-grid">
+
+      <div>
+
+        <div class="section-label">
+          12 / KONTAKT
+        </div>
+
+        <h2 class="contact-title">
+          LASS UNS<br>
+          ETWAS<br>
+          STARTEN.
+        </h2>
+
+        <p class="contact-copy">
+          Du hast eine Idee, ein Unternehmen,
+          ein Projekt oder einfach eine Frage?
+          Schreib uns. Wir schauen gemeinsam,
+          was daraus entstehen kann.
+        </p>
+
+      </div>
+
+      <form
+        class="contact-form"
+        action="https://formspree.io/f/xwlvlqwg"
+        method="POST"
+      >
+
+        <input
+          type="text"
+          name="name"
+          placeholder="DEIN NAME"
+          required
+        >
+
+        <input
+          type="email"
+          name="email"
+          placeholder="DEINE E-MAIL"
+          required
+        >
+
+        <input
+          type="text"
+          name="project"
+          placeholder="WORUM GEHT ES?"
+        >
+
+        <textarea
+          name="message"
+          placeholder="ERZÄHL UNS VON DEINER IDEE..."
+          required
+        ></textarea>
+
+        <button
+          type="submit"
+          class="submit-button"
+        >
+          NACHRICHT SENDEN →
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- ======================================================
+     FOOTER
+     ====================================================== -->
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div class="footer-top">
+
+      <div>
+
+        <div class="footer-logo">
+          SOCIALCLIP
+        </div>
+
+        <div class="footer-tag">
+          ART · MEDIA · DIGITAL
+        </div>
+
+      </div>
+
+      <div class="footer-links">
+
+        <a href="#services">
+          LEISTUNGEN
+        </a>
+
+        <a href="#instagram">
+          INSTAGRAM
+        </a>
+
+        <a href="#contact">
+          KONTAKT
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+      <span>
+        SOCIALCLIP ART &amp; MEDIA
+      </span>
+
+      <!-- LIVE UHRZEIT -->
+
+      <div class="live-time">
+
+        <span class="live-time-label">
+          LOCAL TIME
+        </span>
+
+        <span id="liveClock">
+          00:00:00
+        </span>
+
+        <span id="liveDate">
+          —
+        </span>
+
+      </div>
+
+      <span>
+        ERLANGEN · DEUTSCHLAND
+      </span>
+
+      <span>
+        © <span id="year"></span>
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- ======================================================
+     COOKIE BANNER
+     ====================================================== -->
+
+<div
+  class="cookie-banner"
+  id="cookieBanner"
+  role="dialog"
+  aria-label="Cookie-Hinweis"
+>
+
+  <div class="cookie-content">
+
+    <div class="cookie-label">
+      PRIVATSPHÄRE
+    </div>
+
+    <div class="cookie-text">
+      Wir verwenden notwendige Cookies,
+      damit diese Website funktioniert.
+      Deine Auswahl wird auf deinem Gerät gespeichert.
+    </div>
+
+  </div>
+
+  <div class="cookie-actions">
+
+    <button
+      type="button"
+      class="cookie-button"
+      id="necessaryCookies"
+    >
+      NUR NOTWENDIGE
+    </button>
+
+    <button
+      type="button"
+      class="cookie-button accept"
+      id="acceptCookies"
+    >
+      ALLE AKZEPTIEREN
+    </button>
+
+  </div>
+
+</div>
+
+<div class="cursor-light" id="cursorLight"></div>
+
+<!-- ======================================================
+     JAVASCRIPT
+     ====================================================== -->
+
+<script>
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+const intro =
+  document.getElementById("intro");
+
+const enterButton =
+  document.getElementById("enterButton");
+
+const transition =
+  document.getElementById("transition");
+
+const introSteps =
+  document.querySelectorAll(".intro-step");
+
+let introIndex = 0;
+let introFinished = false;
+
+function showIntroStep(index){
+
+  introSteps.forEach((step,i)=>{
+
+    step.classList.toggle(
+      "active",
+      i === index
+    );
+
+  });
+
+}
+
+function advanceIntro(){
+
+  if(introFinished) return;
+
+  if(introIndex < introSteps.length - 1){
+
+    introIndex++;
+
+    showIntroStep(introIndex);
+
+  }
+
+}
+
+setTimeout(()=>{
+
+  const introTimer =
+    setInterval(()=>{
+
+      if(introFinished){
+
+        clearInterval(introTimer);
+        return;
+
+      }
+
+      advanceIntro();
+
+      if(
+        introIndex >=
+        introSteps.length - 1
+      ){
+
+        clearInterval(introTimer);
+
+      }
+
+    },2200);
+
+},2600);
+
+
+/* =========================================================
+   ENTER
+   ========================================================= */
+
+enterButton.addEventListener(
+  "click",
+  ()=>{
+
+    if(introFinished) return;
+
+    introFinished = true;
+
+    enterButton.disabled = true;
+
+    transition.classList.add("go");
+
+    intro.style.pointerEvents = "none";
+
+    setTimeout(()=>{
+
+      intro.classList.add("hide");
+
+      document.body.classList.remove(
+        "locked"
+      );
+
+      window.scrollTo({
+        top:0,
+        behavior:"instant"
+      });
+
+    },850);
+
+  }
+);
+
+
+/* =========================================================
+   REVEAL
+   ========================================================= */
+
+const revealElements =
+  document.querySelectorAll(".reveal");
+
+const revealObserver =
+  new IntersectionObserver(
+    entries=>{
+
+      entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+          entry.target.classList.add(
+            "visible"
+          );
+
+        }
+
+      });
+
+    },
+    {
+      threshold:.12
+    }
+  );
+
+revealElements.forEach(element=>{
+  revealObserver.observe(element);
+});
+
+
+/* =========================================================
+   CURSOR
+   ========================================================= */
+
+const cursorLight =
+  document.getElementById("cursorLight");
+
+let mouseX =
+  window.innerWidth / 2;
+
+let mouseY =
+  window.innerHeight / 2;
+
+let lightX = mouseX;
+let lightY = mouseY;
+
+window.addEventListener(
+  "mousemove",
+  event=>{
+
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+  }
+);
+
+function animateCursor(){
+
+  lightX +=
+    (mouseX - lightX) * .08;
+
+  lightY +=
+    (mouseY - lightY) * .08;
+
+  cursorLight.style.left =
+    lightX + "px";
+
+  cursorLight.style.top =
+    lightY + "px";
+
+  requestAnimationFrame(
+    animateCursor
+  );
+
+}
+
+animateCursor();
+
+
+/* =========================================================
+   HERO PARALLAX
+   ========================================================= */
+
+const heroGrid =
+  document.querySelector(".hero-grid");
+
+window.addEventListener(
+  "scroll",
+  ()=>{
+
+    if(window.innerWidth <= 800)
+      return;
+
+    const y = window.scrollY;
+
+    if(heroGrid){
+
+      heroGrid.style.transform =
+        `translateY(${y * .12}px)`;
+
+    }
+
+  },
+  {passive:true}
+);
+
+
+/* =========================================================
+   VISUAL PARALLAX
+   ========================================================= */
+
+const visualCards =
+  document.querySelectorAll(
+    ".visual-card"
+  );
+
+function updateVisuals(){
+
+  if(window.innerWidth <= 800){
+
+    visualCards.forEach(card=>{
+      card.style.transform="";
+    });
+
+    return;
+
+  }
+
+  const viewportCenter =
+    window.innerHeight / 2;
+
+  visualCards.forEach(card=>{
+
+    const rect =
+      card.getBoundingClientRect();
+
+    const cardCenter =
+      rect.top +
+      rect.height / 2;
+
+    const distance =
+      (cardCenter - viewportCenter)
+      / window.innerHeight;
+
+    const move =
+      distance * -12;
+
+    card.style.transform =
+      `translateY(${move}px)`;
+
+  });
+
+}
+
+window.addEventListener(
+  "scroll",
+  updateVisuals,
+  {passive:true}
+);
+
+window.addEventListener(
+  "resize",
+  updateVisuals
+);
+
+updateVisuals();
+
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+for(let i=0;i<35;i++){
+
+  const particle =
+    document.createElement("div");
+
+  particle.className =
+    "particle";
+
+  particle.style.left =
+    Math.random()*100 + "%";
+
+  particle.style.animationDuration =
+    (12 + Math.random()*20) + "s";
+
+  particle.style.animationDelay =
+    (-Math.random()*20) + "s";
+
+  particle.style.opacity =
+    (.04 + Math.random()*.15);
+
+  document.body.appendChild(
+    particle
+  );
+
+}
+
+
+/* =========================================================
+   LIVE CLOCK
+   ========================================================= */
+
+const liveClock =
+  document.getElementById(
+    "liveClock"
+  );
+
+const liveDate =
+  document.getElementById(
+    "liveDate"
+  );
+
+function updateClock(){
+
+  const now = new Date();
+
+  const time =
+    now.toLocaleTimeString(
+      "de-DE",
+      {
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit"
+      }
+    );
+
+  const date =
+    now.toLocaleDateString(
+      "de-DE",
+      {
+        weekday:"short",
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+      }
+    );
+
+  liveClock.textContent =
+    time;
+
+  liveDate.textContent =
+    date.toUpperCase();
+
+}
+
+updateClock();
+
+setInterval(
+  updateClock,
+  1000
+);
+
+
+/* =========================================================
+   COOKIE SYSTEM
+   ========================================================= */
+
+const cookieBanner =
+  document.getElementById(
+    "cookieBanner"
+  );
+
+const acceptCookies =
+  document.getElementById(
+    "acceptCookies"
+  );
+
+const necessaryCookies =
+  document.getElementById(
+    "necessaryCookies"
+  );
+
+function saveCookieChoice(choice){
+
+  /*
+    Nur die Auswahl wird gespeichert.
+    Es werden hier keine Tracking-
+    oder Marketing-Cookies gesetzt.
+  */
+
+  localStorage.setItem(
+    "socialclip_cookie_consent",
+    choice
+  );
+
+  cookieBanner.classList.remove(
+    "show"
+  );
+
+}
+
+function checkCookieConsent(){
+
+  const consent =
+    localStorage.getItem(
+      "socialclip_cookie_consent"
+    );
+
+  if(!consent){
+
+    setTimeout(()=>{
+
+      cookieBanner.classList.add(
+        "show"
+      );
+
+    },1800);
+
+  }
+
+}
+
+acceptCookies.addEventListener(
+  "click",
+  ()=>{
+    saveCookieChoice("all");
+  }
+);
+
+necessaryCookies.addEventListener(
+  "click",
+  ()=>{
+    saveCookieChoice("necessary");
+  }
+);
+
+checkCookieConsent();
+
+
+/* =========================================================
+   YEAR
+   ========================================================= */
+
+document.getElementById(
+  "year"
+).textContent =
+  new Date().getFullYear();
+
+
+/* =========================================================
+   KEYBOARD
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key === "Enter" &&
+      !introFinished &&
+      introIndex ===
+      introSteps.length - 1
+    ){
+
+      enterButton.click();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
