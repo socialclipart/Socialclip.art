@@ -34,7 +34,7 @@ a{
   text-decoration:none;
 }
 
-button,input,textarea{
+button,input,textarea,select{
   font:inherit;
 }
 
@@ -148,10 +148,6 @@ body::after{
   letter-spacing:.12em;
 }
 
-/* =========================
-   DIGITAL FILM MARKERS
-========================= */
-
 .progress{
   position:fixed;
   top:71px;
@@ -160,8 +156,11 @@ body::after{
   height:1px;
   z-index:9001;
   background:#fff;
-  box-shadow:0 0 10px rgba(255,255,255,.45);
 }
+
+/* =========================
+   SCENE INFO
+========================= */
 
 .scene-info{
   position:fixed;
@@ -212,227 +211,232 @@ body::after{
       #050505 75%
     );
 
+  opacity:1;
+  visibility:visible;
+
+  transform:scale(1);
+  transform-origin:center center;
+
   transition:
-    opacity 1.5s cubic-bezier(.77,0,.18,1),
-    visibility 1.5s;
+    opacity 1.2s cubic-bezier(.77,0,.18,1),
+    transform 1.6s cubic-bezier(.77,0,.18,1),
+    visibility 1.6s;
 }
 
-.intro.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
-
-.intro-grid{
+.intro::before{
+  content:"";
   position:absolute;
-  inset:-25%;
-
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,.035) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.035) 1px,
-      transparent 1px
-    );
-
-  background-size:70px 70px;
-
-  transform:
-    perspective(750px)
-    rotateX(58deg)
-    scale(1.7);
-
-  transform-origin:center bottom;
-
-  opacity:.42;
-}
-
-.intro-light{
-  position:absolute;
-
-  width:45vw;
-  height:45vw;
-
-  min-width:280px;
-  min-height:280px;
-
-  border-radius:50%;
+  inset:-20%;
 
   background:
     radial-gradient(
-      circle,
-      rgba(255,255,255,.09),
-      rgba(255,255,255,0) 68%
+      circle at 50% 50%,
+      rgba(255,255,255,.055),
+      transparent 28%
     );
 
-  filter:blur(22px);
+  transform:scale(.8);
+  opacity:.6;
+
+  transition:
+    transform 1.5s cubic-bezier(.22,1,.36,1),
+    opacity 1.2s ease;
 }
 
-.intro-line{
-  position:absolute;
-  width:70vw;
-  height:1px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.25),
-    transparent
-  );
-  transform:rotate(-17deg);
-  opacity:.45;
+.intro.entering{
+  opacity:0;
+  visibility:hidden;
+  transform:scale(1.22);
+  pointer-events:none;
 }
 
-.intro-corner{
-  position:absolute;
-  font-size:8px;
-  letter-spacing:.25em;
-  color:#65615b;
-}
-
-.intro-corner.one{
-  top:110px;
-  left:28px;
-}
-
-.intro-corner.two{
-  top:110px;
-  right:28px;
-}
-
-.intro-corner.three{
-  bottom:28px;
-  right:28px;
+.intro.entering::before{
+  transform:scale(2.4);
+  opacity:0;
 }
 
 .intro-content{
   position:relative;
   z-index:4;
-
-  width:min(1000px,90%);
+  width:min(900px,88%);
   text-align:center;
+
+  transform:scale(1);
+  opacity:1;
+
+  transition:
+    transform 1.45s cubic-bezier(.22,1,.36,1),
+    opacity 1s ease;
+}
+
+.intro.entering .intro-content{
+  transform:scale(2.35);
+  opacity:0;
 }
 
 .intro-label{
-  margin-bottom:30px;
-
+  margin-bottom:28px;
   font-size:9px;
-  letter-spacing:.38em;
+  letter-spacing:.35em;
   color:#77736c;
-}
-
-.intro-title{
-  font-size:
-    clamp(48px,8vw,112px);
-
-  line-height:.88;
-  letter-spacing:-.065em;
-  font-weight:800;
-}
-
-.intro-title span{
-  display:block;
 
   opacity:0;
-  transform:translateY(28px);
-
-  transition:
-    opacity 1s ease,
-    transform 1s cubic-bezier(.22,1,.36,1);
-}
-
-.intro-title span.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.intro-copy{
-  margin:38px auto 0;
-
-  max-width:650px;
-
-  min-height:55px;
-
-  color:#918d85;
-
-  font-size:15px;
-  line-height:1.8;
-
-  transition:
-    opacity .6s ease,
-    transform .6s ease;
-}
-
-.intro-final{
-  margin-top:35px;
-
-  opacity:0;
-  transform:translateY(15px);
+  transform:translateY(12px);
 
   transition:
     opacity 1s ease,
     transform 1s ease;
-
-  pointer-events:none;
 }
 
-.intro-final.show{
+.intro.ready .intro-label{
   opacity:1;
   transform:translateY(0);
-  pointer-events:auto;
 }
 
-.enter{
+.intro-title{
+  font-size:clamp(45px,8vw,110px);
+  line-height:.9;
+  letter-spacing:-.065em;
+  font-weight:700;
+
+  opacity:0;
+  transform:scale(.96) translateY(12px);
+
+  transition:
+    opacity 1.1s ease,
+    transform 1.1s cubic-bezier(.22,1,.36,1);
+}
+
+.intro.ready .intro-title{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+
+.intro-title span{
+  display:block;
+}
+
+.intro-title span:last-child{
+  color:#88847d;
+}
+
+.intro-copy{
   position:relative;
+
+  min-height:22px;
+
+  margin:35px auto 0;
+
+  color:#918d85;
+  font-size:14px;
+  letter-spacing:.02em;
+
+  opacity:0;
+  transform:translateY(10px);
+
+  transition:
+    opacity .65s ease,
+    transform .65s ease;
+}
+
+.intro-copy.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.intro-copy.fade{
+  opacity:0;
+  transform:translateY(-8px);
+}
+
+.intro-enter{
+  position:absolute;
+
+  left:50%;
+  bottom:110px;
+
+  transform:
+    translateX(-50%)
+    translateY(18px);
+
+  opacity:0;
+  pointer-events:none;
+
+  padding:15px 22px;
 
   border:1px solid rgba(255,255,255,.3);
 
-  background:rgba(255,255,255,.015);
+  background:rgba(255,255,255,.025);
 
   color:#fff;
-
-  padding:16px 25px;
 
   cursor:pointer;
 
   font-size:9px;
-  letter-spacing:.2em;
+  letter-spacing:.22em;
 
-  overflow:hidden;
+  backdrop-filter:blur(8px);
 
   transition:
+    opacity .8s ease,
+    transform .8s cubic-bezier(.22,1,.36,1),
     background .35s ease,
     color .35s ease,
     border-color .35s ease;
 }
 
-.enter::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-100%;
-  width:100%;
-  height:100%;
-
-  background:rgba(255,255,255,.12);
-
-  transition:left .5s ease;
+.intro-enter.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:
+    translateX(-50%)
+    translateY(0);
 }
 
-.enter:hover::before{
-  left:100%;
-}
-
-.enter:hover{
+.intro-enter:hover{
   background:#fff;
   color:#050505;
   border-color:#fff;
 }
 
+.intro-enter:disabled{
+  cursor:default;
+}
+
+.intro-progress{
+  position:absolute;
+  left:50%;
+  bottom:42px;
+  transform:translateX(-50%);
+  width:min(520px,82vw);
+}
+
+.intro-progress-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:9px;
+
+  color:#77736c;
+  font-size:8px;
+  letter-spacing:.18em;
+}
+
+.intro-progress-track{
+  width:100%;
+  height:2px;
+  background:rgba(255,255,255,.12);
+  overflow:hidden;
+}
+
+.intro-progress-bar{
+  width:0%;
+  height:100%;
+  background:#fff;
+  transition:width .05s linear;
+}
+
 /* =========================
-   CINEMATIC CUT
+   FILM CUT
 ========================= */
 
 .film-cut{
@@ -440,34 +444,38 @@ body::after{
   inset:0;
   z-index:9500;
 
-  background:#fff;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,255,255,.18),
+      rgba(255,255,255,.02) 35%,
+      #050505 75%
+    );
 
   pointer-events:none;
 
-  transform:scaleY(0);
+  opacity:0;
 
-  transform-origin:center;
+  transform:scale(1.15);
 
   transition:
-    transform .65s cubic-bezier(.77,0,.18,1);
+    opacity .25s ease,
+    transform 1.4s cubic-bezier(.22,1,.36,1);
 }
 
 .film-cut.active{
-  transform:scaleY(1);
+  opacity:1;
+  transform:scale(1);
 }
 
 /* =========================
-   GENERAL SECTIONS
+   GENERAL
 ========================= */
 
 section{
   position:relative;
-
   min-height:100vh;
-
-  padding:
-    135px
-    7vw;
+  padding:135px 7vw;
 }
 
 .center{
@@ -478,21 +486,15 @@ section{
 
 .section-label{
   margin-bottom:25px;
-
   font-size:9px;
   letter-spacing:.32em;
-
   color:#69655f;
 }
 
 .big-title{
   max-width:1150px;
-
-  font-size:
-    clamp(48px,9vw,145px);
-
+  font-size:clamp(48px,9vw,145px);
   line-height:.86;
-
   letter-spacing:-.07em;
 }
 
@@ -502,9 +504,7 @@ section{
 
 .text{
   max-width:650px;
-
   color:#9b978f;
-
   font-size:15px;
   line-height:1.9;
 }
@@ -515,7 +515,6 @@ section{
 
 .hero{
   min-height:100vh;
-
   padding-top:160px;
 
   background:
@@ -528,16 +527,10 @@ section{
 
 .hero-small{
   margin-top:40px;
-
   color:#68645e;
-
   font-size:9px;
   letter-spacing:.25em;
 }
-
-/* =========================
-   CINEMATIC CHAPTER LINE
-========================= */
 
 .chapter-line{
   display:flex;
@@ -554,10 +547,8 @@ section{
 
 .chapter-line::before{
   content:"";
-
   width:45px;
   height:1px;
-
   background:#77736c;
 }
 
@@ -581,7 +572,6 @@ section{
 
 .category{
   min-height:275px;
-
   padding:35px;
 
   display:flex;
@@ -603,7 +593,6 @@ section{
 
 .category-number{
   color:#5d5953;
-
   font-size:9px;
   letter-spacing:.2em;
 }
@@ -616,9 +605,7 @@ section{
 
 .category p{
   max-width:330px;
-
   color:#74706a;
-
   font-size:12px;
   line-height:1.7;
 }
@@ -654,7 +641,6 @@ section{
 .service:hover{
   padding-left:16px;
   padding-right:16px;
-
   background:rgba(255,255,255,.025);
 }
 
@@ -664,17 +650,480 @@ section{
 }
 
 .service h3{
-  font-size:
-    clamp(20px,3vw,36px);
-
+  font-size:clamp(20px,3vw,36px);
   font-weight:400;
-
   letter-spacing:-.035em;
 }
 
 .service-arrow{
   color:#77736c;
   font-size:16px;
+}
+
+/* =========================
+   TOOLS / WIDGETS
+========================= */
+
+.tools{
+  border-top:1px solid var(--line);
+  background:
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(255,255,255,.035),
+      transparent 35%
+    );
+}
+
+.tools-intro{
+  max-width:700px;
+}
+
+.widget-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:70px;
+}
+
+.widget-card{
+  position:relative;
+  min-height:310px;
+  padding:30px;
+
+  border:1px solid var(--line);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.008)
+    );
+
+  overflow:hidden;
+
+  transition:
+    transform .4s ease,
+    border-color .4s ease,
+    background .4s ease;
+}
+
+.widget-card:hover{
+  transform:translateY(-7px);
+  border-color:rgba(255,255,255,.3);
+  background:rgba(255,255,255,.045);
+}
+
+.widget-card::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-80px;
+  bottom:-90px;
+  border-radius:50%;
+  background:rgba(255,255,255,.04);
+  filter:blur(15px);
+}
+
+.widget-number{
+  color:#65615b;
+  font-size:8px;
+  letter-spacing:.25em;
+}
+
+.widget-card h3{
+  margin-top:80px;
+  font-size:30px;
+  font-weight:400;
+  letter-spacing:-.045em;
+}
+
+.widget-card p{
+  margin-top:15px;
+  color:#77736c;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.widget-open{
+  position:absolute;
+  left:30px;
+  bottom:30px;
+
+  border:1px solid rgba(255,255,255,.25);
+  background:transparent;
+  color:#fff;
+
+  padding:11px 16px;
+
+  cursor:pointer;
+
+  font-size:8px;
+  letter-spacing:.18em;
+
+  transition:.3s ease;
+}
+
+.widget-open:hover{
+  background:#fff;
+  color:#050505;
+}
+
+/* =========================
+   WIDGET OVERLAY
+========================= */
+
+.widget-overlay{
+  position:fixed;
+  inset:0;
+  z-index:11000;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:25px;
+
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(18px);
+
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+
+  transition:
+    opacity .4s ease,
+    visibility .4s ease;
+}
+
+.widget-overlay.active{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.widget-window{
+  width:min(900px,100%);
+  max-height:90vh;
+  overflow:auto;
+
+  border:1px solid rgba(255,255,255,.18);
+
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(255,255,255,.055),
+      transparent 30%
+    ),
+    #080808;
+
+  box-shadow:0 30px 100px rgba(0,0,0,.6);
+
+  transform:translateY(25px) scale(.98);
+
+  transition:
+    transform .45s cubic-bezier(.22,1,.36,1);
+}
+
+.widget-overlay.active .widget-window{
+  transform:translateY(0) scale(1);
+}
+
+.widget-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:20px 25px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.widget-head-label{
+  color:#77736c;
+  font-size:8px;
+  letter-spacing:.22em;
+}
+
+.widget-close{
+  border:0;
+  background:none;
+  color:#fff;
+  cursor:pointer;
+  font-size:20px;
+}
+
+.widget-body{
+  padding:40px;
+}
+
+.widget-body h3{
+  font-size:clamp(32px,6vw,65px);
+  line-height:.9;
+  letter-spacing:-.06em;
+  font-weight:400;
+}
+
+.widget-body h3 span{
+  color:#77736c;
+}
+
+.widget-sub{
+  margin-top:18px;
+  color:#85817a;
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* =========================
+   SERVICE SELECTOR
+========================= */
+
+.service-selector{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:35px;
+}
+
+.select-service{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:17px;
+
+  border:1px solid rgba(255,255,255,.12);
+
+  background:#0b0b0b;
+
+  color:#aaa69e;
+
+  cursor:pointer;
+
+  text-align:left;
+
+  transition:.3s ease;
+}
+
+.select-service:hover{
+  border-color:rgba(255,255,255,.35);
+  color:#fff;
+}
+
+.select-service.selected{
+  border-color:#fff;
+  background:#fff;
+  color:#050505;
+}
+
+.select-service small{
+  font-size:8px;
+  opacity:.6;
+}
+
+.project-summary{
+  margin-top:30px;
+  padding:25px;
+
+  border:1px solid var(--line);
+
+  background:#0b0b0b;
+}
+
+.summary-title{
+  color:#65615b;
+  font-size:8px;
+  letter-spacing:.2em;
+}
+
+.summary-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:15px;
+}
+
+.summary-tag{
+  padding:9px 11px;
+  border:1px solid rgba(255,255,255,.16);
+  font-size:9px;
+  color:#ddd;
+}
+
+.widget-action{
+  margin-top:25px;
+
+  padding:15px 20px;
+
+  border:0;
+  background:#fff;
+  color:#050505;
+
+  cursor:pointer;
+
+  font-size:9px;
+  letter-spacing:.17em;
+}
+
+/* =========================
+   CALCULATOR
+========================= */
+
+.calc-options{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:35px;
+}
+
+.calc-option{
+  padding:18px;
+  border:1px solid rgba(255,255,255,.12);
+  background:#0b0b0b;
+  color:#aaa69e;
+  cursor:pointer;
+  text-align:left;
+  transition:.3s ease;
+}
+
+.calc-option:hover{
+  border-color:rgba(255,255,255,.3);
+  color:#fff;
+}
+
+.calc-option.active{
+  background:#fff;
+  color:#050505;
+  border-color:#fff;
+}
+
+.calc-option strong{
+  display:block;
+  font-size:14px;
+  font-weight:400;
+}
+
+.calc-option span{
+  display:block;
+  margin-top:6px;
+  font-size:9px;
+  opacity:.65;
+}
+
+.price-result{
+  margin-top:30px;
+  padding:28px;
+
+  border:1px solid var(--line);
+  background:#0b0b0b;
+}
+
+.price-label{
+  color:#65615b;
+  font-size:8px;
+  letter-spacing:.2em;
+}
+
+.price{
+  margin-top:10px;
+  font-size:clamp(38px,7vw,75px);
+  letter-spacing:-.06em;
+}
+
+.price-note{
+  margin-top:8px;
+  color:#77736c;
+  font-size:10px;
+}
+
+/* =========================
+   BRIEFING
+========================= */
+
+.brief-step{
+  display:none;
+}
+
+.brief-step.active{
+  display:block;
+}
+
+.brief-question{
+  margin-top:35px;
+  color:#aaa69e;
+  font-size:11px;
+  letter-spacing:.1em;
+}
+
+.brief-input{
+  width:100%;
+  margin-top:12px;
+
+  padding:17px 0;
+
+  border:0;
+  border-bottom:1px solid rgba(255,255,255,.22);
+
+  outline:none;
+
+  background:transparent;
+  color:#fff;
+
+  font-size:16px;
+}
+
+.brief-input:focus{
+  border-color:#fff;
+}
+
+.brief-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:25px;
+}
+
+.brief-buttons button{
+  padding:13px 17px;
+  border:1px solid rgba(255,255,255,.22);
+  background:transparent;
+  color:#fff;
+  cursor:pointer;
+  font-size:8px;
+  letter-spacing:.16em;
+}
+
+.brief-buttons button.primary{
+  background:#fff;
+  color:#050505;
+}
+
+.brief-result{
+  display:none;
+}
+
+.brief-result.show{
+  display:block;
+}
+
+.brief-result-box{
+  margin-top:30px;
+  padding:25px;
+  border:1px solid var(--line);
+  background:#0b0b0b;
+}
+
+.brief-line{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:12px 0;
+  border-bottom:1px solid var(--line-soft);
+  font-size:11px;
+}
+
+.brief-line span:first-child{
+  color:#65615b;
 }
 
 /* =========================
@@ -694,11 +1143,9 @@ section{
 .manifesto-text{
   max-width:1150px;
 
-  font-size:
-    clamp(38px,6vw,90px);
+  font-size:clamp(38px,6vw,90px);
 
   line-height:.98;
-
   letter-spacing:-.055em;
 }
 
@@ -716,22 +1163,15 @@ section{
 
 .visual-grid{
   display:grid;
-
-  grid-template-columns:
-    1.3fr .7fr;
-
+  grid-template-columns:1.3fr .7fr;
   gap:18px;
-
   margin-top:70px;
 }
 
 .visual-card{
   position:relative;
-
   min-height:440px;
-
   overflow:hidden;
-
   border:1px solid var(--line);
 
   background:
@@ -752,9 +1192,12 @@ section{
     );
 }
 
-.visual-card:nth-child(2){
+.visual-card:nth-child(2),
+.visual-card:nth-child(3){
   min-height:280px;
+}
 
+.visual-card:nth-child(2){
   background:
     linear-gradient(
       125deg,
@@ -769,8 +1212,6 @@ section{
 }
 
 .visual-card:nth-child(3){
-  min-height:280px;
-
   background:
     radial-gradient(
       ellipse at 70% 30%,
@@ -820,9 +1261,7 @@ section{
     );
 
   transform:translateX(-110%);
-
-  transition:
-    transform 1.2s ease;
+  transition:transform 1.2s ease;
 }
 
 .visual-card:hover::after{
@@ -831,13 +1270,10 @@ section{
 
 .visual-word{
   position:absolute;
-
   left:25px;
   bottom:23px;
-
   font-size:9px;
   letter-spacing:.28em;
-
   color:#aaa69e;
 }
 
@@ -856,21 +1292,15 @@ section{
 }
 
 .make-visible h2{
-  font-size:
-    clamp(60px,12vw,185px);
-
+  font-size:clamp(60px,12vw,185px);
   line-height:.78;
-
   letter-spacing:-.085em;
 }
 
 .make-visible p{
   max-width:550px;
-
   margin:38px auto 0;
-
   color:#85817a;
-
   font-size:14px;
   line-height:1.8;
 }
@@ -891,7 +1321,6 @@ section{
   gap:30px;
 
   margin-top:65px;
-
   padding:50px;
 
   border:1px solid var(--line);
@@ -905,22 +1334,16 @@ section{
 }
 
 .instagram-box strong{
-  font-size:
-    clamp(25px,4vw,52px);
-
+  font-size:clamp(25px,4vw,52px);
   font-weight:400;
-
   letter-spacing:-.045em;
 }
 
 .instagram-box a{
   padding:15px 21px;
-
   border:1px solid rgba(255,255,255,.25);
-
   font-size:9px;
   letter-spacing:.2em;
-
   transition:.35s ease;
 }
 
@@ -945,7 +1368,6 @@ section{
 
 .contact-form{
   max-width:750px;
-
   margin-top:65px;
 }
 
@@ -956,7 +1378,6 @@ section{
 .field input,
 .field textarea{
   width:100%;
-
   padding:18px 0;
 
   border:0;
@@ -965,13 +1386,9 @@ section{
   outline:none;
 
   background:transparent;
-
   color:#fff;
 
   font-size:15px;
-
-  transition:
-    border-color .35s ease;
 }
 
 .field input:focus,
@@ -981,7 +1398,6 @@ section{
 
 .field textarea{
   min-height:150px;
-
   resize:vertical;
 }
 
@@ -991,26 +1407,13 @@ section{
   padding:16px 25px;
 
   border:0;
-
   background:#fff;
-
   color:#050505;
 
   cursor:pointer;
 
   font-size:9px;
   letter-spacing:.2em;
-
-  transition:
-    transform .3s ease,
-    box-shadow .3s ease;
-}
-
-.submit:hover{
-  transform:translateY(-2px);
-
-  box-shadow:
-    0 10px 35px rgba(255,255,255,.1);
 }
 
 /* =========================
@@ -1020,7 +1423,6 @@ section{
 footer{
   display:flex;
   justify-content:space-between;
-
   gap:30px;
 
   padding:45px 7vw;
@@ -1043,9 +1445,7 @@ footer strong{
 
 .reveal{
   opacity:0;
-
-  transform:
-    translateY(45px);
+  transform:translateY(45px);
 
   transition:
     opacity 1.1s cubic-bezier(.22,1,.36,1),
@@ -1092,9 +1492,7 @@ footer strong{
 
 .cookie p{
   max-width:650px;
-
   color:#aaa69e;
-
   font-size:11px;
   line-height:1.6;
 }
@@ -1102,7 +1500,6 @@ footer strong{
 .cookie-buttons{
   display:flex;
   gap:10px;
-
   flex-shrink:0;
 }
 
@@ -1112,7 +1509,6 @@ footer strong{
   border:1px solid rgba(255,255,255,.25);
 
   background:transparent;
-
   color:#fff;
 
   cursor:pointer;
@@ -1163,9 +1559,7 @@ footer strong{
   }
 
   section{
-    padding:
-      105px
-      20px;
+    padding:105px 20px;
   }
 
   .hero{
@@ -1173,8 +1567,7 @@ footer strong{
   }
 
   .intro-title{
-    font-size:
-      clamp(46px,14vw,84px);
+    font-size:clamp(46px,14vw,84px);
   }
 
   .intro-copy{
@@ -1182,23 +1575,16 @@ footer strong{
     font-size:13px;
   }
 
-  .intro-corner{
-    font-size:7px;
+  .intro-enter{
+    bottom:105px;
+    width:max-content;
+    max-width:88vw;
+    padding:14px 18px;
+    font-size:8px;
   }
 
-  .intro-corner.one{
-    top:88px;
-    left:18px;
-  }
-
-  .intro-corner.two{
-    top:88px;
-    right:18px;
-  }
-
-  .intro-corner.three{
-    bottom:18px;
-    right:18px;
+  .intro-progress{
+    bottom:35px;
   }
 
   .category-grid{
@@ -1218,6 +1604,23 @@ footer strong{
     display:none;
   }
 
+  .widget-grid{
+    grid-template-columns:1fr;
+  }
+
+  .widget-card{
+    min-height:280px;
+  }
+
+  .service-selector,
+  .calc-options{
+    grid-template-columns:1fr;
+  }
+
+  .widget-body{
+    padding:25px 20px;
+  }
+
   .visual-grid{
     grid-template-columns:1fr;
   }
@@ -1231,7 +1634,6 @@ footer strong{
   .instagram-box{
     flex-direction:column;
     align-items:flex-start;
-
     padding:30px 20px;
   }
 
@@ -1263,10 +1665,8 @@ footer strong{
 
 <div class="vignette"></div>
 
-<!-- FILM CUT -->
 <div class="film-cut" id="filmCut"></div>
 
-<!-- HEADER -->
 <header class="topbar" id="topbar">
 
   <div class="logo">
@@ -1295,24 +1695,6 @@ footer strong{
 
 <div class="intro" id="intro">
 
-  <div class="intro-grid"></div>
-
-  <div class="intro-light"></div>
-
-  <div class="intro-line"></div>
-
-  <div class="intro-corner one">
-    SC 001 / OPENING
-  </div>
-
-  <div class="intro-corner two">
-    ART · MEDIA · DIGITAL
-  </div>
-
-  <div class="intro-corner three">
-    SOCIALCLIP / 2026
-  </div>
-
   <div class="intro-content">
 
     <div class="intro-label">
@@ -1320,30 +1702,39 @@ footer strong{
     </div>
 
     <div class="intro-title">
-
-      <span id="intro1">
-        Eine digitale Reise
-      </span>
-
-      <span id="intro2">
-        beginnt.
-      </span>
-
+      <span>Eine digitale Reise</span>
+      <span>beginnt.</span>
     </div>
 
-    <div class="intro-copy" id="introCopy">
+    <div
+      class="intro-copy"
+      id="introCopy"
+    >
       Alles beginnt mit einer Idee.
     </div>
 
-    <div class="intro-final" id="introFinal">
+  </div>
 
-      <button
-        class="enter"
-        id="enterButton"
-      >
-        DIGITALE WELT BETRETEN →
-      </button>
+  <button
+    class="intro-enter"
+    id="enterButton"
+    type="button"
+  >
+    BETRETE DIE MEDIENWELT →
+  </button>
 
+  <div class="intro-progress">
+
+    <div class="intro-progress-top">
+      <span>OPENING</span>
+      <span id="introPercent">0%</span>
+    </div>
+
+    <div class="intro-progress-track">
+      <div
+        class="intro-progress-bar"
+        id="introProgressBar"
+      ></div>
     </div>
 
   </div>
@@ -1368,10 +1759,7 @@ footer strong{
     WIRKUNG.
   </h1>
 
-  <p
-    class="text reveal"
-    style="margin-top:45px;"
-  >
+  <p class="text reveal" style="margin-top:45px;">
     SocialClip verbindet Design, digitale Lösungen,
     Social Media, Foto, Video und Marketing zu einer
     visuellen Welt, die Marken sichtbar macht.
@@ -1402,105 +1790,39 @@ footer strong{
   <div class="category-grid">
 
     <div class="category reveal">
-
-      <div class="category-number">
-        01 / WEB
-      </div>
-
-      <h3>
-        Web
-      </h3>
-
-      <p>
-        Webseiten und digitale Auftritte,
-        die nicht nach Vorlage aussehen.
-      </p>
-
+      <div class="category-number">01 / WEB</div>
+      <h3>Web</h3>
+      <p>Webseiten und digitale Auftritte, die nicht nach Vorlage aussehen.</p>
     </div>
 
     <div class="category reveal">
-
-      <div class="category-number">
-        02 / DESIGN
-      </div>
-
-      <h3>
-        Design
-      </h3>
-
-      <p>
-        Logos, Flyer, Visitenkarten und
-        visuelle Identitäten.
-      </p>
-
+      <div class="category-number">02 / DESIGN</div>
+      <h3>Design</h3>
+      <p>Logos, Flyer, Visitenkarten und visuelle Identitäten.</p>
     </div>
 
     <div class="category reveal">
-
-      <div class="category-number">
-        03 / SOCIAL
-      </div>
-
-      <h3>
-        Social Media
-      </h3>
-
-      <p>
-        Inhalte, Strategien und Marketing
-        für digitale Aufmerksamkeit.
-      </p>
-
+      <div class="category-number">03 / SOCIAL</div>
+      <h3>Social Media</h3>
+      <p>Inhalte, Strategien und Marketing für digitale Aufmerksamkeit.</p>
     </div>
 
     <div class="category reveal">
-
-      <div class="category-number">
-        04 / MEDIA
-      </div>
-
-      <h3>
-        Foto & Video
-      </h3>
-
-      <p>
-        Bild und Bewegung für Marken,
-        Produkte und Geschichten.
-      </p>
-
+      <div class="category-number">04 / MEDIA</div>
+      <h3>Foto & Video</h3>
+      <p>Bild und Bewegung für Marken, Produkte und Geschichten.</p>
     </div>
 
     <div class="category reveal">
-
-      <div class="category-number">
-        05 / MARKETING
-      </div>
-
-      <h3>
-        Marketing
-      </h3>
-
-      <p>
-        Neukundengewinnung, Strategie
-        und digitale Kampagnen.
-      </p>
-
+      <div class="category-number">05 / MARKETING</div>
+      <h3>Marketing</h3>
+      <p>Neukundengewinnung, Strategie und digitale Kampagnen.</p>
     </div>
 
     <div class="category reveal">
-
-      <div class="category-number">
-        06 / DIGITAL
-      </div>
-
-      <h3>
-        Digitale Lösungen
-      </h3>
-
-      <p>
-        Programmierung, virtuelle Assistenz
-        und individuelle Lösungen.
-      </p>
-
+      <div class="category-number">06 / DIGITAL</div>
+      <h3>Digitale Lösungen</h3>
+      <p>Programmierung, virtuelle Assistenz und individuelle Lösungen.</p>
     </div>
 
   </div>
@@ -1525,88 +1847,111 @@ footer strong{
 
   <div class="service-list">
 
-    <div class="service reveal">
-      <div class="service-number">01</div>
-      <h3>Webseiten erstellen</h3>
-      <div class="service-arrow">→</div>
+    <div class="service reveal"><div class="service-number">01</div><h3>Webseiten erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">02</div><h3>Flyer erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">03</div><h3>Online Marketing</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">04</div><h3>Visitenkarten erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">05</div><h3>Social Media Assistant</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">06</div><h3>Logo erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">07</div><h3>Video & Photo Editor</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">08</div><h3>Lebenslauf erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">09</div><h3>Speisekarte erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">10</div><h3>Virtueller Assistent</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">11</div><h3>Programmierung</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">12</div><h3>Neukundengewinnung</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">13</div><h3>Strategieentwicklung</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal"><div class="service-number">14</div><h3>TikTok Marketing</h3><div class="service-arrow">→</div></div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     SCENE 05 / TOOLS
+========================= -->
+
+<section class="tools">
+
+  <div class="chapter-line reveal">
+    SCENE 05 / INTERACTIVE TOOLS
+  </div>
+
+  <div class="tools-intro">
+
+    <h2 class="big-title reveal">
+      MACH<br>
+      <span>DEINE IDEE</span><br>
+      KONKRET.
+    </h2>
+
+    <p class="text reveal" style="margin-top:40px;">
+      Finde heraus, was zu deinem Projekt passt,
+      erhalte eine erste Orientierung und beschreibe
+      deine Idee direkt.
+    </p>
+
+  </div>
+
+  <div class="widget-grid">
+
+    <div class="widget-card reveal">
+
+      <div class="widget-number">
+        TOOL 01 / SELECTION
+      </div>
+
+      <h3>
+        Was brauchst du?
+      </h3>
+
+      <p>
+        Wähle aus unseren Leistungen dein eigenes Projekt.
+      </p>
+
+      <button class="widget-open" data-widget="servicesWidget">
+        PROJEKT STARTEN →
+      </button>
+
     </div>
 
-    <div class="service reveal">
-      <div class="service-number">02</div>
-      <h3>Flyer erstellen</h3>
-      <div class="service-arrow">→</div>
+    <div class="widget-card reveal">
+
+      <div class="widget-number">
+        TOOL 02 / CALCULATOR
+      </div>
+
+      <h3>
+        Projekt-Kalkulator
+      </h3>
+
+      <p>
+        Stelle dein Projekt zusammen und erhalte eine grobe Orientierung.
+      </p>
+
+      <button class="widget-open" data-widget="calculatorWidget">
+        KALKULIEREN →
+      </button>
+
     </div>
 
-    <div class="service reveal">
-      <div class="service-number">03</div>
-      <h3>Online Marketing</h3>
-      <div class="service-arrow">→</div>
-    </div>
+    <div class="widget-card reveal">
 
-    <div class="service reveal">
-      <div class="service-number">04</div>
-      <h3>Visitenkarten erstellen</h3>
-      <div class="service-arrow">→</div>
-    </div>
+      <div class="widget-number">
+        TOOL 03 / BRIEFING
+      </div>
 
-    <div class="service reveal">
-      <div class="service-number">05</div>
-      <h3>Social Media Assistant</h3>
-      <div class="service-arrow">→</div>
-    </div>
+      <h3>
+        Deine Idee
+      </h3>
 
-    <div class="service reveal">
-      <div class="service-number">06</div>
-      <h3>Logo erstellen</h3>
-      <div class="service-arrow">→</div>
-    </div>
+      <p>
+        Beantworte ein paar Fragen und erstelle dein Projekt-Briefing.
+      </p>
 
-    <div class="service reveal">
-      <div class="service-number">07</div>
-      <h3>Video & Photo Editor</h3>
-      <div class="service-arrow">→</div>
-    </div>
+      <button class="widget-open" data-widget="briefingWidget">
+        IDEE STARTEN →
+      </button>
 
-    <div class="service reveal">
-      <div class="service-number">08</div>
-      <h3>Lebenslauf erstellen</h3>
-      <div class="service-arrow">→</div>
-    </div>
-
-    <div class="service reveal">
-      <div class="service-number">09</div>
-      <h3>Speisekarte erstellen</h3>
-      <div class="service-arrow">→</div>
-    </div>
-
-    <div class="service reveal">
-      <div class="service-number">10</div>
-      <h3>Virtueller Assistent</h3>
-      <div class="service-arrow">→</div>
-    </div>
-
-    <div class="service reveal">
-      <div class="service-number">11</div>
-      <h3>Programmierung</h3>
-      <div class="service-arrow">→</div>
-    </div>
-
-    <div class="service reveal">
-      <div class="service-number">12</div>
-      <h3>Neukundengewinnung</h3>
-      <div class="service-arrow">→</div>
-    </div>
-
-    <div class="service reveal">
-      <div class="service-number">13</div>
-      <h3>Strategieentwicklung</h3>
-      <div class="service-arrow">→</div>
-    </div>
-
-    <div class="service reveal">
-      <div class="service-number">14</div>
-      <h3>TikTok Marketing</h3>
-      <div class="service-arrow">→</div>
     </div>
 
   </div>
@@ -1614,29 +1959,21 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 05
+     SCENE 06
 ========================= -->
 
 <section class="manifesto center">
 
   <div class="chapter-line reveal">
-    SCENE 05 / THE IDEA
+    SCENE 06 / THE IDEA
   </div>
 
   <p class="manifesto-text reveal">
-
     AUS EINER IDEE WIRD ETWAS,
-
-    <span>
-      DAS MAN SEHEN KANN.
-    </span>
-
+    <span>DAS MAN SEHEN KANN.</span>
   </p>
 
-  <p
-    class="text reveal"
-    style="margin-top:50px;"
-  >
+  <p class="text reveal" style="margin-top:50px;">
     Ein Bild wird zur Geschichte.
     Eine Geschichte wird zu Aufmerksamkeit.
     Aufmerksamkeit wird zu Bewegung.
@@ -1645,13 +1982,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 06
+     SCENE 07
 ========================= -->
 
 <section class="visual-world">
 
   <div class="chapter-line reveal">
-    SCENE 06 / VISUAL WORLD
+    SCENE 07 / VISUAL WORLD
   </div>
 
   <h2 class="big-title reveal">
@@ -1663,21 +2000,15 @@ footer strong{
   <div class="visual-grid">
 
     <div class="visual-card reveal">
-      <div class="visual-word">
-        DIGITAL FORM
-      </div>
+      <div class="visual-word">DIGITAL FORM</div>
     </div>
 
     <div class="visual-card reveal">
-      <div class="visual-word">
-        VISUAL STORY
-      </div>
+      <div class="visual-word">VISUAL STORY</div>
     </div>
 
     <div class="visual-card reveal">
-      <div class="visual-word">
-        CREATIVE MEDIA
-      </div>
+      <div class="visual-word">CREATIVE MEDIA</div>
     </div>
 
   </div>
@@ -1685,7 +2016,7 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 07
+     SCENE 08
 ========================= -->
 
 <section class="make-visible">
@@ -1693,7 +2024,7 @@ footer strong{
   <div>
 
     <div class="chapter-line reveal">
-      SCENE 07 / THE MOMENT
+      SCENE 08 / THE MOMENT
     </div>
 
     <h2 class="reveal">
@@ -1714,13 +2045,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 08
+     SCENE 09
 ========================= -->
 
 <section class="instagram">
 
   <div class="chapter-line reveal">
-    SCENE 08 / SOCIALCLIP.ART
+    SCENE 09 / SOCIALCLIP.ART
   </div>
 
   <h2 class="big-title reveal">
@@ -1730,9 +2061,7 @@ footer strong{
 
   <div class="instagram-box reveal">
 
-    <strong>
-      @socialclip.art
-    </strong>
+    <strong>@socialclip.art</strong>
 
     <a
       href="https://www.instagram.com/socialclip.art/"
@@ -1747,13 +2076,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 09
+     SCENE 10
 ========================= -->
 
 <section class="contact">
 
   <div class="chapter-line reveal">
-    SCENE 09 / YOUR STORY
+    SCENE 10 / YOUR STORY
   </div>
 
   <h2 class="big-title reveal">
@@ -1769,41 +2098,32 @@ footer strong{
   >
 
     <div class="field">
-
       <input
         type="text"
         name="name"
         placeholder="Dein Name"
         required
       >
-
     </div>
 
     <div class="field">
-
       <input
         type="email"
         name="email"
         placeholder="Deine E-Mail"
         required
       >
-
     </div>
 
     <div class="field">
-
       <textarea
         name="message"
         placeholder="Erzähl uns von deiner Idee..."
         required
       ></textarea>
-
     </div>
 
-    <button
-      class="submit"
-      type="submit"
-    >
+    <button class="submit" type="submit">
       NACHRICHT SENDEN →
     </button>
 
@@ -1812,6 +2132,383 @@ footer strong{
 </section>
 
 </main>
+
+<!-- =========================
+     WIDGET 01
+========================= -->
+
+<div class="widget-overlay" id="servicesWidget">
+
+  <div class="widget-window">
+
+    <div class="widget-head">
+      <div class="widget-head-label">
+        SOCIALCLIP / PROJECT BUILDER
+      </div>
+
+      <button class="widget-close">
+        ×
+      </button>
+    </div>
+
+    <div class="widget-body">
+
+      <h3>
+        Was brauchst<br>
+        <span>du?</span>
+      </h3>
+
+      <p class="widget-sub">
+        Wähle eine oder mehrere Leistungen.
+      </p>
+
+      <div class="service-selector" id="serviceSelector">
+
+        <button class="select-service" data-service="Webseite">
+          <span>Webseite</span><small>01</small>
+        </button>
+
+        <button class="select-service" data-service="Flyer">
+          <span>Flyer</span><small>02</small>
+        </button>
+
+        <button class="select-service" data-service="Online Marketing">
+          <span>Online Marketing</span><small>03</small>
+        </button>
+
+        <button class="select-service" data-service="Visitenkarte">
+          <span>Visitenkarte</span><small>04</small>
+        </button>
+
+        <button class="select-service" data-service="Social Media">
+          <span>Social Media</span><small>05</small>
+        </button>
+
+        <button class="select-service" data-service="Logo">
+          <span>Logo</span><small>06</small>
+        </button>
+
+        <button class="select-service" data-service="Video & Foto">
+          <span>Video & Foto</span><small>07</small>
+        </button>
+
+        <button class="select-service" data-service="Lebenslauf">
+          <span>Lebenslauf</span><small>08</small>
+        </button>
+
+        <button class="select-service" data-service="Speisekarte">
+          <span>Speisekarte</span><small>09</small>
+        </button>
+
+        <button class="select-service" data-service="Virtueller Assistent">
+          <span>Virtueller Assistent</span><small>10</small>
+        </button>
+
+        <button class="select-service" data-service="Programmierung">
+          <span>Programmierung</span><small>11</small>
+        </button>
+
+        <button class="select-service" data-service="Neukundengewinnung">
+          <span>Neukundengewinnung</span><small>12</small>
+        </button>
+
+        <button class="select-service" data-service="Strategieentwicklung">
+          <span>Strategieentwicklung</span><small>13</small>
+        </button>
+
+        <button class="select-service" data-service="TikTok Marketing">
+          <span>TikTok Marketing</span><small>14</small>
+        </button>
+
+      </div>
+
+      <div class="project-summary">
+
+        <div class="summary-title">
+          DEIN PROJEKT
+        </div>
+
+        <div class="summary-list" id="summaryList">
+          <span style="color:#65615b;font-size:10px;">
+            Noch keine Auswahl
+          </span>
+        </div>
+
+        <button class="widget-action" id="sendProject">
+          PROJEKT ANFRAGEN →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =========================
+     WIDGET 02
+========================= -->
+
+<div class="widget-overlay" id="calculatorWidget">
+
+  <div class="widget-window">
+
+    <div class="widget-head">
+      <div class="widget-head-label">
+        SOCIALCLIP / ESTIMATE
+      </div>
+
+      <button class="widget-close">
+        ×
+      </button>
+    </div>
+
+    <div class="widget-body">
+
+      <h3>
+        Was könnte dein<br>
+        <span>Projekt kosten?</span>
+      </h3>
+
+      <p class="widget-sub">
+        Eine unverbindliche Orientierung – kein verbindliches Angebot.
+      </p>
+
+      <div class="calc-options">
+
+        <!-- GÜNSTIGERE EINSTIEGSPREISE -->
+
+        <button class="calc-option" data-price="149">
+          <strong>Logo</strong>
+          <span>ab ca. 149 €</span>
+        </button>
+
+        <button class="calc-option" data-price="79">
+          <strong>Flyer</strong>
+          <span>ab ca. 79 €</span>
+        </button>
+
+        <button class="calc-option" data-price="59">
+          <strong>Visitenkarte</strong>
+          <span>ab ca. 59 €</span>
+        </button>
+
+        <button class="calc-option" data-price="399">
+          <strong>Webseite</strong>
+          <span>ab ca. 399 €</span>
+        </button>
+
+        <button class="calc-option" data-price="199">
+          <strong>Social Media</strong>
+          <span>ab ca. 199 €</span>
+        </button>
+
+        <button class="calc-option" data-price="249">
+          <strong>Marketing</strong>
+          <span>ab ca. 249 €</span>
+        </button>
+
+        <button class="calc-option" data-price="149">
+          <strong>Video & Foto</strong>
+          <span>ab ca. 149 €</span>
+        </button>
+
+        <button class="calc-option" data-price="299">
+          <strong>Programmierung</strong>
+          <span>ab ca. 299 €</span>
+        </button>
+
+      </div>
+
+      <div class="price-result">
+
+        <div class="price-label">
+          GROBE ORIENTIERUNG
+        </div>
+
+        <div class="price" id="priceResult">
+          0 €
+        </div>
+
+        <div class="price-note">
+          Je nach Umfang, Aufwand und individuellen Anforderungen.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =========================
+     WIDGET 03
+========================= -->
+
+<div class="widget-overlay" id="briefingWidget">
+
+  <div class="widget-window">
+
+    <div class="widget-head">
+
+      <div class="widget-head-label">
+        SOCIALCLIP / PROJECT BRIEF
+      </div>
+
+      <button class="widget-close">
+        ×
+      </button>
+
+    </div>
+
+    <div class="widget-body">
+
+      <div id="briefingForm">
+
+        <div class="brief-step active" data-step="1">
+
+          <h3>
+            Was ist deine<br>
+            <span>Idee?</span>
+          </h3>
+
+          <p class="widget-sub">
+            Beschreibe kurz, was du umsetzen möchtest.
+          </p>
+
+          <div class="brief-question">
+            DEINE IDEE
+          </div>
+
+          <input
+            class="brief-input"
+            id="briefIdea"
+            placeholder="z. B. Website für mein Restaurant"
+          >
+
+          <div class="brief-buttons">
+            <button class="primary" data-next="2">
+              WEITER →
+            </button>
+          </div>
+
+        </div>
+
+        <div class="brief-step" data-step="2">
+
+          <h3>
+            Für wen ist<br>
+            <span>das Projekt?</span>
+          </h3>
+
+          <p class="widget-sub">
+            Wer soll deine Marke oder dein Angebot sehen?
+          </p>
+
+          <div class="brief-question">
+            ZIELGRUPPE
+          </div>
+
+          <input
+            class="brief-input"
+            id="briefTarget"
+            placeholder="z. B. junge Familien"
+          >
+
+          <div class="brief-buttons">
+
+            <button data-prev="1">
+              ← ZURÜCK
+            </button>
+
+            <button class="primary" data-next="3">
+              WEITER →
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="brief-step" data-step="3">
+
+          <h3>
+            Was soll am Ende<br>
+            <span>passieren?</span>
+          </h3>
+
+          <p class="widget-sub">
+            Was möchtest du mit dem Projekt erreichen?
+          </p>
+
+          <div class="brief-question">
+            ZIEL
+          </div>
+
+          <input
+            class="brief-input"
+            id="briefGoal"
+            placeholder="z. B. mehr Kunden gewinnen"
+          >
+
+          <div class="brief-buttons">
+
+            <button data-prev="2">
+              ← ZURÜCK
+            </button>
+
+            <button class="primary" id="createBrief">
+              BRIEFING ERSTELLEN →
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="brief-result" id="briefResult">
+
+        <h3>
+          Dein Projekt<br>
+          <span>steht.</span>
+        </h3>
+
+        <p class="widget-sub">
+          Hier ist deine erste Projekt-Zusammenfassung.
+        </p>
+
+        <div class="brief-result-box">
+
+          <div class="brief-line">
+            <span>PROJEKT</span>
+            <strong id="resultIdea">—</strong>
+          </div>
+
+          <div class="brief-line">
+            <span>ZIELGRUPPE</span>
+            <strong id="resultTarget">—</strong>
+          </div>
+
+          <div class="brief-line">
+            <span>ZIEL</span>
+            <strong id="resultGoal">—</strong>
+          </div>
+
+        </div>
+
+        <button class="widget-action" id="briefContact">
+          PROJEKT ANFRAGEN →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
 <!-- =========================
      FOOTER
@@ -1828,9 +2525,7 @@ footer strong{
   <div>
     LOCAL TIME
     <br><br>
-    <strong id="footerClock">
-      --:--:--
-    </strong>
+    <strong id="footerClock">--:--:--</strong>
   </div>
 
   <div>
@@ -1843,10 +2538,7 @@ footer strong{
      COOKIE
 ========================= -->
 
-<div
-  class="cookie"
-  id="cookie"
->
+<div class="cookie" id="cookie">
 
   <p>
     Wir verwenden notwendige Cookies,
@@ -1860,10 +2552,7 @@ footer strong{
       NUR NOTWENDIGE
     </button>
 
-    <button
-      class="accept"
-      id="accept"
-    >
+    <button class="accept" id="accept">
       ALLE AKZEPTIEREN
     </button>
 
@@ -1874,12 +2563,12 @@ footer strong{
 <script>
 
 /* =========================================
-   SOCIALCLIP CINEMATIC ENGINE
+   SOCIALCLIP ENGINE
 ========================================= */
 
 
 /* =========================
-   LIVE CLOCK
+   CLOCK
 ========================= */
 
 function updateClock(){
@@ -1906,46 +2595,32 @@ function updateClock(){
       }
     );
 
-  document.getElementById(
-    "liveClock"
-  ).textContent = time;
-
-  document.getElementById(
-    "liveDate"
-  ).textContent = date;
-
-  document.getElementById(
-    "footerClock"
-  ).textContent = time;
+  document.getElementById("liveClock").textContent = time;
+  document.getElementById("liveDate").textContent = date;
+  document.getElementById("footerClock").textContent = time;
 
 }
 
 updateClock();
 
-setInterval(
-  updateClock,
-  1000
-);
+setInterval(updateClock,1000);
 
 
 /* =========================
-   INTRO
+   CINEMATIC INTRO
 ========================= */
 
 const intro =
   document.getElementById("intro");
 
-const intro1 =
-  document.getElementById("intro1");
+const introBar =
+  document.getElementById("introProgressBar");
 
-const intro2 =
-  document.getElementById("intro2");
+const introPercent =
+  document.getElementById("introPercent");
 
 const introCopy =
   document.getElementById("introCopy");
-
-const introFinal =
-  document.getElementById("introFinal");
 
 const enterButton =
   document.getElementById("enterButton");
@@ -1968,78 +2643,183 @@ const introTexts = [
 
 let introStep = 0;
 
-function runIntro(){
+let introStarted = false;
 
-  setTimeout(()=>{
-    intro1.classList.add("show");
-  },500);
+let introFinished = false;
 
-  setTimeout(()=>{
-    intro2.classList.add("show");
-  },1200);
 
-  function nextText(){
+/*
+   Intro erscheint zuerst langsam.
+*/
 
-    if(
-      introStep <
-      introTexts.length
-    ){
+setTimeout(()=>{
 
-      introCopy.style.opacity = "0";
-      introCopy.style.transform =
-        "translateY(8px)";
+  intro.classList.add("ready");
 
-      setTimeout(()=>{
+},350);
 
-        introCopy.textContent =
-          introTexts[introStep];
 
-        introCopy.style.opacity = "1";
-        introCopy.style.transform =
-          "translateY(0)";
+/*
+   Kleiner filmischer Text.
+   Jeder Satz verschwindet komplett,
+   bevor der nächste erscheint.
+*/
 
-        introStep++;
+function showNextIntroText(){
 
-      },400);
+  if(introStep >= introTexts.length){
 
-      setTimeout(
-        nextText,
-        1850
-      );
+    introFinished = true;
 
-    }else{
+    setTimeout(()=>{
 
-      setTimeout(()=>{
+      enterButton.classList.add("show");
 
-        introFinal.classList.add(
-          "show"
-        );
+    },500);
 
-      },700);
-
-    }
+    return;
 
   }
 
-  setTimeout(
-    nextText,
-    1700
-  );
+  introCopy.classList.remove("visible");
+
+  introCopy.classList.add("fade");
+
+  setTimeout(()=>{
+
+    introCopy.textContent =
+      introTexts[introStep];
+
+    introCopy.classList.remove("fade");
+
+    requestAnimationFrame(()=>{
+
+      introCopy.classList.add("visible");
+
+    });
+
+    introStep++;
+
+    setTimeout(()=>{
+
+      showNextIntroText();
+
+    },1900);
+
+  },700);
 
 }
 
-runIntro();
+
+/*
+   Erste Textsequenz.
+*/
+
+setTimeout(()=>{
+
+  introCopy.classList.remove("visible");
+  introCopy.classList.add("fade");
+
+  setTimeout(()=>{
+
+    introCopy.textContent =
+      introTexts[0];
+
+    introCopy.classList.remove("fade");
+
+    requestAnimationFrame(()=>{
+
+      introCopy.classList.add("visible");
+
+    });
+
+    introStep = 1;
+
+    setTimeout(()=>{
+
+      showNextIntroText();
+
+    },1900);
+
+  },500);
+
+},1200);
 
 
-/* =========================
-   ENTER FILM
-========================= */
+/*
+   Opening Progress.
+   Läuft nur während des Intros.
+*/
+
+const introDuration = 12500;
+
+const introStart =
+  performance.now();
+
+function introProgress(now){
+
+  const elapsed =
+    now - introStart;
+
+  const percentage =
+    Math.min(
+      100,
+      (elapsed / introDuration) * 100
+    );
+
+  introBar.style.width =
+    percentage + "%";
+
+  introPercent.textContent =
+    Math.floor(percentage) + "%";
+
+  if(percentage < 100){
+
+    requestAnimationFrame(
+      introProgress
+    );
+
+  }else{
+
+    introBar.style.width = "100%";
+    introPercent.textContent = "100%";
+
+  }
+
+}
+
+requestAnimationFrame(
+  introProgress
+);
+
+
+/*
+   BETRETE DIE MEDIENWELT
+*/
 
 enterButton.addEventListener(
   "click",
   ()=>{
 
+    if(!introFinished){
+
+      return;
+
+    }
+
     enterButton.disabled = true;
+
+    /*
+       Kamera fährt nach vorne.
+    */
+
+    intro.classList.add(
+      "entering"
+    );
+
+    /*
+       Film-Cut als kurzer Lichtimpuls.
+    */
 
     const filmCut =
       document.getElementById(
@@ -2052,15 +2832,11 @@ enterButton.addEventListener(
 
     setTimeout(()=>{
 
-      intro.classList.add(
-        "hide"
-      );
-
       document.body.classList.remove(
         "locked"
       );
 
-    },500);
+    },700);
 
     setTimeout(()=>{
 
@@ -2068,50 +2844,44 @@ enterButton.addEventListener(
         "active"
       );
 
-    },950);
+    },1000);
 
     setTimeout(()=>{
 
       intro.remove();
 
-    },1600);
+    },1750);
 
   }
 );
 
 
 /* =========================
-   REVEAL ENGINE
+   REVEAL
 ========================= */
 
 const revealElements =
-  document.querySelectorAll(
-    ".reveal"
-  );
+  document.querySelectorAll(".reveal");
 
 const revealObserver =
   new IntersectionObserver(
-    (entries)=>{
+    entries=>{
 
-      entries.forEach(
-        entry=>{
+      entries.forEach(entry=>{
 
-          if(
-            entry.isIntersecting
-          ){
+        if(entry.isIntersecting){
 
-            entry.target.classList.add(
-              "visible"
-            );
+          entry.target.classList.add(
+            "visible"
+          );
 
-            revealObserver.unobserve(
-              entry.target
-            );
-
-          }
+          revealObserver.unobserve(
+            entry.target
+          );
 
         }
-      );
+
+      });
 
     },
     {
@@ -2121,9 +2891,7 @@ const revealObserver =
 
 revealElements.forEach(
   element=>{
-    revealObserver.observe(
-      element
-    );
+    revealObserver.observe(element);
   }
 );
 
@@ -2172,13 +2940,10 @@ function updateScene(){
 
   sceneNumber.textContent =
     "SCENE " +
-    String(
-      currentScene
-    ).padStart(2,"0");
+    String(currentScene)
+      .padStart(2,"0");
 
-  if(
-    window.scrollY > 60
-  ){
+  if(window.scrollY > 60){
 
     topbar.classList.add(
       "scrolled"
@@ -2205,16 +2970,12 @@ function updateProgress(){
     window.scrollY;
 
   const height =
-    document.documentElement
-      .scrollHeight -
+    document.documentElement.scrollHeight -
     window.innerHeight;
 
   const percentage =
     height > 0
-      ? (
-          scrollTop /
-          height
-        ) * 100
+      ? (scrollTop / height) * 100
       : 0;
 
   document.getElementById(
@@ -2238,47 +2999,541 @@ updateProgress();
 
 
 /* =========================
-   SUBTLE PARALLAX
-   Only for cinematic layers
+   WIDGET OPEN / CLOSE
 ========================= */
 
-const introGrid =
-  document.querySelector(
-    ".intro-grid"
+const overlays =
+  document.querySelectorAll(
+    ".widget-overlay"
   );
 
-window.addEventListener(
-  "mousemove",
+const openButtons =
+  document.querySelectorAll(
+    ".widget-open"
+  );
+
+openButtons.forEach(button=>{
+
+  button.addEventListener(
+    "click",
+    ()=>{
+
+      const id =
+        button.dataset.widget;
+
+      const widget =
+        document.getElementById(id);
+
+      if(widget){
+
+        widget.classList.add(
+          "active"
+        );
+
+      }
+
+    }
+  );
+
+});
+
+
+overlays.forEach(overlay=>{
+
+  const close =
+    overlay.querySelector(
+      ".widget-close"
+    );
+
+  close.addEventListener(
+    "click",
+    ()=>{
+
+      overlay.classList.remove(
+        "active"
+      );
+
+    }
+  );
+
+  overlay.addEventListener(
+    "click",
+    event=>{
+
+      if(event.target === overlay){
+
+        overlay.classList.remove(
+          "active"
+        );
+
+      }
+
+    }
+  );
+
+});
+
+
+document.addEventListener(
+  "keydown",
   event=>{
 
-    if(!introGrid){
-      return;
+    if(event.key === "Escape"){
+
+      overlays.forEach(
+        overlay=>{
+          overlay.classList.remove(
+            "active"
+          );
+        }
+      );
+
     }
-
-    const x =
-      (
-        event.clientX /
-        window.innerWidth -
-        .5
-      ) * 8;
-
-    const y =
-      (
-        event.clientY /
-        window.innerHeight -
-        .5
-      ) * 5;
-
-    introGrid.style.transform =
-      `
-      perspective(750px)
-      rotateX(${58 + y}deg)
-      rotateY(${x}deg)
-      scale(1.7)
-      `;
 
   }
 );
+
+
+/* =========================
+   WIDGET 01
+   SERVICE BUILDER
+========================= */
+
+const selectedServices =
+  new Set();
+
+const serviceButtons =
+  document.querySelectorAll(
+    ".select-service"
+  );
+
+const summaryList =
+  document.getElementById(
+    "summaryList"
+  );
+
+serviceButtons.forEach(button=>{
+
+  button.addEventListener(
+    "click",
+    ()=>{
+
+      const service =
+        button.dataset.service;
+
+      if(
+        selectedServices.has(service)
+      ){
+
+        selectedServices.delete(
+          service
+        );
+
+        button.classList.remove(
+          "selected"
+        );
+
+      }else{
+
+        selectedServices.add(
+          service
+        );
+
+        button.classList.add(
+          "selected"
+        );
+
+      }
+
+      updateSummary();
+
+    }
+  );
+
+});
+
+
+function updateSummary(){
+
+  summaryList.innerHTML = "";
+
+  if(selectedServices.size === 0){
+
+    summaryList.innerHTML =
+      `
+      <span style="
+        color:#65615b;
+        font-size:10px;
+      ">
+        Noch keine Auswahl
+      </span>
+      `;
+
+    return;
+
+  }
+
+  selectedServices.forEach(
+    service=>{
+
+      const tag =
+        document.createElement(
+          "span"
+        );
+
+      tag.className =
+        "summary-tag";
+
+      tag.textContent =
+        service;
+
+      summaryList.appendChild(
+        tag
+      );
+
+    }
+  );
+
+}
+
+
+document
+  .getElementById("sendProject")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(selectedServices.size === 0){
+
+        alert(
+          "Wähle bitte mindestens eine Leistung aus."
+        );
+
+        return;
+
+      }
+
+      const services =
+        Array.from(
+          selectedServices
+        ).join(", ");
+
+      const widget =
+        document.getElementById(
+          "servicesWidget"
+        );
+
+      widget.classList.remove(
+        "active"
+      );
+
+      const message =
+        document.querySelector(
+          'textarea[name="message"]'
+        );
+
+      if(message){
+
+        message.value =
+          "Ich interessiere mich für: " +
+          services +
+          ".\n\n";
+
+      }
+
+      document
+        .querySelector(".contact")
+        .scrollIntoView({
+          behavior:"smooth"
+        });
+
+    }
+  );
+
+
+/* =========================
+   WIDGET 02
+   CALCULATOR
+========================= */
+
+let totalPrice = 0;
+
+const calcButtons =
+  document.querySelectorAll(
+    ".calc-option"
+  );
+
+const priceResult =
+  document.getElementById(
+    "priceResult"
+  );
+
+calcButtons.forEach(button=>{
+
+  button.addEventListener(
+    "click",
+    ()=>{
+
+      const price =
+        Number(
+          button.dataset.price
+        );
+
+      if(button.classList.contains("active")){
+
+        button.classList.remove(
+          "active"
+        );
+
+        totalPrice -= price;
+
+      }else{
+
+        button.classList.add(
+          "active"
+        );
+
+        totalPrice += price;
+
+      }
+
+      priceResult.textContent =
+        totalPrice.toLocaleString(
+          "de-DE"
+        ) + " €";
+
+    }
+  );
+
+});
+
+
+/* =========================
+   WIDGET 03
+   BRIEFING
+========================= */
+
+const briefingSteps =
+  document.querySelectorAll(
+    ".brief-step"
+  );
+
+function showBriefStep(step){
+
+  briefingSteps.forEach(
+    item=>{
+
+      item.classList.remove(
+        "active"
+      );
+
+      if(
+        Number(
+          item.dataset.step
+        ) === step
+      ){
+
+        item.classList.add(
+          "active"
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+document
+  .querySelectorAll(
+    "[data-next]"
+  )
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        const next =
+          Number(
+            button.dataset.next
+          );
+
+        showBriefStep(next);
+
+      }
+    );
+
+  });
+
+
+document
+  .querySelectorAll(
+    "[data-prev]"
+  )
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        const previous =
+          Number(
+            button.dataset.prev
+          );
+
+        showBriefStep(previous);
+
+      }
+    );
+
+  });
+
+
+document
+  .getElementById(
+    "createBrief"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      const idea =
+        document
+          .getElementById(
+            "briefIdea"
+          )
+          .value.trim();
+
+      const target =
+        document
+          .getElementById(
+            "briefTarget"
+          )
+          .value.trim();
+
+      const goal =
+        document
+          .getElementById(
+            "briefGoal"
+          )
+          .value.trim();
+
+      if(
+        !idea ||
+        !target ||
+        !goal
+      ){
+
+        alert(
+          "Bitte fülle alle drei Felder aus."
+        );
+
+        return;
+
+      }
+
+      document
+        .getElementById(
+          "resultIdea"
+        )
+        .textContent = idea;
+
+      document
+        .getElementById(
+          "resultTarget"
+        )
+        .textContent = target;
+
+      document
+        .getElementById(
+          "resultGoal"
+        )
+        .textContent = goal;
+
+      document
+        .getElementById(
+          "briefingForm"
+        )
+        .style.display = "none";
+
+      document
+        .getElementById(
+          "briefResult"
+        )
+        .classList.add(
+          "show"
+        );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "briefContact"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      const idea =
+        document
+          .getElementById(
+            "briefIdea"
+          )
+          .value;
+
+      const target =
+        document
+          .getElementById(
+            "briefTarget"
+          )
+          .value;
+
+      const goal =
+        document
+          .getElementById(
+            "briefGoal"
+          )
+          .value;
+
+      document
+        .getElementById(
+          "briefingWidget"
+        )
+        .classList.remove(
+          "active"
+        );
+
+      const message =
+        document.querySelector(
+          'textarea[name="message"]'
+        );
+
+      if(message){
+
+        message.value =
+          "Projektidee: " +
+          idea +
+          "\n\n" +
+          "Zielgruppe: " +
+          target +
+          "\n\n" +
+          "Ziel: " +
+          goal;
+
+      }
+
+      document
+        .querySelector(".contact")
+        .scrollIntoView({
+          behavior:"smooth"
+        });
+
+    }
+  );
 
 
 /* =========================
@@ -2380,12 +3635,6 @@ window.addEventListener(
       touchStartY -
       touchEndY;
 
-    /*
-      Nur sehr leichte Unterstützung.
-      Kein erzwungenes Scrollen bei
-      normalen Berührungen.
-    */
-
     if(
       Math.abs(distance) > 140
     ){
@@ -2409,7 +3658,7 @@ window.addEventListener(
 
 
 /* =========================
-   FILM START
+   START
 ========================= */
 
 window.scrollTo(
