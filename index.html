@@ -4,8 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050505">
-<meta name="description" content="SocialClip Art & Media — Design, Digital, Social Media, Foto, Video und Marketing.">
-<title>SocialClip — Art & Media</title>
+<meta name="description" content="SocialClip Art · Media · Digital: Design, digitale Lösungen, Social Media, Foto, Video und Marketing aus Erlangen.">
+<title>SocialClip | Art · Media · Digital</title>
+
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://socialclip.art/">
+<meta property="og:site_name" content="SocialClip">
+<meta property="og:title" content="SocialClip | Art · Media · Digital">
+<meta property="og:description" content="Design, digitale Lösungen, Social Media, Foto, Video und Marketing aus Erlangen.">
+<meta property="og:image" content="https://socialclip.art/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SocialClip Logo: Art · Media · Digital">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
 
 <style>
 *{
@@ -99,7 +116,7 @@ body::after{
   top:0;
   left:0;
   width:100%;
-  z-index:9000;
+  z-index:9989; /* above vignette and flashlight, under the film grain like the rest of the page */
 
   display:flex;
   justify-content:space-between;
@@ -113,8 +130,14 @@ body::after{
   backdrop-filter:blur(18px);
 
   transition:
+    opacity 1s ease,
     background .5s ease,
     border-color .5s ease;
+}
+
+body.locked .topbar{
+  opacity:0;
+  pointer-events:none;
 }
 
 .topbar.scrolled{
@@ -123,14 +146,36 @@ body::after{
 }
 
 .logo{
-  font-size:13px;
-  letter-spacing:.2em;
-  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  line-height:1;
 }
 
-.logo span{
+.logo-symbol{
+  display:block;
+  height:26px;
+  width:auto;
+}
+
+.logo-wordmark{
+  display:block;
+  height:13px;
+  width:auto;
+}
+
+.logo-tag{
+  margin-left:4px;
   color:#77736c;
-  font-weight:400;
+  font-size:9px;
+  letter-spacing:.25em;
+  white-space:nowrap;
+}
+
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:26px;
 }
 
 .clock{
@@ -156,36 +201,6 @@ body::after{
   height:1px;
   z-index:9001;
   background:#fff;
-}
-
-/* =========================
-   SCENE INFO
-========================= */
-
-.scene-info{
-  position:fixed;
-  left:28px;
-  bottom:27px;
-  z-index:8000;
-
-  color:rgba(255,255,255,.45);
-
-  font-size:9px;
-  letter-spacing:.2em;
-}
-
-.rec{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-
-.rec-dot{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:#fff;
-  box-shadow:0 0 8px rgba(255,255,255,.7);
 }
 
 /* =========================
@@ -355,11 +370,15 @@ body::after{
   left:50%;
   bottom:110px;
 
+  overflow:hidden;
+
   transform:
     translateX(-50%)
-    translateY(18px);
+    translateY(26px)
+    scale(.94);
 
   opacity:0;
+  filter:blur(8px);
   pointer-events:none;
 
   padding:15px 22px;
@@ -378,19 +397,89 @@ body::after{
   backdrop-filter:blur(8px);
 
   transition:
-    opacity .8s ease,
-    transform .8s cubic-bezier(.22,1,.36,1),
+    opacity .9s ease,
+    filter .9s ease,
+    letter-spacing 1.1s cubic-bezier(.22,1,.36,1),
+    transform 1s cubic-bezier(.22,1,.36,1),
     background .35s ease,
     color .35s ease,
     border-color .35s ease;
 }
 
+/* Arrives when the opening hits 100 %: rises, sharpens, letters settle */
+
+.intro-enter:not(.show){
+  letter-spacing:.42em;
+}
+
 .intro-enter.show{
   opacity:1;
+  filter:blur(0);
   pointer-events:auto;
   transform:
     translateX(-50%)
-    translateY(0);
+    translateY(0)
+    scale(1);
+}
+
+/* Light sweep across the button, starts once it has landed */
+
+.intro-enter::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:-60%;
+  width:50%;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      100deg,
+      transparent,
+      rgba(255,255,255,.22),
+      transparent
+    );
+
+  transform:skewX(-20deg);
+  opacity:0;
+}
+
+.intro-enter.show::after{
+  animation:enterSweep 2.8s cubic-bezier(.65,0,.35,1) 1s infinite;
+}
+
+.intro-enter:hover::after,
+.intro-enter:disabled::after{
+  animation:none;
+}
+
+@keyframes enterSweep{
+  0%{ left:-60%; opacity:1; }
+  45%{ left:130%; opacity:1; }
+  100%{ left:130%; opacity:0; }
+}
+
+/* Opening bar steps back once the button is there */
+
+.intro-progress{
+  transition:opacity .8s ease .2s;
+}
+
+.intro.loaded .intro-progress{
+  opacity:.35;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .intro-enter,
+  .intro-enter:not(.show){
+    filter:none;
+    letter-spacing:.22em;
+    transition:opacity .4s ease;
+  }
+  .intro-enter.show::after{
+    animation:none;
+  }
 }
 
 .intro-enter:hover{
@@ -401,6 +490,22 @@ body::after{
 
 .intro-enter:disabled{
   cursor:default;
+}
+
+/* Nach dem Klick sofort weg, ohne Glas-Kasten, der nachleuchtet */
+
+.intro-enter.leaving,
+.intro-enter.leaving:hover{
+  opacity:0;
+  background:transparent;
+  color:#fff;
+  border-color:rgba(255,255,255,.3);
+  backdrop-filter:none;
+  transition:opacity .25s ease;
+}
+
+.intro-enter.leaving::after{
+  animation:none;
 }
 
 .intro-progress{
@@ -436,6 +541,106 @@ body::after{
 }
 
 /* =========================
+   FLASHLIGHT
+   Licht folgt Maus oder Finger.
+   beam + reveal liegen HINTER dem Inhalt: das Licht fällt
+   auf den Hintergrund und macht dort die eigene Filmkorn-Textur
+   sichtbar (gleiches Muster wie body::before). So läuft kein
+   Muster über Schrift, kleine Texte bleiben scharf.
+   lift (overlay, ohne Muster) liegt darüber und hellt Text auf.
+========================= */
+
+.flash-beam,
+.flash-lift{
+  position:fixed;
+  left:0;
+  top:0;
+  width:880px;
+  height:880px;
+  border-radius:50%;
+  pointer-events:none;
+
+  transform:translate3d(-2000px,-2000px,0);
+  will-change:transform;
+
+  opacity:0;
+  transition:opacity .7s ease;
+}
+
+.flash-beam{
+  z-index:0;
+
+  background:
+    radial-gradient(
+      circle closest-side,
+      rgba(255,243,224,.16),
+      rgba(255,243,224,.07) 38%,
+      rgba(255,243,224,.015) 66%,
+      transparent 100%
+    );
+}
+
+.flash-lift{
+  z-index:9987;
+  mix-blend-mode:overlay;
+
+  background:
+    radial-gradient(
+      circle closest-side,
+      rgba(255,255,255,.6),
+      rgba(255,255,255,.22) 45%,
+      transparent 100%
+    );
+}
+
+.flash-reveal{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+
+  background-image:
+    repeating-radial-gradient(
+      circle at 20% 30%,
+      rgba(255,255,255,.12) 0,
+      rgba(255,255,255,.12) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  -webkit-mask-image:radial-gradient(circle closest-side,#000,rgba(0,0,0,.4) 45%,transparent);
+  mask-image:radial-gradient(circle closest-side,#000,rgba(0,0,0,.4) 45%,transparent);
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-size:880px 880px;
+  mask-size:880px 880px;
+  -webkit-mask-position:-2000px -2000px;
+  mask-position:-2000px -2000px;
+
+  opacity:0;
+  transition:opacity .7s ease;
+}
+
+.flash-beam.on,
+.flash-lift.on,
+.flash-reveal.on{
+  opacity:1;
+}
+
+/* Im Intro ist der Hintergrund heller: Textur leiser, damit kleine Schrift lesbar bleibt */
+
+.intro .flash-reveal.on{
+  opacity:.4;
+}
+
+/* Inhalt liegt über Lichtkegel und Textur */
+
+main{
+  position:relative;
+  z-index:1;
+}
+
+/* =========================
    FILM CUT
 ========================= */
 
@@ -444,12 +649,13 @@ body::after{
   inset:0;
   z-index:9500;
 
+  /* Lichtimpuls aus der Taschenlampe: Position setzt das Script beim Klick */
   background:
     radial-gradient(
-      circle at center,
-      rgba(255,255,255,.18),
-      rgba(255,255,255,.02) 35%,
-      #050505 75%
+      circle at 50% 80%,
+      rgba(255,243,224,.2),
+      rgba(255,243,224,.05) 28%,
+      transparent 60%
     );
 
   pointer-events:none;
@@ -510,6 +716,107 @@ section{
 }
 
 /* =========================
+   CINE BUTTON
+   Eine Button-Sprache für die ganze Seite,
+   abgeleitet vom Intro-Button.
+========================= */
+
+.cine-btn{
+  position:relative;
+  overflow:hidden;
+
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+
+  padding:15px 22px;
+
+  border:1px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.025);
+  color:#fff;
+
+  cursor:pointer;
+
+  font-size:9px;
+  letter-spacing:.22em;
+  white-space:nowrap;
+
+  backdrop-filter:blur(8px);
+
+  transition:
+    background .35s ease,
+    color .35s ease,
+    border-color .35s ease;
+}
+
+.cine-btn.primary{
+  border-color:rgba(255,255,255,.6);
+  background:rgba(255,255,255,.07);
+}
+
+.cine-btn .arr{
+  display:inline-block;
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+
+.cine-btn:hover{
+  border-color:#fff;
+  background:#fff;
+  color:#050505;
+}
+
+.cine-btn:hover .arr,
+.cine-btn:focus-visible .arr{
+  transform:translateX(5px);
+}
+
+.cine-btn.top-cta{
+  padding:12px 17px;
+}
+
+.cine-btn:disabled{
+  cursor:default;
+  opacity:.6;
+}
+
+/* Lichtstreifen: beim Hover einmal, beim Hauptbutton in Ruhe alle paar Sekunden */
+
+.cine-btn::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:-60%;
+  width:50%;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      100deg,
+      transparent,
+      rgba(255,255,255,.22),
+      transparent
+    );
+
+  transform:skewX(-20deg);
+  opacity:0;
+}
+
+.cine-btn.primary::after{
+  animation:enterSweep 3.4s cubic-bezier(.65,0,.35,1) 1.5s infinite;
+}
+
+.cine-btn:hover::after{
+  animation:none;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cine-btn.primary::after{
+    animation:none;
+  }
+}
+
+/* =========================
    HERO
 ========================= */
 
@@ -525,10 +832,17 @@ section{
     );
 }
 
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:42px;
+}
+
 .hero-small{
   margin-top:40px;
-  color:#68645e;
-  font-size:9px;
+  color:#85817a;
+  font-size:10px;
   letter-spacing:.25em;
 }
 
@@ -539,9 +853,9 @@ section{
 
   margin-bottom:35px;
 
-  color:#65615b;
+  color:#85817a;
 
-  font-size:8px;
+  font-size:10px;
   letter-spacing:.25em;
 }
 
@@ -556,10 +870,6 @@ section{
    CATEGORIES
 ========================= */
 
-.categories{
-  border-top:1px solid var(--line);
-}
-
 .category-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -571,6 +881,8 @@ section{
 }
 
 .category{
+  position:relative;
+  overflow:hidden;
   min-height:275px;
   padding:35px;
 
@@ -591,9 +903,22 @@ section{
   transform:translateY(-5px);
 }
 
+.category-ghost{
+  right:-4px;
+  top:-22px;
+  font-size:clamp(120px,12vw,190px);
+}
+
+.category > .category-number,
+.category > h3,
+.category > p{
+  position:relative;
+  z-index:1;
+}
+
 .category-number{
-  color:#5d5953;
-  font-size:9px;
+  color:#7d7973;
+  font-size:10px;
   letter-spacing:.2em;
 }
 
@@ -605,18 +930,14 @@ section{
 
 .category p{
   max-width:330px;
-  color:#74706a;
-  font-size:12px;
+  color:#8e8a83;
+  font-size:13px;
   line-height:1.7;
 }
 
 /* =========================
    SERVICES
 ========================= */
-
-.services{
-  border-top:1px solid var(--line);
-}
 
 .service-list{
   margin-top:65px;
@@ -638,15 +959,27 @@ section{
     background .4s ease;
 }
 
-.service:hover{
+.service{
+  cursor:pointer;
+}
+
+.service:hover,
+.service:focus-visible{
   padding-left:16px;
   padding-right:16px;
   background:rgba(255,255,255,.025);
+  outline:none;
+}
+
+.service:hover .service-arrow,
+.service:focus-visible .service-arrow{
+  color:#fff;
+  transform:translateX(4px);
 }
 
 .service-number{
-  color:#5d5953;
-  font-size:10px;
+  color:#7d7973;
+  font-size:11px;
 }
 
 .service h3{
@@ -658,6 +991,257 @@ section{
 .service-arrow{
   color:#77736c;
   font-size:16px;
+  transition:
+    color .3s ease,
+    transform .3s ease;
+}
+
+/* =========================
+   NOVA / KI-ASSISTENTIN
+========================= */
+
+.nova{
+  background:
+    radial-gradient(
+      ellipse 45% 40% at 75% 50%,
+      rgba(255,255,255,.03),
+      transparent 100%
+    );
+}
+
+.nova::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:7vw;
+  right:7vw;
+  height:1px;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.07) 30%,
+      rgba(255,255,255,.07) 70%,
+      transparent
+    );
+}
+
+.nova-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,520px);
+  align-items:center;
+  gap:70px;
+}
+
+.nova-player{
+  position:relative;
+  overflow:hidden;
+
+  padding:28px;
+
+  border:1px solid var(--line);
+
+  /* fester Grund: Taschenlampe scheint nicht durch, nur das Kartenlicht */
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.008)
+    ),
+    #070707;
+
+  transition:border-color .5s ease;
+}
+
+.nova-player.playing{
+  border-color:rgba(255,255,255,.32);
+}
+
+.nova-player > *:not(.widget-spot){
+  position:relative;
+  z-index:1;
+}
+
+.nova-player:hover .widget-spot{
+  opacity:1;
+}
+
+.nova-head{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+
+  color:#85817a;
+  font-size:10px;
+  letter-spacing:.25em;
+}
+
+.nova-state{
+  color:#85817a;
+  transition:color .4s ease;
+}
+
+.nova-player.playing .nova-state{
+  color:#f4f1ea;
+}
+
+.nova-wave{
+  display:block;
+  width:100%;
+  height:120px;
+  margin-top:34px;
+}
+
+.nova-caption{
+  min-height:3.4em;
+  margin-top:26px;
+
+  color:#77736c;
+  font-size:clamp(18px,1.8vw,23px);
+  line-height:1.45;
+  letter-spacing:-.02em;
+}
+
+.nova-caption .w{
+  transition:color .25s ease;
+}
+
+.nova-caption .w.on{
+  color:#f4f1ea;
+}
+
+.nova-controls{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-top:22px;
+}
+
+/* Play-Knopf im Stil des Intro-Buttons */
+
+.nova-play{
+  position:relative;
+  width:58px;
+  height:58px;
+  flex-shrink:0;
+
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(8px);
+
+  cursor:pointer;
+
+  transition:
+    background .35s ease,
+    border-color .35s ease,
+    transform .35s cubic-bezier(.22,1,.36,1);
+}
+
+.nova-play:hover{
+  background:#fff;
+  border-color:#fff;
+  transform:scale(1.06);
+}
+
+.nova-play::before{
+  content:"";
+  position:absolute;
+  inset:-9px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  animation:novaPulse 2.6s ease-out infinite;
+  pointer-events:none;
+}
+
+.nova-player.playing .nova-play::before{
+  animation:none;
+  opacity:0;
+}
+
+@keyframes novaPulse{
+  0%{ transform:scale(.85); opacity:.9; }
+  100%{ transform:scale(1.25); opacity:0; }
+}
+
+.nova-play-icon{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:0;
+  height:0;
+  margin:-8px 0 0 -4px;
+  border-left:13px solid #fff;
+  border-top:8px solid transparent;
+  border-bottom:8px solid transparent;
+  transition:border-color .35s ease;
+}
+
+.nova-play:hover .nova-play-icon{
+  border-left-color:#050505;
+}
+
+.nova-player.playing .nova-play-icon{
+  width:12px;
+  height:16px;
+  margin:-8px 0 0 -6px;
+  border:0;
+  border-left:4px solid #fff;
+  border-right:4px solid #fff;
+}
+
+.nova-player.playing .nova-play:hover .nova-play-icon{
+  border-left-color:#050505;
+  border-right-color:#050505;
+}
+
+.nova-time{
+  color:#85817a;
+  font-size:11px;
+  letter-spacing:.18em;
+  font-variant-numeric:tabular-nums;
+}
+
+.nova-skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:28px;
+}
+
+.nova-skills span{
+  padding:9px 12px;
+  border:1px solid rgba(255,255,255,.16);
+  color:#8e8a83;
+  font-size:9px;
+  letter-spacing:.2em;
+  transition:
+    color .5s ease,
+    border-color .5s ease,
+    background .5s ease;
+}
+
+.nova-skills span.on{
+  border-color:rgba(255,255,255,.6);
+  background:rgba(255,255,255,.07);
+  color:#fff;
+}
+
+.sr-only{
+  position:absolute !important;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  white-space:nowrap;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .nova-play::before{
+    animation:none;
+  }
 }
 
 /* =========================
@@ -665,12 +1249,11 @@ section{
 ========================= */
 
 .tools{
-  border-top:1px solid var(--line);
   background:
     radial-gradient(
-      circle at 50% 25%,
+      ellipse 55% 40% at 50% 40%,
       rgba(255,255,255,.035),
-      transparent 35%
+      transparent 100%
     );
 }
 
@@ -687,8 +1270,9 @@ section{
 
 .widget-card{
   position:relative;
-  min-height:310px;
+  min-height:380px;
   padding:30px;
+  cursor:pointer;
 
   border:1px solid var(--line);
 
@@ -697,7 +1281,8 @@ section{
       145deg,
       rgba(255,255,255,.045),
       rgba(255,255,255,.008)
-    );
+    ),
+    #070707;
 
   overflow:hidden;
 
@@ -709,8 +1294,72 @@ section{
 
 .widget-card:hover{
   transform:translateY(-7px);
-  border-color:rgba(255,255,255,.3);
-  background:rgba(255,255,255,.045);
+  border-color:rgba(255,255,255,.34);
+  background:
+    linear-gradient(
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.045)
+    ),
+    #070707;
+}
+
+/* Licht folgt der Maus in der Karte */
+
+.widget-spot{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .5s ease;
+}
+
+.widget-card:hover .widget-spot,
+.category:hover .widget-spot{
+  opacity:1;
+}
+
+/* Große Kontur-Nummer, leuchtet beim Hover auf */
+
+.widget-ghost{
+  position:absolute;
+  right:-6px;
+  top:-28px;
+
+  font-size:clamp(150px,17vw,250px);
+  font-weight:700;
+  line-height:1;
+  letter-spacing:-.08em;
+
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.08);
+
+  pointer-events:none;
+  user-select:none;
+
+  transition:
+    -webkit-text-stroke-color .6s ease,
+    transform .9s cubic-bezier(.22,1,.36,1);
+}
+
+.widget-card:hover .widget-ghost,
+.category:hover .widget-ghost{
+  -webkit-text-stroke-color:rgba(255,255,255,.26);
+  transform:translateY(10px);
+}
+
+.widget-meta{
+  margin-top:22px;
+  color:#85817a;
+  font-size:9px;
+  letter-spacing:.22em;
+}
+
+.widget-card > .widget-number,
+.widget-card > h3,
+.widget-card > p,
+.widget-card > .widget-meta{
+  position:relative;
+  z-index:1;
 }
 
 .widget-card::after{
@@ -726,8 +1375,8 @@ section{
 }
 
 .widget-number{
-  color:#65615b;
-  font-size:8px;
+  color:#85817a;
+  font-size:10px;
   letter-spacing:.25em;
 }
 
@@ -740,8 +1389,8 @@ section{
 
 .widget-card p{
   margin-top:15px;
-  color:#77736c;
-  font-size:12px;
+  color:#8e8a83;
+  font-size:13px;
   line-height:1.7;
 }
 
@@ -749,24 +1398,7 @@ section{
   position:absolute;
   left:30px;
   bottom:30px;
-
-  border:1px solid rgba(255,255,255,.25);
-  background:transparent;
-  color:#fff;
-
-  padding:11px 16px;
-
-  cursor:pointer;
-
-  font-size:8px;
-  letter-spacing:.18em;
-
-  transition:.3s ease;
-}
-
-.widget-open:hover{
-  background:#fff;
-  color:#050505;
+  z-index:2;
 }
 
 /* =========================
@@ -906,6 +1538,22 @@ section{
   transition:.3s ease;
 }
 
+.widget-overlay.active .select-service{
+  animation:tileIn .55s cubic-bezier(.22,1,.36,1) both;
+  animation-delay:calc(var(--i, 0) * 30ms + 120ms);
+}
+
+@keyframes tileIn{
+  from{
+    opacity:0;
+    transform:translateY(14px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
 .select-service:hover{
   border-color:rgba(255,255,255,.35);
   color:#fff;
@@ -953,17 +1601,6 @@ section{
 
 .widget-action{
   margin-top:25px;
-
-  padding:15px 20px;
-
-  border:0;
-  background:#fff;
-  color:#050505;
-
-  cursor:pointer;
-
-  font-size:9px;
-  letter-spacing:.17em;
 }
 
 /* =========================
@@ -1013,16 +1650,31 @@ section{
 }
 
 .brief-buttons button{
-  padding:13px 17px;
+  padding:13px 18px;
   border:1px solid rgba(255,255,255,.22);
-  background:transparent;
-  color:#fff;
+  background:rgba(255,255,255,.02);
+  color:#cfcac2;
   cursor:pointer;
-  font-size:8px;
-  letter-spacing:.16em;
+  font-size:9px;
+  letter-spacing:.18em;
+  transition:
+    color .3s ease,
+    border-color .3s ease,
+    background .3s ease;
+}
+
+.brief-buttons button:hover{
+  color:#fff;
+  border-color:#fff;
 }
 
 .brief-buttons button.primary{
+  border-color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+}
+
+.brief-buttons button.primary:hover{
   background:#fff;
   color:#050505;
 }
@@ -1060,12 +1712,13 @@ section{
 ========================= */
 
 .manifesto{
+  min-height:80vh;
   background:
     radial-gradient(
-      circle at 50% 50%,
-      #101010,
-      #080808 55%,
-      #050505
+      ellipse 60% 45% at 50% 50%,
+      rgba(255,255,255,.04),
+      rgba(255,255,255,.015) 55%,
+      transparent 100%
     );
 }
 
@@ -1211,7 +1864,7 @@ section{
 ========================= */
 
 .make-visible{
-  min-height:90vh;
+  min-height:75vh;
 
   display:flex;
   align-items:center;
@@ -1239,7 +1892,7 @@ section{
 ========================= */
 
 .instagram{
-  border-top:1px solid var(--line);
+  min-height:auto;
 }
 
 .instagram-box{
@@ -1268,18 +1921,7 @@ section{
   letter-spacing:-.045em;
 }
 
-.instagram-box a{
-  padding:15px 21px;
-  border:1px solid rgba(255,255,255,.25);
-  font-size:9px;
-  letter-spacing:.2em;
-  transition:.35s ease;
-}
 
-.instagram-box a:hover{
-  background:#fff;
-  color:#050505;
-}
 
 /* =========================
    CONTACT
@@ -1288,42 +1930,222 @@ section{
 .contact{
   background:
     radial-gradient(
-      circle at 80% 20%,
+      ellipse 40% 35% at 80% 30%,
       rgba(255,255,255,.035),
-      transparent 28%
+      transparent 100%
     ),
-    #080808;
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255,255,255,.012) 30%,
+      rgba(255,255,255,.012) 70%,
+      transparent
+    );
+}
+
+/* =========================
+   SOFT DIVIDERS
+   Statt harter 1px-Kanten zwischen den Szenen:
+   eine Linie, die zu beiden Seiten ausläuft.
+========================= */
+
+.categories::before,
+.services::before,
+.tools::before,
+.instagram::before,
+footer::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:7vw;
+  right:7vw;
+  height:1px;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.07) 30%,
+      rgba(255,255,255,.07) 70%,
+      transparent
+    );
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:minmax(0,750px) minmax(220px,320px);
+  justify-content:space-between;
+  gap:60px;
+  margin-top:65px;
 }
 
 .contact-form{
   max-width:750px;
-  margin-top:65px;
+}
+
+.form-note{
+  margin-top:22px;
+  max-width:460px;
+  color:#65615b;
+  font-size:11px;
+  line-height:1.7;
+}
+
+.form-note a{
+  color:#9b978f;
+  border-bottom:1px solid rgba(255,255,255,.2);
+}
+
+.contact-details{
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  padding-top:18px;
+}
+
+.contact-item > span{
+  display:block;
+  margin-bottom:9px;
+  color:#85817a;
+  font-size:10px;
+  letter-spacing:.25em;
+}
+
+.contact-item a,
+.contact-item p{
+  color:#f4f1ea;
+  font-size:15px;
+  line-height:1.7;
+}
+
+.contact-item a{
+  border-bottom:1px solid rgba(255,255,255,.18);
+  transition:border-color .3s ease;
+}
+
+.contact-item a:hover{
+  border-color:#fff;
+}
+
+/* Platzhalter, bis die echten Daten da sind. Vor dem Livegang: grep "class=\"fill\"" */
+
+.inline-hint{
+  display:none;
+  margin:14px 0 0;
+  color:#ffcf9a;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.inline-hint.show{
+  display:block;
+}
+
+.form-success{
+  padding:40px 0;
+}
+
+.form-success h3{
+  font-size:clamp(34px,5vw,64px);
+  font-weight:700;
+  line-height:.95;
+  letter-spacing:-.05em;
+}
+
+.form-success h3 span{
+  color:#77736c;
+}
+
+.form-success p{
+  margin-top:24px;
+  color:#9b978f;
+  font-size:15px;
+  line-height:1.8;
+}
+
+.submit:disabled{
+  opacity:.6;
+  cursor:default;
+}
+
+.fill{
+  outline:1px dashed rgba(255,200,80,.6);
+  outline-offset:2px;
+  color:#ffd27a;
 }
 
 .field{
-  margin-bottom:22px;
+  position:relative;
+  display:block;
+  margin-bottom:34px;
+}
+
+.field-label{
+  display:block;
+  color:#85817a;
+  font-size:10px;
+  letter-spacing:.25em;
+  transition:color .4s ease;
+}
+
+.field:focus-within .field-label{
+  color:#fff;
+}
+
+/* Linie lädt von links, wenn das Feld aktiv ist */
+
+.field-line{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px;
+  background:#fff;
+
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .7s cubic-bezier(.22,1,.36,1);
+}
+
+.field:focus-within .field-line{
+  transform:scaleX(1);
+}
+
+.field textarea{
+  display:block;
 }
 
 .field input,
 .field textarea{
   width:100%;
-  padding:18px 0;
+  padding:14px 0 16px;
 
   border:0;
-  border-bottom:1px solid rgba(255,255,255,.2);
+  border-bottom:1px solid rgba(255,255,255,.18);
+  border-radius:0;
 
   outline:none;
 
   background:transparent;
   color:#fff;
 
-  font-size:15px;
+  font-size:clamp(18px,2vw,24px);
+  letter-spacing:-.02em;
 }
 
-.field input:focus,
-.field textarea:focus{
-  border-color:#fff;
+.field input::placeholder,
+.field textarea::placeholder{
+  color:#4f4c47;
+  transition:color .4s ease;
 }
+
+.field:focus-within input::placeholder,
+.field:focus-within textarea::placeholder{
+  color:#6d6963;
+}
+
+
 
 .field textarea{
   min-height:150px;
@@ -1331,18 +2153,7 @@ section{
 }
 
 .submit{
-  margin-top:20px;
-
-  padding:16px 25px;
-
-  border:0;
-  background:#fff;
-  color:#050505;
-
-  cursor:pointer;
-
-  font-size:9px;
-  letter-spacing:.2em;
+  margin-top:30px;
 }
 
 /* =========================
@@ -1350,13 +2161,13 @@ section{
 ========================= */
 
 footer{
+  position:relative;
+  z-index:9989; /* above vignette, under the grain, like the topbar */
   display:flex;
   justify-content:space-between;
   gap:30px;
 
   padding:45px 7vw;
-
-  border-top:1px solid var(--line);
 
   color:#66625c;
 
@@ -1366,6 +2177,28 @@ footer{
 
 footer strong{
   color:#fff;
+}
+
+.footer-legal{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  gap:22px;
+}
+
+.footer-legal a{
+  color:#9b978f;
+  transition:color .3s ease;
+}
+
+.footer-legal a:hover{
+  color:#fff;
+}
+
+.footer-logo{
+  display:block;
+  height:55px;
+  width:auto;
 }
 
 /* =========================
@@ -1387,71 +2220,6 @@ footer strong{
 }
 
 /* =========================
-   COOKIE
-========================= */
-
-.cookie{
-  position:fixed;
-
-  left:20px;
-  right:20px;
-  bottom:20px;
-
-  z-index:10000;
-
-  display:none;
-
-  align-items:center;
-  justify-content:space-between;
-
-  gap:20px;
-
-  padding:22px;
-
-  border:1px solid rgba(255,255,255,.16);
-
-  background:rgba(12,12,12,.96);
-
-  backdrop-filter:blur(18px);
-}
-
-.cookie.show{
-  display:flex;
-}
-
-.cookie p{
-  max-width:650px;
-  color:#aaa69e;
-  font-size:11px;
-  line-height:1.6;
-}
-
-.cookie-buttons{
-  display:flex;
-  gap:10px;
-  flex-shrink:0;
-}
-
-.cookie button{
-  padding:12px 15px;
-
-  border:1px solid rgba(255,255,255,.25);
-
-  background:transparent;
-  color:#fff;
-
-  cursor:pointer;
-
-  font-size:8px;
-  letter-spacing:.13em;
-}
-
-.cookie button.accept{
-  background:#fff;
-  color:#050505;
-}
-
-/* =========================
    MOBILE
 ========================= */
 
@@ -1462,11 +2230,18 @@ footer strong{
   }
 
   .logo{
-    font-size:10px;
-    letter-spacing:.15em;
+    gap:10px;
   }
 
-  .logo span{
+  .logo-symbol{
+    height:22px;
+  }
+
+  .logo-wordmark{
+    height:11px;
+  }
+
+  .logo-tag{
     display:none;
   }
 
@@ -1482,13 +2257,25 @@ footer strong{
     top:62px;
   }
 
-  .scene-info{
-    left:18px;
-    bottom:18px;
+  section,
+  .manifesto,
+  .make-visible{
+    min-height:auto;
+    padding:105px 20px;
   }
 
-  section{
-    padding:105px 20px;
+  .topbar-right{
+    gap:14px;
+  }
+
+  .cine-btn.top-cta{
+    padding:10px 12px;
+    font-size:8px;
+    letter-spacing:.14em;
+  }
+
+  .top-cta .arr{
+    display:none;
   }
 
   .hero{
@@ -1529,16 +2316,37 @@ footer strong{
     gap:15px;
   }
 
-  .service-arrow{
-    display:none;
+  .service{
+    grid-template-columns:35px 1fr auto;
   }
 
   .widget-grid{
     grid-template-columns:1fr;
   }
 
+  .nova-grid{
+    grid-template-columns:1fr;
+    gap:50px;
+  }
+
+  .nova-player{
+    padding:22px 18px;
+  }
+
+  .nova-wave{
+    height:90px;
+  }
+
   .widget-card{
-    min-height:280px;
+    min-height:380px;
+  }
+
+  .widget-ghost{
+    font-size:150px;
+  }
+
+  .cine-btn{
+    padding:14px 18px;
   }
 
   .service-selector{
@@ -1569,21 +2377,9 @@ footer strong{
     flex-direction:column;
   }
 
-  .cookie{
-    left:10px;
-    right:10px;
-    bottom:10px;
-
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .cookie-buttons{
-    width:100%;
-  }
-
-  .cookie button{
-    flex:1;
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:55px;
   }
 }
 </style>
@@ -1595,27 +2391,32 @@ footer strong{
 
 <div class="film-cut" id="filmCut"></div>
 
+<div class="flash-lift" id="flashLift" aria-hidden="true"></div>
+
 <header class="topbar" id="topbar">
 
-  <div class="logo">
-    SOCIALCLIP <span>ART & MEDIA</span>
-  </div>
+  <a class="logo" href="#" aria-label="SocialClip, zum Seitenanfang">
+    <img class="logo-symbol" src="logo/socialclip-symbol-cream.svg" alt="" width="15" height="26">
+    <img class="logo-wordmark" src="logo/socialclip-wordmark-cream.svg" alt="SocialClip" width="137" height="13">
+    <span class="logo-tag">ART · MEDIA · DIGITAL</span>
+  </a>
 
-  <div class="clock">
-    <strong id="liveClock">--:--:--</strong>
-    <span id="liveDate">--.--.----</span>
+  <div class="topbar-right">
+
+    <button class="top-cta cine-btn" type="button" data-open-builder>
+      PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
+    </button>
+
+    <div class="clock">
+      <strong id="liveClock">--:--:--</strong>
+      <span id="liveDate">--.--.----</span>
+    </div>
+
   </div>
 
 </header>
 
 <div class="progress" id="progress"></div>
-
-<div class="scene-info">
-  <span class="rec">
-    <span class="rec-dot"></span>
-    SOCIALCLIP / <span id="sceneNumber">SCENE 01</span>
-  </span>
-</div>
 
 <!-- =========================
      INTRO
@@ -1669,6 +2470,9 @@ footer strong{
 
 </div>
 
+<div class="flash-reveal" id="flashReveal" aria-hidden="true"></div>
+<div class="flash-beam" id="flashBeam" aria-hidden="true"></div>
+
 <main>
 
 <!-- =========================
@@ -1693,8 +2497,17 @@ footer strong{
     visuellen Welt, die Marken sichtbar macht.
   </p>
 
+  <div class="hero-actions reveal">
+    <button class="cine-btn primary" type="button" data-open-builder>
+      PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
+    </button>
+    <a class="cine-btn" href="#kontakt">
+      KONTAKT <span class="arr" aria-hidden="true">→</span>
+    </a>
+  </div>
+
   <div class="hero-small reveal">
-    ART & MEDIA · ERLANGEN · GERMANY
+    ART · MEDIA · DIGITAL · ERLANGEN
   </div>
 
 </section>
@@ -1718,36 +2531,48 @@ footer strong{
   <div class="category-grid">
 
     <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">01</span>
       <div class="category-number">01 / WEB</div>
       <h3>Web</h3>
       <p>Webseiten und digitale Auftritte, die nicht nach Vorlage aussehen.</p>
     </div>
 
     <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">02</span>
       <div class="category-number">02 / DESIGN</div>
       <h3>Design</h3>
       <p>Logos, Flyer, Visitenkarten und visuelle Identitäten.</p>
     </div>
 
     <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">03</span>
       <div class="category-number">03 / SOCIAL</div>
       <h3>Social Media</h3>
       <p>Inhalte, Strategien und Marketing für digitale Aufmerksamkeit.</p>
     </div>
 
     <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">04</span>
       <div class="category-number">04 / MEDIA</div>
       <h3>Foto & Video</h3>
       <p>Bild und Bewegung für Marken, Produkte und Geschichten.</p>
     </div>
 
     <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">05</span>
       <div class="category-number">05 / MARKETING</div>
       <h3>Marketing</h3>
       <p>Neukundengewinnung, Strategie und digitale Kampagnen.</p>
     </div>
 
     <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">06</span>
       <div class="category-number">06 / DIGITAL</div>
       <h3>Digitale Lösungen</h3>
       <p>Programmierung, virtuelle Assistenz und individuelle Lösungen.</p>
@@ -1775,33 +2600,114 @@ footer strong{
 
   <div class="service-list">
 
-    <div class="service reveal"><div class="service-number">01</div><h3>Webseiten erstellen</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">02</div><h3>Flyer erstellen</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">03</div><h3>Online Marketing</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">04</div><h3>Visitenkarten erstellen</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">05</div><h3>Social Media Assistant</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">06</div><h3>Logo erstellen</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">07</div><h3>Video & Photo Editor</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">08</div><h3>Lebenslauf erstellen</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">09</div><h3>Speisekarte erstellen</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">10</div><h3>Virtueller Assistent</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">11</div><h3>Programmierung</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">12</div><h3>Neukundengewinnung</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">13</div><h3>Strategieentwicklung</h3><div class="service-arrow">→</div></div>
-    <div class="service reveal"><div class="service-number">14</div><h3>TikTok Marketing</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Webseite"><div class="service-number">01</div><h3>Webseiten erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Flyer"><div class="service-number">02</div><h3>Flyer erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Online Marketing"><div class="service-number">03</div><h3>Online Marketing</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Visitenkarte"><div class="service-number">04</div><h3>Visitenkarten erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Social Media"><div class="service-number">05</div><h3>Social Media Assistant</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Logo"><div class="service-number">06</div><h3>Logo erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Video & Foto"><div class="service-number">07</div><h3>Video & Photo Editor</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Lebenslauf"><div class="service-number">08</div><h3>Lebenslauf erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Speisekarte"><div class="service-number">09</div><h3>Speisekarte erstellen</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Virtueller Assistent"><div class="service-number">10</div><h3>Virtueller Assistent</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Programmierung"><div class="service-number">11</div><h3>Programmierung</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Neukundengewinnung"><div class="service-number">12</div><h3>Neukundengewinnung</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="Strategieentwicklung"><div class="service-number">13</div><h3>Strategieentwicklung</h3><div class="service-arrow">→</div></div>
+    <div class="service reveal" role="button" tabindex="0" data-service="TikTok Marketing"><div class="service-number">14</div><h3>TikTok Marketing</h3><div class="service-arrow">→</div></div>
 
   </div>
 
 </section>
 
 <!-- =========================
-     SCENE 05 / TOOLS
+     SCENE 05 / NOVA
+========================= -->
+
+<section class="nova" id="nova">
+
+  <div class="chapter-line reveal">
+    SCENE 05 / MEET NOVA
+  </div>
+
+  <div class="nova-grid">
+
+    <div class="nova-intro">
+
+      <h2 class="big-title reveal">
+        LERN<br>
+        <span>NOVA</span><br>
+        KENNEN.
+      </h2>
+
+      <p class="text reveal" style="margin-top:40px;">
+        Nova ist deine KI-Assistentin. Sie geht ans Telefon, wenn du keine Zeit hast,
+        beantwortet E-Mails und plant Termine. Auch nach Feierabend.
+      </p>
+
+      <div class="hero-actions reveal">
+        <button class="cine-btn primary" type="button" data-open-builder="Virtueller Assistent">
+          NOVA FÜR DEIN BUSINESS <span class="arr" aria-hidden="true">→</span>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="nova-player reveal" id="novaPlayer">
+
+      <span class="widget-spot" aria-hidden="true"></span>
+
+      <div class="nova-head">
+        <span>NOVA · KI-ASSISTENTIN</span>
+        <span class="nova-state" id="novaState">BEREIT</span>
+      </div>
+
+      <canvas class="nova-wave" id="novaWave" aria-hidden="true"></canvas>
+
+      <p class="nova-caption" id="novaCaption">
+        Drück auf Play und hör Nova zu.
+      </p>
+
+      <div class="nova-controls">
+
+        <button class="nova-play" id="novaPlay" type="button" aria-label="Nova anhören">
+          <span class="nova-play-icon" aria-hidden="true"></span>
+        </button>
+
+        <div class="nova-time">
+          <span id="novaTime">00:00</span> / <span id="novaDur">00:11</span>
+        </div>
+
+      </div>
+
+      <div class="nova-skills">
+        <span data-skill="calls">ANRUFE</span>
+        <span data-skill="mail">E-MAILS</span>
+        <span data-skill="dates">TERMINE</span>
+        <span data-skill="late">NACH FEIERABEND</span>
+      </div>
+
+      <p class="sr-only">
+        Nova sagt: Hallo, ich bin Nova, deine persönliche Assistentin.
+        Ich gehe ans Telefon, beantworte deine E-Mails und plane deine Termine.
+        Auch nach Feierabend. Du kümmerst dich um dein Business. Ich mich um den Rest.
+      </p>
+
+      <audio id="novaAudio" src="audio/nova-demo.mp3" preload="metadata"></audio>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     SCENE 06 / TOOLS
 ========================= -->
 
 <section class="tools">
 
   <div class="chapter-line reveal">
-    SCENE 05 / INTERACTIVE TOOLS
+    SCENE 06 / INTERACTIVE TOOLS
   </div>
 
   <div class="tools-intro">
@@ -1822,7 +2728,10 @@ footer strong{
 
   <div class="widget-grid">
 
-    <div class="widget-card reveal">
+    <div class="widget-card reveal" data-widget="servicesWidget">
+
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost" aria-hidden="true">01</span>
 
       <div class="widget-number">
         TOOL 01 / SELECTION
@@ -1836,13 +2745,18 @@ footer strong{
         Wähle aus unseren Leistungen dein eigenes Projekt.
       </p>
 
-      <button class="widget-open" data-widget="servicesWidget">
-        PROJEKT STARTEN →
+      <div class="widget-meta">14 LEISTUNGEN · 1 MINUTE</div>
+
+      <button class="widget-open cine-btn" type="button" data-widget="servicesWidget">
+        PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
       </button>
 
     </div>
 
-    <div class="widget-card reveal">
+    <div class="widget-card reveal" data-widget="briefingWidget">
+
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost" aria-hidden="true">02</span>
 
       <div class="widget-number">
         TOOL 02 / BRIEFING
@@ -1856,8 +2770,35 @@ footer strong{
         Beantworte ein paar Fragen und erstelle dein Projekt-Briefing.
       </p>
 
-      <button class="widget-open" data-widget="briefingWidget">
-        IDEE STARTEN →
+      <div class="widget-meta">3 FRAGEN · 1 MINUTE</div>
+
+      <button class="widget-open cine-btn" type="button" data-widget="briefingWidget">
+        IDEE STARTEN <span class="arr" aria-hidden="true">→</span>
+      </button>
+
+    </div>
+
+    <div class="widget-card reveal" data-nova>
+
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost" aria-hidden="true">03</span>
+
+      <div class="widget-number">
+        TOOL 03 / NOVA
+      </div>
+
+      <h3>
+        Hör Nova zu
+      </h3>
+
+      <p>
+        Unsere KI-Assistentin stellt sich in ein paar Sekunden selbst vor.
+      </p>
+
+      <div class="widget-meta">11 SEKUNDEN · MIT TON</div>
+
+      <button class="widget-open cine-btn" type="button" data-nova-play>
+        ANHÖREN <span class="arr" aria-hidden="true">→</span>
       </button>
 
     </div>
@@ -1867,13 +2808,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 06
+     SCENE 07
 ========================= -->
 
 <section class="manifesto center">
 
   <div class="chapter-line reveal">
-    SCENE 06 / THE IDEA
+    SCENE 07 / THE IDEA
   </div>
 
   <p class="manifesto-text reveal">
@@ -1890,13 +2831,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 07
+     SCENE 08
 ========================= -->
 
 <section class="visual-world">
 
   <div class="chapter-line reveal">
-    SCENE 07 / VISUAL WORLD
+    SCENE 08 / VISUAL WORLD
   </div>
 
   <h2 class="big-title reveal">
@@ -1924,7 +2865,7 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 08
+     SCENE 09
 ========================= -->
 
 <section class="make-visible">
@@ -1932,7 +2873,7 @@ footer strong{
   <div>
 
     <div class="chapter-line reveal">
-      SCENE 08 / THE MOMENT
+      SCENE 09 / THE MOMENT
     </div>
 
     <h2 class="reveal">
@@ -1953,13 +2894,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 09
+     SCENE 10
 ========================= -->
 
 <section class="instagram">
 
   <div class="chapter-line reveal">
-    SCENE 09 / SOCIALCLIP.ART
+    SCENE 10 / SOCIALCLIP.ART
   </div>
 
   <h2 class="big-title reveal">
@@ -1972,11 +2913,12 @@ footer strong{
     <strong>@socialclip.art</strong>
 
     <a
+      class="cine-btn"
       href="https://www.instagram.com/socialclip.art/"
       target="_blank"
       rel="noopener"
     >
-      INSTAGRAM ÖFFNEN →
+      INSTAGRAM ÖFFNEN <span class="arr" aria-hidden="true">→</span>
     </a>
 
   </div>
@@ -1984,13 +2926,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 10
+     SCENE 11
 ========================= -->
 
-<section class="contact">
+<section class="contact" id="kontakt">
 
   <div class="chapter-line reveal">
-    SCENE 10 / YOUR STORY
+    SCENE 11 / YOUR STORY
   </div>
 
   <h2 class="big-title reveal">
@@ -1999,43 +2941,104 @@ footer strong{
     GESCHICHTE?
   </h2>
 
+  <div class="contact-grid">
+
   <form
     class="contact-form reveal"
     action="https://formspree.io/f/xwlvlqwg"
     method="POST"
   >
 
-    <div class="field">
+    <label class="field">
+      <span class="field-label">01 / NAME</span>
       <input
         type="text"
         name="name"
-        placeholder="Dein Name"
+        aria-label="Dein Name"
+        autocomplete="name"
+        placeholder="Wie heißt du?"
         required
       >
-    </div>
+      <span class="field-line" aria-hidden="true"></span>
+    </label>
 
-    <div class="field">
+    <label class="field">
+      <span class="field-label">02 / E-MAIL</span>
       <input
         type="email"
         name="email"
-        placeholder="Deine E-Mail"
+        aria-label="Deine E-Mail"
+        autocomplete="email"
+        placeholder="Wo erreichen wir dich?"
         required
       >
-    </div>
+      <span class="field-line" aria-hidden="true"></span>
+    </label>
 
-    <div class="field">
+    <label class="field">
+      <span class="field-label">03 / DEINE IDEE</span>
       <textarea
         name="message"
-        placeholder="Erzähl uns von deiner Idee..."
+        aria-label="Deine Nachricht"
+        placeholder="Erzähl uns von deiner Idee ..."
         required
       ></textarea>
-    </div>
+      <span class="field-line" aria-hidden="true"></span>
+    </label>
 
-    <button class="submit" type="submit">
-      NACHRICHT SENDEN →
+    <button class="submit cine-btn primary" type="submit">
+      NACHRICHT SENDEN <span class="arr" aria-hidden="true">→</span>
     </button>
 
+    <p class="inline-hint" id="formStatus" aria-live="polite"></p>
+
+    <p class="form-note">
+      Deine Angaben nutzen wir nur, um deine Anfrage zu beantworten.
+      Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.
+    </p>
+
   </form>
+
+  <div class="form-success" id="formSuccess" hidden>
+    <h3>Danke.<br><span>Deine Nachricht ist da.</span></h3>
+    <p>Wir melden uns so schnell wie möglich bei dir.</p>
+  </div>
+
+  <aside class="contact-details reveal" aria-label="Kontaktdaten">
+
+    <div class="contact-item">
+      <span>TELEFON</span>
+      <a href="tel:+49000000000"><span class="fill">[Telefonnummer]</span></a>
+    </div>
+
+    <div class="contact-item">
+      <span>E-MAIL</span>
+      <a href="mailto:info@socialclip.art"><span class="fill">[info@socialclip.art]</span></a>
+    </div>
+
+    <div class="contact-item">
+      <span>STUDIO</span>
+      <p>
+        <span class="fill">[Straße Hausnummer]</span><br>
+        <span class="fill">[PLZ]</span> Erlangen
+      </p>
+    </div>
+
+    <div class="contact-item">
+      <span>ÖFFNUNGSZEITEN</span>
+      <p>
+        <span class="fill">[Mo bis Fr, 09:00 bis 18:00]</span>
+      </p>
+    </div>
+
+    <div class="contact-item">
+      <span>INSTAGRAM</span>
+      <a href="https://www.instagram.com/socialclip.art/" target="_blank" rel="noopener">@socialclip.art</a>
+    </div>
+
+  </aside>
+
+  </div>
 
 </section>
 
@@ -2054,7 +3057,7 @@ footer strong{
         SOCIALCLIP / PROJECT BUILDER
       </div>
 
-      <button class="widget-close">
+      <button class="widget-close" type="button" aria-label="Schließen">
         ×
       </button>
     </div>
@@ -2142,8 +3145,10 @@ footer strong{
           </span>
         </div>
 
-        <button class="widget-action" id="sendProject">
-          PROJEKT ANFRAGEN →
+        <p class="inline-hint" id="builderHint" aria-live="polite"></p>
+
+        <button class="widget-action cine-btn primary" type="button" id="sendProject">
+          PROJEKT ANFRAGEN <span class="arr" aria-hidden="true">→</span>
         </button>
 
       </div>
@@ -2168,7 +3173,7 @@ footer strong{
         SOCIALCLIP / PROJECT BRIEF
       </div>
 
-      <button class="widget-close">
+      <button class="widget-close" type="button" aria-label="Schließen">
         ×
       </button>
 
@@ -2199,6 +3204,8 @@ footer strong{
             placeholder="z. B. Website für mein Restaurant"
           >
 
+          <p class="inline-hint" aria-live="polite"></p>
+
           <div class="brief-buttons">
             <button class="primary" data-next="2">
               WEITER →
@@ -2227,6 +3234,8 @@ footer strong{
             id="briefTarget"
             placeholder="z. B. junge Familien"
           >
+
+          <p class="inline-hint" aria-live="polite"></p>
 
           <div class="brief-buttons">
 
@@ -2263,6 +3272,8 @@ footer strong{
             placeholder="z. B. mehr Kunden gewinnen"
           >
 
+          <p class="inline-hint" aria-live="polite"></p>
+
           <div class="brief-buttons">
 
             <button data-prev="2">
@@ -2294,23 +3305,23 @@ footer strong{
 
           <div class="brief-line">
             <span>PROJEKT</span>
-            <strong id="resultIdea">—</strong>
+            <strong id="resultIdea"></strong>
           </div>
 
           <div class="brief-line">
             <span>ZIELGRUPPE</span>
-            <strong id="resultTarget">—</strong>
+            <strong id="resultTarget"></strong>
           </div>
 
           <div class="brief-line">
             <span>ZIEL</span>
-            <strong id="resultGoal">—</strong>
+            <strong id="resultGoal"></strong>
           </div>
 
         </div>
 
-        <button class="widget-action" id="briefContact">
-          PROJEKT ANFRAGEN →
+        <button class="widget-action cine-btn primary" type="button" id="briefContact">
+          PROJEKT ANFRAGEN <span class="arr" aria-hidden="true">→</span>
         </button>
 
       </div>
@@ -2328,9 +3339,7 @@ footer strong{
 <footer>
 
   <div>
-    <strong>SOCIALCLIP</strong>
-    <br><br>
-    ART · MEDIA · DIGITAL
+    <img class="footer-logo" src="logo/socialclip-logo-footer-cream.svg" alt="SocialClip Art · Media · Digital" width="92" height="55">
   </div>
 
   <div>
@@ -2339,37 +3348,13 @@ footer strong{
     <strong id="footerClock">--:--:--</strong>
   </div>
 
-  <div>
-    © 2026 SOCIALCLIP
+  <div class="footer-legal">
+    <a href="impressum.html">IMPRESSUM</a>
+    <a href="datenschutz.html">DATENSCHUTZ</a>
+    <span>© 2026 SOCIALCLIP</span>
   </div>
 
 </footer>
-
-<!-- =========================
-     COOKIE
-========================= -->
-
-<div class="cookie" id="cookie">
-
-  <p>
-    Wir verwenden notwendige Cookies,
-    damit diese Website technisch funktioniert.
-    Weitere Cookies werden nur mit deiner Zustimmung gesetzt.
-  </p>
-
-  <div class="cookie-buttons">
-
-    <button id="necessary">
-      NUR NOTWENDIGE
-    </button>
-
-    <button class="accept" id="accept">
-      ALLE AKZEPTIEREN
-    </button>
-
-  </div>
-
-</div>
 
 <script>
 
@@ -2448,11 +3433,52 @@ const introTexts = [
 
 ];
 
-let introStep = 0;
+/*
+   Ein Zeitplan für das ganze Intro.
+   Nach INTRO_DURATION steht der Balken auf 100 %
+   und genau dann kommt der Button.
+*/
 
-let introStarted = false;
+const INTRO_DURATION = 5500;
+
+const INTRO_TEXT_TIMES = [
+  700,
+  1900,
+  3100,
+  4300
+];
 
 let introFinished = false;
+
+/*
+   Wer von Impressum oder Datenschutz zurückkommt,
+   hat das Intro schon gesehen: direkt auf die Seite.
+*/
+
+function cameFromOwnSite(){
+
+  try{
+
+    return (
+      document.referrer !== "" &&
+      new URL(document.referrer).origin === location.origin
+    );
+
+  }catch(error){
+
+    return false;
+
+  }
+
+}
+
+if(cameFromOwnSite()){
+
+  intro.remove();
+
+  document.body.classList.remove("locked");
+
+}
 
 
 /*
@@ -2467,26 +3493,11 @@ setTimeout(()=>{
 
 
 /*
-   Kleiner filmischer Text.
    Jeder Satz verschwindet komplett,
    bevor der nächste erscheint.
 */
 
-function showNextIntroText(){
-
-  if(introStep >= introTexts.length){
-
-    introFinished = true;
-
-    setTimeout(()=>{
-
-      enterButton.classList.add("show");
-
-    },250);
-
-    return;
-
-  }
+function showIntroText(text){
 
   introCopy.classList.remove("visible");
 
@@ -2494,8 +3505,7 @@ function showNextIntroText(){
 
   setTimeout(()=>{
 
-    introCopy.textContent =
-      introTexts[introStep];
+    introCopy.textContent = text;
 
     introCopy.classList.remove("fade");
 
@@ -2504,64 +3514,42 @@ function showNextIntroText(){
       introCopy.classList.add("visible");
 
     });
-
-    introStep++;
-
-    setTimeout(()=>{
-
-      showNextIntroText();
-
-    },1000);
-
-  },350);
-
-}
-
-
-/*
-   Erste Textsequenz.
-*/
-
-setTimeout(()=>{
-
-  introCopy.classList.remove("visible");
-  introCopy.classList.add("fade");
-
-  setTimeout(()=>{
-
-    introCopy.textContent =
-      introTexts[0];
-
-    introCopy.classList.remove("fade");
-
-    requestAnimationFrame(()=>{
-
-      introCopy.classList.add("visible");
-
-    });
-
-    introStep = 1;
-
-    setTimeout(()=>{
-
-      showNextIntroText();
-
-    },1000);
 
   },300);
 
-},800);
+}
+
+INTRO_TEXT_TIMES.forEach((time,index)=>{
+
+  setTimeout(()=>{
+
+    showIntroText(introTexts[index]);
+
+  },time);
+
+});
 
 
 /*
    Opening Progress.
-   Läuft nur während des Intros.
+   Wenn er fertig ist, kommt der Button.
 */
-
-const introDuration = 9000;
 
 const introStart =
   performance.now();
+
+function finishIntro(){
+
+  introFinished = true;
+
+  introBar.style.width = "100%";
+  introPercent.textContent = "100%";
+
+  intro.classList.add("loaded");
+
+  enterButton.classList.add("show");
+
+}
 
 function introProgress(now){
 
@@ -2571,7 +3559,7 @@ function introProgress(now){
   const percentage =
     Math.min(
       100,
-      (elapsed / introDuration) * 100
+      (elapsed / INTRO_DURATION) * 100
     );
 
   introBar.style.width =
@@ -2588,8 +3576,7 @@ function introProgress(now){
 
   }else{
 
-    introBar.style.width = "100%";
-    introPercent.textContent = "100%";
+    finishIntro();
 
   }
 
@@ -2616,6 +3603,15 @@ enterButton.addEventListener(
 
     enterButton.disabled = true;
 
+    enterButton.classList.add("leaving");
+
+    /*
+       Das Licht wechselt sofort auf die Seite,
+       damit es nicht mit dem Intro ausblendet.
+    */
+
+    flashHome();
+
     /*
        Kamera fährt nach vorne.
     */
@@ -2632,6 +3628,14 @@ enterButton.addEventListener(
       document.getElementById(
         "filmCut"
       );
+
+    // ohne Maus (Tastatur): Impuls vom Button aus
+    const pulseX = flash.x > 0 ? flash.x : window.innerWidth / 2;
+    const pulseY = flash.y > 0 ? flash.y : window.innerHeight * .8;
+
+    filmCut.style.background =
+      "radial-gradient(circle at " + pulseX + "px " + pulseY + "px," +
+      "rgba(255,243,224,.2),rgba(255,243,224,.05) 28%,transparent 60%)";
 
     filmCut.classList.add(
       "active"
@@ -2655,10 +3659,265 @@ enterButton.addEventListener(
 
     setTimeout(()=>{
 
+      flashHome();
+
       intro.remove();
 
     },1750);
 
+  }
+);
+
+
+/* =========================
+   FLASHLIGHT
+========================= */
+
+const flashBeam = document.getElementById("flashBeam");
+const flashLift = document.getElementById("flashLift");
+const flashReveal = document.getElementById("flashReveal");
+
+const flashLayers = [flashBeam, flashLift, flashReveal];
+
+/*
+   Kegel und Textur hängen hinter dem Inhalt.
+   Solange das Intro läuft, sitzen sie im Intro
+   zwischen Hintergrund und Text, danach wieder vor <main>.
+*/
+
+const flashBehind = [flashReveal, flashBeam];
+
+function flashHome(){
+
+  const main = document.querySelector("main");
+
+  flashBehind.forEach(layer=>{
+    document.body.insertBefore(layer, main);
+  });
+
+}
+
+const introStage = document.getElementById("intro");
+
+if(introStage){
+
+  const introContent =
+    introStage.querySelector(".intro-content");
+
+  flashBehind.forEach(layer=>{
+    introStage.insertBefore(layer, introContent);
+  });
+
+}
+
+const flash = {
+  size: 880,
+  x: -2000,
+  y: -2000,
+  tx: -2000,
+  ty: -2000,
+  running: false,
+  offTimer: null
+};
+
+const reduceMotion =
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/*
+   Kegelgröße passt sich an den Bildschirm an.
+*/
+
+function flashResize(){
+
+  flash.size =
+    Math.round(
+      Math.max(
+        420,
+        Math.min(880, window.innerWidth * .62)
+      )
+    );
+
+  [flashBeam, flashLift].forEach(layer=>{
+    layer.style.width = flash.size + "px";
+    layer.style.height = flash.size + "px";
+  });
+
+  const mask = flash.size + "px " + flash.size + "px";
+
+  flashReveal.style.webkitMaskSize = mask;
+  flashReveal.style.maskSize = mask;
+
+}
+
+flashResize();
+
+window.addEventListener("resize", flashResize);
+
+function flashOn(){
+
+  clearTimeout(flash.offTimer);
+
+  flashLayers.forEach(layer=>layer.classList.add("on"));
+
+}
+
+function flashOff(delay){
+
+  clearTimeout(flash.offTimer);
+
+  flash.offTimer = setTimeout(()=>{
+
+    flashLayers.forEach(layer=>layer.classList.remove("on"));
+
+  },delay);
+
+}
+
+function flashPaint(){
+
+  const half = flash.size / 2;
+
+  const left = flash.x - half;
+  const top = flash.y - half;
+
+  const move =
+    "translate3d(" + left + "px," + top + "px,0)";
+
+  flashBeam.style.transform = move;
+  flashLift.style.transform = move;
+
+  const position = left + "px " + top + "px";
+
+  flashReveal.style.webkitMaskPosition = position;
+  flashReveal.style.maskPosition = position;
+
+}
+
+/*
+   Der Kegel zieht leicht hinterher,
+   wie eine Taschenlampe in der Hand.
+*/
+
+function flashLoop(){
+
+  const ease = reduceMotion ? 1 : .18;
+
+  flash.x += (flash.tx - flash.x) * ease;
+  flash.y += (flash.ty - flash.y) * ease;
+
+  flashPaint();
+
+  if(
+    Math.abs(flash.tx - flash.x) > .4 ||
+    Math.abs(flash.ty - flash.y) > .4
+  ){
+
+    requestAnimationFrame(flashLoop);
+
+  }else{
+
+    flash.running = false;
+
+  }
+
+}
+
+function flashMoveTo(x,y,jump){
+
+  flash.tx = x;
+  flash.ty = y;
+
+  if(jump){
+
+    flash.x = x;
+    flash.y = y;
+
+  }
+
+  flashOn();
+
+  if(!flash.running){
+
+    flash.running = true;
+
+    requestAnimationFrame(flashLoop);
+
+  }
+
+}
+
+let flashSeen = false;
+
+window.addEventListener(
+  "pointermove",
+  event=>{
+
+    if(event.pointerType === "touch"){
+      return;
+    }
+
+    flashMoveTo(event.clientX, event.clientY, !flashSeen);
+
+    flashSeen = true;
+
+  },
+  {
+    passive:true
+  }
+);
+
+document.documentElement.addEventListener(
+  "mouseleave",
+  ()=>{
+    flashOff(0);
+    flashSeen = false;
+  }
+);
+
+/*
+   Am Handy folgt das Licht dem Finger
+   und geht kurz nach dem Loslassen aus.
+*/
+
+window.addEventListener(
+  "touchstart",
+  event=>{
+
+    const touch = event.touches[0];
+
+    if(touch){
+      flashMoveTo(touch.clientX, touch.clientY, true);
+    }
+
+  },
+  {
+    passive:true
+  }
+);
+
+window.addEventListener(
+  "touchmove",
+  event=>{
+
+    const touch = event.touches[0];
+
+    if(touch){
+      flashMoveTo(touch.clientX, touch.clientY, false);
+    }
+
+  },
+  {
+    passive:true
+  }
+);
+
+window.addEventListener(
+  "touchend",
+  ()=>{
+    flashOff(1100);
+  },
+  {
+    passive:true
   }
 );
 
@@ -2682,6 +3941,10 @@ const revealObserver =
             "visible"
           );
 
+          setTimeout(()=>{
+            entry.target.style.transitionDelay = "";
+          },1800);
+
           revealObserver.unobserve(
             entry.target
           );
@@ -2702,20 +3965,45 @@ revealElements.forEach(
   }
 );
 
+/*
+   Listen und Raster kommen nacheinander,
+   nicht alle auf einmal.
+*/
+
+[".category-grid", ".service-list", ".widget-grid", ".visual-grid", ".contact-grid"]
+  .forEach(selector=>{
+
+    const parent = document.querySelector(selector);
+
+    if(!parent){
+      return;
+    }
+
+    parent
+      .querySelectorAll(":scope > .reveal")
+      .forEach((item,index)=>{
+
+        item.style.transitionDelay =
+          Math.min(index, 6) * 90 + "ms";
+
+      });
+
+  });
+
+/*
+   Im Builder bauen sich die Kacheln nacheinander auf.
+*/
+
+document
+  .querySelectorAll(".select-service")
+  .forEach((tile,index)=>{
+    tile.style.setProperty("--i", index);
+  });
+
 
 /* =========================
-   SCENE DIRECTOR
+   TOPBAR STATE
 ========================= */
-
-const scenes =
-  document.querySelectorAll(
-    "main section"
-  );
-
-const sceneNumber =
-  document.getElementById(
-    "sceneNumber"
-  );
 
 const topbar =
   document.getElementById(
@@ -2723,32 +4011,6 @@ const topbar =
   );
 
 function updateScene(){
-
-  let currentScene = 2;
-
-  scenes.forEach(
-    (scene,index)=>{
-
-      const rect =
-        scene.getBoundingClientRect();
-
-      if(
-        rect.top <
-        window.innerHeight * .55
-      ){
-
-        currentScene =
-          index + 2;
-
-      }
-
-    }
-  );
-
-  sceneNumber.textContent =
-    "SCENE " +
-    String(currentScene)
-      .padStart(2,"0");
 
   if(window.scrollY > 60){
 
@@ -2902,6 +4164,364 @@ document.addEventListener(
 
 
 /* =========================
+   TOOL CARDS
+   Ganze Karte öffnet das Tool,
+   Licht folgt der Maus in der Karte.
+========================= */
+
+document
+  .querySelectorAll(".widget-card, .category, .nova-player")
+  .forEach(card=>{
+
+    const spot =
+      card.querySelector(".widget-spot");
+
+    if(!spot){
+      return;
+    }
+
+    card.addEventListener(
+      "pointermove",
+      event=>{
+
+        const box = card.getBoundingClientRect();
+
+        const x = event.clientX - box.left;
+        const y = event.clientY - box.top;
+
+        spot.style.background =
+          "radial-gradient(circle 260px at " + x + "px " + y + "px," +
+          "rgba(255,255,255,.11),rgba(255,255,255,.03) 45%,transparent 70%)";
+
+      }
+    );
+
+    card.addEventListener(
+      "click",
+      event=>{
+
+        if(!card.dataset.widget || event.target.closest(".widget-open")){
+          return;
+        }
+
+        document
+          .getElementById(card.dataset.widget)
+          .classList.add("active");
+
+      }
+    );
+
+  });
+
+
+/* =========================
+   NOVA DEMO
+   Audio mit echter Wellenform (Web Audio),
+   Untertitel Wort für Wort, Skills leuchten,
+   sobald Nova sie ausspricht.
+========================= */
+
+/* NOVA_CUES_START */
+const NOVA_CUES = [{"a": 0.02, "b": 2.48, "words": [{"w": "Hallo,", "t": 0.02}, {"w": "ich", "t": 0.35}, {"w": "bin", "t": 0.54}, {"w": "Nova,", "t": 0.73}, {"w": "deine", "t": 1.01}, {"w": "persönliche", "t": 1.3}, {"w": "Assistentin.", "t": 1.86}]}, {"a": 2.86, "b": 5.5, "words": [{"w": "Ich", "t": 2.86}, {"w": "gehe", "t": 3.08}, {"w": "ans", "t": 3.37}, {"w": "Telefon,", "t": 3.59, "s": "calls"}, {"w": "beantworte", "t": 4.1}, {"w": "deine", "t": 4.71}, {"w": "E-Mails", "t": 5.05, "s": "mail"}]}, {"a": 5.68, "b": 6.88, "words": [{"w": "und", "t": 5.68}, {"w": "plane", "t": 5.87}, {"w": "deine", "t": 6.16}, {"w": "Termine.", "t": 6.45, "s": "dates"}]}, {"a": 7.18, "b": 8.3, "words": [{"w": "Auch", "t": 7.18}, {"w": "nach", "t": 7.43}, {"w": "Feierabend.", "t": 7.69, "s": "late"}]}, {"a": 8.58, "b": 9.88, "words": [{"w": "Du", "t": 8.58}, {"w": "kümmerst", "t": 8.69}, {"w": "dich", "t": 9.03}, {"w": "um", "t": 9.21}, {"w": "dein", "t": 9.32}, {"w": "Business.", "t": 9.51}]}, {"a": 10.38, "b": 11.1, "words": [{"w": "Ich", "t": 10.38}, {"w": "mich", "t": 10.51}, {"w": "um", "t": 10.67}, {"w": "den", "t": 10.77}, {"w": "Rest.", "t": 10.9}]}];
+/* NOVA_CUES_END */
+
+const novaAudio = document.getElementById("novaAudio");
+const novaPlayer = document.getElementById("novaPlayer");
+const novaPlay = document.getElementById("novaPlay");
+const novaState = document.getElementById("novaState");
+const novaCaption = document.getElementById("novaCaption");
+const novaTime = document.getElementById("novaTime");
+const novaDur = document.getElementById("novaDur");
+const novaWave = document.getElementById("novaWave");
+const novaSkills = novaPlayer.querySelectorAll("[data-skill]");
+
+const novaIdleText = novaCaption.textContent.trim();
+
+let novaCtx = null;
+let novaAnalyser = null;
+let novaBins = null;
+let novaCue = -1;
+let novaFrame = null;
+
+function novaClock(seconds){
+
+  const s = Math.max(0, Math.floor(seconds));
+
+  return "00:" + String(s).padStart(2,"0");
+
+}
+
+novaAudio.addEventListener("loadedmetadata", ()=>{
+  novaDur.textContent = novaClock(Math.round(novaAudio.duration));
+});
+
+/*
+   Wellenform: 48 Balken, gespiegelt um die Mitte.
+   Ohne Ton ruhige Grundlinie.
+*/
+
+function novaDraw(){
+
+  const ratio = window.devicePixelRatio || 1;
+  const width = novaWave.clientWidth;
+  const height = novaWave.clientHeight;
+
+  if(novaWave.width !== width * ratio){
+    novaWave.width = width * ratio;
+    novaWave.height = height * ratio;
+  }
+
+  const ctx = novaWave.getContext("2d");
+
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  ctx.clearRect(0,0,width,height);
+
+  const bars = 48;
+  const gap = 4;
+  const barWidth = (width - gap * (bars - 1)) / bars;
+  const playing = !novaAudio.paused;
+
+  if(novaAnalyser && playing){
+    novaAnalyser.getByteFrequencyData(novaBins);
+  }
+
+  for(let i = 0; i < bars; i++){
+
+    let level;
+
+    if(novaAnalyser && playing){
+
+      // Telefon-Stimme liegt zwischen ca. 300 und 3400 Hz:
+      // genau diesen Bereich von der Mitte nach außen verteilen
+      const fromCenter = Math.abs(i - (bars - 1) / 2) / (bars / 2);
+      const binWidth = novaCtx.sampleRate / novaAnalyser.fftSize;
+      const low = 300 / binWidth;
+      const high = 3400 / binWidth;
+      const pos = low + fromCenter * (high - low);
+      const a = Math.floor(pos);
+      const mix = pos - a;
+
+      level =
+        ((novaBins[a] || 0) * (1 - mix) + (novaBins[a + 1] || 0) * mix) / 255;
+
+    }else if(playing){
+
+      // Fallback ohne Web Audio
+      level = .25 + .5 * Math.abs(Math.sin(performance.now() / 160 + i * .7));
+
+    }else{
+
+      level = .04;
+
+    }
+
+    const barHeight = Math.max(2, level * height * .92);
+
+    ctx.fillStyle =
+      playing
+        ? "rgba(244,241,234," + (.35 + level * .65) + ")"
+        : "rgba(244,241,234,.18)";
+
+    ctx.fillRect(
+      i * (barWidth + gap),
+      (height - barHeight) / 2,
+      barWidth,
+      barHeight
+    );
+
+  }
+
+}
+
+function novaRenderCue(index){
+
+  novaCaption.textContent = "";
+
+  NOVA_CUES[index].words.forEach(word=>{
+
+    const span = document.createElement("span");
+
+    span.className = "w";
+    span.textContent = word.w + " ";
+    span.dataset.t = word.t;
+
+    novaCaption.appendChild(span);
+
+  });
+
+}
+
+function novaTick(){
+
+  const t = novaAudio.currentTime;
+
+  novaTime.textContent = novaClock(t);
+
+  // aktuelle Zeile: die letzte, die schon begonnen hat
+  let index = -1;
+
+  NOVA_CUES.forEach((cue,i)=>{
+    if(t >= cue.a - .05){
+      index = i;
+    }
+  });
+
+  if(index !== novaCue && index >= 0){
+
+    novaCue = index;
+
+    novaRenderCue(index);
+
+  }
+
+  novaCaption.querySelectorAll(".w").forEach(span=>{
+    span.classList.toggle("on", t >= Number(span.dataset.t));
+  });
+
+  NOVA_CUES.forEach(cue=>{
+    cue.words.forEach(word=>{
+      if(word.s && t >= word.t){
+        novaPlayer
+          .querySelector('[data-skill="' + word.s + '"]')
+          .classList.add("on");
+      }
+    });
+  });
+
+  novaDraw();
+
+  if(!novaAudio.paused){
+    novaFrame = requestAnimationFrame(novaTick);
+  }
+
+}
+
+function novaSetupAudio(){
+
+  if(novaCtx){
+    return;
+  }
+
+  try{
+
+    const Context = window.AudioContext || window.webkitAudioContext;
+
+    novaCtx = new Context();
+
+    const source = novaCtx.createMediaElementSource(novaAudio);
+
+    novaAnalyser = novaCtx.createAnalyser();
+    novaAnalyser.fftSize = 512;
+    novaAnalyser.smoothingTimeConstant = .72;
+
+    novaBins = new Uint8Array(novaAnalyser.frequencyBinCount);
+
+    source.connect(novaAnalyser);
+    novaAnalyser.connect(novaCtx.destination);
+
+  }catch(error){
+
+    novaAnalyser = null;
+
+  }
+
+}
+
+function novaStart(){
+
+  novaSetupAudio();
+
+  if(novaCtx && novaCtx.state === "suspended"){
+    novaCtx.resume();
+  }
+
+  if(novaAudio.ended || novaAudio.currentTime >= novaAudio.duration - .05){
+
+    novaAudio.currentTime = 0;
+
+    novaCue = -1;
+
+    novaSkills.forEach(skill=>skill.classList.remove("on"));
+
+  }
+
+  novaAudio.play();
+
+}
+
+novaPlay.addEventListener("click", ()=>{
+
+  if(novaAudio.paused){
+    novaStart();
+  }else{
+    novaAudio.pause();
+  }
+
+});
+
+novaAudio.addEventListener("play", ()=>{
+
+  novaPlayer.classList.add("playing");
+
+  novaState.textContent = "SPRICHT";
+
+  novaPlay.setAttribute("aria-label","Pause");
+
+  cancelAnimationFrame(novaFrame);
+
+  novaFrame = requestAnimationFrame(novaTick);
+
+});
+
+novaAudio.addEventListener("pause", ()=>{
+
+  novaPlayer.classList.remove("playing");
+
+  novaState.textContent = novaAudio.ended ? "BEREIT" : "PAUSE";
+
+  novaPlay.setAttribute("aria-label","Nova anhören");
+
+  novaDraw();
+
+});
+
+novaAudio.addEventListener("ended", ()=>{
+
+  novaState.textContent = "BEREIT";
+
+  novaCaption.querySelectorAll(".w").forEach(span=>span.classList.add("on"));
+
+});
+
+window.addEventListener("resize", novaDraw);
+
+novaDraw();
+
+/*
+   Tool-Karte 03: zur Szene springen und abspielen.
+*/
+
+document
+  .querySelectorAll("[data-nova]")
+  .forEach(card=>{
+
+    card.addEventListener("click", ()=>{
+
+      document
+        .getElementById("nova")
+        .scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
+      novaStart();
+
+    });
+
+  });
+
+
+/* =========================
    WIDGET 01
    SERVICE BUILDER
 ========================= */
@@ -3004,15 +4624,90 @@ function updateSummary(){
 }
 
 
+function showHint(element,text){
+
+  if(!element){
+    return;
+  }
+
+  element.textContent = text;
+
+  element.classList.toggle(
+    "show",
+    text !== ""
+  );
+
+}
+
+/*
+   Builder und Briefing schreiben gemeinsam
+   in das Nachrichtenfeld, statt sich zu überschreiben.
+*/
+
+const projectDraft = {
+  services:"",
+  idea:"",
+  target:"",
+  goal:""
+};
+
+function writeProjectMessage(){
+
+  const message =
+    document.querySelector(
+      'textarea[name="message"]'
+    );
+
+  if(!message){
+    return;
+  }
+
+  const lines = [];
+
+  if(projectDraft.services){
+    lines.push("Ich interessiere mich für: " + projectDraft.services + ".");
+  }
+
+  if(projectDraft.idea){
+    lines.push("Projektidee: " + projectDraft.idea);
+  }
+
+  if(projectDraft.target){
+    lines.push("Zielgruppe: " + projectDraft.target);
+  }
+
+  if(projectDraft.goal){
+    lines.push("Ziel: " + projectDraft.goal);
+  }
+
+  message.value =
+    lines.join("\n\n") + "\n\n";
+
+}
+
+function goToContact(){
+
+  document
+    .querySelector(".contact")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
 document
   .getElementById("sendProject")
   .addEventListener(
     "click",
     ()=>{
 
+      const hint =
+        document.getElementById("builderHint");
+
       if(selectedServices.size === 0){
 
-        alert(
+        showHint(
+          hint,
           "Wähle bitte mindestens eine Leistung aus."
         );
 
@@ -3020,42 +4715,89 @@ document
 
       }
 
-      const services =
+      showHint(hint,"");
+
+      projectDraft.services =
         Array.from(
           selectedServices
         ).join(", ");
 
-      const widget =
-        document.getElementById(
-          "servicesWidget"
-        );
-
-      widget.classList.remove(
-        "active"
-      );
-
-      const message =
-        document.querySelector(
-          'textarea[name="message"]'
-        );
-
-      if(message){
-
-        message.value =
-          "Ich interessiere mich für: " +
-          services +
-          ".\n\n";
-
-      }
-
       document
-        .querySelector(".contact")
-        .scrollIntoView({
-          behavior:"smooth"
-        });
+        .getElementById("servicesWidget")
+        .classList.remove("active");
+
+      writeProjectMessage();
+
+      goToContact();
 
     }
   );
+
+
+/*
+   Builder öffnen, optional mit einer Leistung vorausgewählt.
+*/
+
+const servicesWidget =
+  document.getElementById("servicesWidget");
+
+function openBuilder(service){
+
+  if(service){
+
+    const button =
+      document.querySelector(
+        '.select-service[data-service="' + service + '"]'
+      );
+
+    if(button && !selectedServices.has(service)){
+
+      button.click();
+
+    }
+
+  }
+
+  servicesWidget.classList.add("active");
+
+}
+
+document
+  .querySelectorAll("[data-open-builder]")
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>openBuilder(button.dataset.openBuilder || undefined)
+    );
+
+  });
+
+document
+  .querySelectorAll(".service[data-service]")
+  .forEach(row=>{
+
+    row.addEventListener(
+      "click",
+      ()=>openBuilder(row.dataset.service)
+    );
+
+    row.addEventListener(
+      "keydown",
+      event=>{
+
+        if(event.key === "Enter" || event.key === " "){
+
+          event.preventDefault();
+
+          openBuilder(row.dataset.service);
+
+        }
+
+      }
+    );
+
+  });
 
 
 /* =========================
@@ -3104,6 +4846,30 @@ document
     button.addEventListener(
       "click",
       ()=>{
+
+        const step =
+          button.closest(".brief-step");
+
+        const input =
+          step.querySelector(".brief-input");
+
+        const hint =
+          step.querySelector(".inline-hint");
+
+        if(input && !input.value.trim()){
+
+          showHint(
+            hint,
+            "Schreib bitte kurz etwas hier hinein."
+          );
+
+          input.focus();
+
+          return;
+
+        }
+
+        showHint(hint,"");
 
         const next =
           Number(
@@ -3170,19 +4936,33 @@ document
           )
           .value.trim();
 
-      if(
-        !idea ||
-        !target ||
-        !goal
-      ){
-
-        alert(
-          "Bitte fülle alle drei Felder aus."
+      const lastHint =
+        document.querySelector(
+          '.brief-step[data-step="3"] .inline-hint'
         );
+
+      if(!goal){
+
+        showHint(
+          lastHint,
+          "Schreib bitte kurz etwas hier hinein."
+        );
+
+        document.getElementById("briefGoal").focus();
 
         return;
 
       }
+
+      if(!idea || !target){
+
+        showBriefStep(!idea ? 1 : 2);
+
+        return;
+
+      }
+
+      showHint(lastHint,"");
 
       document
         .getElementById(
@@ -3228,26 +5008,14 @@ document
     "click",
     ()=>{
 
-      const idea =
-        document
-          .getElementById(
-            "briefIdea"
-          )
-          .value;
+      projectDraft.idea =
+        document.getElementById("briefIdea").value.trim();
 
-      const target =
-        document
-          .getElementById(
-            "briefTarget"
-          )
-          .value;
+      projectDraft.target =
+        document.getElementById("briefTarget").value.trim();
 
-      const goal =
-        document
-          .getElementById(
-            "briefGoal"
-          )
-          .value;
+      projectDraft.goal =
+        document.getElementById("briefGoal").value.trim();
 
       document
         .getElementById(
@@ -3257,152 +5025,84 @@ document
           "active"
         );
 
-      const message =
-        document.querySelector(
-          'textarea[name="message"]'
+      writeProjectMessage();
+
+      goToContact();
+
+    }
+  );
+
+
+/* =========================
+   CONTACT FORM
+   Sendet im Hintergrund an Formspree,
+   Danke-Meldung direkt auf der Seite.
+========================= */
+
+const contactForm =
+  document.querySelector(".contact-form");
+
+const formStatus =
+  document.getElementById("formStatus");
+
+const formSuccess =
+  document.getElementById("formSuccess");
+
+contactForm.addEventListener(
+  "submit",
+  async event=>{
+
+    event.preventDefault();
+
+    const submit =
+      contactForm.querySelector(".submit");
+
+    const label =
+      submit.innerHTML;
+
+    submit.disabled = true;
+    submit.textContent = "WIRD GESENDET …";
+
+    showHint(formStatus,"");
+
+    try{
+
+      const response =
+        await fetch(
+          contactForm.action,
+          {
+            method:"POST",
+            body:new FormData(contactForm),
+            headers:{
+              Accept:"application/json"
+            }
+          }
         );
 
-      if(message){
-
-        message.value =
-          "Projektidee: " +
-          idea +
-          "\n\n" +
-          "Zielgruppe: " +
-          target +
-          "\n\n" +
-          "Ziel: " +
-          goal;
-
+      if(!response.ok){
+        throw new Error("send failed");
       }
 
-      document
-        .querySelector(".contact")
-        .scrollIntoView({
-          behavior:"smooth"
-        });
+      contactForm.reset();
 
-    }
-  );
+      contactForm.hidden = true;
 
+      formSuccess.hidden = false;
 
-/* =========================
-   COOKIE
-========================= */
+    }catch(error){
 
-const cookie =
-  document.getElementById(
-    "cookie"
-  );
-
-const savedConsent =
-  localStorage.getItem(
-    "socialclip_cookie_consent"
-  );
-
-if(!savedConsent){
-
-  setTimeout(()=>{
-
-    cookie.classList.add(
-      "show"
-    );
-
-  },2200);
-
-}
-
-document
-  .getElementById(
-    "necessary"
-  )
-  .addEventListener(
-    "click",
-    ()=>{
-
-      localStorage.setItem(
-        "socialclip_cookie_consent",
-        "necessary"
+      showHint(
+        formStatus,
+        "Das hat leider nicht geklappt. Versuch es bitte noch einmal oder ruf uns an."
       );
 
-      cookie.classList.remove(
-        "show"
-      );
+    }finally{
 
-    }
-  );
-
-document
-  .getElementById(
-    "accept"
-  )
-  .addEventListener(
-    "click",
-    ()=>{
-
-      localStorage.setItem(
-        "socialclip_cookie_consent",
-        "accepted"
-      );
-
-      cookie.classList.remove(
-        "show"
-      );
-
-    }
-  );
-
-
-/* =========================
-   MOBILE TOUCH
-========================= */
-
-let touchStartY = 0;
-
-window.addEventListener(
-  "touchstart",
-  event=>{
-
-    touchStartY =
-      event.changedTouches[0]
-        .screenY;
-
-  },
-  {
-    passive:true
-  }
-);
-
-window.addEventListener(
-  "touchend",
-  event=>{
-
-    const touchEndY =
-      event.changedTouches[0]
-        .screenY;
-
-    const distance =
-      touchStartY -
-      touchEndY;
-
-    if(
-      Math.abs(distance) > 140
-    ){
-
-      window.scrollBy({
-        top:
-          distance > 0
-            ? window.innerHeight * .18
-            : -window.innerHeight * .18,
-
-        behavior:"smooth"
-      });
+      submit.disabled = false;
+      submit.innerHTML = label;
 
     }
 
-  },
-  {
-    passive:true
   }
 );
 
