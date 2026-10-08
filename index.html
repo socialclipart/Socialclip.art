@@ -1,1579 +1,1434 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SOCIALCLIP — Art & Media</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<title>SocialClip — Art · Media · Digital</title>
+<meta name="description" content="SocialClip Art & Media — Webseiten, Design, Social Media, Marketing, Video, Programmierung und digitale Lösungen.">
 
 <style>
-
-/* =========================================================
-   GRUNDLAGE
-========================================================= */
-
 :root{
-    --black:#030303;
-    --white:#f5f2eb;
-    --gold:#c9ae7a;
-    --gray:#77736c;
+  --black:#020202;
+  --white:#f4f1e9;
+  --gold:#c9ae7a;
+  --soft:#8b877f;
+  --line:rgba(255,255,255,.12);
 }
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    background:#030303;
-    color:var(--white);
-    font-family:Inter,sans-serif;
-    overflow-x:hidden;
-}
-
-body.lock{
-    overflow:hidden;
+  background:var(--black);
+  color:var(--white);
+  font-family:Arial, Helvetica, sans-serif;
+  overflow-x:hidden;
 }
 
 a{
-    color:inherit;
-    text-decoration:none;
+  color:inherit;
+  text-decoration:none;
 }
-
-button{
-    font-family:inherit;
-}
-
 
 /* =========================================================
    INTRO
 ========================================================= */
 
 #intro{
-    position:fixed;
-    inset:0;
-    z-index:99999;
-
-    background:#000;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    overflow:hidden;
-
-    transition:
-        opacity 1.5s ease,
-        visibility 1.5s ease;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  transition:
+    opacity 1.8s cubic-bezier(.77,0,.18,1),
+    visibility 1.8s;
 }
 
-#intro.out{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
+#intro.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
 }
 
 .intro-light{
-    position:absolute;
+  position:absolute;
+  width:55vw;
+  height:55vw;
+  max-width:800px;
+  max-height:800px;
+  border-radius:50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(201,174,122,.22) 0%,
+      rgba(201,174,122,.08) 25%,
+      transparent 68%
+    );
+  filter:blur(35px);
+  animation:introLight 5s ease-in-out infinite;
+}
 
-    width:700px;
-    height:700px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(201,174,122,.22),
-            rgba(201,174,122,.06) 28%,
-            transparent 68%
-        );
-
-    filter:blur(25px);
-
-    animation:introLight 5s ease forwards;
+@keyframes introLight{
+  0%,100%{
+    transform:scale(.8);
+    opacity:.5;
+  }
+  50%{
+    transform:scale(1.15);
+    opacity:1;
+  }
 }
 
 .intro-ring{
-    position:absolute;
-
-    width:250px;
-    height:250px;
-
-    border:1px solid rgba(201,174,122,.25);
-
-    border-radius:50%;
-
-    animation:ring 5s ease forwards;
+  position:absolute;
+  width:52vw;
+  height:52vw;
+  max-width:720px;
+  max-height:720px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:50%;
+  animation:ringSpin 18s linear infinite;
 }
 
-.intro-ring.r2{
-    width:500px;
-    height:500px;
-    animation-delay:.3s;
+.intro-ring:nth-child(2){
+  width:42vw;
+  height:42vw;
+  animation-duration:13s;
+  animation-direction:reverse;
+}
+
+.intro-ring:nth-child(3){
+  width:66vw;
+  height:66vw;
+  border-color:rgba(201,174,122,.07);
+  animation-duration:25s;
+}
+
+@keyframes ringSpin{
+  to{
+    transform:rotate(360deg);
+  }
 }
 
 .intro-content{
-    position:relative;
-    z-index:3;
-
-    text-align:center;
-
-    opacity:0;
-
-    transform:translateY(30px);
-
-    animation:
-        introIn 1.5s
-        .5s
-        cubic-bezier(.16,1,.3,1)
-        forwards;
+  position:relative;
+  z-index:2;
+  text-align:center;
 }
 
 .intro-welcome{
-    font-size:9px;
-
-    letter-spacing:8px;
-
-    text-transform:uppercase;
-
-    color:var(--gold);
-
-    margin-bottom:25px;
+  font-size:12px;
+  letter-spacing:7px;
+  text-transform:uppercase;
+  color:#aaa;
+  margin-bottom:25px;
+  opacity:0;
+  animation:introUp 1.2s .3s forwards;
 }
 
 .intro-logo{
-    font-family:"Cormorant Garamond",serif;
-
-    font-weight:300;
-
-    font-size:
-        clamp(65px,13vw,180px);
-
-    line-height:.75;
-
-    letter-spacing:.05em;
+  font-size:clamp(52px,11vw,150px);
+  line-height:.8;
+  font-weight:900;
+  letter-spacing:-7px;
+  opacity:0;
+  animation:introUp 1.4s .6s forwards;
 }
 
 .intro-logo span{
-    color:var(--gold);
+  color:var(--gold);
 }
 
 .intro-sub{
-    margin-top:30px;
-
-    font-size:8px;
-
-    letter-spacing:7px;
-
-    text-transform:uppercase;
-
-    color:#777;
+  margin-top:30px;
+  font-size:11px;
+  letter-spacing:8px;
+  color:#777;
+  text-transform:uppercase;
+  opacity:0;
+  animation:introUp 1.2s 1s forwards;
 }
 
 .intro-line{
-    position:absolute;
-
-    bottom:50px;
-
-    left:50%;
-
-    width:0;
-
-    height:1px;
-
-    background:#777;
-
-    transform:translateX(-50%);
-
-    animation:lineIn 3s 1s ease forwards;
+  width:0;
+  height:1px;
+  background:var(--gold);
+  margin:35px auto 0;
+  animation:introLine 1.8s 1.3s forwards;
 }
 
+@keyframes introUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes introLine{
+  to{
+    width:100px;
+  }
+}
 
 /* =========================================================
-   NAVIGATION
+   NAV
 ========================================================= */
 
-nav{
-    position:fixed;
-
-    z-index:900;
-
-    top:0;
-    left:0;
-
-    width:100%;
-
-    padding:25px 35px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    mix-blend-mode:difference;
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:82px;
+  padding:0 5vw;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:100;
+  mix-blend-mode:difference;
 }
 
-.logo{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:27px;
-
-    letter-spacing:.1em;
+.nav-logo{
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:3px;
 }
 
-.logo span{
-    color:var(--gold);
+.nav-logo span{
+  color:var(--gold);
 }
 
 .nav-right{
-    display:flex;
-
-    gap:30px;
-
-    font-size:8px;
-
-    text-transform:uppercase;
-
-    letter-spacing:4px;
+  display:flex;
+  align-items:center;
+  gap:28px;
 }
 
 .nav-right a{
-    opacity:.6;
-
-    transition:.3s;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  opacity:.7;
+  transition:.3s;
 }
 
 .nav-right a:hover{
-    opacity:1;
+  opacity:1;
 }
 
-
 /* =========================================================
-   EXPERIENCE
+   MAIN EXPERIENCE
 ========================================================= */
 
 .experience{
-    position:relative;
-
-    height:650vh;
-
-    background:#030303;
+  position:relative;
+  height:760vh;
 }
-
-
-/* =========================================================
-   STICKY WORLD
-========================================================= */
 
 .world{
-    position:sticky;
-
-    top:0;
-
-    height:100vh;
-
-    overflow:hidden;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
+  position:sticky;
+  top:0;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+  background:#030303;
+  perspective:1400px;
 }
-
 
 /* =========================================================
    BACKGROUND
 ========================================================= */
 
 .world-bg{
-    position:absolute;
-
-    inset:-20%;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(201,174,122,.10),
-            transparent 22%
-        ),
-        radial-gradient(
-            circle at 15% 80%,
-            rgba(100,100,255,.05),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(255,255,255,.04),
-            transparent 20%
-        );
-
-    transition:
-        transform .15s linear;
+  position:absolute;
+  inset:-20%;
+  background:
+    radial-gradient(
+      ellipse at 50% 48%,
+      rgba(201,174,122,.12),
+      transparent 22%
+    ),
+    radial-gradient(
+      ellipse at 10% 50%,
+      rgba(255,255,255,.04),
+      transparent 30%
+    ),
+    radial-gradient(
+      ellipse at 90% 40%,
+      rgba(255,255,255,.035),
+      transparent 30%
+    );
+  transition:transform .2s linear;
 }
-
-
-/* =========================================================
-   GRID
-========================================================= */
 
 .grid{
-    position:absolute;
-
-    width:150vw;
-    height:150vh;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.035) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.035) 1px,
-            transparent 1px
-        );
-
-    background-size:100px 100px;
-
-    transform:
-        perspective(700px)
-        rotateX(65deg)
-        translateY(30%);
-
-    opacity:.25;
-
-    transition:
-        transform .15s linear;
+  position:absolute;
+  inset:-40%;
+  opacity:.22;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size:80px 80px;
+  transform:
+    perspective(500px)
+    rotateX(68deg)
+    translateY(25%);
+  transform-origin:center bottom;
+  mask-image:linear-gradient(
+    to top,
+    rgba(0,0,0,1),
+    transparent 75%
+  );
 }
-
 
 /* =========================================================
-   FLOATING ORB
+   GIANT CORE
 ========================================================= */
 
-.orb-wrap{
-    position:absolute;
-
-    width:min(42vw,550px);
-    height:min(42vw,550px);
-
-    transition:
-        transform .15s linear;
+.core-stage{
+  position:absolute;
+  width:min(76vw,1050px);
+  height:min(76vw,1050px);
+  left:50%;
+  top:50%;
+  transform:
+    translate(-50%,-50%)
+    translate3d(var(--mx,0px),var(--my,0px),0);
+  transform-style:preserve-3d;
+  transition:transform .12s linear;
 }
 
-.orb{
-    width:100%;
-    height:100%;
-
-    border-radius:50%;
-
-    position:relative;
-
-    background:
-
-        radial-gradient(
-            circle at 30% 25%,
-            rgba(255,255,255,.9),
-            rgba(255,255,255,.18) 5%,
-            transparent 12%
-        ),
-
-        radial-gradient(
-            circle at 35% 30%,
-            #d8c9ad,
-            #81745f 25%,
-            #29251f 55%,
-            #050505 72%
-        );
-
-    box-shadow:
-
-        inset -30px -30px 80px rgba(0,0,0,.9),
-
-        inset 25px 20px 50px rgba(255,255,255,.15),
-
-        0 0 100px rgba(201,174,122,.15);
-
-    animation:
-        float 7s ease-in-out infinite;
+.core-shadow{
+  position:absolute;
+  width:65%;
+  height:22%;
+  left:17%;
+  bottom:4%;
+  background:#000;
+  filter:blur(55px);
+  opacity:.8;
+  transform:rotateX(75deg);
 }
 
-.orb::before{
-    content:"";
+.core{
+  position:absolute;
+  width:63%;
+  height:63%;
+  left:18.5%;
+  top:18.5%;
+  border-radius:48% 52% 43% 57% / 55% 42% 58% 45%;
 
-    position:absolute;
+  background:
+    radial-gradient(
+      circle at 28% 20%,
+      rgba(255,255,255,.95),
+      transparent 7%
+    ),
+    radial-gradient(
+      circle at 32% 25%,
+      rgba(255,255,255,.25),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 62% 70%,
+      rgba(201,174,122,.45),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 38% 42%,
+      #555,
+      #171717 45%,
+      #030303 78%
+    );
 
-    inset:-15px;
+  box-shadow:
+    inset 22px 20px 60px rgba(255,255,255,.13),
+    inset -35px -45px 80px rgba(0,0,0,.95),
+    0 0 70px rgba(201,174,122,.12);
 
-    border-radius:50%;
-
-    border:1px solid rgba(201,174,122,.22);
-
-    animation:
-        orbit 15s linear infinite;
+  transform-style:preserve-3d;
+  animation:coreFloat 7s ease-in-out infinite;
 }
 
-.orb::after{
-    content:"";
-
-    position:absolute;
-
-    width:20%;
-    height:20%;
-
-    top:17%;
-    left:22%;
-
-    border-radius:50%;
-
-    background:white;
-
-    filter:blur(20px);
-
-    opacity:.35;
+.core::before{
+  content:"";
+  position:absolute;
+  inset:4%;
+  border-radius:inherit;
+  background:
+    conic-gradient(
+      from 40deg,
+      transparent,
+      rgba(255,255,255,.18),
+      transparent 20%,
+      rgba(201,174,122,.25),
+      transparent 45%,
+      rgba(255,255,255,.1),
+      transparent 75%
+    );
+  filter:blur(2px);
+  mix-blend-mode:screen;
 }
 
+.core::after{
+  content:"";
+  position:absolute;
+  width:30%;
+  height:18%;
+  top:13%;
+  left:18%;
+  border-radius:50%;
+  background:rgba(255,255,255,.22);
+  filter:blur(25px);
+  transform:rotate(-25deg);
+}
+
+@keyframes coreFloat{
+  0%,100%{
+    margin-top:-10px;
+  }
+  50%{
+    margin-top:15px;
+  }
+}
+
+/* =========================================================
+   ORBITS
+========================================================= */
+
+.orbits{
+  position:absolute;
+  inset:-12%;
+  transform-style:preserve-3d;
+}
+
+.orbit{
+  position:absolute;
+  left:50%;
+  top:50%;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:50%;
+  transform-style:preserve-3d;
+}
+
+.orbit.one{
+  width:105%;
+  height:40%;
+  transform:
+    translate(-50%,-50%)
+    rotateX(72deg)
+    rotateZ(15deg);
+}
+
+.orbit.two{
+  width:90%;
+  height:65%;
+  transform:
+    translate(-50%,-50%)
+    rotateY(67deg)
+    rotateZ(-25deg);
+}
+
+.orbit.three{
+  width:125%;
+  height:52%;
+  border-color:rgba(201,174,122,.12);
+  transform:
+    translate(-50%,-50%)
+    rotateX(62deg)
+    rotateZ(-48deg);
+}
+
+.orbit.four{
+  width:72%;
+  height:110%;
+  transform:
+    translate(-50%,-50%)
+    rotateY(68deg)
+    rotateZ(42deg);
+}
+
+/* =========================================================
+   ORBIT DOTS
+========================================================= */
+
+.node{
+  position:absolute;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 20px rgba(201,174,122,.8);
+}
+
+.node.n1{
+  left:8%;
+  top:30%;
+}
+
+.node.n2{
+  right:7%;
+  top:55%;
+}
+
+.node.n3{
+  left:35%;
+  bottom:5%;
+}
+
+.node.n4{
+  right:25%;
+  top:8%;
+}
 
 /* =========================================================
    CENTER BRAND
 ========================================================= */
 
 .center-brand{
-    position:absolute;
-
-    z-index:10;
-
-    text-align:center;
-
-    pointer-events:none;
-
-    transition:
-        transform .15s linear,
-        opacity .15s linear;
+  position:absolute;
+  z-index:10;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  pointer-events:none;
 }
 
 .center-brand small{
-    font-size:8px;
-
-    letter-spacing:7px;
-
-    color:var(--gold);
-
-    text-transform:uppercase;
+  display:block;
+  font-size:9px;
+  letter-spacing:6px;
+  color:#888;
+  margin-bottom:16px;
 }
 
 .center-brand h1{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(70px,14vw,190px);
-
-    font-weight:300;
-
-    line-height:.7;
-
-    letter-spacing:.03em;
-
-    margin-top:20px;
+  font-size:clamp(42px,8vw,120px);
+  letter-spacing:-5px;
+  font-weight:900;
+  white-space:nowrap;
 }
 
 .center-brand h1 span{
-    color:var(--gold);
+  color:var(--gold);
 }
 
+.center-brand p{
+  margin-top:20px;
+  font-size:9px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  color:#777;
+}
 
 /* =========================================================
-   FLYING WORDS
+   GIANT WORDS
 ========================================================= */
 
-.flying-word{
-    position:absolute;
-
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(55px,9vw,130px);
-
-    font-weight:300;
-
-    white-space:nowrap;
-
-    opacity:0;
-
-    transition:
-        transform .15s linear,
-        opacity .15s linear;
+.floating-word{
+  position:absolute;
+  z-index:5;
+  font-size:clamp(90px,16vw,260px);
+  font-weight:900;
+  letter-spacing:-12px;
+  line-height:.7;
+  white-space:nowrap;
+  color:rgba(255,255,255,.035);
+  pointer-events:none;
+  user-select:none;
 }
 
-.word1{
-    left:5vw;
-    top:20%;
+.word-create{
+  left:-4vw;
+  top:13%;
 }
 
-.word2{
-    right:5vw;
-    top:25%;
+.word-digital{
+  right:-9vw;
+  top:28%;
 }
 
-.word3{
-    left:8vw;
-    bottom:18%;
+.word-social{
+  left:-10vw;
+  bottom:20%;
 }
 
-.word4{
-    right:7vw;
-    bottom:20%;
+.word-grow{
+  right:-4vw;
+  bottom:10%;
 }
-
-.flying-word span{
-    color:var(--gold);
-}
-
 
 /* =========================================================
-   SMALL LABELS
+   SERVICE LABELS
 ========================================================= */
 
-.scene-label{
-    position:absolute;
-
-    font-size:8px;
-
-    letter-spacing:4px;
-
-    text-transform:uppercase;
-
-    color:#666;
-
-    opacity:0;
-
-    transition:
-        opacity .2s,
-        transform .2s;
+.service{
+  position:absolute;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  opacity:0;
+  transform:translateY(30px) scale(.9);
+  transition:
+    opacity .7s,
+    transform .8s cubic-bezier(.16,1,.3,1);
 }
 
+.service.active{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+.service-line{
+  width:55px;
+  height:1px;
+  background:var(--gold);
+}
+
+.service-text{
+  display:flex;
+  flex-direction:column;
+}
+
+.service-number{
+  font-size:8px;
+  color:var(--gold);
+  letter-spacing:3px;
+  margin-bottom:6px;
+}
+
+.service-title{
+  font-size:clamp(15px,1.5vw,22px);
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.service-items{
+  margin-top:8px;
+  font-size:9px;
+  line-height:1.8;
+  color:#777;
+  letter-spacing:1px;
+}
+
+.service.create{
+  left:7%;
+  top:25%;
+}
+
+.service.digital{
+  right:7%;
+  top:22%;
+  text-align:right;
+  flex-direction:row-reverse;
+}
+
+.service.media{
+  left:8%;
+  bottom:24%;
+}
+
+.service.growth{
+  right:8%;
+  bottom:21%;
+  text-align:right;
+  flex-direction:row-reverse;
+}
 
 /* =========================================================
-   SERVICES
-========================================================= */
-
-.service-object{
-    position:absolute;
-
-    width:230px;
-
-    height:140px;
-
-    border:1px solid rgba(201,174,122,.25);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    opacity:0;
-
-    transform:scale(.6);
-
-    transition:
-        opacity .2s,
-        transform .2s;
-}
-
-.service-object strong{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:30px;
-
-    font-weight:300;
-}
-
-.service-object small{
-    display:block;
-
-    margin-top:8px;
-
-    color:#777;
-
-    font-size:7px;
-
-    letter-spacing:3px;
-
-    text-transform:uppercase;
-}
-
-.so1{
-    left:8%;
-    top:25%;
-}
-
-.so2{
-    right:8%;
-    top:30%;
-}
-
-.so3{
-    left:12%;
-    bottom:22%;
-}
-
-.so4{
-    right:12%;
-    bottom:18%;
-}
-
-
-/* =========================================================
-   SCROLL INDICATOR
-========================================================= */
-
-.scroll-indicator{
-    position:absolute;
-
-    bottom:30px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    z-index:20;
-
-    text-align:center;
-
-    font-size:7px;
-
-    letter-spacing:5px;
-
-    text-transform:uppercase;
-
-    color:#777;
-
-    transition:opacity .3s;
-}
-
-.scroll-indicator::after{
-    content:"";
-
-    display:block;
-
-    height:45px;
-
-    width:1px;
-
-    background:#777;
-
-    margin:12px auto 0;
-}
-
-
-/* =========================================================
-   INSTAGRAM SCENE
+   INSTAGRAM PHONE
 ========================================================= */
 
 .phone{
-    position:absolute;
+  position:absolute;
+  z-index:30;
+  width:min(270px,24vw);
+  height:min(550px,48vw);
+  right:13%;
+  top:50%;
+  border:7px solid #111;
+  border-radius:38px;
+  background:#080808;
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.8),
+    0 0 60px rgba(201,174,122,.1);
+  overflow:hidden;
+  opacity:0;
+  transform:
+    translateY(-50%)
+    translateX(100px)
+    rotate(9deg)
+    scale(.8);
+  transition:
+    opacity 1s,
+    transform 1.2s cubic-bezier(.16,1,.3,1);
+}
 
-    width:260px;
-
-    height:530px;
-
-    border:7px solid #1a1a1a;
-
-    border-radius:38px;
-
-    background:#f8f8f8;
-
-    overflow:hidden;
-
-    box-shadow:
-        0 50px 100px rgba(0,0,0,.7);
-
-    opacity:0;
-
-    transform:
-        translateY(150px)
-        rotateY(-30deg)
-        rotateX(8deg)
-        scale(.8);
-
-    transition:
-        opacity .2s,
-        transform .2s;
+.phone.active{
+  opacity:1;
+  transform:
+    translateY(-50%)
+    translateX(0)
+    rotate(4deg)
+    scale(1);
 }
 
 .phone-top{
-    height:60px;
-
-    color:#111;
-
-    display:flex;
-
-    align-items:flex-end;
-
-    justify-content:space-between;
-
-    padding:10px;
-
-    font-size:10px;
-
-    border-bottom:1px solid #ddd;
+  height:45px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-bottom:1px solid #222;
+  font-size:10px;
+  letter-spacing:2px;
 }
 
-.feed{
-    height:100%;
-
-    color:#111;
+.phone-feed{
+  height:calc(100% - 45px);
+  overflow:hidden;
 }
 
-.feed-image{
-    height:230px;
-
-    background-size:cover;
-
-    background-position:center;
+.post{
+  height:220px;
+  border-bottom:1px solid #222;
+  position:relative;
+  overflow:hidden;
 }
 
-.feed-image.i1{
-    background-image:
-        url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=700&q=85");
+.post:nth-child(1){
+  background:
+    radial-gradient(circle at 40% 30%,#c9ae7a,transparent 12%),
+    radial-gradient(circle at 70% 70%,#444,transparent 30%),
+    linear-gradient(135deg,#101010,#2c2c2c);
 }
 
-.feed-image.i2{
-    background-image:
-        url("https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=700&q=85");
+.post:nth-child(2){
+  background:
+    radial-gradient(circle at 30% 30%,#eee,transparent 7%),
+    radial-gradient(circle at 70% 60%,#777,transparent 25%),
+    linear-gradient(140deg,#151515,#050505);
 }
 
-.feed-text{
-    padding:15px;
-
-    font-size:10px;
-
-    line-height:1.6;
+.post:nth-child(3){
+  background:
+    radial-gradient(circle at 60% 35%,#c9ae7a,transparent 8%),
+    linear-gradient(45deg,#333,#090909);
 }
 
+.post-content{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+}
+
+.post-content strong{
+  font-size:18px;
+  letter-spacing:-1px;
+}
+
+.post-content span{
+  display:block;
+  margin-top:5px;
+  font-size:7px;
+  letter-spacing:2px;
+  color:#aaa;
+}
 
 /* =========================================================
-   FINAL SCENE
+   FINAL
 ========================================================= */
 
 .final{
-    position:absolute;
+  position:absolute;
+  inset:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transform:scale(.94);
+  transition:opacity 1s,transform 1.2s;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(201,174,122,.08),
+      transparent 45%
+    );
+}
 
-    inset:0;
+.final.active{
+  opacity:1;
+  transform:scale(1);
+}
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    opacity:0;
-
-    transform:scale(.8);
-
-    transition:
-        opacity .2s,
-        transform .2s;
-
-    pointer-events:none;
+.final small{
+  font-size:9px;
+  letter-spacing:7px;
+  color:#777;
 }
 
 .final h2{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(70px,12vw,170px);
-
-    font-weight:300;
-
-    line-height:.75;
+  margin-top:22px;
+  font-size:clamp(48px,10vw,150px);
+  line-height:.85;
+  letter-spacing:-7px;
 }
 
 .final h2 span{
-    color:var(--gold);
+  color:var(--gold);
 }
 
-.final p{
-    margin-top:35px;
-
-    color:#777;
-
-    font-size:11px;
+.final a{
+  display:inline-block;
+  margin-top:45px;
+  padding:18px 32px;
+  border:1px solid rgba(255,255,255,.25);
+  font-size:9px;
+  letter-spacing:4px;
+  transition:.4s;
 }
 
+.final a:hover{
+  background:var(--white);
+  color:#000;
+}
 
 /* =========================================================
    CONTACT
 ========================================================= */
 
 .contact{
-    min-height:100vh;
-
-    background:var(--white);
-
-    color:#050505;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:10vw;
+  position:relative;
+  min-height:100vh;
+  padding:140px 7vw;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#050505;
 }
 
 .contact-inner{
-    width:100%;
-
-    max-width:1200px;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:10vw;
+  width:min(900px,100%);
 }
 
-.contact h2{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(70px,10vw,140px);
-
-    font-weight:300;
-
-    line-height:.75;
+.contact-label{
+  color:var(--gold);
+  font-size:9px;
+  letter-spacing:5px;
+  text-transform:uppercase;
 }
 
-.contact h2 span{
-    color:#9b8050;
+.contact h3{
+  margin-top:25px;
+  font-size:clamp(50px,9vw,130px);
+  letter-spacing:-7px;
+  line-height:.85;
 }
 
-.contact p{
-    margin-top:35px;
-
-    max-width:400px;
-
-    color:#777;
-
-    line-height:1.8;
-
-    font-size:13px;
+.contact h3 span{
+  color:var(--gold);
 }
 
-form{
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
+.contact-form{
+  margin-top:80px;
+  display:grid;
+  gap:15px;
 }
 
-input,
-textarea{
-    background:none;
-
-    border:none;
-
-    border-bottom:1px solid rgba(0,0,0,.25);
-
-    padding:15px 0;
-
-    font-size:13px;
-
-    outline:none;
-
-    color:#000;
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid #292929;
+  color:#fff;
+  padding:20px 0;
+  font-size:14px;
+  outline:none;
+  font-family:inherit;
 }
 
-textarea{
-    min-height:130px;
-
-    resize:vertical;
+.contact-form textarea{
+  min-height:140px;
+  resize:vertical;
 }
 
-button{
-    background:#050505;
-
-    color:white;
-
-    border:1px solid #050505;
-
-    padding:20px;
-
-    margin-top:15px;
-
-    cursor:pointer;
-
-    font-size:8px;
-
-    letter-spacing:5px;
-
-    text-transform:uppercase;
-
-    transition:.4s;
+.contact-form button{
+  width:max-content;
+  margin-top:25px;
+  padding:17px 30px;
+  background:transparent;
+  border:1px solid #555;
+  color:white;
+  cursor:pointer;
+  font-size:9px;
+  letter-spacing:4px;
+  transition:.4s;
 }
 
-button:hover{
-    background:transparent;
-
-    color:#000;
+.contact-form button:hover{
+  background:white;
+  color:black;
 }
-
 
 /* =========================================================
    FOOTER
 ========================================================= */
 
 footer{
-    background:#030303;
-
-    padding:80px 5vw 30px;
+  padding:30px 6vw;
+  border-top:1px solid #151515;
+  display:flex;
+  justify-content:space-between;
+  color:#555;
+  font-size:8px;
+  letter-spacing:2px;
+  text-transform:uppercase;
 }
 
-.footer-logo{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:
-        clamp(80px,18vw,250px);
-
-    line-height:.65;
-
-    font-weight:300;
+footer a:hover{
+  color:white;
 }
-
-.footer-logo span{
-    color:var(--gold);
-}
-
-.footer-bottom{
-    margin-top:100px;
-
-    border-top:1px solid rgba(255,255,255,.12);
-
-    padding-top:20px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    color:#666;
-
-    font-size:8px;
-
-    letter-spacing:3px;
-
-    text-transform:uppercase;
-}
-
 
 /* =========================================================
-   ANIMATIONEN
-========================================================= */
-
-@keyframes introLight{
-
-    0%{
-        transform:scale(.3);
-        opacity:0;
-    }
-
-    45%{
-        transform:scale(1);
-        opacity:1;
-    }
-
-    100%{
-        transform:scale(1.2);
-        opacity:.6;
-    }
-}
-
-@keyframes ring{
-
-    0%{
-        opacity:0;
-        transform:scale(.4);
-    }
-
-    30%{
-        opacity:.7;
-    }
-
-    100%{
-        opacity:0;
-        transform:scale(2.7);
-    }
-}
-
-@keyframes introIn{
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes lineIn{
-
-    to{
-        width:180px;
-    }
-}
-
-@keyframes float{
-
-    0%,100%{
-        transform:translateY(0) rotate(0);
-    }
-
-    50%{
-        transform:translateY(-25px) rotate(3deg);
-    }
-}
-
-@keyframes orbit{
-
-    from{
-        transform:rotate(0);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-
-/* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
 @media(max-width:800px){
 
-    nav{
-        padding:20px;
-    }
+  .nav{
+    height:65px;
+    padding:0 6vw;
+  }
 
-    .nav-right{
-        display:none;
-    }
+  .nav-right a:first-child{
+    display:none;
+  }
 
-    .experience{
-        height:500vh;
-    }
+  .experience{
+    height:680vh;
+  }
 
-    .orb-wrap{
-        width:280px;
-        height:280px;
-    }
+  .core-stage{
+    width:125vw;
+    height:125vw;
+  }
 
-    .center-brand h1{
-        font-size:75px;
-    }
+  .core{
+    width:60%;
+    height:60%;
+    left:20%;
+    top:20%;
+  }
 
-    .flying-word{
-        font-size:65px;
-    }
+  .center-brand h1{
+    font-size:14vw;
+    letter-spacing:-4px;
+  }
 
-    .word1{
-        top:14%;
-        left:-20%;
-    }
+  .center-brand p{
+    font-size:7px;
+    letter-spacing:3px;
+  }
 
-    .word2{
-        top:30%;
-        right:-20%;
-    }
+  .floating-word{
+    font-size:28vw;
+    letter-spacing:-7px;
+  }
 
-    .word3{
-        bottom:25%;
-        left:-15%;
-    }
+  .word-create{
+    top:16%;
+    left:-10vw;
+  }
 
-    .word4{
-        bottom:12%;
-        right:-15%;
-    }
+  .word-digital{
+    top:32%;
+    right:-25vw;
+  }
 
-    .service-object{
-        width:170px;
-        height:105px;
-    }
+  .word-social{
+    bottom:25%;
+    left:-25vw;
+  }
 
-    .service-object strong{
-        font-size:22px;
-    }
+  .word-grow{
+    bottom:13%;
+    right:-20vw;
+  }
 
-    .phone{
-        width:230px;
-        height:470px;
-    }
+  .service{
+    max-width:42%;
+  }
 
-    .contact{
-        padding:80px 25px;
-    }
+  .service-title{
+    font-size:13px;
+  }
 
-    .contact-inner{
-        grid-template-columns:1fr;
-    }
+  .service-items{
+    font-size:7px;
+  }
 
-    .footer-bottom{
-        display:block;
+  .service.create{
+    left:5%;
+    top:18%;
+  }
 
-        line-height:3;
-    }
+  .service.digital{
+    right:5%;
+    top:25%;
+  }
 
+  .service.media{
+    left:5%;
+    bottom:19%;
+  }
+
+  .service.growth{
+    right:5%;
+    bottom:16%;
+  }
+
+  .service-line{
+    width:25px;
+  }
+
+  .phone{
+    width:190px;
+    height:380px;
+    right:50%;
+    top:55%;
+    transform:
+      translate(50%,-50%)
+      rotate(5deg)
+      scale(.8);
+  }
+
+  .phone.active{
+    transform:
+      translate(50%,-50%)
+      rotate(3deg)
+      scale(1);
+  }
+
+  .post{
+    height:145px;
+  }
+
+  .final h2{
+    font-size:17vw;
+    letter-spacing:-5px;
+  }
+
+  .contact{
+    padding:100px 7vw;
+  }
+
+  .contact h3{
+    font-size:18vw;
+    letter-spacing:-5px;
+  }
+
+  footer{
+    gap:20px;
+    flex-direction:column;
+  }
 }
 
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+}
 </style>
-
 </head>
 
+<body>
 
-<body class="lock">
-
-
-<!-- =========================================================
+<!-- =====================================================
      INTRO
-========================================================= -->
+===================================================== -->
 
 <div id="intro">
 
-    <div class="intro-light"></div>
+  <div class="intro-light"></div>
 
-    <div class="intro-ring"></div>
-    <div class="intro-ring r2"></div>
+  <div class="intro-ring"></div>
+  <div class="intro-ring"></div>
+  <div class="intro-ring"></div>
 
-    <div class="intro-content">
+  <div class="intro-content">
 
-        <div class="intro-welcome">
-            Willkommen bei
-        </div>
+    <div class="intro-welcome">
+      Willkommen bei
+    </div>
 
-        <div class="intro-logo">
-            SOCIAL<span>CLIP</span>
-        </div>
+    <div class="intro-logo">
+      SOCIAL<span>CLIP</span>
+    </div>
 
-        <div class="intro-sub">
-            Art · Media · Digital
-        </div>
-
+    <div class="intro-sub">
+      Art · Media · Digital
     </div>
 
     <div class="intro-line"></div>
 
+  </div>
+
 </div>
 
 
-<!-- =========================================================
+<!-- =====================================================
      NAV
-========================================================= -->
+===================================================== -->
 
-<nav>
+<nav class="nav">
 
-    <a href="#top" class="logo">
-        SOCIAL<span>CLIP</span>
-    </a>
+  <div class="nav-logo">
+    SOCIAL<span>CLIP</span>
+  </div>
 
-    <div class="nav-right">
-
-        <a href="#experience">
-            Experience
-        </a>
-
-        <a href="#contact">
-            Kontakt
-        </a>
-
-    </div>
+  <div class="nav-right">
+    <a href="#experience">Explore</a>
+    <a href="#contact">Kontakt</a>
+  </div>
 
 </nav>
 
 
-<!-- =========================================================
-     EXPERIENCE
-========================================================= -->
+<!-- =====================================================
+     IMMERSIVE EXPERIENCE
+===================================================== -->
 
-<section
-    class="experience"
-    id="experience"
->
+<main id="experience" class="experience">
 
+  <div class="world">
 
-    <div class="world">
+    <div class="world-bg"></div>
+    <div class="grid"></div>
 
-        <div
-            class="world-bg"
-            id="worldBg"
-        ></div>
 
+    <!-- GIANT TYPOGRAPHY -->
 
-        <div
-            class="grid"
-            id="grid"
-        ></div>
+    <div class="floating-word word-create">
+      CREATE
+    </div>
 
+    <div class="floating-word word-digital">
+      DIGITAL
+    </div>
 
-        <!-- ZENTRALES OBJEKT -->
+    <div class="floating-word word-social">
+      SOCIAL
+    </div>
 
-        <div
-            class="orb-wrap"
-            id="orbWrap"
-        >
+    <div class="floating-word word-grow">
+      GROW
+    </div>
 
-            <div class="orb"></div>
 
-        </div>
+    <!-- CORE -->
 
+    <div class="core-stage" id="coreStage">
 
-        <!-- BRAND -->
+      <div class="core-shadow"></div>
 
-        <div
-            class="center-brand"
-            id="brand"
-        >
+      <div class="orbits">
 
-            <small>
-                Willkommen bei
-            </small>
+        <div class="orbit one"></div>
+        <div class="orbit two"></div>
+        <div class="orbit three"></div>
+        <div class="orbit four"></div>
 
-            <h1>
-                SOCIAL<span>CLIP</span>
-            </h1>
+      </div>
 
-        </div>
+      <div class="node n1"></div>
+      <div class="node n2"></div>
+      <div class="node n3"></div>
+      <div class="node n4"></div>
 
-
-        <!-- WÖRTER -->
-
-        <div
-            class="flying-word word1"
-            id="word1"
-        >
-            CREATE<span>.</span>
-        </div>
-
-        <div
-            class="flying-word word2"
-            id="word2"
-        >
-            DIGITAL<span>.</span>
-        </div>
-
-        <div
-            class="flying-word word3"
-            id="word3"
-        >
-            SOCIAL<span>.</span>
-        </div>
-
-        <div
-            class="flying-word word4"
-            id="word4"
-        >
-            GROW<span>.</span>
-        </div>
-
-
-        <!-- SERVICES -->
-
-        <div
-            class="service-object so1"
-            id="so1"
-        >
-
-            <div>
-
-                <strong>
-                    Webseiten
-                </strong>
-
-                <small>
-                    Design · Entwicklung
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="service-object so2"
-            id="so2"
-        >
-
-            <div>
-
-                <strong>
-                    Social Media
-                </strong>
-
-                <small>
-                    Instagram · TikTok
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="service-object so3"
-            id="so3"
-        >
-
-            <div>
-
-                <strong>
-                    Design
-                </strong>
-
-                <small>
-                    Logo · Flyer · Brand
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="service-object so4"
-            id="so4"
-        >
-
-            <div>
-
-                <strong>
-                    Wachstum
-                </strong>
-
-                <small>
-                    Strategie · Kunden
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <!-- INSTAGRAM PHONE -->
-
-        <div
-            class="phone"
-            id="phone"
-        >
-
-            <div class="phone-top">
-
-                <span>
-                    Instagram
-                </span>
-
-                <span>
-                    @socialclip.art
-                </span>
-
-            </div>
-
-            <div class="feed">
-
-                <div class="feed-image i1"></div>
-
-                <div class="feed-text">
-
-                    <strong>
-                        socialclip.art
-                    </strong>
-
-                    <br><br>
-
-                    Ideen werden sichtbar.
-
-                </div>
-
-                <div class="feed-image i2"></div>
-
-                <div class="feed-text">
-
-                    Design · Media · Digital
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- FINAL -->
-
-        <div
-            class="final"
-            id="final"
-        >
-
-            <div>
-
-                <h2>
-
-                    Mach deine<br>
-
-                    <span>
-                        Idee sichtbar.
-                    </span>
-
-                </h2>
-
-                <p>
-                    SocialClip · Art · Media · Digital
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="scroll-indicator"
-            id="scrollIndicator"
-        >
-            Scroll
-        </div>
+      <div class="core" id="core"></div>
 
     </div>
+
+
+    <!-- BRAND -->
+
+    <div class="center-brand" id="brand">
+
+      <small>ART · MEDIA · DIGITAL</small>
+
+      <h1>
+        SOCIAL<span>CLIP</span>
+      </h1>
+
+      <p>
+        Scroll to enter
+      </p>
+
+    </div>
+
+
+    <!-- SERVICES -->
+
+    <div class="service create" id="serviceCreate">
+
+      <div class="service-line"></div>
+
+      <div class="service-text">
+
+        <div class="service-number">
+          01 / CREATE
+        </div>
+
+        <div class="service-title">
+          Design
+        </div>
+
+        <div class="service-items">
+          Logo · Flyer · Visitenkarte<br>
+          Speisekarte · Lebenslauf
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="service digital" id="serviceDigital">
+
+      <div class="service-line"></div>
+
+      <div class="service-text">
+
+        <div class="service-number">
+          02 / DIGITAL
+        </div>
+
+        <div class="service-title">
+          Digital
+        </div>
+
+        <div class="service-items">
+          Webseiten · Programmierung<br>
+          Virtueller Assistent
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="service media" id="serviceMedia">
+
+      <div class="service-line"></div>
+
+      <div class="service-text">
+
+        <div class="service-number">
+          03 / MEDIA
+        </div>
+
+        <div class="service-title">
+          Social
+        </div>
+
+        <div class="service-items">
+          Social Media Assistant<br>
+          Video & Photo · TikTok Marketing
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="service growth" id="serviceGrowth">
+
+      <div class="service-line"></div>
+
+      <div class="service-text">
+
+        <div class="service-number">
+          04 / GROW
+        </div>
+
+        <div class="service-title">
+          Wachstum
+        </div>
+
+        <div class="service-items">
+          Online Marketing · Neukunden<br>
+          Strategieentwicklung
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- INSTAGRAM -->
+
+    <div class="phone" id="phone">
+
+      <div class="phone-top">
+        @socialclip.art
+      </div>
+
+      <div class="phone-feed">
+
+        <div class="post">
+
+          <div class="post-content">
+            <strong>MAKE IT VISIBLE.</strong>
+            <span>SOCIALCLIP / 01</span>
+          </div>
+
+        </div>
+
+        <div class="post">
+
+          <div class="post-content">
+            <strong>CREATE DIFFERENT.</strong>
+            <span>ART · MEDIA · DIGITAL</span>
+          </div>
+
+        </div>
+
+        <div class="post">
+
+          <div class="post-content">
+            <strong>BUILD THE FUTURE.</strong>
+            <span>SOCIALCLIP / 03</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- FINAL -->
+
+    <div class="final" id="final">
+
+      <div>
+
+        <small>
+          THIS IS SOCIALCLIP
+        </small>
+
+        <h2>
+          Was darf<br>
+          <span>entstehen?</span>
+        </h2>
+
+        <a href="#contact">
+          START A PROJECT
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section class="contact" id="contact">
+
+  <div class="contact-inner">
+
+    <div class="contact-label">
+      Start something
+    </div>
+
+    <h3>
+      Lass uns<br>
+      <span>beginnen.</span>
+    </h3>
+
+    <form
+      class="contact-form"
+      action="https://formspree.io/f/xwlvlqwg"
+      method="POST"
+    >
+
+      <input
+        type="text"
+        name="name"
+        placeholder="Dein Name"
+        required
+      >
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Deine E-Mail"
+        required
+      >
+
+      <textarea
+        name="message"
+        placeholder="Was möchtest du entstehen lassen?"
+        required
+      ></textarea>
+
+      <button type="submit">
+        PROJEKT STARTEN
+      </button>
+
+    </form>
+
+  </div>
 
 </section>
 
 
-<!-- =========================================================
-     KONTAKT
-========================================================= -->
-
-<section
-    class="contact"
-    id="contact"
->
-
-    <div class="contact-inner">
-
-        <div>
-
-            <h2>
-
-                Was darf<br>
-
-                <span>
-                    entstehen?
-                </span>
-
-            </h2>
-
-            <p>
-
-                Du hast eine Idee,
-                ein Projekt oder einfach
-                eine Frage?
-
-                Schreib uns.
-
-            </p>
-
-        </div>
-
-
-        <form
-            action="https://formspree.io/f/xwlvlqwg"
-            method="POST"
-        >
-
-            <input
-                type="text"
-                name="name"
-                placeholder="Dein Name"
-                required
-            >
-
-            <input
-                type="email"
-                name="email"
-                placeholder="Deine E-Mail"
-                required
-            >
-
-            <input
-                type="text"
-                name="subject"
-                placeholder="Projekt / Idee"
-            >
-
-            <textarea
-                name="message"
-                placeholder="Erzähl uns davon..."
-                required
-            ></textarea>
-
-            <button type="submit">
-                Projekt starten
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
+<!-- =====================================================
      FOOTER
-========================================================= -->
+===================================================== -->
 
 <footer>
 
-    <div class="footer-logo">
+  <div>
+    © 2026 SocialClip Art & Media
+  </div>
 
-        SOCIAL<span>CLIP</span>
-
-    </div>
-
-
-    <div class="footer-bottom">
-
-        <span>
-            © 2026 SocialClip Art & Media
-        </span>
-
-        <span>
-            Erlangen · Deutschland
-        </span>
-
-        <a
-            href="https://www.instagram.com/socialclip.art/"
-            target="_blank"
-        >
-            Instagram ↗
-        </a>
-
-    </div>
+  <a
+    href="https://www.instagram.com/socialclip.art/"
+    target="_blank"
+    rel="noopener"
+  >
+    Instagram
+  </a>
 
 </footer>
 
@@ -1585,482 +1440,267 @@ footer{
 ========================================================= */
 
 setTimeout(() => {
-
-    document
-        .getElementById("intro")
-        .classList.add("out");
-
-    document.body.classList.remove("lock");
-
-},5200);
+  document.getElementById("intro").classList.add("hide");
+}, 5200);
 
 
 /* =========================================================
-   ELEMENTE
+   EXPERIENCE
 ========================================================= */
 
-const experience =
-    document.getElementById("experience");
+const experience = document.getElementById("experience");
+const world = document.querySelector(".world");
+const coreStage = document.getElementById("coreStage");
+const core = document.getElementById("core");
+const brand = document.getElementById("brand");
 
-const orb =
-    document.getElementById("orbWrap");
+const serviceCreate =
+  document.getElementById("serviceCreate");
 
-const brand =
-    document.getElementById("brand");
+const serviceDigital =
+  document.getElementById("serviceDigital");
 
-const grid =
-    document.getElementById("grid");
+const serviceMedia =
+  document.getElementById("serviceMedia");
 
-const bg =
-    document.getElementById("worldBg");
-
-const word1 =
-    document.getElementById("word1");
-
-const word2 =
-    document.getElementById("word2");
-
-const word3 =
-    document.getElementById("word3");
-
-const word4 =
-    document.getElementById("word4");
-
-const so1 =
-    document.getElementById("so1");
-
-const so2 =
-    document.getElementById("so2");
-
-const so3 =
-    document.getElementById("so3");
-
-const so4 =
-    document.getElementById("so4");
+const serviceGrowth =
+  document.getElementById("serviceGrowth");
 
 const phone =
-    document.getElementById("phone");
+  document.getElementById("phone");
 
 const finalScene =
-    document.getElementById("final");
+  document.getElementById("final");
 
-const scrollIndicator =
-    document.getElementById(
-        "scrollIndicator"
-    );
+
+let currentProgress = 0;
 
 
 /* =========================================================
-   SCROLL EXPERIENCE
+   CLAMP
 ========================================================= */
 
-function clamp(
-    value,
-    min,
-    max
-){
-
-    return Math.max(
-        min,
-        Math.min(max,value)
-    );
-
+function clamp(value,min,max){
+  return Math.min(Math.max(value,min),max);
 }
 
+
+/* =========================================================
+   MAIN SCROLL ENGINE
+========================================================= */
 
 function updateExperience(){
 
-    const rect =
-        experience.getBoundingClientRect();
+  const rect =
+    experience.getBoundingClientRect();
 
-    const total =
-        experience.offsetHeight -
-        window.innerHeight;
-
-    let progress =
-        -rect.top / total;
+  const total =
+    experience.offsetHeight -
+    window.innerHeight;
 
-    progress =
-        clamp(progress,0,1);
+  let progress =
+    -rect.top / total;
 
-
-    /* --------------------------------
-       ORB
-    -------------------------------- */
-
-    let scale =
-        1 +
-        progress * 1.8;
-
-    let rotate =
-        progress * 700;
+  progress =
+    clamp(progress,0,1);
 
-    let x =
-        Math.sin(progress * Math.PI * 3)
-        * 180;
-
-    let y =
-        Math.cos(progress * Math.PI * 2)
-        * 80;
+  currentProgress = progress;
 
-    orb.style.transform =
-        `
-        translate(${x}px,${y}px)
-        scale(${scale})
-        rotate(${rotate}deg)
-        `;
-
-
-    /* --------------------------------
-       BRAND
-    -------------------------------- */
-
-    let brandOpacity =
-        clamp(
-            1 - progress * 5,
-            0,
-            1
-        );
-
-    brand.style.opacity =
-        brandOpacity;
-
-    brand.style.transform =
-        `
-        scale(${1 + progress * 1.5})
-        translateY(${progress * -100}px)
-        `;
-
-
-    /* --------------------------------
-       GRID
-    -------------------------------- */
-
-    grid.style.transform =
-        `
-        perspective(700px)
-        rotateX(65deg)
-        translateY(${30 - progress * 80}%)
-        scale(${1 + progress})
-        `;
-
-
-    /* --------------------------------
-       BACKGROUND
-    -------------------------------- */
-
-    bg.style.transform =
-        `
-        scale(${1 + progress*.5})
-        rotate(${progress*8}deg)
-        `;
-
-
-    /* --------------------------------
-       WORD 1
-       CREATE
-    -------------------------------- */
-
-    let p1 =
-        clamp(
-            (progress-.08)/.15,
-            0,
-            1
-        );
-
-    word1.style.opacity =
-        p1;
-
-    word1.style.transform =
-        `
-        translate(${p1*250}px,
-                   ${p1*-120}px)
-        rotate(${-p1*10}deg)
-        `;
-
-
-    /* --------------------------------
-       WORD 2
-       DIGITAL
-    -------------------------------- */
-
-    let p2 =
-        clamp(
-            (progress-.22)/.15,
-            0,
-            1
-        );
-
-    word2.style.opacity =
-        p2;
-
-    word2.style.transform =
-        `
-        translate(${-p2*260}px,
-                   ${p2*120}px)
-        rotate(${p2*10}deg)
-        `;
-
-
-    /* --------------------------------
-       WORD 3
-       SOCIAL
-    -------------------------------- */
-
-    let p3 =
-        clamp(
-            (progress-.38)/.15,
-            0,
-            1
-        );
-
-    word3.style.opacity =
-        p3;
-
-    word3.style.transform =
-        `
-        translate(${p3*280}px,
-                   ${p3*-100}px)
-        rotate(${p3*8}deg)
-        `;
-
-
-    /* --------------------------------
-       WORD 4
-       GROW
-    -------------------------------- */
-
-    let p4 =
-        clamp(
-            (progress-.52)/.15,
-            0,
-            1
-        );
-
-    word4.style.opacity =
-        p4;
-
-    word4.style.transform =
-        `
-        translate(${-p4*300}px,
-                   ${p4*100}px)
-        rotate(${-p4*8}deg)
-        `;
-
-
-    /* --------------------------------
-       SERVICE 1
-    -------------------------------- */
-
-    animateService(
-        so1,
-        progress,
-        .14,
-        .27,
-        -100,
-        50
-    );
-
-
-    /* --------------------------------
-       SERVICE 2
-    -------------------------------- */
-
-    animateService(
-        so2,
-        progress,
-        .27,
-        .40,
-        100,
-        -60
-    );
-
-
-    /* --------------------------------
-       SERVICE 3
-    -------------------------------- */
-
-    animateService(
-        so3,
-        progress,
-        .43,
-        .56,
-        -120,
-        -40
-    );
-
-
-    /* --------------------------------
-       SERVICE 4
-    -------------------------------- */
-
-    animateService(
-        so4,
-        progress,
-        .56,
-        .69,
-        120,
-        50
-    );
-
-
-    /* --------------------------------
-       PHONE
-    -------------------------------- */
-
-    let phoneP =
-        clamp(
-            (progress-.65)/.17,
-            0,
-            1
-        );
-
-    phone.style.opacity =
-        phoneP;
-
-    phone.style.transform =
-        `
-        translateY(${150-phoneP*150}px)
-        rotateY(${-30+phoneP*30}deg)
-        rotateX(${8-phoneP*8}deg)
-        scale(${.8+phoneP*.2})
-        `;
-
-
-    /* --------------------------------
-       FINAL
-    -------------------------------- */
-
-    let finalP =
-        clamp(
-            (progress-.82)/.15,
-            0,
-            1
-        );
-
-    finalScene.style.opacity =
-        finalP;
-
-    finalScene.style.transform =
-        `
-        scale(${.8+finalP*.2})
-        `;
-
-
-    /* --------------------------------
-       SCROLL TEXT
-    -------------------------------- */
-
-    scrollIndicator.style.opacity =
-        progress < .05 ? "1" : "0";
-
-}
-
-
-function animateService(
-    element,
-    progress,
-    start,
-    end,
-    x,
-    y
-){
-
-    let p =
-        clamp(
-            (progress-start)/
-            (end-start),
-            0,
-            1
-        );
-
-    element.style.opacity =
-        p;
-
-    element.style.transform =
-        `
-        translate(${x*(1-p)}px,
-                   ${y*(1-p)}px)
-        scale(${.6+.4*p})
-        `;
+
+  /* ---------------------------------------------
+     CORE MOVEMENT
+  --------------------------------------------- */
+
+  const rotation =
+    progress * 1080;
+
+  const scale =
+    .72 +
+    Math.sin(progress * Math.PI) * .5;
+
+  const x =
+    Math.sin(progress * Math.PI * 2.2) * 13;
+
+  const y =
+    Math.cos(progress * Math.PI * 2) * 8;
+
+  coreStage.style.transform = `
+    translate(-50%,-50%)
+    translate3d(
+      calc(var(--mx, 0px) + ${x}vw),
+      calc(var(--my, 0px) + ${y}vh),
+      0
+    )
+    scale(${scale})
+    rotate(${rotation}deg)
+  `;
+
+
+  /* ---------------------------------------------
+     CORE MORPH
+  --------------------------------------------- */
+
+  const radius1 =
+    42 + Math.sin(progress * Math.PI * 2) * 15;
+
+  const radius2 =
+    50 + Math.cos(progress * Math.PI * 2.4) * 12;
+
+  core.style.borderRadius = `
+    ${radius1}% ${100-radius1}%
+    ${radius2}% ${100-radius2}%
+    /
+    ${radius2}% ${radius1}%
+    ${100-radius2}% ${100-radius1}%
+  `;
+
+
+  /* ---------------------------------------------
+     BRAND
+  --------------------------------------------- */
+
+  const brandOpacity =
+    progress < .18
+      ? 1 - progress / .18
+      : 0;
+
+  brand.style.opacity =
+    brandOpacity;
+
+
+  /* ---------------------------------------------
+     BACKGROUND
+  --------------------------------------------- */
+
+  const bgX =
+    Math.sin(progress * Math.PI * 3) * 7;
+
+  const bgY =
+    progress * -10;
+
+  document.querySelector(".world-bg").style.transform =
+    `translate(${bgX}vw,${bgY}vh) scale(${1 + progress*.2})`;
+
+  document.querySelector(".grid").style.transform =
+    `
+    perspective(500px)
+    rotateX(68deg)
+    translateY(${25 + progress*20}%)
+    scale(${1 + progress*.3})
+    `;
+
+
+  /* ---------------------------------------------
+     SERVICES
+  --------------------------------------------- */
+
+  toggleService(
+    serviceCreate,
+    progress >= .17 &&
+    progress < .35
+  );
+
+  toggleService(
+    serviceDigital,
+    progress >= .30 &&
+    progress < .52
+  );
+
+  toggleService(
+    serviceMedia,
+    progress >= .46 &&
+    progress < .68
+  );
+
+  toggleService(
+    serviceGrowth,
+    progress >= .58 &&
+    progress < .77
+  );
+
+
+  /* ---------------------------------------------
+     PHONE
+  --------------------------------------------- */
+
+  if(progress >= .68 && progress < .88){
+    phone.classList.add("active");
+  }else{
+    phone.classList.remove("active");
+  }
+
+
+  /* ---------------------------------------------
+     FINAL
+  --------------------------------------------- */
+
+  if(progress > .87){
+    finalScene.classList.add("active");
+  }else{
+    finalScene.classList.remove("active");
+  }
 
 }
 
 
 /* =========================================================
-   SCROLL EVENT
+   SERVICE TOGGLE
+========================================================= */
+
+function toggleService(element,active){
+
+  if(active){
+    element.classList.add("active");
+  }else{
+    element.classList.remove("active");
+  }
+
+}
+
+
+/* =========================================================
+   MOUSE PARALLAX
+========================================================= */
+
+window.addEventListener("mousemove",(event)=>{
+
+  if(window.innerWidth < 800){
+    return;
+  }
+
+  const x =
+    (event.clientX / window.innerWidth - .5) * 35;
+
+  const y =
+    (event.clientY / window.innerHeight - .5) * 35;
+
+  document.documentElement.style
+    .setProperty("--mx",`${x}px`);
+
+  document.documentElement.style
+    .setProperty("--my",`${y}px`);
+
+});
+
+
+/* =========================================================
+   SCROLL
 ========================================================= */
 
 window.addEventListener(
-    "scroll",
-    updateExperience,
-    {
-        passive:true
-    }
+  "scroll",
+  updateExperience,
+  {passive:true}
 );
 
 
 /* =========================================================
-   MOUSE MOVEMENT
+   RESIZE
 ========================================================= */
-
-document.addEventListener(
-    "mousemove",
-    event => {
-
-        if(
-            window.innerWidth < 800
-        ){
-            return;
-        }
-
-        const x =
-            (
-                event.clientX /
-                window.innerWidth
-                -.5
-            );
-
-        const y =
-            (
-                event.clientY /
-                window.innerHeight
-                -.5
-            );
-
-        orb.style.marginLeft =
-            `${x*20}px`;
-
-        orb.style.marginTop =
-            `${y*20}px`;
-
-        bg.style.marginLeft =
-            `${x*10}px`;
-
-        bg.style.marginTop =
-            `${y*10}px`;
-
-    }
-);
-
-
-/* =========================================================
-   TOUCH / MOBILE
-========================================================= */
-
-let touchStart = 0;
 
 window.addEventListener(
-    "touchstart",
-    e => {
-
-        touchStart =
-            e.touches[0].clientY;
-
-    },
-    {
-        passive:true
-    }
+  "resize",
+  updateExperience
 );
 
 
