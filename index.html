@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SocialClip — Art · Media · Digital</title>
-<meta name="description" content="SocialClip Art & Media — Digitale Welten, Design, Marketing, Social Media, Video und Programmierung.">
+<meta name="description" content="SocialClip Art & Media — Design, Digital, Social Media, Marketing, Video und kreative digitale Lösungen.">
 
 <style>
 :root{
-  --bg:#030303;
-  --white:#f4f4f0;
-  --muted:#858585;
-  --line:rgba(255,255,255,.12);
-  --green:#b7ff00;
-  --cyan:#79e8ff;
-  --orange:#ff6a3d;
-  --max:1600px;
+  --black:#030303;
+  --white:#f5f5f2;
+  --soft:#b9b9b4;
+  --gray:#656565;
+  --line:rgba(255,255,255,.13);
+  --lime:#c7ff32;
+  --blue:#8edcff;
+  --orange:#ff8b65;
 }
 
 *{
@@ -25,12 +25,12 @@
 }
 
 html{
+  background:var(--black);
   scroll-behavior:smooth;
-  background:#030303;
 }
 
 body{
-  background:#030303;
+  background:var(--black);
   color:var(--white);
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
@@ -45,7 +45,7 @@ a{
   text-decoration:none;
 }
 
-button{
+button,input,textarea{
   font:inherit;
 }
 
@@ -56,297 +56,384 @@ button{
 
 
 /* =========================================================
-   INTRO / AI TERMINAL
+   GLOBAL ATMOSPHERE
+========================================================= */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:9998;
+  pointer-events:none;
+  opacity:.035;
+  background-image:
+    radial-gradient(circle at 20% 30%,#fff 0 1px,transparent 1px),
+    radial-gradient(circle at 70% 60%,#fff 0 1px,transparent 1px);
+  background-size:4px 4px,7px 7px;
+}
+
+.cursor-light{
+  position:fixed;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:2;
+  background:radial-gradient(circle,rgba(255,255,255,.055),transparent 65%);
+  transform:translate(-50%,-50%);
+  mix-blend-mode:screen;
+}
+
+
+/* =========================================================
+   INTRO
 ========================================================= */
 
 #intro{
   position:fixed;
   inset:0;
-  z-index:9999;
+  z-index:10000;
   background:
-    radial-gradient(circle at 50% 50%,rgba(70,80,100,.08),transparent 35%),
-    #020202;
+    radial-gradient(circle at 50% 42%,rgba(255,255,255,.065),transparent 24%),
+    #030303;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
   transition:
-    opacity 1.2s cubic-bezier(.77,0,.18,1),
-    transform 1.2s cubic-bezier(.77,0,.18,1);
+    opacity 1.4s cubic-bezier(.77,0,.18,1),
+    transform 1.4s cubic-bezier(.77,0,.18,1);
 }
 
 #intro.hide{
   opacity:0;
-  transform:scale(1.08);
+  transform:scale(1.07);
   pointer-events:none;
 }
 
-.intro-grid{
+.intro-light{
+  position:absolute;
+  width:700px;
+  height:700px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,
+      rgba(255,255,255,.09),
+      rgba(255,255,255,.025) 25%,
+      transparent 67%);
+  animation:introBreath 5s ease-in-out infinite;
+}
+
+@keyframes introBreath{
+  0%,100%{transform:scale(.9);opacity:.65}
+  50%{transform:scale(1.1);opacity:1}
+}
+
+.intro-ring{
+  position:absolute;
+  width:650px;
+  height:650px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:50%;
+  animation:ringRotate 25s linear infinite;
+}
+
+.intro-ring::before,
+.intro-ring::after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.intro-ring::before{
+  inset:35px;
+}
+
+.intro-ring::after{
+  inset:100px;
+}
+
+@keyframes ringRotate{
+  to{transform:rotate(360deg)}
+}
+
+.intro-stars{
   position:absolute;
   inset:0;
-  opacity:.22;
+  overflow:hidden;
+}
+
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  border-radius:50%;
+  background:#fff;
+  opacity:.3;
+  animation:starFloat 7s ease-in-out infinite;
+}
+
+@keyframes starFloat{
+  0%,100%{transform:translateY(0);opacity:.15}
+  50%{transform:translateY(-35px);opacity:.55}
+}
+
+.intro-lines{
+  position:absolute;
+  inset:0;
+  opacity:.1;
   background-image:
-    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:70px 70px;
-  transform:perspective(600px) rotateX(62deg) scale(2);
+    linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:100px 100px;
+  transform:perspective(800px) rotateX(65deg) scale(2);
   transform-origin:center bottom;
-  animation:gridMove 12s linear infinite;
+  animation:introGrid 16s linear infinite;
 }
 
-@keyframes gridMove{
-  from{transform:perspective(600px) rotateX(62deg) scale(2) translateY(0)}
-  to{transform:perspective(600px) rotateX(62deg) scale(2) translateY(70px)}
+@keyframes introGrid{
+  to{
+    transform:
+      perspective(800px)
+      rotateX(65deg)
+      scale(2)
+      translateY(100px);
+  }
 }
 
-.intro-scan{
+.intro-sweep{
   position:absolute;
-  left:0;
-  right:0;
+  width:120%;
   height:1px;
-  top:-10%;
-  background:linear-gradient(90deg,transparent,#fff,transparent);
-  opacity:.15;
-  animation:scan 5s linear infinite;
+  left:-10%;
+  top:35%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.5),
+    transparent
+  );
+  filter:blur(1px);
+  opacity:.2;
+  animation:sweep 7s ease-in-out infinite;
 }
 
-@keyframes scan{
-  to{top:110%}
+@keyframes sweep{
+  0%{transform:translateX(-30%)}
+  50%{transform:translateX(30%)}
+  100%{transform:translateX(-30%)}
 }
 
-.intro-noise{
-  position:absolute;
-  inset:0;
-  opacity:.035;
-  background-image:
-    repeating-radial-gradient(circle at 17% 32%,#fff 0 1px,transparent 1px 3px);
-  background-size:4px 4px;
-  pointer-events:none;
-}
-
-.intro-core{
-  width:min(1000px,88vw);
+.intro-content{
   position:relative;
-  z-index:3;
+  z-index:5;
+  width:min(900px,88vw);
+  text-align:center;
 }
 
-.system-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:45px;
+.intro-mini{
   font-family:monospace;
+  font-size:9px;
+  letter-spacing:4px;
+  color:#777;
+  margin-bottom:42px;
+  opacity:0;
+  animation:fadeUp 1s .5s forwards;
+}
+
+.intro-mini span{
+  display:inline-block;
+  margin:0 10px;
+}
+
+.intro-title{
+  font-size:clamp(50px,9vw,120px);
+  line-height:.9;
+  letter-spacing:-.075em;
+  font-weight:800;
+  min-height:110px;
+}
+
+.intro-title .line{
+  display:block;
+  overflow:hidden;
+}
+
+.intro-title .word{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(100%);
+  animation:titleUp 1.1s 1.2s cubic-bezier(.77,0,.18,1) forwards;
+}
+
+@keyframes titleUp{
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.intro-message{
+  margin:35px auto 0;
+  max-width:500px;
+  min-height:65px;
+  color:#999;
+  font-size:14px;
+  line-height:1.8;
+  opacity:0;
+  animation:fadeUp 1s 2.1s forwards;
+}
+
+.intro-button{
+  margin-top:42px;
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:18px;
+  padding:18px 25px;
+  color:#fff;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.23);
+  cursor:pointer;
   font-size:10px;
   letter-spacing:3px;
-  color:#656565;
-}
-
-.status{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.status-dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 15px var(--green);
-  animation:pulse 1s infinite;
-}
-
-@keyframes pulse{
-  50%{opacity:.25}
-}
-
-.ai-terminal{
-  border-left:1px solid rgba(255,255,255,.2);
-  padding-left:25px;
-  min-height:290px;
-}
-
-.terminal-line{
-  font-family:monospace;
-  color:#666;
-  font-size:11px;
-  letter-spacing:2px;
-  margin-bottom:14px;
-  opacity:0;
-  transform:translateY(8px);
-  transition:.6s;
-}
-
-.terminal-line.show{
-  opacity:1;
-  transform:none;
-}
-
-.terminal-main{
-  font-size:clamp(42px,8vw,110px);
-  font-weight:800;
-  line-height:.9;
-  letter-spacing:-.07em;
-  margin-top:35px;
-  max-width:1000px;
-}
-
-.cursor{
-  display:inline-block;
-  width:9px;
-  height:.85em;
-  background:#fff;
-  margin-left:8px;
-  vertical-align:-.08em;
-  animation:cursorBlink .7s infinite;
-}
-
-@keyframes cursorBlink{
-  50%{opacity:0}
-}
-
-.ai-message{
-  margin-top:35px;
-  max-width:600px;
-  color:#999;
-  font-size:15px;
-  line-height:1.7;
-  font-family:monospace;
-  min-height:25px;
-}
-
-.enter-world{
-  margin-top:42px;
-  border:1px solid rgba(255,255,255,.3);
-  background:rgba(255,255,255,.025);
-  color:#fff;
-  padding:18px 27px;
-  cursor:pointer;
-  letter-spacing:3px;
-  font-size:11px;
-  position:relative;
   overflow:hidden;
   opacity:0;
   transform:translateY(15px);
-  transition:
-    opacity .8s,
-    transform .8s,
-    border-color .3s;
+  animation:buttonAppear 1s 3.1s forwards;
 }
 
-.enter-world.ready{
-  opacity:1;
-  transform:none;
+@keyframes buttonAppear{
+  to{
+    opacity:1;
+    transform:none;
+  }
 }
 
-.enter-world::before{
+.intro-button::before{
   content:"";
   position:absolute;
   inset:0;
   background:#fff;
   transform:translateX(-102%);
-  transition:transform .45s cubic-bezier(.77,0,.18,1);
+  transition:transform .55s cubic-bezier(.77,0,.18,1);
 }
 
-.enter-world span{
+.intro-button span{
   position:relative;
   z-index:2;
+  transition:.4s;
 }
 
-.enter-world:hover{
-  border-color:#fff;
-}
-
-.enter-world:hover::before{
+.intro-button:hover::before{
   transform:none;
 }
 
-.enter-world:hover span{
+.intro-button:hover span{
   color:#000;
 }
 
-.intro-corner{
-  position:absolute;
-  font-family:monospace;
-  color:#444;
-  font-size:9px;
-  letter-spacing:2px;
+.intro-button .arrow{
+  font-size:16px;
 }
-
-.ic1{left:30px;top:30px}
-.ic2{right:30px;top:30px}
-.ic3{left:30px;bottom:30px}
-.ic4{right:30px;bottom:30px}
 
 
 /* =========================================================
-   SYSTEM TRANSITION
+   CINEMATIC TRANSITION
 ========================================================= */
 
 #transition{
   position:fixed;
   inset:0;
   z-index:9000;
-  pointer-events:none;
-  opacity:0;
   background:#000;
+  opacity:0;
+  pointer-events:none;
+  overflow:hidden;
 }
 
 #transition.active{
   opacity:1;
 }
 
-.transition-lines{
+.transition-glow{
   position:absolute;
-  inset:0;
-  overflow:hidden;
+  width:700px;
+  height:700px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%);
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) scale(.2);
 }
 
-.t-line{
+#transition.active .transition-glow{
+  animation:transitionGlow 1.8s cubic-bezier(.77,0,.18,1) forwards;
+}
+
+@keyframes transitionGlow{
+  0%{transform:translate(-50%,-50%) scale(.1);opacity:0}
+  45%{opacity:1}
+  100%{transform:translate(-50%,-50%) scale(2.5);opacity:0}
+}
+
+.transition-bar{
   position:absolute;
-  left:-20%;
-  width:140%;
+  left:-10%;
+  width:120%;
   height:1px;
   background:#fff;
   transform:scaleX(0);
 }
 
-.t-line:nth-child(1){top:18%}
-.t-line:nth-child(2){top:31%}
-.t-line:nth-child(3){top:52%}
-.t-line:nth-child(4){top:69%}
-.t-line:nth-child(5){top:84%}
+.transition-bar:nth-child(1){top:25%}
+.transition-bar:nth-child(2){top:50%}
+.transition-bar:nth-child(3){top:75%}
 
-#transition.active .t-line{
-  animation:transitionLine 1.1s cubic-bezier(.77,0,.18,1) forwards;
+#transition.active .transition-bar{
+  animation:transitionBars 1.1s cubic-bezier(.77,0,.18,1) forwards;
 }
 
-.t-line:nth-child(2){animation-delay:.08s!important}
-.t-line:nth-child(3){animation-delay:.16s!important}
-.t-line:nth-child(4){animation-delay:.24s!important}
-.t-line:nth-child(5){animation-delay:.32s!important}
+.transition-bar:nth-child(2){
+  animation-delay:.1s!important;
+}
 
-@keyframes transitionLine{
+.transition-bar:nth-child(3){
+  animation-delay:.2s!important;
+}
+
+@keyframes transitionBars{
   0%{transform:scaleX(0)}
   45%{transform:scaleX(1)}
   100%{transform:scaleX(0)}
 }
 
-.transition-text{
+.transition-name{
   position:absolute;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-family:monospace;
-  font-size:11px;
-  letter-spacing:6px;
-  color:#fff;
+  font-size:clamp(45px,10vw,140px);
+  font-weight:800;
+  letter-spacing:-.08em;
+  opacity:0;
+}
+
+#transition.active .transition-name{
+  animation:transitionName 1.4s forwards;
+}
+
+@keyframes transitionName{
+  20%{opacity:1;transform:scale(.95)}
+  70%{opacity:1;transform:scale(1.05)}
+  100%{opacity:0;transform:scale(1.3)}
 }
 
 
 /* =========================================================
-   MAIN SITE
+   SITE
 ========================================================= */
 
 #site{
@@ -370,31 +457,30 @@ button{
   z-index:100;
   padding:25px 35px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   mix-blend-mode:difference;
 }
 
 .logo{
-  font-size:18px;
   font-weight:800;
-  letter-spacing:-.06em;
+  font-size:18px;
+  letter-spacing:-.07em;
 }
 
-.nav-right{
+.nav-links{
   display:flex;
-  gap:28px;
-  font-size:10px;
-  letter-spacing:2px;
-  text-transform:uppercase;
+  gap:30px;
+  font-size:9px;
+  letter-spacing:3px;
 }
 
-.nav-right a{
-  opacity:.7;
+.nav-links a{
+  opacity:.65;
   transition:.3s;
 }
 
-.nav-right a:hover{
+.nav-links a:hover{
   opacity:1;
 }
 
@@ -412,101 +498,169 @@ button{
   align-items:flex-end;
   padding:0 5vw 7vh;
   background:
-    radial-gradient(circle at 75% 45%,rgba(90,110,130,.13),transparent 30%),
+    radial-gradient(
+      circle at 75% 40%,
+      rgba(100,130,150,.12),
+      transparent 30%
+    ),
     #030303;
 }
 
 .hero-grid{
   position:absolute;
   inset:-20%;
-  opacity:.22;
   background-image:
     linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
   background-size:80px 80px;
-  transform:perspective(900px) rotateX(58deg);
+  opacity:.25;
+  transform:
+    perspective(900px)
+    rotateX(60deg);
   transform-origin:center bottom;
 }
 
-.hero-light{
+.hero-glow{
   position:absolute;
-  width:70vw;
-  height:1px;
-  background:linear-gradient(90deg,transparent,#fff,transparent);
-  opacity:.16;
-  transform:rotate(-25deg);
-  left:-10%;
-  top:35%;
+  width:600px;
+  height:600px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(150,210,255,.07),
+    transparent 68%
+  );
+  right:5%;
+  top:10%;
+  animation:heroGlow 8s ease-in-out infinite;
 }
 
-.hero-light.two{
+@keyframes heroGlow{
+  50%{transform:scale(1.3);opacity:.6}
+}
+
+.hero-streak{
+  position:absolute;
+  height:1px;
+  width:80vw;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
+  transform:rotate(-23deg);
+  left:-10%;
+  top:40%;
+  animation:streakMove 9s ease-in-out infinite;
+}
+
+.hero-streak.two{
   top:65%;
   left:35%;
-  transform:rotate(18deg);
+  transform:rotate(17deg);
+  animation-delay:2s;
 }
 
-.hero-label{
+@keyframes streakMove{
+  0%,100%{transform:translateX(-10%) rotate(-23deg)}
+  50%{transform:translateX(20%) rotate(-23deg)}
+}
+
+.hero-meta{
   position:absolute;
-  top:17%;
   left:5vw;
-  font-family:monospace;
-  color:#777;
-  font-size:10px;
-  letter-spacing:3px;
+  top:17%;
+  font:9px monospace;
+  letter-spacing:4px;
+  color:#666;
 }
 
 .hero-content{
   position:relative;
-  z-index:2;
+  z-index:5;
   width:100%;
 }
 
-.hero-small{
-  font-family:monospace;
+.hero-kicker{
   color:#777;
-  font-size:10px;
+  font:9px monospace;
   letter-spacing:4px;
-  margin-bottom:25px;
+  margin-bottom:28px;
 }
 
 .hero-title{
-  font-size:clamp(70px,14vw,240px);
-  line-height:.75;
+  font-size:clamp(75px,14vw,235px);
+  line-height:.73;
+  letter-spacing:-.095em;
   font-weight:800;
-  letter-spacing:-.09em;
-  text-transform:uppercase;
   white-space:nowrap;
-  transform:translateX(-.03em);
 }
 
 .hero-title span{
   display:block;
 }
 
-.hero-title .second{
-  margin-left:16vw;
+.hero-title .two{
+  margin-left:17vw;
 }
 
-.hero-bottom{
-  margin-top:55px;
+.hero-title .three{
+  margin-left:5vw;
+}
+
+.hero-sub{
   display:flex;
   justify-content:space-between;
   align-items:flex-end;
-  max-width:1200px;
+  max-width:1150px;
+  margin-top:55px;
 }
 
 .hero-description{
-  width:360px;
+  width:370px;
   color:#888;
   font-size:14px;
-  line-height:1.7;
+  line-height:1.75;
 }
 
-.scroll-indicator{
-  font-family:monospace;
-  font-size:9px;
-  color:#777;
+.scroll-note{
+  color:#666;
+  font:9px monospace;
   letter-spacing:3px;
+}
+
+
+/* =========================================================
+   FLOATING LIGHT PARTICLES
+========================================================= */
+
+.particles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.particle{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#fff;
+  opacity:.15;
+  animation:particleFloat 9s ease-in-out infinite;
+}
+
+@keyframes particleFloat{
+  0%,100%{
+    transform:translate(0,0);
+    opacity:.1;
+  }
+  50%{
+    transform:translate(30px,-80px);
+    opacity:.45;
+  }
 }
 
 
@@ -518,25 +672,26 @@ button{
   overflow:hidden;
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
-  padding:24px 0;
+  padding:25px 0;
   white-space:nowrap;
   background:#050505;
 }
 
 .marquee-track{
   display:inline-flex;
+  align-items:center;
   gap:45px;
-  animation:marquee 25s linear infinite;
+  animation:marquee 28s linear infinite;
 }
 
 .marquee span{
   font-size:clamp(25px,4vw,60px);
   font-weight:700;
-  letter-spacing:-.05em;
+  letter-spacing:-.06em;
 }
 
 .marquee .dot{
-  color:#555;
+  color:#444;
 }
 
 @keyframes marquee{
@@ -545,19 +700,19 @@ button{
 
 
 /* =========================================================
-   DIGITAL SCENES
+   SCENES
 ========================================================= */
 
 .scene{
-  min-height:100vh;
+  min-height:110vh;
   position:relative;
   overflow:hidden;
   border-bottom:1px solid var(--line);
 }
 
 .scene-inner{
-  width:min(var(--max),90vw);
-  min-height:100vh;
+  width:min(1500px,90vw);
+  min-height:110vh;
   margin:auto;
   position:relative;
   display:flex;
@@ -566,130 +721,156 @@ button{
 
 .scene-number{
   position:absolute;
-  top:50px;
+  top:55px;
   left:0;
-  font-family:monospace;
+  font:9px monospace;
   color:#555;
-  font-size:10px;
-  letter-spacing:3px;
-}
-
-.scene-word{
-  font-size:clamp(90px,18vw,280px);
-  font-weight:800;
-  letter-spacing:-.09em;
-  line-height:.72;
-  position:absolute;
-  white-space:nowrap;
-  pointer-events:none;
-  color:#111;
-}
-
-.scene-word.outline{
-  color:transparent;
-  -webkit-text-stroke:1px rgba(255,255,255,.16);
+  letter-spacing:4px;
 }
 
 .scene-copy{
   position:relative;
-  z-index:4;
-  width:420px;
+  z-index:10;
+  width:410px;
+}
+
+.scene-tag{
+  font:9px monospace;
+  color:#777;
+  letter-spacing:4px;
+  margin-bottom:25px;
 }
 
 .scene-copy h2{
-  font-size:clamp(50px,7vw,100px);
-  line-height:.85;
-  letter-spacing:-.07em;
-  margin-bottom:30px;
+  font-size:clamp(55px,7vw,105px);
+  line-height:.83;
+  letter-spacing:-.08em;
+  margin-bottom:35px;
 }
 
 .scene-copy p{
   color:#858585;
-  line-height:1.8;
   font-size:14px;
+  line-height:1.8;
   max-width:380px;
 }
 
-.scene-tag{
-  font-family:monospace;
-  font-size:9px;
-  letter-spacing:3px;
-  color:#888;
-  margin-bottom:20px;
+.scene-word{
+  position:absolute;
+  font-size:clamp(100px,19vw,300px);
+  font-weight:800;
+  line-height:.7;
+  letter-spacing:-.1em;
+  color:#111;
+  white-space:nowrap;
+  pointer-events:none;
+  transition:transform .2s linear;
+}
+
+.outline{
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.13);
 }
 
 
-/* CREATE */
+/* =========================================================
+   CREATE
+========================================================= */
 
 .create{
   background:
-    radial-gradient(circle at 70% 50%,rgba(255,255,255,.06),transparent 30%),
+    radial-gradient(circle at 70% 40%,rgba(255,255,255,.055),transparent 30%),
     #030303;
 }
 
 .create-word{
   right:-8%;
-  top:26%;
-  transform:rotate(-8deg);
+  top:23%;
+  transform:rotate(-7deg);
 }
 
 .create-items{
   position:absolute;
-  right:5%;
-  width:50%;
+  right:3%;
+  width:54%;
   height:70%;
 }
 
 .create-item{
   position:absolute;
-  font-size:clamp(24px,4vw,65px);
+  font-size:clamp(25px,4vw,66px);
   font-weight:700;
-  letter-spacing:-.05em;
-  color:#ddd;
-  border-bottom:1px solid rgba(255,255,255,.2);
+  letter-spacing:-.06em;
+  border-bottom:1px solid rgba(255,255,255,.16);
   padding-bottom:12px;
+  transition:
+    transform .5s cubic-bezier(.2,.8,.2,1),
+    color .4s;
 }
 
-.create-item:nth-child(1){top:5%;left:5%}
-.create-item:nth-child(2){top:28%;left:32%}
-.create-item:nth-child(3){top:50%;left:0}
-.create-item:nth-child(4){top:70%;left:38%}
-.create-item:nth-child(5){top:90%;left:10%}
+.create-item:hover{
+  color:var(--lime);
+  transform:translateX(-15px)!important;
+}
+
+.create-item:nth-child(1){top:4%;left:5%;transform:rotate(-4deg)}
+.create-item:nth-child(2){top:27%;left:32%;transform:rotate(3deg)}
+.create-item:nth-child(3){top:48%;left:0;transform:rotate(-2deg)}
+.create-item:nth-child(4){top:69%;left:35%;transform:rotate(4deg)}
+.create-item:nth-child(5){top:90%;left:10%;transform:rotate(-3deg)}
 
 
-/* DIGITAL */
+/* =========================================================
+   DIGITAL
+========================================================= */
 
 .digital{
-  background:#050505;
+  background:
+    radial-gradient(circle at 75% 50%,rgba(90,170,210,.07),transparent 35%),
+    #050505;
 }
 
 .digital-word{
-  left:-10%;
+  left:-12%;
   top:20%;
-  transform:rotate(7deg);
+  transform:rotate(6deg);
 }
 
 .browser{
   position:absolute;
-  width:min(760px,55vw);
-  height:480px;
-  right:2%;
+  right:1%;
   top:50%;
-  transform:translateY(-50%) perspective(1200px) rotateY(-10deg) rotateX(4deg);
-  border:1px solid rgba(255,255,255,.25);
-  background:#0a0a0a;
+  width:min(760px,57vw);
+  height:490px;
+  transform:
+    translateY(-50%)
+    perspective(1200px)
+    rotateY(-12deg)
+    rotateX(5deg);
+  border:1px solid rgba(255,255,255,.24);
+  background:#080808;
   box-shadow:
-    0 50px 120px rgba(0,0,0,.8),
-    0 0 100px rgba(100,150,170,.05);
+    0 70px 130px rgba(0,0,0,.75),
+    0 0 80px rgba(100,200,255,.04);
+  transition:transform .4s;
+}
+
+.browser:hover{
+  transform:
+    translateY(-50%)
+    perspective(1200px)
+    rotateY(-5deg)
+    rotateX(2deg)
+    scale(1.02);
 }
 
 .browser-top{
-  height:38px;
-  border-bottom:1px solid rgba(255,255,255,.12);
+  height:40px;
+  border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
   gap:7px;
-  padding:0 14px;
+  padding:0 15px;
 }
 
 .browser-dot{
@@ -699,141 +880,177 @@ button{
   background:#555;
 }
 
-.browser-address{
+.browser-url{
   margin-left:20px;
-  height:18px;
   flex:1;
+  height:18px;
   border:1px solid rgba(255,255,255,.1);
-  font:8px monospace;
   color:#555;
+  font:8px monospace;
   padding:4px 8px;
 }
 
 .browser-screen{
   position:relative;
-  height:calc(100% - 38px);
+  height:calc(100% - 40px);
   overflow:hidden;
   background:
-    linear-gradient(135deg,rgba(255,255,255,.05),transparent 50%),
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.07),
+      transparent 45%
+    ),
     #070707;
 }
 
-.fake-site-title{
+.browser-title{
   position:absolute;
   left:40px;
-  top:45px;
-  font-size:70px;
+  top:42px;
+  font-size:65px;
+  line-height:.8;
   font-weight:800;
   letter-spacing:-.08em;
-  line-height:.8;
 }
 
-.fake-line{
+.browser-orbit{
   position:absolute;
-  height:1px;
-  background:rgba(255,255,255,.15);
+  right:50px;
+  top:55px;
+  width:190px;
+  height:190px;
+  border:1px solid rgba(255,255,255,.2);
+  transform:rotate(20deg);
+  animation:browserSpin 12s linear infinite;
+}
+
+.browser-orbit::after{
+  content:"";
+  position:absolute;
+  inset:35px;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+@keyframes browserSpin{
+  to{transform:rotate(380deg)}
+}
+
+.browser-line{
+  position:absolute;
   left:40px;
   right:40px;
+  height:1px;
+  background:rgba(255,255,255,.13);
 }
 
-.fl1{top:190px}
-.fl2{top:250px}
-.fl3{top:310px}
+.browser-line:nth-child(1){top:200px}
+.browser-line:nth-child(2){top:255px}
+.browser-line:nth-child(3){top:310px}
 
-.fake-square{
+.browser-code{
   position:absolute;
-  right:45px;
-  top:50px;
-  width:160px;
-  height:160px;
-  border:1px solid rgba(255,255,255,.2);
-  transform:rotate(12deg);
-}
-
-.code-lines{
-  position:absolute;
-  bottom:30px;
+  bottom:25px;
   left:40px;
   font:8px/2 monospace;
   color:#666;
 }
 
 
-/* MEDIA */
+/* =========================================================
+   MEDIA
+========================================================= */
 
 .media{
   background:
-    radial-gradient(circle at 30% 70%,rgba(255,90,40,.08),transparent 30%),
+    radial-gradient(circle at 30% 60%,rgba(255,110,70,.07),transparent 30%),
     #030303;
 }
 
 .media-word{
-  right:-12%;
-  top:25%;
-  transform:rotate(-5deg);
+  right:-10%;
+  top:23%;
+  transform:rotate(-6deg);
 }
 
 .media-frames{
   position:absolute;
-  right:3%;
-  width:52%;
+  right:2%;
+  width:54%;
   height:70%;
   display:flex;
+  gap:13px;
   align-items:center;
-  gap:12px;
-  transform:rotate(-7deg);
+  transform:rotate(-6deg);
 }
 
 .media-frame{
-  height:430px;
-  flex:1;
-  border:1px solid rgba(255,255,255,.22);
   position:relative;
+  flex:1;
+  height:440px;
+  border:1px solid rgba(255,255,255,.2);
   overflow:hidden;
-  background:#090909;
+  background:
+    linear-gradient(
+      140deg,
+      rgba(255,255,255,.12),
+      transparent 40%
+    ),
+    #0a0a0a;
 }
 
 .media-frame:nth-child(2){
-  transform:translateY(-60px);
+  height:520px;
+  transform:translateY(-50px);
 }
 
 .media-frame:nth-child(3){
-  transform:translateY(50px);
+  transform:translateY(45px);
 }
 
 .media-frame::before{
   content:"";
   position:absolute;
-  inset:-30%;
-  background:
-    linear-gradient(130deg,transparent 20%,rgba(255,255,255,.13) 50%,transparent 70%);
-  transform:translateX(-100%);
-  animation:mediaShine 5s infinite;
+  width:200%;
+  height:100%;
+  left:-100%;
+  top:0;
+  background:linear-gradient(
+    100deg,
+    transparent,
+    rgba(255,255,255,.15),
+    transparent
+  );
+  animation:mediaLight 5s ease-in-out infinite;
 }
 
-@keyframes mediaShine{
-  50%,100%{transform:translateX(100%)}
+@keyframes mediaLight{
+  0%,100%{left:-100%}
+  50%{left:100%}
 }
 
 .media-frame::after{
-  content:"PLAY";
+  content:"VIDEO / PHOTO / EDIT";
   position:absolute;
-  left:20px;
   bottom:20px;
-  font:9px monospace;
+  left:18px;
+  font:8px monospace;
   letter-spacing:3px;
-  color:#999;
+  color:#aaa;
 }
 
 
-/* SOCIAL */
+/* =========================================================
+   SOCIAL
+========================================================= */
 
 .social{
-  background:#040404;
+  background:
+    radial-gradient(circle at 75% 45%,rgba(120,210,255,.08),transparent 30%),
+    #040404;
 }
 
 .social-word{
-  left:-8%;
+  left:-10%;
   top:16%;
   transform:rotate(-4deg);
 }
@@ -842,26 +1059,36 @@ button{
   position:absolute;
   right:13%;
   top:50%;
-  transform:translateY(-50%) rotate(7deg);
   width:300px;
-  height:610px;
-  border:8px solid #161616;
-  border-radius:42px;
+  height:620px;
+  transform:
+    translateY(-50%)
+    rotate(7deg);
+  border:8px solid #151515;
+  border-radius:44px;
   background:#080808;
-  box-shadow:
-    0 40px 100px rgba(0,0,0,.9),
-    0 0 70px rgba(100,200,255,.06);
   overflow:hidden;
+  box-shadow:
+    0 60px 120px rgba(0,0,0,.8),
+    0 0 80px rgba(120,210,255,.07);
+  transition:transform .7s cubic-bezier(.2,.8,.2,1);
+}
+
+.phone:hover{
+  transform:
+    translateY(-50%)
+    rotate(1deg)
+    scale(1.03);
 }
 
 .phone::before{
   content:"";
   position:absolute;
-  z-index:4;
+  z-index:10;
   top:10px;
   left:50%;
   transform:translateX(-50%);
-  width:100px;
+  width:95px;
   height:20px;
   border-radius:20px;
   background:#000;
@@ -870,34 +1097,52 @@ button{
 .phone-feed{
   position:absolute;
   inset:0;
-  padding:65px 14px 20px;
+  padding:60px 14px 18px;
   display:flex;
   flex-direction:column;
   gap:12px;
+  animation:phoneFeed 12s ease-in-out infinite;
+}
+
+@keyframes phoneFeed{
+  0%,20%{transform:translateY(0)}
+  40%,60%{transform:translateY(-90px)}
+  80%,100%{transform:translateY(0)}
 }
 
 .post{
-  min-height:145px;
-  border:1px solid rgba(255,255,255,.13);
+  min-height:170px;
+  border:1px solid rgba(255,255,255,.14);
   position:relative;
   overflow:hidden;
   background:
-    linear-gradient(140deg,rgba(255,255,255,.1),transparent 50%),
-    #111;
+    linear-gradient(140deg,rgba(255,255,255,.12),transparent 50%),
+    #101010;
 }
 
 .post:nth-child(2){
-  min-height:190px;
+  min-height:210px;
   background:
-    linear-gradient(40deg,rgba(120,220,255,.12),transparent),
+    linear-gradient(140deg,rgba(120,220,255,.12),transparent),
     #101010;
 }
 
 .post:nth-child(3){
-  min-height:160px;
+  min-height:180px;
   background:
-    linear-gradient(140deg,rgba(190,255,0,.09),transparent),
-    #0d0d0d;
+    linear-gradient(140deg,rgba(200,255,50,.1),transparent),
+    #0c0c0c;
+}
+
+.post::before{
+  content:"";
+  position:absolute;
+  width:150%;
+  height:1px;
+  left:-25%;
+  top:50%;
+  background:rgba(255,255,255,.18);
+  transform:rotate(-35deg);
 }
 
 .post-label{
@@ -905,32 +1150,30 @@ button{
   left:14px;
   bottom:12px;
   font:8px monospace;
-  letter-spacing:2px;
   color:#aaa;
-}
-
-.social-copy{
-  margin-left:4%;
+  letter-spacing:2px;
 }
 
 
-/* GROW */
+/* =========================================================
+   GROW
+========================================================= */
 
 .grow{
-  min-height:110vh;
   background:
-    linear-gradient(180deg,#030303,#080808);
+    radial-gradient(circle at 75% 50%,rgba(200,255,50,.05),transparent 30%),
+    #030303;
 }
 
 .grow-word{
-  left:-7%;
-  top:24%;
+  left:-8%;
+  top:22%;
 }
 
 .growth-lines{
   position:absolute;
   right:0;
-  width:55%;
+  width:57%;
   height:70%;
 }
 
@@ -938,109 +1181,143 @@ button{
   position:absolute;
   left:0;
   right:0;
-  border-bottom:1px solid rgba(255,255,255,.13);
+  height:1px;
+  background:rgba(255,255,255,.12);
 }
 
-.growth-line:nth-child(1){top:20%}
-.growth-line:nth-child(2){top:40%}
-.growth-line:nth-child(3){top:60%}
-.growth-line:nth-child(4){top:80%}
+.growth-line:nth-child(1){top:15%}
+.growth-line:nth-child(2){top:35%}
+.growth-line:nth-child(3){top:55%}
+.growth-line:nth-child(4){top:75%}
 
 .growth-arrow{
   position:absolute;
-  width:70%;
-  height:70%;
-  border-top:2px solid #fff;
-  border-right:2px solid #fff;
-  transform:skewY(-28deg) rotate(-12deg);
-  top:15%;
   left:5%;
-  opacity:.7;
+  top:10%;
+  width:75%;
+  height:75%;
+  border-top:2px solid rgba(255,255,255,.7);
+  border-right:2px solid rgba(255,255,255,.7);
+  transform:
+    skewY(-28deg)
+    rotate(-12deg);
 }
 
-.growth-stat{
+.growth-arrow::after{
+  content:"";
   position:absolute;
-  font-size:clamp(45px,8vw,120px);
+  right:-2px;
+  top:-10px;
+  width:20px;
+  height:20px;
+  border-top:2px solid #fff;
+  border-right:2px solid #fff;
+}
+
+.growth-number{
+  position:absolute;
+  right:5%;
+  top:28%;
+  font-size:clamp(60px,10vw,150px);
   font-weight:800;
-  letter-spacing:-.08em;
-  right:8%;
-  top:32%;
+  letter-spacing:-.1em;
 }
 
 .growth-label{
   position:absolute;
-  right:10%;
-  bottom:20%;
-  font-family:monospace;
-  color:#777;
+  right:6%;
+  bottom:12%;
+  font:9px monospace;
   letter-spacing:3px;
-  font-size:10px;
+  color:#666;
 }
 
 
 /* =========================================================
-   ALL SERVICES
+   SERVICES
 ========================================================= */
 
-.services-world{
-  min-height:120vh;
+.services{
+  min-height:130vh;
   position:relative;
   padding:150px 5vw;
   overflow:hidden;
   background:#050505;
 }
 
-.services-title{
-  font-size:clamp(70px,13vw,200px);
-  line-height:.75;
-  letter-spacing:-.09em;
-  font-weight:800;
-  max-width:1100px;
-  position:relative;
-  z-index:3;
+.services-background{
+  position:absolute;
+  font-size:40vw;
+  font-weight:900;
+  line-height:.7;
+  color:#080808;
+  right:-10%;
+  top:10%;
+  letter-spacing:-.15em;
 }
 
-.services-title span{
+.services-head{
+  position:relative;
+  z-index:4;
+}
+
+.services-head small{
+  font:9px monospace;
+  letter-spacing:4px;
+  color:#666;
+}
+
+.services-head h2{
+  margin-top:30px;
+  font-size:clamp(75px,13vw,195px);
+  line-height:.72;
+  letter-spacing:-.1em;
+}
+
+.services-head h2 span{
   color:#555;
 }
 
 .service-cloud{
-  margin-top:120px;
   position:relative;
-  min-height:500px;
+  z-index:5;
+  margin-top:120px;
+  min-height:600px;
 }
 
 .service{
   position:absolute;
-  padding:14px 18px;
+  padding:15px 20px;
   border:1px solid rgba(255,255,255,.17);
+  background:rgba(255,255,255,.025);
+  backdrop-filter:blur(12px);
   font-size:clamp(14px,1.5vw,22px);
   letter-spacing:-.03em;
-  background:rgba(255,255,255,.025);
-  backdrop-filter:blur(10px);
-  transition:.5s;
+  transition:
+    transform .5s cubic-bezier(.2,.8,.2,1),
+    background .3s,
+    color .3s;
 }
 
 .service:hover{
   background:#fff;
   color:#000;
-  transform:scale(1.08)!important;
 }
 
-.s1{left:2%;top:5%;transform:rotate(-5deg)}
+.s1{left:1%;top:4%;transform:rotate(-4deg)}
 .s2{left:28%;top:0;transform:rotate(3deg)}
 .s3{right:4%;top:7%;transform:rotate(-2deg)}
-.s4{left:14%;top:28%;transform:rotate(2deg)}
-.s5{left:43%;top:25%;transform:rotate(-4deg)}
-.s6{right:10%;top:31%;transform:rotate(5deg)}
-.s7{left:3%;top:52%;transform:rotate(4deg)}
-.s8{left:32%;top:51%;transform:rotate(-2deg)}
-.s9{right:3%;top:55%;transform:rotate(-5deg)}
-.s10{left:18%;top:74%;transform:rotate(-3deg)}
-.s11{left:49%;top:73%;transform:rotate(4deg)}
-.s12{right:14%;top:78%;transform:rotate(-2deg)}
-.s13{left:5%;top:92%;transform:rotate(2deg)}
-.s14{right:38%;top:92%;transform:rotate(-4deg)}
+.s4{left:13%;top:25%;transform:rotate(2deg)}
+.s5{left:43%;top:22%;transform:rotate(-3deg)}
+.s6{right:10%;top:29%;transform:rotate(5deg)}
+.s7{left:2%;top:48%;transform:rotate(4deg)}
+.s8{left:32%;top:47%;transform:rotate(-2deg)}
+.s9{right:2%;top:51%;transform:rotate(-5deg)}
+.s10{left:17%;top:70%;transform:rotate(-3deg)}
+.s11{left:48%;top:69%;transform:rotate(4deg)}
+.s12{right:14%;top:76%;transform:rotate(-2deg)}
+.s13{left:5%;top:91%;transform:rotate(2deg)}
+.s14{right:38%;top:91%;transform:rotate(-4deg)}
 
 
 /* =========================================================
@@ -1049,151 +1326,188 @@ button{
 
 .manifesto{
   min-height:100vh;
+  position:relative;
   display:flex;
   align-items:center;
-  justify-content:center;
-  padding:10vw 5vw;
-  position:relative;
   overflow:hidden;
+  padding:120px 5vw;
   background:#020202;
 }
 
-.manifesto-bg{
+.manifesto-watermark{
   position:absolute;
-  font-size:35vw;
+  left:-10%;
+  top:10%;
+  font-size:45vw;
   font-weight:900;
-  color:#080808;
-  letter-spacing:-.12em;
-  white-space:nowrap;
+  color:#070707;
+  letter-spacing:-.15em;
 }
 
 .manifesto-content{
   position:relative;
-  z-index:2;
+  z-index:4;
   width:min(1200px,90vw);
+  margin:auto;
 }
 
-.manifesto-kicker{
-  font-family:monospace;
+.manifesto-label{
+  font:9px monospace;
   color:#666;
   letter-spacing:4px;
-  font-size:10px;
   margin-bottom:35px;
 }
 
 .manifesto-text{
-  font-size:clamp(45px,7vw,105px);
-  line-height:.94;
-  letter-spacing:-.07em;
+  font-size:clamp(50px,7.5vw,115px);
+  line-height:.91;
+  letter-spacing:-.08em;
   font-weight:700;
 }
 
-.manifesto-text .dim{
+.manifesto-text .muted{
   color:#444;
+}
+
+.manifesto-light{
+  position:absolute;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  right:5%;
+  bottom:-20%;
+  background:radial-gradient(circle,rgba(255,255,255,.07),transparent 68%);
+  animation:manifestoLight 8s ease-in-out infinite;
+}
+
+@keyframes manifestoLight{
+  50%{transform:translate(-100px,-100px) scale(1.3)}
 }
 
 
 /* =========================================================
-   INSTAGRAM WORLD
+   INSTAGRAM
 ========================================================= */
 
-.instagram-world{
+.instagram{
   min-height:110vh;
-  padding:130px 5vw;
+  padding:140px 5vw;
   position:relative;
   overflow:hidden;
   background:
-    radial-gradient(circle at 50% 40%,rgba(255,255,255,.05),transparent 35%),
+    radial-gradient(circle at 50% 40%,rgba(255,255,255,.05),transparent 32%),
     #030303;
 }
 
-.instagram-world h2{
-  font-size:clamp(65px,12vw,180px);
-  line-height:.75;
-  letter-spacing:-.09em;
-  font-weight:800;
+.instagram-title{
   position:relative;
-  z-index:3;
+  z-index:5;
+  font-size:clamp(70px,13vw,195px);
+  line-height:.7;
+  letter-spacing:-.1em;
 }
 
-.instagram-world h2 span{
+.instagram-title span{
   color:#555;
 }
 
-.insta-panels{
-  position:absolute;
-  inset:250px 5vw 80px;
+.insta-stage{
+  position:relative;
+  min-height:650px;
+  margin-top:90px;
 }
 
-.insta-panel{
+.insta-card{
   position:absolute;
-  width:280px;
-  height:400px;
-  border:1px solid rgba(255,255,255,.2);
-  background:#080808;
-  padding:14px;
-  transition:.5s;
+  width:290px;
+  height:420px;
+  padding:13px;
+  background:#090909;
+  border:1px solid rgba(255,255,255,.18);
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1),
+    z-index .1s;
 }
 
-.insta-panel:hover{
-  transform:translateY(-25px) rotate(0deg)!important;
+.insta-card:hover{
+  transform:
+    translateY(-35px)
+    rotate(0deg)
+    scale(1.03)!important;
   z-index:10;
 }
 
-.insta-panel:nth-child(1){
-  left:8%;
-  top:10%;
+.insta-card:nth-child(1){
+  left:10%;
+  top:12%;
   transform:rotate(-8deg);
 }
 
-.insta-panel:nth-child(2){
-  left:36%;
+.insta-card:nth-child(2){
+  left:38%;
   top:0;
   transform:rotate(4deg);
 }
 
-.insta-panel:nth-child(3){
-  right:8%;
-  top:12%;
+.insta-card:nth-child(3){
+  right:10%;
+  top:14%;
   transform:rotate(7deg);
 }
 
-.insta-image{
-  width:100%;
-  height:270px;
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.15),transparent 50%),
-    #111;
+.insta-visual{
+  height:285px;
   position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.14),
+      transparent 45%
+    ),
+    #111;
 }
 
-.insta-image::after{
+.insta-visual::before{
+  content:"";
+  position:absolute;
+  width:150%;
+  height:1px;
+  background:rgba(255,255,255,.25);
+  top:50%;
+  left:-25%;
+  transform:rotate(-35deg);
+}
+
+.insta-visual::after{
   content:"SOCIALCLIP";
   position:absolute;
-  left:15px;
-  bottom:15px;
-  font-size:18px;
+  left:16px;
+  bottom:16px;
+  font-size:20px;
   font-weight:800;
+  letter-spacing:-.05em;
 }
 
 .insta-info{
-  padding-top:16px;
-  font:9px/1.8 monospace;
+  padding:16px 4px;
   color:#777;
+  font:8px/1.8 monospace;
+  letter-spacing:1px;
 }
 
-.insta-button{
+.instagram-button{
   position:absolute;
-  bottom:70px;
   left:5vw;
+  bottom:70px;
   border:1px solid #555;
-  padding:17px 24px;
-  font-size:10px;
+  padding:18px 25px;
+  font:9px monospace;
   letter-spacing:3px;
-  transition:.3s;
+  transition:.35s;
 }
 
-.insta-button:hover{
+.instagram-button:hover{
   background:#fff;
   color:#000;
 }
@@ -1205,43 +1519,58 @@ button{
 
 .final{
   min-height:100vh;
+  position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  position:relative;
   overflow:hidden;
   background:
-    radial-gradient(circle at 50% 50%,rgba(255,255,255,.08),transparent 30%),
+    radial-gradient(circle at center,rgba(255,255,255,.08),transparent 30%),
     #020202;
 }
 
-.final-lines{
+.final-grid{
   position:absolute;
-  inset:0;
-  background:
-    linear-gradient(90deg,transparent 49.9%,rgba(255,255,255,.08) 50%,transparent 50.1%),
-    linear-gradient(0deg,transparent 49.9%,rgba(255,255,255,.08) 50%,transparent 50.1%);
-  background-size:100% 100%;
+  inset:-30%;
+  opacity:.12;
+  background-image:
+    linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
+  background-size:100px 100px;
+  transform:perspective(700px) rotateX(60deg);
+}
+
+.final-light{
+  position:absolute;
+  width:600px;
+  height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.1),transparent 68%);
+  animation:finalPulse 6s ease-in-out infinite;
+}
+
+@keyframes finalPulse{
+  50%{transform:scale(1.4);opacity:.6}
 }
 
 .final-content{
   position:relative;
-  z-index:2;
+  z-index:5;
 }
 
-.final-small{
-  font:10px monospace;
+.final-label{
+  font:9px monospace;
+  color:#666;
   letter-spacing:4px;
-  color:#777;
   margin-bottom:35px;
 }
 
 .final-title{
-  font-size:clamp(65px,13vw,210px);
-  font-weight:800;
+  font-size:clamp(70px,13vw,210px);
   line-height:.72;
-  letter-spacing:-.09em;
+  letter-spacing:-.1em;
+  font-weight:800;
 }
 
 .final-title span{
@@ -1250,15 +1579,15 @@ button{
 
 .final-title .outline{
   color:transparent;
-  -webkit-text-stroke:1px rgba(255,255,255,.55);
+  -webkit-text-stroke:1px rgba(255,255,255,.5);
 }
 
 .final-button{
   display:inline-block;
   margin-top:65px;
-  border:1px solid rgba(255,255,255,.4);
-  padding:20px 35px;
-  font-size:10px;
+  padding:20px 32px;
+  border:1px solid rgba(255,255,255,.35);
+  font:9px monospace;
   letter-spacing:4px;
   transition:.35s;
 }
@@ -1275,9 +1604,8 @@ button{
 
 .contact{
   min-height:100vh;
-  padding:140px 5vw;
+  padding:150px 5vw;
   background:#050505;
-  position:relative;
 }
 
 .contact-inner{
@@ -1286,32 +1614,32 @@ button{
 }
 
 .contact-label{
-  font:10px monospace;
-  letter-spacing:4px;
+  font:9px monospace;
   color:#666;
+  letter-spacing:4px;
   margin-bottom:35px;
 }
 
-.contact h2{
-  font-size:clamp(60px,11vw,170px);
-  line-height:.75;
-  letter-spacing:-.09em;
-  margin-bottom:100px;
+.contact-title{
+  font-size:clamp(70px,12vw,180px);
+  line-height:.7;
+  letter-spacing:-.1em;
+  margin-bottom:110px;
 }
 
 .contact-form{
-  max-width:850px;
+  width:min(850px,100%);
 }
 
 .form-row{
-  border-bottom:1px solid rgba(255,255,255,.18);
+  border-bottom:1px solid rgba(255,255,255,.17);
   padding:25px 0;
 }
 
 .form-row input,
 .form-row textarea{
   width:100%;
-  background:transparent;
+  background:none;
   border:0;
   outline:0;
   color:#fff;
@@ -1320,7 +1648,7 @@ button{
 }
 
 .form-row textarea{
-  min-height:140px;
+  min-height:150px;
   resize:vertical;
 }
 
@@ -1329,19 +1657,19 @@ button{
   color:#555;
 }
 
-.form-submit{
+.submit{
   margin-top:35px;
+  padding:18px 27px;
   border:1px solid #555;
-  background:transparent;
   color:#fff;
-  padding:18px 28px;
+  background:transparent;
   cursor:pointer;
+  font:9px monospace;
   letter-spacing:3px;
-  font-size:10px;
-  transition:.3s;
+  transition:.35s;
 }
 
-.form-submit:hover{
+.submit:hover{
   background:#fff;
   color:#000;
 }
@@ -1352,12 +1680,12 @@ button{
 ========================================================= */
 
 footer{
-  padding:35px 5vw;
+  padding:30px 5vw;
   border-top:1px solid var(--line);
   display:flex;
   justify-content:space-between;
   color:#555;
-  font:9px monospace;
+  font:8px monospace;
   letter-spacing:2px;
 }
 
@@ -1381,24 +1709,48 @@ footer{
 
 
 /* =========================================================
-   RESPONSIVE
+   MOBILE
 ========================================================= */
 
 @media(max-width:900px){
+
+  .cursor-light{
+    display:none;
+  }
 
   .nav{
     padding:20px;
   }
 
-  .nav-right{
-    gap:12px;
+  .nav-links{
+    gap:14px;
   }
 
-  .nav-right a:nth-child(2){
+  .nav-links a:nth-child(2){
     display:none;
   }
 
+  .intro-ring{
+    width:430px;
+    height:430px;
+  }
+
+  .intro-light{
+    width:450px;
+    height:450px;
+  }
+
+  .intro-title{
+    font-size:13vw;
+  }
+
+  .intro-message{
+    font-size:13px;
+    padding:0 20px;
+  }
+
   .hero{
+    min-height:750px;
     padding:0 20px 50px;
   }
 
@@ -1407,12 +1759,17 @@ footer{
     white-space:normal;
   }
 
-  .hero-title .second{
+  .hero-title .two{
     margin-left:10vw;
   }
 
-  .hero-bottom{
+  .hero-title .three{
+    margin-left:2vw;
+  }
+
+  .hero-sub{
     display:block;
+    margin-top:45px;
   }
 
   .hero-description{
@@ -1420,40 +1777,35 @@ footer{
     max-width:340px;
   }
 
-  .scroll-indicator{
+  .scroll-note{
     margin-top:30px;
   }
 
   .scene{
-    min-height:900px;
+    min-height:950px;
   }
 
   .scene-inner{
     width:90vw;
+    min-height:950px;
     display:block;
-    padding-top:160px;
+    padding-top:145px;
   }
 
   .scene-copy{
     width:100%;
-    position:relative;
-    z-index:10;
-  }
-
-  .scene-copy p{
-    max-width:320px;
   }
 
   .scene-word{
-    font-size:28vw;
-    top:45%;
+    font-size:29vw;
+    top:44%;
   }
 
   .create-items{
-    width:100%;
-    right:auto;
     left:0;
-    top:48%;
+    right:auto;
+    top:49%;
+    width:100%;
     height:420px;
   }
 
@@ -1464,47 +1816,50 @@ footer{
   .create-item:nth-child(1){top:0;left:0}
   .create-item:nth-child(2){top:22%;left:20%}
   .create-item:nth-child(3){top:44%;left:0}
-  .create-item:nth-child(4){top:66%;left:25%}
+  .create-item:nth-child(4){top:66%;left:20%}
   .create-item:nth-child(5){top:88%;left:5%}
 
   .browser{
-    width:92vw;
+    width:94vw;
     height:330px;
-    right:4%;
+    right:3%;
     top:67%;
-    transform:perspective(1000px) rotateY(-4deg) rotateX(3deg);
+    transform:
+      perspective(900px)
+      rotateY(-5deg)
+      rotateX(3deg);
   }
 
-  .fake-site-title{
-    font-size:40px;
+  .browser-title{
+    font-size:38px;
     left:20px;
-    top:30px;
+    top:28px;
   }
 
-  .fake-line{
-    left:20px;
-    right:20px;
-  }
-
-  .fl1{top:120px}
-  .fl2{top:170px}
-  .fl3{top:220px}
-
-  .fake-square{
+  .browser-orbit{
     width:100px;
     height:100px;
     right:20px;
     top:30px;
   }
 
-  .code-lines{
+  .browser-line{
+    left:20px;
+    right:20px;
+  }
+
+  .browser-line:nth-child(1){top:130px}
+  .browser-line:nth-child(2){top:175px}
+  .browser-line:nth-child(3){top:220px}
+
+  .browser-code{
     left:20px;
   }
 
   .media-frames{
     width:100%;
     right:0;
-    top:50%;
+    top:53%;
     height:400px;
   }
 
@@ -1513,6 +1868,7 @@ footer{
   }
 
   .media-frame:nth-child(2){
+    height:350px;
     transform:translateY(-30px);
   }
 
@@ -1521,127 +1877,124 @@ footer{
   }
 
   .phone{
-    right:8%;
-    top:68%;
     width:220px;
-    height:450px;
+    height:455px;
+    right:7%;
+    top:68%;
   }
 
   .post{
     min-height:100px!important;
   }
 
-  .social-copy{
-    margin-left:0;
-  }
-
   .growth-lines{
-    width:90%;
-    right:5%;
-    top:48%;
+    width:92%;
+    right:4%;
+    top:50%;
   }
 
-  .growth-stat{
-    top:55%;
-    right:8%;
+  .growth-number{
+    top:57%;
+    right:7%;
   }
 
   .growth-label{
     bottom:7%;
-    right:8%;
   }
 
-  .services-world{
+  .services{
     padding:100px 20px;
   }
 
-  .services-title{
+  .services-head h2{
     font-size:20vw;
   }
 
   .service-cloud{
-    min-height:800px;
+    min-height:820px;
   }
 
   .service{
-    font-size:13px;
+    font-size:12px;
+    padding:12px 14px;
   }
 
   .s1{left:0;top:3%}
-  .s2{left:25%;top:10%}
+  .s2{left:27%;top:10%}
   .s3{right:0;top:18%}
-  .s4{left:8%;top:27%}
-  .s5{left:40%;top:34%}
+  .s4{left:5%;top:27%}
+  .s5{left:38%;top:34%}
   .s6{right:0;top:43%}
-  .s7{left:0;top:50%}
-  .s8{left:30%;top:58%}
+  .s7{left:0;top:51%}
+  .s8{left:29%;top:58%}
   .s9{right:0;top:66%}
-  .s10{left:5%;top:73%}
-  .s11{left:42%;top:80%}
+  .s10{left:4%;top:74%}
+  .s11{left:40%;top:81%}
   .s12{right:0;top:87%}
-  .s13{left:5%;top:93%}
+  .s13{left:3%;top:94%}
   .s14{display:none}
 
   .manifesto{
-    min-height:800px;
+    min-height:850px;
   }
 
   .manifesto-text{
     font-size:12vw;
   }
 
-  .instagram-world{
-    min-height:950px;
+  .instagram{
+    min-height:1000px;
     padding:100px 20px;
   }
 
-  .instagram-world h2{
-    font-size:19vw;
+  .instagram-title{
+    font-size:20vw;
   }
 
-  .insta-panels{
-    inset:330px 20px 80px;
+  .insta-stage{
+    min-height:600px;
   }
 
-  .insta-panel{
+  .insta-card{
     width:210px;
-    height:300px;
+    height:310px;
   }
 
-  .insta-panel:nth-child(1){
+  .insta-card:nth-child(1){
     left:0;
-    top:10%;
+    top:15%;
   }
 
-  .insta-panel:nth-child(2){
+  .insta-card:nth-child(2){
     left:25%;
     top:0;
   }
 
-  .insta-panel:nth-child(3){
+  .insta-card:nth-child(3){
     right:0;
-    top:17%;
+    top:20%;
   }
 
-  .insta-image{
-    height:190px;
+  .insta-visual{
+    height:200px;
   }
 
-  .insta-button{
-    bottom:45px;
+  .instagram-button{
     left:20px;
+    bottom:40px;
   }
 
   .final-title{
-    font-size:19vw;
+    font-size:20vw;
   }
 
   .contact{
     padding:100px 20px;
   }
 
-  .contact h2{
-    font-size:19vw;
+  .contact-title{
+    font-size:20vw;
+    margin-bottom:80px;
   }
 
   footer{
@@ -1649,131 +2002,126 @@ footer{
     display:block;
     line-height:2;
   }
-
-  .system-top{
-    margin-bottom:25px;
-  }
-
-  .ai-terminal{
-    padding-left:15px;
-  }
-
-  .terminal-main{
-    font-size:12vw;
-  }
-
-  .intro-corner{
-    display:none;
-  }
 }
 
 @media(prefers-reduced-motion:reduce){
+
   *,
   *::before,
   *::after{
     animation-duration:.01ms!important;
     animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
     transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
   }
 }
 </style>
 </head>
 
+
 <body class="locked">
 
-<!-- ======================================================
-     AI INTRO
-====================================================== -->
+<div class="cursor-light" id="cursorLight"></div>
+
+
+<!-- =====================================================
+     SANFTER KI-INTRO
+===================================================== -->
 
 <section id="intro">
 
-  <div class="intro-grid"></div>
-  <div class="intro-scan"></div>
-  <div class="intro-noise"></div>
+  <div class="intro-light"></div>
+  <div class="intro-ring"></div>
+  <div class="intro-lines"></div>
+  <div class="intro-sweep"></div>
 
-  <div class="intro-corner ic1">SC-001 / DIGITAL SYSTEM</div>
-  <div class="intro-corner ic2">ONLINE</div>
-  <div class="intro-corner ic3">SOCIALCLIP / ART & MEDIA</div>
-  <div class="intro-corner ic4">2026</div>
+  <div class="intro-stars">
+    <span class="star" style="left:12%;top:20%;animation-delay:0s"></span>
+    <span class="star" style="left:24%;top:70%;animation-delay:1s"></span>
+    <span class="star" style="left:38%;top:17%;animation-delay:2s"></span>
+    <span class="star" style="left:57%;top:25%;animation-delay:3s"></span>
+    <span class="star" style="left:71%;top:68%;animation-delay:1.5s"></span>
+    <span class="star" style="left:87%;top:31%;animation-delay:2.5s"></span>
+    <span class="star" style="left:79%;top:84%;animation-delay:4s"></span>
+  </div>
 
-  <div class="intro-core">
+  <div class="intro-content">
 
-    <div class="system-top">
-      <div>SOCIALCLIP // INTELLIGENCE INTERFACE</div>
-      <div class="status">
-        <span class="status-dot"></span>
-        SYSTEM ONLINE
-      </div>
+    <div class="intro-mini">
+      <span>ART</span>
+      <span>MEDIA</span>
+      <span>DIGITAL</span>
     </div>
 
-    <div class="ai-terminal">
+    <div class="intro-title">
 
-      <div class="terminal-line" id="line1">
-        &gt; INITIALIZING DIGITAL ENVIRONMENT...
+      <div class="line">
+        <span class="word">Hallo.</span>
       </div>
 
-      <div class="terminal-line" id="line2">
-        &gt; SEARCHING FOR CREATIVE SIGNAL...
+      <div class="line">
+        <span class="word">Schön, dass du hier bist.</span>
       </div>
-
-      <div class="terminal-line" id="line3">
-        &gt; SIGNAL FOUND.
-      </div>
-
-      <div class="terminal-main">
-        <span id="typedTitle"></span><span class="cursor"></span>
-      </div>
-
-      <div class="ai-message">
-        <span id="typedMessage"></span>
-      </div>
-
-      <button class="enter-world" id="enterWorld">
-        <span>↳ DIGITALE WELT BETRETEN</span>
-      </button>
 
     </div>
+
+    <div class="intro-message" id="introMessage"></div>
+
+    <button class="intro-button" id="enterWorld">
+      <span>DIGITALE WELT BETRETEN</span>
+      <span class="arrow">→</span>
+    </button>
 
   </div>
+
 </section>
 
 
-<!-- ======================================================
-     TRANSITION
-====================================================== -->
+<!-- =====================================================
+     FILMISCHE ÜBERBLENDUNG
+===================================================== -->
 
 <div id="transition">
 
-  <div class="transition-lines">
-    <div class="t-line"></div>
-    <div class="t-line"></div>
-    <div class="t-line"></div>
-    <div class="t-line"></div>
-    <div class="t-line"></div>
-  </div>
+  <div class="transition-glow"></div>
 
-  <div class="transition-text" id="transitionText">
-    ENTERING SOCIALCLIP
+  <div
+    class="transition-bar"
+  ></div>
+
+  <div
+    class="transition-bar"
+  ></div>
+
+  <div
+    class="transition-bar"
+  ></div>
+
+  <div class="transition-name">
+    SOCIALCLIP
   </div>
 
 </div>
 
 
-<!-- ======================================================
+<!-- =====================================================
      WEBSITE
-====================================================== -->
+===================================================== -->
 
 <div id="site">
 
   <nav class="nav">
-    <a href="#top" class="logo">SOCIALCLIP</a>
 
-    <div class="nav-right">
-      <a href="#world">WORLD</a>
-      <a href="#services">SERVICES</a>
-      <a href="#contact">CONTACT</a>
+    <a href="#top" class="logo">
+      SOCIALCLIP
+    </a>
+
+    <div class="nav-links">
+      <a href="#world">WELT</a>
+      <a href="#services">LEISTUNGEN</a>
+      <a href="#contact">KONTAKT</a>
     </div>
+
   </nav>
 
 
@@ -1782,35 +2130,54 @@ footer{
   <section class="hero" id="top">
 
     <div class="hero-grid"></div>
-    <div class="hero-light"></div>
-    <div class="hero-light two"></div>
 
-    <div class="hero-label">
-      ART / MEDIA / DIGITAL / ERLANGEN
+    <div class="hero-glow"></div>
+
+    <div class="hero-streak"></div>
+    <div class="hero-streak two"></div>
+
+    <div class="particles">
+
+      <span class="particle" style="left:10%;top:30%;animation-delay:0s"></span>
+      <span class="particle" style="left:20%;top:65%;animation-delay:1s"></span>
+      <span class="particle" style="left:34%;top:20%;animation-delay:2s"></span>
+      <span class="particle" style="left:48%;top:75%;animation-delay:3s"></span>
+      <span class="particle" style="left:65%;top:30%;animation-delay:1.5s"></span>
+      <span class="particle" style="left:82%;top:70%;animation-delay:2.5s"></span>
+      <span class="particle" style="left:91%;top:20%;animation-delay:4s"></span>
+
+    </div>
+
+    <div class="hero-meta">
+      SOCIALCLIP / DIGITALE WELT / 001
     </div>
 
     <div class="hero-content">
 
-      <div class="hero-small">
-        SOCIALCLIP DIGITAL ENVIRONMENT / 001
+      <div class="hero-kicker">
+        ART · MEDIA · DIGITAL
       </div>
 
       <h1 class="hero-title">
+
         <span>IDEAS</span>
-        <span class="second">INTO</span>
-        <span>IMPACT.</span>
+
+        <span class="two">INTO</span>
+
+        <span class="three">IMPACT.</span>
+
       </h1>
 
-      <div class="hero-bottom">
+      <div class="hero-sub">
 
         <p class="hero-description">
-          Wir bauen digitale Erlebnisse, Marken, Inhalte und
-          Systeme für Menschen, die nicht einfach sichtbar sein
-          wollen — sondern im Kopf bleiben.
+          Wir verwandeln Ideen in digitale Erlebnisse,
+          starke Marken, Content und Strategien,
+          die Menschen erreichen und im Kopf bleiben.
         </p>
 
-        <div class="scroll-indicator">
-          SCROLL TO EXPLORE ↓
+        <div class="scroll-note">
+          SCROLLEN, UM DIE WELT ZU ENTDECKEN ↓
         </div>
 
       </div>
@@ -1823,7 +2190,9 @@ footer{
   <!-- MARQUEE -->
 
   <div class="marquee">
+
     <div class="marquee-track">
+
       <span>DESIGN</span>
       <span class="dot">✦</span>
       <span>DIGITAL</span>
@@ -1832,7 +2201,9 @@ footer{
       <span class="dot">✦</span>
       <span>MEDIA</span>
       <span class="dot">✦</span>
-      <span>GROWTH</span>
+      <span>MARKETING</span>
+      <span class="dot">✦</span>
+      <span>STRATEGIE</span>
       <span class="dot">✦</span>
 
       <span>DESIGN</span>
@@ -1843,21 +2214,30 @@ footer{
       <span class="dot">✦</span>
       <span>MEDIA</span>
       <span class="dot">✦</span>
-      <span>GROWTH</span>
+      <span>MARKETING</span>
       <span class="dot">✦</span>
+      <span>STRATEGIE</span>
+      <span class="dot">✦</span>
+
     </div>
+
   </div>
 
 
   <main id="world">
 
-    <!-- CREATE -->
+
+    <!-- =================================================
+         CREATE
+    ================================================== -->
 
     <section class="scene create">
 
       <div class="scene-inner">
 
-        <div class="scene-number">02 / CREATE</div>
+        <div class="scene-number">
+          01 / KREATION
+        </div>
 
         <div class="scene-word create-word">
           CREATE
@@ -1865,29 +2245,45 @@ footer{
 
         <div class="scene-copy reveal">
 
-          <div class="scene-tag">VISUAL IDENTITY</div>
+          <div class="scene-tag">
+            DESIGN & IDENTITÄT
+          </div>
 
           <h2>
-            MAKE<br>
-            IT<br>
-            YOURS.
+            MACH<br>
+            ES<br>
+            DEINS.
           </h2>
 
           <p>
-            Eine Marke beginnt nicht mit einem Logo.
-            Sie beginnt mit einer Idee. Wir machen daraus
-            eine visuelle Identität, die sich richtig anfühlt.
+            Logos, Flyer, Visitenkarten, Speisekarten
+            und Lebensläufe. Aus einer Idee wird eine
+            visuelle Identität, die zu dir passt.
           </p>
 
         </div>
 
         <div class="create-items">
 
-          <div class="create-item">LOGO</div>
-          <div class="create-item">FLYER</div>
-          <div class="create-item">VISITENKARTE</div>
-          <div class="create-item">SPEISEKARTE</div>
-          <div class="create-item">LEBENSLAUF</div>
+          <div class="create-item">
+            LOGO
+          </div>
+
+          <div class="create-item">
+            FLYER
+          </div>
+
+          <div class="create-item">
+            VISITENKARTE
+          </div>
+
+          <div class="create-item">
+            SPEISEKARTE
+          </div>
+
+          <div class="create-item">
+            LEBENSLAUF
+          </div>
 
         </div>
 
@@ -1896,13 +2292,17 @@ footer{
     </section>
 
 
-    <!-- DIGITAL -->
+    <!-- =================================================
+         DIGITAL
+    ================================================== -->
 
     <section class="scene digital">
 
       <div class="scene-inner">
 
-        <div class="scene-number">03 / DIGITAL</div>
+        <div class="scene-number">
+          02 / DIGITAL
+        </div>
 
         <div class="scene-word digital-word outline">
           DIGITAL
@@ -1910,18 +2310,20 @@ footer{
 
         <div class="scene-copy reveal">
 
-          <div class="scene-tag">DIGITAL SYSTEMS</div>
+          <div class="scene-tag">
+            WEB & PROGRAMMIERUNG
+          </div>
 
           <h2>
-            BUILD<br>
-            THE<br>
-            FUTURE.
+            DEINE<br>
+            IDEE.<br>
+            ONLINE.
           </h2>
 
           <p>
-            Webseiten, Programmierung und digitale
-            Assistenten. Nicht einfach online stellen.
-            Eine digitale Umgebung bauen.
+            Webseiten, Programmierung und virtuelle
+            Assistenten. Wir bauen digitale Erlebnisse,
+            die mehr können als nur gut aussehen.
           </p>
 
         </div>
@@ -1929,35 +2331,37 @@ footer{
         <div class="browser">
 
           <div class="browser-top">
+
             <span class="browser-dot"></span>
             <span class="browser-dot"></span>
             <span class="browser-dot"></span>
 
-            <div class="browser-address">
-              socialclip.digital / system
+            <div class="browser-url">
+              deine-idee.de / willkommen
             </div>
+
           </div>
 
           <div class="browser-screen">
 
-            <div class="fake-site-title">
+            <div class="browser-title">
               YOUR<br>
               DIGITAL<br>
               WORLD.
             </div>
 
-            <div class="fake-square"></div>
+            <div class="browser-orbit"></div>
 
-            <div class="fake-line fl1"></div>
-            <div class="fake-line fl2"></div>
-            <div class="fake-line fl3"></div>
+            <div class="browser-line"></div>
+            <div class="browser-line"></div>
+            <div class="browser-line"></div>
 
-            <div class="code-lines">
-              &lt;experience&gt;<br>
-              &nbsp;&nbsp;design.system();<br>
-              &nbsp;&nbsp;create.impact();<br>
-              &nbsp;&nbsp;launch.world();<br>
-              &lt;/experience&gt;
+            <div class="browser-code">
+              &lt;idee&gt;<br>
+              &nbsp;&nbsp;design();<br>
+              &nbsp;&nbsp;create();<br>
+              &nbsp;&nbsp;experience();<br>
+              &lt;/idee&gt;
             </div>
 
           </div>
@@ -1969,13 +2373,17 @@ footer{
     </section>
 
 
-    <!-- MEDIA -->
+    <!-- =================================================
+         MEDIA
+    ================================================== -->
 
     <section class="scene media">
 
       <div class="scene-inner">
 
-        <div class="scene-number">04 / MEDIA</div>
+        <div class="scene-number">
+          03 / MEDIA
+        </div>
 
         <div class="scene-word media-word">
           MEDIA
@@ -1983,18 +2391,20 @@ footer{
 
         <div class="scene-copy reveal">
 
-          <div class="scene-tag">VIDEO / PHOTO / EDIT</div>
+          <div class="scene-tag">
+            VIDEO · PHOTO · EDITING
+          </div>
 
           <h2>
-            FREEZE<br>
-            THE<br>
-            MOMENT.
+            HALTE<br>
+            MOMENTE<br>
+            FEST.
           </h2>
 
           <p>
-            Bewegtbild, Fotografie und Editing.
-            Wir geben deinem Content Rhythmus,
-            Energie und eine eigene Sprache.
+            Video, Fotografie und Editing für Inhalte,
+            die nicht nach fünf Sekunden vergessen
+            werden.
           </p>
 
         </div>
@@ -2012,31 +2422,39 @@ footer{
     </section>
 
 
-    <!-- SOCIAL -->
+    <!-- =================================================
+         SOCIAL
+    ================================================== -->
 
     <section class="scene social">
 
       <div class="scene-inner">
 
-        <div class="scene-number">05 / SOCIAL</div>
+        <div class="scene-number">
+          04 / SOCIAL
+        </div>
 
         <div class="scene-word social-word outline">
           SOCIAL
         </div>
 
-        <div class="scene-copy social-copy reveal">
+        <div class="scene-copy reveal">
 
-          <div class="scene-tag">SOCIAL MEDIA ENVIRONMENT</div>
+          <div class="scene-tag">
+            SOCIAL MEDIA
+          </div>
 
           <h2>
-            BE<br>
-            EVERYWHERE.
+            SEI<br>
+            DORT,<br>
+            WO MENSCHEN SIND.
           </h2>
 
           <p>
             Social Media Assistant, TikTok Marketing
-            und digitale Kommunikation. Inhalte sollen
-            nicht nur gepostet werden. Sie sollen leben.
+            und digitale Kommunikation.
+            Deine Marke soll nicht nur online sein —
+            sie soll stattfinden.
           </p>
 
         </div>
@@ -2046,15 +2464,21 @@ footer{
           <div class="phone-feed">
 
             <div class="post">
-              <div class="post-label">SOCIALCLIP / 001</div>
+              <div class="post-label">
+                SOCIALCLIP / 001
+              </div>
             </div>
 
             <div class="post">
-              <div class="post-label">CREATE / SHARE / MOVE</div>
+              <div class="post-label">
+                DESIGN / SOCIAL / MEDIA
+              </div>
             </div>
 
             <div class="post">
-              <div class="post-label">DIGITAL CULTURE</div>
+              <div class="post-label">
+                CREATE SOMETHING
+              </div>
             </div>
 
           </div>
@@ -2066,13 +2490,17 @@ footer{
     </section>
 
 
-    <!-- GROW -->
+    <!-- =================================================
+         GROW
+    ================================================== -->
 
     <section class="scene grow">
 
       <div class="scene-inner">
 
-        <div class="scene-number">06 / GROW</div>
+        <div class="scene-number">
+          05 / WACHSTUM
+        </div>
 
         <div class="scene-word grow-word">
           GROW
@@ -2080,18 +2508,20 @@ footer{
 
         <div class="scene-copy reveal">
 
-          <div class="scene-tag">MARKETING / STRATEGY</div>
+          <div class="scene-tag">
+            MARKETING & STRATEGIE
+          </div>
 
           <h2>
-            TURN<br>
-            ATTENTION<br>
-            INTO GROWTH.
+            AUS<br>
+            AUFMERKSAMKEIT<br>
+            WIRD WACHSTUM.
           </h2>
 
           <p>
-            Online Marketing, Strategieentwicklung
-            und Neukundengewinnung. Kreativität bekommt
-            eine Richtung.
+            Online Marketing, Neukundengewinnung
+            und Strategieentwicklung.
+            Kreativität bekommt eine Richtung.
           </p>
 
         </div>
@@ -2105,12 +2535,12 @@ footer{
 
           <div class="growth-arrow"></div>
 
-          <div class="growth-stat">
+          <div class="growth-number">
             +∞
           </div>
 
           <div class="growth-label">
-            STRATEGY / MOTION / GROWTH
+            IDEE · STRATEGIE · WACHSTUM
           </div>
 
         </div>
@@ -2119,64 +2549,136 @@ footer{
 
     </section>
 
+
   </main>
 
 
-  <!-- ALL SERVICES -->
+  <!-- =================================================
+       ALLE LEISTUNGEN
+  ================================================== -->
 
-  <section class="services-world" id="services">
+  <section class="services" id="services">
 
-    <div class="services-title reveal">
-      ONE<br>
-      <span>WORLD.</span><br>
-      MANY<br>
-      <span>IDEAS.</span>
+    <div class="services-background">
+      SC
+    </div>
+
+    <div class="services-head reveal">
+
+      <small>
+        SOCIALCLIP / WAS WIR MACHEN
+      </small>
+
+      <h2>
+        VIELE<br>
+        <span>IDEEN.</span><br>
+        EINE<br>
+        <span>WELT.</span>
+      </h2>
+
     </div>
 
     <div class="service-cloud">
 
-      <div class="service s1">Webseiten erstellen</div>
-      <div class="service s2">Flyer erstellen</div>
-      <div class="service s3">Online Marketing</div>
-      <div class="service s4">Visitenkarten erstellen</div>
-      <div class="service s5">Social Media Assistant</div>
-      <div class="service s6">Logo erstellen</div>
-      <div class="service s7">Video & Photo Editor</div>
-      <div class="service s8">Lebenslauf erstellen</div>
-      <div class="service s9">Speisekarte erstellen</div>
-      <div class="service s10">Virtueller Assistent</div>
-      <div class="service s11">Programmierung</div>
-      <div class="service s12">Neukundengewinnung</div>
-      <div class="service s13">Strategieentwicklung</div>
-      <div class="service s14">TikTok Marketing</div>
+      <div class="service s1">
+        Webseiten erstellen
+      </div>
+
+      <div class="service s2">
+        Flyer erstellen
+      </div>
+
+      <div class="service s3">
+        Online Marketing
+      </div>
+
+      <div class="service s4">
+        Visitenkarten erstellen
+      </div>
+
+      <div class="service s5">
+        Social Media Assistant
+      </div>
+
+      <div class="service s6">
+        Logo erstellen
+      </div>
+
+      <div class="service s7">
+        Video & Photo Editor
+      </div>
+
+      <div class="service s8">
+        Lebenslauf erstellen
+      </div>
+
+      <div class="service s9">
+        Speisekarte erstellen
+      </div>
+
+      <div class="service s10">
+        Virtueller Assistent
+      </div>
+
+      <div class="service s11">
+        Programmierung
+      </div>
+
+      <div class="service s12">
+        Neukundengewinnung
+      </div>
+
+      <div class="service s13">
+        Strategieentwicklung
+      </div>
+
+      <div class="service s14">
+        TikTok Marketing
+      </div>
 
     </div>
 
   </section>
 
 
-  <!-- MANIFESTO -->
+  <!-- =================================================
+       MANIFEST
+  ================================================== -->
 
   <section class="manifesto">
 
-    <div class="manifesto-bg">
+    <div class="manifesto-watermark">
       SC
     </div>
 
+    <div class="manifesto-light"></div>
+
     <div class="manifesto-content reveal">
 
-      <div class="manifesto-kicker">
-        SOCIALCLIP / PHILOSOPHY
+      <div class="manifesto-label">
+        UNSERE IDEE DAHINTER
       </div>
 
       <div class="manifesto-text">
-        WE DON'T<br>
-        <span class="dim">MAKE THINGS</span><br>
-        LOOK GOOD.<br>
-        <br>
-        WE MAKE<br>
-        <span class="dim">PEOPLE</span><br>
-        REMEMBER.
+
+        WIR MACHEN<br>
+
+        <span class="muted">
+          NICHT NUR
+        </span>
+
+        SACHEN SCHÖN.
+
+        <br><br>
+
+        WIR MACHEN<br>
+
+        <span class="muted">
+          IDEEN
+        </span>
+
+        SICHTBAR.
+
       </div>
 
     </div>
@@ -2184,75 +2686,107 @@ footer{
   </section>
 
 
-  <!-- INSTAGRAM -->
+  <!-- =================================================
+       INSTAGRAM
+  ================================================== -->
 
-  <section class="instagram-world">
+  <section class="instagram">
 
-    <h2>
+    <div class="instagram-title">
+
       SOCIAL<br>
+
       <span>IN MOTION.</span>
-    </h2>
 
-    <div class="insta-panels">
+    </div>
 
-      <div class="insta-panel">
-        <div class="insta-image"></div>
+    <div class="insta-stage">
+
+      <div class="insta-card">
+
+        <div class="insta-visual"></div>
+
         <div class="insta-info">
           SOCIALCLIP.ART<br>
-          DESIGN / MEDIA
+          DESIGN · MEDIA · DIGITAL
         </div>
+
       </div>
 
-      <div class="insta-panel">
-        <div class="insta-image"></div>
+
+      <div class="insta-card">
+
+        <div class="insta-visual"></div>
+
         <div class="insta-info">
           CREATE SOMETHING<br>
           PEOPLE REMEMBER.
         </div>
+
       </div>
 
-      <div class="insta-panel">
-        <div class="insta-image"></div>
+
+      <div class="insta-card">
+
+        <div class="insta-visual"></div>
+
         <div class="insta-info">
           DIGITAL CULTURE<br>
-          ART / MEDIA / DIGITAL
+          ART · MEDIA · DIGITAL
         </div>
+
       </div>
 
     </div>
 
     <a
-      class="insta-button"
+      class="instagram-button"
       href="https://www.instagram.com/socialclip.art/"
       target="_blank"
       rel="noopener"
     >
-      OPEN INSTAGRAM ↗
+      INSTAGRAM ÖFFNEN ↗
     </a>
 
   </section>
 
 
-  <!-- FINAL -->
+  <!-- =================================================
+       FINAL
+  ================================================== -->
 
   <section class="final">
 
-    <div class="final-lines"></div>
+    <div class="final-grid"></div>
+    <div class="final-light"></div>
 
     <div class="final-content reveal">
 
-      <div class="final-small">
-        SYSTEM READY / YOUR IDEA IS WAITING
+      <div class="final-label">
+        DEINE IDEE IST BEREIT
       </div>
 
       <div class="final-title">
-        <span>MAKE</span>
-        <span class="outline">SOMETHING</span>
-        <span>REAL.</span>
+
+        <span>
+          MACH
+        </span>
+
+        <span class="outline">
+          ETWAS
+        </span>
+
+        <span>
+          ECHTES.
+        </span>
+
       </div>
 
-      <a href="#contact" class="final-button">
-        START A PROJECT
+      <a
+        href="#contact"
+        class="final-button"
+      >
+        PROJEKT STARTEN →
       </a>
 
     </div>
@@ -2260,20 +2794,23 @@ footer{
   </section>
 
 
-  <!-- CONTACT -->
+  <!-- =================================================
+       KONTAKT
+  ================================================== -->
 
   <section class="contact" id="contact">
 
     <div class="contact-inner">
 
       <div class="contact-label">
-        SOCIALCLIP / START A PROJECT
+        SOCIALCLIP / KONTAKT
       </div>
 
-      <h2>
-        LET'S<br>
-        CREATE.
-      </h2>
+      <div class="contact-title">
+        LASS UNS<br>
+        ETWAS<br>
+        ERSCHAFFEN.
+      </div>
 
       <form
         class="contact-form"
@@ -2282,40 +2819,51 @@ footer{
       >
 
         <div class="form-row">
+
           <input
             type="text"
             name="name"
             placeholder="DEIN NAME"
             required
           >
+
         </div>
 
         <div class="form-row">
+
           <input
             type="email"
             name="email"
             placeholder="DEINE E-MAIL"
             required
           >
+
         </div>
 
         <div class="form-row">
+
           <input
             type="text"
             name="project"
             placeholder="WORUM GEHT ES?"
           >
+
         </div>
 
         <div class="form-row">
+
           <textarea
             name="message"
             placeholder="ERZÄHL UNS VON DEINER IDEE..."
           ></textarea>
+
         </div>
 
-        <button class="form-submit" type="submit">
-          MESSAGE SENDEN ↗
+        <button
+          class="submit"
+          type="submit"
+        >
+          NACHRICHT SENDEN ↗
         </button>
 
       </form>
@@ -2326,9 +2874,19 @@ footer{
 
 
   <footer>
-    <div>© SOCIALCLIP ART & MEDIA</div>
-    <div>ERLANGEN / GERMANY</div>
-    <div>ART · MEDIA · DIGITAL</div>
+
+    <div>
+      © SOCIALCLIP ART & MEDIA
+    </div>
+
+    <div>
+      ERLANGEN · GERMANY
+    </div>
+
+    <div>
+      ART · MEDIA · DIGITAL
+    </div>
+
   </footer>
 
 </div>
@@ -2337,81 +2895,40 @@ footer{
 <script>
 
 /* =========================================================
-   AI INTRO TYPING SYSTEM
+   EINSTIEGSTEXT
 ========================================================= */
 
-const sleep = ms =>
-  new Promise(resolve => setTimeout(resolve, ms));
+const introMessage =
+  document.getElementById("introMessage");
 
-const typeText = async (element, text, speed = 45) => {
+const introText =
+  "Wir haben eine digitale Welt für dich vorbereitet.";
 
-  element.textContent = "";
+let introIndex = 0;
 
-  for(let i = 0; i < text.length; i++){
+function typeIntro(){
 
-    element.textContent += text[i];
+  if(introIndex < introText.length){
 
-    await sleep(speed);
+    introMessage.textContent +=
+      introText.charAt(introIndex);
+
+    introIndex++;
+
+    setTimeout(typeIntro,35);
 
   }
 
-};
-
-
-async function startIntro(){
-
-  const line1 = document.getElementById("line1");
-  const line2 = document.getElementById("line2");
-  const line3 = document.getElementById("line3");
-
-  const title = document.getElementById("typedTitle");
-  const message = document.getElementById("typedMessage");
-
-  await sleep(600);
-
-  line1.classList.add("show");
-
-  await sleep(850);
-
-  line2.classList.add("show");
-
-  await sleep(850);
-
-  line3.classList.add("show");
-
-  await sleep(500);
-
-  await typeText(
-    title,
-    "WILLKOMMEN BEI SOCIALCLIP.",
-    55
-  );
-
-  await sleep(500);
-
-  await typeText(
-    message,
-    "Ich habe eine digitale Welt für dich vorbereitet.",
-    32
-  );
-
-  await sleep(700);
-
-  document
-    .getElementById("enterWorld")
-    .classList.add("ready");
-
 }
 
-
-startIntro();
+setTimeout(typeIntro,2400);
 
 
 /* =========================================================
-   ENTER DIGITAL WORLD
+   INTRO → WEBSITE
 ========================================================= */
 
-const enterButton =
+const enterWorld =
   document.getElementById("enterWorld");
 
 const intro =
@@ -2423,38 +2940,23 @@ const transition =
 const site =
   document.getElementById("site");
 
-const transitionText =
-  document.getElementById("transitionText");
+enterWorld.addEventListener("click", async () => {
 
-
-enterButton.addEventListener("click", async () => {
-
-  enterButton.disabled = true;
+  enterWorld.disabled = true;
 
   document.body.classList.remove("locked");
 
   transition.classList.add("active");
 
-  transitionText.textContent =
-    "CONNECTING TO SOCIALCLIP...";
-
-  await sleep(700);
-
-  transitionText.textContent =
-    "DIGITAL ENVIRONMENT LOADING...";
-
-  await sleep(700);
-
-  transitionText.textContent =
-    "WELCOME.";
+  await wait(800);
 
   intro.classList.add("hide");
 
-  await sleep(500);
+  await wait(600);
 
   site.classList.add("live");
 
-  await sleep(900);
+  await wait(1000);
 
   transition.classList.remove("active");
 
@@ -2463,14 +2965,21 @@ enterButton.addEventListener("click", async () => {
 });
 
 
+function wait(ms){
+  return new Promise(resolve =>
+    setTimeout(resolve,ms)
+  );
+}
+
+
 /* =========================================================
-   REVEAL ON SCROLL
+   REVEAL
 ========================================================= */
 
-const revealElements =
+const revealItems =
   document.querySelectorAll(".reveal");
 
-const revealObserver =
+const observer =
   new IntersectionObserver(
     entries => {
 
@@ -2490,10 +2999,27 @@ const revealObserver =
     }
   );
 
-
-revealElements.forEach(el =>
-  revealObserver.observe(el)
+revealItems.forEach(item =>
+  observer.observe(item)
 );
+
+
+/* =========================================================
+   MAUS-LICHT
+========================================================= */
+
+const cursorLight =
+  document.getElementById("cursorLight");
+
+window.addEventListener("mousemove", event => {
+
+  cursorLight.style.left =
+    event.clientX + "px";
+
+  cursorLight.style.top =
+    event.clientY + "px";
+
+});
 
 
 /* =========================================================
@@ -2506,59 +3032,61 @@ const heroTitle =
 const heroGrid =
   document.querySelector(".hero-grid");
 
-const heroLight =
-  document.querySelector(".hero-light");
+const sceneWords =
+  document.querySelectorAll(".scene-word");
 
-const heroLightTwo =
-  document.querySelector(".hero-light.two");
+let scrollTicking = false;
 
-let ticking = false;
+function updateScroll(){
 
-
-function updateParallax(){
-
-  const y = window.scrollY;
+  const scrollY =
+    window.scrollY;
 
   if(heroTitle){
 
     heroTitle.style.transform =
-      `translate3d(${-y * .045}px,${y * .08}px,0)`;
+      `translate3d(${-scrollY*.045}px,${scrollY*.055}px,0)`;
 
   }
 
   if(heroGrid){
 
     heroGrid.style.transform =
-      `perspective(900px) rotateX(58deg) translateY(${y * .12}px)`;
+      `perspective(900px)
+       rotateX(60deg)
+       translateY(${scrollY*.12}px)`;
 
   }
 
-  if(heroLight){
+  sceneWords.forEach((word,index) => {
 
-    heroLight.style.transform =
-      `translateX(${y * .25}px) rotate(-25deg)`;
+    const rect =
+      word.parentElement.getBoundingClientRect();
 
-  }
+    const distance =
+      window.innerHeight/2 -
+      (rect.top + rect.height/2);
 
-  if(heroLightTwo){
+    const movement =
+      distance * (.05 + index*.008);
 
-    heroLightTwo.style.transform =
-      `translateX(${-y * .18}px) rotate(18deg)`;
+    word.style.transform =
+      `translateX(${movement}px)
+       rotate(${index % 2 === 0 ? -5 : 5}deg)`;
 
-  }
+  });
 
-  ticking = false;
+  scrollTicking = false;
 
 }
 
+window.addEventListener("scroll",() => {
 
-window.addEventListener("scroll", () => {
+  if(!scrollTicking){
 
-  if(!ticking){
+    requestAnimationFrame(updateScroll);
 
-    requestAnimationFrame(updateParallax);
-
-    ticking = true;
+    scrollTicking = true;
 
   }
 
@@ -2566,49 +3094,16 @@ window.addEventListener("scroll", () => {
 
 
 /* =========================================================
-   MOUSE MOVEMENT
-========================================================= */
-
-let mouseX = 0;
-let mouseY = 0;
-
-window.addEventListener("mousemove", e => {
-
-  mouseX =
-    (e.clientX / window.innerWidth - .5);
-
-  mouseY =
-    (e.clientY / window.innerHeight - .5);
-
-  document
-    .querySelectorAll(".browser,.phone,.media-frame")
-    .forEach((el,index) => {
-
-      const strength =
-        (index + 1) * 5;
-
-      el.style.marginLeft =
-        `${mouseX * strength}px`;
-
-      el.style.marginTop =
-        `${mouseY * strength}px`;
-
-    });
-
-});
-
-
-/* =========================================================
-   SERVICE FLOATING MOVEMENT
+   SERVICE FLOAT
 ========================================================= */
 
 const services =
   document.querySelectorAll(".service");
 
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll",() => {
 
-  const viewportCenter =
-    window.innerHeight / 2;
+  const center =
+    window.innerHeight/2;
 
   services.forEach((service,index) => {
 
@@ -2616,15 +3111,16 @@ window.addEventListener("scroll", () => {
       service.getBoundingClientRect();
 
     const distance =
-      rect.top - viewportCenter;
+      rect.top-center;
 
-    if(Math.abs(distance) < window.innerHeight){
+    if(Math.abs(distance)<window.innerHeight){
 
-      const movement =
-        distance * (index % 2 === 0 ? -.025 : .025);
+      const move =
+        distance *
+        (index%2===0 ? -.018 : .018);
 
       service.style.marginLeft =
-        `${movement}px`;
+        `${move}px`;
 
     }
 
@@ -2634,7 +3130,42 @@ window.addEventListener("scroll", () => {
 
 
 /* =========================================================
-   CONTACT FORM FEEDBACK
+   MOUSE PARALLAX AUF GROSSEN ELEMENTEN
+========================================================= */
+
+const interactive =
+  document.querySelectorAll(
+    ".browser,.phone,.media-frame,.insta-card"
+  );
+
+window.addEventListener("mousemove",event => {
+
+  const x =
+    event.clientX/window.innerWidth-.5;
+
+  const y =
+    event.clientY/window.innerHeight-.5;
+
+  interactive.forEach((element,index) => {
+
+    if(window.innerWidth < 900) return;
+
+    const amount =
+      4 + index%3*2;
+
+    element.style.marginLeft =
+      `${x*amount}px`;
+
+    element.style.marginTop =
+      `${y*amount}px`;
+
+  });
+
+});
+
+
+/* =========================================================
+   KONTAKT BUTTON
 ========================================================= */
 
 const form =
@@ -2642,13 +3173,13 @@ const form =
 
 if(form){
 
-  form.addEventListener("submit", () => {
+  form.addEventListener("submit",() => {
 
     const button =
-      form.querySelector(".form-submit");
+      form.querySelector(".submit");
 
     button.textContent =
-      "SENDING...";
+      "NACHRICHT WIRD GESENDET...";
 
   });
 
