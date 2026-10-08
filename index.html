@@ -8,7 +8,7 @@
 
 <meta
   name="description"
-  content="SocialClip Art & Media — Design, Webseiten, Social Media, Marketing, Video, Programmierung und digitale Lösungen."
+  content="SocialClip Art & Media — Design, Digital, Social Media, Marketing und kreative digitale Lösungen."
 >
 
 <style>
@@ -28,8 +28,8 @@ html{
 }
 
 body{
-  background:#020202;
-  color:#f4f1e9;
+  background:#030303;
+  color:#f4f0e8;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
 }
@@ -39,22 +39,16 @@ a{
   text-decoration:none;
 }
 
-button,
-input,
-textarea{
-  font-family:inherit;
-}
-
 
 /* =========================================================
    VARIABLES
 ========================================================= */
 
 :root{
-  --black:#020202;
-  --white:#f4f1e9;
+  --black:#030303;
   --gold:#c9ae7a;
-  --gray:#77736c;
+  --white:#f4f0e8;
+  --muted:#77736b;
 }
 
 
@@ -66,10 +60,13 @@ textarea{
   position:fixed;
   inset:0;
   z-index:9999;
+
   background:#000;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   overflow:hidden;
 
   transition:
@@ -85,26 +82,26 @@ textarea{
 
 .intro-light{
   position:absolute;
+
   width:55vw;
   height:55vw;
-  max-width:800px;
-  max-height:800px;
+
   border-radius:50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(201,174,122,.22),
-      rgba(201,174,122,.08) 25%,
+      rgba(201,174,122,.23),
+      rgba(201,174,122,.07) 28%,
       transparent 68%
     );
 
-  filter:blur(35px);
+  filter:blur(40px);
 
-  animation:introLight 5s ease-in-out infinite;
+  animation:introGlow 5s ease-in-out infinite;
 }
 
-@keyframes introLight{
+@keyframes introGlow{
 
   0%,100%{
     transform:scale(.8);
@@ -120,15 +117,15 @@ textarea{
 
 .intro-ring{
   position:absolute;
+
   width:52vw;
   height:52vw;
-  max-width:720px;
-  max-height:720px;
 
   border:1px solid rgba(255,255,255,.08);
+
   border-radius:50%;
 
-  animation:ringSpin 18s linear infinite;
+  animation:introSpin 18s linear infinite;
 }
 
 .intro-ring:nth-child(2){
@@ -145,7 +142,7 @@ textarea{
   animation-duration:25s;
 }
 
-@keyframes ringSpin{
+@keyframes introSpin{
   to{
     transform:rotate(360deg);
   }
@@ -160,9 +157,8 @@ textarea{
 .intro-welcome{
   font-size:12px;
   letter-spacing:7px;
-  text-transform:uppercase;
   color:#aaa;
-  margin-bottom:25px;
+  text-transform:uppercase;
 
   opacity:0;
 
@@ -170,9 +166,14 @@ textarea{
 }
 
 .intro-logo{
+  margin-top:25px;
+
   font-size:clamp(52px,11vw,150px);
+
   line-height:.8;
+
   font-weight:900;
+
   letter-spacing:-7px;
 
   opacity:0;
@@ -186,9 +187,13 @@ textarea{
 
 .intro-sub{
   margin-top:30px;
+
   font-size:11px;
+
   letter-spacing:8px;
+
   color:#777;
+
   text-transform:uppercase;
 
   opacity:0;
@@ -199,8 +204,10 @@ textarea{
 .intro-line{
   width:0;
   height:1px;
-  background:var(--gold);
+
   margin:35px auto 0;
+
+  background:var(--gold);
 
   animation:introLine 1.8s 1.3s forwards;
 }
@@ -220,11 +227,9 @@ textarea{
 }
 
 @keyframes introLine{
-
   to{
     width:100px;
   }
-
 }
 
 
@@ -234,10 +239,12 @@ textarea{
 
 .nav{
   position:fixed;
+
   top:0;
   left:0;
+
   width:100%;
-  height:82px;
+  height:80px;
 
   padding:0 5vw;
 
@@ -245,45 +252,49 @@ textarea{
   align-items:center;
   justify-content:space-between;
 
-  z-index:200;
+  z-index:500;
 
   mix-blend-mode:difference;
 }
 
-.nav-logo{
+.logo{
   font-size:15px;
   font-weight:800;
   letter-spacing:3px;
 }
 
-.nav-logo span{
+.logo span{
   color:var(--gold);
 }
 
-.nav-right{
+.nav-links{
   display:flex;
   gap:28px;
 }
 
-.nav-right a{
-  font-size:10px;
-  text-transform:uppercase;
+.nav-links a{
+  font-size:9px;
   letter-spacing:3px;
-  opacity:.7;
+  text-transform:uppercase;
+  opacity:.75;
 }
 
 
 /* =========================================================
-   MAIN EXPERIENCE
+   MACHINE EXPERIENCE
 ========================================================= */
 
-.experience{
+.machine{
   position:relative;
-  height:1100vh;
+
+  height:1250vh;
+
+  background:#030303;
 }
 
-.world{
+.stage{
   position:sticky;
+
   top:0;
 
   width:100%;
@@ -291,79 +302,117 @@ textarea{
 
   overflow:hidden;
 
-  background:#030303;
+  perspective:1600px;
 
-  perspective:1400px;
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(201,174,122,.08),
+      transparent 28%
+    );
 }
 
 
 /* =========================================================
-   BACKGROUND
+   ATMOSPHERE
 ========================================================= */
 
-.world-bg{
+.noise{
   position:absolute;
-  inset:-25%;
+  inset:0;
 
-  background:
+  opacity:.05;
 
+  pointer-events:none;
+
+  background-image:
     radial-gradient(
-      ellipse at 50% 45%,
-      rgba(201,174,122,.13),
-      transparent 23%
-    ),
-
-    radial-gradient(
-      ellipse at 10% 50%,
-      rgba(255,255,255,.04),
-      transparent 30%
-    ),
-
-    radial-gradient(
-      ellipse at 90% 40%,
-      rgba(255,255,255,.04),
-      transparent 30%
+      rgba(255,255,255,.7) 1px,
+      transparent 1px
     );
+
+  background-size:5px 5px;
 }
 
-.grid{
+.light{
   position:absolute;
-  inset:-50%;
 
-  opacity:.16;
+  width:50vw;
+  height:50vw;
+
+  border-radius:50%;
+
+  filter:blur(80px);
+
+  opacity:.25;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(201,174,122,.3),
+      transparent 65%
+    );
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+}
+
+
+/* =========================================================
+   GRID FLOOR
+========================================================= */
+
+.floor{
+  position:absolute;
+
+  left:-30%;
+  right:-30%;
+  bottom:-35%;
+
+  height:75%;
 
   background-image:
     linear-gradient(
-      rgba(255,255,255,.05) 1px,
+      rgba(255,255,255,.055) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(255,255,255,.05) 1px,
+      rgba(255,255,255,.055) 1px,
       transparent 1px
     );
 
-  background-size:80px 80px;
+  background-size:75px 75px;
 
   transform:
     perspective(500px)
-    rotateX(68deg)
-    translateY(25%);
+    rotateX(72deg);
+
+  opacity:.15;
+
+  mask-image:
+    linear-gradient(
+      to top,
+      black,
+      transparent 90%
+    );
 }
 
 
 /* =========================================================
-   HUGE CORE
+   MACHINE CORE
 ========================================================= */
 
-.core-stage{
+.core-wrap{
   position:absolute;
-
-  width:min(78vw,1100px);
-  height:min(78vw,1100px);
 
   left:50%;
   top:50%;
+
+  width:min(42vw,650px);
+  aspect-ratio:1;
 
   transform:
     translate(-50%,-50%);
@@ -375,92 +424,75 @@ textarea{
   position:absolute;
 
   width:65%;
-  height:22%;
+  height:15%;
 
   left:17%;
-  bottom:4%;
+  bottom:5%;
 
   background:#000;
 
-  filter:blur(55px);
-
-  opacity:.8;
-
-  transform:rotateX(75deg);
+  filter:blur(45px);
 }
 
 .core{
   position:absolute;
 
-  width:63%;
-  height:63%;
+  inset:15%;
 
-  left:18.5%;
-  top:18.5%;
-
-  border-radius:48% 52% 43% 57% / 55% 42% 58% 45%;
+  border-radius:50%;
 
   background:
 
     radial-gradient(
-      circle at 28% 20%,
-      rgba(255,255,255,.95),
-      transparent 7%
+      circle at 32% 28%,
+      rgba(255,255,255,.9),
+      transparent 5%
     ),
 
     radial-gradient(
-      circle at 32% 25%,
-      rgba(255,255,255,.25),
+      circle at 35% 30%,
+      rgba(255,255,255,.2),
       transparent 20%
     ),
 
     radial-gradient(
-      circle at 62% 70%,
-      rgba(201,174,122,.45),
+      circle at 65% 70%,
+      rgba(201,174,122,.5),
       transparent 25%
     ),
 
-    radial-gradient(
-      circle at 38% 42%,
-      #555,
-      #171717 45%,
-      #030303 78%
+    linear-gradient(
+      135deg,
+      #777,
+      #222 40%,
+      #050505 80%
     );
 
   box-shadow:
 
-    inset 22px 20px 60px rgba(255,255,255,.13),
+    inset 15px 20px 40px rgba(255,255,255,.15),
 
-    inset -35px -45px 80px rgba(0,0,0,.95),
+    inset -25px -30px 60px #000,
 
-    0 0 80px rgba(201,174,122,.13);
+    0 0 80px rgba(201,174,122,.15);
 
-  animation:coreFloat 7s ease-in-out infinite;
+  transform-style:preserve-3d;
 }
 
 .core::before{
   content:"";
 
   position:absolute;
-  inset:4%;
+  inset:-5%;
 
-  border-radius:inherit;
+  border-radius:50%;
 
-  background:
-    conic-gradient(
-      from 40deg,
-      transparent,
-      rgba(255,255,255,.18),
-      transparent 20%,
-      rgba(201,174,122,.25),
-      transparent 45%,
-      rgba(255,255,255,.1),
-      transparent 75%
-    );
+  border:
+    1px solid
+    rgba(201,174,122,.5);
 
-  filter:blur(2px);
-
-  mix-blend-mode:screen;
+  box-shadow:
+    0 0 35px rgba(201,174,122,.12);
 }
 
 .core::after{
@@ -469,106 +501,337 @@ textarea{
   position:absolute;
 
   width:30%;
-  height:18%;
+  height:15%;
 
-  top:13%;
-  left:18%;
+  top:17%;
+  left:20%;
 
   border-radius:50%;
 
-  background:rgba(255,255,255,.22);
+  background:rgba(255,255,255,.18);
 
-  filter:blur(25px);
+  filter:blur(18px);
 
   transform:rotate(-25deg);
 }
 
-@keyframes coreFloat{
-
-  0%,100%{
-    margin-top:-10px;
-  }
-
-  50%{
-    margin-top:15px;
-  }
-
-}
-
 
 /* =========================================================
-   ORBITS
+   CORE RINGS
 ========================================================= */
 
-.orbits{
-  position:absolute;
-  inset:-12%;
-
-  transform-style:preserve-3d;
-}
-
-.orbit{
+.ring{
   position:absolute;
 
   left:50%;
   top:50%;
 
-  border:1px solid rgba(255,255,255,.11);
-
   border-radius:50%;
+
+  border:1px solid rgba(255,255,255,.13);
+
+  transform-style:preserve-3d;
 }
 
-.orbit.one{
-  width:105%;
+.ring-a{
+  width:110%;
   height:40%;
 
   transform:
     translate(-50%,-50%)
-    rotateX(72deg)
-    rotateZ(15deg);
+    rotateX(72deg);
 }
 
-.orbit.two{
-  width:90%;
+.ring-b{
+  width:80%;
+  height:115%;
+
+  transform:
+    translate(-50%,-50%)
+    rotateY(65deg);
+}
+
+.ring-c{
+  width:125%;
   height:65%;
 
-  transform:
-    translate(-50%,-50%)
-    rotateY(67deg)
-    rotateZ(-25deg);
-}
-
-.orbit.three{
-  width:125%;
-  height:52%;
-
-  border-color:rgba(201,174,122,.12);
+  border-color:rgba(201,174,122,.18);
 
   transform:
     translate(-50%,-50%)
-    rotateX(62deg)
-    rotateZ(-48deg);
-}
-
-.orbit.four{
-  width:72%;
-  height:110%;
-
-  transform:
-    translate(-50%,-50%)
-    rotateY(68deg)
-    rotateZ(42deg);
+    rotateZ(35deg)
+    rotateX(60deg);
 }
 
 
 /* =========================================================
-   GIANT BACKGROUND WORDS
+   CORE CENTER
 ========================================================= */
 
-.giant-word{
+.core-label{
   position:absolute;
 
-  font-size:clamp(100px,18vw,300px);
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  text-align:center;
+
+  z-index:10;
+
+  pointer-events:none;
+}
+
+.core-label small{
+  display:block;
+
+  font-size:8px;
+
+  letter-spacing:5px;
+
+  color:#999;
+
+  margin-bottom:14px;
+}
+
+.core-label strong{
+  font-size:clamp(32px,5vw,70px);
+
+  letter-spacing:-4px;
+
+  font-weight:900;
+}
+
+.core-label strong span{
+  color:var(--gold);
+}
+
+
+/* =========================================================
+   SERVICE ORBITS
+========================================================= */
+
+.service-field{
+  position:absolute;
+
+  inset:0;
+
+  z-index:100;
+
+  pointer-events:none;
+}
+
+
+/* =========================================================
+   SERVICE ITEM
+========================================================= */
+
+.service-item{
+  position:absolute;
+
+  width:190px;
+
+  opacity:0;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.55);
+
+  transition:
+    opacity .6s,
+    transform 1s cubic-bezier(.16,1,.3,1);
+}
+
+.service-item.active{
+  opacity:1;
+
+  transform:
+    translate(-50%,-50%)
+    scale(1);
+}
+
+.service-item-inner{
+  position:relative;
+
+  padding:18px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.06),
+      rgba(255,255,255,.015)
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  backdrop-filter:blur(14px);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.35);
+}
+
+.service-item-inner::before{
+  content:"";
+
+  position:absolute;
+
+  left:-1px;
+  top:20px;
+
+  width:3px;
+  height:35px;
+
+  background:var(--gold);
+}
+
+.service-index{
+  font-size:8px;
+
+  color:var(--gold);
+
+  letter-spacing:3px;
+
+  margin-bottom:10px;
+}
+
+.service-name{
+  font-size:15px;
+
+  font-weight:700;
+
+  letter-spacing:.5px;
+
+  text-transform:uppercase;
+}
+
+.service-category{
+  margin-top:8px;
+
+  font-size:7px;
+
+  color:#777;
+
+  letter-spacing:2px;
+}
+
+
+/* =========================================================
+   SERVICE POSITIONS
+========================================================= */
+
+.s1{
+  left:17%;
+  top:30%;
+}
+
+.s2{
+  left:13%;
+  top:58%;
+}
+
+.s3{
+  left:28%;
+  top:76%;
+}
+
+.s4{
+  left:50%;
+  top:88%;
+}
+
+.s5{
+  right:11%;
+  top:72%;
+}
+
+.s6{
+  right:8%;
+  top:42%;
+}
+
+.s7{
+  right:17%;
+  top:20%;
+}
+
+.s8{
+  left:50%;
+  top:12%;
+}
+
+.s9{
+  left:28%;
+  top:16%;
+}
+
+.s10{
+  right:27%;
+  top:10%;
+}
+
+.s11{
+  right:7%;
+  top:58%;
+}
+
+.s12{
+  left:7%;
+  top:45%;
+}
+
+.s13{
+  left:36%;
+  top:93%;
+}
+
+.s14{
+  right:34%;
+  top:92%;
+}
+
+
+/* =========================================================
+   CONNECTING LINES
+========================================================= */
+
+.connection{
+  position:absolute;
+
+  height:1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(201,174,122,.5),
+      transparent
+    );
+
+  transform-origin:left center;
+
+  opacity:0;
+
+  transition:opacity .6s;
+}
+
+.connection.active{
+  opacity:1;
+}
+
+
+/* =========================================================
+   HUGE CATEGORY WORD
+========================================================= */
+
+.category-word{
+  position:absolute;
+
+  z-index:20;
+
+  font-size:clamp(100px,17vw,280px);
 
   font-weight:900;
 
@@ -581,262 +844,170 @@ textarea{
   color:rgba(255,255,255,.035);
 
   pointer-events:none;
+
+  transition:
+    opacity .8s,
+    transform 1.2s;
 }
 
-.giant-create{
-  left:-8vw;
+.category-word.create{
+  left:-10vw;
   top:10%;
 }
 
-.giant-digital{
-  right:-15vw;
-  top:32%;
+.category-word.digital{
+  right:-17vw;
+  top:30%;
 }
 
-.giant-social{
-  left:-15vw;
-  bottom:25%;
+.category-word.media{
+  left:-16vw;
+  bottom:23%;
 }
 
-.giant-grow{
-  right:-8vw;
-  bottom:8%;
+.category-word.grow{
+  right:-10vw;
+  bottom:5%;
 }
 
 
 /* =========================================================
-   SERVICE EXPERIENCE
+   PHASE TITLE
 ========================================================= */
 
-.service-scene{
+.phase-title{
+  position:absolute;
+
+  z-index:150;
+
+  left:50%;
+  top:12%;
+
+  transform:translateX(-50%);
+
+  text-align:center;
+
+  opacity:0;
+
+  transition:opacity .8s;
+}
+
+.phase-title.visible{
+  opacity:1;
+}
+
+.phase-title small{
+  font-size:8px;
+
+  letter-spacing:6px;
+
+  color:var(--gold);
+
+  text-transform:uppercase;
+}
+
+.phase-title h2{
+  margin-top:12px;
+
+  font-size:clamp(30px,5vw,65px);
+
+  letter-spacing:-3px;
+}
+
+
+/* =========================================================
+   INSTAGRAM MOMENT
+========================================================= */
+
+.instagram-moment{
   position:absolute;
 
   inset:0;
 
-  z-index:50;
+  z-index:300;
 
   display:flex;
 
   align-items:center;
   justify-content:center;
 
-  pointer-events:none;
-
   opacity:0;
 
-  transition:opacity .5s ease;
+  pointer-events:none;
+
+  transition:opacity 1s;
 }
 
-.service-scene.visible{
+.instagram-moment.active{
   opacity:1;
 }
 
-
-/* =========================================================
-   SERVICE BIG NUMBER
-========================================================= */
-
-.service-number-big{
+.instagram-copy{
   position:absolute;
 
-  left:5vw;
-  top:50%;
+  left:10%;
 
-  transform:translateY(-50%);
-
-  font-size:clamp(100px,20vw,300px);
-
-  font-weight:900;
-
-  line-height:.7;
-
-  color:rgba(255,255,255,.035);
-
-  letter-spacing:-15px;
+  max-width:400px;
 }
 
+.instagram-copy small{
+  font-size:8px;
 
-/* =========================================================
-   SERVICE CONTENT
-========================================================= */
+  letter-spacing:5px;
 
-.service-content{
-  position:relative;
-
-  width:min(1100px,90vw);
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  text-align:center;
-
-  transform:translateY(50px);
-
-  transition:
-    transform 1s cubic-bezier(.16,1,.3,1);
-}
-
-.service-scene.visible .service-content{
-  transform:translateY(0);
-}
-
-.service-category{
-  font-size:9px;
-
-  letter-spacing:7px;
-
-  color:var(--gold);
-
-  text-transform:uppercase;
-
-  margin-bottom:22px;
-}
-
-.service-main-title{
-  font-size:clamp(55px,10vw,150px);
-
-  line-height:.82;
-
-  letter-spacing:-8px;
-
-  font-weight:900;
-
-  text-transform:uppercase;
-}
-
-.service-main-title span{
   color:var(--gold);
 }
 
-.service-description{
-  max-width:560px;
+.instagram-copy h2{
+  margin-top:20px;
 
-  margin-top:28px;
+  font-size:clamp(45px,7vw,100px);
 
-  font-size:13px;
+  line-height:.85;
 
-  line-height:1.7;
+  letter-spacing:-6px;
+}
+
+.instagram-copy p{
+  margin-top:25px;
 
   color:#777;
+
+  font-size:12px;
+
+  line-height:1.7;
+}
+
+.instagram-link{
+  display:inline-block;
+
+  margin-top:25px;
+
+  padding:13px 20px;
+
+  border:1px solid #444;
+
+  font-size:8px;
+
+  letter-spacing:3px;
+
+  pointer-events:auto;
 }
 
 
 /* =========================================================
-   INDIVIDUAL SERVICE WORDS
-========================================================= */
-
-.service-cloud{
-  position:relative;
-
-  width:min(1000px,90vw);
-
-  height:180px;
-
-  margin-top:45px;
-}
-
-.service-word{
-  position:absolute;
-
-  padding:13px 18px;
-
-  border:1px solid rgba(255,255,255,.15);
-
-  background:rgba(0,0,0,.3);
-
-  backdrop-filter:blur(10px);
-
-  font-size:10px;
-
-  letter-spacing:2px;
-
-  text-transform:uppercase;
-
-  color:#ddd;
-
-  transition:
-    transform .8s cubic-bezier(.16,1,.3,1),
-    border-color .5s;
-}
-
-.service-word:hover{
-  border-color:var(--gold);
-}
-
-.sw1{
-  left:2%;
-  top:20px;
-  transform:rotate(-7deg);
-}
-
-.sw2{
-  left:23%;
-  top:90px;
-  transform:rotate(4deg);
-}
-
-.sw3{
-  left:43%;
-  top:5px;
-  transform:rotate(-3deg);
-}
-
-.sw4{
-  right:22%;
-  top:88px;
-  transform:rotate(5deg);
-}
-
-.sw5{
-  right:2%;
-  top:15px;
-  transform:rotate(-6deg);
-}
-
-
-/* =========================================================
-   14 SERVICE SCENES
-========================================================= */
-
-#scene1{}
-#scene2{}
-#scene3{}
-#scene4{}
-#scene5{}
-#scene6{}
-#scene7{}
-#scene8{}
-#scene9{}
-#scene10{}
-#scene11{}
-#scene12{}
-#scene13{}
-#scene14{}
-
-
-/* =========================================================
-   INSTAGRAM PHONE
+   PHONE
 ========================================================= */
 
 .phone{
-  position:absolute;
-
-  z-index:70;
-
-  width:min(260px,25vw);
-  height:min(520px,50vw);
-
-  right:9%;
-  top:50%;
+  width:250px;
+  height:500px;
 
   border:7px solid #111;
 
   border-radius:38px;
 
-  background:#080808;
+  background:#090909;
 
   box-shadow:
     0 40px 100px rgba(0,0,0,.8),
@@ -844,27 +1015,17 @@ textarea{
 
   overflow:hidden;
 
-  opacity:0;
-
   transform:
-    translateY(-50%)
-    translateX(150px)
-    rotate(9deg)
-    scale(.8);
+    rotate(7deg)
+    translateY(40px);
 
-  transition:
-    opacity 1s,
-    transform 1.2s cubic-bezier(.16,1,.3,1);
+  transition:transform 1.3s cubic-bezier(.16,1,.3,1);
 }
 
-.phone.active{
-  opacity:1;
-
+.instagram-moment.active .phone{
   transform:
-    translateY(-50%)
-    translateX(0)
-    rotate(4deg)
-    scale(1);
+    rotate(3deg)
+    translateY(0);
 }
 
 .phone-top{
@@ -882,100 +1043,88 @@ textarea{
   letter-spacing:2px;
 }
 
-.phone-feed{
+.feed{
   height:calc(100% - 45px);
 
   overflow:hidden;
 }
 
 .post{
-  height:210px;
-
-  position:relative;
-
-  overflow:hidden;
+  height:205px;
 
   border-bottom:1px solid #222;
+
+  position:relative;
 }
 
 .post:nth-child(1){
   background:
     radial-gradient(
-      circle at 40% 30%,
+      circle at 35% 30%,
       #c9ae7a,
       transparent 12%
     ),
-    radial-gradient(
-      circle at 70% 70%,
-      #444,
-      transparent 30%
-    ),
     linear-gradient(
       135deg,
-      #101010,
-      #2c2c2c
+      #111,
+      #3a3a3a
     );
 }
 
 .post:nth-child(2){
   background:
     radial-gradient(
-      circle at 30% 30%,
-      #eee,
-      transparent 7%
-    ),
-    radial-gradient(
-      circle at 70% 60%,
-      #777,
-      transparent 25%
+      circle at 65% 45%,
+      #aaa,
+      transparent 16%
     ),
     linear-gradient(
-      140deg,
-      #151515,
-      #050505
+      45deg,
+      #080808,
+      #333
     );
 }
 
 .post:nth-child(3){
   background:
     radial-gradient(
-      circle at 60% 35%,
+      circle at 50% 35%,
       #c9ae7a,
-      transparent 8%
+      transparent 9%
     ),
     linear-gradient(
-      45deg,
-      #333,
-      #090909
+      135deg,
+      #222,
+      #050505
     );
 }
 
-.post-content{
+.post-text{
   position:absolute;
 
   left:18px;
   bottom:18px;
 }
 
-.post-content strong{
-  font-size:17px;
+.post-text strong{
+  font-size:16px;
 }
 
-.post-content span{
+.post-text span{
   display:block;
 
   margin-top:5px;
 
   font-size:7px;
 
-  letter-spacing:2px;
-
   color:#aaa;
+
+  letter-spacing:2px;
 }
 
 
 /* =========================================================
-   FINAL SCENE
+   FINAL
 ========================================================= */
 
 .final{
@@ -983,7 +1132,7 @@ textarea{
 
   inset:0;
 
-  z-index:100;
+  z-index:450;
 
   display:flex;
 
@@ -994,25 +1143,28 @@ textarea{
 
   opacity:0;
 
-  transform:scale(.9);
+  transform:scale(.92);
 
   pointer-events:none;
 
   transition:
-    opacity 1s,
-    transform 1.2s;
+    opacity 1.2s,
+    transform 1.4s;
 
   background:
     radial-gradient(
-      circle at center,
-      rgba(201,174,122,.08),
+      circle,
+      rgba(201,174,122,.1),
       transparent 45%
     );
 }
 
 .final.active{
   opacity:1;
+
   transform:scale(1);
+
+  pointer-events:auto;
 }
 
 .final small{
@@ -1024,11 +1176,11 @@ textarea{
 }
 
 .final h2{
-  margin-top:22px;
+  margin-top:25px;
 
   font-size:clamp(55px,10vw,150px);
 
-  line-height:.83;
+  line-height:.82;
 
   letter-spacing:-8px;
 }
@@ -1042,22 +1194,20 @@ textarea{
 
   margin-top:45px;
 
-  padding:18px 32px;
+  padding:18px 30px;
 
-  border:1px solid rgba(255,255,255,.25);
+  border:1px solid #555;
 
   font-size:9px;
 
   letter-spacing:4px;
 
-  pointer-events:auto;
-
   transition:.4s;
 }
 
 .final a:hover{
-  background:white;
-  color:black;
+  background:#fff;
+  color:#000;
 }
 
 
@@ -1066,8 +1216,6 @@ textarea{
 ========================================================= */
 
 .contact{
-  position:relative;
-
   min-height:100vh;
 
   padding:140px 7vw;
@@ -1099,16 +1247,16 @@ textarea{
 
   font-size:clamp(50px,9vw,130px);
 
-  letter-spacing:-7px;
-
   line-height:.85;
+
+  letter-spacing:-7px;
 }
 
 .contact h3 span{
   color:var(--gold);
 }
 
-.contact-form{
+.form{
   margin-top:80px;
 
   display:grid;
@@ -1116,8 +1264,8 @@ textarea{
   gap:15px;
 }
 
-.contact-form input,
-.contact-form textarea{
+.form input,
+.form textarea{
   width:100%;
 
   background:transparent;
@@ -1126,21 +1274,22 @@ textarea{
 
   border-bottom:1px solid #292929;
 
-  color:#fff;
+  color:white;
 
   padding:20px 0;
 
-  font-size:14px;
-
   outline:none;
+
+  font-size:14px;
 }
 
-.contact-form textarea{
+.form textarea{
   min-height:140px;
+
   resize:vertical;
 }
 
-.contact-form button{
+.form button{
   width:max-content;
 
   margin-top:25px;
@@ -1162,7 +1311,7 @@ textarea{
   transition:.4s;
 }
 
-.contact-form button:hover{
+.form button:hover{
   background:white;
   color:black;
 }
@@ -1199,95 +1348,129 @@ footer{
 
   .nav{
     height:65px;
+
     padding:0 6vw;
   }
 
-  .nav-right a:first-child{
+  .nav-links a:first-child{
     display:none;
   }
 
-  .experience{
-    height:1250vh;
+  .machine{
+    height:1450vh;
   }
 
-  .core-stage{
-    width:125vw;
-    height:125vw;
+  .core-wrap{
+    width:75vw;
   }
 
-  .core{
-    width:60%;
-    height:60%;
+  .category-word{
+    font-size:30vw;
 
-    left:20%;
-    top:20%;
+    letter-spacing:-7px;
   }
 
-  .service-main-title{
-    font-size:16vw;
-    letter-spacing:-5px;
+  .service-item{
+    width:145px;
   }
 
-  .service-description{
-    width:80%;
+  .service-item-inner{
+    padding:14px;
+  }
+
+  .service-name{
     font-size:11px;
   }
 
-  .service-cloud{
-    width:92vw;
-    height:210px;
+  .service-category{
+    font-size:6px;
   }
 
-  .service-word{
-    font-size:7px;
-    padding:10px;
+  .s1{
+    left:12%;
+    top:27%;
   }
 
-  .sw1{
-    left:0;
+  .s2{
+    left:8%;
+    top:58%;
   }
 
-  .sw2{
-    left:18%;
-    top:90px;
+  .s3{
+    left:25%;
+    top:78%;
   }
 
-  .sw3{
-    left:38%;
+  .s4{
+    left:50%;
+    top:88%;
   }
 
-  .sw4{
-    right:18%;
-    top:140px;
+  .s5{
+    right:5%;
+    top:73%;
   }
 
-  .sw5{
-    right:0;
+  .s6{
+    right:5%;
+    top:43%;
   }
 
-  .service-number-big{
-    font-size:35vw;
-    left:-5vw;
+  .s7{
+    right:10%;
+    top:20%;
+  }
+
+  .s8{
+    left:50%;
+    top:10%;
+  }
+
+  .s9{
+    left:20%;
+    top:14%;
+  }
+
+  .s10{
+    right:20%;
+    top:9%;
+  }
+
+  .s11{
+    right:4%;
+    top:58%;
+  }
+
+  .s12{
+    left:3%;
+    top:44%;
+  }
+
+  .s13{
+    left:20%;
+    top:92%;
+  }
+
+  .s14{
+    right:20%;
+    top:92%;
+  }
+
+  .instagram-copy{
+    left:7%;
+    top:15%;
+    max-width:280px;
+  }
+
+  .instagram-copy h2{
+    font-size:14vw;
   }
 
   .phone{
     width:185px;
-    height:375px;
+    height:370px;
 
-    right:50%;
-    top:70%;
-
-    transform:
-      translate(50%,-50%)
-      rotate(5deg)
-      scale(.8);
-  }
-
-  .phone.active{
-    transform:
-      translate(50%,-50%)
-      rotate(3deg)
-      scale(1);
+    margin-top:230px;
   }
 
   .post{
@@ -1296,6 +1479,7 @@ footer{
 
   .final h2{
     font-size:17vw;
+
     letter-spacing:-5px;
   }
 
@@ -1305,11 +1489,13 @@ footer{
 
   .contact h3{
     font-size:18vw;
+
     letter-spacing:-5px;
   }
 
   footer{
     flex-direction:column;
+
     gap:20px;
   }
 
@@ -1361,14 +1547,14 @@ footer{
 
 <nav class="nav">
 
-  <div class="nav-logo">
+  <div class="logo">
     SOCIAL<span>CLIP</span>
   </div>
 
-  <div class="nav-right">
+  <div class="nav-links">
 
-    <a href="#experience">
-      Explore
+    <a href="#machine">
+      Experience
     </a>
 
     <a href="#contact">
@@ -1381,143 +1567,93 @@ footer{
 
 
 <!-- =====================================================
-     EXPERIENCE
+     MACHINE
 ===================================================== -->
 
 <main
-  class="experience"
-  id="experience"
+  class="machine"
+  id="machine"
 >
 
+<div class="stage">
 
-<div class="world">
+  <div class="noise"></div>
 
-  <div class="world-bg"></div>
+  <div class="light"></div>
 
-  <div class="grid"></div>
+  <div class="floor"></div>
 
 
-  <!-- GIANT WORDS -->
+  <!-- ===================================================
+       BACKGROUND WORDS
+  ==================================================== -->
 
-  <div class="giant-word giant-create">
+  <div class="category-word create">
     CREATE
   </div>
 
-  <div class="giant-word giant-digital">
+  <div class="category-word digital">
     DIGITAL
   </div>
 
-  <div class="giant-word giant-social">
-    SOCIAL
+  <div class="category-word media">
+    MEDIA
   </div>
 
-  <div class="giant-word giant-grow">
+  <div class="category-word grow">
     GROW
   </div>
 
 
-  <!-- CORE -->
+  <!-- ===================================================
+       PHASE TITLE
+  ==================================================== -->
 
   <div
-    class="core-stage"
-    id="coreStage"
+    class="phase-title"
+    id="phaseTitle"
+  >
+
+    <small id="phaseSmall">
+      SOCIALCLIP
+    </small>
+
+    <h2 id="phaseText">
+      CREATE
+    </h2>
+
+  </div>
+
+
+  <!-- ===================================================
+       CORE
+  ==================================================== -->
+
+  <div
+    class="core-wrap"
+    id="coreWrap"
   >
 
     <div class="core-shadow"></div>
 
-    <div class="orbits">
-
-      <div class="orbit one"></div>
-
-      <div class="orbit two"></div>
-
-      <div class="orbit three"></div>
-
-      <div class="orbit four"></div>
-
-    </div>
+    <div class="ring ring-a"></div>
+    <div class="ring ring-b"></div>
+    <div class="ring ring-c"></div>
 
     <div
       class="core"
       id="core"
     ></div>
 
-  </div>
+    <div class="core-label">
 
+      <small>
+        ART · MEDIA · DIGITAL
+      </small>
 
-  <!-- CENTER BRAND -->
-
-  <div
-    class="service-content"
-    id="introBrand"
-    style="
-      position:absolute;
-      z-index:20;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%);
-    "
-  >
-
-    <div class="service-category">
-      ART · MEDIA · DIGITAL
-    </div>
-
-    <div class="service-main-title">
-      SOCIAL<span>CLIP</span>
-    </div>
-
-    <div class="service-description">
-      Scroll durch unsere Welt.
-    </div>
-
-  </div>
-
-
-  <!-- ===================================================
-       SERVICE 01
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene1"
-  >
-
-    <div class="service-number-big">
-      01
-    </div>
-
-    <div class="service-content">
-
-      <div class="service-category">
-        CREATE / 01
-      </div>
-
-      <div class="service-main-title">
-        Logo<br>
-        <span>Design</span>
-      </div>
-
-      <div class="service-description">
-        Eine visuelle Identität, die nicht einfach nur
-        gut aussieht, sondern im Kopf bleibt.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Logo erstellen
-        </div>
-
-        <div class="service-word sw2">
-          Corporate Look
-        </div>
-
-        <div class="service-word sw3">
-          Branding
-        </div>
-
-      </div>
+      <strong>
+        SOCIAL<span>CLIP</span>
+      </strong>
 
     </div>
 
@@ -1525,654 +1661,140 @@ footer{
 
 
   <!-- ===================================================
-       SERVICE 02
+       SERVICES
   ==================================================== -->
 
   <div
-    class="service-scene"
-    id="scene2"
+    class="service-field"
+    id="serviceField"
   >
 
-    <div class="service-number-big">
-      02
+
+    <div class="service-item s1">
+      <div class="service-item-inner">
+        <div class="service-index">01 / CREATE</div>
+        <div class="service-name">Logo erstellen</div>
+        <div class="service-category">Brand Identity</div>
+      </div>
     </div>
 
-    <div class="service-content">
 
-      <div class="service-category">
-        CREATE / 02
+    <div class="service-item s2">
+      <div class="service-item-inner">
+        <div class="service-index">02 / CREATE</div>
+        <div class="service-name">Flyer erstellen</div>
+        <div class="service-category">Print Design</div>
       </div>
-
-      <div class="service-main-title">
-        Flyer
-        <span>&</span><br>
-        Print
-      </div>
-
-      <div class="service-description">
-        Flyer, Werbematerial und Printdesign,
-        das Aufmerksamkeit erzeugt.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Flyer erstellen
-        </div>
-
-        <div class="service-word sw2">
-          Werbematerial
-        </div>
-
-        <div class="service-word sw3">
-          Print Design
-        </div>
-
-      </div>
-
     </div>
 
-  </div>
 
-
-  <!-- ===================================================
-       SERVICE 03
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene3"
-  >
-
-    <div class="service-number-big">
-      03
+    <div class="service-item s3">
+      <div class="service-item-inner">
+        <div class="service-index">03 / CREATE</div>
+        <div class="service-name">Visitenkarten</div>
+        <div class="service-category">Business Design</div>
+      </div>
     </div>
 
-    <div class="service-content">
 
-      <div class="service-category">
-        CREATE / 03
+    <div class="service-item s4">
+      <div class="service-item-inner">
+        <div class="service-index">04 / CREATE</div>
+        <div class="service-name">Speisekarte</div>
+        <div class="service-category">Gastro Design</div>
       </div>
-
-      <div class="service-main-title">
-        Business<br>
-        <span>Cards</span>
-      </div>
-
-      <div class="service-description">
-        Visitenkarten, die deine Marke auch
-        offline professionell repräsentieren.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Visitenkarten
-        </div>
-
-        <div class="service-word sw2">
-          Business Design
-        </div>
-
-        <div class="service-word sw3">
-          Print
-        </div>
-
-      </div>
-
     </div>
 
-  </div>
 
-
-  <!-- ===================================================
-       SERVICE 04
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene4"
-  >
-
-    <div class="service-number-big">
-      04
+    <div class="service-item s5">
+      <div class="service-item-inner">
+        <div class="service-index">05 / CREATE</div>
+        <div class="service-name">Lebenslauf</div>
+        <div class="service-category">Career Design</div>
+      </div>
     </div>
 
-    <div class="service-content">
 
-      <div class="service-category">
-        CREATE / 04
+    <div class="service-item s6">
+      <div class="service-item-inner">
+        <div class="service-index">06 / DIGITAL</div>
+        <div class="service-name">Webseiten</div>
+        <div class="service-category">Web Experience</div>
       </div>
-
-      <div class="service-main-title">
-        Menu<br>
-        <span>Design</span>
-      </div>
-
-      <div class="service-description">
-        Moderne Speisekarten für Restaurants,
-        Cafés, Bars und Gastronomie.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Speisekarte
-        </div>
-
-        <div class="service-word sw2">
-          Restaurant Design
-        </div>
-
-        <div class="service-word sw3">
-          Print
-        </div>
-
-      </div>
-
     </div>
 
-  </div>
 
-
-  <!-- ===================================================
-       SERVICE 05
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene5"
-  >
-
-    <div class="service-number-big">
-      05
+    <div class="service-item s7">
+      <div class="service-item-inner">
+        <div class="service-index">07 / DIGITAL</div>
+        <div class="service-name">Programmierung</div>
+        <div class="service-category">Development</div>
+      </div>
     </div>
 
-    <div class="service-content">
 
-      <div class="service-category">
-        CREATE / 05
+    <div class="service-item s8">
+      <div class="service-item-inner">
+        <div class="service-index">08 / DIGITAL</div>
+        <div class="service-name">Virtueller Assistent</div>
+        <div class="service-category">Digital Support</div>
       </div>
-
-      <div class="service-main-title">
-        CV
-        <span>&</span><br>
-        <span>Career</span>
-      </div>
-
-      <div class="service-description">
-        Professionelle Lebensläufe, die deine
-        Persönlichkeit sichtbar machen.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Lebenslauf
-        </div>
-
-        <div class="service-word sw2">
-          Bewerbung
-        </div>
-
-        <div class="service-word sw3">
-          Personal Branding
-        </div>
-
-      </div>
-
     </div>
 
-  </div>
 
-
-  <!-- ===================================================
-       SERVICE 06
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene6"
-  >
-
-    <div class="service-number-big">
-      06
+    <div class="service-item s9">
+      <div class="service-item-inner">
+        <div class="service-index">09 / MEDIA</div>
+        <div class="service-name">Social Media Assistant</div>
+        <div class="service-category">Social Media</div>
+      </div>
     </div>
 
-    <div class="service-content">
 
-      <div class="service-category">
-        DIGITAL / 01
+    <div class="service-item s10">
+      <div class="service-item-inner">
+        <div class="service-index">10 / MEDIA</div>
+        <div class="service-name">Video & Photo Editor</div>
+        <div class="service-category">Content</div>
       </div>
-
-      <div class="service-main-title">
-        Web<br>
-        <span>Design</span>
-      </div>
-
-      <div class="service-description">
-        Webseiten, die nicht wie Standard-Webseiten
-        aussehen. Digital. Schnell. Anders.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Webseiten erstellen
-        </div>
-
-        <div class="service-word sw2">
-          Web Design
-        </div>
-
-        <div class="service-word sw3">
-          Landingpages
-        </div>
-
-      </div>
-
     </div>
 
-  </div>
 
-
-  <!-- ===================================================
-       SERVICE 07
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene7"
-  >
-
-    <div class="service-number-big">
-      07
+    <div class="service-item s11">
+      <div class="service-item-inner">
+        <div class="service-index">11 / MEDIA</div>
+        <div class="service-name">TikTok Marketing</div>
+        <div class="service-category">Short Form</div>
+      </div>
     </div>
 
-    <div class="service-content">
 
-      <div class="service-category">
-        DIGITAL / 02
+    <div class="service-item s12">
+      <div class="service-item-inner">
+        <div class="service-index">12 / GROW</div>
+        <div class="service-name">Online Marketing</div>
+        <div class="service-category">Digital Growth</div>
       </div>
-
-      <div class="service-main-title">
-        Code<br>
-        <span>& Tech</span>
-      </div>
-
-      <div class="service-description">
-        Programmierung und digitale Lösungen
-        für individuelle Anforderungen.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Programmierung
-        </div>
-
-        <div class="service-word sw2">
-          Automatisierung
-        </div>
-
-        <div class="service-word sw3">
-          Digitale Lösungen
-        </div>
-
-      </div>
-
     </div>
 
-  </div>
 
-
-  <!-- ===================================================
-       SERVICE 08
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene8"
-  >
-
-    <div class="service-number-big">
-      08
+    <div class="service-item s13">
+      <div class="service-item-inner">
+        <div class="service-index">13 / GROW</div>
+        <div class="service-name">Neukundengewinnung</div>
+        <div class="service-category">Lead Generation</div>
+      </div>
     </div>
 
-    <div class="service-content">
 
-      <div class="service-category">
-        DIGITAL / 03
+    <div class="service-item s14">
+      <div class="service-item-inner">
+        <div class="service-index">14 / GROW</div>
+        <div class="service-name">Strategieentwicklung</div>
+        <div class="service-category">Strategy</div>
       </div>
-
-      <div class="service-main-title">
-        Virtual<br>
-        <span>Assistant</span>
-      </div>
-
-      <div class="service-description">
-        Digitale Unterstützung für Aufgaben,
-        Abläufe und dein tägliches Business.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Virtueller Assistent
-        </div>
-
-        <div class="service-word sw2">
-          Organisation
-        </div>
-
-        <div class="service-word sw3">
-          Automatisierung
-        </div>
-
-      </div>
-
     </div>
 
-  </div>
-
-
-  <!-- ===================================================
-       SERVICE 09
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene9"
-  >
-
-    <div class="service-number-big">
-      09
-    </div>
-
-    <div class="service-content">
-
-      <div class="service-category">
-        MEDIA / 01
-      </div>
-
-      <div class="service-main-title">
-        Social<br>
-        <span>Assistant</span>
-      </div>
-
-      <div class="service-description">
-        Social Media Unterstützung für Content,
-        Planung und einen starken Auftritt.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Social Media Assistant
-        </div>
-
-        <div class="service-word sw2">
-          Content
-        </div>
-
-        <div class="service-word sw3">
-          Social Strategy
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ===================================================
-       SERVICE 10
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene10"
-  >
-
-    <div class="service-number-big">
-      10
-    </div>
-
-    <div class="service-content">
-
-      <div class="service-category">
-        MEDIA / 02
-      </div>
-
-      <div class="service-main-title">
-        Video
-        <span>&</span><br>
-        <span>Photo</span>
-      </div>
-
-      <div class="service-description">
-        Foto- und Videobearbeitung für Content,
-        Social Media und professionelle Auftritte.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Video Editor
-        </div>
-
-        <div class="service-word sw2">
-          Photo Editor
-        </div>
-
-        <div class="service-word sw3">
-          Content Creation
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ===================================================
-       SERVICE 11
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene11"
-  >
-
-    <div class="service-number-big">
-      11
-    </div>
-
-    <div class="service-content">
-
-      <div class="service-category">
-        MEDIA / 03
-      </div>
-
-      <div class="service-main-title">
-        TikTok<br>
-        <span>Marketing</span>
-      </div>
-
-      <div class="service-description">
-        Aufmerksamkeit dort erzeugen, wo neue
-        Marken und Trends entstehen.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          TikTok Marketing
-        </div>
-
-        <div class="service-word sw2">
-          Short Video
-        </div>
-
-        <div class="service-word sw3">
-          Social Growth
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ===================================================
-       SERVICE 12
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene12"
-  >
-
-    <div class="service-number-big">
-      12
-    </div>
-
-    <div class="service-content">
-
-      <div class="service-category">
-        GROW / 01
-      </div>
-
-      <div class="service-main-title">
-        Online<br>
-        <span>Marketing</span>
-      </div>
-
-      <div class="service-description">
-        Digitale Sichtbarkeit, Kampagnen und
-        Marketingstrategien für mehr Reichweite.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Online Marketing
-        </div>
-
-        <div class="service-word sw2">
-          Kampagnen
-        </div>
-
-        <div class="service-word sw3">
-          Reichweite
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ===================================================
-       SERVICE 13
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene13"
-  >
-
-    <div class="service-number-big">
-      13
-    </div>
-
-    <div class="service-content">
-
-      <div class="service-category">
-        GROW / 02
-      </div>
-
-      <div class="service-main-title">
-        New<br>
-        <span>Customers</span>
-      </div>
-
-      <div class="service-description">
-        Neukundengewinnung mit digitalen Strategien,
-        die aus Aufmerksamkeit echte Kontakte machen.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Neukundengewinnung
-        </div>
-
-        <div class="service-word sw2">
-          Leads
-        </div>
-
-        <div class="service-word sw3">
-          Conversion
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ===================================================
-       SERVICE 14
-  ==================================================== -->
-
-  <div
-    class="service-scene"
-    id="scene14"
-  >
-
-    <div class="service-number-big">
-      14
-    </div>
-
-    <div class="service-content">
-
-      <div class="service-category">
-        GROW / 03
-      </div>
-
-      <div class="service-main-title">
-        Strategy<br>
-        <span>Development</span>
-      </div>
-
-      <div class="service-description">
-        Eine klare Strategie, damit Design,
-        Marketing und digitale Präsenz zusammenarbeiten.
-      </div>
-
-      <div class="service-cloud">
-
-        <div class="service-word sw1">
-          Strategieentwicklung
-        </div>
-
-        <div class="service-word sw2">
-          Positionierung
-        </div>
-
-        <div class="service-word sw3">
-          Wachstum
-        </div>
-
-      </div>
-
-    </div>
 
   </div>
 
@@ -2181,54 +1803,111 @@ footer{
        INSTAGRAM
   ==================================================== -->
 
-  <div
-    class="phone"
-    id="phone"
+  <section
+    class="instagram-moment"
+    id="instagramMoment"
   >
 
-    <div class="phone-top">
-      @socialclip.art
-    </div>
+    <div class="instagram-copy">
 
-    <div class="phone-feed">
+      <small>
+        SOCIALCLIP / SOCIAL
+      </small>
 
-      <div class="post">
+      <h2>
+        Deine Marke<br>
+        <span style="color:#c9ae7a;">
+          lebt digital.
+        </span>
+      </h2>
 
-        <div class="post-content">
-          <strong>MAKE IT VISIBLE.</strong>
-          <span>SOCIALCLIP / 01</span>
-        </div>
+      <p>
+        Content, Social Media und visuelle Ideen
+        werden zu einer digitalen Präsenz.
+      </p>
 
-      </div>
-
-      <div class="post">
-
-        <div class="post-content">
-          <strong>CREATE DIFFERENT.</strong>
-          <span>ART · MEDIA · DIGITAL</span>
-        </div>
-
-      </div>
-
-      <div class="post">
-
-        <div class="post-content">
-          <strong>BUILD THE FUTURE.</strong>
-          <span>SOCIALCLIP / 03</span>
-        </div>
-
-      </div>
+      <a
+        class="instagram-link"
+        href="https://www.instagram.com/socialclip.art/"
+        target="_blank"
+        rel="noopener"
+      >
+        @SOCIALCLIP.ART
+      </a>
 
     </div>
 
-  </div>
+
+    <div class="phone">
+
+      <div class="phone-top">
+        @socialclip.art
+      </div>
+
+      <div class="feed">
+
+        <div class="post">
+
+          <div class="post-text">
+
+            <strong>
+              MAKE IT VISIBLE.
+            </strong>
+
+            <span>
+              SOCIALCLIP / 01
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="post">
+
+          <div class="post-text">
+
+            <strong>
+              CREATE DIFFERENT.
+            </strong>
+
+            <span>
+              ART · MEDIA · DIGITAL
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="post">
+
+          <div class="post-text">
+
+            <strong>
+              BUILD YOUR WORLD.
+            </strong>
+
+            <span>
+              SOCIALCLIP / 03
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
 
 
   <!-- ===================================================
        FINAL
   ==================================================== -->
 
-  <div
+  <section
     class="final"
     id="final"
   >
@@ -2250,7 +1929,7 @@ footer{
 
     </div>
 
-  </div>
+  </section>
 
 
 </div>
@@ -2278,8 +1957,9 @@ footer{
       <span>beginnen.</span>
     </h3>
 
+
     <form
-      class="contact-form"
+      class="form"
       action="https://formspree.io/f/xwlvlqwg"
       method="POST"
     >
@@ -2356,40 +2036,95 @@ setTimeout(function(){
    ELEMENTS
 ========================================================= */
 
-const experience =
-  document.getElementById("experience");
+const machine =
+  document.getElementById("machine");
 
-const coreStage =
-  document.getElementById("coreStage");
+const stage =
+  document.querySelector(".stage");
+
+const coreWrap =
+  document.getElementById("coreWrap");
 
 const core =
   document.getElementById("core");
 
-const introBrand =
-  document.getElementById("introBrand");
+const phaseTitle =
+  document.getElementById("phaseTitle");
 
-const phone =
-  document.getElementById("phone");
+const phaseText =
+  document.getElementById("phaseText");
 
-const finalScene =
+const phaseSmall =
+  document.getElementById("phaseSmall");
+
+const instagramMoment =
+  document.getElementById("instagramMoment");
+
+const final =
   document.getElementById("final");
 
-const scenes = [];
+const services =
+  document.querySelectorAll(".service-item");
 
-for(let i=1;i<=14;i++){
+const giantCreate =
+  document.querySelector(".category-word.create");
 
-  scenes.push(
-    document.getElementById("scene"+i)
-  );
+const giantDigital =
+  document.querySelector(".category-word.digital");
 
-}
+const giantMedia =
+  document.querySelector(".category-word.media");
+
+const giantGrow =
+  document.querySelector(".category-word.grow");
+
+
+/* =========================================================
+   PHASES
+========================================================= */
+
+const phases = [
+
+  {
+    name:"CREATE",
+    small:"01 — CREATE",
+    start:.06,
+    end:.31
+  },
+
+  {
+    name:"DIGITAL",
+    small:"02 — DIGITAL",
+    start:.31,
+    end:.50
+  },
+
+  {
+    name:"MEDIA",
+    small:"03 — MEDIA",
+    start:.50,
+    end:.69
+  },
+
+  {
+    name:"GROW",
+    small:"04 — GROW",
+    start:.69,
+    end:.84
+  }
+
+];
 
 
 /* =========================================================
    CLAMP
 ========================================================= */
 
-function clamp(value,min,max){
+function clamp(
+  value,
+  min,
+  max
+){
 
   return Math.min(
     Math.max(value,min),
@@ -2406,10 +2141,10 @@ function clamp(value,min,max){
 function update(){
 
   const rect =
-    experience.getBoundingClientRect();
+    machine.getBoundingClientRect();
 
   const total =
-    experience.offsetHeight -
+    machine.offsetHeight -
     window.innerHeight;
 
   let progress =
@@ -2423,34 +2158,35 @@ function update(){
      CORE
   ===================================================== */
 
-  const rotation =
-    progress * 1200;
+  const coreRotation =
+    progress * 1500;
 
-  let scale;
+  let coreScale;
 
-  if(progress < .08){
+  if(progress < .06){
 
-    scale =
-      .75 + progress*3;
+    coreScale =
+      .65 + progress * 4;
 
   }else{
 
-    scale =
-      1.05 + Math.sin(progress*Math.PI)*.45;
+    coreScale =
+      1 +
+      Math.sin(progress*Math.PI*2)*.18;
 
   }
 
-  const x =
-    Math.sin(progress*Math.PI*2.5)*12;
+  const moveX =
+    Math.sin(progress*Math.PI*4)*5;
 
-  const y =
-    Math.cos(progress*Math.PI*2)*7;
+  const moveY =
+    Math.cos(progress*Math.PI*3)*4;
 
-  coreStage.style.transform = `
+  coreWrap.style.transform = `
     translate(-50%,-50%)
-    translate(${x}vw,${y}vh)
-    scale(${scale})
-    rotate(${rotation}deg)
+    translate(${moveX}vw,${moveY}vh)
+    scale(${coreScale})
+    rotate(${coreRotation}deg)
   `;
 
 
@@ -2458,37 +2194,77 @@ function update(){
      CORE MORPH
   ===================================================== */
 
-  const r1 =
-    45 +
-    Math.sin(progress*Math.PI*3)*14;
-
-  const r2 =
+  const radius =
     50 +
-    Math.cos(progress*Math.PI*2.5)*12;
+    Math.sin(progress*Math.PI*5)*12;
 
   core.style.borderRadius = `
-    ${r1}% ${100-r1}%
-    ${r2}% ${100-r2}%
-    /
-    ${r2}% ${r1}%
-    ${100-r2}% ${100-r1}%
+    ${radius}% ${100-radius}%
+    ${100-radius}% ${radius}%
   `;
 
 
   /* =====================================================
-     BRAND
+     PHASE
   ===================================================== */
 
-  if(progress < .055){
+  let currentPhase = null;
 
-    introBrand.style.opacity =
-      1 - progress/.055;
+  phases.forEach(function(phase){
+
+    if(
+      progress >= phase.start &&
+      progress < phase.end
+    ){
+
+      currentPhase = phase;
+
+    }
+
+  });
+
+
+  if(currentPhase){
+
+    phaseTitle.classList.add("visible");
+
+    phaseText.textContent =
+      currentPhase.name;
+
+    phaseSmall.textContent =
+      currentPhase.small;
 
   }else{
 
-    introBrand.style.opacity = 0;
+    phaseTitle.classList.remove("visible");
 
   }
+
+
+  /* =====================================================
+     CATEGORY WORDS
+  ===================================================== */
+
+  giantCreate.style.opacity =
+    progress < .34 ? ".9" : ".15";
+
+  giantDigital.style.opacity =
+    progress >= .27 &&
+    progress < .53
+      ? ".9"
+      : ".12";
+
+  giantMedia.style.opacity =
+    progress >= .46 &&
+    progress < .72
+      ? ".9"
+      : ".12";
+
+  giantGrow.style.opacity =
+    progress >= .66 &&
+    progress < .87
+      ? ".9"
+      : ".12";
 
 
   /* =====================================================
@@ -2496,47 +2272,44 @@ function update(){
   ===================================================== */
 
   /*
-     The service journey begins at 8%.
-     Each service gets its own section.
+    Services occupy the first big part
+    of the experience.
   */
 
-  const start =
+  const serviceStart =
     .075;
 
-  const end =
-    .86;
+  const serviceEnd =
+    .83;
 
   const serviceProgress =
     clamp(
-      (progress-start) /
-      (end-start),
+      (progress-serviceStart) /
+      (serviceEnd-serviceStart),
       0,
-      1
+      0.999
     );
 
-  const index =
-    Math.min(
-      13,
-      Math.floor(
-        serviceProgress * 14
-      )
+  const serviceIndex =
+    Math.floor(
+      serviceProgress * 14
     );
 
 
-  scenes.forEach(
-    function(scene,i){
+  services.forEach(
+    function(service,index){
 
       if(
-        i === index &&
-        progress >= start &&
-        progress < end
+        progress >= serviceStart &&
+        progress < serviceEnd &&
+        index === serviceIndex
       ){
 
-        scene.classList.add("visible");
+        service.classList.add("active");
 
       }else{
 
-        scene.classList.remove("visible");
+        service.classList.remove("active");
 
       }
 
@@ -2545,19 +2318,19 @@ function update(){
 
 
   /* =====================================================
-     PHONE
+     INSTAGRAM
   ===================================================== */
 
   if(
-    progress >= .86 &&
-    progress < .94
+    progress >= .83 &&
+    progress < .93
   ){
 
-    phone.classList.add("active");
+    instagramMoment.classList.add("active");
 
   }else{
 
-    phone.classList.remove("active");
+    instagramMoment.classList.remove("active");
 
   }
 
@@ -2566,13 +2339,13 @@ function update(){
      FINAL
   ===================================================== */
 
-  if(progress >= .94){
+  if(progress >= .93){
 
-    finalScene.classList.add("active");
+    final.classList.add("active");
 
   }else{
 
-    finalScene.classList.remove("active");
+    final.classList.remove("active");
 
   }
 
@@ -2580,7 +2353,7 @@ function update(){
 
 
 /* =========================================================
-   MOUSE PARALLAX
+   MOUSE
 ========================================================= */
 
 window.addEventListener(
@@ -2594,22 +2367,18 @@ window.addEventListener(
     const x =
       (event.clientX /
       window.innerWidth -
-      .5) * 25;
+      .5);
 
     const y =
       (event.clientY /
       window.innerHeight -
-      .5) * 25;
+      .5);
 
-    coreStage.style.setProperty(
-      "--mouseX",
-      x+"px"
-    );
-
-    coreStage.style.setProperty(
-      "--mouseY",
-      y+"px"
-    );
+    stage.style.transform =
+      `
+      rotateX(${y * -1.5}deg)
+      rotateY(${x * 1.5}deg)
+      `;
 
   }
 );
