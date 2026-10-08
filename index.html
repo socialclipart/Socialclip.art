@@ -6,9 +6,6 @@
 
 <title>SocialClip — Art · Media · Digital</title>
 
-<meta name="description"
-content="SocialClip Art & Media – Webseiten, Design, Social Media, Marketing, Video, Strategie und digitale Lösungen aus Erlangen.">
-
 <style>
 *{
     margin:0;
@@ -23,7 +20,7 @@ html{
 body{
     background:#050505;
     color:#fff;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     overflow-x:hidden;
 }
 
@@ -31,18 +28,19 @@ body.locked{
     overflow:hidden;
 }
 
+button,
+a{
+    font:inherit;
+}
+
 a{
     color:inherit;
     text-decoration:none;
 }
 
-button{
-    font:inherit;
-}
-
-/* =========================================================
+/* =====================================================
    INTRO
-========================================================= */
+===================================================== */
 
 #intro{
     position:fixed;
@@ -50,9 +48,11 @@ button{
     z-index:9999;
     background:#030303;
     overflow:hidden;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     transition:
         opacity 1.8s ease,
         visibility 1.8s ease;
@@ -67,60 +67,79 @@ button{
 .intro-background{
     position:absolute;
     inset:-20%;
+
     background:
         radial-gradient(
             circle at 50% 48%,
-            rgba(255,255,255,.13),
+            rgba(255,255,255,.14),
             transparent 18%
         ),
         radial-gradient(
-            circle at 20% 80%,
-            rgba(150,180,255,.06),
+            circle at 15% 80%,
+            rgba(120,150,255,.06),
             transparent 30%
         ),
         radial-gradient(
-            circle at 80% 20%,
+            circle at 85% 20%,
             rgba(255,255,255,.05),
             transparent 30%
         );
+
     animation:introBreath 8s ease-in-out infinite;
 }
 
 @keyframes introBreath{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.12);}
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.12);
+    }
 }
 
 .intro-noise{
     position:absolute;
     inset:0;
-    opacity:.06;
-    background-image:
+    opacity:.035;
+    pointer-events:none;
+
+    background:
         repeating-linear-gradient(
             0deg,
             rgba(255,255,255,.15) 0px,
             transparent 1px,
             transparent 4px
         );
-    pointer-events:none;
 }
 
 .intro-grid{
     position:absolute;
-    width:130vw;
-    height:130vh;
-    left:-15vw;
+    width:140vw;
+    height:140vh;
+    left:-20vw;
     top:-15vh;
-    opacity:.10;
+
+    opacity:.08;
+
     background-image:
-        linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px);
+        linear-gradient(
+            rgba(255,255,255,.15) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.15) 1px,
+            transparent 1px
+        );
+
     background-size:90px 90px;
+
     transform:
         perspective(900px)
         rotateX(67deg)
         translateY(25%);
-    transform-origin:center;
+
     animation:gridMove 14s linear infinite;
 }
 
@@ -131,6 +150,7 @@ button{
             rotateX(67deg)
             translateY(25%);
     }
+
     to{
         transform:
             perspective(900px)
@@ -141,27 +161,34 @@ button{
 
 .intro-light{
     position:absolute;
+
     width:70vw;
     height:70vw;
     max-width:800px;
     max-height:800px;
+
     border-radius:50%;
-    background:radial-gradient(
-        circle,
-        rgba(255,255,255,.18),
-        rgba(255,255,255,.04) 28%,
-        transparent 65%
-    );
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.18),
+            rgba(255,255,255,.04) 28%,
+            transparent 65%
+        );
+
     filter:blur(25px);
-    opacity:.7;
+
     animation:lightPulse 6s ease-in-out infinite;
 }
 
 @keyframes lightPulse{
+
     0%,100%{
         transform:scale(.85);
         opacity:.45;
     }
+
     50%{
         transform:scale(1.12);
         opacity:.8;
@@ -170,20 +197,26 @@ button{
 
 .intro-ring{
     position:absolute;
+
     width:55vw;
     height:55vw;
+
     max-width:700px;
     max-height:700px;
+
     border:1px solid rgba(255,255,255,.12);
     border-radius:50%;
+
     animation:ringRotate 18s linear infinite;
 }
 
 .intro-ring::before,
 .intro-ring::after{
     content:"";
+
     position:absolute;
     inset:10%;
+
     border:1px solid rgba(255,255,255,.06);
     border-radius:50%;
 }
@@ -193,8 +226,13 @@ button{
 }
 
 @keyframes ringRotate{
-    from{transform:rotate(0deg) scale(1);}
-    to{transform:rotate(360deg) scale(1.04);}
+    from{
+        transform:rotate(0deg) scale(1);
+    }
+
+    to{
+        transform:rotate(360deg) scale(1.04);
+    }
 }
 
 .intro-lines{
@@ -205,14 +243,19 @@ button{
 
 .intro-lines span{
     position:absolute;
+
     height:1px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.35),
-        transparent
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.35),
+            transparent
+        );
+
     opacity:0;
+
     animation:introLine 7s ease-in-out infinite;
 }
 
@@ -237,13 +280,16 @@ button{
 }
 
 @keyframes introLine{
+
     0%,100%{
         opacity:0;
         transform:translateX(-20%);
     }
+
     25%,70%{
         opacity:.7;
     }
+
     50%{
         transform:translateX(25%);
     }
@@ -252,38 +298,59 @@ button{
 .intro-particles{
     position:absolute;
     inset:0;
+    pointer-events:none;
 }
 
 .intro-particle{
     position:absolute;
+
     width:2px;
     height:2px;
+
     border-radius:50%;
     background:#fff;
+
     opacity:.3;
-    animation:particleFloat 8s ease-in-out infinite;
+
+    animation:
+        particleFloat
+        8s
+        ease-in-out
+        infinite;
 }
 
 @keyframes particleFloat{
+
     0%,100%{
         transform:translateY(0) scale(1);
         opacity:.15;
     }
+
     50%{
         transform:translateY(-50px) scale(1.8);
         opacity:.7;
     }
 }
 
+/* =====================================================
+   INTRO CONTENT
+===================================================== */
+
 .intro-content{
     position:relative;
-    z-index:5;
+
+    z-index:10;
+
     width:min(900px,90vw);
+
     text-align:center;
+
+    pointer-events:none;
 }
 
 .intro-stage{
     min-height:280px;
+
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -292,293 +359,536 @@ button{
 
 .intro-small{
     font-size:11px;
+
     letter-spacing:.45em;
     text-transform:uppercase;
+
     color:rgba(255,255,255,.45);
+
     margin-bottom:30px;
+
     opacity:0;
-    animation:fadeUp 1.5s ease forwards;
+
+    animation:
+        fadeUp
+        1.5s
+        ease
+        forwards;
 }
 
 .intro-title{
-    font-size:clamp(38px,7vw,100px);
+    font-size:
+        clamp(
+            38px,
+            7vw,
+            100px
+        );
+
     font-weight:300;
+
     letter-spacing:-.05em;
+
     line-height:.95;
+
     opacity:0;
+}
+
+.intro-title.show{
+    animation:
+        fadeUp
+        1.4s
+        ease
+        forwards;
 }
 
 .intro-subtitle{
     margin-top:25px;
-    font-size:clamp(17px,2vw,25px);
+
+    font-size:
+        clamp(
+            17px,
+            2vw,
+            25px
+        );
+
     line-height:1.5;
+
     color:rgba(255,255,255,.68);
+
     opacity:0;
 }
 
+.intro-subtitle.show{
+    animation:
+        fadeUp
+        .9s
+        ease
+        forwards;
+}
+
 @keyframes fadeUp{
+
     from{
         opacity:0;
         transform:translateY(30px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-.intro-title.show{
-    animation:fadeUp 1.4s ease forwards;
-}
-
-.intro-subtitle.show{
-    animation:fadeUp 1.4s .3s ease forwards;
-}
+/* =====================================================
+   INTRO WORDS
+===================================================== */
 
 .intro-word{
+
     position:absolute;
+
     left:50%;
     top:50%;
-    transform:translate(-50%,-50%) scale(.85);
+
+    transform:
+        translate(-50%,-50%)
+        scale(.85);
+
     width:100vw;
+
     text-align:center;
-    font-size:clamp(70px,16vw,230px);
+
+    font-size:
+        clamp(
+            70px,
+            16vw,
+            230px
+        );
+
     font-weight:700;
+
     letter-spacing:-.08em;
+
     white-space:nowrap;
+
     opacity:0;
+
     pointer-events:none;
 }
 
 .intro-word.show{
-    animation:wordAppear 2.4s ease forwards;
+
+    animation:
+        wordAppear
+        2.4s
+        ease
+        forwards;
 }
 
 @keyframes wordAppear{
+
     0%{
         opacity:0;
-        transform:translate(-50%,-50%) scale(.85);
+
+        transform:
+            translate(-50%,-50%)
+            scale(.85);
+
         filter:blur(18px);
     }
+
     30%{
         opacity:.95;
         filter:blur(0);
     }
+
     75%{
         opacity:.95;
     }
+
     100%{
         opacity:0;
-        transform:translate(-50%,-50%) scale(1.18);
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.18);
+
         filter:blur(8px);
     }
 }
 
+/* =====================================================
+   BRAND
+===================================================== */
+
 .intro-brand{
+
     position:absolute;
+
     left:50%;
     top:50%;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     text-align:center;
+
     opacity:0;
+
     pointer-events:none;
 }
 
 .intro-brand.show{
-    animation:brandIn 2.2s ease forwards;
+
+    animation:
+        brandIn
+        2.2s
+        ease
+        forwards;
 }
 
 .intro-brand-name{
-    font-size:clamp(55px,12vw,170px);
+
+    font-size:
+        clamp(
+            55px,
+            12vw,
+            170px
+        );
+
     font-weight:700;
+
     letter-spacing:-.08em;
 }
 
 .intro-brand-sub{
+
     margin-top:15px;
+
     font-size:12px;
+
     letter-spacing:.55em;
+
     color:rgba(255,255,255,.55);
 }
 
 @keyframes brandIn{
+
     0%{
         opacity:0;
-        transform:translate(-50%,-50%) scale(.8);
+
+        transform:
+            translate(-50%,-50%)
+            scale(.8);
+
         filter:blur(20px);
     }
+
     35%{
         opacity:1;
         filter:blur(0);
     }
+
     75%{
         opacity:1;
     }
+
     100%{
         opacity:0;
-        transform:translate(-50%,-50%) scale(1.08);
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.08);
     }
 }
 
+/* =====================================================
+   FINAL INTRO
+===================================================== */
+
 .intro-final{
+
     position:absolute;
+
     inset:0;
+
+    z-index:100;
+
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
+
+    text-align:center;
+
     opacity:0;
+
     pointer-events:none;
 }
 
 .intro-final.show{
-    animation:finalAppear 2s ease forwards;
+
+    animation:
+        finalAppear
+        1.5s
+        ease
+        forwards;
+
+    pointer-events:auto;
 }
 
 .intro-final h2{
-    font-size:clamp(34px,6vw,82px);
+
+    font-size:
+        clamp(
+            38px,
+            6vw,
+            82px
+        );
+
     font-weight:300;
+
     letter-spacing:-.04em;
 }
 
 .intro-final p{
+
     margin-top:20px;
-    color:rgba(255,255,255,.6);
+
+    color:rgba(255,255,255,.65);
+
     font-size:18px;
+
+    line-height:1.7;
+}
+
+.enter-button{
+
+    position:relative;
+
+    z-index:1000;
+
+    margin-top:42px;
+
+    padding:18px 32px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.3);
+
+    background:
+        rgba(255,255,255,.05);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    pointer-events:auto;
+
+    letter-spacing:.16em;
+
+    font-size:11px;
+
+    transition:
+        .5s ease;
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+}
+
+.enter-button:hover{
+
+    background:#fff;
+
+    color:#000;
+
+    transform:
+        translateY(-4px)
+        scale(1.03);
+
+    box-shadow:
+        0 20px 80px
+        rgba(255,255,255,.18);
 }
 
 @keyframes finalAppear{
+
     from{
         opacity:0;
         transform:translateY(30px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-.enter-button{
-    margin-top:42px;
-    padding:17px 30px;
-    border:1px solid rgba(255,255,255,.25);
-    background:rgba(255,255,255,.04);
-    color:#fff;
-    cursor:pointer;
-    letter-spacing:.16em;
-    font-size:11px;
-    transition:.5s ease;
-    backdrop-filter:blur(12px);
-}
-
-.enter-button:hover{
-    background:#fff;
-    color:#000;
-    transform:translateY(-3px);
-    box-shadow:0 15px 60px rgba(255,255,255,.12);
-}
-
-/* =========================================================
+/* =====================================================
    TRANSITION
-========================================================= */
+===================================================== */
 
 #transition{
+
     position:fixed;
+
     inset:0;
-    z-index:10000;
+
+    z-index:11000;
+
     background:#fff;
+
     color:#000;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     opacity:0;
+
     visibility:hidden;
+
     pointer-events:none;
 }
 
 #transition.active{
+
     visibility:visible;
-    animation:transitionScene 2.6s ease forwards;
+
+    animation:
+        transitionScene
+        2.6s
+        ease
+        forwards;
 }
 
 .transition-logo{
-    font-size:clamp(50px,12vw,160px);
+
+    font-size:
+        clamp(
+            50px,
+            12vw,
+            160px
+        );
+
     font-weight:700;
+
     letter-spacing:-.08em;
 }
 
 @keyframes transitionScene{
+
     0%{
         opacity:0;
         transform:scale(.8);
     }
+
     15%{
         opacity:1;
         transform:scale(1);
     }
+
     55%{
         opacity:1;
         transform:scale(1.15);
     }
+
     100%{
         opacity:0;
         transform:scale(3);
     }
 }
 
-/* =========================================================
-   CURSOR LIGHT
-========================================================= */
+/* =====================================================
+   CURSOR
+===================================================== */
 
 .cursor-light{
+
     position:fixed;
+
     width:300px;
     height:300px;
+
     border-radius:50%;
-    background:radial-gradient(
-        circle,
-        rgba(255,255,255,.08),
-        transparent 65%
-    );
-    transform:translate(-50%,-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.08),
+            transparent 65%
+        );
+
+    transform:
+        translate(-50%,-50%);
+
     pointer-events:none;
+
     z-index:20;
+
     mix-blend-mode:screen;
 }
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* =====================================================
+   NAV
+===================================================== */
 
 .nav{
+
     position:fixed;
+
     top:0;
     left:0;
+
     width:100%;
+
     z-index:100;
-    padding:25px 4vw;
+
+    padding:
+        25px
+        4vw;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     mix-blend-mode:difference;
 }
 
 .logo{
+
     font-size:18px;
+
     font-weight:700;
+
     letter-spacing:-.04em;
 }
 
 .nav-links{
+
     display:flex;
+
     gap:30px;
+
     font-size:11px;
+
     letter-spacing:.14em;
+
     text-transform:uppercase;
 }
 
 .nav-links a{
+
     opacity:.7;
+
     transition:.3s;
 }
 
@@ -586,22 +896,33 @@ button{
     opacity:1;
 }
 
-/* =========================================================
+/* =====================================================
    HERO
-========================================================= */
+===================================================== */
 
 .hero{
+
     min-height:100vh;
+
     position:relative;
+
     display:flex;
+
     align-items:center;
+
     overflow:hidden;
-    padding:0 5vw;
+
+    padding:
+        0
+        5vw;
 }
 
 .hero-bg{
+
     position:absolute;
+
     inset:0;
+
     background:
         radial-gradient(
             circle at 75% 50%,
@@ -616,37 +937,67 @@ button{
 }
 
 .hero-grid{
+
     position:absolute;
+
     inset:0;
+
     opacity:.08;
+
     background-image:
-        linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
+        linear-gradient(
+            rgba(255,255,255,.12) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.12) 1px,
+            transparent 1px
+        );
+
     background-size:100px 100px;
+
     transform:
         perspective(800px)
         rotateX(60deg)
         scale(1.5);
+
     transform-origin:center bottom;
 }
 
 .hero-content{
+
     position:relative;
+
     z-index:2;
+
     max-width:1200px;
 }
 
 .hero-kicker{
+
     font-size:11px;
+
     letter-spacing:.4em;
+
     color:rgba(255,255,255,.45);
+
     margin-bottom:35px;
 }
 
 .hero-title{
-    font-size:clamp(70px,14vw,190px);
+
+    font-size:
+        clamp(
+            70px,
+            14vw,
+            190px
+        );
+
     line-height:.78;
+
     letter-spacing:-.08em;
+
     font-weight:700;
 }
 
@@ -655,85 +1006,154 @@ button{
 }
 
 .hero-title .outline{
+
     color:transparent;
-    -webkit-text-stroke:1px rgba(255,255,255,.5);
+
+    -webkit-text-stroke:
+        1px
+        rgba(255,255,255,.5);
 }
 
 .hero-description{
+
     margin-top:55px;
+
     max-width:500px;
+
     color:rgba(255,255,255,.58);
+
     font-size:17px;
+
     line-height:1.7;
 }
 
-/* =========================================================
+/* =====================================================
    MARQUEE
-========================================================= */
+===================================================== */
 
 .marquee{
+
     overflow:hidden;
-    border-top:1px solid rgba(255,255,255,.1);
-    border-bottom:1px solid rgba(255,255,255,.1);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.1);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.1);
+
     padding:24px 0;
+
     white-space:nowrap;
 }
 
 .marquee-track{
+
     display:inline-block;
-    animation:marquee 25s linear infinite;
+
+    animation:
+        marquee
+        25s
+        linear
+        infinite;
 }
 
 .marquee span{
-    font-size:clamp(30px,5vw,70px);
+
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            70px
+        );
+
     font-weight:300;
+
     letter-spacing:-.04em;
+
     margin-right:70px;
 }
 
 .marquee .dot{
+
     font-size:18px;
+
     opacity:.4;
 }
 
 @keyframes marquee{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-50%);
+    }
 }
 
-/* =========================================================
+/* =====================================================
    SCENES
-========================================================= */
+===================================================== */
 
 .scene{
+
     min-height:110vh;
+
     position:relative;
+
     overflow:hidden;
+
     display:flex;
+
     align-items:center;
-    padding:12vw 6vw;
+
+    padding:
+        12vw
+        6vw;
 }
 
 .scene-number{
+
     position:absolute;
+
     top:40px;
     left:6vw;
+
     font-size:11px;
+
     letter-spacing:.3em;
+
     color:rgba(255,255,255,.3);
 }
 
 .scene-content{
+
     width:100%;
+
     display:grid;
-    grid-template-columns:1fr 1fr;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
     gap:8vw;
+
     align-items:center;
 }
 
 .scene-title{
-    font-size:clamp(70px,12vw,170px);
+
+    font-size:
+        clamp(
+            70px,
+            12vw,
+            170px
+        );
+
     line-height:.78;
+
     letter-spacing:-.08em;
 }
 
@@ -745,39 +1165,60 @@ button{
     font-weight:300;
 }
 
-.scene-text{
-    max-width:520px;
-}
-
-.scene-text p{
-    font-size:20px;
-    line-height:1.7;
-    color:rgba(255,255,255,.6);
-}
-
 .scene-label{
+
     font-size:11px;
+
     letter-spacing:.35em;
+
     color:rgba(255,255,255,.4);
+
     margin-bottom:30px;
 }
 
-/* =========================================================
-   VISUAL PANELS
-========================================================= */
+.scene-text{
+
+    max-width:520px;
+
+    margin-top:35px;
+}
+
+.scene-text p{
+
+    font-size:20px;
+
+    line-height:1.7;
+
+    color:rgba(255,255,255,.6);
+}
+
+/* =====================================================
+   VISUAL
+===================================================== */
 
 .visual{
+
     position:relative;
+
     height:500px;
+
     overflow:hidden;
-    border:1px solid rgba(255,255,255,.12);
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
     background:#080808;
 }
 
 .visual::before{
+
     content:"";
+
     position:absolute;
+
     inset:0;
+
     background:
         radial-gradient(
             circle at 50% 50%,
@@ -787,8 +1228,11 @@ button{
 }
 
 .visual-lines{
+
     position:absolute;
+
     inset:0;
+
     background-image:
         linear-gradient(
             rgba(255,255,255,.08) 1px,
@@ -799,52 +1243,89 @@ button{
             rgba(255,255,255,.08) 1px,
             transparent 1px
         );
+
     background-size:55px 55px;
-    transform:perspective(700px) rotateX(60deg) scale(1.5);
+
+    transform:
+        perspective(700px)
+        rotateX(60deg)
+        scale(1.5);
+
     transform-origin:center bottom;
 }
 
 .visual-word{
+
     position:absolute;
+
     left:50%;
     top:50%;
-    transform:translate(-50%,-50%);
-    font-size:clamp(70px,11vw,150px);
+
+    transform:
+        translate(-50%,-50%);
+
+    font-size:
+        clamp(
+            70px,
+            11vw,
+            150px
+        );
+
     font-weight:700;
+
     letter-spacing:-.08em;
+
     white-space:nowrap;
 }
 
 .visual-small{
+
     position:absolute;
+
     bottom:25px;
     left:25px;
+
     font-size:10px;
+
     letter-spacing:.3em;
+
     color:rgba(255,255,255,.45);
 }
 
-/* =========================================================
-   DIGITAL BROWSER
-========================================================= */
+/* =====================================================
+   BROWSER
+===================================================== */
 
 .browser{
+
     position:absolute;
+
     width:78%;
     height:70%;
+
     left:11%;
     top:15%;
+
     background:#111;
-    border:1px solid rgba(255,255,255,.2);
-    box-shadow:0 40px 100px rgba(0,0,0,.7);
+
+    border:
+        1px solid
+        rgba(255,255,255,.2);
+
+    box-shadow:
+        0 40px 100px
+        rgba(0,0,0,.7);
+
     transform:
         perspective(900px)
         rotateY(-8deg)
         rotateX(4deg);
+
     transition:1s ease;
 }
 
 .browser:hover{
+
     transform:
         perspective(900px)
         rotateY(0)
@@ -853,18 +1334,29 @@ button{
 }
 
 .browser-top{
+
     height:34px;
-    border-bottom:1px solid rgba(255,255,255,.1);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.1);
+
     display:flex;
+
     align-items:center;
+
     gap:7px;
+
     padding:0 12px;
 }
 
 .browser-dot{
+
     width:7px;
     height:7px;
+
     border-radius:50%;
+
     background:#555;
 }
 
@@ -873,14 +1365,21 @@ button{
 }
 
 .browser-heading{
+
     font-size:45px;
+
     letter-spacing:-.06em;
+
     margin-bottom:25px;
 }
 
 .browser-line{
+
     height:5px;
-    background:rgba(255,255,255,.12);
+
+    background:
+        rgba(255,255,255,.12);
+
     margin-bottom:12px;
 }
 
@@ -893,39 +1392,61 @@ button{
 }
 
 .browser-boxes{
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:10px;
+
     margin-top:35px;
 }
 
 .browser-box{
+
     height:100px;
-    border:1px solid rgba(255,255,255,.1);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 }
 
-/* =========================================================
+/* =====================================================
    MEDIA
-========================================================= */
+===================================================== */
 
 .media-wall{
+
     position:relative;
+
     height:550px;
 }
 
 .media-frame{
+
     position:absolute;
+
     width:52%;
     height:65%;
-    border:1px solid rgba(255,255,255,.2);
+
+    border:
+        1px solid
+        rgba(255,255,255,.2);
+
     background:#101010;
+
     overflow:hidden;
 }
 
 .media-frame::after{
+
     content:"";
+
     position:absolute;
+
     inset:0;
+
     background:
         linear-gradient(
             135deg,
@@ -933,35 +1454,54 @@ button{
             rgba(255,255,255,.12),
             transparent 60%
         );
-    animation:sweep 4s ease-in-out infinite;
+
+    animation:
+        sweep
+        4s
+        ease-in-out
+        infinite;
 }
 
 @keyframes sweep{
-    from{transform:translateX(-100%);}
-    to{transform:translateX(100%);}
+
+    from{
+        transform:translateX(-100%);
+    }
+
+    to{
+        transform:translateX(100%);
+    }
 }
 
 .media-frame:nth-child(1){
+
     left:0;
     top:10%;
+
     transform:rotate(-6deg);
 }
 
 .media-frame:nth-child(2){
+
     right:2%;
     top:0;
+
     transform:rotate(5deg);
 }
 
 .media-frame:nth-child(3){
+
     left:22%;
     bottom:0;
+
     transform:rotate(-2deg);
 }
 
 .media-inner{
+
     width:100%;
     height:100%;
+
     background:
         radial-gradient(
             circle at 40% 40%,
@@ -975,150 +1515,254 @@ button{
         );
 }
 
-/* =========================================================
-   SOCIAL PHONE
-========================================================= */
+/* =====================================================
+   SOCIAL
+===================================================== */
 
 .social-stage{
+
     position:relative;
+
     height:600px;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 }
 
 .phone{
+
     position:relative;
+
     width:280px;
     height:560px;
-    border:8px solid #171717;
+
+    border:
+        8px solid
+        #171717;
+
     border-radius:38px;
+
     background:#050505;
+
     box-shadow:
-        0 40px 100px rgba(0,0,0,.8),
-        0 0 80px rgba(255,255,255,.05);
+        0 40px 100px
+        rgba(0,0,0,.8),
+        0 0 80px
+        rgba(255,255,255,.05);
+
     overflow:hidden;
+
     transform:rotate(-7deg);
+
     transition:1s ease;
 }
 
 .phone:hover{
-    transform:rotate(0deg) translateY(-20px);
+
+    transform:
+        rotate(0deg)
+        translateY(-20px);
 }
 
 .phone-notch{
+
     position:absolute;
+
     top:8px;
     left:50%;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     width:90px;
     height:22px;
+
     background:#111;
+
     border-radius:20px;
+
     z-index:4;
 }
 
 .feed{
+
     position:absolute;
+
     inset:0;
+
     padding-top:50px;
+
     overflow:hidden;
 }
 
 .feed-header{
+
     height:45px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:0 15px;
-    border-bottom:1px solid rgba(255,255,255,.1);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.1);
 }
 
 .feed-logo{
+
     font-weight:700;
+
     font-size:13px;
 }
 
 .feed-post{
+
     height:210px;
+
     margin:12px;
+
     background:
         radial-gradient(
             circle at 50% 35%,
             rgba(255,255,255,.22),
             transparent 25%
         ),
-        linear-gradient(135deg,#202020,#070707);
+        linear-gradient(
+            135deg,
+            #202020,
+            #070707
+        );
+
     position:relative;
+
     overflow:hidden;
 }
 
 .feed-post::after{
+
     content:"";
+
     position:absolute;
+
     width:180%;
+
     height:2px;
-    background:rgba(255,255,255,.3);
+
+    background:
+        rgba(255,255,255,.3);
+
     transform:rotate(-35deg);
+
     left:-50%;
     top:50%;
-    animation:feedLight 3s linear infinite;
+
+    animation:
+        feedLight
+        3s
+        linear
+        infinite;
 }
 
 @keyframes feedLight{
-    from{transform:rotate(-35deg) translateX(-50%);}
-    to{transform:rotate(-35deg) translateX(50%);}
+
+    from{
+        transform:
+            rotate(-35deg)
+            translateX(-50%);
+    }
+
+    to{
+        transform:
+            rotate(-35deg)
+            translateX(50%);
+    }
 }
 
 .feed-caption{
-    padding:0 14px 20px;
+
+    padding:
+        0 14px
+        20px;
+
     font-size:11px;
-    color:rgba(255,255,255,.5);
+
+    color:
+        rgba(255,255,255,.5);
 }
 
-/* =========================================================
+/* =====================================================
    GROWTH
-========================================================= */
+===================================================== */
 
 .growth-visual{
+
     height:500px;
+
     position:relative;
-    border-bottom:1px solid rgba(255,255,255,.15);
-    border-left:1px solid rgba(255,255,255,.15);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.15);
+
+    border-left:
+        1px solid
+        rgba(255,255,255,.15);
 }
 
 .growth-line{
+
     position:absolute;
+
     width:90%;
     height:4px;
+
     left:5%;
     bottom:18%;
+
     background:#fff;
+
     transform-origin:left;
+
     transform:rotate(-25deg);
-    box-shadow:0 0 30px rgba(255,255,255,.25);
+
+    box-shadow:
+        0 0 30px
+        rgba(255,255,255,.25);
 }
 
 .growth-arrow{
+
     position:absolute;
+
     right:4%;
     top:3%;
+
     font-size:70px;
+
     transform:rotate(-25deg);
 }
 
-.growth-points{
-    position:absolute;
-    inset:0;
-}
-
 .growth-point{
+
     position:absolute;
+
     width:9px;
     height:9px;
+
     background:#fff;
+
     border-radius:50%;
-    box-shadow:0 0 25px rgba(255,255,255,.5);
+
+    box-shadow:
+        0 0 25px
+        rgba(255,255,255,.5);
 }
 
 .growth-point:nth-child(1){
@@ -1141,58 +1785,100 @@ button{
     bottom:77%;
 }
 
-/* =========================================================
+/* =====================================================
    SERVICES
-========================================================= */
+===================================================== */
 
 .services{
+
     position:relative;
-    padding:15vw 5vw;
+
+    padding:
+        15vw
+        5vw;
+
     overflow:hidden;
 }
 
 .services-head{
+
     margin-bottom:100px;
 }
 
 .services-head small{
+
     font-size:11px;
+
     letter-spacing:.35em;
-    color:rgba(255,255,255,.35);
+
+    color:
+        rgba(255,255,255,.35);
 }
 
 .services-head h2{
+
     margin-top:25px;
-    font-size:clamp(60px,12vw,160px);
+
+    font-size:
+        clamp(
+            60px,
+            12vw,
+            160px
+        );
+
     line-height:.8;
+
     letter-spacing:-.08em;
 }
 
 .service-list{
-    border-top:1px solid rgba(255,255,255,.15);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.15);
 }
 
 .service{
+
     position:relative;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     min-height:110px;
-    border-bottom:1px solid rgba(255,255,255,.12);
-    padding:20px 10px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.12);
+
+    padding:
+        20px
+        10px;
+
     overflow:hidden;
+
     transition:.5s ease;
 }
 
 .service::before{
+
     content:"";
+
     position:absolute;
+
     left:-100%;
     top:0;
+
     width:100%;
     height:100%;
+
     background:#fff;
+
     transition:.5s ease;
+
     z-index:0;
 }
 
@@ -1201,70 +1887,118 @@ button{
 }
 
 .service:hover{
+
     color:#000;
+
     padding-left:30px;
 }
 
 .service-name{
+
     position:relative;
+
     z-index:1;
-    font-size:clamp(25px,4vw,55px);
+
+    font-size:
+        clamp(
+            25px,
+            4vw,
+            55px
+        );
+
     font-weight:300;
+
     letter-spacing:-.04em;
 }
 
 .service-number{
+
     position:relative;
+
     z-index:1;
+
     font-size:11px;
+
     letter-spacing:.2em;
+
     opacity:.5;
 }
 
 .service-arrow{
+
     position:relative;
+
     z-index:1;
+
     font-size:22px;
 }
 
-/* =========================================================
+/* =====================================================
    MANIFESTO
-========================================================= */
+===================================================== */
 
 .manifesto{
+
     min-height:90vh;
-    padding:15vw 8vw;
+
+    padding:
+        15vw
+        8vw;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     text-align:center;
+
     position:relative;
+
     overflow:hidden;
 }
 
 .manifesto::before{
+
     content:"";
+
     position:absolute;
+
     width:600px;
     height:600px;
+
     border-radius:50%;
-    background:radial-gradient(
-        circle,
-        rgba(255,255,255,.08),
-        transparent 65%
-    );
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.08),
+            transparent 65%
+        );
+
     filter:blur(30px);
 }
 
 .manifesto-content{
+
     position:relative;
+
     max-width:1100px;
 }
 
 .manifesto p{
-    font-size:clamp(35px,6vw,85px);
+
+    font-size:
+        clamp(
+            35px,
+            6vw,
+            85px
+        );
+
     line-height:1;
+
     letter-spacing:-.06em;
+
     font-weight:300;
 }
 
@@ -1272,43 +2006,71 @@ button{
     font-weight:700;
 }
 
-/* =========================================================
+/* =====================================================
    INSTAGRAM
-========================================================= */
+===================================================== */
 
 .instagram{
-    padding:12vw 5vw;
+
+    padding:
+        12vw
+        5vw;
+
     position:relative;
 }
 
 .instagram-head{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:end;
+
     margin-bottom:70px;
 }
 
 .instagram-head h2{
-    font-size:clamp(60px,11vw,150px);
+
+    font-size:
+        clamp(
+            60px,
+            11vw,
+            150px
+        );
+
     line-height:.8;
+
     letter-spacing:-.08em;
 }
 
 .instagram-head a{
+
     font-size:11px;
+
     letter-spacing:.2em;
-    border-bottom:1px solid rgba(255,255,255,.3);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.3);
+
     padding-bottom:8px;
 }
 
 .instagram-grid{
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:15px;
 }
 
 .instagram-item{
+
     aspect-ratio:1/1;
+
     background:
         radial-gradient(
             circle at 50% 40%,
@@ -1320,27 +2082,39 @@ button{
             #1b1b1b,
             #060606
         );
+
     position:relative;
+
     overflow:hidden;
+
     transition:.7s ease;
 }
 
 .instagram-item::after{
+
     content:"";
+
     position:absolute;
+
     inset:-100%;
-    background:linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,.16),
-        transparent
-    );
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,.16),
+            transparent
+        );
+
     transform:rotate(20deg);
+
     transition:1s;
 }
 
 .instagram-item:hover{
-    transform:translateY(-10px);
+
+    transform:
+        translateY(-10px);
 }
 
 .instagram-item:hover::after{
@@ -1348,31 +2122,47 @@ button{
 }
 
 .instagram-number{
+
     position:absolute;
+
     left:15px;
     bottom:15px;
+
     font-size:10px;
+
     letter-spacing:.2em;
-    color:rgba(255,255,255,.4);
+
+    color:
+        rgba(255,255,255,.4);
 }
 
-/* =========================================================
+/* =====================================================
    FINAL
-========================================================= */
+===================================================== */
 
 .final{
+
     min-height:100vh;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     text-align:center;
+
     position:relative;
+
     overflow:hidden;
 }
 
 .final-bg{
+
     position:absolute;
+
     inset:0;
+
     background:
         radial-gradient(
             circle at center,
@@ -1382,20 +2172,35 @@ button{
 }
 
 .final-content{
+
     position:relative;
+
     z-index:2;
 }
 
 .final-kicker{
+
     font-size:11px;
+
     letter-spacing:.4em;
-    color:rgba(255,255,255,.4);
+
+    color:
+        rgba(255,255,255,.4);
+
     margin-bottom:40px;
 }
 
 .final h2{
-    font-size:clamp(70px,15vw,220px);
+
+    font-size:
+        clamp(
+            70px,
+            15vw,
+            220px
+        );
+
     line-height:.75;
+
     letter-spacing:-.09em;
 }
 
@@ -1404,51 +2209,96 @@ button{
 }
 
 .final h2 .outline{
+
     color:transparent;
-    -webkit-text-stroke:1px rgba(255,255,255,.5);
+
+    -webkit-text-stroke:
+        1px
+        rgba(255,255,255,.5);
 }
 
 .final p{
-    margin:50px auto;
+
+    margin:
+        50px
+        auto;
+
     max-width:500px;
-    color:rgba(255,255,255,.55);
+
+    color:
+        rgba(255,255,255,.55);
+
     font-size:18px;
+
     line-height:1.6;
 }
 
 .cta{
+
     display:inline-flex;
+
     align-items:center;
+
     gap:25px;
-    padding:20px 30px;
-    border:1px solid rgba(255,255,255,.25);
+
+    padding:
+        20px
+        30px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
     transition:.5s;
 }
 
 .cta:hover{
+
     background:#fff;
+
     color:#000;
-    transform:translateY(-5px);
+
+    transform:
+        translateY(-5px);
 }
 
-/* =========================================================
+/* =====================================================
    CONTACT
-========================================================= */
+===================================================== */
 
 .contact{
-    padding:12vw 7vw;
-    border-top:1px solid rgba(255,255,255,.1);
+
+    padding:
+        12vw
+        7vw;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.1);
 }
 
 .contact-grid{
+
     display:grid;
-    grid-template-columns:1fr 1fr;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
     gap:10vw;
 }
 
 .contact h2{
-    font-size:clamp(60px,10vw,140px);
+
+    font-size:
+        clamp(
+            60px,
+            10vw,
+            140px
+        );
+
     line-height:.8;
+
     letter-spacing:-.08em;
 }
 
@@ -1457,8 +2307,12 @@ button{
 }
 
 .contact-info p{
-    color:rgba(255,255,255,.5);
+
+    color:
+        rgba(255,255,255,.5);
+
     line-height:1.7;
+
     max-width:450px;
 }
 
@@ -1467,19 +2321,33 @@ button{
 }
 
 .field{
-    border-bottom:1px solid rgba(255,255,255,.2);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.2);
+
     margin-bottom:30px;
 }
 
 .field input,
 .field textarea{
+
     width:100%;
+
     background:transparent;
+
     border:0;
+
     outline:none;
+
     color:#fff;
-    padding:15px 0;
+
+    padding:
+        15px
+        0;
+
     font-size:17px;
+
     resize:none;
 }
 
@@ -1489,64 +2357,101 @@ button{
 
 .field input::placeholder,
 .field textarea::placeholder{
-    color:rgba(255,255,255,.3);
+
+    color:
+        rgba(255,255,255,.3);
 }
 
 .form-button{
-    border:1px solid rgba(255,255,255,.25);
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
     background:transparent;
+
     color:#fff;
-    padding:17px 30px;
+
+    padding:
+        17px
+        30px;
+
     cursor:pointer;
+
     transition:.4s;
 }
 
 .form-button:hover{
+
     background:#fff;
+
     color:#000;
 }
 
-/* =========================================================
+/* =====================================================
    FOOTER
-========================================================= */
+===================================================== */
 
 footer{
-    padding:40px 5vw;
-    border-top:1px solid rgba(255,255,255,.1);
+
+    padding:
+        40px
+        5vw;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.1);
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
-    color:rgba(255,255,255,.4);
+
+    color:
+        rgba(255,255,255,.4);
+
     font-size:11px;
+
     letter-spacing:.12em;
 }
 
 .footer-logo{
+
     color:#fff;
+
     font-size:16px;
+
     font-weight:700;
 }
 
-/* =========================================================
+/* =====================================================
    REVEAL
-========================================================= */
+===================================================== */
 
 .reveal{
+
     opacity:0;
-    transform:translateY(60px);
+
+    transform:
+        translateY(60px);
+
     transition:
         opacity 1.2s ease,
         transform 1.2s ease;
 }
 
 .reveal.visible{
+
     opacity:1;
-    transform:translateY(0);
+
+    transform:
+        translateY(0);
 }
 
-/* =========================================================
+/* =====================================================
    MOBILE
-========================================================= */
+===================================================== */
 
 @media(max-width:800px){
 
@@ -1571,21 +2476,30 @@ footer{
     }
 
     .hero-description{
+
         font-size:15px;
+
         margin-top:40px;
     }
 
     .scene{
+
         min-height:auto;
-        padding:120px 20px;
+
+        padding:
+            120px
+            20px;
     }
 
     .scene-content{
+
         grid-template-columns:1fr;
+
         gap:60px;
     }
 
     .scene-title{
+
         font-size:22vw;
     }
 
@@ -1607,7 +2521,9 @@ footer{
     }
 
     .services{
-        padding:130px 20px;
+        padding:
+            130px
+            20px;
     }
 
     .service{
@@ -1623,7 +2539,10 @@ footer{
     }
 
     .instagram{
-        padding:120px 20px;
+
+        padding:
+            120px
+            20px;
     }
 
     .instagram-head{
@@ -1631,27 +2550,43 @@ footer{
     }
 
     .instagram-head a{
+
         display:inline-block;
+
         margin-top:35px;
     }
 
     .instagram-grid{
-        grid-template-columns:1fr 1fr;
+
+        grid-template-columns:
+            1fr
+            1fr;
     }
 
     .contact{
-        padding:120px 20px;
+
+        padding:
+            120px
+            20px;
     }
 
     .contact-grid{
+
         grid-template-columns:1fr;
+
         gap:80px;
     }
 
     footer{
-        padding:30px 20px;
+
+        padding:
+            30px
+            20px;
+
         flex-direction:column;
+
         gap:15px;
+
         text-align:center;
     }
 
@@ -1660,12 +2595,24 @@ footer{
     }
 
     .intro-ring{
+
         width:90vw;
         height:90vw;
     }
 
     .intro-word{
+
         font-size:23vw;
+    }
+
+    .intro-final p{
+        font-size:16px;
+        padding:0 20px;
+    }
+
+    .enter-button{
+        padding:18px 22px;
+        font-size:10px;
     }
 }
 </style>
@@ -1674,15 +2621,19 @@ footer{
 <body class="locked">
 
 <!-- =====================================================
-     CINEMATIC INTRO
+     INTRO
 ===================================================== -->
 
 <section id="intro">
 
     <div class="intro-background"></div>
+
     <div class="intro-noise"></div>
+
     <div class="intro-grid"></div>
+
     <div class="intro-light"></div>
+
     <div class="intro-ring"></div>
 
     <div class="intro-lines">
@@ -1691,7 +2642,11 @@ footer{
         <span></span>
     </div>
 
-    <div class="intro-particles" id="introParticles"></div>
+    <div
+        class="intro-particles"
+        id="introParticles">
+    </div>
+
 
     <div class="intro-content">
 
@@ -1701,35 +2656,67 @@ footer{
                 Eine digitale Reise beginnt
             </div>
 
-            <div class="intro-title" id="introTitle">
-                Alles beginnt<br>mit einer Idee.
+            <div
+                class="intro-title"
+                id="introTitle">
+
+                Alles beginnt<br>
+                mit einer Idee.
+
             </div>
 
-            <div class="intro-subtitle" id="introSubtitle">
+            <div
+                class="intro-subtitle"
+                id="introSubtitle">
+
                 Ein Gedanke. Ein Bild. Eine Vision.
+
             </div>
 
         </div>
 
     </div>
 
-    <div class="intro-word" id="word1">
+
+    <div
+        class="intro-word"
+        id="word1">
+
         FORM
+
     </div>
 
-    <div class="intro-word" id="word2">
+
+    <div
+        class="intro-word"
+        id="word2">
+
         DESIGN
+
     </div>
 
-    <div class="intro-word" id="word3">
+
+    <div
+        class="intro-word"
+        id="word3">
+
         BEWEGUNG
+
     </div>
 
-    <div class="intro-word" id="word4">
+
+    <div
+        class="intro-word"
+        id="word4">
+
         WIRKUNG
+
     </div>
 
-    <div class="intro-brand" id="introBrand">
+
+    <div
+        class="intro-brand"
+        id="introBrand">
 
         <div class="intro-brand-name">
             SOCIALCLIP
@@ -1741,7 +2728,15 @@ footer{
 
     </div>
 
-    <div class="intro-final" id="introFinal">
+
+    <!-- WICHTIG:
+         Dieser Bereich liegt ganz oben
+         und kann jetzt sicher geklickt werden.
+    -->
+
+    <div
+        class="intro-final"
+        id="introFinal">
 
         <h2>
             Hallo.
@@ -1753,9 +2748,12 @@ footer{
         </p>
 
         <button
+            type="button"
             class="enter-button"
             id="enterButton">
+
             DIGITALE WELT BETRETEN →
+
         </button>
 
     </div>
@@ -1777,19 +2775,27 @@ footer{
 
 
 <!-- =====================================================
-     MAIN WEBSITE
+     WEBSITE
 ===================================================== -->
 
 <div id="website">
 
-    <div class="cursor-light" id="cursorLight"></div>
+    <div
+        class="cursor-light"
+        id="cursorLight">
+    </div>
+
 
     <!-- NAVIGATION -->
 
     <nav class="nav">
 
-        <a href="#" class="logo">
+        <a
+            href="#"
+            class="logo">
+
             SOCIALCLIP
+
         </a>
 
         <div class="nav-links">
@@ -1816,6 +2822,7 @@ footer{
     <section class="hero">
 
         <div class="hero-bg"></div>
+
         <div class="hero-grid"></div>
 
         <div class="hero-content reveal">
@@ -1841,9 +2848,13 @@ footer{
             </h1>
 
             <p class="hero-description">
-                SocialClip verbindet Gestaltung, digitale Technologien,
-                Social Media und Marketing zu digitalen Erlebnissen,
-                die nicht einfach nur gut aussehen – sondern etwas bewirken.
+
+                SocialClip verbindet Gestaltung,
+                digitale Technologien, Social Media
+                und Marketing zu digitalen Erlebnissen,
+                die nicht einfach nur gut aussehen –
+                sondern etwas bewirken.
+
             </p>
 
         </div>
@@ -1886,7 +2897,7 @@ footer{
     </div>
 
 
-    <!-- CREATE -->
+    <!-- ERSTELLEN -->
 
     <section class="scene reveal">
 
@@ -2001,8 +3012,9 @@ footer{
                 <div class="scene-text">
 
                     <p>
-                        Webseiten, digitale Auftritte und individuelle
-                        Programmierungen, die nicht nach Vorlage aussehen.
+                        Webseiten, digitale Auftritte
+                        und individuelle Programmierungen,
+                        die nicht nach Vorlage aussehen.
                     </p>
 
                 </div>
@@ -2138,8 +3150,9 @@ footer{
                 <div class="scene-text">
 
                     <p>
-                        Social Media, Content und digitale Kommunikation
-                        werden zu einer Geschichte, die Menschen
+                        Social Media, Content und digitale
+                        Kommunikation werden zu einer
+                        Geschichte, die Menschen
                         entdecken möchten.
                     </p>
 
@@ -2152,7 +3165,7 @@ footer{
     </section>
 
 
-    <!-- GROW -->
+    <!-- WACHSTUM -->
 
     <section class="scene reveal">
 
@@ -2194,14 +3207,10 @@ footer{
                     ↗
                 </div>
 
-                <div class="growth-points">
-
-                    <div class="growth-point"></div>
-                    <div class="growth-point"></div>
-                    <div class="growth-point"></div>
-                    <div class="growth-point"></div>
-
-                </div>
+                <div class="growth-point"></div>
+                <div class="growth-point"></div>
+                <div class="growth-point"></div>
+                <div class="growth-point"></div>
 
             </div>
 
@@ -2210,7 +3219,7 @@ footer{
     </section>
 
 
-    <!-- SERVICES -->
+    <!-- LEISTUNGEN -->
 
     <section
         class="services"
@@ -2232,85 +3241,113 @@ footer{
 
             <div class="service reveal">
                 <span class="service-number">01</span>
-                <span class="service-name">Webseiten erstellen</span>
+                <span class="service-name">
+                    Webseiten erstellen
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">02</span>
-                <span class="service-name">Flyer erstellen</span>
+                <span class="service-name">
+                    Flyer erstellen
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">03</span>
-                <span class="service-name">Online Marketing</span>
+                <span class="service-name">
+                    Online Marketing
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">04</span>
-                <span class="service-name">Visitenkarten erstellen</span>
+                <span class="service-name">
+                    Visitenkarten erstellen
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">05</span>
-                <span class="service-name">Social Media Assistant</span>
+                <span class="service-name">
+                    Social Media Assistant
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">06</span>
-                <span class="service-name">Logo erstellen</span>
+                <span class="service-name">
+                    Logo erstellen
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">07</span>
-                <span class="service-name">Video &amp; Foto Editor</span>
+                <span class="service-name">
+                    Video &amp; Foto Editor
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">08</span>
-                <span class="service-name">Lebenslauf erstellen</span>
+                <span class="service-name">
+                    Lebenslauf erstellen
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">09</span>
-                <span class="service-name">Speisekarte erstellen</span>
+                <span class="service-name">
+                    Speisekarte erstellen
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">10</span>
-                <span class="service-name">Virtueller Assistent</span>
+                <span class="service-name">
+                    Virtueller Assistent
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">11</span>
-                <span class="service-name">Programmierung</span>
+                <span class="service-name">
+                    Programmierung
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">12</span>
-                <span class="service-name">Neukundengewinnung</span>
+                <span class="service-name">
+                    Neukundengewinnung
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">13</span>
-                <span class="service-name">Strategieentwicklung</span>
+                <span class="service-name">
+                    Strategieentwicklung
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
             <div class="service reveal">
                 <span class="service-number">14</span>
-                <span class="service-name">TikTok Marketing</span>
+                <span class="service-name">
+                    TikTok Marketing
+                </span>
                 <span class="service-arrow">↗</span>
             </div>
 
@@ -2319,7 +3356,7 @@ footer{
     </section>
 
 
-    <!-- MANIFESTO -->
+    <!-- MANIFEST -->
 
     <section class="manifesto reveal">
 
@@ -2347,14 +3384,18 @@ footer{
 
             <h2>
                 SOCIAL<br>
-                <span style="font-weight:300;">CLIP.</span>
+                <span style="font-weight:300;">
+                    CLIP.
+                </span>
             </h2>
 
             <a
                 href="https://www.instagram.com/socialclip.art/"
                 target="_blank"
                 rel="noopener">
+
                 INSTAGRAM BESUCHEN →
+
             </a>
 
         </div>
@@ -2364,6 +3405,7 @@ footer{
             <a
                 href="https://www.instagram.com/socialclip.art/"
                 target="_blank"
+                rel="noopener"
                 class="instagram-item reveal">
 
                 <span class="instagram-number">
@@ -2375,6 +3417,7 @@ footer{
             <a
                 href="https://www.instagram.com/socialclip.art/"
                 target="_blank"
+                rel="noopener"
                 class="instagram-item reveal">
 
                 <span class="instagram-number">
@@ -2386,6 +3429,7 @@ footer{
             <a
                 href="https://www.instagram.com/socialclip.art/"
                 target="_blank"
+                rel="noopener"
                 class="instagram-item reveal">
 
                 <span class="instagram-number">
@@ -2397,6 +3441,7 @@ footer{
             <a
                 href="https://www.instagram.com/socialclip.art/"
                 target="_blank"
+                rel="noopener"
                 class="instagram-item reveal">
 
                 <span class="instagram-number">
@@ -2408,6 +3453,7 @@ footer{
             <a
                 href="https://www.instagram.com/socialclip.art/"
                 target="_blank"
+                rel="noopener"
                 class="instagram-item reveal">
 
                 <span class="instagram-number">
@@ -2419,6 +3465,7 @@ footer{
             <a
                 href="https://www.instagram.com/socialclip.art/"
                 target="_blank"
+                rel="noopener"
                 class="instagram-item reveal">
 
                 <span class="instagram-number">
@@ -2457,14 +3504,20 @@ footer{
             </h2>
 
             <p>
-                Deine Idee muss nicht aussehen wie alles andere.
-                Lass uns etwas daraus machen, das man nicht vergisst.
+
+                Deine Idee muss nicht aussehen
+                wie alles andere.
+                Lass uns etwas daraus machen,
+                das man nicht vergisst.
+
             </p>
 
             <a
                 href="#kontakt"
                 class="cta">
+
                 PROJEKT STARTEN →
+
             </a>
 
         </div>
@@ -2472,7 +3525,7 @@ footer{
     </section>
 
 
-    <!-- CONTACT -->
+    <!-- KONTAKT -->
 
     <section
         class="contact"
@@ -2483,8 +3536,10 @@ footer{
             <div class="reveal">
 
                 <h2>
+
                     LASS UNS<br>
                     REDEN.
+
                 </h2>
 
             </div>
@@ -2492,11 +3547,18 @@ footer{
             <div class="contact-info reveal">
 
                 <p>
-                    Du hast eine Idee, ein Projekt oder möchtest
-                    einfach wissen, was möglich ist?
-                    Schreib uns. Gemeinsam machen wir daraus
+
+                    Du hast eine Idee, ein Projekt
+                    oder möchtest einfach wissen,
+                    was möglich ist?
+
+                    Schreib uns.
+
+                    Gemeinsam machen wir daraus
                     etwas Besonderes.
+
                 </p>
+
 
                 <form
                     class="contact-form"
@@ -2572,12 +3634,14 @@ footer{
 
 <script>
 
-/* =========================================================
-   INTRO PARTICLES
-========================================================= */
+/* =====================================================
+   PARTIKEL
+===================================================== */
 
 const particleContainer =
-    document.getElementById("introParticles");
+    document.getElementById(
+        "introParticles"
+    );
 
 for(let i = 0; i < 55; i++){
 
@@ -2599,318 +3663,464 @@ for(let i = 0; i < 55; i++){
     particle.style.animationDuration =
         5 + Math.random() * 8 + "s";
 
-    particleContainer.appendChild(particle);
+    particleContainer.appendChild(
+        particle
+    );
 }
 
 
-/* =========================================================
-   INTRO TIMELINE
-========================================================= */
-
-const introTitle =
-    document.getElementById("introTitle");
-
-const introSubtitle =
-    document.getElementById("introSubtitle");
-
-const words = [
-    document.getElementById("word1"),
-    document.getElementById("word2"),
-    document.getElementById("word3"),
-    document.getElementById("word4")
-];
-
-const introBrand =
-    document.getElementById("introBrand");
-
-const introFinal =
-    document.getElementById("introFinal");
-
-
-setTimeout(() => {
-    introTitle.classList.add("show");
-}, 1000);
-
-
-setTimeout(() => {
-    introSubtitle.classList.add("show");
-}, 2300);
-
-
-setTimeout(() => {
-    introTitle.classList.remove("show");
-    introSubtitle.classList.remove("show");
-    words[0].classList.add("show");
-}, 5000);
-
-
-setTimeout(() => {
-
-    words[0].classList.remove("show");
-    words[1].classList.add("show");
-
-}, 7500);
-
-
-setTimeout(() => {
-
-    words[1].classList.remove("show");
-    words[2].classList.add("show");
-
-}, 10000);
-
-
-setTimeout(() => {
-
-    words[2].classList.remove("show");
-    words[3].classList.add("show");
-
-}, 12500);
-
-
-setTimeout(() => {
-
-    words[3].classList.remove("show");
-    introBrand.classList.add("show");
-
-}, 15000);
-
-
-setTimeout(() => {
-
-    introBrand.classList.remove("show");
-    introFinal.classList.add("show");
-
-}, 18000);
-
-
-/* =========================================================
-   ENTER WEBSITE
-========================================================= */
-
-const enterButton =
-    document.getElementById("enterButton");
+/* =====================================================
+   INTRO ELEMENTE
+===================================================== */
 
 const intro =
     document.getElementById("intro");
 
+const introTitle =
+    document.getElementById(
+        "introTitle"
+    );
+
+const introSubtitle =
+    document.getElementById(
+        "introSubtitle"
+    );
+
+const words = [
+
+    document.getElementById("word1"),
+    document.getElementById("word2"),
+    document.getElementById("word3"),
+    document.getElementById("word4")
+
+];
+
+const introBrand =
+    document.getElementById(
+        "introBrand"
+    );
+
+const introFinal =
+    document.getElementById(
+        "introFinal"
+    );
+
+const enterButton =
+    document.getElementById(
+        "enterButton"
+    );
+
 const transition =
-    document.getElementById("transition");
-
-
-enterButton.addEventListener("click", () => {
-
-    introFinal.classList.remove("show");
-
-    transition.classList.add("active");
-
-    setTimeout(() => {
-
-        intro.classList.add("hide");
-
-        document.body.classList.remove("locked");
-
-        window.scrollTo(0,0);
-
-    }, 1700);
-
-    setTimeout(() => {
-
-        transition.classList.remove("active");
-
-    }, 2800);
-
-});
-
-
-/* =========================================================
-   CURSOR LIGHT
-========================================================= */
-
-const cursor =
-    document.getElementById("cursorLight");
-
-window.addEventListener("mousemove", e => {
-
-    cursor.style.left =
-        e.clientX + "px";
-
-    cursor.style.top =
-        e.clientY + "px";
-
-});
-
-
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-const observer =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if(entry.isIntersecting){
-
-                    entry.target.classList.add("visible");
-
-                }
-
-            });
-
-        },
-        {
-            threshold:.12
-        }
+    document.getElementById(
+        "transition"
     );
 
 
-revealElements.forEach(el => {
+/* =====================================================
+   INTRO ABLAUF
+===================================================== */
 
-    observer.observe(el);
+setTimeout(() => {
 
-});
+    introTitle.classList.add(
+        "show"
+    );
+
+},1000);
 
 
-/* =========================================================
-   PARALLAX
-========================================================= */
+setTimeout(() => {
 
-window.addEventListener("scroll", () => {
+    introSubtitle.classList.add(
+        "show"
+    );
 
-    const scroll =
-        window.scrollY;
+},2300);
 
-    const heroGrid =
-        document.querySelector(".hero-grid");
 
-    if(heroGrid){
+setTimeout(() => {
 
-        heroGrid.style.transform =
+    introTitle.classList.remove(
+        "show"
+    );
+
+    introSubtitle.classList.remove(
+        "show"
+    );
+
+    words[0].classList.add(
+        "show"
+    );
+
+},5000);
+
+
+setTimeout(() => {
+
+    words[0].classList.remove(
+        "show"
+    );
+
+    words[1].classList.add(
+        "show"
+    );
+
+},7500);
+
+
+setTimeout(() => {
+
+    words[1].classList.remove(
+        "show"
+    );
+
+    words[2].classList.add(
+        "show"
+    );
+
+},10000);
+
+
+setTimeout(() => {
+
+    words[2].classList.remove(
+        "show"
+    );
+
+    words[3].classList.add(
+        "show"
+    );
+
+},12500);
+
+
+setTimeout(() => {
+
+    words[3].classList.remove(
+        "show"
+    );
+
+    introBrand.classList.add(
+        "show"
+    );
+
+},15000);
+
+
+setTimeout(() => {
+
+    introBrand.classList.remove(
+        "show"
+    );
+
+    introFinal.classList.add(
+        "show"
+    );
+
+},18000);
+
+
+/* =====================================================
+   BUTTON — DIGITALE WELT BETRETEN
+===================================================== */
+
+enterButton.addEventListener(
+    "click",
+    function(){
+
+        /* Button sofort deaktivieren,
+           damit kein Doppelklick möglich ist */
+
+        enterButton.disabled = true;
+
+        /* Intro ausblenden */
+
+        introFinal.style.pointerEvents =
+            "none";
+
+        /* Übergang starten */
+
+        transition.classList.add(
+            "active"
+        );
+
+        /* Nach kurzer Kamerafahrt
+           Intro komplett entfernen */
+
+        setTimeout(() => {
+
+            intro.classList.add(
+                "hide"
+            );
+
+            document.body.classList.remove(
+                "locked"
+            );
+
+            window.scrollTo(
+                0,
+                0
+            );
+
+        },1600);
+
+
+        setTimeout(() => {
+
+            transition.classList.remove(
+                "active"
+            );
+
+        },2800);
+
+    }
+);
+
+
+/* =====================================================
+   CURSOR
+===================================================== */
+
+const cursor =
+    document.getElementById(
+        "cursorLight"
+    );
+
+window.addEventListener(
+    "mousemove",
+    e => {
+
+        cursor.style.left =
+            e.clientX + "px";
+
+        cursor.style.top =
+            e.clientY + "px";
+
+    }
+);
+
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+const revealElements =
+    document.querySelectorAll(
+        ".reveal"
+    );
+
+const observer =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+
+        {
+            threshold:.12
+        }
+
+    );
+
+
+revealElements.forEach(
+    element => {
+
+        observer.observe(
+            element
+        );
+
+    }
+);
+
+
+/* =====================================================
+   HERO PARALLAX
+===================================================== */
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const scroll =
+            window.scrollY;
+
+        const heroGrid =
+            document.querySelector(
+                ".hero-grid"
+            );
+
+        if(heroGrid){
+
+            heroGrid.style.transform =
+
+                `
+                perspective(800px)
+                rotateX(60deg)
+                scale(1.5)
+                translateY(${scroll * .08}px)
+                `;
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PHONE PARALLAX
+===================================================== */
+
+const phone =
+    document.querySelector(
+        ".phone"
+    );
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if(!phone) return;
+
+        const rect =
+            phone.getBoundingClientRect();
+
+        const center =
+            window.innerHeight / 2;
+
+        const difference =
+            rect.top - center;
+
+        const rotation =
+            Math.max(
+                -12,
+                Math.min(
+                    12,
+                    difference * -.015
+                )
+            );
+
+        const movement =
+            Math.max(
+                -30,
+                Math.min(
+                    30,
+                    difference * -.05
+                )
+            );
+
+        phone.style.transform =
+
             `
-            perspective(800px)
-            rotateX(60deg)
-            scale(1.5)
-            translateY(${scroll * .08}px)
+            rotate(${rotation - 2}deg)
+            translateY(${movement}px)
             `;
 
     }
-
-});
-
-
-/* =========================================================
-   PHONE PARALLAX
-========================================================= */
-
-const phone =
-    document.querySelector(".phone");
-
-window.addEventListener("scroll", () => {
-
-    if(!phone) return;
-
-    const rect =
-        phone.getBoundingClientRect();
-
-    const center =
-        window.innerHeight / 2;
-
-    const difference =
-        rect.top - center;
-
-    const rotation =
-        Math.max(
-            -12,
-            Math.min(12, difference * -.015)
-        );
-
-    const movement =
-        Math.max(
-            -30,
-            Math.min(30, difference * -.05)
-        );
-
-    phone.style.transform =
-        `
-        rotate(${rotation - 2}deg)
-        translateY(${movement}px)
-        `;
-
-});
+);
 
 
-/* =========================================================
-   SERVICE MOUSE EFFECT
-========================================================= */
+/* =====================================================
+   SERVICE EFFEKT
+===================================================== */
 
-document.querySelectorAll(".service")
-.forEach(service => {
+document
+    .querySelectorAll(".service")
+    .forEach(
+        service => {
 
-    service.addEventListener(
-        "mousemove",
-        e => {
+            service.addEventListener(
+                "mousemove",
+                event => {
 
-            const rect =
-                service.getBoundingClientRect();
+                    const rect =
+                        service.getBoundingClientRect();
 
-            const x =
-                e.clientX - rect.left;
+                    const x =
+                        event.clientX -
+                        rect.left;
 
-            const percentage =
-                x / rect.width;
+                    service.style.setProperty(
+                        "--mouse-x",
+                        x / rect.width
+                    );
 
-            service.style.setProperty(
-                "--mouse-x",
-                percentage
+                }
             );
 
         }
     );
 
-});
+
+/* =====================================================
+   INTRO NICHT MIT MAUSRAD ÜBERSPRINGEN
+===================================================== */
+
+window.addEventListener(
+    "wheel",
+    event => {
+
+        if(
+            document.body.classList.contains(
+                "locked"
+            )
+        ){
+
+            event.preventDefault();
+
+        }
+
+    },
+    {
+        passive:false
+    }
+);
 
 
-/* =========================================================
-   PREVENT INTRO SCROLL
-========================================================= */
+/* =====================================================
+   ENTER-TASTE
+===================================================== */
 
-window.addEventListener("wheel", e => {
+document.addEventListener(
+    "keydown",
+    event => {
 
-    if(
-        document.body.classList.contains("locked")
-    ){
+        if(
 
-        e.preventDefault();
+            event.key === "Enter" &&
+
+            document.body.classList.contains(
+                "locked"
+            ) &&
+
+            introFinal.classList.contains(
+                "show"
+            )
+
+        ){
+
+            enterButton.click();
+
+        }
 
     }
-
-},{
-    passive:false
-});
-
-
-/* =========================================================
-   KEYBOARD ENTER
-========================================================= */
-
-document.addEventListener("keydown", e => {
-
-    if(
-        e.key === "Enter" &&
-        document.body.classList.contains("locked") &&
-        introFinal.classList.contains("show")
-    ){
-
-        enterButton.click();
-
-    }
-
-});
+);
 
 </script>
 
