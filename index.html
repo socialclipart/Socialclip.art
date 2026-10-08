@@ -967,77 +967,6 @@ section{
 }
 
 /* =========================
-   CALCULATOR
-========================= */
-
-.calc-options{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-top:35px;
-}
-
-.calc-option{
-  padding:18px;
-  border:1px solid rgba(255,255,255,.12);
-  background:#0b0b0b;
-  color:#aaa69e;
-  cursor:pointer;
-  text-align:left;
-  transition:.3s ease;
-}
-
-.calc-option:hover{
-  border-color:rgba(255,255,255,.3);
-  color:#fff;
-}
-
-.calc-option.active{
-  background:#fff;
-  color:#050505;
-  border-color:#fff;
-}
-
-.calc-option strong{
-  display:block;
-  font-size:14px;
-  font-weight:400;
-}
-
-.calc-option span{
-  display:block;
-  margin-top:6px;
-  font-size:9px;
-  opacity:.65;
-}
-
-.price-result{
-  margin-top:30px;
-  padding:28px;
-
-  border:1px solid var(--line);
-  background:#0b0b0b;
-}
-
-.price-label{
-  color:#65615b;
-  font-size:8px;
-  letter-spacing:.2em;
-}
-
-.price{
-  margin-top:10px;
-  font-size:clamp(38px,7vw,75px);
-  letter-spacing:-.06em;
-}
-
-.price-note{
-  margin-top:8px;
-  color:#77736c;
-  font-size:10px;
-}
-
-/* =========================
    BRIEFING
 ========================= */
 
@@ -1612,8 +1541,7 @@ footer strong{
     min-height:280px;
   }
 
-  .service-selector,
-  .calc-options{
+  .service-selector{
     grid-template-columns:1fr;
   }
 
@@ -1917,27 +1845,7 @@ footer strong{
     <div class="widget-card reveal">
 
       <div class="widget-number">
-        TOOL 02 / CALCULATOR
-      </div>
-
-      <h3>
-        Projekt-Kalkulator
-      </h3>
-
-      <p>
-        Stelle dein Projekt zusammen und erhalte eine grobe Orientierung.
-      </p>
-
-      <button class="widget-open" data-widget="calculatorWidget">
-        KALKULIEREN →
-      </button>
-
-    </div>
-
-    <div class="widget-card reveal">
-
-      <div class="widget-number">
-        TOOL 03 / BRIEFING
+        TOOL 02 / BRIEFING
       </div>
 
       <h3>
@@ -2250,103 +2158,6 @@ footer strong{
      WIDGET 02
 ========================= -->
 
-<div class="widget-overlay" id="calculatorWidget">
-
-  <div class="widget-window">
-
-    <div class="widget-head">
-      <div class="widget-head-label">
-        SOCIALCLIP / ESTIMATE
-      </div>
-
-      <button class="widget-close">
-        ×
-      </button>
-    </div>
-
-    <div class="widget-body">
-
-      <h3>
-        Was könnte dein<br>
-        <span>Projekt kosten?</span>
-      </h3>
-
-      <p class="widget-sub">
-        Eine unverbindliche Orientierung – kein verbindliches Angebot.
-      </p>
-
-      <div class="calc-options">
-
-        <!-- GÜNSTIGERE EINSTIEGSPREISE -->
-
-        <button class="calc-option" data-price="149">
-          <strong>Logo</strong>
-          <span>ab ca. 149 €</span>
-        </button>
-
-        <button class="calc-option" data-price="79">
-          <strong>Flyer</strong>
-          <span>ab ca. 79 €</span>
-        </button>
-
-        <button class="calc-option" data-price="59">
-          <strong>Visitenkarte</strong>
-          <span>ab ca. 59 €</span>
-        </button>
-
-        <button class="calc-option" data-price="399">
-          <strong>Webseite</strong>
-          <span>ab ca. 399 €</span>
-        </button>
-
-        <button class="calc-option" data-price="199">
-          <strong>Social Media</strong>
-          <span>ab ca. 199 €</span>
-        </button>
-
-        <button class="calc-option" data-price="249">
-          <strong>Marketing</strong>
-          <span>ab ca. 249 €</span>
-        </button>
-
-        <button class="calc-option" data-price="149">
-          <strong>Video & Foto</strong>
-          <span>ab ca. 149 €</span>
-        </button>
-
-        <button class="calc-option" data-price="299">
-          <strong>Programmierung</strong>
-          <span>ab ca. 299 €</span>
-        </button>
-
-      </div>
-
-      <div class="price-result">
-
-        <div class="price-label">
-          GROBE ORIENTIERUNG
-        </div>
-
-        <div class="price" id="priceResult">
-          0 €
-        </div>
-
-        <div class="price-note">
-          Je nach Umfang, Aufwand und individuellen Anforderungen.
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-<!-- =========================
-     WIDGET 03
-========================= -->
-
 <div class="widget-overlay" id="briefingWidget">
 
   <div class="widget-window">
@@ -2629,13 +2440,9 @@ const introTexts = [
 
   "Alles beginnt mit einer Idee.",
 
-  "Ein Gedanke. Ein Bild. Eine Vision.",
-
   "Wir geben dieser Idee eine Form.",
 
   "Wir verbinden Design mit Bewegung.",
-
-  "Aus Aufmerksamkeit wird Wirkung.",
 
   "Willkommen bei SocialClip."
 
@@ -2675,7 +2482,7 @@ function showNextIntroText(){
 
       enterButton.classList.add("show");
 
-    },500);
+    },250);
 
     return;
 
@@ -2704,9 +2511,9 @@ function showNextIntroText(){
 
       showNextIntroText();
 
-    },1900);
+    },1000);
 
-  },700);
+  },350);
 
 }
 
@@ -2739,11 +2546,11 @@ setTimeout(()=>{
 
       showNextIntroText();
 
-    },1900);
+    },1000);
 
-  },500);
+  },300);
 
-},1200);
+},800);
 
 
 /*
@@ -2751,7 +2558,7 @@ setTimeout(()=>{
    Läuft nur während des Intros.
 */
 
-const introDuration = 12500;
+const introDuration = 9000;
 
 const introStart =
   performance.now();
@@ -3253,63 +3060,6 @@ document
 
 /* =========================
    WIDGET 02
-   CALCULATOR
-========================= */
-
-let totalPrice = 0;
-
-const calcButtons =
-  document.querySelectorAll(
-    ".calc-option"
-  );
-
-const priceResult =
-  document.getElementById(
-    "priceResult"
-  );
-
-calcButtons.forEach(button=>{
-
-  button.addEventListener(
-    "click",
-    ()=>{
-
-      const price =
-        Number(
-          button.dataset.price
-        );
-
-      if(button.classList.contains("active")){
-
-        button.classList.remove(
-          "active"
-        );
-
-        totalPrice -= price;
-
-      }else{
-
-        button.classList.add(
-          "active"
-        );
-
-        totalPrice += price;
-
-      }
-
-      priceResult.textContent =
-        totalPrice.toLocaleString(
-          "de-DE"
-        ) + " €";
-
-    }
-  );
-
-});
-
-
-/* =========================
-   WIDGET 03
    BRIEFING
 ========================= */
 
