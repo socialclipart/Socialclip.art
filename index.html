@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SocialClip Art & Media</title>
+  <title>SocialClip — Art & Media</title>
 
   <meta
     name="description"
-    content="SocialClip Art & Media – Webdesign, Social Media, Design, Foto, Video und digitale Lösungen aus Erlangen."
+    content="SocialClip Art & Media – Digital, Design, Social Media, Foto, Video und kreative Lösungen."
   >
 
   <style>
@@ -18,15 +18,23 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --bg: #050505;
+      --text: #f5f5f5;
+      --muted: #8d8d8d;
+      --line: rgba(255,255,255,.1);
+      --glass: rgba(255,255,255,.055);
+    }
+
     html {
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #080808;
-      color: #ffffff;
-      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
     }
 
     a {
@@ -34,24 +42,69 @@
       text-decoration: none;
     }
 
+    /* ---------- BACKGROUND ---------- */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .orb {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: .18;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      background: #ffffff;
+      top: -250px;
+      right: -150px;
+    }
+
+    .orb.two {
+      background: #777;
+      bottom: -300px;
+      left: -200px;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+
+      to {
+        transform: translate(-60px, 50px) scale(1.15);
+      }
+    }
+
+    /* ---------- HEADER ---------- */
+
     header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      padding: 20px 7%;
+      padding: 22px 6%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(8, 8, 8, 0.85);
-      backdrop-filter: blur(12px);
-      z-index: 1000;
-      border-bottom: 1px solid #222;
+      z-index: 100;
+      background: rgba(5,5,5,.65);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
 
     .logo {
-      font-size: 24px;
-      font-weight: 800;
+      font-size: 22px;
+      font-weight: 900;
       letter-spacing: -1px;
     }
 
@@ -61,170 +114,265 @@
 
     nav {
       display: flex;
-      gap: 28px;
-      font-size: 14px;
+      gap: 30px;
     }
 
     nav a {
-      color: #aaa;
-      transition: 0.3s;
+      color: #999;
+      font-size: 13px;
+      transition: .3s;
     }
 
     nav a:hover {
-      color: #fff;
+      color: white;
     }
+
+    /* ---------- HERO ---------- */
 
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 140px 7% 80px;
-      background:
-        radial-gradient(circle at 80% 20%, #252525 0%, transparent 35%),
-        radial-gradient(circle at 20% 80%, #181818 0%, transparent 35%),
-        #080808;
+      padding: 150px 7% 100px;
+      position: relative;
     }
 
     .hero-content {
-      max-width: 900px;
+      max-width: 1100px;
     }
 
-    .eyebrow {
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 4px;
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      background: var(--glass);
+      color: #aaa;
       font-size: 12px;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 15px white;
     }
 
     h1 {
-      font-size: clamp(50px, 9vw, 110px);
-      line-height: 0.95;
-      letter-spacing: -5px;
-      margin-bottom: 35px;
-    }
-
-    h1 span {
-      color: #777;
-    }
-
-    .hero-text {
-      max-width: 650px;
-      color: #aaa;
-      font-size: 20px;
+      font-size: clamp(60px, 10vw, 150px);
+      line-height: .88;
+      letter-spacing: -8px;
+      max-width: 1100px;
       margin-bottom: 40px;
     }
 
+    h1 .muted {
+      color: #555;
+    }
+
+    .hero-description {
+      max-width: 600px;
+      color: #929292;
+      font-size: 19px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
     .button {
-      display: inline-block;
-      padding: 15px 26px;
-      background: #fff;
-      color: #000;
-      border-radius: 50px;
+      padding: 15px 23px;
+      border-radius: 100px;
+      background: white;
+      color: black;
+      font-size: 14px;
       font-weight: 700;
-      transition: 0.3s;
+      transition: .3s;
     }
 
     .button:hover {
-      transform: translateY(-3px);
-      background: #ddd;
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(255,255,255,.15);
     }
+
+    .button.secondary {
+      background: transparent;
+      color: white;
+      border: 1px solid var(--line);
+    }
+
+    /* ---------- MARQUEE ---------- */
+
+    .marquee {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 25px 0;
+      color: #555;
+      font-size: 14px;
+      letter-spacing: 3px;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: marquee 25s linear infinite;
+    }
+
+    .marquee span {
+      margin: 0 35px;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ---------- SECTIONS ---------- */
 
     section {
-      padding: 120px 7%;
-      border-top: 1px solid #1c1c1c;
+      padding: 140px 7%;
+      border-bottom: 1px solid var(--line);
     }
 
-    .section-label {
-      color: #666;
+    .label {
       text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 12px;
-      margin-bottom: 18px;
+      color: #555;
+      font-size: 11px;
+      letter-spacing: 4px;
+      margin-bottom: 25px;
     }
 
     h2 {
-      font-size: clamp(38px, 6vw, 70px);
-      line-height: 1;
-      letter-spacing: -3px;
-      margin-bottom: 60px;
-      max-width: 900px;
+      font-size: clamp(42px, 7vw, 90px);
+      line-height: .95;
+      letter-spacing: -5px;
+      max-width: 1000px;
+      margin-bottom: 70px;
     }
+
+    /* ---------- SERVICES ---------- */
 
     .services {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: #252525;
-      border: 1px solid #252525;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
     }
 
-    .service {
-      background: #080808;
-      padding: 45px;
-      min-height: 230px;
-      transition: 0.3s;
+    .card {
+      min-height: 280px;
+      padding: 35px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.07),
+        rgba(255,255,255,.015)
+      );
+      transition: .4s;
+      position: relative;
+      overflow: hidden;
     }
 
-    .service:hover {
-      background: #111;
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: white;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0;
+      right: -80px;
+      top: -80px;
+      transition: .5s;
     }
 
-    .service-number {
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,.25);
+    }
+
+    .card:hover::before {
+      opacity: .08;
+    }
+
+    .number {
       color: #555;
-      font-size: 13px;
-      margin-bottom: 35px;
+      font-size: 12px;
+      margin-bottom: 80px;
     }
 
-    .service h3 {
-      font-size: 27px;
+    .card h3 {
+      font-size: 25px;
       margin-bottom: 12px;
     }
 
-    .service p {
-      color: #888;
-      max-width: 450px;
-    }
-
-    .about {
-      max-width: 950px;
-    }
-
-    .about p {
-      color: #aaa;
-      font-size: 24px;
+    .card p {
+      color: #777;
+      font-size: 14px;
       line-height: 1.6;
     }
 
-    .contact {
-      text-align: center;
-      padding-top: 160px;
-      padding-bottom: 160px;
+    /* ---------- ABOUT ---------- */
+
+    .about-text {
+      max-width: 1000px;
+      color: #999;
+      font-size: clamp(24px, 4vw, 42px);
+      line-height: 1.35;
     }
 
-    .contact h2 {
+    .about-text strong {
+      color: white;
+    }
+
+    /* ---------- BIG CTA ---------- */
+
+    .cta {
+      text-align: center;
+      padding: 180px 7%;
+    }
+
+    .cta h2 {
       margin-left: auto;
       margin-right: auto;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
     }
 
-    .contact-text {
-      color: #888;
+    .cta p {
+      color: #777;
       max-width: 600px;
       margin: 0 auto 40px;
-      font-size: 18px;
     }
+
+    /* ---------- FOOTER ---------- */
 
     footer {
       padding: 30px 7%;
-      border-top: 1px solid #222;
       display: flex;
       justify-content: space-between;
       color: #555;
-      font-size: 13px;
+      font-size: 12px;
     }
 
-    @media (max-width: 700px) {
+    /* ---------- MOBILE ---------- */
+
+    @media (max-width: 800px) {
 
       header {
         padding: 18px 5%;
@@ -235,47 +383,51 @@
       }
 
       .hero {
-        padding: 130px 5% 80px;
+        padding: 140px 5% 100px;
       }
 
       h1 {
-        letter-spacing: -3px;
+        font-size: clamp(55px, 17vw, 100px);
+        letter-spacing: -5px;
       }
 
-      .hero-text {
+      .hero-description {
         font-size: 17px;
       }
 
       section {
-        padding: 90px 5%;
+        padding: 100px 5%;
       }
 
       h2 {
-        margin-bottom: 40px;
+        letter-spacing: -3px;
+        margin-bottom: 45px;
       }
 
       .services {
         grid-template-columns: 1fr;
       }
 
-      .service {
-        padding: 32px;
-        min-height: auto;
+      .card {
+        min-height: 240px;
       }
 
-      .about p {
-        font-size: 19px;
+      .number {
+        margin-bottom: 60px;
       }
 
-      .contact {
-        padding-top: 100px;
-        padding-bottom: 100px;
+      .about-text {
+        font-size: 25px;
+      }
+
+      .cta {
+        padding: 120px 5%;
       }
 
       footer {
         padding: 25px 5%;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
       }
     }
   </style>
@@ -283,112 +435,162 @@
 
 <body>
 
+  <div class="background">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+  </div>
+
+
   <header>
+
     <a href="#" class="logo">
       SocialClip<span>.</span>
     </a>
 
     <nav>
-      <a href="#leistungen">Leistungen</a>
-      <a href="#ueber-uns">Über uns</a>
-      <a href="#kontakt">Kontakt</a>
+      <a href="#services">Leistungen</a>
+      <a href="#about">Über uns</a>
+      <a href="#contact">Kontakt</a>
     </nav>
+
   </header>
 
 
   <main>
 
+    <!-- HERO -->
+
     <section class="hero">
 
       <div class="hero-content">
 
-        <div class="eyebrow">
+        <div class="tag">
+          <span class="dot"></span>
           SocialClip Art & Media · Erlangen
         </div>
 
         <h1>
-          Digitale Ideen.<br>
-          <span>Sichtbar gemacht.</span>
+          We create<br>
+          <span class="muted">digital impact.</span>
         </h1>
 
-        <p class="hero-text">
-          Wir entwickeln moderne digitale Auftritte,
-          kreative Inhalte und Lösungen für Unternehmen,
-          Marken und Menschen mit Visionen.
+        <p class="hero-description">
+          Websites, Social Media, Design, Foto, Video und
+          digitale Lösungen — entwickelt für Marken,
+          Unternehmen und Menschen mit Ideen.
         </p>
 
-        <a href="#kontakt" class="button">
-          Projekt starten →
-        </a>
+        <div class="hero-buttons">
+
+          <a href="#contact" class="button">
+            Projekt starten →
+          </a>
+
+          <a href="#services" class="button secondary">
+            Leistungen ansehen
+          </a>
+
+        </div>
 
       </div>
 
     </section>
 
 
-    <section id="leistungen">
+    <!-- MARQUEE -->
 
-      <div class="section-label">
-        Was wir machen
+    <div class="marquee">
+
+      <div class="marquee-track">
+
+        <span>WEB DESIGN</span>
+        <span>CREATIVE</span>
+        <span>SOCIAL MEDIA</span>
+        <span>BRANDING</span>
+        <span>PHOTO</span>
+        <span>VIDEO</span>
+        <span>AI</span>
+
+        <span>WEB DESIGN</span>
+        <span>CREATIVE</span>
+        <span>SOCIAL MEDIA</span>
+        <span>BRANDING</span>
+        <span>PHOTO</span>
+        <span>VIDEO</span>
+        <span>AI</span>
+
+      </div>
+
+    </div>
+
+
+    <!-- SERVICES -->
+
+    <section id="services">
+
+      <div class="label">
+        01 · Services
       </div>
 
       <h2>
-        Alles für deinen digitalen Auftritt.
+        Digital.<br>
+        Creative.<br>
+        Different.
       </h2>
 
       <div class="services">
 
-        <article class="service">
-          <div class="service-number">01</div>
+        <article class="card">
+          <div class="number">01</div>
           <h3>Websites</h3>
           <p>
-            Moderne Websites, Landingpages und digitale
-            Auftritte, die professionell wirken.
+            Moderne Websites und Landingpages,
+            die deine Marke professionell präsentieren.
           </p>
         </article>
 
-        <article class="service">
-          <div class="service-number">02</div>
+        <article class="card">
+          <div class="number">02</div>
           <h3>Social Media</h3>
           <p>
-            Kreativer Content und Social-Media-Lösungen
-            für mehr Sichtbarkeit und Reichweite.
+            Content, Strategie und kreative Ideen
+            für mehr Sichtbarkeit.
           </p>
         </article>
 
-        <article class="service">
-          <div class="service-number">03</div>
-          <h3>Design & Branding</h3>
+        <article class="card">
+          <div class="number">03</div>
+          <h3>Branding</h3>
           <p>
-            Logos, visuelle Identitäten und Designs,
-            die deiner Marke ein klares Gesicht geben.
+            Visuelle Identitäten, Logos und Designs
+            mit Wiedererkennungswert.
           </p>
         </article>
 
-        <article class="service">
-          <div class="service-number">04</div>
+        <article class="card">
+          <div class="number">04</div>
           <h3>Foto & Video</h3>
           <p>
-            Visuelle Inhalte für Websites, Social Media,
-            Unternehmen und digitale Projekte.
+            Professionelle visuelle Inhalte für
+            digitale Plattformen und Unternehmen.
           </p>
         </article>
 
-        <article class="service">
-          <div class="service-number">05</div>
-          <h3>KI & Automatisierung</h3>
+        <article class="card">
+          <div class="number">05</div>
+          <h3>AI & Automation</h3>
           <p>
-            Moderne digitale Lösungen, die Prozesse
-            vereinfachen und neue Möglichkeiten schaffen.
+            Moderne Technologien, die Prozesse
+            intelligenter und effizienter machen.
           </p>
         </article>
 
-        <article class="service">
-          <div class="service-number">06</div>
-          <h3>Digitale Projekte</h3>
+        <article class="card">
+          <div class="number">06</div>
+          <h3>Creative Projects</h3>
           <p>
-            Von der ersten Idee bis zur fertigen Umsetzung –
-            gemeinsam entwickeln wir etwas Besonderes.
+            Besondere digitale Projekte von der
+            ersten Idee bis zur Umsetzung.
           </p>
         </article>
 
@@ -397,46 +599,42 @@
     </section>
 
 
-    <section id="ueber-uns">
+    <!-- ABOUT -->
 
-      <div class="section-label">
-        Über SocialClip
+    <section id="about">
+
+      <div class="label">
+        02 · About
       </div>
 
-      <div class="about">
-
-        <h2>
-          Kreativität trifft Technologie.
-        </h2>
-
-        <p>
-          SocialClip Art & Media verbindet Design,
-          digitale Medien und moderne Technologien,
-          um Unternehmen professionell sichtbar zu machen.
-          Dabei geht es nicht nur darum, etwas Schönes
-          zu erstellen – sondern darum, etwas zu schaffen,
-          das funktioniert.
-        </p>
-
-      </div>
+      <p class="about-text">
+        <strong>SocialClip</strong> verbindet
+        Kreativität, Design und Technologie,
+        um digitale Erlebnisse zu schaffen,
+        die nicht einfach nur gut aussehen —
+        <strong>sondern im Kopf bleiben.</strong>
+      </p>
 
     </section>
 
 
-    <section id="kontakt" class="contact">
+    <!-- CONTACT -->
 
-      <div class="section-label">
-        Kontakt
+    <section id="contact" class="cta">
+
+      <div class="label">
+        03 · Let's talk
       </div>
 
       <h2>
-        Lass uns etwas starten.
+        Have an idea?<br>
+        Let's make it real.
       </h2>
 
-      <p class="contact-text">
-        Du hast eine Idee, ein Projekt oder möchtest
-        einfach wissen, was digital für dein Unternehmen
-        möglich ist?
+      <p>
+        Du hast ein Projekt, eine Idee oder möchtest
+        einfach wissen, was möglich ist?
+        Schreib uns.
       </p>
 
       <a
@@ -453,13 +651,13 @@
 
   <footer>
 
-    <div>
+    <span>
       © 2026 SocialClip Art & Media
-    </div>
+    </span>
 
-    <div>
+    <span>
       Erlangen · Deutschland
-    </div>
+    </span>
 
   </footer>
 
