@@ -6,2412 +6,1744 @@
 
 <title>SocialClip — Art · Media · Digital</title>
 
-<meta
-  name="description"
-  content="SocialClip Art & Media — Design, Digital, Social Media, Marketing und kreative digitale Lösungen."
->
+<meta name="description"
+content="SocialClip Art & Media — Webdesign, Social Media, Design, Marketing, Video, Programmierung und digitale Lösungen.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
-/* =========================================================
-   RESET
-========================================================= */
-
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
+    background:#050505;
 }
 
 body{
-  background:#030303;
-  color:#f4f0e8;
-  font-family:Arial,Helvetica,sans-serif;
-  overflow-x:hidden;
+    background:#050505;
+    color:#fff;
+    font-family:Inter,Arial,sans-serif;
+    overflow-x:hidden;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root{
-  --black:#030303;
-  --gold:#c9ae7a;
-  --white:#f4f0e8;
-  --muted:#77736b;
-}
-
-
-/* =========================================================
+/* =========================
    INTRO
-========================================================= */
+========================= */
 
-#intro{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-
-  background:#000;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  overflow:hidden;
-
-  transition:
-    opacity 1.8s cubic-bezier(.77,0,.18,1),
-    visibility 1.8s;
+.intro{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    transition:
+        opacity 1.5s cubic-bezier(.77,0,.18,1),
+        visibility 1.5s;
 }
 
-#intro.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
+.intro.hide{
+    opacity:0;
+    visibility:hidden;
 }
 
-.intro-light{
-  position:absolute;
-
-  width:55vw;
-  height:55vw;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(201,174,122,.23),
-      rgba(201,174,122,.07) 28%,
-      transparent 68%
-    );
-
-  filter:blur(40px);
-
-  animation:introGlow 5s ease-in-out infinite;
+.intro-inner{
+    position:relative;
+    width:min(1400px,92vw);
+    text-align:center;
 }
 
-@keyframes introGlow{
-
-  0%,100%{
-    transform:scale(.8);
-    opacity:.5;
-  }
-
-  50%{
-    transform:scale(1.15);
-    opacity:1;
-  }
-
+.intro-small{
+    font-size:14px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:#999;
+    margin-bottom:22px;
+    animation:introSmall 1.4s ease forwards;
 }
 
-.intro-ring{
-  position:absolute;
-
-  width:52vw;
-  height:52vw;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:50%;
-
-  animation:introSpin 18s linear infinite;
+.intro-title{
+    font-family:Manrope,sans-serif;
+    font-size:clamp(60px,13vw,210px);
+    line-height:.8;
+    font-weight:800;
+    letter-spacing:-.08em;
+    position:relative;
+    z-index:2;
+    animation:introTitle 1.8s cubic-bezier(.16,1,.3,1) forwards;
 }
 
-.intro-ring:nth-child(2){
-  width:42vw;
-  height:42vw;
-  animation-duration:13s;
-  animation-direction:reverse;
-}
-
-.intro-ring:nth-child(3){
-  width:66vw;
-  height:66vw;
-  border-color:rgba(201,174,122,.07);
-  animation-duration:25s;
-}
-
-@keyframes introSpin{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-.intro-content{
-  position:relative;
-  z-index:2;
-  text-align:center;
-}
-
-.intro-welcome{
-  font-size:12px;
-  letter-spacing:7px;
-  color:#aaa;
-  text-transform:uppercase;
-
-  opacity:0;
-
-  animation:introUp 1.2s .3s forwards;
-}
-
-.intro-logo{
-  margin-top:25px;
-
-  font-size:clamp(52px,11vw,150px);
-
-  line-height:.8;
-
-  font-weight:900;
-
-  letter-spacing:-7px;
-
-  opacity:0;
-
-  animation:introUp 1.4s .6s forwards;
-}
-
-.intro-logo span{
-  color:var(--gold);
+.intro-title span{
+    color:#d9b56b;
 }
 
 .intro-sub{
-  margin-top:30px;
-
-  font-size:11px;
-
-  letter-spacing:8px;
-
-  color:#777;
-
-  text-transform:uppercase;
-
-  opacity:0;
-
-  animation:introUp 1.2s 1s forwards;
+    margin-top:32px;
+    color:#777;
+    font-size:12px;
+    letter-spacing:.45em;
+    text-transform:uppercase;
+    animation:introSub 2s ease forwards;
 }
 
-.intro-line{
-  width:0;
-  height:1px;
-
-  margin:35px auto 0;
-
-  background:var(--gold);
-
-  animation:introLine 1.8s 1.3s forwards;
+.intro-glow{
+    position:absolute;
+    width:35vw;
+    height:35vw;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(
+        circle,
+        rgba(220,180,100,.18),
+        rgba(220,180,100,.04) 35%,
+        transparent 70%
+    );
+    filter:blur(15px);
 }
 
-@keyframes introUp{
-
-  from{
-    opacity:0;
-    transform:translateY(30px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-
+.intro-ring{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:35vw;
+    height:35vw;
+    max-width:600px;
+    max-height:600px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    animation:ringRotate 18s linear infinite;
 }
 
-@keyframes introLine{
-  to{
-    width:100px;
-  }
+.intro-ring:nth-child(2){
+    width:48vw;
+    height:48vw;
+    border-color:rgba(255,255,255,.04);
+    animation-duration:28s;
+    animation-direction:reverse;
 }
 
+.intro-ring:nth-child(3){
+    width:62vw;
+    height:62vw;
+    border-color:rgba(217,181,107,.025);
+    animation-duration:40s;
+}
 
-/* =========================================================
+@keyframes introTitle{
+    from{
+        opacity:0;
+        transform:translateY(70px);
+        letter-spacing:-.02em;
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+        letter-spacing:-.08em;
+    }
+}
+
+@keyframes introSmall{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes introSub{
+    from{
+        opacity:0;
+        letter-spacing:.1em;
+    }
+    to{
+        opacity:1;
+        letter-spacing:.45em;
+    }
+}
+
+@keyframes ringRotate{
+    to{
+        transform:translate(-50%,-50%) rotate(360deg);
+    }
+}
+
+/* =========================
    NAV
-========================================================= */
+========================= */
 
 .nav{
-  position:fixed;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
 
-  top:0;
-  left:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-  width:100%;
-  height:80px;
+    padding:28px 42px;
 
-  padding:0 5vw;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  z-index:500;
-
-  mix-blend-mode:difference;
+    mix-blend-mode:difference;
 }
 
 .logo{
-  font-size:15px;
-  font-weight:800;
-  letter-spacing:3px;
+    font-size:17px;
+    font-weight:800;
+    letter-spacing:.12em;
 }
 
-.logo span{
-  color:var(--gold);
+.nav-right{
+    display:flex;
+    gap:32px;
 }
 
-.nav-links{
-  display:flex;
-  gap:28px;
+.nav-right a{
+    color:white;
+    text-decoration:none;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.2em;
 }
 
-.nav-links a{
-  font-size:9px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  opacity:.75;
+/* =========================
+   GLOBAL
+========================= */
+
+section{
+    position:relative;
 }
 
-
-/* =========================================================
-   MACHINE EXPERIENCE
-========================================================= */
-
-.machine{
-  position:relative;
-
-  height:1250vh;
-
-  background:#030303;
+.gold{
+    color:#d9b56b;
 }
 
-.stage{
-  position:sticky;
-
-  top:0;
-
-  width:100%;
-  height:100vh;
-
-  overflow:hidden;
-
-  perspective:1600px;
-
-  background:
-    radial-gradient(
-      ellipse at 50% 50%,
-      rgba(201,174,122,.08),
-      transparent 28%
-    );
+.muted{
+    color:#777;
 }
 
+/* =========================
+   HERO
+========================= */
 
-/* =========================================================
-   ATMOSPHERE
-========================================================= */
-
-.noise{
-  position:absolute;
-  inset:0;
-
-  opacity:.05;
-
-  pointer-events:none;
-
-  background-image:
-    radial-gradient(
-      rgba(255,255,255,.7) 1px,
-      transparent 1px
-    );
-
-  background-size:5px 5px;
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:150px 5vw 100px;
+    overflow:hidden;
 }
 
-.light{
-  position:absolute;
-
-  width:50vw;
-  height:50vw;
-
-  border-radius:50%;
-
-  filter:blur(80px);
-
-  opacity:.25;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(201,174,122,.3),
-      transparent 65%
-    );
-
-  left:50%;
-  top:50%;
-
-  transform:translate(-50%,-50%);
+.hero-content{
+    width:100%;
+    max-width:1700px;
+    margin:auto;
 }
 
-
-/* =========================================================
-   GRID FLOOR
-========================================================= */
-
-.floor{
-  position:absolute;
-
-  left:-30%;
-  right:-30%;
-  bottom:-35%;
-
-  height:75%;
-
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,.055) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.055) 1px,
-      transparent 1px
-    );
-
-  background-size:75px 75px;
-
-  transform:
-    perspective(500px)
-    rotateX(72deg);
-
-  opacity:.15;
-
-  mask-image:
-    linear-gradient(
-      to top,
-      black,
-      transparent 90%
-    );
+.hero-label{
+    font-size:11px;
+    letter-spacing:.35em;
+    text-transform:uppercase;
+    color:#777;
+    margin-bottom:45px;
 }
 
-
-/* =========================================================
-   MACHINE CORE
-========================================================= */
-
-.core-wrap{
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  width:min(42vw,650px);
-  aspect-ratio:1;
-
-  transform:
-    translate(-50%,-50%);
-
-  transform-style:preserve-3d;
+.hero-title{
+    font-family:Manrope,sans-serif;
+    font-size:clamp(70px,13vw,220px);
+    line-height:.78;
+    letter-spacing:-.09em;
+    font-weight:700;
 }
 
-.core-shadow{
-  position:absolute;
-
-  width:65%;
-  height:15%;
-
-  left:17%;
-  bottom:5%;
-
-  background:#000;
-
-  filter:blur(45px);
+.hero-title .line{
+    display:block;
+    white-space:nowrap;
 }
 
-.core{
-  position:absolute;
-
-  inset:15%;
-
-  border-radius:50%;
-
-  background:
-
-    radial-gradient(
-      circle at 32% 28%,
-      rgba(255,255,255,.9),
-      transparent 5%
-    ),
-
-    radial-gradient(
-      circle at 35% 30%,
-      rgba(255,255,255,.2),
-      transparent 20%
-    ),
-
-    radial-gradient(
-      circle at 65% 70%,
-      rgba(201,174,122,.5),
-      transparent 25%
-    ),
-
-    linear-gradient(
-      135deg,
-      #777,
-      #222 40%,
-      #050505 80%
-    );
-
-  box-shadow:
-
-    inset 15px 20px 40px rgba(255,255,255,.15),
-
-    inset -25px -30px 60px #000,
-
-    0 0 80px rgba(201,174,122,.15);
-
-  transform-style:preserve-3d;
+.hero-title .indent{
+    margin-left:13vw;
 }
 
-.core::before{
-  content:"";
-
-  position:absolute;
-  inset:-5%;
-
-  border-radius:50%;
-
-  border:
-    1px solid
-    rgba(201,174,122,.5);
-
-  box-shadow:
-    0 0 35px rgba(201,174,122,.12);
+.hero-description{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-top:90px;
+    gap:40px;
 }
 
-.core::after{
-  content:"";
-
-  position:absolute;
-
-  width:30%;
-  height:15%;
-
-  top:17%;
-  left:20%;
-
-  border-radius:50%;
-
-  background:rgba(255,255,255,.18);
-
-  filter:blur(18px);
-
-  transform:rotate(-25deg);
+.hero-description p{
+    max-width:430px;
+    color:#999;
+    font-size:15px;
+    line-height:1.8;
 }
 
-
-/* =========================================================
-   CORE RINGS
-========================================================= */
-
-.ring{
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  border-radius:50%;
-
-  border:1px solid rgba(255,255,255,.13);
-
-  transform-style:preserve-3d;
+.scroll-indicator{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    color:#666;
+    font-size:10px;
+    letter-spacing:.25em;
+    text-transform:uppercase;
 }
 
-.ring-a{
-  width:110%;
-  height:40%;
-
-  transform:
-    translate(-50%,-50%)
-    rotateX(72deg);
+.scroll-line{
+    width:80px;
+    height:1px;
+    background:#444;
 }
 
-.ring-b{
-  width:80%;
-  height:115%;
+/* =========================
+   MARQUEE
+========================= */
 
-  transform:
-    translate(-50%,-50%)
-    rotateY(65deg);
+.marquee{
+    border-top:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    overflow:hidden;
+    padding:30px 0;
 }
 
-.ring-c{
-  width:125%;
-  height:65%;
-
-  border-color:rgba(201,174,122,.18);
-
-  transform:
-    translate(-50%,-50%)
-    rotateZ(35deg)
-    rotateX(60deg);
+.marquee-track{
+    width:max-content;
+    display:flex;
+    animation:marquee 25s linear infinite;
 }
 
-
-/* =========================================================
-   CORE CENTER
-========================================================= */
-
-.core-label{
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  transform:translate(-50%,-50%);
-
-  text-align:center;
-
-  z-index:10;
-
-  pointer-events:none;
+.marquee span{
+    font-family:Manrope,sans-serif;
+    font-size:clamp(40px,6vw,90px);
+    font-weight:700;
+    letter-spacing:-.05em;
+    margin-right:70px;
 }
 
-.core-label small{
-  display:block;
-
-  font-size:8px;
-
-  letter-spacing:5px;
-
-  color:#999;
-
-  margin-bottom:14px;
+.marquee span:nth-child(even){
+    color:#555;
 }
 
-.core-label strong{
-  font-size:clamp(32px,5vw,70px);
-
-  letter-spacing:-4px;
-
-  font-weight:900;
+@keyframes marquee{
+    to{
+        transform:translateX(-50%);
+    }
 }
 
-.core-label strong span{
-  color:var(--gold);
+/* =========================
+   SERVICES
+========================= */
+
+.services{
+    padding:180px 5vw 220px;
+    overflow:hidden;
 }
 
-
-/* =========================================================
-   SERVICE ORBITS
-========================================================= */
-
-.service-field{
-  position:absolute;
-
-  inset:0;
-
-  z-index:100;
-
-  pointer-events:none;
+.services-intro{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:120px;
+    gap:40px;
 }
 
-
-/* =========================================================
-   SERVICE ITEM
-========================================================= */
-
-.service-item{
-  position:absolute;
-
-  width:190px;
-
-  opacity:0;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.55);
-
-  transition:
-    opacity .6s,
-    transform 1s cubic-bezier(.16,1,.3,1);
+.services-intro h2{
+    font-family:Manrope,sans-serif;
+    font-size:clamp(50px,8vw,130px);
+    line-height:.85;
+    letter-spacing:-.08em;
+    font-weight:600;
 }
 
-.service-item.active{
-  opacity:1;
-
-  transform:
-    translate(-50%,-50%)
-    scale(1);
+.services-intro p{
+    width:320px;
+    color:#777;
+    line-height:1.7;
+    font-size:14px;
 }
 
-.service-item-inner{
-  position:relative;
-
-  padding:18px 20px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.06),
-      rgba(255,255,255,.015)
-    );
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  backdrop-filter:blur(14px);
-
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.35);
+.service-list{
+    max-width:1650px;
+    margin:auto;
 }
 
-.service-item-inner::before{
-  content:"";
+.service{
+    position:relative;
+    display:grid;
+    grid-template-columns:90px 1fr auto;
+    align-items:center;
 
-  position:absolute;
+    min-height:125px;
 
-  left:-1px;
-  top:20px;
+    border-top:1px solid rgba(255,255,255,.12);
 
-  width:3px;
-  height:35px;
-
-  background:var(--gold);
+    transition:
+        padding .5s ease,
+        background .5s ease;
 }
 
-.service-index{
-  font-size:8px;
+.service:last-child{
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
 
-  color:var(--gold);
-
-  letter-spacing:3px;
-
-  margin-bottom:10px;
+.service-number{
+    color:#555;
+    font-size:11px;
+    letter-spacing:.15em;
 }
 
 .service-name{
-  font-size:15px;
-
-  font-weight:700;
-
-  letter-spacing:.5px;
-
-  text-transform:uppercase;
+    font-family:Manrope,sans-serif;
+    font-size:clamp(32px,5vw,75px);
+    letter-spacing:-.06em;
+    font-weight:500;
+    transition:
+        transform .5s ease,
+        color .5s ease;
 }
 
-.service-category{
-  margin-top:8px;
-
-  font-size:7px;
-
-  color:#777;
-
-  letter-spacing:2px;
+.service-arrow{
+    font-size:25px;
+    color:#555;
+    transition:transform .5s ease,color .5s ease;
 }
 
-
-/* =========================================================
-   SERVICE POSITIONS
-========================================================= */
-
-.s1{
-  left:17%;
-  top:30%;
+.service:hover{
+    padding-left:25px;
+    padding-right:25px;
+    background:rgba(255,255,255,.025);
 }
 
-.s2{
-  left:13%;
-  top:58%;
+.service:hover .service-name{
+    transform:translateX(20px);
+    color:#d9b56b;
 }
 
-.s3{
-  left:28%;
-  top:76%;
+.service:hover .service-arrow{
+    transform:translateX(-15px);
+    color:#d9b56b;
 }
 
-.s4{
-  left:50%;
-  top:88%;
+/* =========================
+   MANIFESTO
+========================= */
+
+.manifesto{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:150px 5vw;
+    overflow:hidden;
 }
 
-.s5{
-  right:11%;
-  top:72%;
+.manifesto-inner{
+    max-width:1600px;
+    margin:auto;
 }
 
-.s6{
-  right:8%;
-  top:42%;
+.manifesto-small{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.3em;
+    color:#666;
+    margin-bottom:60px;
 }
 
-.s7{
-  right:17%;
-  top:20%;
+.manifesto-text{
+    font-family:Manrope,sans-serif;
+    font-size:clamp(55px,9vw,145px);
+    line-height:.95;
+    letter-spacing:-.075em;
+    font-weight:500;
 }
 
-.s8{
-  left:50%;
-  top:12%;
+.manifesto-text .fade{
+    color:#444;
 }
 
-.s9{
-  left:28%;
-  top:16%;
+.manifesto-text .gold{
+    color:#d9b56b;
 }
 
-.s10{
-  right:27%;
-  top:10%;
+/* =========================
+   DIGITAL SCENE
+========================= */
+
+.digital{
+    min-height:110vh;
+    padding:180px 5vw;
+    overflow:hidden;
 }
 
-.s11{
-  right:7%;
-  top:58%;
+.digital-grid{
+    position:absolute;
+    inset:0;
+    opacity:.25;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+
+    background-size:90px 90px;
+
+    transform:
+        perspective(900px)
+        rotateX(62deg)
+        scale(1.7);
+
+    transform-origin:center bottom;
 }
 
-.s12{
-  left:7%;
-  top:45%;
+.digital-content{
+    position:relative;
+    z-index:2;
+    max-width:1600px;
+    margin:auto;
 }
 
-.s13{
-  left:36%;
-  top:93%;
+.digital-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
 }
 
-.s14{
-  right:34%;
-  top:92%;
+.digital-title{
+    font-family:Manrope,sans-serif;
+    font-size:clamp(60px,10vw,170px);
+    line-height:.8;
+    letter-spacing:-.08em;
 }
 
-
-/* =========================================================
-   CONNECTING LINES
-========================================================= */
-
-.connection{
-  position:absolute;
-
-  height:1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(201,174,122,.5),
-      transparent
-    );
-
-  transform-origin:left center;
-
-  opacity:0;
-
-  transition:opacity .6s;
+.digital-side{
+    width:260px;
+    color:#777;
+    font-size:13px;
+    line-height:1.8;
 }
 
-.connection.active{
-  opacity:1;
+.digital-word{
+    margin-top:180px;
+    font-size:clamp(80px,17vw,280px);
+    font-family:Manrope,sans-serif;
+    font-weight:800;
+    letter-spacing:-.1em;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(255,255,255,.16);
+    white-space:nowrap;
+    transform:translateX(-4vw);
 }
 
+/* =========================
+   INSTAGRAM
+========================= */
 
-/* =========================================================
-   HUGE CATEGORY WORD
-========================================================= */
-
-.category-word{
-  position:absolute;
-
-  z-index:20;
-
-  font-size:clamp(100px,17vw,280px);
-
-  font-weight:900;
-
-  letter-spacing:-15px;
-
-  line-height:.7;
-
-  white-space:nowrap;
-
-  color:rgba(255,255,255,.035);
-
-  pointer-events:none;
-
-  transition:
-    opacity .8s,
-    transform 1.2s;
+.instagram{
+    min-height:100vh;
+    padding:160px 5vw;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
 }
 
-.category-word.create{
-  left:-10vw;
-  top:10%;
+.instagram-inner{
+    width:100%;
+    max-width:1500px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1fr 450px;
+    align-items:center;
+    gap:100px;
 }
 
-.category-word.digital{
-  right:-17vw;
-  top:30%;
+.instagram-title{
+    font-family:Manrope,sans-serif;
+    font-size:clamp(65px,10vw,160px);
+    line-height:.82;
+    letter-spacing:-.08em;
 }
 
-.category-word.media{
-  left:-16vw;
-  bottom:23%;
-}
-
-.category-word.grow{
-  right:-10vw;
-  bottom:5%;
-}
-
-
-/* =========================================================
-   PHASE TITLE
-========================================================= */
-
-.phase-title{
-  position:absolute;
-
-  z-index:150;
-
-  left:50%;
-  top:12%;
-
-  transform:translateX(-50%);
-
-  text-align:center;
-
-  opacity:0;
-
-  transition:opacity .8s;
-}
-
-.phase-title.visible{
-  opacity:1;
-}
-
-.phase-title small{
-  font-size:8px;
-
-  letter-spacing:6px;
-
-  color:var(--gold);
-
-  text-transform:uppercase;
-}
-
-.phase-title h2{
-  margin-top:12px;
-
-  font-size:clamp(30px,5vw,65px);
-
-  letter-spacing:-3px;
-}
-
-
-/* =========================================================
-   INSTAGRAM MOMENT
-========================================================= */
-
-.instagram-moment{
-  position:absolute;
-
-  inset:0;
-
-  z-index:300;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  opacity:0;
-
-  pointer-events:none;
-
-  transition:opacity 1s;
-}
-
-.instagram-moment.active{
-  opacity:1;
+.instagram-title span{
+    color:#d9b56b;
 }
 
 .instagram-copy{
-  position:absolute;
-
-  left:10%;
-
-  max-width:400px;
-}
-
-.instagram-copy small{
-  font-size:8px;
-
-  letter-spacing:5px;
-
-  color:var(--gold);
-}
-
-.instagram-copy h2{
-  margin-top:20px;
-
-  font-size:clamp(45px,7vw,100px);
-
-  line-height:.85;
-
-  letter-spacing:-6px;
-}
-
-.instagram-copy p{
-  margin-top:25px;
-
-  color:#777;
-
-  font-size:12px;
-
-  line-height:1.7;
+    margin-top:50px;
+    color:#777;
+    max-width:450px;
+    line-height:1.8;
 }
 
 .instagram-link{
-  display:inline-block;
-
-  margin-top:25px;
-
-  padding:13px 20px;
-
-  border:1px solid #444;
-
-  font-size:8px;
-
-  letter-spacing:3px;
-
-  pointer-events:auto;
+    display:inline-block;
+    margin-top:35px;
+    color:#fff;
+    text-decoration:none;
+    border-bottom:1px solid #555;
+    padding-bottom:12px;
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
 }
 
-
-/* =========================================================
-   PHONE
-========================================================= */
+/* PHONE */
 
 .phone{
-  width:250px;
-  height:500px;
+    position:relative;
+    width:320px;
+    height:650px;
+    margin:auto;
 
-  border:7px solid #111;
+    border:7px solid #222;
+    border-radius:42px;
+    background:#080808;
 
-  border-radius:38px;
+    box-shadow:
+        0 0 0 1px #444,
+        0 40px 100px rgba(0,0,0,.8);
 
-  background:#090909;
+    overflow:hidden;
 
-  box-shadow:
-    0 40px 100px rgba(0,0,0,.8),
-    0 0 60px rgba(201,174,122,.1);
-
-  overflow:hidden;
-
-  transform:
-    rotate(7deg)
-    translateY(40px);
-
-  transition:transform 1.3s cubic-bezier(.16,1,.3,1);
+    transform:rotate(5deg);
+    transition:transform .8s ease;
 }
 
-.instagram-moment.active .phone{
-  transform:
-    rotate(3deg)
-    translateY(0);
+.phone:hover{
+    transform:rotate(0deg) translateY(-15px);
 }
 
 .phone-top{
-  height:45px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border-bottom:1px solid #222;
-
-  font-size:9px;
-
-  letter-spacing:2px;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-bottom:1px solid #222;
+    font-size:13px;
+    font-weight:700;
 }
 
-.feed{
-  height:calc(100% - 45px);
-
-  overflow:hidden;
+.instagram-feed{
+    padding:14px;
 }
 
 .post{
-  height:205px;
-
-  border-bottom:1px solid #222;
-
-  position:relative;
+    margin-bottom:22px;
+    background:#111;
+    overflow:hidden;
 }
 
-.post:nth-child(1){
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #c9ae7a,
-      transparent 12%
-    ),
-    linear-gradient(
-      135deg,
-      #111,
-      #3a3a3a
-    );
+.post-image{
+    height:190px;
+    background:
+        radial-gradient(circle at 25% 30%,#d9b56b,transparent 20%),
+        radial-gradient(circle at 75% 65%,#333,transparent 35%),
+        linear-gradient(135deg,#111,#282828,#080808);
 }
 
-.post:nth-child(2){
-  background:
-    radial-gradient(
-      circle at 65% 45%,
-      #aaa,
-      transparent 16%
-    ),
-    linear-gradient(
-      45deg,
-      #080808,
-      #333
-    );
+.post:nth-child(2) .post-image{
+    background:
+        linear-gradient(130deg,#111 20%,#555 20%,#555 35%,#111 35%,#111 60%,#d9b56b 60%);
 }
 
-.post:nth-child(3){
-  background:
-    radial-gradient(
-      circle at 50% 35%,
-      #c9ae7a,
-      transparent 9%
-    ),
-    linear-gradient(
-      135deg,
-      #222,
-      #050505
-    );
+.post:nth-child(3) .post-image{
+    background:
+        radial-gradient(circle at 50% 50%,#d9b56b,transparent 4%),
+        repeating-radial-gradient(circle,#111 0 15px,#222 16px 17px);
 }
 
-.post-text{
-  position:absolute;
-
-  left:18px;
-  bottom:18px;
+.post-info{
+    padding:12px;
+    font-size:9px;
+    color:#777;
 }
 
-.post-text strong{
-  font-size:16px;
-}
-
-.post-text span{
-  display:block;
-
-  margin-top:5px;
-
-  font-size:7px;
-
-  color:#aaa;
-
-  letter-spacing:2px;
-}
-
-
-/* =========================================================
+/* =========================
    FINAL
-========================================================= */
+========================= */
 
 .final{
-  position:absolute;
-
-  inset:0;
-
-  z-index:450;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-
-  opacity:0;
-
-  transform:scale(.92);
-
-  pointer-events:none;
-
-  transition:
-    opacity 1.2s,
-    transform 1.4s;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(201,174,122,.1),
-      transparent 45%
-    );
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:100px 5vw;
+    overflow:hidden;
 }
 
-.final.active{
-  opacity:1;
-
-  transform:scale(1);
-
-  pointer-events:auto;
+.final-bg{
+    position:absolute;
+    width:70vw;
+    height:70vw;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(217,181,107,.13),
+            transparent 60%
+        );
+    filter:blur(50px);
 }
 
-.final small{
-  font-size:9px;
+.final-content{
+    position:relative;
+    z-index:2;
+}
 
-  letter-spacing:7px;
-
-  color:#777;
+.final-small{
+    font-size:11px;
+    letter-spacing:.35em;
+    text-transform:uppercase;
+    color:#666;
+    margin-bottom:50px;
 }
 
 .final h2{
-  margin-top:25px;
-
-  font-size:clamp(55px,10vw,150px);
-
-  line-height:.82;
-
-  letter-spacing:-8px;
+    font-family:Manrope,sans-serif;
+    font-size:clamp(70px,12vw,190px);
+    line-height:.8;
+    letter-spacing:-.09em;
+    font-weight:600;
 }
 
 .final h2 span{
-  color:var(--gold);
+    color:#d9b56b;
 }
 
-.final a{
-  display:inline-block;
+.final-button{
+    display:inline-block;
+    margin-top:70px;
 
-  margin-top:45px;
+    padding:22px 38px;
 
-  padding:18px 30px;
+    border:1px solid #444;
+    color:#fff;
+    text-decoration:none;
 
-  border:1px solid #555;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.25em;
 
-  font-size:9px;
-
-  letter-spacing:4px;
-
-  transition:.4s;
+    transition:
+        background .4s ease,
+        color .4s ease,
+        border-color .4s ease;
 }
 
-.final a:hover{
-  background:#fff;
-  color:#000;
+.final-button:hover{
+    background:#d9b56b;
+    border-color:#d9b56b;
+    color:#000;
 }
 
-
-/* =========================================================
+/* =========================
    CONTACT
-========================================================= */
+========================= */
 
 .contact{
-  min-height:100vh;
-
-  padding:140px 7vw;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  background:#050505;
+    padding:160px 5vw 120px;
+    border-top:1px solid rgba(255,255,255,.08);
 }
 
 .contact-inner{
-  width:min(900px,100%);
-}
-
-.contact-label{
-  color:var(--gold);
-
-  font-size:9px;
-
-  letter-spacing:5px;
-
-  text-transform:uppercase;
+    max-width:1300px;
+    margin:auto;
 }
 
 .contact h3{
-  margin-top:25px;
-
-  font-size:clamp(50px,9vw,130px);
-
-  line-height:.85;
-
-  letter-spacing:-7px;
+    font-family:Manrope,sans-serif;
+    font-size:clamp(50px,8vw,120px);
+    letter-spacing:-.07em;
+    line-height:.9;
+    margin-bottom:90px;
 }
 
-.contact h3 span{
-  color:var(--gold);
+.contact-form{
+    display:grid;
+    gap:25px;
 }
 
-.form{
-  margin-top:80px;
-
-  display:grid;
-
-  gap:15px;
+.contact-form input,
+.contact-form textarea{
+    width:100%;
+    background:transparent;
+    border:0;
+    border-bottom:1px solid #333;
+    padding:22px 0;
+    color:#fff;
+    outline:none;
+    font-family:inherit;
+    font-size:16px;
 }
 
-.form input,
-.form textarea{
-  width:100%;
-
-  background:transparent;
-
-  border:none;
-
-  border-bottom:1px solid #292929;
-
-  color:white;
-
-  padding:20px 0;
-
-  outline:none;
-
-  font-size:14px;
+.contact-form textarea{
+    min-height:150px;
+    resize:vertical;
 }
 
-.form textarea{
-  min-height:140px;
-
-  resize:vertical;
+.contact-form input:focus,
+.contact-form textarea:focus{
+    border-color:#d9b56b;
 }
 
-.form button{
-  width:max-content;
-
-  margin-top:25px;
-
-  padding:17px 30px;
-
-  background:transparent;
-
-  border:1px solid #555;
-
-  color:white;
-
-  cursor:pointer;
-
-  font-size:9px;
-
-  letter-spacing:4px;
-
-  transition:.4s;
+.contact-form button{
+    justify-self:start;
+    margin-top:30px;
+    padding:20px 35px;
+    background:#fff;
+    color:#000;
+    border:0;
+    cursor:pointer;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
 }
 
-.form button:hover{
-  background:white;
-  color:black;
-}
-
-
-/* =========================================================
+/* =========================
    FOOTER
-========================================================= */
+========================= */
 
 footer{
-  padding:30px 6vw;
+    padding:35px 42px;
+    border-top:1px solid rgba(255,255,255,.08);
 
-  border-top:1px solid #151515;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  color:#555;
-
-  font-size:8px;
-
-  letter-spacing:2px;
-
-  text-transform:uppercase;
+    display:flex;
+    justify-content:space-between;
+    color:#555;
+    font-size:10px;
+    letter-spacing:.12em;
 }
 
+footer a{
+    color:#777;
+    text-decoration:none;
+}
 
-/* =========================================================
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition:
+        opacity 1s cubic-bezier(.16,1,.3,1),
+        transform 1s cubic-bezier(.16,1,.3,1);
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
 @media(max-width:800px){
 
-  .nav{
-    height:65px;
+    .nav{
+        padding:22px 20px;
+    }
 
-    padding:0 6vw;
-  }
+    .nav-right{
+        gap:15px;
+    }
 
-  .nav-links a:first-child{
-    display:none;
-  }
+    .nav-right a{
+        font-size:9px;
+    }
 
-  .machine{
-    height:1450vh;
-  }
+    .hero{
+        padding:130px 22px 80px;
+    }
 
-  .core-wrap{
-    width:75vw;
-  }
+    .hero-title{
+        font-size:20vw;
+    }
 
-  .category-word{
-    font-size:30vw;
+    .hero-title .line{
+        white-space:normal;
+    }
 
-    letter-spacing:-7px;
-  }
+    .hero-title .indent{
+        margin-left:0;
+    }
 
-  .service-item{
-    width:145px;
-  }
+    .hero-description{
+        display:block;
+        margin-top:70px;
+    }
 
-  .service-item-inner{
-    padding:14px;
-  }
+    .scroll-indicator{
+        margin-top:40px;
+    }
 
-  .service-name{
-    font-size:11px;
-  }
+    .services{
+        padding:120px 22px;
+    }
 
-  .service-category{
-    font-size:6px;
-  }
+    .services-intro{
+        display:block;
+        margin-bottom:70px;
+    }
 
-  .s1{
-    left:12%;
-    top:27%;
-  }
+    .services-intro p{
+        margin-top:35px;
+        width:auto;
+    }
 
-  .s2{
-    left:8%;
-    top:58%;
-  }
+    .service{
+        grid-template-columns:45px 1fr 20px;
+        min-height:95px;
+    }
 
-  .s3{
-    left:25%;
-    top:78%;
-  }
+    .service-name{
+        font-size:27px;
+    }
 
-  .s4{
-    left:50%;
-    top:88%;
-  }
+    .service:hover{
+        padding-left:10px;
+        padding-right:10px;
+    }
 
-  .s5{
-    right:5%;
-    top:73%;
-  }
+    .service:hover .service-name{
+        transform:none;
+    }
 
-  .s6{
-    right:5%;
-    top:43%;
-  }
+    .manifesto{
+        padding:120px 22px;
+    }
 
-  .s7{
-    right:10%;
-    top:20%;
-  }
+    .digital{
+        padding:120px 22px;
+        min-height:90vh;
+    }
 
-  .s8{
-    left:50%;
-    top:10%;
-  }
+    .digital-top{
+        display:block;
+    }
 
-  .s9{
-    left:20%;
-    top:14%;
-  }
+    .digital-side{
+        margin-top:40px;
+        width:auto;
+    }
 
-  .s10{
-    right:20%;
-    top:9%;
-  }
+    .digital-word{
+        margin-top:130px;
+        font-size:24vw;
+        transform:none;
+    }
 
-  .s11{
-    right:4%;
-    top:58%;
-  }
+    .instagram{
+        padding:120px 22px;
+    }
 
-  .s12{
-    left:3%;
-    top:44%;
-  }
+    .instagram-inner{
+        grid-template-columns:1fr;
+        gap:80px;
+    }
 
-  .s13{
-    left:20%;
-    top:92%;
-  }
+    .instagram-title{
+        font-size:20vw;
+    }
 
-  .s14{
-    right:20%;
-    top:92%;
-  }
+    .phone{
+        width:280px;
+        height:570px;
+    }
 
-  .instagram-copy{
-    left:7%;
-    top:15%;
-    max-width:280px;
-  }
+    .post-image{
+        height:155px;
+    }
 
-  .instagram-copy h2{
-    font-size:14vw;
-  }
+    .final{
+        padding:100px 22px;
+    }
 
-  .phone{
-    width:185px;
-    height:370px;
+    .final h2{
+        font-size:20vw;
+    }
 
-    margin-top:230px;
-  }
+    .contact{
+        padding:120px 22px;
+    }
 
-  .post{
-    height:145px;
-  }
+    footer{
+        padding:30px 22px;
+        display:block;
+        line-height:2;
+    }
 
-  .final h2{
-    font-size:17vw;
+}
 
-    letter-spacing:-5px;
-  }
+/* =========================
+   CURSOR
+========================= */
 
-  .contact{
-    padding:100px 7vw;
-  }
+.cursor{
+    position:fixed;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#d9b56b;
+    pointer-events:none;
+    z-index:99999;
+    transform:translate(-50%,-50%);
+    mix-blend-mode:difference;
+    opacity:0;
+}
 
-  .contact h3{
-    font-size:18vw;
+@media(min-width:900px){
 
-    letter-spacing:-5px;
-  }
-
-  footer{
-    flex-direction:column;
-
-    gap:20px;
-  }
+    body:hover .cursor{
+        opacity:1;
+    }
 
 }
 
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =====================================================
+<!-- =========================
      INTRO
-===================================================== -->
+========================= -->
 
-<div id="intro">
+<div class="intro" id="intro">
 
-  <div class="intro-light"></div>
+    <div class="intro-ring"></div>
+    <div class="intro-ring"></div>
+    <div class="intro-ring"></div>
 
-  <div class="intro-ring"></div>
-  <div class="intro-ring"></div>
-  <div class="intro-ring"></div>
+    <div class="intro-glow"></div>
 
-  <div class="intro-content">
+    <div class="intro-inner">
 
-    <div class="intro-welcome">
-      Willkommen bei
+        <div class="intro-small">
+            Willkommen bei
+        </div>
+
+        <div class="intro-title">
+            SOCIAL<span>CLIP</span>
+        </div>
+
+        <div class="intro-sub">
+            Art · Media · Digital
+        </div>
+
     </div>
-
-    <div class="intro-logo">
-      SOCIAL<span>CLIP</span>
-    </div>
-
-    <div class="intro-sub">
-      Art · Media · Digital
-    </div>
-
-    <div class="intro-line"></div>
-
-  </div>
 
 </div>
 
 
-<!-- =====================================================
-     NAV
-===================================================== -->
+<!-- NAV -->
 
 <nav class="nav">
 
-  <div class="logo">
-    SOCIAL<span>CLIP</span>
-  </div>
+    <div class="logo">
+        SOCIALCLIP
+    </div>
 
-  <div class="nav-links">
+    <div class="nav-right">
 
-    <a href="#machine">
-      Experience
-    </a>
+        <a href="#services">
+            Services
+        </a>
 
-    <a href="#contact">
-      Kontakt
-    </a>
+        <a href="#contact">
+            Kontakt
+        </a>
 
-  </div>
+    </div>
 
 </nav>
 
 
-<!-- =====================================================
-     MACHINE
-===================================================== -->
+<main>
 
-<main
-  class="machine"
-  id="machine"
->
+<!-- =========================
+     HERO
+========================= -->
 
-<div class="stage">
+<section class="hero">
 
-  <div class="noise"></div>
+    <div class="hero-content">
 
-  <div class="light"></div>
+        <div class="hero-label reveal">
+            SocialClip Art & Media
+        </div>
 
-  <div class="floor"></div>
+        <h1 class="hero-title reveal">
 
-
-  <!-- ===================================================
-       BACKGROUND WORDS
-  ==================================================== -->
-
-  <div class="category-word create">
-    CREATE
-  </div>
-
-  <div class="category-word digital">
-    DIGITAL
-  </div>
-
-  <div class="category-word media">
-    MEDIA
-  </div>
-
-  <div class="category-word grow">
-    GROW
-  </div>
-
-
-  <!-- ===================================================
-       PHASE TITLE
-  ==================================================== -->
-
-  <div
-    class="phase-title"
-    id="phaseTitle"
-  >
-
-    <small id="phaseSmall">
-      SOCIALCLIP
-    </small>
-
-    <h2 id="phaseText">
-      CREATE
-    </h2>
-
-  </div>
-
-
-  <!-- ===================================================
-       CORE
-  ==================================================== -->
-
-  <div
-    class="core-wrap"
-    id="coreWrap"
-  >
-
-    <div class="core-shadow"></div>
-
-    <div class="ring ring-a"></div>
-    <div class="ring ring-b"></div>
-    <div class="ring ring-c"></div>
-
-    <div
-      class="core"
-      id="core"
-    ></div>
-
-    <div class="core-label">
-
-      <small>
-        ART · MEDIA · DIGITAL
-      </small>
-
-      <strong>
-        SOCIAL<span>CLIP</span>
-      </strong>
-
-    </div>
-
-  </div>
-
-
-  <!-- ===================================================
-       SERVICES
-  ==================================================== -->
-
-  <div
-    class="service-field"
-    id="serviceField"
-  >
-
-
-    <div class="service-item s1">
-      <div class="service-item-inner">
-        <div class="service-index">01 / CREATE</div>
-        <div class="service-name">Logo erstellen</div>
-        <div class="service-category">Brand Identity</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s2">
-      <div class="service-item-inner">
-        <div class="service-index">02 / CREATE</div>
-        <div class="service-name">Flyer erstellen</div>
-        <div class="service-category">Print Design</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s3">
-      <div class="service-item-inner">
-        <div class="service-index">03 / CREATE</div>
-        <div class="service-name">Visitenkarten</div>
-        <div class="service-category">Business Design</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s4">
-      <div class="service-item-inner">
-        <div class="service-index">04 / CREATE</div>
-        <div class="service-name">Speisekarte</div>
-        <div class="service-category">Gastro Design</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s5">
-      <div class="service-item-inner">
-        <div class="service-index">05 / CREATE</div>
-        <div class="service-name">Lebenslauf</div>
-        <div class="service-category">Career Design</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s6">
-      <div class="service-item-inner">
-        <div class="service-index">06 / DIGITAL</div>
-        <div class="service-name">Webseiten</div>
-        <div class="service-category">Web Experience</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s7">
-      <div class="service-item-inner">
-        <div class="service-index">07 / DIGITAL</div>
-        <div class="service-name">Programmierung</div>
-        <div class="service-category">Development</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s8">
-      <div class="service-item-inner">
-        <div class="service-index">08 / DIGITAL</div>
-        <div class="service-name">Virtueller Assistent</div>
-        <div class="service-category">Digital Support</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s9">
-      <div class="service-item-inner">
-        <div class="service-index">09 / MEDIA</div>
-        <div class="service-name">Social Media Assistant</div>
-        <div class="service-category">Social Media</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s10">
-      <div class="service-item-inner">
-        <div class="service-index">10 / MEDIA</div>
-        <div class="service-name">Video & Photo Editor</div>
-        <div class="service-category">Content</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s11">
-      <div class="service-item-inner">
-        <div class="service-index">11 / MEDIA</div>
-        <div class="service-name">TikTok Marketing</div>
-        <div class="service-category">Short Form</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s12">
-      <div class="service-item-inner">
-        <div class="service-index">12 / GROW</div>
-        <div class="service-name">Online Marketing</div>
-        <div class="service-category">Digital Growth</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s13">
-      <div class="service-item-inner">
-        <div class="service-index">13 / GROW</div>
-        <div class="service-name">Neukundengewinnung</div>
-        <div class="service-category">Lead Generation</div>
-      </div>
-    </div>
-
-
-    <div class="service-item s14">
-      <div class="service-item-inner">
-        <div class="service-index">14 / GROW</div>
-        <div class="service-name">Strategieentwicklung</div>
-        <div class="service-category">Strategy</div>
-      </div>
-    </div>
-
-
-  </div>
-
-
-  <!-- ===================================================
-       INSTAGRAM
-  ==================================================== -->
-
-  <section
-    class="instagram-moment"
-    id="instagramMoment"
-  >
-
-    <div class="instagram-copy">
-
-      <small>
-        SOCIALCLIP / SOCIAL
-      </small>
-
-      <h2>
-        Deine Marke<br>
-        <span style="color:#c9ae7a;">
-          lebt digital.
-        </span>
-      </h2>
-
-      <p>
-        Content, Social Media und visuelle Ideen
-        werden zu einer digitalen Präsenz.
-      </p>
-
-      <a
-        class="instagram-link"
-        href="https://www.instagram.com/socialclip.art/"
-        target="_blank"
-        rel="noopener"
-      >
-        @SOCIALCLIP.ART
-      </a>
-
-    </div>
-
-
-    <div class="phone">
-
-      <div class="phone-top">
-        @socialclip.art
-      </div>
-
-      <div class="feed">
-
-        <div class="post">
-
-          <div class="post-text">
-
-            <strong>
-              MAKE IT VISIBLE.
-            </strong>
-
-            <span>
-              SOCIALCLIP / 01
+            <span class="line">
+                IDEAS
             </span>
 
-          </div>
+            <span class="line indent">
+                INTO
+            </span>
+
+            <span class="line">
+                IMPACT.
+            </span>
+
+        </h1>
+
+        <div class="hero-description reveal">
+
+            <p>
+                Wir verbinden Design, digitale Technologien,
+                Social Media und Marketing zu digitalen
+                Erlebnissen, die sichtbar bleiben.
+            </p>
+
+            <div class="scroll-indicator">
+                Scroll
+                <span class="scroll-line"></span>
+            </div>
 
         </div>
 
-
-        <div class="post">
-
-          <div class="post-text">
-
-            <strong>
-              CREATE DIFFERENT.
-            </strong>
-
-            <span>
-              ART · MEDIA · DIGITAL
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="post">
-
-          <div class="post-text">
-
-            <strong>
-              BUILD YOUR WORLD.
-            </strong>
-
-            <span>
-              SOCIALCLIP / 03
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
     </div>
-
-  </section>
-
-
-  <!-- ===================================================
-       FINAL
-  ==================================================== -->
-
-  <section
-    class="final"
-    id="final"
-  >
-
-    <div>
-
-      <small>
-        THIS IS SOCIALCLIP
-      </small>
-
-      <h2>
-        Was darf<br>
-        <span>entstehen?</span>
-      </h2>
-
-      <a href="#contact">
-        START A PROJECT
-      </a>
-
-    </div>
-
-  </section>
-
-
-</div>
-
-</main>
-
-
-<!-- =====================================================
-     CONTACT
-===================================================== -->
-
-<section
-  class="contact"
-  id="contact"
->
-
-  <div class="contact-inner">
-
-    <div class="contact-label">
-      Start something
-    </div>
-
-    <h3>
-      Lass uns<br>
-      <span>beginnen.</span>
-    </h3>
-
-
-    <form
-      class="form"
-      action="https://formspree.io/f/xwlvlqwg"
-      method="POST"
-    >
-
-      <input
-        type="text"
-        name="name"
-        placeholder="Dein Name"
-        required
-      >
-
-      <input
-        type="email"
-        name="email"
-        placeholder="Deine E-Mail"
-        required
-      >
-
-      <textarea
-        name="message"
-        placeholder="Was möchtest du entstehen lassen?"
-        required
-      ></textarea>
-
-      <button type="submit">
-        PROJEKT STARTEN
-      </button>
-
-    </form>
-
-  </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
+     MARQUEE
+========================= -->
+
+<div class="marquee">
+
+    <div class="marquee-track">
+
+        <span>CREATE</span>
+        <span>DESIGN</span>
+        <span>BUILD</span>
+        <span>GROW</span>
+        <span>CREATE</span>
+        <span>DESIGN</span>
+        <span>BUILD</span>
+        <span>GROW</span>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section class="services" id="services">
+
+    <div class="services-intro reveal">
+
+        <h2>
+            Alles,<br>
+            was du<br>
+            brauchst.
+        </h2>
+
+        <p>
+            Von der ersten Idee bis zur digitalen Umsetzung.
+            Kreativität, Technologie und Marketing aus einer
+            Hand.
+        </p>
+
+    </div>
+
+
+    <div class="service-list">
+
+        <div class="service reveal">
+            <span class="service-number">01</span>
+            <span class="service-name">Logo erstellen</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">02</span>
+            <span class="service-name">Flyer erstellen</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">03</span>
+            <span class="service-name">Visitenkarten</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">04</span>
+            <span class="service-name">Speisekarten</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">05</span>
+            <span class="service-name">Lebenslauf</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">06</span>
+            <span class="service-name">Webseiten</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">07</span>
+            <span class="service-name">Programmierung</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">08</span>
+            <span class="service-name">Virtueller Assistent</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">09</span>
+            <span class="service-name">Social Media Assistant</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">10</span>
+            <span class="service-name">Video & Photo Editor</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">11</span>
+            <span class="service-name">TikTok Marketing</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">12</span>
+            <span class="service-name">Online Marketing</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">13</span>
+            <span class="service-name">Neukundengewinnung</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service reveal">
+            <span class="service-number">14</span>
+            <span class="service-name">Strategieentwicklung</span>
+            <span class="service-arrow">↗</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MANIFESTO
+========================= -->
+
+<section class="manifesto">
+
+    <div class="manifesto-inner">
+
+        <div class="manifesto-small reveal">
+            Our approach
+        </div>
+
+        <div class="manifesto-text reveal">
+
+            Nicht einfach
+            <span class="fade">sichtbar.</span>
+
+            <br>
+
+            Sondern
+
+            <span class="gold">
+                unverwechselbar.
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DIGITAL
+========================= -->
+
+<section class="digital">
+
+    <div class="digital-grid"></div>
+
+    <div class="digital-content">
+
+        <div class="digital-top">
+
+            <div class="digital-title reveal">
+                DIGITAL<br>
+                WITH<br>
+                PURPOSE.
+            </div>
+
+            <div class="digital-side reveal">
+                Websites.
+                Social Media.
+                Content.
+                Marketing.
+                Technologie.
+
+                <br><br>
+
+                Alles beginnt mit einer Idee.
+            </div>
+
+        </div>
+
+        <div class="digital-word reveal">
+            SOCIAL
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INSTAGRAM
+========================= -->
+
+<section class="instagram">
+
+    <div class="instagram-inner">
+
+        <div>
+
+            <div class="instagram-title reveal">
+
+                YOUR<br>
+                BRAND<br>
+                <span>ONLINE.</span>
+
+            </div>
+
+            <p class="instagram-copy reveal">
+
+                Social Media ist nicht nur ein Kanal.
+                Es ist der Ort, an dem deine Marke
+                täglich sichtbar wird.
+
+            </p>
+
+            <a
+                class="instagram-link reveal"
+                href="https://www.instagram.com/socialclip.art/"
+                target="_blank"
+                rel="noopener"
+            >
+                @socialclip.art ↗
+            </a>
+
+        </div>
+
+
+        <div class="phone reveal">
+
+            <div class="phone-top">
+                socialclip.art
+            </div>
+
+            <div class="instagram-feed">
+
+                <div class="post">
+
+                    <div class="post-image"></div>
+
+                    <div class="post-info">
+                        SOCIALCLIP · ART & MEDIA
+                    </div>
+
+                </div>
+
+                <div class="post">
+
+                    <div class="post-image"></div>
+
+                    <div class="post-info">
+                        DESIGN · DIGITAL · SOCIAL
+                    </div>
+
+                </div>
+
+                <div class="post">
+
+                    <div class="post-image"></div>
+
+                    <div class="post-info">
+                        CREATE SOMETHING DIFFERENT
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FINAL
+========================= -->
+
+<section class="final">
+
+    <div class="final-bg"></div>
+
+    <div class="final-content">
+
+        <div class="final-small reveal">
+            Your next move
+        </div>
+
+        <h2 class="reveal">
+            MAKE IT<br>
+            <span>VISIBLE.</span>
+        </h2>
+
+        <a
+            href="#contact"
+            class="final-button reveal"
+        >
+            Start a project →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section class="contact" id="contact">
+
+    <div class="contact-inner">
+
+        <h3 class="reveal">
+            Lass uns<br>
+            etwas machen.
+        </h3>
+
+
+        <form
+            class="contact-form reveal"
+            action="https://formspree.io/f/xwlvlqwg"
+            method="POST"
+        >
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Dein Name"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Deine E-Mail"
+                required
+            >
+
+            <input
+                type="text"
+                name="project"
+                placeholder="Worum geht es?"
+            >
+
+            <textarea
+                name="message"
+                placeholder="Erzähl uns von deiner Idee..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Nachricht senden →
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
      FOOTER
-===================================================== -->
+========================= -->
 
 <footer>
 
-  <div>
-    © 2026 SocialClip Art & Media
-  </div>
+    <div>
+        © 2026 SOCIALCLIP ART & MEDIA
+    </div>
 
-  <a
-    href="https://www.instagram.com/socialclip.art/"
-    target="_blank"
-    rel="noopener"
-  >
-    Instagram
-  </a>
+    <div>
+        Erlangen · Germany
+    </div>
+
+    <div>
+        <a
+            href="https://www.instagram.com/socialclip.art/"
+            target="_blank"
+            rel="noopener"
+        >
+            Instagram ↗
+        </a>
+    </div>
 
 </footer>
 
 
+<!-- CURSOR -->
+
+<div class="cursor" id="cursor"></div>
+
+
 <script>
 
-/* =========================================================
+/* =========================
    INTRO
-========================================================= */
+========================= */
 
-setTimeout(function(){
+setTimeout(() => {
 
-  document
-    .getElementById("intro")
-    .classList
-    .add("hide");
+    document
+        .getElementById("intro")
+        .classList.add("hide");
 
-},5200);
+}, 5200);
 
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+/* =========================
+   SCROLL REVEAL
+========================= */
 
-const machine =
-  document.getElementById("machine");
+const reveals =
+    document.querySelectorAll(".reveal");
 
-const stage =
-  document.querySelector(".stage");
 
-const coreWrap =
-  document.getElementById("coreWrap");
+const revealObserver =
+    new IntersectionObserver(
+        entries => {
 
-const core =
-  document.getElementById("core");
+            entries.forEach(entry => {
 
-const phaseTitle =
-  document.getElementById("phaseTitle");
+                if(entry.isIntersecting){
 
-const phaseText =
-  document.getElementById("phaseText");
+                    entry.target.classList.add("visible");
 
-const phaseSmall =
-  document.getElementById("phaseSmall");
+                }
 
-const instagramMoment =
-  document.getElementById("instagramMoment");
+            });
 
-const final =
-  document.getElementById("final");
-
-const services =
-  document.querySelectorAll(".service-item");
-
-const giantCreate =
-  document.querySelector(".category-word.create");
-
-const giantDigital =
-  document.querySelector(".category-word.digital");
-
-const giantMedia =
-  document.querySelector(".category-word.media");
-
-const giantGrow =
-  document.querySelector(".category-word.grow");
-
-
-/* =========================================================
-   PHASES
-========================================================= */
-
-const phases = [
-
-  {
-    name:"CREATE",
-    small:"01 — CREATE",
-    start:.06,
-    end:.31
-  },
-
-  {
-    name:"DIGITAL",
-    small:"02 — DIGITAL",
-    start:.31,
-    end:.50
-  },
-
-  {
-    name:"MEDIA",
-    small:"03 — MEDIA",
-    start:.50,
-    end:.69
-  },
-
-  {
-    name:"GROW",
-    small:"04 — GROW",
-    start:.69,
-    end:.84
-  }
-
-];
-
-
-/* =========================================================
-   CLAMP
-========================================================= */
-
-function clamp(
-  value,
-  min,
-  max
-){
-
-  return Math.min(
-    Math.max(value,min),
-    max
-  );
-
-}
-
-
-/* =========================================================
-   UPDATE
-========================================================= */
-
-function update(){
-
-  const rect =
-    machine.getBoundingClientRect();
-
-  const total =
-    machine.offsetHeight -
-    window.innerHeight;
-
-  let progress =
-    -rect.top / total;
-
-  progress =
-    clamp(progress,0,1);
-
-
-  /* =====================================================
-     CORE
-  ===================================================== */
-
-  const coreRotation =
-    progress * 1500;
-
-  let coreScale;
-
-  if(progress < .06){
-
-    coreScale =
-      .65 + progress * 4;
-
-  }else{
-
-    coreScale =
-      1 +
-      Math.sin(progress*Math.PI*2)*.18;
-
-  }
-
-  const moveX =
-    Math.sin(progress*Math.PI*4)*5;
-
-  const moveY =
-    Math.cos(progress*Math.PI*3)*4;
-
-  coreWrap.style.transform = `
-    translate(-50%,-50%)
-    translate(${moveX}vw,${moveY}vh)
-    scale(${coreScale})
-    rotate(${coreRotation}deg)
-  `;
-
-
-  /* =====================================================
-     CORE MORPH
-  ===================================================== */
-
-  const radius =
-    50 +
-    Math.sin(progress*Math.PI*5)*12;
-
-  core.style.borderRadius = `
-    ${radius}% ${100-radius}%
-    ${100-radius}% ${radius}%
-  `;
-
-
-  /* =====================================================
-     PHASE
-  ===================================================== */
-
-  let currentPhase = null;
-
-  phases.forEach(function(phase){
-
-    if(
-      progress >= phase.start &&
-      progress < phase.end
-    ){
-
-      currentPhase = phase;
-
-    }
-
-  });
-
-
-  if(currentPhase){
-
-    phaseTitle.classList.add("visible");
-
-    phaseText.textContent =
-      currentPhase.name;
-
-    phaseSmall.textContent =
-      currentPhase.small;
-
-  }else{
-
-    phaseTitle.classList.remove("visible");
-
-  }
-
-
-  /* =====================================================
-     CATEGORY WORDS
-  ===================================================== */
-
-  giantCreate.style.opacity =
-    progress < .34 ? ".9" : ".15";
-
-  giantDigital.style.opacity =
-    progress >= .27 &&
-    progress < .53
-      ? ".9"
-      : ".12";
-
-  giantMedia.style.opacity =
-    progress >= .46 &&
-    progress < .72
-      ? ".9"
-      : ".12";
-
-  giantGrow.style.opacity =
-    progress >= .66 &&
-    progress < .87
-      ? ".9"
-      : ".12";
-
-
-  /* =====================================================
-     SERVICES
-  ===================================================== */
-
-  /*
-    Services occupy the first big part
-    of the experience.
-  */
-
-  const serviceStart =
-    .075;
-
-  const serviceEnd =
-    .83;
-
-  const serviceProgress =
-    clamp(
-      (progress-serviceStart) /
-      (serviceEnd-serviceStart),
-      0,
-      0.999
-    );
-
-  const serviceIndex =
-    Math.floor(
-      serviceProgress * 14
+        },
+        {
+            threshold:.12
+        }
     );
 
 
-  services.forEach(
-    function(service,index){
+reveals.forEach(el => {
 
-      if(
-        progress >= serviceStart &&
-        progress < serviceEnd &&
-        index === serviceIndex
-      ){
+    revealObserver.observe(el);
 
-        service.classList.add("active");
-
-      }else{
-
-        service.classList.remove("active");
-
-      }
-
-    }
-  );
+});
 
 
-  /* =====================================================
-     INSTAGRAM
-  ===================================================== */
+/* =========================
+   MOUSE PARALLAX
+========================= */
 
-  if(
-    progress >= .83 &&
-    progress < .93
-  ){
-
-    instagramMoment.classList.add("active");
-
-  }else{
-
-    instagramMoment.classList.remove("active");
-
-  }
+const cursor =
+    document.getElementById("cursor");
 
 
-  /* =====================================================
-     FINAL
-  ===================================================== */
+let mouseX = 0;
+let mouseY = 0;
 
-  if(progress >= .93){
+let currentX = 0;
+let currentY = 0;
 
-    final.classList.add("active");
 
-  }else{
+window.addEventListener("mousemove", e => {
 
-    final.classList.remove("active");
+    mouseX = e.clientX;
+    mouseY = e.clientY;
 
-  }
+});
+
+
+function animateCursor(){
+
+    currentX +=
+        (mouseX - currentX) * .15;
+
+    currentY +=
+        (mouseY - currentY) * .15;
+
+    cursor.style.left =
+        currentX + "px";
+
+    cursor.style.top =
+        currentY + "px";
+
+    requestAnimationFrame(
+        animateCursor
+    );
 
 }
 
+animateCursor();
 
-/* =========================================================
-   MOUSE
-========================================================= */
 
-window.addEventListener(
-  "mousemove",
-  function(event){
+/* =========================
+   DIGITAL PARALLAX
+========================= */
 
-    if(window.innerWidth < 800){
-      return;
+const digitalGrid =
+    document.querySelector(".digital-grid");
+
+const digitalWord =
+    document.querySelector(".digital-word");
+
+
+window.addEventListener("scroll", () => {
+
+    const scroll =
+        window.scrollY;
+
+    if(digitalGrid){
+
+        digitalGrid.style.transform =
+            `perspective(900px)
+             rotateX(62deg)
+             scale(1.7)
+             translateY(${scroll * .015}px)`;
+
     }
+
+    if(digitalWord){
+
+        const rect =
+            digitalWord.getBoundingClientRect();
+
+        const center =
+            window.innerHeight / 2;
+
+        const distance =
+            (rect.top - center) * .08;
+
+        digitalWord.style.transform =
+            `translateX(${distance}px)`;
+
+    }
+
+});
+
+
+/* =========================
+   SERVICE HOVER EFFECT
+========================= */
+
+document
+    .querySelectorAll(".service")
+    .forEach(service => {
+
+        service.addEventListener(
+            "mouseenter",
+            () => {
+
+                document.body.style.cursor =
+                    "none";
+
+            }
+        );
+
+    });
+
+
+/* =========================
+   PHONE PARALLAX
+========================= */
+
+const phone =
+    document.querySelector(".phone");
+
+
+window.addEventListener("mousemove", e => {
+
+    if(!phone ||
+       window.innerWidth < 900) return;
 
     const x =
-      (event.clientX /
-      window.innerWidth -
-      .5);
+        (e.clientX / window.innerWidth - .5);
 
     const y =
-      (event.clientY /
-      window.innerHeight -
-      .5);
+        (e.clientY / window.innerHeight - .5);
 
-    stage.style.transform =
-      `
-      rotateX(${y * -1.5}deg)
-      rotateY(${x * 1.5}deg)
-      `;
+    phone.style.transform =
+        `rotate(${5 + x * 8}deg)
+         translate(${x * 15}px,${y * 15}px)`;
 
-  }
-);
+});
 
 
-/* =========================================================
-   SCROLL
-========================================================= */
+/* =========================
+   SMOOTH SERVICE STAGGER
+========================= */
 
-window.addEventListener(
-  "scroll",
-  update,
-  {
-    passive:true
-  }
-);
+document
+    .querySelectorAll(".service")
+    .forEach((service,index) => {
 
+        service.style.transitionDelay =
+            `${(index % 4) * 60}ms`;
 
-/* =========================================================
-   RESIZE
-========================================================= */
-
-window.addEventListener(
-  "resize",
-  update
-);
-
-
-/* =========================================================
-   START
-========================================================= */
-
-update();
+    });
 
 </script>
 
