@@ -1,0 +1,248 @@
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#050505;
+  --white:#f4f1ea;
+  --soft:#9b978f;
+  --dim:#65615b;
+  --line:rgba(255,255,255,.13);
+}
+
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+a{
+  color:inherit;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:10;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:18px 28px;
+
+  border-bottom:1px solid rgba(255,255,255,.09);
+
+  background:rgba(5,5,5,.9);
+  backdrop-filter:blur(18px);
+}
+
+.logo{
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  line-height:1;
+}
+
+.logo-symbol{
+  display:block;
+  height:26px;
+  width:auto;
+}
+
+.logo-wordmark{
+  display:block;
+  height:13px;
+  width:auto;
+}
+
+.logo-tag{
+  margin-left:4px;
+  color:#77736c;
+  font-size:9px;
+  letter-spacing:.25em;
+  white-space:nowrap;
+}
+
+.back{
+  color:var(--soft);
+  font-size:9px;
+  letter-spacing:.2em;
+  text-decoration:none;
+  transition:color .3s ease;
+}
+
+.back:hover{
+  color:#fff;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+main{
+  max-width:820px;
+  padding:110px 7vw 120px;
+}
+
+.chapter-line{
+  display:flex;
+  align-items:center;
+  gap:15px;
+
+  margin-bottom:35px;
+
+  color:var(--dim);
+
+  font-size:8px;
+  letter-spacing:.25em;
+}
+
+.chapter-line::before{
+  content:"";
+  width:45px;
+  height:1px;
+  background:#77736c;
+}
+
+h1{
+  margin-bottom:70px;
+  font-size:clamp(44px,7vw,96px);
+  line-height:.9;
+  letter-spacing:-.06em;
+}
+
+h2{
+  margin:55px 0 16px;
+  font-size:19px;
+  letter-spacing:-.01em;
+}
+
+h3{
+  margin:30px 0 10px;
+  font-size:15px;
+}
+
+p,
+li{
+  color:var(--soft);
+  font-size:15px;
+  line-height:1.85;
+}
+
+p + p{
+  margin-top:14px;
+}
+
+ul{
+  margin:12px 0 0 20px;
+}
+
+main a{
+  color:var(--white);
+  border-bottom:1px solid rgba(255,255,255,.25);
+  text-decoration:none;
+}
+
+main a:hover{
+  border-color:#fff;
+}
+
+.stand{
+  margin-top:70px;
+  padding-top:25px;
+  border-top:1px solid var(--line);
+  color:var(--dim);
+  font-size:11px;
+  letter-spacing:.12em;
+}
+
+/* Platzhalter, bis die echten Daten da sind. Vor dem Livegang: grep "class=\"fill\"" */
+
+.fill{
+  outline:1px dashed rgba(255,200,80,.6);
+  outline-offset:2px;
+  color:#ffd27a;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:30px;
+
+  padding:45px 7vw;
+
+  border-top:1px solid var(--line);
+
+  color:var(--dim);
+
+  font-size:9px;
+  letter-spacing:.16em;
+}
+
+.footer-logo{
+  display:block;
+  height:55px;
+  width:auto;
+}
+
+.footer-legal{
+  display:flex;
+  flex-wrap:wrap;
+  gap:22px;
+}
+
+.footer-legal a{
+  color:var(--soft);
+  text-decoration:none;
+  transition:color .3s ease;
+}
+
+.footer-legal a:hover,
+.footer-legal a[aria-current="page"]{
+  color:#fff;
+}
+
+@media(max-width:800px){
+
+  .topbar{
+    padding:15px 18px;
+  }
+
+  .logo{
+    gap:10px;
+  }
+
+  .logo-symbol{
+    height:22px;
+  }
+
+  .logo-wordmark{
+    height:11px;
+  }
+
+  .logo-tag{
+    display:none;
+  }
+
+  main{
+    padding:80px 20px 90px;
+  }
+
+  footer{
+    flex-direction:column;
+  }
+}
