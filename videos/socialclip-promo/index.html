@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="vendor/gsap.min.js"></script>
+    <script src="vendor/three.min.js"></script>
+    <script src="vendor/GLTFLoader.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #050505;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #050505;
+        color: #f4f1ea;
+        font-family: Inter, Helvetica, Arial, sans-serif;
+      }
+
+      /* ── Background layer ─────────────────────────────── */
+      .bg-glow {
+        position: absolute;
+        left: 90px;
+        top: 760px;
+        width: 900px;
+        height: 900px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(244, 241, 234, 0.16) 0%, rgba(244, 241, 234, 0.05) 40%, rgba(5, 5, 5, 0) 70%);
+      }
+      .ghost {
+        position: absolute;
+        left: 0;
+        top: 1180px;
+        width: 2600px;
+        font-weight: 900;
+        font-size: 420px;
+        line-height: 1;
+        letter-spacing: -0.07em;
+        color: rgba(244, 241, 234, 0.07);
+        opacity: 0;
+        white-space: nowrap;
+      }
+      .floor-shadow {
+        position: absolute;
+        left: 290px;
+        top: 1610px;
+        width: 500px;
+        height: 90px;
+        border-radius: 50%;
+        background: radial-gradient(ellipse, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 70%);
+      }
+      .rule {
+        position: absolute;
+        left: 72px;
+        right: 72px;
+        height: 2px;
+        background: rgba(244, 241, 234, 0.18);
+        transform-origin: left center;
+      }
+      #theater {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+      }
+
+      /* ── Typography (site: .big-title / .chapter-line) ── */
+      .scene {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        padding: 250px 72px 0;
+      }
+      .chapter {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        font-size: 24px;
+        letter-spacing: 0.32em;
+        color: #9b978f;
+        text-transform: uppercase;
+      }
+      .chapter i {
+        display: block;
+        width: 90px;
+        height: 2px;
+        background: #9b978f;
+        transform-origin: left center;
+      }
+      .big {
+        margin-top: 34px;
+        font-weight: 800;
+        font-size: 132px;
+        line-height: 0.86;
+        letter-spacing: -0.07em;
+      }
+      .big .ln {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 8px;
+      }
+      .big .ln b {
+        display: block;
+        font-weight: 800;
+      }
+      .big .mute {
+        color: #85817a;
+      }
+      .svc-num {
+        font-size: 30px;
+        letter-spacing: 0.3em;
+        color: #9b978f;
+      }
+      .svc-word {
+        margin-top: 18px;
+        font-weight: 800;
+        font-size: 140px;
+        line-height: 0.9;
+        letter-spacing: -0.065em;
+      }
+      .svc-line {
+        margin-top: 26px;
+        max-width: 860px;
+        font-size: 34px;
+        line-height: 1.3;
+        color: #aaa69e;
+      }
+      .svc {
+        position: absolute;
+        left: 72px;
+        top: 330px;
+        width: 936px;
+      }
+      .end-logo {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+      .end-logo .sym {
+        display: block;
+        width: 74px;
+        height: 130px;
+      }
+      .end-logo .word {
+        display: block;
+        width: 600px;
+        height: 57px;
+      }
+      .end-cta {
+        margin-top: 60px;
+        font-size: 30px;
+        letter-spacing: 0.3em;
+        color: #9b978f;
+      }
+      .end-url {
+        margin-top: 16px;
+        font-weight: 800;
+        font-size: 124px;
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+      }
+      .footer-tag {
+        position: absolute;
+        left: 72px;
+        right: 72px;
+        top: 1700px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 24px;
+        letter-spacing: 0.32em;
+        color: #85817a;
+      }
+
+      /* ── Grain (registry: grain-overlay, GSAP-driven for seek safety) ── */
+      #grain {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      #grain .tex {
+        position: absolute;
+        left: -50%;
+        top: -50%;
+        width: 200%;
+        height: 200%;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.12;
+      }
+      #flash {
+        position: absolute;
+        inset: 0;
+        background: #f4f1ea;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .vignette {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(ellipse at 50% 55%, rgba(5, 5, 5, 0) 55%, rgba(5, 5, 5, 0.75) 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="24"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- background -->
+      <div class="bg-glow" id="glow"></div>
+      <div class="ghost" id="ghost" aria-hidden="true" data-layout-ignore data-layout-allow-occlusion data-layout-allow-overflow>ORIGINAL · ORIGINAL ·</div>
+      <div class="floor-shadow" id="shadow"></div>
+
+      <!-- 3D phone -->
+      <canvas id="theater" width="1080" height="1920"></canvas>
+
+      <div class="vignette"></div>
+
+      <!-- 01 · Die Vorlage -->
+      <div id="s1" class="scene clip" data-start="0" data-duration="5" data-track-index="1">
+        <div class="chapter"><i id="s1-rule"></i><span id="s1-chap">Scene 01 / Die Vorlage</span></div>
+        <div class="big" id="s1-big">
+          <span class="ln"><b>SIEHT AUS</b></span>
+          <span class="ln"><b class="mute">WIE ALLE</b></span>
+          <span class="ln"><b>ANDEREN?</b></span>
+        </div>
+      </div>
+
+      <!-- 02 · Der Bruch -->
+      <div id="s2" class="scene clip" data-start="4.6" data-duration="4" data-track-index="2">
+        <div class="chapter"><i id="s2-rule"></i><span id="s2-chap">Scene 02 / SocialClip</span></div>
+        <div class="big" id="s2-big">
+          <span class="ln"><b>NICHT</b></span>
+          <span class="ln"><b class="mute">NACH</b></span>
+          <span class="ln"><b>VORLAGE.</b></span>
+        </div>
+      </div>
+
+      <!-- 03 · Was wir machen -->
+      <div id="s3" class="scene clip" data-start="8.4" data-duration="10.2" data-track-index="3">
+        <div class="chapter"><i id="s3-rule"></i><span id="s3-chap">Scene 03 / What we create</span></div>
+        <div class="svc" id="svc-0">
+          <div class="svc-num">01 / WEB</div>
+          <div class="svc-word">Web.</div>
+          <div class="svc-line">Webseiten und digitale Auftritte, die nicht nach Vorlage aussehen.</div>
+        </div>
+        <div class="svc" id="svc-1">
+          <div class="svc-num">02 / DESIGN</div>
+          <div class="svc-word">Design.</div>
+          <div class="svc-line">Logos, Flyer, Visitenkarten und visuelle Identitäten.</div>
+        </div>
+        <div class="svc" id="svc-2">
+          <div class="svc-num">03 / SOCIAL</div>
+          <div class="svc-word">Social Media.</div>
+          <div class="svc-line">Inhalte, Strategien und Marketing für digitale Aufmerksamkeit.</div>
+        </div>
+        <div class="svc" id="svc-3">
+          <div class="svc-num">04 / MEDIA</div>
+          <div class="svc-word">Foto &amp; Video.</div>
+          <div class="svc-line">Bild und Bewegung für Marken, Produkte und Geschichten.</div>
+        </div>
+        <div class="svc" id="svc-4">
+          <div class="svc-num">05 / MARKETING</div>
+          <div class="svc-word">Marketing.</div>
+          <div class="svc-line">Neukundengewinnung, Strategie und digitale Kampagnen.</div>
+        </div>
+      </div>
+
+      <!-- 04 · Abschluss -->
+      <div id="s4" class="scene clip" data-start="18.4" data-duration="5.6" data-track-index="4">
+        <div class="end-logo" id="end-logo">
+          <img class="sym" id="end-sym" src="assets/socialclip-symbol-cream.svg" alt="" />
+          <img class="word" id="end-word" src="assets/socialclip-wordmark-cream.svg" alt="SocialClip" />
+        </div>
+        <div class="end-cta" id="end-cta">PROJEKT STARTEN AUF</div>
+        <div class="end-url" id="end-url">socialclip.art</div>
+      </div>
+
+      <div class="footer-tag" id="footer-tag"><span>ART · MEDIA · DIGITAL</span><span>ERLANGEN</span></div>
+
+      <div id="flash"></div>
+      <div id="grain"><div class="tex" id="grain-tex"></div></div>
+    </div>
+
+    <script>
+      (function () {
+        var W = 1080,
+          H = 1920,
+          PI = Math.PI;
+
+        // ── Shared animated state (every visual reads from S) ──────────
+        var S = {
+          phY: -6, phRX: 0.35, phRY: -0.55, phRZ: 0.06, phX: 0, phS: 1,
+          camZ: 10.5,
+          screen: 0, // 0 = template, 1 = socialclip site
+          tplScroll: 0, siteScroll: 0,
+          glitch: 0, tap: 0, tapX: 195, tapY: 420,
+          sheen: 0,
+        };
+
+        // ── Screen canvas (2x of a 390×844 iPhone viewport) ─────────────
+        var SW = 780, SH = 1688, BAR = 94; // status bar height (2x)
+        var scr = document.createElement("canvas");
+        scr.width = SW;
+        scr.height = SH;
+        var sx = scr.getContext("2d");
+        var imgTpl = new Image(), imgSite = new Image();
+
+        function rng(seed) {
+          return function () {
+            seed |= 0;
+            seed = (seed + 0x6d2b79f5) | 0;
+            var t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+            t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+          };
+        }
+
+        function drawPage(which, ctx) {
+          var dark = which === 1;
+          var img = dark ? imgSite : imgTpl;
+          var sc = (dark ? S.siteScroll : S.tplScroll) * 2;
+          sc = Math.max(0, Math.min(sc, img.height - (SH - BAR)));
+          ctx.fillStyle = dark ? "#050505" : "#ffffff";
+          ctx.fillRect(0, 0, SW, SH);
+          ctx.drawImage(img, 0, sc, SW, SH - BAR, 0, BAR, SW, SH - BAR);
+          // fixed top bar of the real site stays pinned while scrolling
+          if (dark && sc > 0) ctx.drawImage(img, 0, 0, SW, 124, 0, BAR, SW, 124);
+          // iOS status bar
+          ctx.fillStyle = dark ? "#050505" : "#ffffff";
+          ctx.fillRect(0, 0, SW, BAR);
+          ctx.fillStyle = dark ? "#f4f1ea" : "#111111";
+          ctx.font = "600 34px Inter, Helvetica, Arial, sans-serif";
+          ctx.textBaseline = "middle";
+          ctx.fillText("9:41", 76, 54);
+          // signal bars
+          for (var i = 0; i < 4; i++) ctx.fillRect(560 + i * 12, 64 - (i + 1) * 6, 8, (i + 1) * 6);
+          // battery
+          ctx.strokeStyle = ctx.fillStyle;
+          ctx.lineWidth = 3;
+          roundRect(ctx, 640, 40, 52, 26, 8);
+          ctx.stroke();
+          ctx.fillRect(645, 45, 36, 16);
+          ctx.fillRect(695, 48, 4, 10);
+        }
+
+        function roundRect(ctx, x, y, w, h, r) {
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.arcTo(x + w, y, x + w, y + h, r);
+          ctx.arcTo(x + w, y + h, x, y + h, r);
+          ctx.arcTo(x, y + h, x, y, r);
+          ctx.arcTo(x, y, x + w, y, r);
+          ctx.closePath();
+        }
+
+        var buf = document.createElement("canvas");
+        buf.width = SW;
+        buf.height = SH;
+        var bx = buf.getContext("2d");
+        var buf2 = document.createElement("canvas");
+        buf2.width = SW;
+        buf2.height = SH;
+        var bx2 = buf2.getContext("2d");
+
+        function drawScreen(t) {
+          var g = S.glitch;
+          drawPage(S.screen >= 0.5 ? 1 : 0, sx);
+          if (g > 0.001) {
+            // seeded per-frame slice displacement + RGB split
+            var r = rng(Math.floor(t * 30) * 7919 + 13);
+            drawPage(0, bx);
+            drawPage(1, bx2);
+            var n = 14;
+            for (var k = 0; k < n; k++) {
+              var y = Math.floor(r() * SH);
+              var h = 20 + Math.floor(r() * 160 * g);
+              var off = (r() - 0.5) * 220 * g;
+              var src = r() < 0.5 ? buf : buf2;
+              sx.drawImage(src, 0, y, SW, h, off, y, SW, h);
+            }
+            sx.globalCompositeOperation = "screen";
+            for (var c = 0; c < 6; c++) {
+              sx.fillStyle = c % 2 ? "rgba(255,40,80," + 0.35 * g + ")" : "rgba(40,220,255," + 0.3 * g + ")";
+              sx.fillRect((r() - 0.5) * 80, Math.floor(r() * SH), SW, 6 + r() * 40);
+            }
+            sx.globalCompositeOperation = "source-over";
+            sx.fillStyle = "rgba(0,0,0," + 0.18 * g + ")";
+            for (var yy = 0; yy < SH; yy += 6) sx.fillRect(0, yy, SW, 2);
+          }
+          // touch: finger contact + ripple
+          if (S.tap > 0.001 && S.tap < 0.999) {
+            var p = S.tap;
+            var cx = S.tapX * 2, cy = S.tapY * 2 + BAR;
+            var press = p < 0.35 ? p / 0.35 : 1 - (p - 0.35) / 0.65;
+            sx.fillStyle = "rgba(160,160,160," + 0.55 * press + ")";
+            sx.beginPath();
+            sx.arc(cx, cy, 44, 0, PI * 2);
+            sx.fill();
+            sx.strokeStyle = "rgba(220,220,220," + 0.6 * (1 - p) + ")";
+            sx.lineWidth = 5;
+            sx.beginPath();
+            sx.arc(cx, cy, 44 + p * 90, 0, PI * 2);
+            sx.stroke();
+          }
+          // glass sheen that slides with the phone's turn
+          var sh = sx.createLinearGradient(0, 0, SW, SH);
+          var o = 0.3 + S.sheen * 0.4;
+          sh.addColorStop(Math.max(0, o - 0.12), "rgba(255,255,255,0)");
+          sh.addColorStop(o, "rgba(255,255,255,0.07)");
+          sh.addColorStop(Math.min(1, o + 0.12), "rgba(255,255,255,0)");
+          sx.fillStyle = sh;
+          sx.fillRect(0, 0, SW, SH);
+          // dynamic island
+          sx.fillStyle = "#000";
+          roundRect(sx, SW / 2 - 125, 22, 250, 72, 36);
+          sx.fill();
+          screenTex.needsUpdate = true;
+        }
+
+        // ── Three.js scene ─────────────────────────────────────────────
+        var renderer = new THREE.WebGLRenderer({
+          canvas: document.getElementById("theater"),
+          antialias: true,
+          alpha: true,
+          preserveDrawingBuffer: true,
+        });
+        renderer.setSize(W, H, false);
+        renderer.setPixelRatio(1);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.1;
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer.setClearColor(0x000000, 0);
+
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 100);
+
+        // studio environment: warm softboxes for titanium reflections
+        var eC = document.createElement("canvas");
+        eC.width = 1024;
+        eC.height = 512;
+        var ec = eC.getContext("2d");
+        ec.fillStyle = "#0a0907";
+        ec.fillRect(0, 0, 1024, 512);
+        ec.fillStyle = "#fff6e8";
+        ec.fillRect(120, 140, 220, 200);
+        ec.fillStyle = "#c9c2b5";
+        ec.fillRect(620, 90, 140, 320);
+        ec.fillStyle = "#3a352d";
+        ec.fillRect(0, 430, 1024, 82);
+        var eT = new THREE.CanvasTexture(eC);
+        eT.mapping = THREE.EquirectangularReflectionMapping;
+        var pm = new THREE.PMREMGenerator(renderer);
+        scene.environment = pm.fromEquirectangular(eT).texture;
+        eT.dispose();
+        pm.dispose();
+
+        scene.add(new THREE.AmbientLight(0xfff4e6, 0.35));
+        var key = new THREE.DirectionalLight(0xfff1e0, 2.0);
+        key.position.set(-4, 5, 6);
+        scene.add(key);
+        var rim = new THREE.DirectionalLight(0xffffff, 1.4);
+        rim.position.set(5, 2, -4);
+        scene.add(rim);
+
+        var screenTex = new THREE.CanvasTexture(scr);
+        screenTex.encoding = THREE.sRGBEncoding;
+        screenTex.minFilter = THREE.LinearFilter;
+        screenTex.generateMipmaps = false;
+        screenTex.anisotropy = 4;
+
+        var phone = new THREE.Group();
+        scene.add(phone);
+
+        function planarScreenUv(mesh, flipX) {
+          var g = mesh.geometry;
+          g.computeBoundingBox();
+          var bb = g.boundingBox, pos = g.attributes.position;
+          var w = bb.max.x - bb.min.x || 1, h = bb.max.y - bb.min.y || 1;
+          var uv = new Float32Array(pos.count * 2);
+          for (var i = 0; i < pos.count; i++) {
+            var u = (pos.getX(i) - bb.min.x) / w;
+            uv[i * 2] = flipX ? 1 - u : u;
+            uv[i * 2 + 1] = (pos.getY(i) - bb.min.y) / h;
+          }
+          g.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
+        }
+
+        var modelReady = false, imgsReady = 0;
+        var loader = new THREE.GLTFLoader();
+        loader.load("models/iphone.glb", function (gltf) {
+          var m = gltf.scene;
+          var box = new THREE.Box3().setFromObject(m);
+          var s = 2.5 / box.getSize(new THREE.Vector3()).y;
+          m.scale.setScalar(s);
+          box.setFromObject(m);
+          m.position.sub(box.getCenter(new THREE.Vector3()));
+          // face the display toward the camera (+Z)
+          m.updateWorldMatrix(true, true);
+          var front = m.getObjectByName("front-glass"), back = m.getObjectByName("rear-window");
+          var flip = false;
+          if (front && back) {
+            var fp = new THREE.Vector3(), bp = new THREE.Vector3();
+            front.getWorldPosition(fp);
+            back.getWorldPosition(bp);
+            if (fp.z < bp.z) {
+              m.rotation.y += PI;
+            }
+          }
+          m.traverse(function (c) {
+            // brand fit: natural-titanium body instead of the model's orange finish
+            if (c.isMesh && c.material && /anodised|antenna|apple-logo|lens-ring|shield-back/.test(c.material.name || "")) {
+              c.material = c.material.clone();
+              c.material.color.setRGB(0.3, 0.29, 0.27);
+            }
+            if (c.isMesh && c.name.indexOf("front-glass") === 0) {
+              planarScreenUv(c, window.__SCREEN_FLIP_X === true);
+              c.material = new THREE.MeshBasicMaterial({ map: screenTex, toneMapped: false });
+            }
+          });
+          phone.add(m);
+          modelReady = true;
+          maybeStart();
+        });
+        imgTpl.onload = imgSite.onload = function () {
+          imgsReady++;
+          maybeStart();
+        };
+        imgTpl.src = "assets/template.png";
+        imgSite.src = "assets/site-top.png";
+
+        // ── Per-frame render ───────────────────────────────────────────
+        function render() {
+          if (!modelReady || imgsReady < 2) return;
+          var t = tl.time();
+          drawScreen(t);
+          phone.position.set(S.phX, S.phY, 0);
+          phone.rotation.set(S.phRX, S.phRY, S.phRZ);
+          phone.scale.setScalar(S.phS);
+          camera.position.set(0, 0, S.camZ);
+          camera.lookAt(0, 0, 0);
+          renderer.render(scene, camera);
+        }
+
+        // ── Timeline ───────────────────────────────────────────────────
+        var tl = gsap.timeline({ paused: true, onUpdate: render });
+        var D = 24;
+        // grain: stepped jitter, finite repeat inside the root duration
+        tl.fromTo("#grain-tex", { x: 0, y: 0 }, { x: -60, y: 40, duration: 0.1, ease: "steps(1)", repeat: Math.max(0, Math.floor(D / 0.2) - 1), yoyo: true }, 0);
+        // ambient background drift
+        tl.fromTo("#glow", { scale: 0.92, opacity: 0.8 }, { scale: 1.08, opacity: 1, duration: 6, ease: "sine.inOut", repeat: 3, yoyo: true }, 0);
+        tl.fromTo("#ghost", { x: 0 }, { x: -900, duration: D, ease: "none" }, 0);
+        tl.fromTo("#footer-tag", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out" }, 0.6);
+
+        // ── 01 Vorlage (0–4.6) ─────────────────────────────────────────
+        tl.to(S, { phY: -0.75, phRX: 0.06, phRY: -0.28, phRZ: 0.0, duration: 1.4, ease: "expo.out" }, 0);
+        tl.to(S, { phRY: -0.12, phRX: 0.02, sheen: 0.4, duration: 3, ease: "sine.inOut" }, 1.4);
+        tl.fromTo("#shadow", { opacity: 0, scaleX: 0.5 }, { opacity: 1, scaleX: 1, duration: 1.2, ease: "power2.out" }, 0.2);
+        tl.fromTo("#s1-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 0.3);
+        tl.fromTo("#s1-chap", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.4);
+        tl.fromTo("#s1-big .ln b", { yPercent: 105 }, { yPercent: 0, duration: 0.7, ease: "power4.out", stagger: 0.12 }, 0.5);
+        tl.to(S, { tplScroll: 520, duration: 2.0, ease: "power2.inOut" }, 1.5);
+        tl.set(S, { tapX: 104, tapY: 330 }, 3.5);
+        tl.fromTo(S, { tap: 0 }, { tap: 1, duration: 0.6, ease: "none", immediateRender: false }, 3.6);
+
+        // ── Glitch break (4.0–5.0) ─────────────────────────────────────
+        tl.to(S, { glitch: 1, duration: 0.25, ease: "power2.in" }, 4.0);
+        tl.to(S, { phRZ: 0.03, phX: 0.06, duration: 0.08, ease: "none", yoyo: true, repeat: 5 }, 4.05);
+        tl.to("#s1-big", { x: 30, skewX: -8, opacity: 0.5, duration: 0.06, ease: "none", yoyo: true, repeat: 5 }, 4.05);
+        tl.to("#s1", { opacity: 0, duration: 0.15, ease: "none" }, 4.45);
+        tl.set(S, { screen: 1, siteScroll: 0 }, 4.55);
+        tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.55, duration: 0.06, ease: "none", yoyo: true, repeat: 1 }, 4.55);
+        tl.to(S, { glitch: 0, phRZ: 0, phX: 0, duration: 0.45, ease: "power2.out" }, 4.6);
+
+        // ── 02 Nicht nach Vorlage (4.6–8.4) ────────────────────────────
+        tl.to(S, { phRY: 0.22, phRX: 0.05, camZ: 10.2, sheen: 0.9, duration: 3.8, ease: "sine.inOut" }, 4.6);
+        tl.fromTo("#s2-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 4.7);
+        tl.fromTo("#s2-chap", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 4.75);
+        tl.fromTo("#s2-big .ln b", { yPercent: 105 }, { yPercent: 0, duration: 0.55, ease: "expo.out", stagger: 0.14 }, 4.75);
+        tl.fromTo("#ghost", { opacity: 0 }, { opacity: 1, duration: 1, ease: "power1.out", immediateRender: false }, 5);
+        tl.to("#s2-big .ln b", { yPercent: -105, duration: 0.4, ease: "power3.in", stagger: 0.06 }, 8.0);
+        tl.to("#s2 .chapter", { opacity: 0, duration: 0.3, ease: "power1.in" }, 8.1);
+
+        // ── 03 Leistungen (8.4–18.4) ───────────────────────────────────
+        tl.fromTo("#s3-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 8.45);
+        tl.fromTo("#s3-chap", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 8.5);
+        tl.to(S, { phRY: -0.18, camZ: 10.0, duration: 10, ease: "sine.inOut" }, 8.4);
+        var stops = [905, 1125, 1345, 1567, 1789];
+        for (var i = 0; i < 5; i++) {
+          var t0 = 8.4 + i * 2;
+          var sel = "#svc-" + i;
+          tl.to(S, { siteScroll: stops[i], duration: 0.8, ease: "power3.inOut" }, t0);
+          tl.fromTo(sel + " .svc-num", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, t0 + 0.3);
+          tl.fromTo(sel + " .svc-word", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.55, ease: "back.out(1.4)" }, t0 + 0.35);
+          tl.fromTo(sel + " .svc-line", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, t0 + 0.5);
+          tl.to(sel, { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, t0 + 1.7);
+          if (i === 0) tl.set(sel, { opacity: 1 }, 0);
+          else tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.01, immediateRender: true }, t0 + 0.29);
+        }
+        // hide later cards before their slot
+        tl.set(["#svc-1", "#svc-2", "#svc-3", "#svc-4"], { opacity: 0 }, 0);
+
+        // ── 04 Abschluss (18.4–24) ─────────────────────────────────────
+        tl.to(S, { siteScroll: 0, duration: 0.9, ease: "power3.inOut" }, 18.4);
+        tl.to(S, { phRY: 0.0, phRX: 0.0, phY: -0.95, phS: 0.92, camZ: 10.3, sheen: 0.5, duration: 1.4, ease: "power3.inOut" }, 18.4);
+        tl.set(S, { tapX: 108, tapY: 580 }, 19.5);
+        tl.fromTo(S, { tap: 0 }, { tap: 1, duration: 0.7, ease: "none", immediateRender: false }, 19.6);
+        tl.fromTo("#end-sym", { opacity: 0, scale: 0.6, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.7)" }, 18.6);
+        tl.fromTo("#end-word", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, 18.85);
+        tl.fromTo("#end-cta", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 19.3);
+        tl.fromTo("#end-url", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" }, 19.5);
+        tl.to(S, { phRY: 0.1, duration: 3.6, ease: "sine.inOut" }, 20.4);
+
+        function maybeStart() {
+          if (!modelReady || imgsReady < 2) return;
+          tl.seek(0, false);
+          render();
+          window.__timelines["main"] = tl;
+        }
+      })();
+    </script>
+  </body>
+</html>
