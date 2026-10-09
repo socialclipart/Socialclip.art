@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "short-video-maker": {
+      "type": "sse",
+      "url": "http://localhost:3123/mcp/sse"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+# Short Video Maker (https://github.com/gyoridavid/short-video-maker)
+# MCP-Server für Claude: erstellt Shorts/Reels/TikToks aus Text.
+# Start:  PEXELS_API_KEY=dein_key docker compose -f docker-compose.short-video-maker.yml up -d
+# MCP:    http://localhost:3123/mcp/sse  (in .mcp.json eingetragen)
+services:
+  short-video-maker:
+    image: gyoridavid/short-video-maker:latest-tiny
+    # Direkt mit node starten statt "pnpm start" (vermeidet Corepack-Download beim Start)
+    command: ["node", "dist/index.js"]
+    environment:
+      - PEXELS_API_KEY=${PEXELS_API_KEY:?PEXELS_API_KEY fehlt - kostenlos unter https://www.pexels.com/api/}
+      - LOG_LEVEL=info
+    ports:
+      - "3123:3123"
+    volumes:
+      - ./videos:/app/data/videos
+    restart: unless-stopped
