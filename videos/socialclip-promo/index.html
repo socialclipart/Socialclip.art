@@ -185,22 +185,6 @@
         color: #85817a;
       }
 
-      /* ── Grain (registry: grain-overlay, GSAP-driven for seek safety) ── */
-      #grain {
-        position: absolute;
-        inset: 0;
-        overflow: hidden;
-        pointer-events: none;
-      }
-      #grain .tex {
-        position: absolute;
-        left: -50%;
-        top: -50%;
-        width: 200%;
-        height: 200%;
-        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-        opacity: 0.12;
-      }
       #flash {
         position: absolute;
         inset: 0;
@@ -298,7 +282,6 @@
       <div class="footer-tag" id="footer-tag"><span>ART · MEDIA · DIGITAL</span><span>ERLANGEN</span></div>
 
       <div id="flash"></div>
-      <div id="grain"><div class="tex" id="grain-tex"></div></div>
     </div>
 
     <script>
@@ -564,8 +547,6 @@
         // ── Timeline ───────────────────────────────────────────────────
         var tl = gsap.timeline({ paused: true, onUpdate: render });
         var D = 24;
-        // grain: stepped jitter, finite repeat inside the root duration
-        tl.fromTo("#grain-tex", { x: 0, y: 0 }, { x: -60, y: 40, duration: 0.1, ease: "steps(1)", repeat: Math.max(0, Math.floor(D / 0.2) - 1), yoyo: true }, 0);
         // ambient background drift
         tl.fromTo("#glow", { scale: 0.92, opacity: 0.8 }, { scale: 1.08, opacity: 1, duration: 6, ease: "sine.inOut", repeat: 3, yoyo: true }, 0);
         tl.fromTo("#ghost", { x: 0 }, { x: -900, duration: D, ease: "none" }, 0);
