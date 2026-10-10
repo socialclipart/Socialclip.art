@@ -6958,12 +6958,28 @@ checkForm.addEventListener(
 
 /* =========================
    START
+   Beim Neuladen immer ganz oben anfangen:
+   Der Browser darf die alte Scroll-Position nicht
+   wiederherstellen, und ein #anker in der Adresse
+   (z. B. #kontakt) springt beim Neuladen nicht mit.
 ========================= */
+
+if("scrollRestoration" in history){
+  history.scrollRestoration = "manual";
+}
+
+if(location.hash){
+  history.replaceState(null, "", location.pathname + location.search);
+}
 
 window.scrollTo(
   0,
   0
 );
+
+window.addEventListener("load",()=>{
+  window.scrollTo(0, 0);
+});
 
 </script>
 
