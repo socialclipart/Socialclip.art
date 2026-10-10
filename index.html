@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#121212">
 <meta name="description" content="SocialClip Art · Media · Digital: Design, digitale Lösungen, Social Media, Foto, Video und Marketing aus Erlangen.">
 <title>SocialClip | Art · Media · Digital</title>
 
@@ -36,7 +36,7 @@ html{
 }
 
 body{
-  background:#050505;
+  background:#121212;
   color:#f4f1ea;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
@@ -56,10 +56,10 @@ button,input,textarea,select{
 }
 
 :root{
-  --bg:#050505;
+  --bg:#121212;
   --white:#f4f1ea;
-  --soft:#99958d;
-  --dim:#62605b;
+  --soft:#b0aca4;
+  --dim:#86827b;
   --line:rgba(255,255,255,.13);
   --line-soft:rgba(255,255,255,.07);
 }
@@ -94,8 +94,8 @@ body::after{
   background:
     radial-gradient(
       circle at 50% 35%,
-      transparent 25%,
-      rgba(0,0,0,.72) 100%
+      transparent 45%,
+      rgba(0,0,0,.38) 100%
     );
 }
 
@@ -104,7 +104,7 @@ body::after{
   inset:0;
   pointer-events:none;
   z-index:9980;
-  box-shadow:inset 0 0 180px rgba(0,0,0,.95);
+  box-shadow:inset 0 0 140px rgba(0,0,0,.55);
 }
 
 /* =========================
@@ -126,7 +126,7 @@ body::after{
 
   border-bottom:1px solid rgba(255,255,255,.09);
 
-  background:rgba(5,5,5,.62);
+  background:rgba(18,18,18,.62);
   backdrop-filter:blur(18px);
 
   transition:
@@ -141,7 +141,7 @@ body.locked .topbar{
 }
 
 .topbar.scrolled{
-  background:rgba(5,5,5,.9);
+  background:rgba(18,18,18,.9);
   border-color:rgba(255,255,255,.16);
 }
 
@@ -166,7 +166,7 @@ body.locked .topbar{
 
 .logo-tag{
   margin-left:4px;
-  color:#77736c;
+  color:#938f87;
   font-size:9px;
   letter-spacing:.25em;
   white-space:nowrap;
@@ -182,7 +182,7 @@ body.locked .topbar{
   text-align:right;
   font-size:9px;
   letter-spacing:.16em;
-  color:#8f8b84;
+  color:#a8a49c;
 }
 
 .clock strong{
@@ -197,7 +197,9 @@ body.locked .topbar{
   position:fixed;
   top:71px;
   left:0;
-  width:0%;
+  width:100%;
+  transform:scaleX(0);
+  transform-origin:left center;
   height:1px;
   z-index:9001;
   background:#fff;
@@ -222,8 +224,8 @@ body.locked .topbar{
     radial-gradient(
       circle at 50% 45%,
       #151515 0,
-      #080808 38%,
-      #050505 75%
+      #0e0e0e 38%,
+      #121212 75%
     );
 
   opacity:1;
@@ -293,7 +295,7 @@ body.locked .topbar{
   margin-bottom:28px;
   font-size:9px;
   letter-spacing:.35em;
-  color:#77736c;
+  color:#938f87;
 
   opacity:0;
   transform:translateY(12px);
@@ -332,7 +334,7 @@ body.locked .topbar{
 }
 
 .intro-title span:last-child{
-  color:#88847d;
+  color:#a29e96;
 }
 
 .intro-copy{
@@ -342,7 +344,7 @@ body.locked .topbar{
 
   margin:35px auto 0;
 
-  color:#918d85;
+  color:#aba79f;
   font-size:14px;
   letter-spacing:.02em;
 
@@ -521,7 +523,7 @@ body.locked .topbar{
   justify-content:space-between;
   margin-bottom:9px;
 
-  color:#77736c;
+  color:#938f87;
   font-size:8px;
   letter-spacing:.18em;
 }
@@ -694,7 +696,7 @@ section{
   margin-bottom:25px;
   font-size:9px;
   letter-spacing:.32em;
-  color:#69655f;
+  color:#8a867f;
 }
 
 .big-title{
@@ -705,12 +707,12 @@ section{
 }
 
 .big-title span{
-  color:#77736c;
+  color:#938f87;
 }
 
 .text{
   max-width:650px;
-  color:#9b978f;
+  color:#b8b4ac;
   font-size:15px;
   line-height:1.9;
 }
@@ -841,7 +843,7 @@ section{
 
 .hero-small{
   margin-top:40px;
-  color:#85817a;
+  color:#a29e96;
   font-size:10px;
   letter-spacing:.25em;
 }
@@ -853,7 +855,7 @@ section{
 
   margin-bottom:35px;
 
-  color:#85817a;
+  color:#a29e96;
 
   font-size:10px;
   letter-spacing:.25em;
@@ -863,7 +865,7 @@ section{
   content:"";
   width:45px;
   height:1px;
-  background:#77736c;
+  background:#938f87;
 }
 
 /* =========================
@@ -917,7 +919,7 @@ section{
 }
 
 .category-number{
-  color:#7d7973;
+  color:#9b978f;
   font-size:10px;
   letter-spacing:.2em;
 }
@@ -930,7 +932,7 @@ section{
 
 .category p{
   max-width:330px;
-  color:#8e8a83;
+  color:#a8a49c;
   font-size:13px;
   line-height:1.7;
 }
@@ -978,7 +980,7 @@ section{
 }
 
 .service-number{
-  color:#7d7973;
+  color:#9b978f;
   font-size:11px;
 }
 
@@ -989,7 +991,7 @@ section{
 }
 
 .service-arrow{
-  color:#77736c;
+  color:#938f87;
   font-size:16px;
   transition:
     color .3s ease,
@@ -1073,13 +1075,13 @@ section{
   justify-content:space-between;
   gap:20px;
 
-  color:#85817a;
+  color:#a29e96;
   font-size:10px;
   letter-spacing:.25em;
 }
 
 .nova-state{
-  color:#85817a;
+  color:#a29e96;
   transition:color .4s ease;
 }
 
@@ -1098,7 +1100,7 @@ section{
   min-height:3.4em;
   margin-top:26px;
 
-  color:#77736c;
+  color:#938f87;
   font-size:clamp(18px,1.8vw,23px);
   line-height:1.45;
   letter-spacing:-.02em;
@@ -1198,7 +1200,7 @@ section{
 }
 
 .nova-time{
-  color:#85817a;
+  color:#a29e96;
   font-size:11px;
   letter-spacing:.18em;
   font-variant-numeric:tabular-nums;
@@ -1214,7 +1216,7 @@ section{
 .nova-skills span{
   padding:9px 12px;
   border:1px solid rgba(255,255,255,.16);
-  color:#8e8a83;
+  color:#a8a49c;
   font-size:9px;
   letter-spacing:.2em;
   transition:
@@ -1349,7 +1351,7 @@ section{
 
 .widget-meta{
   margin-top:22px;
-  color:#85817a;
+  color:#a29e96;
   font-size:9px;
   letter-spacing:.22em;
 }
@@ -1375,7 +1377,7 @@ section{
 }
 
 .widget-number{
-  color:#85817a;
+  color:#a29e96;
   font-size:10px;
   letter-spacing:.25em;
 }
@@ -1389,7 +1391,7 @@ section{
 
 .widget-card p{
   margin-top:15px;
-  color:#8e8a83;
+  color:#a8a49c;
   font-size:13px;
   line-height:1.7;
 }
@@ -1472,7 +1474,7 @@ section{
 }
 
 .widget-head-label{
-  color:#77736c;
+  color:#938f87;
   font-size:8px;
   letter-spacing:.22em;
 }
@@ -1497,12 +1499,12 @@ section{
 }
 
 .widget-body h3 span{
-  color:#77736c;
+  color:#938f87;
 }
 
 .widget-sub{
   margin-top:18px;
-  color:#85817a;
+  color:#a29e96;
   font-size:13px;
   line-height:1.7;
 }
@@ -1529,7 +1531,7 @@ section{
 
   background:#0b0b0b;
 
-  color:#aaa69e;
+  color:#c0bcb4;
 
   cursor:pointer;
 
@@ -1580,7 +1582,7 @@ section{
 }
 
 .summary-title{
-  color:#65615b;
+  color:#87837c;
   font-size:8px;
   letter-spacing:.2em;
 }
@@ -1617,7 +1619,7 @@ section{
 
 .brief-question{
   margin-top:35px;
-  color:#aaa69e;
+  color:#c0bcb4;
   font-size:11px;
   letter-spacing:.1em;
 }
@@ -1704,7 +1706,7 @@ section{
 }
 
 .brief-line span:first-child{
-  color:#65615b;
+  color:#87837c;
 }
 
 /* =========================
@@ -1732,7 +1734,7 @@ section{
 }
 
 .manifesto-text span{
-  color:#77736c;
+  color:#938f87;
 }
 
 /* =========================
@@ -1769,8 +1771,8 @@ section{
     ),
     linear-gradient(
       135deg,
-      #151515,
-      #050505 65%
+      #1c1c1c,
+      #121212 65%
     );
 }
 
@@ -1788,8 +1790,8 @@ section{
     ),
     linear-gradient(
       25deg,
-      #070707,
-      #191919
+      #101010,
+      #202020
     );
 }
 
@@ -1802,8 +1804,8 @@ section{
     ),
     linear-gradient(
       145deg,
-      #151515,
-      #050505
+      #1c1c1c,
+      #121212
     );
 }
 
@@ -1856,7 +1858,7 @@ section{
   bottom:23px;
   font-size:9px;
   letter-spacing:.28em;
-  color:#aaa69e;
+  color:#c0bcb4;
 }
 
 /* =========================
@@ -1882,7 +1884,7 @@ section{
 .make-visible p{
   max-width:550px;
   margin:38px auto 0;
-  color:#85817a;
+  color:#a29e96;
   font-size:14px;
   line-height:1.8;
 }
@@ -1911,7 +1913,7 @@ section{
   gap:20px;
   padding-bottom:18px;
   border-bottom:1px solid var(--line);
-  color:#85817a;
+  color:#a29e96;
   font-size:10px;
   letter-spacing:.25em;
 }
@@ -1984,13 +1986,13 @@ section{
 
 .check-no{
   padding-top:5px;
-  color:#62605b;
+  color:#86827b;
   font-size:10px;
   letter-spacing:.2em;
 }
 
 .check-copy{
-  color:#85817a;
+  color:#a29e96;
   font-size:13px;
   line-height:1.7;
 }
@@ -2006,7 +2008,7 @@ section{
 }
 
 .check-item input:checked ~ .check-copy strong{
-  color:#9b978f;
+  color:#b8b4ac;
 }
 
 .check-panel{
@@ -2024,7 +2026,7 @@ section{
 
 .check-panel-label{
   display:block;
-  color:#85817a;
+  color:#a29e96;
   font-size:10px;
   letter-spacing:.25em;
 }
@@ -2041,7 +2043,7 @@ section{
 }
 
 .check-score span{
-  color:#77736c;
+  color:#938f87;
   font-size:clamp(28px,3vw,40px);
   letter-spacing:-.04em;
 }
@@ -2072,7 +2074,7 @@ section{
   margin-top:18px;
   padding-left:14px;
   border-left:1px solid rgba(255,255,255,.35);
-  color:#9b978f;
+  color:#b8b4ac;
   font-size:13px;
   line-height:1.7;
 }
@@ -2090,7 +2092,7 @@ section{
 
 .check-form-text{
   margin:10px 0 26px;
-  color:#85817a;
+  color:#a29e96;
   font-size:13px;
   line-height:1.7;
 }
@@ -2123,7 +2125,7 @@ section{
   border:0;
   border-bottom:1px solid rgba(255,255,255,.2);
   background:none;
-  color:#9b978f;
+  color:#b8b4ac;
   cursor:pointer;
   font-size:9px;
   letter-spacing:.22em;
@@ -2239,13 +2241,13 @@ footer::before{
 .form-note{
   margin-top:22px;
   max-width:460px;
-  color:#65615b;
+  color:#87837c;
   font-size:11px;
   line-height:1.7;
 }
 
 .form-note a{
-  color:#9b978f;
+  color:#b8b4ac;
   border-bottom:1px solid rgba(255,255,255,.2);
 }
 
@@ -2259,7 +2261,7 @@ footer::before{
 .contact-item > span{
   display:block;
   margin-bottom:9px;
-  color:#85817a;
+  color:#a29e96;
   font-size:10px;
   letter-spacing:.25em;
 }
@@ -2306,12 +2308,12 @@ footer::before{
 }
 
 .form-success h3 span{
-  color:#77736c;
+  color:#938f87;
 }
 
 .form-success p{
   margin-top:24px;
-  color:#9b978f;
+  color:#b8b4ac;
   font-size:15px;
   line-height:1.8;
 }
@@ -2335,7 +2337,7 @@ footer::before{
 
 .field-label{
   display:block;
-  color:#85817a;
+  color:#a29e96;
   font-size:10px;
   letter-spacing:.25em;
   transition:color .4s ease;
@@ -2388,13 +2390,13 @@ footer::before{
 
 .field input::placeholder,
 .field textarea::placeholder{
-  color:#4f4c47;
+  color:#6e6b65;
   transition:color .4s ease;
 }
 
 .field:focus-within input::placeholder,
 .field:focus-within textarea::placeholder{
-  color:#6d6963;
+  color:#8c8882;
 }
 
 
@@ -2421,7 +2423,7 @@ footer{
 
   padding:45px 7vw;
 
-  color:#66625c;
+  color:#88847d;
 
   font-size:9px;
   letter-spacing:.16em;
@@ -2439,7 +2441,7 @@ footer strong{
 }
 
 .footer-legal a{
-  color:#9b978f;
+  color:#b8b4ac;
   transition:color .3s ease;
 }
 
@@ -2648,6 +2650,59 @@ footer strong{
   .check-item{
     grid-template-columns:24px 26px minmax(0,1fr);
     gap:12px;
+  }
+}
+
+/* =========================
+   HANDY-PERFORMANCE
+   Ohne Maus (Touch) und auf kleinen Bildschirmen:
+   kein Taschenlampen-Licht, kein Filmkorn über allem,
+   kein Glas-Blur. Diese Effekte muss das Handy bei
+   jedem Scrollen neu berechnen, dadurch hängt die Seite.
+========================= */
+
+@media (hover:none), (max-width:800px){
+
+  .flash-beam,
+  .flash-lift,
+  .flash-reveal,
+  body::before{
+    display:none;
+  }
+
+  body::after{
+    background:
+      radial-gradient(
+        circle at 50% 40%,
+        transparent 55%,
+        rgba(0,0,0,.28) 100%
+      );
+  }
+
+  .vignette{
+    box-shadow:inset 0 0 60px rgba(0,0,0,.4);
+  }
+
+  .topbar,
+  .topbar.scrolled{
+    background:rgba(18,18,18,.96);
+  }
+
+  .topbar,
+  .cine-btn,
+  .intro-enter,
+  .nova-play,
+  .widget-overlay{
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+
+  .cine-btn.primary::after{
+    animation:none;
+  }
+
+  .widget-overlay{
+    background:rgba(10,10,10,.94);
   }
 }
 
@@ -4529,9 +4584,13 @@ document.documentElement.addEventListener(
 );
 
 /*
-   Am Handy folgt das Licht dem Finger
-   und geht kurz nach dem Loslassen aus.
+   Am Handy (kein Hover) bleibt das Licht aus:
+   Es müsste bei jedem Wisch die ganze Fläche neu
+   zeichnen, und genau das lässt die Seite ruckeln.
 */
+
+const touchOnly =
+  window.matchMedia("(hover: none)").matches;
 
 window.addEventListener(
   "touchstart",
@@ -4539,7 +4598,7 @@ window.addEventListener(
 
     const touch = event.touches[0];
 
-    if(touch){
+    if(touch && !touchOnly){
       flashMoveTo(touch.clientX, touch.clientY, true);
     }
 
@@ -4555,7 +4614,7 @@ window.addEventListener(
 
     const touch = event.touches[0];
 
-    if(touch){
+    if(touch && !touchOnly){
       flashMoveTo(touch.clientX, touch.clientY, false);
     }
 
@@ -4687,7 +4746,14 @@ function updateScene(){
    SCROLL PROGRESS
 ========================= */
 
+const progressBar =
+  document.getElementById("progress");
+
+let progressQueued = false;
+
 function updateProgress(){
+
+  progressQueued = false;
 
   const scrollTop =
     window.scrollY;
@@ -4696,15 +4762,13 @@ function updateProgress(){
     document.documentElement.scrollHeight -
     window.innerHeight;
 
-  const percentage =
+  const share =
     height > 0
-      ? (scrollTop / height) * 100
+      ? scrollTop / height
       : 0;
 
-  document.getElementById(
-    "progress"
-  ).style.width =
-    percentage + "%";
+  progressBar.style.transform =
+    "scaleX(" + share + ")";
 
   updateScene();
 
@@ -4712,7 +4776,12 @@ function updateProgress(){
 
 window.addEventListener(
   "scroll",
-  updateProgress,
+  ()=>{
+    if(!progressQueued){
+      progressQueued = true;
+      requestAnimationFrame(updateProgress);
+    }
+  },
   {
     passive:true
   }
