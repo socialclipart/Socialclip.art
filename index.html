@@ -1976,6 +1976,153 @@ section{
 }
 
 /* =========================
+   KAMERAFAHRT (3D-TUNNEL)
+   Die Sektion ist hoch, der Inhalt klebt am
+   Bildschirm. Scrollen schiebt die "Welt"
+   auf die Kamera zu.
+========================= */
+
+.tunnel{
+  height:320vh;
+  min-height:0;
+  padding:0;
+}
+
+.tunnel-sticky{
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:hidden;
+  perspective:800px;
+  perspective-origin:50% 50%;
+}
+
+.tunnel-world{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:0;
+  height:0;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+
+.tunnel-word{
+  position:absolute;
+  left:0;
+  top:0;
+  transform:
+    translate(-50%,-50%)
+    translate3d(var(--x,0),var(--y,0),var(--z,0px));
+}
+
+.tunnel-word{
+  white-space:nowrap;
+  font-size:clamp(46px,8vw,120px);
+  font-weight:700;
+  letter-spacing:-.06em;
+  color:#f4f1ea;
+}
+
+.tunnel-word:nth-child(even){
+  color:transparent;
+  -webkit-text-stroke:1px rgba(244,241,234,.75);
+}
+
+.tunnel-final{
+  font-size:clamp(64px,13vw,200px);
+  color:#fff;
+  -webkit-text-stroke:0;
+}
+
+/* Rahmen werden auf eine Fläche gezeichnet: eine Ebene statt elf */
+.tunnel-frames{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.tunnel-caption{
+  position:absolute;
+  left:7vw;
+  right:7vw;
+  bottom:42px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#a29e96;
+  font-size:10px;
+  letter-spacing:.25em;
+}
+
+@media(max-width:800px){
+
+  .tunnel{
+    height:260vh;
+  }
+
+  .tunnel-sticky{
+    perspective:600px;
+  }
+
+  /* Umriss-Schrift ist am Handy teuer: gefüllt, nur heller/dunkler */
+  .tunnel-word:nth-child(even){
+    color:rgba(244,241,234,.55);
+    -webkit-text-stroke:0;
+  }
+
+  .tunnel-caption{
+    left:20px;
+    right:20px;
+    bottom:30px;
+    font-size:9px;
+  }
+}
+
+/* Ohne Bewegung: Wörter einfach untereinander */
+
+@media (prefers-reduced-motion:reduce){
+
+  .tunnel{
+    height:auto;
+    padding:100px 7vw;
+  }
+
+  .tunnel-sticky{
+    position:static;
+    height:auto;
+    perspective:none;
+  }
+
+  .tunnel-world{
+    position:static;
+    width:auto;
+    height:auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 28px;
+    transform:none !important;
+  }
+
+  .tunnel-frames{
+    display:none;
+  }
+
+  .tunnel-word{
+    position:static;
+    transform:none;
+    opacity:1 !important;
+    font-size:clamp(32px,5vw,64px);
+  }
+
+  .tunnel-caption{
+    position:static;
+    margin-top:40px;
+  }
+}
+
+/* =========================
    MAKE VISIBLE
 ========================= */
 
@@ -3437,6 +3584,41 @@ footer strong{
     Eine Geschichte wird zu Aufmerksamkeit.
     Aufmerksamkeit wird zu Bewegung.
   </p>
+
+</section>
+
+<!-- =========================
+     KAMERAFAHRT
+     3D-Tunnel: beim Scrollen fliegt man durch
+     schwebende Wörter und Rahmen. Reines CSS-3D,
+     ein Transform pro Frame.
+========================= -->
+
+<section class="tunnel" id="tunnel" aria-label="Kamerafahrt: von der Idee zur Wirkung">
+
+  <div class="tunnel-sticky">
+
+    <canvas class="tunnel-frames" id="tunnelFrames" aria-hidden="true"></canvas>
+
+    <div class="tunnel-world" id="tunnelWorld" aria-hidden="true">
+        <span class="tunnel-word" data-z="-500" style="--x:-34vw;--y:-14vh">IDEE</span>
+        <span class="tunnel-word" data-z="-920" style="--x:32vw;--y:16vh">SKIZZE</span>
+        <span class="tunnel-word" data-z="-1340" style="--x:-30vw;--y:20vh">FORM</span>
+        <span class="tunnel-word" data-z="-1760" style="--x:34vw;--y:-18vh">FARBE</span>
+        <span class="tunnel-word" data-z="-2180" style="--x:-36vw;--y:-2vh">LICHT</span>
+        <span class="tunnel-word" data-z="-2600" style="--x:26vw;--y:22vh">BEWEGUNG</span>
+        <span class="tunnel-word" data-z="-3020" style="--x:-24vw;--y:-22vh">GESCHICHTE</span>
+        <span class="tunnel-word" data-z="-3440" style="--x:34vw;--y:8vh">MARKE</span>
+        <span class="tunnel-word" data-z="-3860" style="--x:-30vw;--y:14vh">SICHTBAR</span>
+        <span class="tunnel-word tunnel-final" data-z="-4480" style="--x:0vw;--y:0vh">WIRKUNG.</span>
+    </div>
+
+    <div class="tunnel-caption">
+      <span>KAMERAFAHRT</span>
+      <span>VON DER IDEE ZUR WIRKUNG</span>
+    </div>
+
+  </div>
 
 </section>
 
@@ -6332,6 +6514,153 @@ checkForm.addEventListener(
   },{ threshold:.3 }).observe(stage);
 
   show(0, true);
+
+})();
+
+
+/* =========================
+   KAMERAFAHRT (3D-TUNNEL)
+   Ein Transform für die ganze Welt pro Frame,
+   dazu Ein- und Ausblenden je nach Abstand
+   zur Kamera. Läuft nur, solange der Tunnel
+   im Bild ist.
+========================= */
+
+(()=>{
+
+  const section = document.getElementById("tunnel");
+  const world = document.getElementById("tunnelWorld");
+
+  if(!section || !world || reduceMotion){
+    return;
+  }
+
+  const items =
+    [...world.children].map(el=>{
+      const z = Number(el.dataset.z);
+      el.style.setProperty("--z", z + "px");
+      return { el, z, final: el.classList.contains("tunnel-final") };
+    });
+
+  const deepest =
+    Math.min(...items.map(item=>item.z));
+
+  /* Rahmen: Tiefe und leichte Drehung, gezeichnet mit derselben Perspektive */
+  const canvas = document.getElementById("tunnelFrames");
+  const ctx = canvas.getContext("2d");
+  const frames = Array.from({ length:11 }, (_, i)=>({ z: -300 - i * 400, r: i * 7 * Math.PI / 180 }));
+
+  let cw = 0;
+  let ch = 0;
+  let persp = 800;
+
+  function sizeCanvas(){
+    cw = canvas.clientWidth;
+    ch = canvas.clientHeight;
+    persp = parseFloat(getComputedStyle(canvas.parentElement).perspective) || 800;
+    /* Am Handy reicht einfache Auflösung für dünne Linien */
+    const dpr = cw < 800 ? 1 : Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = cw * dpr;
+    canvas.height = ch * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  sizeCanvas();
+
+  function drawFrames(cam){
+
+    const fw = Math.min(cw * .92, 1100);
+    const fh = Math.min(ch * .78, 700);
+
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.lineWidth = 1;
+
+    for(const f of frames){
+
+      const z = f.z + cam;
+
+      if(z >= persp - 10){
+        continue;
+      }
+
+      const scale = persp / (persp - z);
+      const far = Math.min(1, Math.max(0, (z + 2100) / 1200));
+      const near = Math.min(1, Math.max(0, (persp - 60 - z) / 300));
+      const a = .16 * far * near;
+
+      if(a <= .002){
+        continue;
+      }
+
+      ctx.save();
+      ctx.translate(cw / 2, ch / 2);
+      ctx.rotate(f.r);
+      ctx.strokeStyle = "rgba(255,255,255," + a.toFixed(3) + ")";
+      ctx.strokeRect(-fw * scale / 2, -fh * scale / 2, fw * scale, fh * scale);
+      ctx.restore();
+    }
+  }
+
+  let active = false;
+  let queued = false;
+
+  function frame(){
+
+    queued = false;
+
+    const box = section.getBoundingClientRect();
+    const travel = box.height - window.innerHeight;
+    const p = Math.min(1, Math.max(0, -box.top / travel));
+
+    /* Am Ende steht das letzte Wort knapp vor der Kamera */
+    const cam = p * (-deepest - 260);
+
+    world.style.transform = "translate3d(0,0," + cam + "px)";
+
+    drawFrames(cam);
+
+    items.forEach(item=>{
+
+      const z = item.z + cam;
+
+      /* Nebel hinten, Ausblenden kurz vor der Kamera */
+      const far = Math.min(1, Math.max(0, (z + 2100) / 1200));
+      const near = item.final ? 1 : Math.min(1, Math.max(0, (420 - z) / 260));
+
+      /* Nur schreiben, wenn sich etwas ändert; Unsichtbares gar nicht zeichnen */
+      const o = Math.round(far * near * 50) / 50;
+
+      if(o !== item.o){
+        item.o = o;
+        item.el.style.opacity = o;
+        item.el.style.visibility = o === 0 ? "hidden" : "visible";
+      }
+
+    });
+
+  }
+
+  function request(){
+    if(active && !queued){
+      queued = true;
+      requestAnimationFrame(frame);
+    }
+  }
+
+  new IntersectionObserver(entries=>{
+    active = entries[0].isIntersecting;
+    request();
+  }).observe(section);
+
+  window.addEventListener("scroll", request, { passive:true });
+  window.addEventListener("resize", ()=>{
+    sizeCanvas();
+    request();
+  });
+
+  active = true;
+  frame();
+  active = false;
 
 })();
 
