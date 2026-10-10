@@ -1997,7 +1997,6 @@ section{
 
 .check-copy strong{
   display:block;
-  margin-bottom:4px;
   color:#f4f1ea;
   font-size:clamp(17px,1.8vw,22px);
   font-weight:400;
@@ -2023,8 +2022,7 @@ section{
     );
 }
 
-.check-panel-label,
-.check-open > span{
+.check-panel-label{
   display:block;
   color:#85817a;
   font-size:10px;
@@ -2071,32 +2069,12 @@ section{
 }
 
 .check-open{
-  margin-top:24px;
-}
-
-.check-open ul{
-  margin-top:12px;
-  list-style:none;
-}
-
-.check-open li{
-  display:flex;
-  justify-content:space-between;
-  gap:14px;
-  padding:7px 0;
-  border-bottom:1px solid var(--line-soft);
+  margin-top:18px;
+  padding-left:14px;
+  border-left:1px solid rgba(255,255,255,.35);
   color:#9b978f;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.check-open li em{
-  flex-shrink:0;
-  color:#62605b;
-  font-style:normal;
-  font-size:9px;
-  letter-spacing:.18em;
-  padding-top:3px;
+  font-size:13px;
+  line-height:1.7;
 }
 
 .check-form{
@@ -2753,7 +2731,7 @@ footer strong{
 
   .check-list-head,
   .check-item,
-  .check-open li{
+  .check-open{
     border-color:#ccc;
     color:#555;
   }
@@ -3357,9 +3335,8 @@ footer strong{
 
   <p class="text reveal" style="margin-top:40px;">
     Der 10-Punkte-Sichtbarkeits-Check für Selbstständige
-    und lokale Betriebe. Hake ab, was du schon hast.
-    In zwei Minuten weißt du, wo du stehst und wo
-    Kunden dich gerade verlieren.
+    und lokale Betriebe. Hake ab, was du schon hast,
+    und sieh in einer Minute, wo du stehst.
   </p>
 
   <div class="check-grid">
@@ -3367,7 +3344,7 @@ footer strong{
     <div class="check-list reveal" role="group" aria-label="Sichtbarkeits-Check, 10 Punkte">
 
       <div class="check-list-head">
-        <span>10 PUNKTE · 2 MINUTEN</span>
+        <span>10 FRAGEN · 1 MINUTE</span>
         <span><strong id="checkCountTop">0</strong> / 10 ERFÜLLT</span>
       </div>
 
@@ -3376,8 +3353,7 @@ footer strong{
         <span class="check-box" aria-hidden="true"></span>
         <span class="check-no">01</span>
         <span class="check-copy">
-          <strong>Google-Unternehmensprofil</strong>
-          Vollständig mit Öffnungszeiten, Telefonnummer und aktuellen Fotos.
+          <strong>Findet man dich bei Google?</strong>
         </span>
       </label>
 
@@ -3386,8 +3362,7 @@ footer strong{
         <span class="check-box" aria-hidden="true"></span>
         <span class="check-no">02</span>
         <span class="check-copy">
-          <strong>Eigene Website, die am Handy funktioniert</strong>
-          Lädt schnell, ist gut lesbar und braucht kein Zoomen.
+          <strong>Hast du eine eigene Website?</strong>
         </span>
       </label>
 
@@ -3396,8 +3371,7 @@ footer strong{
         <span class="check-box" aria-hidden="true"></span>
         <span class="check-no">03</span>
         <span class="check-copy">
-          <strong>In 5 Sekunden klar</strong>
-          Besucher sehen sofort, was du anbietest und wie sie dich mit einem Klick erreichen.
+          <strong>Verstehen Besucher sofort, was du anbietest?</strong>
         </span>
       </label>
 
@@ -3406,8 +3380,7 @@ footer strong{
         <span class="check-box" aria-hidden="true"></span>
         <span class="check-no">04</span>
         <span class="check-copy">
-          <strong>Ein einheitlicher Auftritt</strong>
-          Logo, Farben und Schrift sehen überall gleich aus, online wie offline.
+          <strong>Sieht dein Auftritt überall einheitlich aus?</strong>
         </span>
       </label>
 
@@ -3416,8 +3389,7 @@ footer strong{
         <span class="check-box" aria-hidden="true"></span>
         <span class="check-no">05</span>
         <span class="check-copy">
-          <strong>Eigene, gute Fotos</strong>
-          Von dir, deinem Team, deinen Räumen oder Produkten, keine Stockbilder.
+          <strong>Hast du eigene, professionelle Fotos?</strong>
         </span>
       </label>
 
@@ -3426,8 +3398,7 @@ footer strong{
         <span class="check-box" aria-hidden="true"></span>
         <span class="check-no">06</span>
         <span class="check-copy">
-          <strong>Social Media lebt</strong>
-          Mindestens ein Beitrag pro Woche in den letzten zwei Monaten.
+          <strong>Postest du regelmäßig auf Social Media?</strong>
         </span>
       </label>
 
@@ -3436,8 +3407,7 @@ footer strong{
         <span class="check-box" aria-hidden="true"></span>
         <span class="check-no">07</span>
         <span class="check-copy">
-          <strong>Kurze Videos</strong>
-          Du zeigst dich in Reels oder TikToks, nicht nur in Fotos.
+          <strong>Zeigst du dich in Videos?</strong>
         </span>
       </label>
 
@@ -3446,8 +3416,7 @@ footer strong{
         <span class="check-box" aria-hidden="true"></span>
         <span class="check-no">08</span>
         <span class="check-copy">
-          <strong>Drucksachen sind aktuell</strong>
-          Visitenkarten, Flyer oder Speisekarte passen zu deinem Online-Auftritt.
+          <strong>Passen deine Drucksachen zu deinem Auftritt?</strong>
         </span>
       </label>
 
@@ -3456,8 +3425,7 @@ footer strong{
         <span class="check-box" aria-hidden="true"></span>
         <span class="check-no">09</span>
         <span class="check-copy">
-          <strong>Sichtbare Bewertungen</strong>
-          Echte Kundenstimmen auf Google, die du regelmäßig beantwortest.
+          <strong>Hast du sichtbare Kundenbewertungen?</strong>
         </span>
       </label>
 
@@ -3466,8 +3434,7 @@ footer strong{
         <span class="check-box" aria-hidden="true"></span>
         <span class="check-no">10</span>
         <span class="check-copy">
-          <strong>Ein Plan für neue Kunden</strong>
-          Du weißt, über welche Kanäle neue Kunden kommen, und pflegst sie gezielt.
+          <strong>Hast du einen Plan, wie neue Kunden zu dir kommen?</strong>
         </span>
       </label>
 
@@ -3489,10 +3456,7 @@ footer strong{
         Hake ab, was auf dich zutrifft.
       </p>
 
-      <div class="check-open" id="checkOpen" hidden>
-        <span>HIER STECKT POTENZIAL</span>
-        <ul id="checkOpenList"></ul>
-      </div>
+      <p class="check-open" id="checkOpen" hidden></p>
 
       <form
         class="check-form no-print"
@@ -5822,9 +5786,6 @@ const checkVerdict =
 const checkOpen =
   document.getElementById("checkOpen");
 
-const checkOpenList =
-  document.getElementById("checkOpenList");
-
 const checkForm =
   document.getElementById("checkForm");
 
@@ -5876,21 +5837,10 @@ function updateCheck(){
   checkBar.style.transform = `scaleX(${score / checkItems.length})`;
   checkVerdict.textContent = checkVerdictFor(score);
 
-  checkOpenList.innerHTML = "";
-
-  open.forEach(item=>{
-
-    const li = document.createElement("li");
-    const name = document.createElement("span");
-    const service = document.createElement("em");
-
-    name.textContent = checkTitle(item);
-    service.textContent = item.dataset.service.toUpperCase();
-
-    li.append(name,service);
-    checkOpenList.append(li);
-
-  });
+  checkOpen.textContent =
+    open.length === 1
+      ? "1 Punkt bremst dich gerade. Was genau zu tun ist, zeigen wir dir im kostenlosen Check."
+      : `${open.length} Punkte bremsen dich gerade. Welche am meisten bringen und was genau zu tun ist, zeigen wir dir im kostenlosen Check.`;
 
   checkOpen.hidden = !checkTouched || open.length === 0;
 
