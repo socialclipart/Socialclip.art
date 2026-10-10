@@ -2438,6 +2438,202 @@ section{
 
 
 
+/* 3D-Handy neben der Instagram-Box */
+
+.ig-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(260px,420px);
+  align-items:center;
+  gap:60px;
+}
+
+.ig-phone-stage{
+  position:relative;
+  height:620px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1200px;
+}
+
+.ig-phone{
+  --w:270px;
+  --h:550px;
+  --d:16px;
+  position:relative;
+  width:var(--w);
+  height:var(--h);
+  transform-style:preserve-3d;
+  transform:rotateX(var(--tx,8deg)) rotateY(var(--ty,-22deg));
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+
+.ig-phone-stage.running .ig-phone{
+  animation:phoneFloat 6s ease-in-out infinite;
+}
+
+@keyframes phoneFloat{
+  0%,100%{ translate:0 0; }
+  50%{ translate:0 -16px; }
+}
+
+.ig-phone-front,
+.ig-phone-back{
+  position:absolute;
+  inset:0;
+  border-radius:42px;
+}
+
+.ig-phone-front{
+  padding:11px;
+  background:linear-gradient(150deg,#3a3a3a,#161616 45%,#262626);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.18),
+    inset 0 0 0 3px #0c0c0c;
+  transform:translateZ(calc(var(--d) / 2));
+}
+
+.ig-phone-back{
+  background:linear-gradient(150deg,#2a2a2a,#0d0d0d);
+  transform:translateZ(calc(var(--d) / -2));
+}
+
+.ig-phone-edge{
+  position:absolute;
+  top:30px;
+  bottom:30px;
+  width:var(--d);
+  background:linear-gradient(#3b3b3b,#1d1d1d 50%,#333);
+}
+
+.ig-edge-l{
+  left:calc(var(--d) / -2);
+  transform:rotateY(-90deg);
+}
+
+.ig-edge-r{
+  right:calc(var(--d) / -2);
+  transform:rotateY(90deg);
+}
+
+.ig-screen{
+  position:relative;
+  height:100%;
+  overflow:hidden;
+  border-radius:32px;
+  background:#0b0b0b;
+}
+
+/* Glas-Spiegelung */
+.ig-screen::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.1),transparent 35%,transparent 65%,rgba(255,255,255,.04));
+}
+
+.ig-notch{
+  position:absolute;
+  top:9px;
+  left:50%;
+  z-index:2;
+  width:84px;
+  height:22px;
+  transform:translateX(-50%);
+  border-radius:12px;
+  background:#000;
+}
+
+.ig-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:44px 16px 14px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.ig-avatar{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.4);
+  background:#1b1b1b;
+}
+
+.ig-name{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.ig-name small{
+  color:#a29e96;
+  font-size:9px;
+  font-weight:400;
+  letter-spacing:.12em;
+}
+
+.ig-feed{
+  position:absolute;
+  top:92px;
+  left:0;
+  right:0;
+  bottom:0;
+  overflow:hidden;
+}
+
+.ig-feed-track{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+
+.ig-phone-stage.running .ig-feed-track{
+  animation:feedScroll 24s linear infinite;
+}
+
+@keyframes feedScroll{
+  to{ transform:translateY(-50%); }
+}
+
+.ig-post{
+  display:grid;
+  place-items:center;
+  aspect-ratio:1;
+  color:rgba(255,255,255,.85);
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.14em;
+}
+
+.ig-a{ background:linear-gradient(135deg,#3a3732,#141414); }
+.ig-b{ background:radial-gradient(circle at 70% 30%,#5a554d,#181818 70%); }
+.ig-c{ background:linear-gradient(200deg,#f4f1ea,#8f8b84); color:#111; }
+.ig-d{ background:linear-gradient(45deg,#222,#2f2f2f 50%,#1a1a1a); }
+
+.ig-phone-shadow{
+  position:absolute;
+  left:50%;
+  bottom:12px;
+  width:240px;
+  height:30px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.7),transparent 70%);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ig-phone-stage.running .ig-phone,
+  .ig-phone-stage.running .ig-feed-track{
+    animation:none;
+  }
+}
+
 /* =========================
    CONTACT
 ========================= */
@@ -2888,6 +3084,21 @@ footer strong{
     flex-direction:column;
     align-items:flex-start;
     padding:30px 20px;
+  }
+
+  .ig-grid{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .ig-phone-stage{
+    height:480px;
+  }
+
+  .ig-phone{
+    --w:210px;
+    --h:430px;
+    --d:12px;
   }
 
   footer{
@@ -3929,6 +4140,10 @@ footer strong{
 
 <section class="instagram">
 
+  <div class="ig-grid">
+
+  <div class="ig-copy">
+
   <div class="chapter-line reveal">
     SCENE 11 / SOCIALCLIP.ART
   </div>
@@ -3950,6 +4165,61 @@ footer strong{
     >
       INSTAGRAM ÖFFNEN <span class="arr" aria-hidden="true">→</span>
     </a>
+
+  </div>
+
+  </div>
+
+  <!--
+    3D-Handy: schwebt und neigt sich zur Maus.
+    Die Kacheln sind Platzhalter. Für echte Posts:
+    <span class="ig-post"> durch <img src="..." alt=""> ersetzen.
+  -->
+  <div class="ig-phone-stage reveal" id="phoneStage" aria-hidden="true">
+    <div class="ig-phone" id="phone">
+      <div class="ig-phone-back"></div>
+      <div class="ig-phone-edge ig-edge-l"></div>
+      <div class="ig-phone-edge ig-edge-r"></div>
+      <div class="ig-phone-front">
+        <div class="ig-screen">
+          <div class="ig-notch"></div>
+          <div class="ig-head">
+            <span class="ig-avatar"><img src="logo/socialclip-symbol-cream.svg" alt="" width="10" height="17"></span>
+            <span class="ig-name">socialclip.art<small>Art · Media · Digital</small></span>
+          </div>
+          <div class="ig-feed">
+            <div class="ig-feed-track">
+              <span class="ig-post ig-a">WEB</span>
+              <span class="ig-post ig-b">REEL ▶</span>
+              <span class="ig-post ig-c">LOGO</span>
+              <span class="ig-post ig-d">FLYER</span>
+              <span class="ig-post ig-b">FOTO</span>
+              <span class="ig-post ig-a">STORY</span>
+              <span class="ig-post ig-c">BRANDING</span>
+              <span class="ig-post ig-d">TIKTOK ▶</span>
+              <span class="ig-post ig-a">MENÜ</span>
+              <span class="ig-post ig-b">KAMPAGNE</span>
+              <span class="ig-post ig-c">VIDEO ▶</span>
+              <span class="ig-post ig-d">DESIGN</span>
+              <span class="ig-post ig-a">WEB</span>
+              <span class="ig-post ig-b">REEL ▶</span>
+              <span class="ig-post ig-c">LOGO</span>
+              <span class="ig-post ig-d">FLYER</span>
+              <span class="ig-post ig-b">FOTO</span>
+              <span class="ig-post ig-a">STORY</span>
+              <span class="ig-post ig-c">BRANDING</span>
+              <span class="ig-post ig-d">TIKTOK ▶</span>
+              <span class="ig-post ig-a">MENÜ</span>
+              <span class="ig-post ig-b">KAMPAGNE</span>
+              <span class="ig-post ig-c">VIDEO ▶</span>
+              <span class="ig-post ig-d">DESIGN</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ig-phone-shadow"></div>
+  </div>
 
   </div>
 
@@ -6661,6 +6931,50 @@ checkForm.addEventListener(
   active = true;
   frame();
   active = false;
+
+})();
+
+
+/* =========================
+   3D-HANDY (INSTAGRAM)
+   Animationen laufen nur, solange das Handy
+   im Bild ist. Am Computer neigt es sich zur Maus.
+========================= */
+
+(()=>{
+
+  const stage = document.getElementById("phoneStage");
+  const phone = document.getElementById("phone");
+
+  if(!stage || !phone){
+    return;
+  }
+
+  new IntersectionObserver(entries=>{
+    stage.classList.toggle("running", entries[0].isIntersecting);
+  }).observe(stage);
+
+  if(touchOnly || reduceMotion){
+    return;
+  }
+
+  const section = stage.closest("section");
+
+  section.addEventListener("pointermove",event=>{
+
+    const box = stage.getBoundingClientRect();
+    const x = (event.clientX - (box.left + box.width / 2)) / box.width;
+    const y = (event.clientY - (box.top + box.height / 2)) / box.height;
+
+    phone.style.setProperty("--ty", (-22 + x * 26).toFixed(1) + "deg");
+    phone.style.setProperty("--tx", (8 - y * 14).toFixed(1) + "deg");
+
+  });
+
+  section.addEventListener("pointerleave",()=>{
+    phone.style.removeProperty("--ty");
+    phone.style.removeProperty("--tx");
+  });
 
 })();
 
