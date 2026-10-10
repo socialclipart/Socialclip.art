@@ -1,0 +1,12 @@
+{
+  "name": "socialclip-alexa-claude",
+  "version": "1.0.0",
+  "description": "Alexa-Skill, der Fragen an Claude weiterleitet",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
+    "ask-sdk-core": "^2.14.0",
+    "ask-sdk-model": "^1.86.0"
+  }
+}

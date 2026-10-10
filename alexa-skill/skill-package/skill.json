@@ -1,0 +1,38 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "de-DE": {
+          "name": "Social Clip",
+          "summary": "Stell Claude deine Fragen über Alexa.",
+          "description": "Social Clip verbindet Alexa mit der KI Claude. Stell eine Frage, zum Beispiel zu Social Media, Texten oder Ideen, und hör dir die Antwort an.",
+          "examplePhrases": [
+            "Alexa, öffne social clip",
+            "Alexa, frag social clip, wie schreibe ich einen guten Instagram-Post",
+            "Alexa, sag social clip, erkläre mir was ein Reel ist"
+          ],
+          "keywords": ["KI", "Claude", "Social Media", "Assistent"]
+        }
+      },
+      "isAvailableWorldwide": false,
+      "distributionCountries": ["DE", "AT", "CH"],
+      "category": "EDUCATION_AND_REFERENCE",
+      "testingInstructions": "Öffne den Skill und stell eine Frage, z. B. 'Frage, was ist ein Hashtag?'."
+    },
+    "apis": {
+      "custom": {}
+    },
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "usesPersonalInfo": false,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false,
+      "locales": {
+        "de-DE": {
+          "privacyPolicyUrl": "https://socialclip.art/datenschutz.html"
+        }
+      }
+    }
+  }
+}

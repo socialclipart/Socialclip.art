@@ -1,0 +1,43 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "social clip",
+      "intents": [
+        {
+          "name": "FrageIntent",
+          "slots": [
+            { "name": "anfrage", "type": "AMAZON.SearchQuery" }
+          ],
+          "samples": [
+            "frage {anfrage}",
+            "frag {anfrage}",
+            "sag mir {anfrage}",
+            "erkläre mir {anfrage}",
+            "erklär mir {anfrage}",
+            "ich möchte wissen {anfrage}",
+            "ich will wissen {anfrage}",
+            "was ist {anfrage}",
+            "was sind {anfrage}",
+            "wie {anfrage}",
+            "warum {anfrage}",
+            "wer {anfrage}",
+            "wo {anfrage}",
+            "wann {anfrage}",
+            "welche {anfrage}",
+            "welcher {anfrage}",
+            "gib mir {anfrage}",
+            "schreib mir {anfrage}",
+            "hilf mir {anfrage}",
+            "kannst du {anfrage}"
+          ]
+        },
+        { "name": "AMAZON.HelpIntent", "samples": [] },
+        { "name": "AMAZON.CancelIntent", "samples": [] },
+        { "name": "AMAZON.StopIntent", "samples": [] },
+        { "name": "AMAZON.NavigateHomeIntent", "samples": [] },
+        { "name": "AMAZON.FallbackIntent", "samples": [] }
+      ],
+      "types": []
+    }
+  }
+}
