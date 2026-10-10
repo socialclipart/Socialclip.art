@@ -1862,6 +1862,153 @@ section{
 }
 
 /* =========================
+   KAMERAFAHRT (3D-TUNNEL)
+   Die Sektion ist hoch, der Inhalt klebt am
+   Bildschirm. Scrollen schiebt die "Welt"
+   auf die Kamera zu.
+========================= */
+
+.tunnel{
+  height:320vh;
+  min-height:0;
+  padding:0;
+}
+
+.tunnel-sticky{
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:hidden;
+  perspective:800px;
+  perspective-origin:50% 50%;
+}
+
+.tunnel-world{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:0;
+  height:0;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+
+.tunnel-word{
+  position:absolute;
+  left:0;
+  top:0;
+  transform:
+    translate(-50%,-50%)
+    translate3d(var(--x,0),var(--y,0),var(--z,0px));
+}
+
+.tunnel-word{
+  white-space:nowrap;
+  font-size:clamp(46px,8vw,120px);
+  font-weight:700;
+  letter-spacing:-.06em;
+  color:#f4f1ea;
+}
+
+.tunnel-word:nth-child(even){
+  color:transparent;
+  -webkit-text-stroke:1px rgba(244,241,234,.75);
+}
+
+.tunnel-final{
+  font-size:clamp(64px,13vw,200px);
+  color:#fff;
+  -webkit-text-stroke:0;
+}
+
+/* Rahmen werden auf eine Fläche gezeichnet: eine Ebene statt elf */
+.tunnel-frames{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.tunnel-caption{
+  position:absolute;
+  left:7vw;
+  right:7vw;
+  bottom:42px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#a29e96;
+  font-size:10px;
+  letter-spacing:.25em;
+}
+
+@media(max-width:800px){
+
+  .tunnel{
+    height:260vh;
+  }
+
+  .tunnel-sticky{
+    perspective:600px;
+  }
+
+  /* Umriss-Schrift ist am Handy teuer: gefüllt, nur heller/dunkler */
+  .tunnel-word:nth-child(even){
+    color:rgba(244,241,234,.55);
+    -webkit-text-stroke:0;
+  }
+
+  .tunnel-caption{
+    left:20px;
+    right:20px;
+    bottom:30px;
+    font-size:9px;
+  }
+}
+
+/* Ohne Bewegung: Wörter einfach untereinander */
+
+@media (prefers-reduced-motion:reduce){
+
+  .tunnel{
+    height:auto;
+    padding:100px 7vw;
+  }
+
+  .tunnel-sticky{
+    position:static;
+    height:auto;
+    perspective:none;
+  }
+
+  .tunnel-world{
+    position:static;
+    width:auto;
+    height:auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 28px;
+    transform:none !important;
+  }
+
+  .tunnel-frames{
+    display:none;
+  }
+
+  .tunnel-word{
+    position:static;
+    transform:none;
+    opacity:1 !important;
+    font-size:clamp(32px,5vw,64px);
+  }
+
+  .tunnel-caption{
+    position:static;
+    margin-top:40px;
+  }
+}
+
+/* =========================
    MAKE VISIBLE
 ========================= */
 
@@ -2177,6 +2324,202 @@ section{
 
 
 
+/* 3D-Handy neben der Instagram-Box */
+
+.ig-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(260px,420px);
+  align-items:center;
+  gap:60px;
+}
+
+.ig-phone-stage{
+  position:relative;
+  height:620px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1200px;
+}
+
+.ig-phone{
+  --w:270px;
+  --h:550px;
+  --d:16px;
+  position:relative;
+  width:var(--w);
+  height:var(--h);
+  transform-style:preserve-3d;
+  transform:rotateX(var(--tx,8deg)) rotateY(var(--ty,-22deg));
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+
+.ig-phone-stage.running .ig-phone{
+  animation:phoneFloat 6s ease-in-out infinite;
+}
+
+@keyframes phoneFloat{
+  0%,100%{ translate:0 0; }
+  50%{ translate:0 -16px; }
+}
+
+.ig-phone-front,
+.ig-phone-back{
+  position:absolute;
+  inset:0;
+  border-radius:42px;
+}
+
+.ig-phone-front{
+  padding:11px;
+  background:linear-gradient(150deg,#3a3a3a,#161616 45%,#262626);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.18),
+    inset 0 0 0 3px #0c0c0c;
+  transform:translateZ(calc(var(--d) / 2));
+}
+
+.ig-phone-back{
+  background:linear-gradient(150deg,#2a2a2a,#0d0d0d);
+  transform:translateZ(calc(var(--d) / -2));
+}
+
+.ig-phone-edge{
+  position:absolute;
+  top:30px;
+  bottom:30px;
+  width:var(--d);
+  background:linear-gradient(#3b3b3b,#1d1d1d 50%,#333);
+}
+
+.ig-edge-l{
+  left:calc(var(--d) / -2);
+  transform:rotateY(-90deg);
+}
+
+.ig-edge-r{
+  right:calc(var(--d) / -2);
+  transform:rotateY(90deg);
+}
+
+.ig-screen{
+  position:relative;
+  height:100%;
+  overflow:hidden;
+  border-radius:32px;
+  background:#0b0b0b;
+}
+
+/* Glas-Spiegelung */
+.ig-screen::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.1),transparent 35%,transparent 65%,rgba(255,255,255,.04));
+}
+
+.ig-notch{
+  position:absolute;
+  top:9px;
+  left:50%;
+  z-index:2;
+  width:84px;
+  height:22px;
+  transform:translateX(-50%);
+  border-radius:12px;
+  background:#000;
+}
+
+.ig-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:44px 16px 14px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.ig-avatar{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.4);
+  background:#1b1b1b;
+}
+
+.ig-name{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.ig-name small{
+  color:#a29e96;
+  font-size:9px;
+  font-weight:400;
+  letter-spacing:.12em;
+}
+
+.ig-feed{
+  position:absolute;
+  top:92px;
+  left:0;
+  right:0;
+  bottom:0;
+  overflow:hidden;
+}
+
+.ig-feed-track{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+
+.ig-phone-stage.running .ig-feed-track{
+  animation:feedScroll 24s linear infinite;
+}
+
+@keyframes feedScroll{
+  to{ transform:translateY(-50%); }
+}
+
+.ig-post{
+  display:grid;
+  place-items:center;
+  aspect-ratio:1;
+  color:rgba(255,255,255,.85);
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.14em;
+}
+
+.ig-a{ background:linear-gradient(135deg,#3a3732,#141414); }
+.ig-b{ background:radial-gradient(circle at 70% 30%,#5a554d,#181818 70%); }
+.ig-c{ background:linear-gradient(200deg,#f4f1ea,#8f8b84); color:#111; }
+.ig-d{ background:linear-gradient(45deg,#222,#2f2f2f 50%,#1a1a1a); }
+
+.ig-phone-shadow{
+  position:absolute;
+  left:50%;
+  bottom:12px;
+  width:240px;
+  height:30px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.7),transparent 70%);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ig-phone-stage.running .ig-phone,
+  .ig-phone-stage.running .ig-feed-track{
+    animation:none;
+  }
+}
+
 /* =========================
    CONTACT
 ========================= */
@@ -2411,6 +2754,30 @@ footer::before{
 }
 
 /* =========================
+   FINALE: PARTIKEL
+========================= */
+
+.particles{
+  min-height:0;
+  padding:40px 0 70px;
+}
+
+.particles canvas{
+  display:block;
+  width:100%;
+  height:clamp(150px,34vw,520px);
+  touch-action:pan-y;
+}
+
+.particles-hint{
+  margin-top:10px;
+  text-align:center;
+  color:#86827b;
+  font-size:9px;
+  letter-spacing:.25em;
+}
+
+/* =========================
    FOOTER
 ========================= */
 
@@ -2625,6 +2992,21 @@ footer strong{
     flex-direction:column;
     align-items:flex-start;
     padding:30px 20px;
+  }
+
+  .ig-grid{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .ig-phone-stage{
+    height:480px;
+  }
+
+  .ig-phone{
+    --w:210px;
+    --h:430px;
+    --d:12px;
   }
 
   footer{
@@ -3302,6 +3684,41 @@ footer strong{
 </section>
 
 <!-- =========================
+     KAMERAFAHRT
+     3D-Tunnel: beim Scrollen fliegt man durch
+     schwebende Wörter und Rahmen. Reines CSS-3D,
+     ein Transform pro Frame.
+========================= -->
+
+<section class="tunnel" id="tunnel" aria-label="Kamerafahrt: von der Idee zur Wirkung">
+
+  <div class="tunnel-sticky">
+
+    <canvas class="tunnel-frames" id="tunnelFrames" aria-hidden="true"></canvas>
+
+    <div class="tunnel-world" id="tunnelWorld" aria-hidden="true">
+        <span class="tunnel-word" data-z="-500" style="--x:-34vw;--y:-14vh">IDEE</span>
+        <span class="tunnel-word" data-z="-920" style="--x:32vw;--y:16vh">SKIZZE</span>
+        <span class="tunnel-word" data-z="-1340" style="--x:-30vw;--y:20vh">FORM</span>
+        <span class="tunnel-word" data-z="-1760" style="--x:34vw;--y:-18vh">FARBE</span>
+        <span class="tunnel-word" data-z="-2180" style="--x:-36vw;--y:-2vh">LICHT</span>
+        <span class="tunnel-word" data-z="-2600" style="--x:26vw;--y:22vh">BEWEGUNG</span>
+        <span class="tunnel-word" data-z="-3020" style="--x:-24vw;--y:-22vh">GESCHICHTE</span>
+        <span class="tunnel-word" data-z="-3440" style="--x:34vw;--y:8vh">MARKE</span>
+        <span class="tunnel-word" data-z="-3860" style="--x:-30vw;--y:14vh">SICHTBAR</span>
+        <span class="tunnel-word tunnel-final" data-z="-4480" style="--x:0vw;--y:0vh">WIRKUNG.</span>
+    </div>
+
+    <div class="tunnel-caption">
+      <span>KAMERAFAHRT</span>
+      <span>VON DER IDEE ZUR WIRKUNG</span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
      SCENE 08
 ========================= -->
 
@@ -3608,6 +4025,10 @@ footer strong{
 
 <section class="instagram">
 
+  <div class="ig-grid">
+
+  <div class="ig-copy">
+
   <div class="chapter-line reveal">
     SCENE 11 / SOCIALCLIP.ART
   </div>
@@ -3629,6 +4050,61 @@ footer strong{
     >
       INSTAGRAM ÖFFNEN <span class="arr" aria-hidden="true">→</span>
     </a>
+
+  </div>
+
+  </div>
+
+  <!--
+    3D-Handy: schwebt und neigt sich zur Maus.
+    Die Kacheln sind Platzhalter. Für echte Posts:
+    <span class="ig-post"> durch <img src="..." alt=""> ersetzen.
+  -->
+  <div class="ig-phone-stage reveal" id="phoneStage" aria-hidden="true">
+    <div class="ig-phone" id="phone">
+      <div class="ig-phone-back"></div>
+      <div class="ig-phone-edge ig-edge-l"></div>
+      <div class="ig-phone-edge ig-edge-r"></div>
+      <div class="ig-phone-front">
+        <div class="ig-screen">
+          <div class="ig-notch"></div>
+          <div class="ig-head">
+            <span class="ig-avatar"><img src="logo/socialclip-symbol-cream.svg" alt="" width="10" height="17"></span>
+            <span class="ig-name">socialclip.art<small>Art · Media · Digital</small></span>
+          </div>
+          <div class="ig-feed">
+            <div class="ig-feed-track">
+              <span class="ig-post ig-a">WEB</span>
+              <span class="ig-post ig-b">REEL ▶</span>
+              <span class="ig-post ig-c">LOGO</span>
+              <span class="ig-post ig-d">FLYER</span>
+              <span class="ig-post ig-b">FOTO</span>
+              <span class="ig-post ig-a">STORY</span>
+              <span class="ig-post ig-c">BRANDING</span>
+              <span class="ig-post ig-d">TIKTOK ▶</span>
+              <span class="ig-post ig-a">MENÜ</span>
+              <span class="ig-post ig-b">KAMPAGNE</span>
+              <span class="ig-post ig-c">VIDEO ▶</span>
+              <span class="ig-post ig-d">DESIGN</span>
+              <span class="ig-post ig-a">WEB</span>
+              <span class="ig-post ig-b">REEL ▶</span>
+              <span class="ig-post ig-c">LOGO</span>
+              <span class="ig-post ig-d">FLYER</span>
+              <span class="ig-post ig-b">FOTO</span>
+              <span class="ig-post ig-a">STORY</span>
+              <span class="ig-post ig-c">BRANDING</span>
+              <span class="ig-post ig-d">TIKTOK ▶</span>
+              <span class="ig-post ig-a">MENÜ</span>
+              <span class="ig-post ig-b">KAMPAGNE</span>
+              <span class="ig-post ig-c">VIDEO ▶</span>
+              <span class="ig-post ig-d">DESIGN</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ig-phone-shadow"></div>
+  </div>
 
   </div>
 
@@ -3749,6 +4225,18 @@ footer strong{
 
   </div>
 
+</section>
+
+<!-- =========================
+     FINALE
+     Lichtpunkte im Raum ziehen sich zu
+     SOCIALCLIP zusammen. Maus oder Finger
+     wirbeln sie auf. Canvas, kein externes Skript.
+========================= -->
+
+<section class="particles" id="particles" aria-label="SocialClip">
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="particles-hint">BERÜHREN · BEWEGEN</div>
 </section>
 
 </main>
@@ -6000,6 +6488,472 @@ checkForm.addEventListener(
 
   }
 );
+
+
+/* =========================
+   KAMERAFAHRT (3D-TUNNEL)
+   Ein Transform für die ganze Welt pro Frame,
+   dazu Ein- und Ausblenden je nach Abstand
+   zur Kamera. Läuft nur, solange der Tunnel
+   im Bild ist.
+========================= */
+
+(()=>{
+
+  const section = document.getElementById("tunnel");
+  const world = document.getElementById("tunnelWorld");
+
+  if(!section || !world || reduceMotion){
+    return;
+  }
+
+  const items =
+    [...world.children].map(el=>{
+      const z = Number(el.dataset.z);
+      el.style.setProperty("--z", z + "px");
+      return { el, z, final: el.classList.contains("tunnel-final") };
+    });
+
+  const deepest =
+    Math.min(...items.map(item=>item.z));
+
+  /* Rahmen: Tiefe und leichte Drehung, gezeichnet mit derselben Perspektive */
+  const canvas = document.getElementById("tunnelFrames");
+  const ctx = canvas.getContext("2d");
+  const frames = Array.from({ length:11 }, (_, i)=>({ z: -300 - i * 400, r: i * 7 * Math.PI / 180 }));
+
+  let cw = 0;
+  let ch = 0;
+  let persp = 800;
+
+  function sizeCanvas(){
+    cw = canvas.clientWidth;
+    ch = canvas.clientHeight;
+    persp = parseFloat(getComputedStyle(canvas.parentElement).perspective) || 800;
+    /* Am Handy reicht einfache Auflösung für dünne Linien */
+    const dpr = cw < 800 ? 1 : Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = cw * dpr;
+    canvas.height = ch * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  sizeCanvas();
+
+  function drawFrames(cam){
+
+    const fw = Math.min(cw * .92, 1100);
+    const fh = Math.min(ch * .78, 700);
+
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.lineWidth = 1;
+
+    for(const f of frames){
+
+      const z = f.z + cam;
+
+      if(z >= persp - 10){
+        continue;
+      }
+
+      const scale = persp / (persp - z);
+      const far = Math.min(1, Math.max(0, (z + 2100) / 1200));
+      const near = Math.min(1, Math.max(0, (persp - 60 - z) / 300));
+      const a = .16 * far * near;
+
+      if(a <= .002){
+        continue;
+      }
+
+      ctx.save();
+      ctx.translate(cw / 2, ch / 2);
+      ctx.rotate(f.r);
+      ctx.strokeStyle = "rgba(255,255,255," + a.toFixed(3) + ")";
+      ctx.strokeRect(-fw * scale / 2, -fh * scale / 2, fw * scale, fh * scale);
+      ctx.restore();
+    }
+  }
+
+  let active = false;
+  let queued = false;
+
+  function frame(){
+
+    queued = false;
+
+    const box = section.getBoundingClientRect();
+    const travel = box.height - window.innerHeight;
+    const p = Math.min(1, Math.max(0, -box.top / travel));
+
+    /* Am Ende steht das letzte Wort knapp vor der Kamera */
+    const cam = p * (-deepest - 260);
+
+    world.style.transform = "translate3d(0,0," + cam + "px)";
+
+    drawFrames(cam);
+
+    items.forEach(item=>{
+
+      const z = item.z + cam;
+
+      /* Nebel hinten, Ausblenden kurz vor der Kamera */
+      const far = Math.min(1, Math.max(0, (z + 2100) / 1200));
+      const near = item.final ? 1 : Math.min(1, Math.max(0, (420 - z) / 260));
+
+      /* Nur schreiben, wenn sich etwas ändert; Unsichtbares gar nicht zeichnen */
+      const o = Math.round(far * near * 50) / 50;
+
+      if(o !== item.o){
+        item.o = o;
+        item.el.style.opacity = o;
+        item.el.style.visibility = o === 0 ? "hidden" : "visible";
+      }
+
+    });
+
+  }
+
+  function request(){
+    if(active && !queued){
+      queued = true;
+      requestAnimationFrame(frame);
+    }
+  }
+
+  new IntersectionObserver(entries=>{
+    active = entries[0].isIntersecting;
+    request();
+  }).observe(section);
+
+  window.addEventListener("scroll", request, { passive:true });
+  window.addEventListener("resize", ()=>{
+    sizeCanvas();
+    request();
+  });
+
+  active = true;
+  frame();
+  active = false;
+
+})();
+
+
+/* =========================
+   3D-HANDY (INSTAGRAM)
+   Animationen laufen nur, solange das Handy
+   im Bild ist. Am Computer neigt es sich zur Maus.
+========================= */
+
+(()=>{
+
+  const stage = document.getElementById("phoneStage");
+  const phone = document.getElementById("phone");
+
+  if(!stage || !phone){
+    return;
+  }
+
+  new IntersectionObserver(entries=>{
+    stage.classList.toggle("running", entries[0].isIntersecting);
+  }).observe(stage);
+
+  if(touchOnly || reduceMotion){
+    return;
+  }
+
+  const section = stage.closest("section");
+
+  section.addEventListener("pointermove",event=>{
+
+    const box = stage.getBoundingClientRect();
+    const x = (event.clientX - (box.left + box.width / 2)) / box.width;
+    const y = (event.clientY - (box.top + box.height / 2)) / box.height;
+
+    phone.style.setProperty("--ty", (-22 + x * 26).toFixed(1) + "deg");
+    phone.style.setProperty("--tx", (8 - y * 14).toFixed(1) + "deg");
+
+  });
+
+  section.addEventListener("pointerleave",()=>{
+    phone.style.removeProperty("--ty");
+    phone.style.removeProperty("--tx");
+  });
+
+})();
+
+
+/* =========================
+   FINALE: PARTIKEL
+   Punkte starten verstreut im Raum (x, y, z)
+   und federn zu den Punkten des Schriftzugs.
+   Perspektive: näher = größer und heller.
+   Die Schleife läuft nur, solange sie sichtbar
+   ist und sich noch etwas bewegt.
+========================= */
+
+(()=>{
+
+  const section = document.getElementById("particles");
+  const canvas = document.getElementById("particleCanvas");
+
+  if(!section || !canvas){
+    return;
+  }
+
+  const ctx = canvas.getContext("2d");
+  const FOCAL = 700;
+
+  let W = 0;
+  let H = 0;
+  let dpr = 1;
+  let points = [];
+  let visible = false;
+  let running = false;
+  let formed = false;
+
+  const pointer = { x: -9999, y: -9999, active: false };
+  let turn = 0;
+  let turnTarget = 0;
+
+  function sampleText(){
+
+    const off = document.createElement("canvas");
+    off.width = W;
+    off.height = H;
+
+    const o = off.getContext("2d");
+    const size = Math.min(H * .62, W / 6.4);
+
+    o.fillStyle = "#fff";
+    o.textAlign = "center";
+    o.textBaseline = "middle";
+    o.font = "700 " + size + "px Arial, Helvetica, sans-serif";
+    o.fillText("SOCIALCLIP", W / 2, H / 2);
+
+    const data = o.getImageData(0, 0, W, H).data;
+
+    /* Abstand so wählen, dass es am Handy weniger Punkte sind */
+    const step = Math.max(3, Math.round(W / (W < 700 ? 130 : 290)));
+    const result = [];
+
+    for(let y = 0; y < H; y += step){
+      for(let x = 0; x < W; x += step){
+        if(data[(y * W + x) * 4 + 3] > 128){
+          result.push([x - W / 2, y - H / 2]);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  function scatter(p){
+    p.x = (Math.random() - .5) * W * 1.6;
+    p.y = (Math.random() - .5) * H * 2.2;
+    p.z = (Math.random() - .2) * 1400;
+  }
+
+  function setup(){
+
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+
+    const box = canvas.getBoundingClientRect();
+    W = Math.round(box.width);
+    H = Math.round(box.height);
+
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    points = sampleText().map(([tx, ty])=>{
+      const p = { tx, ty, vx: 0, vy: 0, vz: 0, s: .6 + Math.random() * .9 };
+      if(formed && !reduceMotion){
+        p.x = tx; p.y = ty; p.z = 0;
+      }else{
+        scatter(p);
+      }
+      if(reduceMotion){
+        p.x = tx; p.y = ty; p.z = 0;
+      }
+      return p;
+    });
+
+    draw();
+  }
+
+  function draw(){
+
+    ctx.clearRect(0, 0, W, H);
+
+    const cx = W / 2;
+    const cy = H / 2;
+
+    for(const p of points){
+
+      const depth = FOCAL / (FOCAL + p.z);
+
+      if(depth <= 0 || depth > 6){
+        continue;
+      }
+
+      const sx = cx + p.x * depth;
+      const sy = cy + p.y * depth;
+      const r = p.s * depth * 1.25;
+      const a = Math.max(.08, Math.min(1, depth * .9));
+
+      ctx.fillStyle = "rgba(244,241,234," + a.toFixed(2) + ")";
+      ctx.fillRect(sx - r / 2, sy - r / 2, r, r);
+    }
+  }
+
+  function step(){
+
+    turn += (turnTarget - turn) * .06;
+
+    const cos = Math.cos(turn);
+    const sin = Math.sin(turn);
+
+    const cx = W / 2;
+    const cy = H / 2;
+    const radius = Math.min(140, W * .14);
+
+    let energy = 0;
+
+    for(const p of points){
+
+      /* Ziel leicht um die Hochachse gedreht: wirkt räumlich */
+      const gx = p.tx * cos;
+      const gz = p.tx * sin;
+
+      p.vx += (gx - p.x) * .022;
+      p.vy += (p.ty - p.y) * .022;
+      p.vz += (gz - p.z) * .022;
+
+      if(pointer.active){
+
+        const depth = FOCAL / (FOCAL + p.z);
+        const dx = cx + p.x * depth - pointer.x;
+        const dy = cy + p.y * depth - pointer.y;
+        const d2 = dx * dx + dy * dy;
+
+        if(d2 < radius * radius){
+          const f = (1 - Math.sqrt(d2) / radius) * 3.2;
+          const len = Math.sqrt(d2) || 1;
+          p.vx += dx / len * f;
+          p.vy += dy / len * f;
+          p.vz -= f * 6;
+        }
+      }
+
+      p.vx *= .86;
+      p.vy *= .86;
+      p.vz *= .86;
+
+      p.x += p.vx;
+      p.y += p.vy;
+      p.z += p.vz;
+
+      energy += Math.abs(p.vx) + Math.abs(p.vy) + Math.abs(p.vz) * .1;
+    }
+
+    draw();
+
+    const moving =
+      energy / Math.max(1, points.length) > .02 ||
+      pointer.active ||
+      Math.abs(turnTarget - turn) > .002;
+
+    if(visible && moving){
+      requestAnimationFrame(step);
+    }else{
+      running = false;
+    }
+  }
+
+  function wake(){
+    if(reduceMotion || running || !visible){
+      return;
+    }
+    running = true;
+    requestAnimationFrame(step);
+  }
+
+  function localPoint(event){
+    const box = canvas.getBoundingClientRect();
+    return [event.clientX - box.left, event.clientY - box.top];
+  }
+
+  canvas.addEventListener("pointermove",event=>{
+
+    const [x, y] = localPoint(event);
+
+    pointer.x = x;
+    pointer.y = y;
+    pointer.active = event.pointerType !== "touch" || event.pressure > 0;
+
+    if(event.pointerType !== "touch"){
+      turnTarget = (x / W - .5) * .7;
+    }
+
+    wake();
+  });
+
+  canvas.addEventListener("pointerleave",()=>{
+    pointer.active = false;
+    turnTarget = 0;
+    wake();
+  });
+
+  /* Antippen: alles zerstiebt und formt sich neu */
+  canvas.addEventListener("pointerdown",event=>{
+
+    const [x, y] = localPoint(event);
+
+    for(const p of points){
+      const dx = p.x - (x - W / 2);
+      const dy = p.y - (y - H / 2);
+      const len = Math.sqrt(dx * dx + dy * dy) || 1;
+      const f = 18 + Math.random() * 14;
+      p.vx += dx / len * f;
+      p.vy += dy / len * f;
+      p.vz += (Math.random() - .5) * 90;
+    }
+
+    wake();
+  });
+
+  canvas.addEventListener("pointerup",()=>{
+    pointer.active = false;
+    wake();
+  });
+
+  new IntersectionObserver(entries=>{
+
+    visible = entries[0].isIntersecting;
+
+    if(visible){
+      formed = true;
+      wake();
+    }
+
+  },{ threshold:.25 }).observe(canvas);
+
+  let resizeTimer = null;
+
+  window.addEventListener("resize",()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(()=>{
+      const before = W;
+      const box = canvas.getBoundingClientRect();
+      if(Math.round(box.width) !== before){
+        setup();
+        wake();
+      }
+    },200);
+  });
+
+  setup();
+
+})();
 
 
 /* =========================
