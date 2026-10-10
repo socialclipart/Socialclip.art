@@ -352,8 +352,8 @@ body.locked .topbar{
   transform:translateY(10px);
 
   transition:
-    opacity .65s ease,
-    transform .65s ease;
+    opacity .45s ease,
+    transform .45s ease;
 }
 
 .intro-copy.visible{
@@ -399,10 +399,10 @@ body.locked .topbar{
   backdrop-filter:blur(8px);
 
   transition:
-    opacity .9s ease,
-    filter .9s ease,
-    letter-spacing 1.1s cubic-bezier(.22,1,.36,1),
-    transform 1s cubic-bezier(.22,1,.36,1),
+    opacity .6s ease,
+    filter .6s ease,
+    letter-spacing .8s cubic-bezier(.22,1,.36,1),
+    transform .7s cubic-bezier(.22,1,.36,1),
     background .35s ease,
     color .35s ease,
     border-color .35s ease;
@@ -4136,8 +4136,6 @@ const introTexts = [
 
   "Wir geben dieser Idee eine Form.",
 
-  "Wir verbinden Design mit Bewegung.",
-
   "Willkommen bei SocialClip."
 
 ];
@@ -4148,13 +4146,12 @@ const introTexts = [
    und genau dann kommt der Button.
 */
 
-const INTRO_DURATION = 5500;
+const INTRO_DURATION = 2500;
 
 const INTRO_TEXT_TIMES = [
-  700,
-  1900,
-  3100,
-  4300
+  400,
+  1150,
+  1900
 ];
 
 let introFinished = false;
