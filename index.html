@@ -24,6 +24,12 @@
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
 
+<script>
+/* So früh wie möglich: Der Browser soll die alte Scroll-Position
+   beim Neuladen gar nicht erst wiederherstellen. */
+if("scrollRestoration" in history){ history.scrollRestoration = "manual"; }
+</script>
+
 <style>
 *{
   box-sizing:border-box;
@@ -7434,6 +7440,14 @@ window.scrollTo(
 
 window.addEventListener("load",()=>{
   window.scrollTo(0, 0);
+});
+
+/* Safari & Co. holen die Seite manchmal fertig aus dem Speicher (Zurück-Taste,
+   App-Wechsel). Auch dann oben starten. */
+window.addEventListener("pageshow",event=>{
+  if(event.persisted){
+    window.scrollTo(0, 0);
+  }
 });
 
 </script>
