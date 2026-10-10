@@ -24,6 +24,12 @@
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
 
+<script>
+/* So früh wie möglich: Der Browser soll die alte Scroll-Position
+   beim Neuladen gar nicht erst wiederherstellen. */
+if("scrollRestoration" in history){ history.scrollRestoration = "manual"; }
+</script>
+
 <style>
 *{
   box-sizing:border-box;
@@ -2778,6 +2784,134 @@ footer::before{
 }
 
 /* =========================
+   PERSÖNLICHER EMPFANG
+   Begrüßung, Idee für heute, Erinnerungs-Frage
+========================= */
+
+.hero-greeting{
+  min-height:1em;
+  margin-bottom:22px;
+  color:#c0bcb4;
+  font-size:11px;
+  letter-spacing:.25em;
+}
+
+.hero-idea{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:10px 18px;
+  max-width:720px;
+  margin-top:34px;
+  padding:16px 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.hero-idea[hidden]{
+  display:none;
+}
+
+.hero-idea-label{
+  color:#a29e96;
+  font-size:9px;
+  letter-spacing:.25em;
+}
+
+.hero-idea-text{
+  flex:1 1 260px;
+  color:#e6e2da;
+  font-size:15px;
+  line-height:1.5;
+}
+
+.hero-idea-btn{
+  padding:0;
+  border:0;
+  border-bottom:1px solid rgba(255,255,255,.3);
+  background:none;
+  color:#fff;
+  cursor:pointer;
+  font-size:9px;
+  letter-spacing:.22em;
+  white-space:nowrap;
+}
+
+.hero-idea-btn:hover{
+  border-color:#fff;
+}
+
+.memory-ask{
+  position:fixed;
+  left:24px;
+  bottom:24px;
+  z-index:9995;
+  width:min(420px,calc(100vw - 32px));
+  padding:22px 22px 20px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(22,22,22,.97);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1);
+}
+
+.memory-ask.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.memory-ask-title{
+  font-size:17px;
+  letter-spacing:-.02em;
+}
+
+.memory-ask-text{
+  margin-top:8px;
+  color:#b8b4ac;
+  font-size:12px;
+  line-height:1.65;
+}
+
+.memory-ask-text a{
+  color:#e6e2da;
+  border-bottom:1px solid rgba(255,255,255,.25);
+}
+
+.memory-ask-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+
+.memory-link{
+  padding:0;
+  border:0;
+  background:none;
+  color:#b8b4ac;
+  cursor:pointer;
+  font:inherit;
+  letter-spacing:inherit;
+  transition:color .3s ease;
+}
+
+.memory-link:hover{
+  color:#fff;
+}
+
+@media(max-width:800px){
+
+  .memory-ask{
+    left:16px;
+    right:16px;
+    bottom:16px;
+    width:auto;
+  }
+}
+
+/* =========================
    FOOTER
 ========================= */
 
@@ -3335,6 +3469,8 @@ footer strong{
     SCENE 02 / THE BEGINNING
   </div>
 
+  <div class="hero-greeting reveal" id="heroGreeting"></div>
+
   <h1 class="big-title reveal">
     IDEEN<br>
     <span>WERDEN</span><br>
@@ -3357,6 +3493,15 @@ footer strong{
     <a class="cine-btn" href="#kontakt">
       KONTAKT <span class="arr" aria-hidden="true">→</span>
     </a>
+  </div>
+
+  <!-- Wechselt bei jedem Besuch; mit Erinnerung: persönlicher Hinweis -->
+  <div class="hero-idea reveal" id="heroIdea" hidden>
+    <span class="hero-idea-label" id="heroIdeaLabel">IDEE FÜR HEUTE</span>
+    <p class="hero-idea-text" id="heroIdeaText"></p>
+    <button class="hero-idea-btn" type="button" id="heroIdeaBtn">
+      <span id="heroIdeaCta">MEHR DAZU</span> <span class="arr" aria-hidden="true">→</span>
+    </button>
   </div>
 
   <div class="hero-small reveal">
@@ -4548,16 +4693,96 @@ footer strong{
   <div class="footer-legal">
     <a href="impressum.html">IMPRESSUM</a>
     <a href="datenschutz.html">DATENSCHUTZ</a>
+    <button class="memory-link" id="memoryLink" type="button" hidden></button>
     <span>© 2026 SOCIALCLIP</span>
   </div>
 
 </footer>
+
+<!--
+  Frage nach dem persönlichen Empfang.
+  Nur wer Ja sagt, wird beim nächsten Besuch wiedererkannt.
+  Gespeichert wird ausschließlich im eigenen Browser (localStorage).
+-->
+<div class="memory-ask" id="memoryAsk" role="dialog" aria-labelledby="memoryAskTitle" hidden>
+  <p class="memory-ask-title" id="memoryAskTitle">Darf sich die Seite an dich erinnern?</p>
+  <p class="memory-ask-text">
+    Dann begrüßen wir dich beim nächsten Besuch persönlich.
+    Gespeichert wird nur in deinem Browser, nichts davon geht an uns.
+    <a href="datenschutz.html#erinnerung">Mehr erfahren</a>
+  </p>
+  <div class="memory-ask-actions">
+    <button class="cine-btn primary" type="button" id="memoryYes">JA, GERN</button>
+    <button class="cine-btn" type="button" id="memoryNo">NEIN, DANKE</button>
+  </div>
+</div>
 
 <script>
 
 /* =========================================
    SOCIALCLIP ENGINE
 ========================================= */
+
+
+/* =========================
+   ERINNERUNG (nur mit Zustimmung)
+   Ohne Ja wird nichts gespeichert. Ein Nein merken
+   wir uns, damit die Frage nicht jedes Mal kommt.
+   Alles bleibt im Browser, nichts wird gesendet.
+========================= */
+
+const MEMORY_KEY = "socialclip.memory";
+
+function readMemory(){
+  try{
+    return JSON.parse(localStorage.getItem(MEMORY_KEY)) || null;
+  }catch(error){
+    return null;
+  }
+}
+
+function writeMemory(data){
+  try{
+    localStorage.setItem(MEMORY_KEY, JSON.stringify(data));
+    return true;
+  }catch(error){
+    return false;
+  }
+}
+
+function forgetMemory(){
+  try{
+    localStorage.removeItem(MEMORY_KEY);
+  }catch(error){}
+}
+
+let memory = readMemory();
+
+/* Nur dieser Besuch: Stand vom letzten Mal, bevor wir ihn aktualisieren */
+const lastVisit =
+  memory && memory.consent === "yes"
+    ? { ...memory }
+    : null;
+
+const returning =
+  !!(lastVisit && lastVisit.visits >= 1);
+
+if(lastVisit){
+  memory = { ...memory, visits:(memory.visits || 0) + 1, last:Date.now() };
+  writeMemory(memory);
+}
+
+function remember(patch){
+  if(!memory || memory.consent !== "yes"){
+    return;
+  }
+  memory = { ...memory, ...patch };
+  writeMemory(memory);
+}
+
+function pick(list){
+  return list[Math.floor(Math.random() * list.length)];
+}
 
 
 /* =========================
@@ -4627,6 +4852,39 @@ const introTexts = [
   "Willkommen bei SocialClip."
 
 ];
+
+/*
+   Jedes Mal ein etwas anderes Intro.
+   Wer sich erinnern lässt, wird persönlich begrüßt.
+*/
+
+introTexts[1] = pick([
+  "Wir geben dieser Idee eine Form.",
+  "Wir machen sie sichtbar.",
+  "Wir geben ihr Licht und Bewegung.",
+  "Wir erzählen sie in Bildern.",
+  "Wir bringen sie auf jeden Bildschirm."
+]);
+
+if(returning){
+
+  introTexts[0] = lastVisit.name
+    ? "Schön, dass du wieder da bist, " + lastVisit.name + "."
+    : "Schön, dass du wieder da bist.";
+
+  introTexts[2] = "Willkommen zurück bei SocialClip.";
+
+}else{
+
+  introTexts[0] = pick([
+    "Alles beginnt mit einer Idee.",
+    "Jede Marke beginnt mit einer Idee.",
+    "Am Anfang steht immer eine Idee."
+  ]);
+
+}
+
+introCopy.textContent = introTexts[0];
 
 /*
    Ein Zeitplan für das ganze Intro.
@@ -6957,13 +7215,240 @@ checkForm.addEventListener(
 
 
 /* =========================
-   START
+   PERSÖNLICHER EMPFANG
+   Für alle: Begrüßung nach Tageszeit und eine
+   wechselnde Idee für heute. Mit Erinnerung:
+   Name, Besuchszahl und das Thema vom letzten Mal.
 ========================= */
+
+(()=>{
+
+  const now = new Date();
+  const hour = now.getHours();
+  const weekend = now.getDay() === 0 || now.getDay() === 6;
+  const DAYS = ["SONNTAG","MONTAG","DIENSTAG","MITTWOCH","DONNERSTAG","FREITAG","SAMSTAG"];
+
+  function timeGreeting(){
+    if(hour < 5) return "NOCH WACH? DIE BESTEN IDEEN KOMMEN NACHTS";
+    if(hour < 11) return "GUTEN MORGEN";
+    if(hour < 14) return "SCHÖNEN MITTAG";
+    if(hour < 18) return weekend ? "SCHÖNES WOCHENENDE" : "SCHÖNEN NACHMITTAG";
+    if(hour < 23) return "GUTEN ABEND";
+    return "SPÄT DRAN? PERFEKT FÜR NEUE IDEEN";
+  }
+
+  /* Begrüßung */
+
+  const greeting = document.getElementById("heroGreeting");
+
+  if(greeting){
+
+    if(returning){
+
+      const visit = memory.visits;
+      const name = lastVisit.name ? ", " + lastVisit.name.toUpperCase() : "";
+
+      greeting.textContent =
+        "WILLKOMMEN ZURÜCK" + name + " · DEIN " + visit + ". BESUCH";
+
+    }else{
+
+      greeting.textContent = timeGreeting() + " · " + DAYS[now.getDay()];
+
+    }
+  }
+
+  /* Idee für heute (oder: weiter, wo du warst) */
+
+  const IDEAS = [
+    ["Webseite", "Die meisten Kunden sehen deine Website zuerst am Handy."],
+    ["Logo", "Ein Logo ist oft das Erste, was Kunden von dir sehen."],
+    ["Social Media", "Wer regelmäßig postet, bleibt im Kopf."],
+    ["TikTok Marketing", "Kurze Videos erreichen Menschen, die dich noch nicht kennen."],
+    ["Flyer", "Ein guter Flyer landet am Kühlschrank, nicht im Altpapier."],
+    ["Visitenkarte", "Eine Visitenkarte ist dein Händedruck zum Mitnehmen."],
+    ["Speisekarte", "Eine gute Speisekarte verkauft schon beim Lesen."],
+    ["Video & Foto", "Eigene Bilder schaffen mehr Vertrauen als jedes Stockfoto."],
+    ["Neukundengewinnung", "Neue Kunden kommen selten zufällig."],
+    ["Strategieentwicklung", "Ein klarer Plan spart Zeit, Geld und Nerven."],
+    ["Lebenslauf", "Ein Lebenslauf entscheidet oft in wenigen Sekunden."]
+  ];
+
+  const idea = document.getElementById("heroIdea");
+
+  if(idea){
+
+    const label = document.getElementById("heroIdeaLabel");
+    const text = document.getElementById("heroIdeaText");
+    const cta = document.getElementById("heroIdeaCta");
+    const button = document.getElementById("heroIdeaBtn");
+
+    let service;
+
+    if(returning && lastVisit.service){
+
+      service = lastVisit.service;
+      label.textContent = "WEITER, WO DU WARST";
+      const TOPIC = {
+        "Webseite":"deine Website", "Flyer":"Flyer", "Online Marketing":"Online Marketing",
+        "Visitenkarte":"Visitenkarten", "Social Media":"Social Media", "Logo":"dein Logo",
+        "Video & Foto":"Video & Foto", "Lebenslauf":"deinen Lebenslauf", "Speisekarte":"deine Speisekarte",
+        "Virtueller Assistent":"einen virtuellen Assistenten", "Programmierung":"Programmierung",
+        "Neukundengewinnung":"neue Kunden", "Strategieentwicklung":"deine Strategie",
+        "TikTok Marketing":"TikTok"
+      };
+      text.textContent = "Letztes Mal ging es um " + (TOPIC[service] || service) + ". Sollen wir da weitermachen?";
+      cta.textContent = "WEITER PLANEN";
+
+    }else{
+
+      const [s, line] = pick(IDEAS);
+      service = s;
+      text.textContent = line;
+      cta.textContent = s.toUpperCase() + " ANSCHAUEN";
+
+    }
+
+    button.addEventListener("click",()=>openBuilder(service));
+
+    idea.hidden = false;
+  }
+
+  /* Was jemand sich anschaut, merken (nur mit Zustimmung) */
+
+  document.querySelectorAll(".select-service").forEach(button=>{
+    button.addEventListener("click",()=>{
+      if(button.classList.contains("selected")){
+        remember({ service: button.dataset.service });
+      }
+    });
+  });
+
+  /* Vorname merken, wenn jemand ein Formular abschickt (nur mit Zustimmung) */
+
+  document.querySelectorAll("form").forEach(form=>{
+    form.addEventListener("submit",()=>{
+      const field = form.querySelector('[name="name"]');
+      const first = field && field.value.trim().split(/\s+/)[0];
+      if(first){
+        remember({ name: first.slice(0, 30) });
+      }
+    });
+  });
+
+  /* Frage und Fußzeilen-Link */
+
+  const ask = document.getElementById("memoryAsk");
+  const link = document.getElementById("memoryLink");
+
+  function storageWorks(){
+    try{
+      localStorage.setItem("socialclip.test", "1");
+      localStorage.removeItem("socialclip.test");
+      return true;
+    }catch(error){
+      return false;
+    }
+  }
+
+  function updateLink(){
+    if(!storageWorks()){
+      link.hidden = true;
+      return;
+    }
+    const on = memory && memory.consent === "yes";
+    link.textContent = on ? "ERINNERUNG LÖSCHEN" : "PERSÖNLICHER EMPFANG";
+    link.hidden = false;
+  }
+
+  function showAsk(){
+    ask.hidden = false;
+    requestAnimationFrame(()=>ask.classList.add("show"));
+  }
+
+  function hideAsk(){
+    ask.classList.remove("show");
+    setTimeout(()=>{ ask.hidden = true; }, 500);
+  }
+
+  document.getElementById("memoryYes").addEventListener("click",()=>{
+    memory = { consent:"yes", visits:1, last:Date.now() };
+    writeMemory(memory);
+    hideAsk();
+    updateLink();
+  });
+
+  document.getElementById("memoryNo").addEventListener("click",()=>{
+    memory = { consent:"no" };
+    writeMemory(memory);
+    hideAsk();
+    updateLink();
+  });
+
+  link.addEventListener("click",()=>{
+    if(memory && memory.consent === "yes"){
+      forgetMemory();
+      memory = null;
+      link.textContent = "ERINNERUNG GELÖSCHT";
+      setTimeout(updateLink, 2200);
+    }else{
+      showAsk();
+    }
+  });
+
+  updateLink();
+
+  /* Erst fragen, wenn jemand schon etwas Zeit auf der Seite verbracht hat */
+  if(!memory && storageWorks()){
+    setTimeout(()=>{
+      if(!document.body.classList.contains("locked")){
+        showAsk();
+      }else{
+        const wait = setInterval(()=>{
+          if(!document.body.classList.contains("locked")){
+            clearInterval(wait);
+            setTimeout(showAsk, 4000);
+          }
+        }, 500);
+      }
+    }, 8000);
+  }
+
+})();
+
+
+/* =========================
+   START
+   Beim Neuladen immer ganz oben anfangen:
+   Der Browser darf die alte Scroll-Position nicht
+   wiederherstellen, und ein #anker in der Adresse
+   (z. B. #kontakt) springt beim Neuladen nicht mit.
+========================= */
+
+if("scrollRestoration" in history){
+  history.scrollRestoration = "manual";
+}
+
+if(location.hash){
+  history.replaceState(null, "", location.pathname + location.search);
+}
 
 window.scrollTo(
   0,
   0
 );
+
+window.addEventListener("load",()=>{
+  window.scrollTo(0, 0);
+});
+
+/* Safari & Co. holen die Seite manchmal fertig aus dem Speicher (Zurück-Taste,
+   App-Wechsel). Auch dann oben starten. */
+window.addEventListener("pageshow",event=>{
+  if(event.persisted){
+    window.scrollTo(0, 0);
+  }
+});
 
 </script>
 
