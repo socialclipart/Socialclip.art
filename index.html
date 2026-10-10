@@ -2868,6 +2868,30 @@ footer::before{
 }
 
 /* =========================
+   FINALE: PARTIKEL
+========================= */
+
+.particles{
+  min-height:0;
+  padding:40px 0 70px;
+}
+
+.particles canvas{
+  display:block;
+  width:100%;
+  height:clamp(150px,34vw,520px);
+  touch-action:pan-y;
+}
+
+.particles-hint{
+  margin-top:10px;
+  text-align:center;
+  color:#86827b;
+  font-size:9px;
+  letter-spacing:.25em;
+}
+
+/* =========================
    FOOTER
 ========================= */
 
@@ -4340,6 +4364,18 @@ footer strong{
 
   </div>
 
+</section>
+
+<!-- =========================
+     FINALE
+     Lichtpunkte im Raum ziehen sich zu
+     SOCIALCLIP zusammen. Maus oder Finger
+     wirbeln sie auf. Canvas, kein externes Skript.
+========================= -->
+
+<section class="particles" id="particles" aria-label="SocialClip">
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="particles-hint">BERÜHREN · BEWEGEN</div>
 </section>
 
 </main>
@@ -6975,6 +7011,281 @@ checkForm.addEventListener(
     phone.style.removeProperty("--ty");
     phone.style.removeProperty("--tx");
   });
+
+})();
+
+
+/* =========================
+   FINALE: PARTIKEL
+   Punkte starten verstreut im Raum (x, y, z)
+   und federn zu den Punkten des Schriftzugs.
+   Perspektive: näher = größer und heller.
+   Die Schleife läuft nur, solange sie sichtbar
+   ist und sich noch etwas bewegt.
+========================= */
+
+(()=>{
+
+  const section = document.getElementById("particles");
+  const canvas = document.getElementById("particleCanvas");
+
+  if(!section || !canvas){
+    return;
+  }
+
+  const ctx = canvas.getContext("2d");
+  const FOCAL = 700;
+
+  let W = 0;
+  let H = 0;
+  let dpr = 1;
+  let points = [];
+  let visible = false;
+  let running = false;
+  let formed = false;
+
+  const pointer = { x: -9999, y: -9999, active: false };
+  let turn = 0;
+  let turnTarget = 0;
+
+  function sampleText(){
+
+    const off = document.createElement("canvas");
+    off.width = W;
+    off.height = H;
+
+    const o = off.getContext("2d");
+    const size = Math.min(H * .62, W / 6.4);
+
+    o.fillStyle = "#fff";
+    o.textAlign = "center";
+    o.textBaseline = "middle";
+    o.font = "700 " + size + "px Arial, Helvetica, sans-serif";
+    o.fillText("SOCIALCLIP", W / 2, H / 2);
+
+    const data = o.getImageData(0, 0, W, H).data;
+
+    /* Abstand so wählen, dass es am Handy weniger Punkte sind */
+    const step = Math.max(3, Math.round(W / (W < 700 ? 130 : 290)));
+    const result = [];
+
+    for(let y = 0; y < H; y += step){
+      for(let x = 0; x < W; x += step){
+        if(data[(y * W + x) * 4 + 3] > 128){
+          result.push([x - W / 2, y - H / 2]);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  function scatter(p){
+    p.x = (Math.random() - .5) * W * 1.6;
+    p.y = (Math.random() - .5) * H * 2.2;
+    p.z = (Math.random() - .2) * 1400;
+  }
+
+  function setup(){
+
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+
+    const box = canvas.getBoundingClientRect();
+    W = Math.round(box.width);
+    H = Math.round(box.height);
+
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    points = sampleText().map(([tx, ty])=>{
+      const p = { tx, ty, vx: 0, vy: 0, vz: 0, s: .6 + Math.random() * .9 };
+      if(formed && !reduceMotion){
+        p.x = tx; p.y = ty; p.z = 0;
+      }else{
+        scatter(p);
+      }
+      if(reduceMotion){
+        p.x = tx; p.y = ty; p.z = 0;
+      }
+      return p;
+    });
+
+    draw();
+  }
+
+  function draw(){
+
+    ctx.clearRect(0, 0, W, H);
+
+    const cx = W / 2;
+    const cy = H / 2;
+
+    for(const p of points){
+
+      const depth = FOCAL / (FOCAL + p.z);
+
+      if(depth <= 0 || depth > 6){
+        continue;
+      }
+
+      const sx = cx + p.x * depth;
+      const sy = cy + p.y * depth;
+      const r = p.s * depth * 1.25;
+      const a = Math.max(.08, Math.min(1, depth * .9));
+
+      ctx.fillStyle = "rgba(244,241,234," + a.toFixed(2) + ")";
+      ctx.fillRect(sx - r / 2, sy - r / 2, r, r);
+    }
+  }
+
+  function step(){
+
+    turn += (turnTarget - turn) * .06;
+
+    const cos = Math.cos(turn);
+    const sin = Math.sin(turn);
+
+    const cx = W / 2;
+    const cy = H / 2;
+    const radius = Math.min(140, W * .14);
+
+    let energy = 0;
+
+    for(const p of points){
+
+      /* Ziel leicht um die Hochachse gedreht: wirkt räumlich */
+      const gx = p.tx * cos;
+      const gz = p.tx * sin;
+
+      p.vx += (gx - p.x) * .022;
+      p.vy += (p.ty - p.y) * .022;
+      p.vz += (gz - p.z) * .022;
+
+      if(pointer.active){
+
+        const depth = FOCAL / (FOCAL + p.z);
+        const dx = cx + p.x * depth - pointer.x;
+        const dy = cy + p.y * depth - pointer.y;
+        const d2 = dx * dx + dy * dy;
+
+        if(d2 < radius * radius){
+          const f = (1 - Math.sqrt(d2) / radius) * 3.2;
+          const len = Math.sqrt(d2) || 1;
+          p.vx += dx / len * f;
+          p.vy += dy / len * f;
+          p.vz -= f * 6;
+        }
+      }
+
+      p.vx *= .86;
+      p.vy *= .86;
+      p.vz *= .86;
+
+      p.x += p.vx;
+      p.y += p.vy;
+      p.z += p.vz;
+
+      energy += Math.abs(p.vx) + Math.abs(p.vy) + Math.abs(p.vz) * .1;
+    }
+
+    draw();
+
+    const moving =
+      energy / Math.max(1, points.length) > .02 ||
+      pointer.active ||
+      Math.abs(turnTarget - turn) > .002;
+
+    if(visible && moving){
+      requestAnimationFrame(step);
+    }else{
+      running = false;
+    }
+  }
+
+  function wake(){
+    if(reduceMotion || running || !visible){
+      return;
+    }
+    running = true;
+    requestAnimationFrame(step);
+  }
+
+  function localPoint(event){
+    const box = canvas.getBoundingClientRect();
+    return [event.clientX - box.left, event.clientY - box.top];
+  }
+
+  canvas.addEventListener("pointermove",event=>{
+
+    const [x, y] = localPoint(event);
+
+    pointer.x = x;
+    pointer.y = y;
+    pointer.active = event.pointerType !== "touch" || event.pressure > 0;
+
+    if(event.pointerType !== "touch"){
+      turnTarget = (x / W - .5) * .7;
+    }
+
+    wake();
+  });
+
+  canvas.addEventListener("pointerleave",()=>{
+    pointer.active = false;
+    turnTarget = 0;
+    wake();
+  });
+
+  /* Antippen: alles zerstiebt und formt sich neu */
+  canvas.addEventListener("pointerdown",event=>{
+
+    const [x, y] = localPoint(event);
+
+    for(const p of points){
+      const dx = p.x - (x - W / 2);
+      const dy = p.y - (y - H / 2);
+      const len = Math.sqrt(dx * dx + dy * dy) || 1;
+      const f = 18 + Math.random() * 14;
+      p.vx += dx / len * f;
+      p.vy += dy / len * f;
+      p.vz += (Math.random() - .5) * 90;
+    }
+
+    wake();
+  });
+
+  canvas.addEventListener("pointerup",()=>{
+    pointer.active = false;
+    wake();
+  });
+
+  new IntersectionObserver(entries=>{
+
+    visible = entries[0].isIntersecting;
+
+    if(visible){
+      formed = true;
+      wake();
+    }
+
+  },{ threshold:.25 }).observe(canvas);
+
+  let resizeTimer = null;
+
+  window.addEventListener("resize",()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(()=>{
+      const before = W;
+      const box = canvas.getBoundingClientRect();
+      if(Math.round(box.width) !== before){
+        setup();
+        wake();
+      }
+    },200);
+  });
+
+  setup();
 
 })();
 
