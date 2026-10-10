@@ -1888,6 +1888,280 @@ section{
 }
 
 /* =========================
+   VISIBILITY CHECK
+   Lead Magnet: Checkliste links,
+   Ergebnis und Anfrage rechts (sticky).
+========================= */
+
+.check{
+  min-height:auto;
+}
+
+.check-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(300px,400px);
+  align-items:start;
+  gap:60px;
+  margin-top:65px;
+}
+
+.check-list-head{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+  color:#85817a;
+  font-size:10px;
+  letter-spacing:.25em;
+}
+
+.check-list-head strong{
+  color:#fff;
+  font-weight:400;
+}
+
+.check-item{
+  position:relative;
+  display:grid;
+  grid-template-columns:26px 34px minmax(0,1fr);
+  align-items:start;
+  gap:14px;
+  padding:24px 0;
+  border-bottom:1px solid var(--line-soft);
+  cursor:pointer;
+  transition:background .35s ease;
+}
+
+.check-item:hover{
+  background:linear-gradient(90deg,rgba(255,255,255,.025),transparent 70%);
+}
+
+/* Echte Checkbox bleibt für Tastatur und Screenreader da, nur unsichtbar */
+
+.check-item input{
+  position:absolute;
+  opacity:0;
+  width:1px;
+  height:1px;
+}
+
+.check-box{
+  position:relative;
+  width:22px;
+  height:22px;
+  margin-top:2px;
+  border:1px solid rgba(255,255,255,.35);
+  transition:background .3s ease,border-color .3s ease;
+}
+
+.check-box::after{
+  content:"";
+  position:absolute;
+  left:7px;
+  top:3px;
+  width:6px;
+  height:11px;
+  border:solid #050505;
+  border-width:0 2px 2px 0;
+  transform:rotate(45deg) scale(0);
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+
+.check-item input:checked + .check-box{
+  background:#fff;
+  border-color:#fff;
+}
+
+.check-item input:checked + .check-box::after{
+  transform:rotate(45deg) scale(1);
+}
+
+.check-item input:focus-visible + .check-box{
+  outline:1px solid #fff;
+  outline-offset:4px;
+}
+
+.check-no{
+  padding-top:5px;
+  color:#62605b;
+  font-size:10px;
+  letter-spacing:.2em;
+}
+
+.check-copy{
+  color:#85817a;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.check-copy strong{
+  display:block;
+  margin-bottom:4px;
+  color:#f4f1ea;
+  font-size:clamp(17px,1.8vw,22px);
+  font-weight:400;
+  letter-spacing:-.02em;
+  line-height:1.25;
+  transition:color .3s ease;
+}
+
+.check-item input:checked ~ .check-copy strong{
+  color:#9b978f;
+}
+
+.check-panel{
+  position:sticky;
+  top:110px;
+  padding:38px;
+  border:1px solid var(--line);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.035),
+      transparent
+    );
+}
+
+.check-panel-label,
+.check-open > span{
+  display:block;
+  color:#85817a;
+  font-size:10px;
+  letter-spacing:.25em;
+}
+
+.check-score{
+  margin-top:18px;
+  line-height:.9;
+}
+
+.check-score strong{
+  font-size:clamp(72px,8vw,118px);
+  font-weight:700;
+  letter-spacing:-.07em;
+}
+
+.check-score span{
+  color:#77736c;
+  font-size:clamp(28px,3vw,40px);
+  letter-spacing:-.04em;
+}
+
+.check-bar{
+  height:2px;
+  margin-top:22px;
+  background:rgba(255,255,255,.1);
+  overflow:hidden;
+}
+
+.check-bar-fill{
+  height:100%;
+  background:#fff;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+
+.check-verdict{
+  margin-top:20px;
+  color:#f4f1ea;
+  font-size:16px;
+  line-height:1.6;
+}
+
+.check-open{
+  margin-top:24px;
+}
+
+.check-open ul{
+  margin-top:12px;
+  list-style:none;
+}
+
+.check-open li{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:7px 0;
+  border-bottom:1px solid var(--line-soft);
+  color:#9b978f;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.check-open li em{
+  flex-shrink:0;
+  color:#62605b;
+  font-style:normal;
+  font-size:9px;
+  letter-spacing:.18em;
+  padding-top:3px;
+}
+
+.check-form{
+  margin-top:34px;
+  padding-top:30px;
+  border-top:1px solid var(--line);
+}
+
+.check-form-title{
+  font-size:22px;
+  letter-spacing:-.03em;
+}
+
+.check-form-text{
+  margin:10px 0 26px;
+  color:#85817a;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.check-form .field{
+  margin-bottom:22px;
+}
+
+.check-form .field input{
+  padding:10px 0 12px;
+  font-size:17px;
+}
+
+.check-form .submit{
+  margin-top:10px;
+}
+
+.check-success{
+  padding:30px 0 0;
+}
+
+.check-success h3{
+  font-size:clamp(28px,3vw,40px);
+}
+
+.check-print{
+  display:block;
+  margin-top:26px;
+  padding:0;
+  border:0;
+  border-bottom:1px solid rgba(255,255,255,.2);
+  background:none;
+  color:#9b978f;
+  cursor:pointer;
+  font-size:9px;
+  letter-spacing:.22em;
+  transition:color .3s ease,border-color .3s ease;
+}
+
+.check-print:hover{
+  color:#fff;
+  border-color:#fff;
+}
+
+.print-only{
+  display:none;
+}
+
+/* =========================
    INSTAGRAM
 ========================= */
 
@@ -2381,6 +2655,22 @@ footer strong{
     grid-template-columns:1fr;
     gap:55px;
   }
+
+  .check-grid{
+    grid-template-columns:1fr;
+    gap:45px;
+  }
+
+  .check-panel{
+    position:relative;
+    top:auto;
+    padding:28px 22px;
+  }
+
+  .check-item{
+    grid-template-columns:24px 26px minmax(0,1fr);
+    gap:12px;
+  }
 }
 
 /* Schmale Handys (z. B. 360px Android): Uhr weg,
@@ -2390,6 +2680,141 @@ footer strong{
 
   .clock{
     display:none;
+  }
+}
+/* =========================
+   PRINT
+   "Als PDF speichern" druckt nur die Checkliste,
+   hell und ohne Kino-Effekte.
+========================= */
+
+@media print{
+
+  @page{
+    margin:16mm;
+  }
+
+  html,
+  body,
+  body.locked{
+    overflow:visible !important;
+    height:auto !important;
+    background:#fff !important;
+    color:#111 !important;
+  }
+
+  body::before,
+  body::after,
+  body > *:not(main),
+  main > *:not(.check),
+  .no-print,
+  .check .chapter-line,
+  .check .text{
+    display:none !important;
+  }
+
+  .reveal{
+    opacity:1 !important;
+    transform:none !important;
+  }
+
+  .check{
+    padding:0;
+    min-height:0;
+    background:none;
+  }
+
+  .print-only{
+    display:block;
+  }
+
+  .check-print-head{
+    margin-bottom:14px;
+    color:#555;
+    font-size:9px;
+    letter-spacing:.25em;
+  }
+
+  .check .big-title{
+    font-size:38px;
+    line-height:.95;
+    color:#111;
+  }
+
+  .check .big-title span,
+  .check-score span{
+    color:#777;
+  }
+
+  .check-grid{
+    display:block;
+    margin-top:24px;
+  }
+
+  .check-list-head,
+  .check-item,
+  .check-open li{
+    border-color:#ccc;
+    color:#555;
+  }
+
+  .check-list-head strong,
+  .check-copy strong,
+  .check-item input:checked ~ .check-copy strong,
+  .check-verdict{
+    color:#111;
+  }
+
+  .check-item{
+    padding:12px 0;
+    break-inside:avoid;
+  }
+
+  .check-copy,
+  .check-no{
+    color:#555;
+  }
+
+  .check-box{
+    border-color:#111;
+  }
+
+  .check-item input:checked + .check-box{
+    background:none;
+  }
+
+  .check-box::after{
+    border-color:#111;
+  }
+
+  .check-panel{
+    position:static;
+    margin-top:24px;
+    padding:20px;
+    border-color:#ccc;
+    background:none;
+    break-inside:avoid;
+  }
+
+  .check-score strong{
+    font-size:56px;
+    color:#111;
+  }
+
+  .check-bar{
+    background:#ddd;
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact;
+  }
+
+  .check-bar-fill{
+    background:#111;
+  }
+
+  .check-print-foot{
+    margin-top:18px;
+    color:#111;
+    font-size:12px;
   }
 }
 </style>
@@ -2511,6 +2936,9 @@ footer strong{
     <button class="cine-btn primary" type="button" data-open-builder>
       PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
     </button>
+    <a class="cine-btn" href="#check">
+      SICHTBARKEITS-CHECK <span class="arr" aria-hidden="true">→</span>
+    </a>
     <a class="cine-btn" href="#kontakt">
       KONTAKT <span class="arr" aria-hidden="true">→</span>
     </a>
@@ -2905,12 +3333,264 @@ footer strong{
 
 <!-- =========================
      SCENE 10
+     Lead Magnet: interaktiver Sichtbarkeits-Check.
+     Alles läuft im Browser, gespeichert wird nichts.
+     Erst wenn jemand den Check anfragt, geht das
+     Ergebnis über Formspree an uns.
+========================= -->
+
+<section class="check" id="check">
+
+  <div class="chapter-line reveal">
+    SCENE 10 / VISIBILITY CHECK
+  </div>
+
+  <div class="print-only check-print-head">
+    SOCIALCLIP · ART · MEDIA · DIGITAL · SOCIALCLIP.ART
+  </div>
+
+  <h2 class="big-title reveal">
+    WIRST DU<br>
+    <span>ONLINE</span><br>
+    GEFUNDEN?
+  </h2>
+
+  <p class="text reveal" style="margin-top:40px;">
+    Der 10-Punkte-Sichtbarkeits-Check für Selbstständige
+    und lokale Betriebe. Hake ab, was du schon hast.
+    In zwei Minuten weißt du, wo du stehst und wo
+    Kunden dich gerade verlieren.
+  </p>
+
+  <div class="check-grid">
+
+    <div class="check-list reveal" role="group" aria-label="Sichtbarkeits-Check, 10 Punkte">
+
+      <div class="check-list-head">
+        <span>10 PUNKTE · 2 MINUTEN</span>
+        <span><strong id="checkCountTop">0</strong> / 10 ERFÜLLT</span>
+      </div>
+
+      <label class="check-item" data-service="Online Marketing">
+        <input type="checkbox">
+        <span class="check-box" aria-hidden="true"></span>
+        <span class="check-no">01</span>
+        <span class="check-copy">
+          <strong>Google-Unternehmensprofil</strong>
+          Vollständig mit Öffnungszeiten, Telefonnummer und aktuellen Fotos.
+        </span>
+      </label>
+
+      <label class="check-item" data-service="Webseite">
+        <input type="checkbox">
+        <span class="check-box" aria-hidden="true"></span>
+        <span class="check-no">02</span>
+        <span class="check-copy">
+          <strong>Eigene Website, die am Handy funktioniert</strong>
+          Lädt schnell, ist gut lesbar und braucht kein Zoomen.
+        </span>
+      </label>
+
+      <label class="check-item" data-service="Webseite">
+        <input type="checkbox">
+        <span class="check-box" aria-hidden="true"></span>
+        <span class="check-no">03</span>
+        <span class="check-copy">
+          <strong>In 5 Sekunden klar</strong>
+          Besucher sehen sofort, was du anbietest und wie sie dich mit einem Klick erreichen.
+        </span>
+      </label>
+
+      <label class="check-item" data-service="Logo">
+        <input type="checkbox">
+        <span class="check-box" aria-hidden="true"></span>
+        <span class="check-no">04</span>
+        <span class="check-copy">
+          <strong>Ein einheitlicher Auftritt</strong>
+          Logo, Farben und Schrift sehen überall gleich aus, online wie offline.
+        </span>
+      </label>
+
+      <label class="check-item" data-service="Video & Foto">
+        <input type="checkbox">
+        <span class="check-box" aria-hidden="true"></span>
+        <span class="check-no">05</span>
+        <span class="check-copy">
+          <strong>Eigene, gute Fotos</strong>
+          Von dir, deinem Team, deinen Räumen oder Produkten, keine Stockbilder.
+        </span>
+      </label>
+
+      <label class="check-item" data-service="Social Media">
+        <input type="checkbox">
+        <span class="check-box" aria-hidden="true"></span>
+        <span class="check-no">06</span>
+        <span class="check-copy">
+          <strong>Social Media lebt</strong>
+          Mindestens ein Beitrag pro Woche in den letzten zwei Monaten.
+        </span>
+      </label>
+
+      <label class="check-item" data-service="TikTok Marketing">
+        <input type="checkbox">
+        <span class="check-box" aria-hidden="true"></span>
+        <span class="check-no">07</span>
+        <span class="check-copy">
+          <strong>Kurze Videos</strong>
+          Du zeigst dich in Reels oder TikToks, nicht nur in Fotos.
+        </span>
+      </label>
+
+      <label class="check-item" data-service="Flyer & Visitenkarte">
+        <input type="checkbox">
+        <span class="check-box" aria-hidden="true"></span>
+        <span class="check-no">08</span>
+        <span class="check-copy">
+          <strong>Drucksachen sind aktuell</strong>
+          Visitenkarten, Flyer oder Speisekarte passen zu deinem Online-Auftritt.
+        </span>
+      </label>
+
+      <label class="check-item" data-service="Neukundengewinnung">
+        <input type="checkbox">
+        <span class="check-box" aria-hidden="true"></span>
+        <span class="check-no">09</span>
+        <span class="check-copy">
+          <strong>Sichtbare Bewertungen</strong>
+          Echte Kundenstimmen auf Google, die du regelmäßig beantwortest.
+        </span>
+      </label>
+
+      <label class="check-item" data-service="Strategieentwicklung">
+        <input type="checkbox">
+        <span class="check-box" aria-hidden="true"></span>
+        <span class="check-no">10</span>
+        <span class="check-copy">
+          <strong>Ein Plan für neue Kunden</strong>
+          Du weißt, über welche Kanäle neue Kunden kommen, und pflegst sie gezielt.
+        </span>
+      </label>
+
+    </div>
+
+    <aside class="check-panel reveal" aria-label="Dein Ergebnis">
+
+      <div class="check-panel-label">DEIN ERGEBNIS</div>
+
+      <div class="check-score" aria-live="polite">
+        <strong id="checkScore">0</strong><span>/10</span>
+      </div>
+
+      <div class="check-bar" aria-hidden="true">
+        <div class="check-bar-fill" id="checkBar"></div>
+      </div>
+
+      <p class="check-verdict" id="checkVerdict">
+        Hake ab, was auf dich zutrifft.
+      </p>
+
+      <div class="check-open" id="checkOpen" hidden>
+        <span>HIER STECKT POTENZIAL</span>
+        <ul id="checkOpenList"></ul>
+      </div>
+
+      <form
+        class="check-form no-print"
+        id="checkForm"
+        action="https://formspree.io/f/xwlvlqwg"
+        method="POST"
+      >
+
+        <p class="check-form-title">
+          Kostenloser Sichtbarkeits-Check
+        </p>
+
+        <p class="check-form-text">
+          Wir schauen uns deinen Auftritt persönlich an
+          und sagen dir, welche drei Schritte am meisten bringen.
+          Unverbindlich, ohne Newsletter.
+        </p>
+
+        <input type="hidden" name="_subject" id="checkSubject" value="Sichtbarkeits-Check">
+        <input type="hidden" name="message" id="checkMessage" value="">
+
+        <label class="field">
+          <span class="field-label">NAME</span>
+          <input
+            type="text"
+            name="name"
+            aria-label="Dein Name"
+            autocomplete="name"
+            placeholder="Wie heißt du?"
+            required
+          >
+          <span class="field-line" aria-hidden="true"></span>
+        </label>
+
+        <label class="field">
+          <span class="field-label">E-MAIL</span>
+          <input
+            type="email"
+            name="email"
+            aria-label="Deine E-Mail"
+            autocomplete="email"
+            placeholder="Wo erreichen wir dich?"
+            required
+          >
+          <span class="field-line" aria-hidden="true"></span>
+        </label>
+
+        <label class="field">
+          <span class="field-label">BETRIEB ODER WEBSITE (OPTIONAL)</span>
+          <input
+            type="text"
+            name="betrieb"
+            aria-label="Dein Betrieb oder deine Website"
+            placeholder="z. B. Café Lena, Erlangen"
+          >
+          <span class="field-line" aria-hidden="true"></span>
+        </label>
+
+        <button class="submit cine-btn primary" type="submit">
+          CHECK ANFRAGEN <span class="arr" aria-hidden="true">→</span>
+        </button>
+
+        <p class="inline-hint" id="checkStatus" aria-live="polite"></p>
+
+        <p class="form-note">
+          Wir nutzen deine Angaben und dein Ergebnis nur, um dir zu antworten.
+          Mehr in der <a href="datenschutz.html">Datenschutzerklärung</a>.
+        </p>
+
+      </form>
+
+      <div class="form-success check-success" id="checkSuccess" hidden>
+        <h3>Danke.<br><span>Dein Check ist angefragt.</span></h3>
+        <p>Wir schauen uns deinen Auftritt an und melden uns in den nächsten Tagen bei dir.</p>
+      </div>
+
+      <p class="print-only check-print-foot">
+        Kostenloser Sichtbarkeits-Check: socialclip.art · 0176 46188101 · socialclip.art@gmail.com
+      </p>
+
+      <button class="check-print no-print" type="button" id="checkPrint">
+        CHECKLISTE ALS PDF SPEICHERN ↓
+      </button>
+
+    </aside>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     SCENE 11
 ========================= -->
 
 <section class="instagram">
 
   <div class="chapter-line reveal">
-    SCENE 10 / SOCIALCLIP.ART
+    SCENE 11 / SOCIALCLIP.ART
   </div>
 
   <h2 class="big-title reveal">
@@ -2936,13 +3616,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 11
+     SCENE 12
 ========================= -->
 
 <section class="contact" id="kontakt">
 
   <div class="chapter-line reveal">
-    SCENE 11 / YOUR STORY
+    SCENE 12 / YOUR STORY
   </div>
 
   <h2 class="big-title reveal">
@@ -5103,6 +5783,195 @@ contactForm.addEventListener(
 
       showHint(
         formStatus,
+        "Das hat leider nicht geklappt. Versuch es bitte noch einmal oder ruf uns an."
+      );
+
+    }finally{
+
+      submit.disabled = false;
+      submit.innerHTML = label;
+
+    }
+
+  }
+);
+
+
+/* =========================
+   VISIBILITY CHECK
+   Zählt live mit, zeigt die offenen Punkte
+   und schickt das Ergebnis mit der Anfrage
+   an Formspree. Nichts wird im Browser gespeichert.
+========================= */
+
+const checkItems =
+  [...document.querySelectorAll(".check-item")];
+
+const checkScore =
+  document.getElementById("checkScore");
+
+const checkCountTop =
+  document.getElementById("checkCountTop");
+
+const checkBar =
+  document.getElementById("checkBar");
+
+const checkVerdict =
+  document.getElementById("checkVerdict");
+
+const checkOpen =
+  document.getElementById("checkOpen");
+
+const checkOpenList =
+  document.getElementById("checkOpenList");
+
+const checkForm =
+  document.getElementById("checkForm");
+
+const checkStatus =
+  document.getElementById("checkStatus");
+
+const checkSuccess =
+  document.getElementById("checkSuccess");
+
+let checkTouched = false;
+
+function checkTitle(item){
+  return item.querySelector(".check-copy strong").textContent.trim();
+}
+
+function checkVerdictFor(score){
+
+  if(!checkTouched){
+    return "Hake ab, was auf dich zutrifft.";
+  }
+
+  if(score <= 3){
+    return "Kaum sichtbar. Hier liegt das größte Potenzial, und schon kleine Schritte bringen viel.";
+  }
+
+  if(score <= 6){
+    return "Gute Basis, aber da geht noch einiges. Ein paar gezielte Schritte machen den Unterschied.";
+  }
+
+  if(score <= 9){
+    return "Stark aufgestellt. Jetzt geht es um den Feinschliff.";
+  }
+
+  return "Alles abgehakt. Lass uns gemeinsam den nächsten Schritt planen.";
+}
+
+function updateCheck(){
+
+  const done =
+    checkItems.filter(item=>item.querySelector("input").checked);
+
+  const open =
+    checkItems.filter(item=>!item.querySelector("input").checked);
+
+  const score = done.length;
+
+  checkScore.textContent = score;
+  checkCountTop.textContent = score;
+  checkBar.style.transform = `scaleX(${score / checkItems.length})`;
+  checkVerdict.textContent = checkVerdictFor(score);
+
+  checkOpenList.innerHTML = "";
+
+  open.forEach(item=>{
+
+    const li = document.createElement("li");
+    const name = document.createElement("span");
+    const service = document.createElement("em");
+
+    name.textContent = checkTitle(item);
+    service.textContent = item.dataset.service.toUpperCase();
+
+    li.append(name,service);
+    checkOpenList.append(li);
+
+  });
+
+  checkOpen.hidden = !checkTouched || open.length === 0;
+
+  document.getElementById("checkSubject").value =
+    `Sichtbarkeits-Check: ${score}/10`;
+
+  document.getElementById("checkMessage").value = [
+    `Sichtbarkeits-Check: ${score} von 10 Punkten`,
+    "",
+    "Offen:",
+    ...(open.length ? open.map(item=>`- ${checkTitle(item)} (${item.dataset.service})`) : ["- nichts"]),
+    "",
+    "Erfüllt:",
+    ...(done.length ? done.map(item=>`- ${checkTitle(item)}`) : ["- nichts"])
+  ].join("\n");
+
+}
+
+checkItems.forEach(item=>{
+  item.querySelector("input").addEventListener(
+    "change",
+    ()=>{
+      checkTouched = true;
+      updateCheck();
+    }
+  );
+});
+
+updateCheck();
+
+document
+  .getElementById("checkPrint")
+  .addEventListener("click",()=>window.print());
+
+checkForm.addEventListener(
+  "submit",
+  async event=>{
+
+    event.preventDefault();
+
+    updateCheck();
+
+    const submit =
+      checkForm.querySelector(".submit");
+
+    const label =
+      submit.innerHTML;
+
+    submit.disabled = true;
+    submit.textContent = "WIRD GESENDET …";
+
+    showHint(checkStatus,"");
+
+    try{
+
+      const response =
+        await fetch(
+          checkForm.action,
+          {
+            method:"POST",
+            body:new FormData(checkForm),
+            headers:{
+              Accept:"application/json"
+            }
+          }
+        );
+
+      if(!response.ok){
+        throw new Error("send failed");
+      }
+
+      checkForm.reset();
+
+      checkForm.hidden = true;
+
+      checkSuccess.hidden = false;
+
+    }catch(error){
+
+      showHint(
+        checkStatus,
         "Das hat leider nicht geklappt. Versuch es bitte noch einmal oder ruf uns an."
       );
 
