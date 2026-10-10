@@ -1,15 +1,20 @@
-// Alexa-Skill "Social Clip": leitet gesprochene Fragen an Claude weiter
+// Alexa-Skill "Social Clip": leitet gesprochene Fragen an Google Gemini weiter
 // und liest die Antwort vor. Läuft als Alexa-hosted Skill oder AWS Lambda.
 
 const Alexa = require('ask-sdk-core');
-const Anthropic = require('@anthropic-ai/sdk');
+const { GoogleGenAI, ApiError } = require('@google/genai');
+
+const TIMEOUT_MS = 7000;
 
 // Alexa wartet höchstens 8 Sekunden auf eine Antwort. Deshalb: kurzer
-// Timeout, keine automatischen Wiederholungen und niedriger Denkaufwand.
-const client = new Anthropic({ timeout: 7000, maxRetries: 0 });
+// Timeout und keine automatischen Wiederholungen.
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+  httpOptions: { timeout: TIMEOUT_MS, retryOptions: { attempts: 1 } },
+});
 
-const MODEL = process.env.CLAUDE_MODEL || 'claude-opus-5-5';
-const EFFORT = process.env.CLAUDE_EFFORT || 'low';
+// Ein Flash-Modell ist schnell und im kostenlosen Kontingent enthalten.
+const MODEL = process.env.GEMINI_MODEL || 'gemini-flash-latest';
 const MAX_HISTORY_TURNS = 6; // so viele Frage/Antwort-Paare merkt sich der Skill
 
 const SYSTEM_PROMPT = `Du bist der Sprachassistent von SocialClip (socialclip.art) und antwortest über ein Amazon-Alexa-Gerät.
@@ -21,7 +26,7 @@ Deine Antwort wird vorgelesen, nicht angezeigt. Deshalb:
 
 const REPROMPT = 'Möchtest du noch etwas wissen?';
 
-// Macht Claudes Text vorlesbar: Markdown raus, SSML-Sonderzeichen maskieren.
+// Macht den KI-Text vorlesbar: Markdown raus, SSML-Sonderzeichen maskieren.
 function toSpeech(text) {
   const plain = text
     .replace(/```[\s\S]*?```/g, ' ')
@@ -33,32 +38,40 @@ function toSpeech(text) {
   return escaped.length > 7500 ? `${escaped.slice(0, 7500)} …` : escaped;
 }
 
-async function askClaude(question, history) {
-  const messages = [...history, { role: 'user', content: question }];
+async function askGemini(question, history) {
+  const contents = [...history, { role: 'user', parts: [{ text: question }] }]
+    .map((turn) => ({ role: turn.role, parts: turn.parts }));
 
-  const response = await client.beta.messages.create({
+  const response = await ai.models.generateContent({
     model: MODEL,
-    max_tokens: 2000,
-    system: SYSTEM_PROMPT,
-    output_config: { effort: EFFORT },
-    // Lehnt das Modell aus Sicherheitsgründen ab, springt serverseitig
-    // automatisch ein passendes Ersatzmodell ein.
-    betas: ['server-side-fallback-2026-07-01'],
-    fallbacks: 'default',
-    messages,
+    contents,
+    config: {
+      systemInstruction: SYSTEM_PROMPT,
+      maxOutputTokens: 2000,
+    },
   });
 
-  if (response.stop_reason === 'refusal') {
+  const finishReason = response.candidates?.[0]?.finishReason;
+  if (finishReason === 'SAFETY' || response.promptFeedback?.blockReason) {
     return { text: 'Dabei kann ich leider nicht helfen. Frag mich gerne etwas anderes.', ok: false };
   }
 
-  const text = response.content
-    .filter((block) => block.type === 'text')
-    .map((block) => block.text)
-    .join(' ')
-    .trim();
-
+  const text = (response.text || '').trim();
   return { text: text || 'Darauf habe ich gerade keine Antwort.', ok: Boolean(text) };
+}
+
+// Fehlermeldung, die Alexa vorliest, passend zur Ursache.
+function errorSpeech(error) {
+  if (error instanceof ApiError && error.status === 429) {
+    return 'Das kostenlose Tageskontingent ist gerade aufgebraucht. Versuch es bitte später noch einmal.';
+  }
+  if (error instanceof ApiError && (error.status === 400 || error.status === 403)) {
+    return 'Der Gemini-Schlüssel oder das Modell ist nicht richtig eingerichtet. Schau bitte in die Anleitung.';
+  }
+  if (error?.name === 'AbortError' || /timeout|timed out|aborted/i.test(String(error?.message))) {
+    return 'Das dauert gerade zu lange. Stell die Frage bitte noch einmal, vielleicht etwas kürzer.';
+  }
+  return 'Ich kann die KI gerade nicht erreichen. Versuch es bitte gleich noch einmal.';
 }
 
 const LaunchRequestHandler = {
@@ -67,7 +80,7 @@ const LaunchRequestHandler = {
   },
   handle(handlerInput) {
     return handlerInput.responseBuilder
-      .speak('Hallo, hier ist Social Clip mit Claude. Was möchtest du wissen?')
+      .speak('Hallo, hier ist Social Clip. Was möchtest du wissen?')
       .reprompt('Stell mir einfach eine Frage, zum Beispiel: Frage, wie schreibe ich einen guten Instagram-Post?')
       .getResponse();
   },
@@ -92,17 +105,17 @@ const FrageIntentHandler = {
 
     let answer;
     try {
-      answer = await askClaude(question, history);
+      answer = await askGemini(question, history);
     } catch (error) {
-      console.error('Claude-Anfrage fehlgeschlagen:', error);
-      const speech = error instanceof Anthropic.APIConnectionTimeoutError
-        ? 'Das dauert gerade zu lange. Stell die Frage bitte noch einmal, vielleicht etwas kürzer.'
-        : 'Ich kann Claude gerade nicht erreichen. Versuch es bitte gleich noch einmal.';
-      return handlerInput.responseBuilder.speak(speech).reprompt(REPROMPT).getResponse();
+      console.error('Gemini-Anfrage fehlgeschlagen:', error);
+      return handlerInput.responseBuilder.speak(errorSpeech(error)).reprompt(REPROMPT).getResponse();
     }
 
     if (answer.ok) {
-      history.push({ role: 'user', content: question }, { role: 'assistant', content: answer.text });
+      history.push(
+        { role: 'user', parts: [{ text: question }] },
+        { role: 'model', parts: [{ text: answer.text }] },
+      );
       session.history = history.slice(-MAX_HISTORY_TURNS * 2);
       handlerInput.attributesManager.setSessionAttributes(session);
     }
@@ -183,9 +196,9 @@ exports.handler = Alexa.SkillBuilders.custom()
     SessionEndedRequestHandler,
   )
   .addErrorHandlers(ErrorHandler)
-  .withCustomUserAgent('socialclip/alexa-claude')
+  .withCustomUserAgent('socialclip/alexa-gemini')
   .lambda();
 
 // Für lokale Tests
-exports.askClaude = askClaude;
+exports.askGemini = askGemini;
 exports.toSpeech = toSpeech;

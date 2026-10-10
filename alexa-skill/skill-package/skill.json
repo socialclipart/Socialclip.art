@@ -4,14 +4,14 @@
       "locales": {
         "de-DE": {
           "name": "Social Clip",
-          "summary": "Stell Claude deine Fragen über Alexa.",
-          "description": "Social Clip verbindet Alexa mit der KI Claude. Stell eine Frage, zum Beispiel zu Social Media, Texten oder Ideen, und hör dir die Antwort an.",
+          "summary": "Stell einer KI deine Fragen über Alexa.",
+          "description": "Social Clip verbindet Alexa mit einer KI (Google Gemini). Stell eine Frage, zum Beispiel zu Social Media, Texten oder Ideen, und hör dir die Antwort an.",
           "examplePhrases": [
             "Alexa, öffne social clip",
             "Alexa, frag social clip, wie schreibe ich einen guten Instagram-Post",
             "Alexa, sag social clip, erkläre mir was ein Reel ist"
           ],
-          "keywords": ["KI", "Claude", "Social Media", "Assistent"]
+          "keywords": ["KI", "Gemini", "Social Media", "Assistent"]
         }
       },
       "isAvailableWorldwide": false,
