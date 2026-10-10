@@ -516,6 +516,62 @@ body.locked .topbar{
   animation:none;
 }
 
+.intro-name{
+  position:absolute;
+  left:50%;
+  bottom:178px;
+  z-index:2;
+  width:min(320px,80vw);
+  transform:translateX(-50%) translateY(14px);
+  text-align:center;
+
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .6s ease,transform .7s cubic-bezier(.22,1,.36,1);
+}
+
+.intro.loaded .intro-name{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+
+.intro-name span{
+  display:block;
+  color:#a29e96;
+  font-size:9px;
+  letter-spacing:.25em;
+}
+
+.intro-name em{
+  font-style:normal;
+  color:#86827b;
+}
+
+.intro-name input{
+  width:100%;
+  margin-top:8px;
+  padding:8px 0 10px;
+  border:0;
+  border-bottom:1px solid rgba(255,255,255,.3);
+  border-radius:0;
+  outline:none;
+  background:transparent;
+  color:#fff;
+  text-align:center;
+  font-size:20px;
+  letter-spacing:-.01em;
+  transition:border-color .3s ease;
+}
+
+.intro-name input:focus{
+  border-color:#fff;
+}
+
+.intro-name input::placeholder{
+  color:#6e6b65;
+}
+
 .intro-progress{
   position:absolute;
   left:50%;
@@ -3046,6 +3102,10 @@ footer strong{
     font-size:13px;
   }
 
+  .intro-name{
+    bottom:168px;
+  }
+
   .intro-enter{
     bottom:105px;
     width:max-content;
@@ -3427,6 +3487,19 @@ footer strong{
     </div>
 
   </div>
+
+  <!-- Freiwillig: mit Namen wird die Seite persönlich. Nichts wird gesendet. -->
+  <label class="intro-name" id="introName">
+    <span>WIE HEISST DU? <em>(FREIWILLIG)</em></span>
+    <input
+      type="text"
+      id="introNameInput"
+      autocomplete="given-name"
+      maxlength="30"
+      placeholder="Dein Vorname"
+      enterkeyhint="go"
+    >
+  </label>
 
   <button
     class="intro-enter"
@@ -4059,7 +4132,7 @@ footer strong{
 
     <aside class="check-panel reveal" aria-label="Dein Ergebnis">
 
-      <div class="check-panel-label">DEIN ERGEBNIS</div>
+      <div class="check-panel-label" id="checkPanelLabel">DEIN ERGEBNIS</div>
 
       <div class="check-score" aria-live="polite">
         <strong id="checkScore">0</strong><span>/10</span>
@@ -4146,7 +4219,7 @@ footer strong{
       </form>
 
       <div class="form-success check-success" id="checkSuccess" hidden>
-        <h3>Danke.<br><span>Dein Check ist angefragt.</span></h3>
+        <h3><span class="name-thanks">Danke.</span><br><span>Dein Check ist angefragt.</span></h3>
         <p>Wir schauen uns deinen Auftritt an und melden uns in den nächsten Tagen bei dir.</p>
       </div>
 
@@ -4330,7 +4403,7 @@ footer strong{
   </form>
 
   <div class="form-success" id="formSuccess" hidden>
-    <h3>Danke.<br><span>Deine Nachricht ist da.</span></h3>
+    <h3><span class="name-thanks">Danke.</span><br><span>Deine Nachricht ist da.</span></h3>
     <p>Wir melden uns so schnell wie möglich bei dir.</p>
   </div>
 
@@ -4771,6 +4844,10 @@ if(lastVisit){
   memory = { ...memory, visits:(memory.visits || 0) + 1, last:Date.now() };
   writeMemory(memory);
 }
+
+/* Vorname für diesen Besuch (aus dem Intro oder vom letzten Mal) */
+let visitorName =
+  lastVisit && lastVisit.name ? lastVisit.name : "";
 
 function remember(patch){
   if(!memory || memory.consent !== "yes"){
@@ -7373,6 +7450,9 @@ checkForm.addEventListener(
 
   document.getElementById("memoryYes").addEventListener("click",()=>{
     memory = { consent:"yes", visits:1, last:Date.now() };
+    if(visitorName){
+      memory.name = visitorName;
+    }
     writeMemory(memory);
     hideAsk();
     updateLink();
@@ -7418,6 +7498,120 @@ checkForm.addEventListener(
 
 
 /* =========================
+   NAME IM INTRO
+   Wer seinen Vornamen eingibt, wird auf der Seite
+   persönlich angesprochen. Der Name bleibt im Browser;
+   gespeichert wird er nur mit Zustimmung zur Erinnerung.
+========================= */
+
+(()=>{
+
+  const field = document.getElementById("introName");
+  const input = document.getElementById("introNameInput");
+  const enter = document.getElementById("enterButton");
+
+  if(!field || !input || !enter){
+    return;
+  }
+
+  /* Schon bekannt: nicht noch einmal fragen */
+  if(visitorName){
+    field.remove();
+  }
+
+  function cleanName(raw){
+    const first = raw.trim().split(/\s+/)[0] || "";
+    const safe = first.replace(/[^\p{L}\p{M}'\-]/gu, "").slice(0, 30);
+    return safe ? safe.charAt(0).toUpperCase() + safe.slice(1) : "";
+  }
+
+  input.addEventListener("keydown",event=>{
+    if(event.key === "Enter"){
+      event.preventDefault();
+      enter.click();
+    }
+  });
+
+  enter.addEventListener("click",()=>{
+
+    if(!introFinished || !field.isConnected){
+      return;
+    }
+
+    const name = cleanName(input.value);
+
+    input.blur();
+
+    if(name){
+      visitorName = name;
+      remember({ name });
+      applyName();
+    }
+
+  });
+
+  /* Am Computer gleich ins Feld, am Handy nicht (Tastatur würde aufgehen) */
+  if(!touchOnly && field.isConnected){
+    const wait = setInterval(()=>{
+      if(introFinished){
+        clearInterval(wait);
+        input.focus({ preventScroll:true });
+      }
+    }, 200);
+  }
+
+})();
+
+
+/*
+   Überall, wo es passt, den Namen einsetzen.
+   Wird beim Start (bekannter Name) und nach dem Intro aufgerufen.
+*/
+
+function applyName(){
+
+  if(!visitorName){
+    return;
+  }
+
+  const upper = visitorName.toUpperCase();
+
+  /* Begrüßung oben */
+  const greeting = document.getElementById("heroGreeting");
+
+  if(greeting && !returning){
+    const parts = greeting.textContent.split(" · ");
+    greeting.textContent = parts[0] + ", " + upper + (parts[1] ? " · " + parts[1] : "");
+  }
+
+  /* Sichtbarkeits-Check */
+  const label = document.getElementById("checkPanelLabel");
+
+  if(label){
+    label.textContent = "DEIN ERGEBNIS, " + upper;
+  }
+
+  /* Formulare: Name vorausfüllen, Platzhalter persönlicher */
+  document.querySelectorAll('form [name="name"]').forEach(nameField=>{
+    if(!nameField.value){
+      nameField.value = visitorName;
+    }
+  });
+
+  const idea = document.querySelector('.contact-form textarea[name="message"]');
+
+  if(idea){
+    idea.placeholder = "Erzähl uns von deiner Idee, " + visitorName + " ...";
+  }
+
+  /* Danke-Meldungen */
+  document.querySelectorAll(".name-thanks").forEach(el=>{
+    el.textContent = "Danke, " + visitorName + ".";
+  });
+}
+
+
+/* =========================
    START
    Beim Neuladen immer ganz oben anfangen:
    Der Browser darf die alte Scroll-Position nicht
@@ -7428,6 +7622,8 @@ checkForm.addEventListener(
 if("scrollRestoration" in history){
   history.scrollRestoration = "manual";
 }
+
+applyName();
 
 if(location.hash){
   history.replaceState(null, "", location.pathname + location.search);
