@@ -2,14 +2,16 @@
 """Build a dark, cinematic 9:16 Instagram reel with centred German text.
 
 Usage:
-    python3 tools/make_reel.py INPUT.mp4 OUTPUT.mp4 [--slow 1.5]
+    python3 tools/make_reel.py INPUT.mp4 OUTPUT.mp4 [--slow 1.5] [--lines reels/x.json]
 
-Text lines and their timing live in LINES below. Each entry is shown on
+Text lines and their timing default to LINES below; --lines loads them from
+a JSON file instead (a list of [start, end, [rows], max_size]). Each entry is shown on
 its own, faded in and out, centred on the frame. Lines are upper-cased and
 auto-sized to fit the safe width. The source audio is dropped (add a
 licensed track in the Instagram app instead) and replaced by silence.
 """
 import argparse
+import json
 import subprocess
 import sys
 import tempfile
@@ -33,6 +35,12 @@ LINES = [
 ]
 
 
+def load_lines(path=None):
+    if not path:
+        return LINES
+    return [tuple(x) for x in json.loads(Path(path).read_text(encoding="utf-8"))]
+
+
 def fit_size(rows, max_size):
     size = max_size
     while size > 40:
@@ -47,9 +55,9 @@ def esc(text):
     return text.replace("\\", "\\\\").replace(":", "\\:").replace("'", "\\'").replace(",", "\\,").replace("%", "\\%")
 
 
-def drawtext_filters(tmp):
+def drawtext_filters(tmp, lines):
     out = []
-    for i, (a, b, rows, max_size) in enumerate(LINES):
+    for i, (a, b, rows, max_size) in enumerate(lines):
         size = fit_size(rows, max_size)
         alpha = (f"if(lt(t,{a}),0,if(lt(t,{a + FADE_IN}),(t-{a})/{FADE_IN},"
                  f"if(lt(t,{b - FADE_OUT}),1,if(lt(t,{b}),({b}-t)/{FADE_OUT},0))))")
@@ -75,6 +83,7 @@ def main():
     ap.add_argument("output")
     ap.add_argument("--slow", type=float, default=1.5,
                     help="slow-motion factor to stretch short clips")
+    ap.add_argument("--lines", help="JSON file with the text cards")
     args = ap.parse_args()
 
     dur = float(subprocess.check_output([
@@ -95,7 +104,7 @@ def main():
             "colorbalance=rs=-0.05:gs=-0.01:bs=0.06:rh=0.03:bh=-0.03",
             "vignette=angle=PI/4.2",
             "noise=alls=3:allf=t",
-            *drawtext_filters(tmp),
+            *drawtext_filters(tmp, load_lines(args.lines)),
             "fade=t=in:st=0:d=0.6",
             f"fade=t=out:st={total - 0.8}:d=0.8",
             "format=yuv420p",

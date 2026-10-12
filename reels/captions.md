@@ -12,3 +12,15 @@ Disziplin schlägt Motivation. Jeden einzelnen Tag.
 📌 Speichern für die Tage, an denen du es vergisst.
 
 #disziplin #mindset #motivation #motivationdeutsch #erfolg #selbstdisziplin #nurdu #stehauf #mentalestärke #ziele #fokus #erfolgsmindset #persönlichkeitsentwicklung #willenskraft #niemalsaufgeben
+
+## Reel 02 – „Das ist der Unterschied.“ (Quelle: Video-517.mp4, 18 s, Text: reels/02_disziplin.json)
+
+Motivation ist ein Gefühl. Disziplin ist eine Entscheidung. 🌑
+Während andere auf den richtigen Moment warten, arbeitest du – leise, jeden Tag, auch wenn es keiner sieht.
+
+Genau das ist der Unterschied.
+
+💬 Wann arbeitest du an deinen Zielen? Früh morgens oder spät nachts? 👇
+📌 Speichern & an jemanden schicken, der das heute hören muss.
+
+#disziplin #mindset #motivation #motivationdeutsch #selbstdisziplin #hustle #nachtschicht #erfolg #erfolgsmindset #mentalestärke #fokus #ziele #willenskraft #arbeitenstattreden #persönlichkeitsentwicklung
