@@ -1,17 +1,17 @@
 # Karussell „Website statt mehr Posts“ (SocialClip)
 
-Format wie das Vorbild (6 Slides, 1080×1350, jede Slide oben/unten geteilt).
-Look wie socialclip.art: Schwarz, weiße Schrift. Unter jedem Text ein ruhiger
-Ausschnitt deiner Website (nur echte Screenshots, nichts nachgebaut).
+6 Slides (1080×1350), ein Bild pro Slide, Text in zwei Zeilen wie beim Vorbild.
+Die Bilder sind KI-generiert im dunklen, filmischen Look von socialclip.art.
+Auf dem Laptop in Slide 5 ist die echte Startseite von socialclip.art zu sehen.
 
-| Slide | oben | unten |
+| Slide | Text | Bild |
 |---|---|---|
-| 1 | 1 Minute Check, | nicht 1 Jahr raten. |
-| 2 | Nova geht ran, | nicht die Mailbox. |
-| 3 | 1 Ansprechpartner, | nicht 5 Agenturen. |
-| 4 | 3 Felder, | nicht 3 Seiten Formular. |
-| 5 | Du brauchst nicht mehr Posts, | du brauchst eine Website. |
-| 6 | Willkommen, | auf socialclip.art <3 |
+| 1 | 1 Minute Check, / nicht 1 Jahr raten. | Handy mit Checkliste im Dunkeln |
+| 2 | Nova geht ran, / nicht die Mailbox. | Handy auf dem Schreibtisch am Abend |
+| 3 | 1 Ansprechpartner, / nicht 5 Agenturen. | Schreibtisch mit Logo-Skizzen, Flyern, Visitenkarten |
+| 4 | Zeig dein Gesicht, / nicht nur dein Logo. | Café-Inhaberin hinter der Theke |
+| 5 | Du brauchst nicht mehr Posts, / du brauchst eine Website. | Laptop mit socialclip.art |
+| 6 | Willkommen, / auf socialclip.art <3 | Cappuccino und Laptop im Café |
 
 ## Bildunterschrift
 falls deine Website sich angesprochen fühlt..
@@ -28,6 +28,7 @@ Ruhiger, melancholischer Trend-Sound, wie beim Vorbild („Do I Clench My Fists?
 
 ## Dateien
 - `export/slide-1.png` … `slide-6.png`: fertige Slides zum Hochladen
-- `slides.json`: Texte und welcher Ausschnitt der Website (y = Pixel von oben)
-- `screenshots.js`: macht die Website-Screenshots in `fotos/` neu
-- `render.py`: baut die Slides aus `fotos/`
+- `ki/`: die Bilder (KI-generiert) und der Website-Screenshot für Slide 5
+- `slides.json`: Texte, Bild und Höhe des Textes (ty)
+- `render.py`: baut die Slides (`python3 render.py`)
+- `desktop-shot.js`: macht den Website-Screenshot für den Laptop neu
