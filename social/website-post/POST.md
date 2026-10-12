@@ -1,17 +1,17 @@
-# Karussell „Website: weniger, aber richtig“ (SocialClip)
+# Karussell „Website statt mehr Posts“ (SocialClip)
 
 Format wie das Vorbild (6 Slides, 1080×1350, jede Slide oben/unten geteilt).
-Oben: echte Screenshots von socialclip.art, also so geht's.
-Unten: typische Fehler auf Betriebs-Websites, also so nicht.
+Look wie socialclip.art: Schwarz, weiße Schrift. Unter jedem Text ein ruhiger
+Ausschnitt deiner Website (nur echte Screenshots, nichts nachgebaut).
 
-| Slide | oben (socialclip.art) | unten (so nicht) |
+| Slide | oben | unten |
 |---|---|---|
-| 1 | erklär's in 5 Sekunden, | nicht in 17 Menüpunkten. |
-| 2 | gebaut fürs Handy, | nicht nur für den PC. |
-| 3 | frag 3 Dinge, | nicht 12 Pflichtfelder. |
-| 4 | Nova geht ran, | nicht die Mailbox. |
+| 1 | 1 Minute Check, | nicht 1 Jahr raten. |
+| 2 | Nova geht ran, | nicht die Mailbox. |
+| 3 | 1 Ansprechpartner, | nicht 5 Agenturen. |
+| 4 | 3 Felder, | nicht 3 Seiten Formular. |
 | 5 | Du brauchst nicht mehr Posts, | du brauchst eine Website. |
-| 6 | Mach den Check, | auf socialclip.art <3 |
+| 6 | Willkommen, | auf socialclip.art <3 |
 
 ## Bildunterschrift
 falls deine Website sich angesprochen fühlt..
@@ -28,6 +28,6 @@ Ruhiger, melancholischer Trend-Sound, wie beim Vorbild („Do I Clench My Fists?
 
 ## Dateien
 - `export/slide-1.png` … `slide-6.png`: fertige Slides zum Hochladen
-- `slides.json`: Texte und Bildausschnitte
-- `screenshots.js`: macht die Website-Screenshots und die „So nicht“-Beispiele (aus `mocks/`) neu
+- `slides.json`: Texte und welcher Ausschnitt der Website (y = Pixel von oben)
+- `screenshots.js`: macht die Website-Screenshots in `fotos/` neu
 - `render.py`: baut die Slides aus `fotos/`
