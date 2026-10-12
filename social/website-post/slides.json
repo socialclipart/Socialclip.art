@@ -1,0 +1,79 @@
+[
+ {
+  "top": {
+   "text": "erklär's in 5 Sekunden,",
+   "bild": "hero.png",
+   "y": 0.1,
+   "ty": 0.2
+  },
+  "bottom": {
+   "text": "nicht in 17 Menüpunkten.",
+   "bild": "alt-homepage.png",
+   "y": 0.0
+  }
+ },
+ {
+  "top": {
+   "text": "gebaut fürs Handy,",
+   "bild": "check.png",
+   "y": 0.12,
+   "ty": 0.82
+  },
+  "bottom": {
+   "text": "nicht nur für den PC.",
+   "bild": "desktop-only.png",
+   "y": 0.0
+  }
+ },
+ {
+  "top": {
+   "text": "frag 3 Dinge,",
+   "bild": "kontakt.png",
+   "y": 0.1,
+   "ty": 0.85
+  },
+  "bottom": {
+   "text": "nicht 12 Pflichtfelder.",
+   "bild": "formular.png",
+   "y": 0.12
+  }
+ },
+ {
+  "top": {
+   "text": "Nova geht ran,",
+   "bild": "nova.png",
+   "y": 0.1,
+   "ty": 0.82
+  },
+  "bottom": {
+   "text": "nicht die Mailbox.",
+   "bild": "mailbox.png",
+   "y": 0.08
+  }
+ },
+ {
+  "top": {
+   "text": "Du brauchst nicht mehr Posts,",
+   "bild": "tunnel.png",
+   "y": 0.18
+  },
+  "bottom": {
+   "text": "du brauchst eine Website.",
+   "bild": "hero.png",
+   "y": 0.42
+  }
+ },
+ {
+  "top": {
+   "text": "Mach den Check,",
+   "bild": "check-ergebnis.png",
+   "y": 0.0
+  },
+  "bottom": {
+   "text": "auf socialclip.art <3",
+   "bild": "check-ergebnis.png",
+   "y": 0.56,
+   "ty": 0.52
+  }
+ }
+]
