@@ -7995,11 +7995,25 @@ applyName();
 /* Eine Leistungsseite öffnet den Builder mit ihrer Leistung vorausgewählt.
    Nur vorhandene Optionen werden angenommen; der Parameter wird danach entfernt. */
 const arrivalHash = location.hash;
-const arrivalSection = cameFromOwnSite() && ["#leistungen", "#kontakt", "#check"].includes(arrivalHash)
+let arrivalSection = cameFromOwnSite() && ["#leistungen", "#kontakt", "#check"].includes(arrivalHash)
   ? document.getElementById(arrivalHash.slice(1))
   : null;
 const projectURL = new URL(location.href);
 const requestedProject = projectURL.searchParams.get("projekt");
+const availableProjectServices = new Set(Array.from(document.querySelectorAll(".select-service[data-service]"))
+  .map(button => button.dataset.service));
+const requestedContactServices = [...new Set(projectURL.searchParams.getAll("anfrage"))]
+  .filter(service => availableProjectServices.has(service));
+if(requestedContactServices.length){
+  document.getElementById("intro")?.remove();
+  document.body.classList.remove("locked");
+  projectDraft.services = requestedContactServices.join(", ");
+  writeProjectMessage();
+  arrivalSection = document.getElementById("kontakt");
+  projectURL.searchParams.delete("anfrage");
+  history.replaceState(null, "", projectURL.pathname + projectURL.search + projectURL.hash);
+}
+
 if(requestedProject && Array.from(document.querySelectorAll(".select-service[data-service]"))
   .some(button => button.dataset.service === requestedProject)){
   document.getElementById("intro")?.remove();
