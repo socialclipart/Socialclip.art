@@ -55,8 +55,18 @@
 .service-footer a{text-underline-offset:4px}
 @media(max-width:800px){.seo-guide-grid,.service-features{grid-template-columns:1fr}.service-header{align-items:flex-start;flex-direction:column;gap:18px}.service-header nav{gap:16px;font-size:12px}.service-hero{padding:48px 0 55px}.service-section{padding:45px 0}.seo-guide{gap:14px}.service-feature{padding:20px 0 10px}}
 @media(prefers-reduced-motion:reduce){.seo-guide{transition:none}.seo-guide:hover{transform:none}}
-.seo-service-links{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:32px;font-size:14px;line-height:1.6}
-.seo-service-links>span{color:#aaa69e}
-.seo-service-links a{color:#f4f1ea;text-decoration:underline;text-decoration-color:#696055;text-underline-offset:5px;transition:text-decoration-color .2s}
-.seo-service-links a:hover{color:#e6d0ad;text-decoration-color:#e6d0ad}
-.seo-service-links a:focus-visible{outline:2px solid #e6c99f;outline-offset:5px}
+.seo-offer-intro{max-width:760px;margin:30px 0 36px;color:#b9b4aa;font-size:16px;line-height:1.8}
+.service-list.seo-offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.seo-offer{display:flex;flex-direction:column;gap:20px;padding:30px;border:1px solid #514d45;border-radius:4px;background:linear-gradient(135deg,#23211e,#161616);min-width:0}
+.seo-offer-number{font-size:11px;letter-spacing:.13em;color:#d2b894}
+.seo-offer h3{font-size:clamp(23px,2.3vw,29px);font-weight:500;line-height:1.15;letter-spacing:-.035em;overflow-wrap:anywhere}
+.seo-offer>p{font-size:15px;line-height:1.8;color:#b9b4aa}
+.seo-offer-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:auto;padding-top:10px}
+.seo-offer-actions a{color:#e6d0ad;text-decoration:underline;text-underline-offset:5px;font-size:13px;line-height:1.5;padding:10px 0}
+.seo-offer-actions button{cursor:pointer;border:1px solid #696055;border-radius:3px;padding:12px 14px;background:transparent;color:#f4f1ea;font-family:inherit;font-size:13px;line-height:1.4}
+.seo-offer-actions button:hover{border-color:#e6d0ad;background:#28241f}
+.seo-offer-actions a:focus-visible,.seo-offer-actions button:focus-visible{outline:2px solid #e6c99f;outline-offset:5px}
+.service-hero h1{overflow-wrap:anywhere}
+.services#leistungen{scroll-margin-top:95px}
+@media(max-width:1100px){.service-list.seo-offer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.service-list.seo-offer-grid{grid-template-columns:1fr}.seo-offer{padding:26px;gap:18px}.seo-offer-intro{font-size:15px}.service-hero h1{font-size:clamp(34px,9vw,43px)}}
