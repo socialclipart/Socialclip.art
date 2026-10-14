@@ -83,6 +83,11 @@ VEHICLES = {
 }
 
 
+def photo(name, alt, eager=False):
+    return (f'<img src="../img/{name}.webp" alt="{esc(alt)}" decoding="async"'
+            f'{"" if eager else " loading=\"lazy\""} width="1400" height="933">')
+
+
 def svg(kind, color, cls="car"):
     return (f'<svg class="{cls}" viewBox="0 0 320 136" role="img" aria-hidden="true">'
             f'{VEHICLES[kind](color)}</svg>')
@@ -144,7 +149,7 @@ def intl(phone):
 # --------------------------------------------------------------------------
 BUSINESSES = [
     {
-        "slug": "map-rent-nuernberg",
+        "slug": "map-rent-nuernberg", "hero_img": "van4",
         "name": "MAP Rent",
         "legal": "MAP Rent Fahrzeugvermietung",
         "city": "Nürnberg",
@@ -169,13 +174,13 @@ BUSINESSES = [
         "hero_vehicle": "transporter",
         "hero_color": "#f5b301",
         "fleet": [
-            {"name": "Mercedes Sprinter", "cat": "Transporter", "kind": "transporter", "price": 79,
+            {"name": "Mercedes Sprinter", "cat": "Transporter", "img": "van1", "kind": "transporter", "price": 79,
              "unit": "Tag (Mo–Fr, inkl. 100 km)", "specs": ["3 Sitze", "Führerschein B", "Wochenende 99 €/Tag", "3 Std. ab 60 €"]},
-            {"name": "VW Crafter Maxi", "cat": "Transporter", "kind": "transporter", "price": None,
+            {"name": "VW Crafter Maxi", "img": "van2", "cat": "Transporter", "kind": "transporter", "price": None,
              "specs": ["Hochdach, extralang", "Führerschein B", "Ideal für Umzüge"]},
-            {"name": "Mercedes C 200", "cat": "Limousine", "kind": "sedan", "price": None,
+            {"name": "Mercedes C 200", "img": "mb2", "cat": "Limousine", "kind": "sedan", "price": None,
              "specs": ["5 Sitze", "Automatik", "Business & Alltag"]},
-            {"name": "BMW 530e", "cat": "Premium Hybrid", "kind": "sedan", "price": None,
+            {"name": "BMW 530e", "img": "bmw1", "cat": "Premium Hybrid", "kind": "sedan", "price": None,
              "specs": ["5 Sitze", "Plug-in-Hybrid", "Hochzeit, Business, Wochenende"]},
         ],
         "usps": [
@@ -200,7 +205,7 @@ BUSINESSES = [
                   "angle": "Lange Öffnungszeiten und Sonntagsbetrieb gehen auf der aktuellen Seite unter. Neue Seite stellt genau das in den Vordergrund und führt jeden Besucher direkt in den WhatsApp-Chat."},
     },
     {
-        "slug": "loesch-autovermietung-nuernberg",
+        "slug": "loesch-autovermietung-nuernberg", "hero_img": "nue1",
         "name": "Lösch Autovermietung",
         "legal": "Lösch Autovermietung GmbH",
         "city": "Nürnberg",
@@ -225,11 +230,11 @@ BUSINESSES = [
         "hero_vehicle": "van",
         "hero_color": "#1f4d36",
         "fleet": [
-            {"name": "Pkw", "cat": "Kompakt bis Mittelklasse", "kind": "sedan", "price": 70, "specs": ["5 Sitze", "Alltag, Reise, Ersatzwagen"]},
-            {"name": "Transporter", "cat": "Sprinter, Crafter & Co.", "kind": "transporter", "price": 64, "specs": ["Führerschein B", "Umzug & Gewerbe"]},
-            {"name": "Vans & Kleinbusse", "cat": "7- bis 9-Sitzer", "kind": "van", "price": 114, "specs": ["bis 9 Sitze", "Verein, Familie, Ausflug"]},
-            {"name": "Lkw", "cat": "3,5 t bis 7,5 t", "kind": "truck", "price": 94, "specs": ["Koffer & Plane", "mit Hebebühne"]},
-            {"name": "Anhänger", "cat": "Plane & Autotransport", "kind": "trailer", "price": 29, "specs": ["Planenanhänger", "Autotransporter"]},
+            {"name": "Pkw", "cat": "Kompakt bis Mittelklasse", "img": "sm2", "kind": "sedan", "price": 70, "specs": ["5 Sitze", "Alltag, Reise, Ersatzwagen"]},
+            {"name": "Transporter", "cat": "Sprinter, Crafter & Co.", "img": "van1", "kind": "transporter", "price": 64, "specs": ["Führerschein B", "Umzug & Gewerbe"]},
+            {"name": "Vans & Kleinbusse", "img": "van9", "cat": "7- bis 9-Sitzer", "kind": "van", "price": 114, "specs": ["bis 9 Sitze", "Verein, Familie, Ausflug"]},
+            {"name": "Lkw", "cat": "3,5 t bis 7,5 t", "img": "trk1", "kind": "truck", "price": 94, "specs": ["Koffer & Plane", "mit Hebebühne"]},
+            {"name": "Anhänger", "cat": "Plane & Autotransport", "img": "tr1", "kind": "trailer", "price": 29, "specs": ["Planenanhänger", "Autotransporter"]},
         ],
         "usps": [
             ("heart", "Familie statt Konzern", "Seit 1932 in Nürnberg-Mögeldorf. Sie sprechen mit Menschen, die den Betrieb führen – nicht mit einer Hotline."),
@@ -253,7 +258,7 @@ BUSINESSES = [
                   "angle": "Über 90 Jahre Familiengeschichte + eigene Werkstatt sind ein Vertrauensvorsprung, den kein Konzern hat. Neue Seite ist fertig statt „im Aufbau“."},
     },
     {
-        "slug": "es-autovermietung-nuernberg",
+        "slug": "es-autovermietung-nuernberg", "hero_img": "van8",
         "name": "ES Autovermietung",
         "legal": "ES Europa-Service Autovermietung",
         "city": "Nürnberg",
@@ -278,10 +283,10 @@ BUSINESSES = [
         "hero_vehicle": "van",
         "hero_color": "#0b3a82",
         "fleet": [
-            {"name": "Pkw", "cat": "Alltag & Reise", "kind": "sedan", "price": None, "specs": ["5 Sitze", "kurzfristig verfügbar"]},
-            {"name": "Kleinbus", "cat": "bis 9 Sitze", "kind": "van", "price": None, "specs": ["Gruppen & Vereine", "Urlaub & Ausflug"]},
-            {"name": "Transporter", "cat": "mehrere Größen", "kind": "transporter", "price": None, "specs": ["Führerschein B", "Umzug & Gewerbe"]},
-            {"name": "Unfallersatzwagen", "cat": "Service", "kind": "suv", "price": None, "specs": ["Abwicklung mit Versicherung", "schnell mobil"]},
+            {"name": "Pkw", "cat": "Alltag & Reise", "img": "sm1", "kind": "sedan", "price": None, "specs": ["5 Sitze", "kurzfristig verfügbar"]},
+            {"name": "Kleinbus", "cat": "bis 9 Sitze", "img": "van9", "kind": "van", "price": None, "specs": ["Gruppen & Vereine", "Urlaub & Ausflug"]},
+            {"name": "Transporter", "cat": "mehrere Größen", "img": "van2", "kind": "transporter", "price": None, "specs": ["Führerschein B", "Umzug & Gewerbe"]},
+            {"name": "Unfallersatzwagen", "img": "suv2", "cat": "Service", "kind": "suv", "price": None, "specs": ["Abwicklung mit Versicherung", "schnell mobil"]},
         ],
         "usps": [
             ("users", "Ansprechpartner mit Namen", "Kein Callcenter, keine Warteschleife. Sie rufen an – wir kennen Ihr Anliegen."),
@@ -305,7 +310,7 @@ BUSINESSES = [
                   "angle": "Fokus auf Firmenkunden & Unfallersatz mit eigener Landingpage + Anfrageformular, das echte Leads erzeugt. Eher Upgrade/Relaunch-Angebot als Neubau."},
     },
     {
-        "slug": "myonecar-nuernberg",
+        "slug": "myonecar-nuernberg", "hero_img": "sm5",
         "name": "myonecar",
         "legal": "myonecar Autovermietung",
         "city": "Nürnberg",
@@ -330,9 +335,9 @@ BUSINESSES = [
         "hero_vehicle": "sedan",
         "hero_color": "#5b3df5",
         "fleet": [
-            {"name": "Dacia Sandero", "cat": "Kleinwagen", "kind": "sedan", "price": 60, "specs": ["5 Sitze", "250 km/Tag frei", "ideal für die Stadt"]},
-            {"name": "MG3", "cat": "Kleinwagen Automatik", "kind": "sedan", "price": 65, "specs": ["5 Sitze", "Automatik", "250 km/Tag frei"]},
-            {"name": "Dacia Dokker", "cat": "Hochdach-Kombi", "kind": "van", "price": 60, "specs": ["viel Laderaum", "Ikea-tauglich", "250 km/Tag frei"]},
+            {"name": "Dacia Sandero", "img": "sm4", "cat": "Kleinwagen", "kind": "sedan", "price": 60, "specs": ["5 Sitze", "250 km/Tag frei", "ideal für die Stadt"]},
+            {"name": "MG3", "img": "sm1", "cat": "Kleinwagen Automatik", "kind": "sedan", "price": 65, "specs": ["5 Sitze", "Automatik", "250 km/Tag frei"]},
+            {"name": "Dacia Dokker", "img": "van2", "cat": "Hochdach-Kombi", "kind": "van", "price": 60, "specs": ["viel Laderaum", "Ikea-tauglich", "250 km/Tag frei"]},
         ],
         "usps": [
             ("euro", "Keine Kaution", "Mit Wohnsitz in Deutschland zahlen Sie nur den Mietpreis vorab. Kein geblockter Betrag auf der Kreditkarte."),
@@ -356,7 +361,7 @@ BUSINESSES = [
                   "angle": "Konzept ist stark (keine Kaution, 24/7). Der Bayreuth-Link kostet jeden Tag Buchungen – das ist das Verkaufsargument Nr. 1."},
     },
     {
-        "slug": "tesla-car-rent-erlangen",
+        "slug": "tesla-car-rent-erlangen", "hero_img": "tes3",
         "name": "Tesla Car Rent Erlangen",
         "legal": "Tesla Car Rent · Klaus Fischer",
         "city": "Erlangen",
@@ -381,7 +386,7 @@ BUSINESSES = [
         "hero_vehicle": "ev",
         "hero_color": "#22262d",
         "fleet": [
-            {"name": "Tesla Model 3", "cat": "Elektro-Limousine", "kind": "ev", "price": None,
+            {"name": "Tesla Model 3", "img": "tes2", "cat": "Elektro-Limousine", "kind": "ev", "price": None,
              "specs": ["5 Sitze", "Autopilot-Assistenz", "Supercharger-fähig", "Glasdach"]},
         ],
         "usps": [
@@ -407,7 +412,7 @@ BUSINESSES = [
                   "angle": "Super Bewertungen, aber kein eigenes Schaufenster. Wer „Tesla mieten Erlangen“ googelt, landet bei Portalen. Neue Seite + Google-Profil = direkte Buchungen ohne Provision."},
     },
     {
-        "slug": "geomobil-graupner-erlangen",
+        "slug": "geomobil-graupner-erlangen", "hero_img": "suv2",
         "name": "Geomobil Graupner",
         "legal": "Autovermietung Geomobil Graupner",
         "city": "Erlangen",
@@ -432,9 +437,9 @@ BUSINESSES = [
         "hero_vehicle": "suv",
         "hero_color": "#e8590c",
         "fleet": [
-            {"name": "Kleinwagen", "cat": "Stadt & Alltag", "kind": "sedan", "price": None, "specs": ["5 Sitze", "sparsam"]},
-            {"name": "Kombi & SUV", "cat": "Reise & Familie", "kind": "suv", "price": None, "specs": ["5 Sitze", "großer Kofferraum"]},
-            {"name": "Transporter", "cat": "Umzug & Gewerbe", "kind": "transporter", "price": None, "specs": ["Führerschein B", "bis 3,5 t"]},
+            {"name": "Kleinwagen", "cat": "Stadt & Alltag", "img": "sm4", "kind": "sedan", "price": None, "specs": ["5 Sitze", "sparsam"]},
+            {"name": "Kombi & SUV", "img": "suv2", "cat": "Reise & Familie", "kind": "suv", "price": None, "specs": ["5 Sitze", "großer Kofferraum"]},
+            {"name": "Transporter", "cat": "Umzug & Gewerbe", "img": "van1", "kind": "transporter", "price": None, "specs": ["Führerschein B", "bis 3,5 t"]},
         ],
         "usps": [
             ("users", "Persönlich statt anonym", "Feste Ansprechpartner vor Ort. Kurze Wege, schnelle Entscheidungen."),
@@ -457,7 +462,7 @@ BUSINESSES = [
                   "angle": "Größter Hebel von allen: Erste eigene Website + Google-Unternehmensprofil. Die Vorschau zeigt, wie es aussehen könnte; Fahrzeuge, Preise und Öffnungszeiten werden beim Termin ergänzt."},
     },
     {
-        "slug": "ms-car-erlangen",
+        "slug": "ms-car-erlangen", "hero_img": "van1",
         "name": "MS Car Autovermietung",
         "legal": "MS Car Autovermietung",
         "city": "Erlangen",
@@ -482,9 +487,9 @@ BUSINESSES = [
         "hero_vehicle": "transporter",
         "hero_color": "#2ec4b6",
         "fleet": [
-            {"name": "Transporter", "cat": "Tagesmiete", "kind": "transporter", "price": None, "specs": ["Führerschein B", "Umzug & Möbel", "ohne Kaution"]},
-            {"name": "Transporter", "cat": "Langzeitmiete", "kind": "transporter", "price": None, "specs": ["Wochen & Monate", "Handwerk & Gewerbe", "fester Monatspreis"]},
-            {"name": "Kastenwagen", "cat": "kompakt", "kind": "van", "price": None, "specs": ["passt in jede Tiefgarage", "Lieferfahrten"]},
+            {"name": "Transporter", "cat": "Tagesmiete", "img": "van1", "kind": "transporter", "price": None, "specs": ["Führerschein B", "Umzug & Möbel", "ohne Kaution"]},
+            {"name": "Transporter", "cat": "Langzeitmiete", "img": "van8", "kind": "transporter", "price": None, "specs": ["Wochen & Monate", "Handwerk & Gewerbe", "fester Monatspreis"]},
+            {"name": "Kastenwagen", "img": "van2", "cat": "kompakt", "kind": "van", "price": None, "specs": ["passt in jede Tiefgarage", "Lieferfahrten"]},
         ],
         "usps": [
             ("euro", "Keine Kaution", "Kein geblockter Betrag, keine Kreditkarte nötig. Sie zahlen nur die Miete."),
@@ -562,7 +567,10 @@ p{margin:0}
 .trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;padding:0;list-style:none;font-size:.93rem;font-weight:600}
 .trust li{display:flex;align-items:center;gap:8px}
 .trust .ico{color:var(--primary-text)}
-.stage{position:relative}
+.stage{position:relative;border-radius:calc(var(--r) * 1.6);overflow:hidden;aspect-ratio:16/10;box-shadow:0 30px 60px -30px rgba(0,0,0,.5);background:var(--surface2)}
+.stage img{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;left:16px;bottom:44px;display:flex;align-items:center;gap:8px;background:var(--surface);color:var(--text);padding:10px 14px;border-radius:999px;font-size:.88rem;font-weight:700;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
+.badge .ico{color:var(--primary-text);width:18px;height:18px}
 .stage .car{width:100%;filter:drop-shadow(0 30px 30px rgba(0,0,0,.18))}
 .plate{position:absolute;left:50%;top:-6%;transform:translateX(-50%);width:84%;aspect-ratio:1;border-radius:50%;background:color-mix(in srgb,var(--primary) 14%,var(--surface2));z-index:-1}
 
@@ -599,7 +607,12 @@ section{padding:88px 0}
 .fleet{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
 .vc{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:22px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
 .vc:hover{transform:translateY(-4px);box-shadow:0 24px 40px -28px rgba(0,0,0,.4)}
-.vc .pic{background:var(--surface2);border-radius:var(--r);padding:22px 14px 12px;margin-bottom:18px}
+.vc .pic{position:relative;background:var(--surface2);border-radius:var(--r);overflow:hidden;aspect-ratio:16/10;margin-bottom:18px}
+.vc .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.vc:hover .pic img{transform:scale(1.05)}
+img[src$="van2.webp"]{object-position:50% 82%}
+.vc .pic svg{padding:22px 14px 12px}
+.sym{position:absolute;right:8px;bottom:8px;font-size:.66rem;background:rgba(0,0,0,.55);color:#fff;padding:2px 7px;border-radius:999px}
 .vc .cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary-text)}
 .vc h3{margin:4px 0 12px}
 .vc ul{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-wrap:wrap;gap:6px}
@@ -709,7 +722,7 @@ def build(b):
     for i, v in enumerate(b["fleet"]):
         specs = "".join(f"<li>{esc(s)}</li>" for s in v["specs"])
         fleet.append(
-            f'<article class="vc reveal"><div class="pic">{svg(v["kind"], b["hero_color"])}</div>'
+            f'<article class="vc reveal"><div class="pic">{photo(v.get("img"), v["name"] + " – Symbolbild") if v.get("img") else svg(v["kind"], b["hero_color"])}<span class="sym">Symbolbild</span></div>'
             f'<span class="cat">{esc(v["cat"])}</span><h3>{esc(v["name"])}</h3><ul>{specs}</ul>'
             f'<div class="foot">{price_html(v)}<a href="#anfrage" class="btn btn-o btn-sm" data-pick="{i}">Anfragen</a></div></article>')
 
@@ -796,7 +809,7 @@ def build(b):
     <ul class="trust">{trust}</ul>
   </div>
   <div>
-    <div class="stage"><div class="plate"></div>{svg(b["hero_vehicle"], b["hero_color"])}</div>
+    <div class="stage">{photo(b["hero_img"], b["name"] + " – " + b["eyebrow"], eager=True)}<div class="badge">{ico(b["trust"][0][0])}<span>{esc(b["trust"][0][1])}</span></div></div>
     <div class="book" id="anfrage">
       <form id="bf" novalidate>
         <h3>Verfügbarkeit anfragen</h3>
@@ -853,7 +866,7 @@ def build(b):
 
 <footer class="ft"><div class="wrap">
   <span>© 2026 {esc(b["legal"])} · {esc(full_addr)}</span>
-  <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a> · Website: <a href="{AGENCY["url"]}" target="_blank" rel="noopener">{AGENCY["name"]}</a></span>
+  <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a> · Fotos: Unsplash (Symbolbilder) · Website: <a href="{AGENCY["url"]}" target="_blank" rel="noopener">{AGENCY["name"]}</a></span>
 </div></footer>
 
 <nav class="mb" aria-label="Schnellkontakt">

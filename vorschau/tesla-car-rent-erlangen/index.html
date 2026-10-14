@@ -58,7 +58,10 @@ p{margin:0}
 .trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;padding:0;list-style:none;font-size:.93rem;font-weight:600}
 .trust li{display:flex;align-items:center;gap:8px}
 .trust .ico{color:var(--primary-text)}
-.stage{position:relative}
+.stage{position:relative;border-radius:calc(var(--r) * 1.6);overflow:hidden;aspect-ratio:16/10;box-shadow:0 30px 60px -30px rgba(0,0,0,.5);background:var(--surface2)}
+.stage img{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;left:16px;bottom:44px;display:flex;align-items:center;gap:8px;background:var(--surface);color:var(--text);padding:10px 14px;border-radius:999px;font-size:.88rem;font-weight:700;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
+.badge .ico{color:var(--primary-text);width:18px;height:18px}
 .stage .car{width:100%;filter:drop-shadow(0 30px 30px rgba(0,0,0,.18))}
 .plate{position:absolute;left:50%;top:-6%;transform:translateX(-50%);width:84%;aspect-ratio:1;border-radius:50%;background:color-mix(in srgb,var(--primary) 14%,var(--surface2));z-index:-1}
 
@@ -95,7 +98,12 @@ section{padding:88px 0}
 .fleet{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
 .vc{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:22px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
 .vc:hover{transform:translateY(-4px);box-shadow:0 24px 40px -28px rgba(0,0,0,.4)}
-.vc .pic{background:var(--surface2);border-radius:var(--r);padding:22px 14px 12px;margin-bottom:18px}
+.vc .pic{position:relative;background:var(--surface2);border-radius:var(--r);overflow:hidden;aspect-ratio:16/10;margin-bottom:18px}
+.vc .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.vc:hover .pic img{transform:scale(1.05)}
+img[src$="van2.webp"]{object-position:50% 82%}
+.vc .pic svg{padding:22px 14px 12px}
+.sym{position:absolute;right:8px;bottom:8px;font-size:.66rem;background:rgba(0,0,0,.55);color:#fff;padding:2px 7px;border-radius:999px}
 .vc .cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary-text)}
 .vc h3{margin:4px 0 12px}
 .vc ul{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-wrap:wrap;gap:6px}
@@ -196,7 +204,7 @@ details p{padding:0 0 20px;color:var(--muted)}
     <ul class="trust"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>4,9 ★ bei 84 Trustpilot-Bewertungen</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.5a3.5 3.5 0 010 7M18 14a6 6 0 013.5 6"/></svg>Persönliche Einweisung</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg>100 % elektrisch</li></ul>
   </div>
   <div>
-    <div class="stage"><div class="plate"></div><svg class="car" viewBox="0 0 320 136" role="img" aria-hidden="true"><ellipse cx="160" cy="126" rx="150" ry="7" fill="#000" opacity=".18"/><path d="M14 104 V90 Q16 78 36 74 L96 64 Q130 36 168 34 H198 Q236 36 266 64 L296 72 Q310 78 308 94 V104 Z" fill="#22262d"/><path d="M108 64 Q138 42 168 40 H200 Q232 42 254 64 Z" fill="#5d6b7e"/><path d="M184 40 V64" stroke="#22262d" stroke-width="5"/><rect x="290" y="82" width="16" height="4" rx="2" fill="#e8f1ff"/><g><circle cx="80" cy="104" r="21" fill="#1b1d22"/><circle cx="80" cy="104" r="11" fill="#c9ccd3"/><circle cx="80" cy="104" r="4" fill="#1b1d22"/></g><g><circle cx="246" cy="104" r="21" fill="#1b1d22"/><circle cx="246" cy="104" r="11" fill="#c9ccd3"/><circle cx="246" cy="104" r="4" fill="#1b1d22"/></g></svg></div>
+    <div class="stage"><img src="../img/tes3.webp" alt="Tesla Car Rent Erlangen – Elektrisch mieten in Erlangen" decoding="async" width="1400" height="933"><div class="badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>4,9 ★ bei 84 Trustpilot-Bewertungen</span></div></div>
     <div class="book" id="anfrage">
       <form id="bf" novalidate>
         <h3>Verfügbarkeit anfragen</h3>
@@ -221,7 +229,7 @@ details p{padding:0 0 20px;color:var(--muted)}
 
 <section id="fahrzeuge"><div class="wrap">
   <div class="sh"><div><span class="eyebrow">Unsere Flotte</span><h2>Das passende Fahrzeug<br>für jedes Vorhaben.</h2></div><p>Klare Preise, gepflegte Fahrzeuge und ehrliche Beratung – direkt vom Vermieter aus Erlangen.</p></div>
-  <div class="grid fleet"><article class="vc reveal"><div class="pic"><svg class="car" viewBox="0 0 320 136" role="img" aria-hidden="true"><ellipse cx="160" cy="126" rx="150" ry="7" fill="#000" opacity=".18"/><path d="M14 104 V90 Q16 78 36 74 L96 64 Q130 36 168 34 H198 Q236 36 266 64 L296 72 Q310 78 308 94 V104 Z" fill="#22262d"/><path d="M108 64 Q138 42 168 40 H200 Q232 42 254 64 Z" fill="#5d6b7e"/><path d="M184 40 V64" stroke="#22262d" stroke-width="5"/><rect x="290" y="82" width="16" height="4" rx="2" fill="#e8f1ff"/><g><circle cx="80" cy="104" r="21" fill="#1b1d22"/><circle cx="80" cy="104" r="11" fill="#c9ccd3"/><circle cx="80" cy="104" r="4" fill="#1b1d22"/></g><g><circle cx="246" cy="104" r="21" fill="#1b1d22"/><circle cx="246" cy="104" r="11" fill="#c9ccd3"/><circle cx="246" cy="104" r="4" fill="#1b1d22"/></g></svg></div><span class="cat">Elektro-Limousine</span><h3>Tesla Model 3</h3><ul><li>5 Sitze</li><li>Autopilot-Assistenz</li><li>Supercharger-fähig</li><li>Glasdach</li></ul><div class="foot"><div class="price"><small>Preis</small><b class="ask">auf Anfrage</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="0">Anfragen</a></div></article></div>
+  <div class="grid fleet"><article class="vc reveal"><div class="pic"><img src="../img/tes2.webp" alt="Tesla Model 3 – Symbolbild" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Elektro-Limousine</span><h3>Tesla Model 3</h3><ul><li>5 Sitze</li><li>Autopilot-Assistenz</li><li>Supercharger-fähig</li><li>Glasdach</li></ul><div class="foot"><div class="price"><small>Preis</small><b class="ask">auf Anfrage</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="0">Anfragen</a></div></article></div>
 </div></section>
 
 <section id="vorteile" class="alt"><div class="wrap">
@@ -258,7 +266,7 @@ details p{padding:0 0 20px;color:var(--muted)}
 
 <footer class="ft"><div class="wrap">
   <span>© 2026 Tesla Car Rent · Klaus Fischer · Hindenburgstraße 68, 91054 Erlangen</span>
-  <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a> · Website: <a href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a></span>
+  <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a> · Fotos: Unsplash (Symbolbilder) · Website: <a href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a></span>
 </div></footer>
 
 <nav class="mb" aria-label="Schnellkontakt">
