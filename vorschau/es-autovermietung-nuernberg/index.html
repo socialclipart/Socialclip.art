@@ -4,303 +4,124 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#f4f6fa">
-<title>ES Autovermietung – Autovermietung Nürnberg-Eberhardshof</title>
+<meta name="theme-color" content="#0a2d6b">
+<title>ES Autovermietung – persönlich vermietet seit 1958</title>
 <meta name="description" content="Pkw, 9-Sitzer und Transporter in jeder Größe – kurzfristig verfügbar, flexibel in der Mietdauer und mit einem echten Ansprechpartner statt Callcenter.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b3a82'/%3E%3C/svg%3E">
-<style>:root{--bg:#f4f6fa;--surface:#ffffff;--surface2:#e9eef6;--text:#0d1b33;--muted:#56637a;--primary:#0b3a82;--onp:#fff;--line:#dbe2ee;--primary-text:#0b3a82;--font:'Segoe UI', 'Helvetica Neue', system-ui, sans-serif;--head:'Segoe UI', 'Helvetica Neue', system-ui, sans-serif;--hw:800;--upper:none;--r:10px;color-scheme:light}
-*,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;font-size:17px}
-img,svg{display:block;max-width:100%}
-a{color:inherit}
-.wrap{width:min(1160px,100% - 32px);margin-inline:auto}
-h1,h2,h3{font-family:var(--head);font-weight:var(--hw);line-height:1.08;margin:0;letter-spacing:-.02em;text-transform:var(--upper)}
-h1{font-size:clamp(2.3rem,5.6vw,4.4rem)}
-h2{font-size:clamp(1.8rem,3.6vw,2.8rem)}
-h3{font-size:1.2rem;letter-spacing:-.01em}
-p{margin:0}
-.ico{width:22px;height:22px;flex:none}
-.muted{color:var(--muted)}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary-text)}
-.eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
-
-/* Vorschau-Leiste */
-.pv{background:#111;color:#fff;font-size:.88rem;position:relative;z-index:60}
-.pv .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:9px 0;flex-wrap:wrap}
-.pv b{color:#ffd166}
-.pv a.pvbtn{background:#ffd166;color:#111;text-decoration:none;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap}
-.pv button{background:none;border:0;color:#fff;cursor:pointer;padding:4px;display:inline-flex}
-
-/* Header */
-.hd{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.hd .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--head);font-weight:var(--hw);font-size:1.15rem;letter-spacing:-.01em;text-transform:var(--upper)}
-.mark{width:40px;height:40px;border-radius:calc(var(--r) * .8);background:var(--primary);color:var(--onp);display:grid;place-items:center;font-size:.95rem;font-weight:800;letter-spacing:-.03em}
-.brand small{display:block;font-family:var(--font);font-weight:500;font-size:.72rem;color:var(--muted);letter-spacing:.02em;text-transform:none}
-.nav{display:flex;gap:26px;font-size:.95rem}
-.nav a{text-decoration:none;color:var(--muted);font-weight:500}
-.nav a:hover{color:var(--text)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:var(--r);padding:14px 22px;font-weight:700;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s,background .15s}
-.btn:hover{transform:translateY(-1px)}
-.btn-p{background:var(--primary);color:var(--onp);box-shadow:0 10px 26px -12px var(--primary)}
-.btn-o{border-color:var(--line);color:var(--text);background:var(--surface)}
-.btn-wa{background:#1fa855;color:#fff}
-.btn-sm{padding:10px 16px;font-size:.92rem}
-
-/* Hero */
-.hero{position:relative;overflow:hidden;padding:48px 0 56px}
-.hero::before{content:"";position:absolute;inset:auto -10% -40% 35%;height:110%;background:radial-gradient(closest-side,color-mix(in srgb,var(--primary) 22%,transparent),transparent);pointer-events:none}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;position:relative}
-.hero h1{margin:18px 0 20px}
-.hero .lead{font-size:1.14rem;color:var(--muted);max-width:56ch}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;padding:0;list-style:none;font-size:.93rem;font-weight:600}
-.trust li{display:flex;align-items:center;gap:8px}
-.trust .ico{color:var(--primary-text)}
-.stage{position:relative;border-radius:calc(var(--r) * 1.6);overflow:hidden;aspect-ratio:16/10;box-shadow:0 30px 60px -30px rgba(0,0,0,.5);background:var(--surface2)}
-.stage img{width:100%;height:100%;object-fit:cover}
-.badge{position:absolute;left:16px;bottom:44px;display:flex;align-items:center;gap:8px;background:var(--surface);color:var(--text);padding:10px 14px;border-radius:999px;font-size:.88rem;font-weight:700;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
-.badge .ico{color:var(--primary-text);width:18px;height:18px}
-.stage .car{width:100%;filter:drop-shadow(0 30px 30px rgba(0,0,0,.18))}
-.plate{position:absolute;left:50%;top:-6%;transform:translateX(-50%);width:84%;aspect-ratio:1;border-radius:50%;background:color-mix(in srgb,var(--primary) 14%,var(--surface2));z-index:-1}
-
-/* Buchungskarte */
-.book{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:24px;box-shadow:0 30px 60px -30px rgba(0,0,0,.35);margin-top:-30px;position:relative}
-.book h3{margin-bottom:4px}
-.book .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.book label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.book input,.book select{width:100%;font:inherit;font-size:1rem;color:var(--text);background:var(--bg);border:1.5px solid var(--line);border-radius:calc(var(--r) * .7);padding:12px 12px;min-height:48px}
-.book input:focus,.book select:focus{outline:2px solid var(--primary);outline-offset:1px}
-.est{display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 14px;padding:14px 16px;border-radius:calc(var(--r) * .7);background:var(--surface2);font-size:.95rem}
-.est strong{font-size:1.4rem;font-family:var(--head)}
-.book .btn{width:100%}
-.ok{display:none;text-align:center;padding:10px 0}
-.ok .tick{width:58px;height:58px;border-radius:50%;background:#1fa855;color:#fff;display:grid;place-items:center;margin:0 auto 12px}
-.ok .tick .ico{width:30px;height:30px}
-.ok p{color:var(--muted);font-size:.95rem;margin:8px 0 16px}
-.book.sent form{display:none}.book.sent .ok{display:block}
-
-/* Stats */
-.stats{border-block:1px solid var(--line);background:var(--surface)}
-.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
-.stat{padding:26px 18px;border-left:1px solid var(--line)}
-.stat:first-child{border-left:0}
-.stat b{display:block;font-family:var(--head);font-size:1.8rem;font-weight:var(--hw);letter-spacing:-.02em;color:var(--primary-text)}
-.stat span{font-size:.9rem;color:var(--muted)}
-
-/* Sections */
-section{padding:64px 0}
-.sh{display:flex;justify-content:space-between;align-items:end;gap:16px 24px;margin-bottom:28px;flex-wrap:wrap}
-.sh p{max-width:46ch;color:var(--muted)}
-.sh h2{margin-top:12px}
-.grid{display:grid;gap:20px}
-.fleet{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.vc{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:22px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
-.vc:hover{transform:translateY(-4px);box-shadow:0 24px 40px -28px rgba(0,0,0,.4)}
-.vc .pic{position:relative;background:var(--surface2);border-radius:var(--r);overflow:hidden;aspect-ratio:16/10;margin-bottom:18px}
-.vc .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.vc:hover .pic img{transform:scale(1.05)}
-img[src$="van2.webp"]{object-position:50% 82%}
-.vc .pic.cut{background:#fff}
-.vc .pic.cut img{object-fit:contain;padding:6px 8px}
-.vc .pic svg{padding:22px 14px 12px}
-.sym{position:absolute;right:8px;bottom:8px;font-size:.66rem;background:rgba(0,0,0,.55);color:#fff;padding:2px 7px;border-radius:999px}
-.vc .cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary-text)}
-.vc h3{margin:4px 0 12px}
-.vc ul{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-wrap:wrap;gap:6px}
-.vc li{font-size:.8rem;background:var(--surface2);border-radius:999px;padding:4px 10px;color:var(--muted)}
-.vc .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:16px}
-.price small{display:block;font-size:.75rem;color:var(--muted)}
-.price b{font-family:var(--head);font-size:1.5rem;font-weight:var(--hw)}
-.price .ask{font-size:1.05rem}
-.usps{grid-template-columns:repeat(3,1fr)}
-.usp{padding:26px;border-radius:calc(var(--r) * 1.4);background:var(--surface);border:1px solid var(--line)}
-.usp .ib{width:48px;height:48px;border-radius:var(--r);display:grid;place-items:center;background:color-mix(in srgb,var(--primary) 14%,transparent);color:var(--primary-text);margin-bottom:16px}
-.usp h3{margin-bottom:8px}
-.usp p{color:var(--muted);font-size:.97rem}
-.alt{background:var(--surface2)}
-.steps{grid-template-columns:repeat(3,1fr);counter-reset:s}
-.step{position:relative;padding:28px;background:var(--surface);border-radius:calc(var(--r) * 1.4);border:1px solid var(--line)}
-.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--primary);color:var(--onp);font-weight:800;margin-bottom:16px;font-size:1.1rem}
-.step p{color:var(--muted);margin-top:8px}
-.rate{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;background:var(--primary);color:var(--onp);border-radius:calc(var(--r) * 2);padding:44px}
-.rate .big{font-family:var(--head);font-size:clamp(3.4rem,8vw,5.6rem);font-weight:var(--hw);line-height:1;letter-spacing:-.04em}
-.stars{display:flex;gap:4px;margin:10px 0 6px}
-.stars .ico{width:24px;height:24px;fill:currentColor}
-.rate p{opacity:.88;max-width:52ch}
-.rate .btn{margin-top:18px;background:var(--onp);color:var(--primary)}
-.faq{max-width:820px}
-details{border-bottom:1px solid var(--line);padding:6px 0}
-summary{cursor:pointer;list-style:none;padding:18px 40px 18px 0;font-weight:700;font-size:1.06rem;position:relative}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";position:absolute;right:6px;top:12px;font-size:1.6rem;font-weight:400;color:var(--primary-text);transition:transform .2s}
-details[open] summary::after{transform:rotate(45deg)}
-details p{padding:0 0 20px;color:var(--muted)}
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:30px}
-.cl{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:16px}
-.cl li{display:flex;gap:14px;align-items:flex-start}
-.cl .ico{color:var(--primary-text);margin-top:3px}
-.cl a{text-decoration:none;font-weight:600}
-.hrs{width:100%;border-collapse:collapse;margin-top:16px}
-.hrs td{padding:11px 0;border-bottom:1px solid var(--line)}
-.hrs td+td{text-align:right;font-weight:600}
-.mapbtn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:22px;height:150px;border-radius:var(--r);text-decoration:none;font-weight:700;background:
-  repeating-linear-gradient(45deg,var(--surface2) 0 14px,color-mix(in srgb,var(--surface2) 70%,var(--bg)) 14px 28px);border:1px dashed var(--line)}
-.mapbtn .ico{color:var(--primary-text)}
-.ft{border-top:1px solid var(--line);padding:28px 0 96px;font-size:.88rem;color:var(--muted)}
-.ft .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
-.ft a{text-decoration:none}
-.note{font-size:.8rem;color:var(--muted);margin-top:26px}
-
-/* Mobile-Leiste */
-.mb{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;grid-template-columns:1fr 1fr 1.2fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
-.mb .btn{padding:12px 8px;font-size:.92rem}
-
-/* Inhalte sind immer sichtbar – keine Einblend-Effekte, die in manchen Viewern leere Flächen erzeugen */
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-@media (max-width:960px){
-  .hero .wrap{grid-template-columns:1fr;gap:36px}
-  .usps,.steps{grid-template-columns:1fr 1fr}
-  .nav{display:none}
-}
-@media (max-width:680px){
-  body{font-size:16px}
-  .hero{padding:36px 0 48px}
-  .stats .wrap{grid-template-columns:1fr 1fr}
-  .stat:nth-child(3){border-left:0}
-  .stat:nth-child(n+3){border-top:1px solid var(--line)}
-  .usps,.steps,.contact{grid-template-columns:1fr}
-  .rate{grid-template-columns:1fr;gap:16px;padding:30px}
-  section{padding:44px 0}
-  .sh{margin-bottom:20px}
-  .hero .wrap{gap:24px}
-  .book .row{grid-template-columns:1fr}
-  .hd .hcta{display:none}
-  .mb{display:grid}
-  .pv .wrap{font-size:.8rem}
-}
-</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a2d6b'/%3E%3C/svg%3E">
+<style>*{box-sizing:border-box}html{scroll-behavior:smooth}a{color:inherit}img{display:block;max-width:100%}
+.w{width:min(1160px,100% - 32px);margin:0 auto}footer{padding:30px 0 100px;font-size:.82rem}footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+input,select,textarea{font:inherit}.note{font-size:.8rem;opacity:.75}
+:root{--n:#0a2d6b;--n2:#071f4a;--r:#d7263d;--bg:#ffffff;--s:#f3f6fb;--t:#0b1a33;--m:#56637a;--line:#dfe6f0}
+body{margin:0;background:var(--bg);color:var(--t);font-family:'Segoe UI','Helvetica Neue',system-ui,sans-serif;font-size:17px;line-height:1.6}
+header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:40}header .w{display:flex;align-items:center;justify-content:space-between;height:74px;gap:16px}
+.lg{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;font-size:1.2rem}.lg i{width:44px;height:44px;border-radius:10px;background:var(--n);color:#fff;display:grid;place-items:center;font-style:normal;position:relative}
+.lg i::after{content:"";position:absolute;right:-4px;bottom:-4px;width:14px;height:14px;background:var(--r);border-radius:3px}
+.lg small{display:block;font-weight:500;color:var(--m);font-size:.75rem}
+.sw{display:inline-flex;background:var(--s);border-radius:999px;padding:5px;border:1px solid var(--line)}
+.sw button{border:0;background:none;padding:10px 18px;border-radius:999px;font:inherit;font-weight:700;cursor:pointer;color:var(--m)}
+.sw button.on{background:var(--n);color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:8px;font-weight:700;text-decoration:none;border:2px solid transparent;cursor:pointer;font:inherit;font-weight:700}
+.bn{background:var(--n);color:#fff}.br{background:var(--r);color:#fff}.bo{border-color:var(--line);background:#fff;color:var(--t)}.btn svg{width:18px;height:18px}
+.hero{background:linear-gradient(120deg,var(--n2),var(--n));color:#fff;overflow:hidden}
+.hero .w{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:60px 0}
+.hero h1{font-size:clamp(2.4rem,5.4vw,4rem);line-height:1.05;margin:14px 0}
+.hero p{opacity:.85;font-size:1.12rem;max-width:46ch}
+.hero .kp{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap}.hero .kp b{display:block;font-size:2rem}.hero .kp span{opacity:.75;font-size:.9rem}
+.hero img{border-radius:16px;aspect-ratio:4/3;object-fit:cover;width:100%;box-shadow:0 30px 60px -30px #000}
+[data-aud]{display:none}[data-aud].on{display:block}
+section{padding:80px 0}
+.ey{color:var(--r);font-weight:800;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+h2{font-size:clamp(2rem,4vw,2.9rem);line-height:1.1;margin:8px 0 26px}
+.cls{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cl{border:1px solid var(--line);border-radius:14px;padding:22px;background:#fff;transition:box-shadow .2s}.cl:hover{box-shadow:0 20px 40px -26px rgba(10,45,107,.5)}
+.cl img{height:110px;width:100%;object-fit:contain;margin-bottom:12px}
+.cl h3{margin:0}.cl small{color:var(--m)}.cl ul{padding-left:18px;color:var(--m);font-size:.92rem}
+.guide{background:var(--s)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.steps div{padding:26px;border-left:3px solid var(--line);position:relative}
+.steps div::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--r);color:#fff;font-weight:800;margin-bottom:14px}
+.steps h3{margin:0 0 6px}.steps p{margin:0;color:var(--m)}
+.code{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;border-radius:16px;background:var(--n);color:#fff;padding:30px 34px}
+.code .c{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.6rem;letter-spacing:.12em;background:rgba(255,255,255,.12);padding:10px 18px;border-radius:8px;border:1px dashed rgba(255,255,255,.5)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.form{border:1px solid var(--line);border-radius:16px;padding:30px}
+.form label{display:block;font-size:.8rem;font-weight:700;color:var(--m);margin:12px 0 6px}
+.form input,.form select{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form .row>div:only-child{grid-column:1/-1}
+.est{margin:16px 0;color:var(--n);font-weight:700}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.trust div{background:var(--s);border-radius:14px;padding:22px}.trust b{font-size:1.8rem;color:var(--n);display:block}
+details.faq{border:1px solid var(--line);border-radius:12px;padding:0 20px;margin-bottom:10px}details.faq summary{cursor:pointer;padding:16px 0;font-weight:700;list-style:none}details.faq p{margin:0 0 16px;color:var(--m)}
+.done{padding:20px}footer{background:var(--n2);color:#b9c6dc}
+.mbar{position:fixed;left:0;right:0;bottom:0;display:none;grid-template-columns:1fr 1fr;z-index:50}.mbar a{padding:16px;text-align:center;font-weight:700;text-decoration:none}
+@media(max-width:900px){.hero .w,.two{grid-template-columns:1fr}.cls,.steps{grid-template-columns:1fr 1fr}.trust{grid-template-columns:1fr}header .sw{display:none}}
+@media(max-width:600px){.cls,.steps{grid-template-columns:1fr}.mbar{display:grid}header .hb{display:none}.form .row{grid-template-columns:1fr}section{padding:56px 0}}
+[data-box] .done{display:none}[data-box].sent form{display:none}[data-box].sent .done{display:block}</style>
 </head>
 <body>
 
-<div class="pv" id="pv"><div class="wrap">
-  <span><b>Vorschau</b> · Entwurf von SocialClip für ES Autovermietung. Gefällt sie Ihnen? Diese Seite kann in wenigen Tagen live sein.</span>
-  <span style="display:flex;gap:8px;align-items:center"><a class="pvbtn" href="https://wa.me/4917646188101?text=Hallo,%20ich%20habe%20die%20Website-Vorschau%20für%20ES%20Autovermietung%20gesehen%20und%20möchte%20mehr%20wissen." target="_blank" rel="noopener">Jetzt übernehmen</a><button aria-label="Hinweis schließen" onclick="document.getElementById('pv').remove()"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span>
-</div></div>
-
-<header class="hd"><div class="wrap">
-  <a class="brand" href="#top"><span class="mark">ES</span><span>ES Autovermietung<small>Autovermietung Nürnberg</small></span></a>
-  <nav class="nav" aria-label="Hauptnavigation"><a href="#fahrzeuge">Fahrzeuge</a><a href="#vorteile">Vorteile</a><a href="#ablauf">Ablauf</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a></nav>
-  <a class="btn btn-p btn-sm hcta" href="tel:+49911610680"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>0911 61068-0</a>
-</div></header>
-
+<div id="pv" style="background:#071f4a;color:#fff;font:14px/1.4 system-ui,sans-serif;position:relative;z-index:99"><div style="max-width:1160px;margin:0 auto;padding:9px 16px;display:flex;gap:10px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap"><span><b style="color:#ff8a98">Vorschau</b> · Unverbindlicher Entwurf von SocialClip für ES Autovermietung – keine offizielle Website.</span><span style="display:flex;gap:8px;align-items:center"><a href="https://wa.me/4917646188101?text=Hallo,%20ich%20habe%20die%20Website-Vorschau%20für%20ES%20Autovermietung%20gesehen%20und%20möchte%20mehr%20wissen." target="_blank" rel="noopener" style="background:#ff8a98;color:#111;text-decoration:none;font-weight:700;padding:6px 12px;border-radius:999px">Jetzt übernehmen</a><button aria-label="Hinweis schließen" onclick="document.getElementById('pv').remove()" style="background:none;border:0;color:#fff;font-size:20px;cursor:pointer;line-height:1">×</button></span></div></div>
+<header><div class="w"><a class="lg" href="#top"><i>ES</i><span>ES Autovermietung<small>Nürnberg · seit 1958</small></span></a>
+  <div class="sw" id="sw"><button class="on" data-a="p" type="button">Privatkunden</button><button data-a="f" type="button">Firmenkunden</button></div>
+  <a class="btn bn hb" href="tel:+49911610680"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>0911 61068-0</a></div></header>
 <main id="top">
-<section class="hero"><div class="wrap">
-  <div>
-    <span class="eyebrow">Nürnbergs älteste Autovermietung · seit 1958</span>
-    <h1>Persönlich vermietet.<br>Seit 1958.</h1>
-    <p class="lead">Pkw, 9-Sitzer und Transporter in jeder Größe – kurzfristig verfügbar, flexibel in der Mietdauer und mit einem echten Ansprechpartner statt Callcenter.</p>
-    <div class="cta"><a class="btn btn-p" href="#anfrage">Fahrzeug anfragen <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-o" href="tel:+49911610680"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>0911 61068-0</a></div>
-    <ul class="trust"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>4,8 ★ bei 121 Google-Bewertungen</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.5a3.5 3.5 0 010 7M18 14a6 6 0 013.5 6"/></svg>Persönlicher Ansprechpartner</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Hilfe beim Unfallersatz</li></ul>
-  </div>
-  <div>
-    <div class="stage"><img src="../img/es-firmenkunden.webp" alt="ES Autovermietung – Nürnbergs älteste Autovermietung · seit 1958" decoding="async" width="1400" height="933"><div class="badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>4,8 ★ bei 121 Google-Bewertungen</span></div></div>
-    <div class="book" id="anfrage">
-      <form id="bf" novalidate>
-        <h3>Verfügbarkeit anfragen</h3>
-        <p class="muted" style="font-size:.92rem">Unverbindlich · Antwort in Kürze</p>
-        <div class="row" style="grid-template-columns:1fr"><div><label for="veh">Fahrzeug</label><select id="veh"><option value="0">Pkw · Alltag &amp; Reise</option><option value="1">Kleinbus · bis 9 Sitze</option><option value="2">Transporter · mehrere Größen</option><option value="3">Unfallersatzwagen · Service</option></select></div></div>
-        <div class="row"><div><label for="d1">Abholung</label><input type="date" id="d1" required></div><div><label for="d2">Rückgabe</label><input type="date" id="d2" required></div></div>
-        <div class="row"><div><label for="nm">Name</label><input id="nm" autocomplete="name" placeholder="Ihr Name" required></div><div><label for="ph">Telefon</label><input id="ph" type="tel" autocomplete="tel" placeholder="Für die Rückmeldung" required></div></div>
-        <div class="est"><span id="estl">Geschätzter Preis</span><strong id="est">–</strong></div>
-        <button class="btn btn-p" type="submit">Anfrage senden <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      </form>
-      <div class="ok" role="status">
-        <div class="tick"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <h3>Anfrage ist angekommen</h3>
-        <p id="oktext">Vorschau-Demo: In der Live-Version landet diese Anfrage sofort bei ES Autovermietung – per E-Mail.</p>
-        <button class="btn btn-o btn-sm" type="button" id="again">Neue Anfrage</button>
-      </div>
-    </div>
-  </div>
-</div></section>
+<section class="hero" style="padding:0"><div class="w">
+  <div><span class="ey" style="color:#ff8a98">Nürnbergs älteste Autovermietung · seit 1958</span>
+    <div data-aud="p" class="on"><h1>Persönlich vermietet.<br>Seit 1958.</h1><p>Pkw, 9-Sitzer und Transporter in jeder Größe – kurzfristig verfügbar, mit echtem Ansprechpartner statt Callcenter.</p></div>
+    <div data-aud="f"><h1>Ihr Mobilitätspartner<br>für das Unternehmen.</h1><p>Fuhrpark-Ergänzung, Projektfahrzeuge und Unfallersatz – mit festen Ansprechpartnern und flexiblen Laufzeiten.</p></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px"><a class="btn br" href="#anfrage">Fahrzeug anfragen</a><a class="btn bo" href="#unfall">Unfallersatz</a></div>
+    <div class="kp"><div><b>1958</b><span>gegründet</span></div><div><b>4,8 ★</b><span>121 Google-Bewertungen</span></div><div><b>−10 %</b><span>auf die Erstmiete</span></div></div></div>
+  <img src="../img/es-firmenkunden.webp" alt="Firmenkunde mit Mietwagen"></div></section>
 
-<div class="stats"><div class="wrap"><div class="stat"><b>1958</b><span>gegründet in Nürnberg</span></div><div class="stat"><b>4,8 ★</b><span>121 Google-Bewertungen</span></div><div class="stat"><b>9</b><span>Sitze im Kleinbus</span></div><div class="stat"><b>−10 %</b><span>auf Ihre erste Miete</span></div></div></div>
+<section id="flotte"><div class="w"><span class="ey">Fahrzeuge</span><h2>Für jeden Zweck das richtige Fahrzeug.</h2><div class="cls"><div class="cl"><img src="../img/cut-es-pkw.webp" alt="Pkw" loading="lazy"><h3>Pkw</h3><small>Alltag &amp; Reise</small><ul><li>5 Sitze</li><li>kurzfristig verfügbar</li></ul><a class="btn bo" href="#anfrage" data-pick="0">Anfragen</a></div><div class="cl"><img src="../img/cut-es-van.webp" alt="Kleinbus" loading="lazy"><h3>Kleinbus</h3><small>bis 9 Sitze</small><ul><li>Gruppen &amp; Vereine</li><li>Urlaub &amp; Ausflug</li></ul><a class="btn bo" href="#anfrage" data-pick="1">Anfragen</a></div><div class="cl"><img src="../img/cut-es-transporter.webp" alt="Transporter" loading="lazy"><h3>Transporter</h3><small>mehrere Größen</small><ul><li>Führerschein B</li><li>Umzug &amp; Gewerbe</li></ul><a class="btn bo" href="#anfrage" data-pick="2">Anfragen</a></div><div class="cl"><img src="../img/cut-es-suv.webp" alt="Unfallersatzwagen" loading="lazy"><h3>Unfallersatzwagen</h3><small>Service</small><ul><li>Abwicklung mit Versicherung</li><li>schnell mobil</li></ul><a class="btn bo" href="#anfrage" data-pick="3">Anfragen</a></div></div></div></section>
 
-<section id="fahrzeuge"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Unsere Flotte</span><h2>Das passende Fahrzeug<br>für jedes Vorhaben.</h2></div><p>Klare Preise, gepflegte Fahrzeuge und ehrliche Beratung – direkt vom Vermieter aus Nürnberg.</p></div>
-  <div class="grid fleet"><article class="vc reveal"><div class="pic cut"><img src="../img/cut-es-pkw.webp" alt="Pkw" decoding="async" loading="lazy" width="1400" height="933"></div><span class="cat">Alltag &amp; Reise</span><h3>Pkw</h3><ul><li>5 Sitze</li><li>kurzfristig verfügbar</li></ul><div class="foot"><div class="price"><small>Preis</small><b class="ask">auf Anfrage</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="0">Anfragen</a></div></article><article class="vc reveal"><div class="pic cut"><img src="../img/cut-es-van.webp" alt="Kleinbus" decoding="async" loading="lazy" width="1400" height="933"></div><span class="cat">bis 9 Sitze</span><h3>Kleinbus</h3><ul><li>Gruppen &amp; Vereine</li><li>Urlaub &amp; Ausflug</li></ul><div class="foot"><div class="price"><small>Preis</small><b class="ask">auf Anfrage</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="1">Anfragen</a></div></article><article class="vc reveal"><div class="pic cut"><img src="../img/cut-es-transporter.webp" alt="Transporter" decoding="async" loading="lazy" width="1400" height="933"></div><span class="cat">mehrere Größen</span><h3>Transporter</h3><ul><li>Führerschein B</li><li>Umzug &amp; Gewerbe</li></ul><div class="foot"><div class="price"><small>Preis</small><b class="ask">auf Anfrage</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="2">Anfragen</a></div></article><article class="vc reveal"><div class="pic cut"><img src="../img/cut-es-suv.webp" alt="Unfallersatzwagen" decoding="async" loading="lazy" width="1400" height="933"></div><span class="cat">Service</span><h3>Unfallersatzwagen</h3><ul><li>Abwicklung mit Versicherung</li><li>schnell mobil</li></ul><div class="foot"><div class="price"><small>Preis</small><b class="ask">auf Anfrage</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="3">Anfragen</a></div></article></div>
-</div></section>
+<section id="unfall" class="guide"><div class="w"><span class="ey">Unfallersatz</span><h2>Unfall gehabt? So bleiben Sie mobil.</h2>
+  <div class="steps"><div><h3>Anrufen</h3><p>Melden Sie sich unter 0911 61068-0 – wir klären das Wichtigste sofort.</p></div><div><h3>Ersatzwagen</h3><p>Sie erhalten kurzfristig ein passendes Ersatzfahrzeug.</p></div>
+  <div><h3>Abwicklung</h3><p>Wir unterstützen Sie bei der Abwicklung mit der Versicherung.</p></div><div><h3>Weiterfahren</h3><p>Sie bleiben mobil, bis Ihr Auto zurück ist.</p></div></div></div></section>
 
-<section id="vorteile" class="alt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Warum ES Autovermietung</span><h2>Lokal mieten lohnt sich.</h2></div><p>Kein Konzern, keine Hotline, kein Kleingedrucktes-Labyrinth. Sondern ein Vermieter, der in Nürnberg zu Hause ist.</p></div>
-  <div class="grid usps"><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.5a3.5 3.5 0 010 7M18 14a6 6 0 013.5 6"/></svg></div><h3>Ansprechpartner mit Namen</h3><p>Kein Callcenter, keine Warteschleife. Sie rufen an – wir kennen Ihr Anliegen.</p></div><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></div><h3>Kurzfristig verfügbar</h3><p>Heute anrufen, heute fahren. Hohe Verfügbarkeit und flexible Mietzeiträume.</p></div><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><h3>Unfallersatz ohne Stress</h3><p>Wir unterstützen Sie bei der Abwicklung mit der Versicherung und halten Sie mobil.</p></div><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 12h18"/></svg></div><h3>Partner für Unternehmen</h3><p>Firmenkunden, Handwerk und Fuhrparks vertrauen seit Jahrzehnten auf uns.</p></div><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.5a3.5 3.5 0 010 7M18 14a6 6 0 013.5 6"/></svg></div><h3>Für Gruppen &amp; Umzüge</h3><p>9-Sitzer für Vereine und Familien, Transporter in mehreren Größen für jedes Umzugsvolumen.</p></div><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6.5A7 7 0 107 17.5 7 7 0 0018 17.5M4 10.5h9M4 13.5h9"/></svg></div><h3>10 % auf die Erstmiete</h3><p>Mit dem Code WILLKOMMEN10 sparen Sie bei Ihrer ersten Anmietung.</p></div></div>
-</div></section>
+<section><div class="w"><div class="code"><div><span class="ey" style="color:#ff8a98">Neukunden-Vorteil</span><h3 style="margin:6px 0 0;font-size:1.6rem">10 % auf Ihre erste Miete</h3></div>
+  <span class="c" id="code">WILLKOMMEN10</span><button class="btn br" type="button" id="cp">Code kopieren</button></div></div></section>
 
-<section id="ablauf"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">So einfach geht’s</span><h2>In drei Schritten auf der Straße.</h2></div></div>
-  <div class="grid steps"><div class="step reveal"><h3>Anfrage stellen</h3><p>Online, per Telefon oder E-Mail – mit Wunschfahrzeug und Zeitraum.</p></div><div class="step reveal"><h3>Persönliches Angebot</h3><p>Ihr Ansprechpartner meldet sich mit Verfügbarkeit und Preis.</p></div><div class="step reveal"><h3>Abholen in der Fuggerstraße</h3><p>Fahrzeug übernehmen und losfahren.</p></div></div>
+<section id="anfrage" style="padding-top:0"><div class="w two">
+  <div class="form" data-box><span class="ey">Anfrage</span><h2 style="margin-bottom:4px">Verfügbarkeit prüfen</h2>
+    <form data-demo data-rent novalidate><div class="row"><div><label class="" for="rv">Fahrzeug</label><select id="rv" name="v"><option value="0" data-p="0">Pkw · Alltag &amp; Reise</option><option value="1" data-p="0">Kleinbus · bis 9 Sitze</option><option value="2" data-p="0">Transporter · mehrere Größen</option><option value="3" data-p="0">Unfallersatzwagen · Service</option></select></div></div><div class="row"><div><label class="" for="r1">Abholung</label><input id="r1" name="d1" type="date"></div><div><label class="" for="r2">Rückgabe</label><input id="r2" name="d2" type="date"></div></div><div class="row"><div><label class="" for="r3">Name</label><input id="r3" required placeholder="Ihr Name"></div><div><label class="" for="r4">Telefon</label><input id="r4" type="tel" required placeholder="Für die Rückmeldung"></div></div><div class="est" data-out></div><button class="btn br" type="submit">Anfrage senden</button></form><div class="done "><h3>✓ Anfrage angekommen</h3><p>Vorschau-Demo: In der Live-Version landet Ihre Anfrage sofort bei ES Autovermietung.</p><button class="btn bo" type="button" data-again>Neue Anfrage</button></div></div>
+  <div><div class="trust"><div><b>1958</b>gegründet in der Fürther Straße</div><div><b>4,8 ★</b>121 Google-Bewertungen</div><div><b>1:1</b>persönlicher Ansprechpartner</div></div>
+    <div style="margin-top:20px;border:1px solid var(--line);border-radius:16px;padding:26px"><b>ES Europa-Service Autovermietung</b><br>Fuggerstraße 15, 90439 Nürnberg<br><a href="tel:+49911610680">0911 61068-0</a> · <a href="mailto:info@es-vermietung.de">info@es-vermietung.de</a>
+      <p style="margin-bottom:0"><a class="btn bo" href="https://www.google.com/maps/search/?api=1&query=ES+Europa-Service+Autovermietung+Fuggerstraße+15+90439+Nürnberg" target="_blank" rel="noopener">Route planen</a></p></div></div>
 </div></section>
-
-<section><div class="wrap"><div class="rate reveal">
-  <div><div class="big">4,8</div><div class="stars"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></div><small>121 Bewertungen auf Google</small></div>
-  <div><h2>Kunden empfehlen uns weiter.</h2><p>Ehrliche Bewertungen von echten Kundinnen und Kunden – keine gekauften Sterne. In der Live-Version erscheinen hier Ihre neuesten Google-Bewertungen automatisch.</p>
-  <a class="btn" href="https://www.google.com/search?q=ES+Europa+Service+Autovermietung+N+rnberg+Bewertungen" target="_blank" rel="noopener">Alle Bewertungen ansehen <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-</div></div></section>
-<section id="faq" class="alt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Häufige Fragen</span><h2>Gut zu wissen.</h2></div></div>
-  <div class="faq"><details><summary>Seit wann gibt es ES Autovermietung?</summary><p>Seit 1958. Angefangen in der Fürther Straße, heute mit modernem Fuhrpark und digitaler Buchung in der Fuggerstraße 15.</p></details><details><summary>Helfen Sie bei einem Unfallersatzwagen?</summary><p>Ja. Wir stellen Ihnen ein Ersatzfahrzeug und unterstützen bei der Abwicklung mit der Versicherung.</p></details><details><summary>Gibt es einen Rabatt für Neukunden?</summary><p>Ja. Mit dem Code WILLKOMMEN10 erhalten Sie 10 % auf Ihre erste Miete.</p></details><details><summary>Vermieten Sie auch an Firmen?</summary><p>Ja, Geschäftskunden sind ein Schwerpunkt. Sprechen Sie uns auf Rahmenkonditionen an.</p></details></div>
-</div></section>
-
-<section id="kontakt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Kontakt & Anfahrt</span><h2>Wir sind für Sie da.</h2></div></div>
-  <div class="contact">
-    <div class="card reveal"><h3>ES Europa-Service Autovermietung</h3><ul class="cl"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><div><b>Adresse</b><br>Fuggerstraße 15<br>90439 Nürnberg-Eberhardshof</div></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg><div><b>Telefon</b><br><a href="tel:+49911610680">0911 61068-0</a></div></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><b>E-Mail</b><br><a href="mailto:info@es-vermietung.de">info@es-vermietung.de</a></div></li></ul>
-      <a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=ES+Europa-Service+Autovermietung+Fuggerstraße+15+90439+Nürnberg" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Route in Google Maps öffnen</a></div>
-    <div class="card reveal"><h3>Öffnungszeiten</h3><table class="hrs"><tr><td>Mo – Fr</td><td>nach Vereinbarung*</td></tr><tr><td>Samstag</td><td>nach Vereinbarung*</td></tr></table>
-      <div class="cta"><a class="btn btn-p" href="tel:+49911610680"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>Jetzt anrufen</a><a class="btn btn-o" href="#anfrage">Online anfragen</a></div></div>
-  </div>
-  <p class="note">* Angaben in dieser Vorschau stammen aus öffentlich verfügbaren Quellen (Stand 10/2026) und werden vor dem Livegang gemeinsam mit Ihnen geprüft und ergänzt. Preise und Fahrzeuge sind beispielhaft.</p>
-</div></section>
+<section id="faq" style="padding-top:0"><div class="w"><details class="faq"><summary>Seit wann gibt es ES Autovermietung?</summary><p>Seit 1958. Angefangen in der Fürther Straße, heute mit modernem Fuhrpark und digitaler Buchung in der Fuggerstraße 15.</p></details><details class="faq"><summary>Helfen Sie bei einem Unfallersatzwagen?</summary><p>Ja. Wir stellen Ihnen ein Ersatzfahrzeug und unterstützen bei der Abwicklung mit der Versicherung.</p></details><details class="faq"><summary>Gibt es einen Rabatt für Neukunden?</summary><p>Ja. Mit dem Code WILLKOMMEN10 erhalten Sie 10 % auf Ihre erste Miete.</p></details><details class="faq"><summary>Vermieten Sie auch an Firmen?</summary><p>Ja, Geschäftskunden sind ein Schwerpunkt. Sprechen Sie uns auf Rahmenkonditionen an.</p></details><p class="note">Angaben in dieser Vorschau stammen aus öffentlich verfügbaren Quellen (Stand 10/2026) und werden vor dem Livegang gemeinsam mit Ihnen geprüft und ergänzt. Fotos: Unsplash (Symbolbilder).</p></div></section>
 </main>
-
-<footer class="ft"><div class="wrap">
-  <span>© 2026 ES Europa-Service Autovermietung · Fuggerstraße 15, 90439 Nürnberg</span>
-  <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a> · Fotos: ES Autovermietung · Website: <a href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a></span>
-</div></footer>
-
-<nav class="mb" aria-label="Schnellkontakt">
-  <a class="btn btn-o" href="tel:+49911610680"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>Anrufen</a><a class="btn btn-o" href="#kontakt"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Anfahrt</a><a class="btn btn-p" href="#anfrage">Anfragen</a>
-</nav>
+<footer class=""><div class="w"><span>Entwurf für ES Europa-Service Autovermietung</span><span>Entwurf: <a style="color:inherit" href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a> · <a style="color:inherit" href="https://socialclip.art/impressum.html" target="_blank" rel="noopener">Impressum</a> · <a style="color:inherit" href="https://socialclip.art/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a></span></div></footer>
+<nav class="mbar"><a href="tel:+49911610680" style="background:var(--n);color:#fff">Anrufen</a><a href="#anfrage" style="background:var(--r);color:#fff">Anfragen</a></nav>
+<script>
+document.querySelectorAll('#sw button').forEach(function(x){x.addEventListener('click',function(){document.querySelectorAll('#sw button').forEach(function(y){y.classList.toggle('on',y===x)});
+document.querySelectorAll('[data-aud]').forEach(function(d){d.classList.toggle('on',d.dataset.aud===x.dataset.a)})})});
+document.getElementById('cp').addEventListener('click',function(){var t='WILLKOMMEN10',me=this;try{navigator.clipboard.writeText(t).then(function(){me.textContent='Kopiert ✓'},function(){me.textContent='Code: '+t})}catch(e){me.textContent='Code: '+t}});
+</script>
 
 <script>
-(function(){
-  var D={"name": "ES Autovermietung", "wa": null, "mail": "info@es-vermietung.de", "tel": "tel:+49911610680", "fleet": [{"n": "Pkw", "c": "Alltag & Reise", "p": null}, {"n": "Kleinbus", "c": "bis 9 Sitze", "p": null}, {"n": "Transporter", "c": "mehrere Größen", "p": null}, {"n": "Unfallersatzwagen", "c": "Service", "p": null}]};
-  var f=document.getElementById('bf'),veh=document.getElementById('veh'),d1=document.getElementById('d1'),d2=document.getElementById('d2');
-  var est=document.getElementById('est'),estl=document.getElementById('estl'),box=document.querySelector('.book');
-  function iso(d){return d.toISOString().slice(0,10)}
-  var t=new Date();t.setDate(t.getDate()+1);var u=new Date(t);u.setDate(u.getDate()+1);
-  d1.value=iso(t);d2.value=iso(u);d1.min=iso(new Date());d2.min=d1.value;
-  function days(){var a=new Date(d1.value),b=new Date(d2.value);var n=Math.round((b-a)/864e5);return isNaN(n)?0:Math.max(1,n)}
-  function calc(){
-    if(d2.value<d1.value){d2.value=d1.value}d2.min=d1.value;
-    var v=D.fleet[veh.value],n=days();
-    if(v.p){est.textContent='ab '+(v.p*n).toLocaleString('de-DE')+' €';estl.textContent='Geschätzt für '+n+(n==1?' Tag':' Tage')}
-    else{est.textContent='auf Anfrage';estl.textContent=n+(n==1?' Tag':' Tage')+' · individueller Preis'}
-  }
-  [veh,d1,d2].forEach(function(e){e.addEventListener('change',calc)});calc();
-  document.querySelectorAll('[data-pick]').forEach(function(a){a.addEventListener('click',function(){veh.value=a.getAttribute('data-pick');calc()})});
+document.querySelectorAll('form[data-demo]').forEach(function(f){
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var nm=document.getElementById('nm'),ph=document.getElementById('ph');
-    if(!nm.value.trim()){nm.focus();return} if(!ph.value.trim()){ph.focus();return}
-    box.classList.add('sent');
+    var bad=[].slice.call(f.querySelectorAll('[required]')).filter(function(i){return !i.value.trim()})[0];
+    if(bad){bad.focus();return}
+    f.closest('[data-box]').classList.add('sent');
   });
-  document.getElementById('again').addEventListener('click',function(){box.classList.remove('sent')});
-})();
+});
+document.querySelectorAll('[data-again]').forEach(function(a){a.addEventListener('click',function(){a.closest('[data-box]').classList.remove('sent')})});
+document.querySelectorAll('input[type=date]').forEach(function(d){d.min=new Date().toISOString().slice(0,10)});
 </script>
-</body>
-</html>
+
+<script>
+document.querySelectorAll('form[data-rent]').forEach(function(f){
+  var v=f.querySelector('[name=v]'),a=f.querySelector('[name=d1]'),b=f.querySelector('[name=d2]'),o=f.querySelector('[data-out]');
+  function iso(d){return d.toISOString().slice(0,10)}
+  var t=new Date();t.setDate(t.getDate()+1);var u=new Date(t);u.setDate(u.getDate()+1);
+  if(a&&!a.value){a.value=iso(t)} if(b&&!b.value){b.value=iso(u)}
+  function calc(){if(!o)return;if(b.value<a.value)b.value=a.value;var n=Math.max(1,Math.round((new Date(b.value)-new Date(a.value))/864e5)||1);
+    var p=+v.options[v.selectedIndex].dataset.p;o.textContent=p?('ca. '+(p*n).toLocaleString('de-DE')+' € für '+n+(n==1?' Tag':' Tage')):(n+(n==1?' Tag':' Tage')+' · Preis auf Anfrage')}
+  [v,a,b].forEach(function(e){e&&e.addEventListener('change',calc)});calc();
+});
+document.querySelectorAll('[data-pick]').forEach(function(x){x.addEventListener('click',function(){var s=document.querySelector('form[data-rent] [name=v]');if(s){s.value=x.dataset.pick;s.dispatchEvent(new Event('change'))}})});
+</script>
+</body></html>

@@ -4,303 +4,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#fbfbfe">
-<title>myonecar – Autovermietung Nürnberg-Dutzendteich</title>
+<meta name="theme-color" content="#5b3df5">
+<title>myonecar – Auto mieten ohne Kaution in Nürnberg</title>
 <meta name="description" content="Online buchen, Code aufs Handy, Schlüssel aus der Keybox – fertig. 250 Freikilometer pro Tag und kein Aufpreis für junge Fahrer oder Zusatzfahrer.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b3df5'/%3E%3C/svg%3E">
-<style>:root{--bg:#fbfbfe;--surface:#ffffff;--surface2:#f0eefc;--text:#15122b;--muted:#5d5a75;--primary:#5b3df5;--onp:#fff;--line:#e4e1f5;--primary-text:#5b3df5;--font:'Avenir Next', 'Segoe UI', system-ui, sans-serif;--head:'Avenir Next', 'Segoe UI', system-ui, sans-serif;--hw:800;--upper:none;--r:22px;color-scheme:light}
-*,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;font-size:17px}
-img,svg{display:block;max-width:100%}
-a{color:inherit}
-.wrap{width:min(1160px,100% - 32px);margin-inline:auto}
-h1,h2,h3{font-family:var(--head);font-weight:var(--hw);line-height:1.08;margin:0;letter-spacing:-.02em;text-transform:var(--upper)}
-h1{font-size:clamp(2.3rem,5.6vw,4.4rem)}
-h2{font-size:clamp(1.8rem,3.6vw,2.8rem)}
-h3{font-size:1.2rem;letter-spacing:-.01em}
-p{margin:0}
-.ico{width:22px;height:22px;flex:none}
-.muted{color:var(--muted)}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary-text)}
-.eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
-
-/* Vorschau-Leiste */
-.pv{background:#111;color:#fff;font-size:.88rem;position:relative;z-index:60}
-.pv .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:9px 0;flex-wrap:wrap}
-.pv b{color:#ffd166}
-.pv a.pvbtn{background:#ffd166;color:#111;text-decoration:none;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap}
-.pv button{background:none;border:0;color:#fff;cursor:pointer;padding:4px;display:inline-flex}
-
-/* Header */
-.hd{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.hd .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--head);font-weight:var(--hw);font-size:1.15rem;letter-spacing:-.01em;text-transform:var(--upper)}
-.mark{width:40px;height:40px;border-radius:calc(var(--r) * .8);background:var(--primary);color:var(--onp);display:grid;place-items:center;font-size:.95rem;font-weight:800;letter-spacing:-.03em}
-.brand small{display:block;font-family:var(--font);font-weight:500;font-size:.72rem;color:var(--muted);letter-spacing:.02em;text-transform:none}
-.nav{display:flex;gap:26px;font-size:.95rem}
-.nav a{text-decoration:none;color:var(--muted);font-weight:500}
-.nav a:hover{color:var(--text)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:var(--r);padding:14px 22px;font-weight:700;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s,background .15s}
-.btn:hover{transform:translateY(-1px)}
-.btn-p{background:var(--primary);color:var(--onp);box-shadow:0 10px 26px -12px var(--primary)}
-.btn-o{border-color:var(--line);color:var(--text);background:var(--surface)}
-.btn-wa{background:#1fa855;color:#fff}
-.btn-sm{padding:10px 16px;font-size:.92rem}
-
-/* Hero */
-.hero{position:relative;overflow:hidden;padding:48px 0 56px}
-.hero::before{content:"";position:absolute;inset:auto -10% -40% 35%;height:110%;background:radial-gradient(closest-side,color-mix(in srgb,var(--primary) 22%,transparent),transparent);pointer-events:none}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;position:relative}
-.hero h1{margin:18px 0 20px}
-.hero .lead{font-size:1.14rem;color:var(--muted);max-width:56ch}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;padding:0;list-style:none;font-size:.93rem;font-weight:600}
-.trust li{display:flex;align-items:center;gap:8px}
-.trust .ico{color:var(--primary-text)}
-.stage{position:relative;border-radius:calc(var(--r) * 1.6);overflow:hidden;aspect-ratio:16/10;box-shadow:0 30px 60px -30px rgba(0,0,0,.5);background:var(--surface2)}
-.stage img{width:100%;height:100%;object-fit:cover}
-.badge{position:absolute;left:16px;bottom:44px;display:flex;align-items:center;gap:8px;background:var(--surface);color:var(--text);padding:10px 14px;border-radius:999px;font-size:.88rem;font-weight:700;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
-.badge .ico{color:var(--primary-text);width:18px;height:18px}
-.stage .car{width:100%;filter:drop-shadow(0 30px 30px rgba(0,0,0,.18))}
-.plate{position:absolute;left:50%;top:-6%;transform:translateX(-50%);width:84%;aspect-ratio:1;border-radius:50%;background:color-mix(in srgb,var(--primary) 14%,var(--surface2));z-index:-1}
-
-/* Buchungskarte */
-.book{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:24px;box-shadow:0 30px 60px -30px rgba(0,0,0,.35);margin-top:-30px;position:relative}
-.book h3{margin-bottom:4px}
-.book .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.book label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.book input,.book select{width:100%;font:inherit;font-size:1rem;color:var(--text);background:var(--bg);border:1.5px solid var(--line);border-radius:calc(var(--r) * .7);padding:12px 12px;min-height:48px}
-.book input:focus,.book select:focus{outline:2px solid var(--primary);outline-offset:1px}
-.est{display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 14px;padding:14px 16px;border-radius:calc(var(--r) * .7);background:var(--surface2);font-size:.95rem}
-.est strong{font-size:1.4rem;font-family:var(--head)}
-.book .btn{width:100%}
-.ok{display:none;text-align:center;padding:10px 0}
-.ok .tick{width:58px;height:58px;border-radius:50%;background:#1fa855;color:#fff;display:grid;place-items:center;margin:0 auto 12px}
-.ok .tick .ico{width:30px;height:30px}
-.ok p{color:var(--muted);font-size:.95rem;margin:8px 0 16px}
-.book.sent form{display:none}.book.sent .ok{display:block}
-
-/* Stats */
-.stats{border-block:1px solid var(--line);background:var(--surface)}
-.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
-.stat{padding:26px 18px;border-left:1px solid var(--line)}
-.stat:first-child{border-left:0}
-.stat b{display:block;font-family:var(--head);font-size:1.8rem;font-weight:var(--hw);letter-spacing:-.02em;color:var(--primary-text)}
-.stat span{font-size:.9rem;color:var(--muted)}
-
-/* Sections */
-section{padding:64px 0}
-.sh{display:flex;justify-content:space-between;align-items:end;gap:16px 24px;margin-bottom:28px;flex-wrap:wrap}
-.sh p{max-width:46ch;color:var(--muted)}
-.sh h2{margin-top:12px}
-.grid{display:grid;gap:20px}
-.fleet{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.vc{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:22px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
-.vc:hover{transform:translateY(-4px);box-shadow:0 24px 40px -28px rgba(0,0,0,.4)}
-.vc .pic{position:relative;background:var(--surface2);border-radius:var(--r);overflow:hidden;aspect-ratio:16/10;margin-bottom:18px}
-.vc .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.vc:hover .pic img{transform:scale(1.05)}
-img[src$="van2.webp"]{object-position:50% 82%}
-.vc .pic.cut{background:#fff}
-.vc .pic.cut img{object-fit:contain;padding:6px 8px}
-.vc .pic svg{padding:22px 14px 12px}
-.sym{position:absolute;right:8px;bottom:8px;font-size:.66rem;background:rgba(0,0,0,.55);color:#fff;padding:2px 7px;border-radius:999px}
-.vc .cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary-text)}
-.vc h3{margin:4px 0 12px}
-.vc ul{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-wrap:wrap;gap:6px}
-.vc li{font-size:.8rem;background:var(--surface2);border-radius:999px;padding:4px 10px;color:var(--muted)}
-.vc .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:16px}
-.price small{display:block;font-size:.75rem;color:var(--muted)}
-.price b{font-family:var(--head);font-size:1.5rem;font-weight:var(--hw)}
-.price .ask{font-size:1.05rem}
-.usps{grid-template-columns:repeat(3,1fr)}
-.usp{padding:26px;border-radius:calc(var(--r) * 1.4);background:var(--surface);border:1px solid var(--line)}
-.usp .ib{width:48px;height:48px;border-radius:var(--r);display:grid;place-items:center;background:color-mix(in srgb,var(--primary) 14%,transparent);color:var(--primary-text);margin-bottom:16px}
-.usp h3{margin-bottom:8px}
-.usp p{color:var(--muted);font-size:.97rem}
-.alt{background:var(--surface2)}
-.steps{grid-template-columns:repeat(3,1fr);counter-reset:s}
-.step{position:relative;padding:28px;background:var(--surface);border-radius:calc(var(--r) * 1.4);border:1px solid var(--line)}
-.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--primary);color:var(--onp);font-weight:800;margin-bottom:16px;font-size:1.1rem}
-.step p{color:var(--muted);margin-top:8px}
-.rate{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;background:var(--primary);color:var(--onp);border-radius:calc(var(--r) * 2);padding:44px}
-.rate .big{font-family:var(--head);font-size:clamp(3.4rem,8vw,5.6rem);font-weight:var(--hw);line-height:1;letter-spacing:-.04em}
-.stars{display:flex;gap:4px;margin:10px 0 6px}
-.stars .ico{width:24px;height:24px;fill:currentColor}
-.rate p{opacity:.88;max-width:52ch}
-.rate .btn{margin-top:18px;background:var(--onp);color:var(--primary)}
-.faq{max-width:820px}
-details{border-bottom:1px solid var(--line);padding:6px 0}
-summary{cursor:pointer;list-style:none;padding:18px 40px 18px 0;font-weight:700;font-size:1.06rem;position:relative}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";position:absolute;right:6px;top:12px;font-size:1.6rem;font-weight:400;color:var(--primary-text);transition:transform .2s}
-details[open] summary::after{transform:rotate(45deg)}
-details p{padding:0 0 20px;color:var(--muted)}
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:30px}
-.cl{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:16px}
-.cl li{display:flex;gap:14px;align-items:flex-start}
-.cl .ico{color:var(--primary-text);margin-top:3px}
-.cl a{text-decoration:none;font-weight:600}
-.hrs{width:100%;border-collapse:collapse;margin-top:16px}
-.hrs td{padding:11px 0;border-bottom:1px solid var(--line)}
-.hrs td+td{text-align:right;font-weight:600}
-.mapbtn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:22px;height:150px;border-radius:var(--r);text-decoration:none;font-weight:700;background:
-  repeating-linear-gradient(45deg,var(--surface2) 0 14px,color-mix(in srgb,var(--surface2) 70%,var(--bg)) 14px 28px);border:1px dashed var(--line)}
-.mapbtn .ico{color:var(--primary-text)}
-.ft{border-top:1px solid var(--line);padding:28px 0 96px;font-size:.88rem;color:var(--muted)}
-.ft .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
-.ft a{text-decoration:none}
-.note{font-size:.8rem;color:var(--muted);margin-top:26px}
-
-/* Mobile-Leiste */
-.mb{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;grid-template-columns:1fr 1fr 1.2fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
-.mb .btn{padding:12px 8px;font-size:.92rem}
-
-/* Inhalte sind immer sichtbar – keine Einblend-Effekte, die in manchen Viewern leere Flächen erzeugen */
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-@media (max-width:960px){
-  .hero .wrap{grid-template-columns:1fr;gap:36px}
-  .usps,.steps{grid-template-columns:1fr 1fr}
-  .nav{display:none}
-}
-@media (max-width:680px){
-  body{font-size:16px}
-  .hero{padding:36px 0 48px}
-  .stats .wrap{grid-template-columns:1fr 1fr}
-  .stat:nth-child(3){border-left:0}
-  .stat:nth-child(n+3){border-top:1px solid var(--line)}
-  .usps,.steps,.contact{grid-template-columns:1fr}
-  .rate{grid-template-columns:1fr;gap:16px;padding:30px}
-  section{padding:44px 0}
-  .sh{margin-bottom:20px}
-  .hero .wrap{gap:24px}
-  .book .row{grid-template-columns:1fr}
-  .hd .hcta{display:none}
-  .mb{display:grid}
-  .pv .wrap{font-size:.8rem}
-}
-</style>
+<style>*{box-sizing:border-box}html{scroll-behavior:smooth}a{color:inherit}img{display:block;max-width:100%}
+.w{width:min(1160px,100% - 32px);margin:0 auto}footer{padding:30px 0 100px;font-size:.82rem}footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+input,select,textarea{font:inherit}.note{font-size:.8rem;opacity:.75}
+:root{--v:#5b3df5;--v2:#3d22d1;--l:#c6f432;--ink:#15122b;--m:#625f7c;--bg:#fbfaff;--s:#f1eefe;--line:#e4e0f7}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Avenir Next','Segoe UI',system-ui,sans-serif;font-size:17px;line-height:1.6}
+header .w{display:flex;align-items:center;justify-content:space-between;height:72px}
+.lg{font-weight:900;font-size:1.5rem;text-decoration:none;letter-spacing:-.03em}.lg b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--v);color:var(--l);margin-right:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:999px;font-weight:800;text-decoration:none;border:0;cursor:pointer;font:inherit;font-weight:800}
+.bv{background:var(--v);color:#fff}.bl{background:var(--l);color:var(--ink)}.bo{background:#fff;border:2px solid var(--line);color:var(--ink)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:40px 0 80px}
+.hero .tag{display:inline-block;background:var(--l);padding:6px 14px;border-radius:999px;font-weight:800;font-size:.85rem}
+.hero h1{font-size:clamp(3rem,8vw,6.2rem);line-height:.92;letter-spacing:-.05em;margin:18px 0}
+.hero h1 span{color:var(--v)}
+.hero p{color:var(--m);font-size:1.15rem;max-width:42ch}
+.phone{width:300px;margin:0 auto;background:var(--ink);border-radius:46px;padding:14px;box-shadow:0 50px 80px -40px rgba(61,34,209,.7)}
+.scr{background:linear-gradient(160deg,var(--v),var(--v2));border-radius:34px;min-height:540px;color:#fff;padding:30px 22px;display:flex;flex-direction:column}
+.scr small{opacity:.75}.scr .code{display:flex;gap:10px;justify-content:center;margin:34px 0 20px}
+.scr .code span{width:48px;height:62px;border-radius:14px;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:1.8rem;font-weight:900;animation:pop 4s infinite}
+.scr .code span:nth-child(2){animation-delay:.3s}.scr .code span:nth-child(3){animation-delay:.6s}.scr .code span:nth-child(4){animation-delay:.9s}
+@keyframes pop{0%,10%{background:rgba(255,255,255,.14)}20%,80%{background:var(--l);color:var(--ink)}100%{background:rgba(255,255,255,.14)}}
+@media(prefers-reduced-motion:reduce){.scr .code span{animation:none;background:var(--l);color:var(--ink)}}
+.scr .card{background:#fff;color:var(--ink);border-radius:20px;padding:16px;margin-top:auto}
+.scr .card img{height:90px;width:100%;object-fit:contain}
+.scr .ok{background:var(--l);color:var(--ink);border-radius:14px;padding:12px;text-align:center;font-weight:900;margin-top:12px}
+.zero{background:var(--ink);color:#fff;border-radius:36px;padding:60px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.zero b{display:block;font-size:clamp(2.4rem,5vw,3.8rem);color:var(--l);line-height:1;letter-spacing:-.04em}.zero span{opacity:.8}
+section{padding:80px 0}
+h2{font-size:clamp(2.2rem,5vw,3.6rem);letter-spacing:-.04em;line-height:1;margin:0 0 30px}
+.cars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.car{background:#fff;border:2px solid var(--line);border-radius:30px;padding:24px;text-align:center}
+.car img{height:150px;width:100%;object-fit:contain}.car h3{margin:10px 0 0;font-size:1.4rem}.car .c{color:var(--m)}
+.car .p{font-size:2.4rem;font-weight:900;letter-spacing:-.04em;margin:10px 0}.car .p small{font-size:1rem;color:var(--m);font-weight:600}
+.calc{background:var(--s);border-radius:36px;padding:44px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.calc input[type=range]{width:100%;accent-color:var(--v)}
+.calc .tot{font-size:clamp(3rem,7vw,5rem);font-weight:900;letter-spacing:-.05em;color:var(--v);line-height:1}
+.calc .seg{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 24px}.calc .seg label input{display:none}.calc .seg label span{display:inline-block;padding:10px 16px;border-radius:999px;background:#fff;border:2px solid var(--line);font-weight:800;cursor:pointer}
+.calc .seg input:checked+span{background:var(--v);color:#fff;border-color:var(--v)}
+table.cmp{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:2px solid var(--line);border-radius:26px;overflow:hidden}
+.cmp th,.cmp td{padding:18px 22px;text-align:left;border-bottom:1px solid var(--line)}.cmp tr:last-child td{border-bottom:0}
+.cmp th{background:var(--s)}.cmp td:nth-child(2){font-weight:800;color:var(--v)}.cmp td:nth-child(3){color:var(--m)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.steps div{background:#fff;border:2px solid var(--line);border-radius:30px;padding:30px}.steps b{font-size:3.2rem;color:var(--v);letter-spacing:-.04em;display:block;line-height:1}
+.form{background:#fff;border:2px solid var(--line);border-radius:36px;padding:36px;max-width:760px;margin:0 auto}
+.form label{display:block;font-weight:800;font-size:.85rem;margin:12px 0 6px}.form input,.form select{width:100%;padding:14px 16px;border-radius:16px;border:2px solid var(--line);background:var(--bg)}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form .row>div:only-child{grid-column:1/-1}
+.est{margin:16px 0;font-weight:900;color:var(--v);font-size:1.2rem}
+details.faq{background:#fff;border:2px solid var(--line);border-radius:22px;padding:0 22px;margin-bottom:10px}details.faq summary{cursor:pointer;padding:18px 0;font-weight:800;list-style:none}details.faq p{margin:0 0 18px;color:var(--m)}
+.done{text-align:center;padding:20px}footer{color:var(--m);border-top:1px solid var(--line)}
+.fab{position:fixed;right:16px;bottom:16px;z-index:50;display:none}
+@media(max-width:900px){.hero,.calc{grid-template-columns:1fr}.zero{grid-template-columns:1fr 1fr;padding:36px}.cars,.steps{grid-template-columns:1fr}}
+@media(max-width:600px){.fab{display:inline-flex}.form .row{grid-template-columns:1fr}section{padding:56px 0}.cmp th,.cmp td{padding:12px;font-size:.9rem}.calc{padding:26px}}
+[data-box] .done{display:none}[data-box].sent form{display:none}[data-box].sent .done{display:block}</style>
 </head>
 <body>
 
-<div class="pv" id="pv"><div class="wrap">
-  <span><b>Vorschau</b> · Entwurf von SocialClip für myonecar. Gefällt sie Ihnen? Diese Seite kann in wenigen Tagen live sein.</span>
-  <span style="display:flex;gap:8px;align-items:center"><a class="pvbtn" href="https://wa.me/4917646188101?text=Hallo,%20ich%20habe%20die%20Website-Vorschau%20für%20myonecar%20gesehen%20und%20möchte%20mehr%20wissen." target="_blank" rel="noopener">Jetzt übernehmen</a><button aria-label="Hinweis schließen" onclick="document.getElementById('pv').remove()"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span>
-</div></div>
-
-<header class="hd"><div class="wrap">
-  <a class="brand" href="#top"><span class="mark">1</span><span>myonecar<small>Autovermietung Nürnberg</small></span></a>
-  <nav class="nav" aria-label="Hauptnavigation"><a href="#fahrzeuge">Fahrzeuge</a><a href="#vorteile">Vorteile</a><a href="#ablauf">Ablauf</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a></nav>
-  <a class="btn btn-p btn-sm hcta" href="tel:+491627517520"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>0162 7517520</a>
-</div></header>
-
+<div id="pv" style="background:#15122b;color:#fff;font:14px/1.4 system-ui,sans-serif;position:relative;z-index:99"><div style="max-width:1160px;margin:0 auto;padding:9px 16px;display:flex;gap:10px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap"><span><b style="color:#c6f432">Vorschau</b> · Unverbindlicher Entwurf von SocialClip für myonecar – keine offizielle Website.</span><span style="display:flex;gap:8px;align-items:center"><a href="https://wa.me/4917646188101?text=Hallo,%20ich%20habe%20die%20Website-Vorschau%20für%20myonecar%20gesehen%20und%20möchte%20mehr%20wissen." target="_blank" rel="noopener" style="background:#c6f432;color:#111;text-decoration:none;font-weight:700;padding:6px 12px;border-radius:999px">Jetzt übernehmen</a><button aria-label="Hinweis schließen" onclick="document.getElementById('pv').remove()" style="background:none;border:0;color:#fff;font-size:20px;cursor:pointer;line-height:1">×</button></span></div></div>
+<header><div class="w"><a class="lg" href="#top"><b>1</b>myonecar</a><a class="btn bv" href="#buchen">Jetzt buchen</a></div></header>
 <main id="top">
-<section class="hero"><div class="wrap">
-  <div>
-    <span class="eyebrow">ein auto. ein preis. einfach.</span>
-    <h1>Ohne Kaution.<br>Ohne Schalter.<br>Rund um die Uhr.</h1>
-    <p class="lead">Online buchen, Code aufs Handy, Schlüssel aus der Keybox – fertig. 250 Freikilometer pro Tag und kein Aufpreis für junge Fahrer oder Zusatzfahrer.</p>
-    <div class="cta"><a class="btn btn-p" href="#anfrage">Fahrzeug anfragen <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-wa" href="https://wa.me/491627517520"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.6-4.8A9 9 0 1112 21a9 9 0 01-4.2-1z"/><path d="M9 9.5c.4 2 2.3 4 4.5 4.5l1-1.2 2 .9c-.3 1.3-1.4 2-2.6 1.8A7 7 0 018 10.1c-.1-1.2.6-2.3 1.8-2.6l.9 2z"/></svg>WhatsApp</a></div>
-    <ul class="trust"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>4,9 ★ bei 150 Google-Bewertungen</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M16 7l2 2M14 9l2 2"/></svg>24/7 kontaktlose Abholung</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6.5A7 7 0 107 17.5 7 7 0 0018 17.5M4 10.5h9M4 13.5h9"/></svg>0 € Kaution*</li></ul>
-  </div>
-  <div>
-    <div class="stage"><img src="../img/myonecar-zeppelinfeld.webp" alt="myonecar – ein auto. ein preis. einfach." decoding="async" width="1400" height="933"><div class="badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>4,9 ★ bei 150 Google-Bewertungen</span></div></div>
-    <div class="book" id="anfrage">
-      <form id="bf" novalidate>
-        <h3>Verfügbarkeit anfragen</h3>
-        <p class="muted" style="font-size:.92rem">Unverbindlich · Antwort in Kürze</p>
-        <div class="row" style="grid-template-columns:1fr"><div><label for="veh">Fahrzeug</label><select id="veh"><option value="0">Dacia Sandero · Kleinwagen</option><option value="1">MG3 · Kleinwagen Automatik</option><option value="2">Dacia Dokker · Hochdach-Kombi</option></select></div></div>
-        <div class="row"><div><label for="d1">Abholung</label><input type="date" id="d1" required></div><div><label for="d2">Rückgabe</label><input type="date" id="d2" required></div></div>
-        <div class="row"><div><label for="nm">Name</label><input id="nm" autocomplete="name" placeholder="Ihr Name" required></div><div><label for="ph">Telefon</label><input id="ph" type="tel" autocomplete="tel" placeholder="Für die Rückmeldung" required></div></div>
-        <div class="est"><span id="estl">Geschätzter Preis</span><strong id="est">–</strong></div>
-        <button class="btn btn-p" type="submit">Anfrage senden <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      </form>
-      <div class="ok" role="status">
-        <div class="tick"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <h3>Anfrage ist angekommen</h3>
-        <p id="oktext">Vorschau-Demo: In der Live-Version landet diese Anfrage sofort bei myonecar – per E-Mail und WhatsApp.</p>
-        <button class="btn btn-o btn-sm" type="button" id="again">Neue Anfrage</button>
-      </div>
-    </div>
-  </div>
-</div></section>
-
-<div class="stats"><div class="wrap"><div class="stat"><b>0 €</b><span>Kaution*</span></div><div class="stat"><b>24/7</b><span>Abholung &amp; Rückgabe</span></div><div class="stat"><b>250 km</b><span>frei pro Tag</span></div><div class="stat"><b>4,9 ★</b><span>150 Google-Bewertungen</span></div></div></div>
-
-<section id="fahrzeuge"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Unsere Flotte</span><h2>Das passende Fahrzeug<br>für jedes Vorhaben.</h2></div><p>Klare Preise, gepflegte Fahrzeuge und ehrliche Beratung – direkt vom Vermieter aus Nürnberg.</p></div>
-  <div class="grid fleet"><article class="vc reveal"><div class="pic cut"><img src="../img/cut-myonecar-sandero.webp" alt="Dacia Sandero" decoding="async" loading="lazy" width="1400" height="933"></div><span class="cat">Kleinwagen</span><h3>Dacia Sandero</h3><ul><li>5 Sitze</li><li>250 km/Tag frei</li><li>ideal für die Stadt</li></ul><div class="foot"><div class="price"><small>ab</small><b>60 €</b> <small>pro Tag</small></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="0">Anfragen</a></div></article><article class="vc reveal"><div class="pic cut"><img src="../img/cut-myonecar-mg3.webp" alt="MG3" decoding="async" loading="lazy" width="1400" height="933"></div><span class="cat">Kleinwagen Automatik</span><h3>MG3</h3><ul><li>5 Sitze</li><li>Automatik</li><li>250 km/Tag frei</li></ul><div class="foot"><div class="price"><small>ab</small><b>65 €</b> <small>pro Tag</small></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="1">Anfragen</a></div></article><article class="vc reveal"><div class="pic cut"><img src="../img/cut-myonecar-dokker.webp" alt="Dacia Dokker" decoding="async" loading="lazy" width="1400" height="933"></div><span class="cat">Hochdach-Kombi</span><h3>Dacia Dokker</h3><ul><li>viel Laderaum</li><li>Ikea-tauglich</li><li>250 km/Tag frei</li></ul><div class="foot"><div class="price"><small>ab</small><b>60 €</b> <small>pro Tag</small></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="2">Anfragen</a></div></article></div>
-</div></section>
-
-<section id="vorteile" class="alt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Warum myonecar</span><h2>Lokal mieten lohnt sich.</h2></div><p>Kein Konzern, keine Hotline, kein Kleingedrucktes-Labyrinth. Sondern ein Vermieter, der in Nürnberg zu Hause ist.</p></div>
-  <div class="grid usps"><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6.5A7 7 0 107 17.5 7 7 0 0018 17.5M4 10.5h9M4 13.5h9"/></svg></div><h3>Keine Kaution</h3><p>Mit Wohnsitz in Deutschland zahlen Sie nur den Mietpreis vorab. Kein geblockter Betrag auf der Kreditkarte.</p></div><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M16 7l2 2M14 9l2 2"/></svg></div><h3>Abholen, wann Sie wollen</h3><p>Keybox mit Zugangscode – auch nachts um drei oder am Sonntagmorgen.</p></div><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.5a3.5 3.5 0 010 7M18 14a6 6 0 013.5 6"/></svg></div><h3>Kein Aufpreis für junge Fahrer</h3><p>Zusatzfahrer und junge Fahrer kosten bei uns nichts extra.</p></div><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H16a3 3 0 000-6H8a3 3 0 010-6h7.5"/></svg></div><h3>250 km pro Tag inklusive</h3><p>Genug für den Wochenendtrip nach Bamberg, Regensburg oder an den Brombachsee.</p></div><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><h3>Vollkasko inklusive</h3><p>Selbstbeteiligung 1.000 €, auf Wunsch reduzierbar auf 500 €.</p></div><div class="usp reveal"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>Ein fester Preis</h3><p>Keine Rabattschlacht, keine Saisonaufschläge. Sie sehen den Preis – und zahlen genau den.</p></div></div>
-</div></section>
-
-<section id="ablauf"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">So einfach geht’s</span><h2>In drei Schritten auf der Straße.</h2></div></div>
-  <div class="grid steps"><div class="step reveal"><h3>Online buchen</h3><p>Auto und Zeitraum wählen, Mietpreis vorab bezahlen.</p></div><div class="step reveal"><h3>Code erhalten</h3><p>Sie bekommen den Zugangscode für die Keybox aufs Handy.</p></div><div class="step reveal"><h3>Einsteigen &amp; losfahren</h3><p>Schlüssel nehmen, Auto steht in der Zeppelinstraße bereit.</p></div></div>
-</div></section>
-
-<section><div class="wrap"><div class="rate reveal">
-  <div><div class="big">4,9</div><div class="stars"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></div><small>150 Bewertungen auf Google</small></div>
-  <div><h2>Kunden empfehlen uns weiter.</h2><p>Ehrliche Bewertungen von echten Kundinnen und Kunden – keine gekauften Sterne. In der Live-Version erscheinen hier Ihre neuesten Google-Bewertungen automatisch.</p>
-  <a class="btn" href="https://www.google.com/search?q=myonecar+Autovermietung+N+rnberg+Bewertungen" target="_blank" rel="noopener">Alle Bewertungen ansehen <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-</div></div></section>
-<section id="faq" class="alt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Häufige Fragen</span><h2>Gut zu wissen.</h2></div></div>
-  <div class="faq"><details><summary>Brauche ich eine Kreditkarte?</summary><p>Nein. Sie zahlen den Mietpreis vorab, eine Kaution entfällt bei Wohnsitz in Deutschland.</p></details><details><summary>Wie funktioniert die Schlüsselübergabe?</summary><p>Kontaktlos über eine Keybox. Nach der Buchung erhalten Sie den Zugangscode.</p></details><details><summary>Wie viele Kilometer sind inklusive?</summary><p>250 Kilometer pro Miettag sind frei.</p></details><details><summary>Wie bin ich versichert?</summary><p>Vollkasko mit 1.000 € Selbstbeteiligung, auf Wunsch reduzierbar auf 500 €.</p></details></div>
-</div></section>
-
-<section id="kontakt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Kontakt & Anfahrt</span><h2>Wir sind für Sie da.</h2></div></div>
-  <div class="contact">
-    <div class="card reveal"><h3>myonecar Autovermietung</h3><ul class="cl"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><div><b>Adresse</b><br>Zeppelinstraße (Nähe Dutzendteich)<br>Nürnberg-Dutzendteich</div></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg><div><b>Telefon</b><br><a href="tel:+491627517520">0162 7517520</a></div></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.6-4.8A9 9 0 1112 21a9 9 0 01-4.2-1z"/><path d="M9 9.5c.4 2 2.3 4 4.5 4.5l1-1.2 2 .9c-.3 1.3-1.4 2-2.6 1.8A7 7 0 018 10.1c-.1-1.2.6-2.3 1.8-2.6l.9 2z"/></svg><div><b>WhatsApp</b><br><a href="https://wa.me/491627517520">Chat starten</a></div></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><b>E-Mail</b><br><a href="mailto:info@myonecar.de">info@myonecar.de</a></div></li></ul>
-      <a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=myonecar+Autovermietung+Zeppelinstraße+(Nähe+Dutzendteich)+Nürnberg" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Route in Google Maps öffnen</a></div>
-    <div class="card reveal"><h3>Öffnungszeiten</h3><table class="hrs"><tr><td>Täglich</td><td>08:00 – 20:00 (Service)</td></tr><tr><td>Abholung</td><td>24/7 kontaktlos</td></tr></table>
-      <div class="cta"><a class="btn btn-p" href="tel:+491627517520"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>Jetzt anrufen</a><a class="btn btn-o" href="#anfrage">Online anfragen</a></div></div>
-  </div>
-  <p class="note">* Angaben in dieser Vorschau stammen aus öffentlich verfügbaren Quellen (Stand 10/2026) und werden vor dem Livegang gemeinsam mit Ihnen geprüft und ergänzt. Preise und Fahrzeuge sind beispielhaft.</p>
-</div></section>
+<section class="w hero"><div><span class="tag">ein auto. ein preis. einfach.</span><h1>0 € Kaution.<br><span>24/7</span> losfahren.</h1>
+  <p>Online buchen, Code aufs Handy, Schlüssel aus der Keybox – in der Zeppelinstraße am Dutzendteich. 250 Freikilometer pro Tag inklusive.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px"><a class="btn bv" href="#buchen">Auto buchen →</a><a class="btn bo" href="#preis">Preis berechnen</a></div></div>
+  <div class="phone"><div class="scr"><small>Deine Buchung · Nürnberg</small><b style="font-size:1.4rem">Keybox-Code</b>
+    <div class="code"><span>4</span><span>8</span><span>1</span><span>7</span></div><small style="text-align:center">Beispiel – dein Code kommt nach der Buchung</small>
+    <div class="card"><img src="../img/cut-myonecar-sandero.webp" alt="Dacia Sandero"><b>Dacia Sandero</b><div style="color:var(--m);font-size:.9rem">Zeppelinstraße · bereit</div><div class="ok">🔓 Auto ist entsperrt</div></div></div></div>
+</section>
+<div class="w"><div class="zero"><div><b>0 €</b><span>Kaution*</span></div><div><b>24/7</b><span>Abholung & Rückgabe</span></div><div><b>250 km</b><span>frei pro Tag</span></div><div><b>4,9 ★</b><span>150 Google-Bewertungen</span></div></div></div>
+<section id="autos"><div class="w"><h2>Drei Autos.<br>Ein fester Preis.</h2><div class="cars"><div class="car"><img src="../img/cut-myonecar-sandero.webp" alt="Dacia Sandero" loading="lazy"><h3>Dacia Sandero</h3><div class="c">Kleinwagen</div><div class="p">60 €<small> / Tag</small></div><a class="btn bo" href="#buchen" data-pick="0">Auswählen</a></div><div class="car"><img src="../img/cut-myonecar-mg3.webp" alt="MG3" loading="lazy"><h3>MG3</h3><div class="c">Kleinwagen Automatik</div><div class="p">65 €<small> / Tag</small></div><a class="btn bo" href="#buchen" data-pick="1">Auswählen</a></div><div class="car"><img src="../img/cut-myonecar-dokker.webp" alt="Dacia Dokker" loading="lazy"><h3>Dacia Dokker</h3><div class="c">Hochdach-Kombi</div><div class="p">60 €<small> / Tag</small></div><a class="btn bo" href="#buchen" data-pick="2">Auswählen</a></div></div></div></section>
+<section id="preis" style="padding-top:0"><div class="w"><div class="calc">
+  <div><h2 style="margin-bottom:10px">Was kostet’s?</h2><div class="seg" id="seg"><label><input type="radio" name="cc" value="60" checked><span>Dacia Sandero</span></label><label><input type="radio" name="cc" value="65"><span>MG3</span></label><label><input type="radio" name="cc" value="60"><span>Dacia Dokker</span></label></div>
+    <label for="days" style="font-weight:800">Mietdauer: <span id="dl">3 Tage</span></label><input id="days" type="range" min="1" max="14" value="3"></div>
+  <div><div class="tot" id="tot">–</div><p style="color:var(--m);margin:10px 0 0" id="km">inkl. 750 Freikilometer · keine Kaution</p></div></div></div></section>
+<section style="padding-top:0"><div class="w"><h2>Anders als die anderen.</h2>
+  <table class="cmp"><tr><th></th><th>myonecar</th><th>klassische Vermietung</th></tr>
+  <tr><td>Kaution</td><td>0 €*</td><td>häufig Kaution per Kreditkarte</td></tr><tr><td>Abholung</td><td>24/7 kontaktlos</td><td>nur zu Öffnungszeiten</td></tr>
+  <tr><td>Junge Fahrer / Zusatzfahrer</td><td>ohne Aufpreis</td><td>oft mit Aufpreis</td></tr><tr><td>Preis</td><td>ein fester Preis</td><td>saisonabhängig</td></tr></table></div></section>
+<section style="padding-top:0"><div class="w"><h2>So geht’s.</h2><div class="steps"><div><b>01</b><h3>Online buchen</h3><p>Auto und Zeitraum wählen, Mietpreis vorab zahlen.</p></div><div><b>02</b><h3>Code erhalten</h3><p>Der Keybox-Code kommt aufs Handy.</p></div><div><b>03</b><h3>Losfahren</h3><p>Schlüssel nehmen – das Auto steht in der Zeppelinstraße.</p></div></div></div></section>
+<section id="buchen" style="padding-top:0"><div class="w"><div class="form" data-box><h2 style="margin-bottom:6px">Auto anfragen</h2>
+  <form data-demo data-rent novalidate><div class="row"><div><label class="" for="rv">Fahrzeug</label><select id="rv" name="v"><option value="0" data-p="60">Dacia Sandero · Kleinwagen</option><option value="1" data-p="65">MG3 · Kleinwagen Automatik</option><option value="2" data-p="60">Dacia Dokker · Hochdach-Kombi</option></select></div></div><div class="row"><div><label class="" for="r1">Abholung</label><input id="r1" name="d1" type="date"></div><div><label class="" for="r2">Rückgabe</label><input id="r2" name="d2" type="date"></div></div><div class="row"><div><label class="" for="r3">Name</label><input id="r3" required placeholder="Ihr Name"></div><div><label class="" for="r4">Telefon</label><input id="r4" type="tel" required placeholder="Für die Rückmeldung"></div></div><div class="est" data-out></div><button class="btn bv" type="submit">Anfrage senden →</button></form><div class="done "><h3>✓ Anfrage angekommen</h3><p>Vorschau-Demo: In der Live-Version landet Ihre Anfrage sofort bei myonecar.</p><button class="btn bo" type="button" data-again>Neue Anfrage</button></div></div></div></section>
+<section id="faq" style="padding-top:0"><div class="w"><details class="faq"><summary>Brauche ich eine Kreditkarte?</summary><p>Nein. Sie zahlen den Mietpreis vorab, eine Kaution entfällt bei Wohnsitz in Deutschland.</p></details><details class="faq"><summary>Wie funktioniert die Schlüsselübergabe?</summary><p>Kontaktlos über eine Keybox. Nach der Buchung erhalten Sie den Zugangscode.</p></details><details class="faq"><summary>Wie viele Kilometer sind inklusive?</summary><p>250 Kilometer pro Miettag sind frei.</p></details><details class="faq"><summary>Wie bin ich versichert?</summary><p>Vollkasko mit 1.000 € Selbstbeteiligung, auf Wunsch reduzierbar auf 500 €.</p></details><p class="note">Angaben in dieser Vorschau stammen aus öffentlich verfügbaren Quellen (Stand 10/2026) und werden vor dem Livegang gemeinsam mit Ihnen geprüft und ergänzt. Fotos: Unsplash (Symbolbilder). Kaution entfällt bei Wohnsitz in Deutschland.</p>
+  <p>Kontakt: <a href="tel:+491627517520">0162 7517520</a> · <a href="mailto:info@myonecar.de">info@myonecar.de</a> · Zeppelinstraße (Nähe Dutzendteich), Nürnberg</p></div></section>
 </main>
-
-<footer class="ft"><div class="wrap">
-  <span>© 2026 myonecar Autovermietung · Zeppelinstraße (Nähe Dutzendteich), Nürnberg</span>
-  <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a> · Fotos: myonecar · Website: <a href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a></span>
-</div></footer>
-
-<nav class="mb" aria-label="Schnellkontakt">
-  <a class="btn btn-o" href="tel:+491627517520"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>Anrufen</a><a class="btn btn-wa" href="https://wa.me/491627517520"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.6-4.8A9 9 0 1112 21a9 9 0 01-4.2-1z"/><path d="M9 9.5c.4 2 2.3 4 4.5 4.5l1-1.2 2 .9c-.3 1.3-1.4 2-2.6 1.8A7 7 0 018 10.1c-.1-1.2.6-2.3 1.8-2.6l.9 2z"/></svg>WhatsApp</a><a class="btn btn-p" href="#anfrage">Anfragen</a>
-</nav>
+<footer class=""><div class="w"><span>Entwurf für myonecar Autovermietung</span><span>Entwurf: <a style="color:inherit" href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a> · <a style="color:inherit" href="https://socialclip.art/impressum.html" target="_blank" rel="noopener">Impressum</a> · <a style="color:inherit" href="https://socialclip.art/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a></span></div></footer>
+<a class="fab btn bv" href="#buchen">Jetzt buchen →</a>
+<script>
+(function(){var d=document.getElementById('days'),dl=document.getElementById('dl'),t=document.getElementById('tot'),k=document.getElementById('km');
+function c(){var p=+document.querySelector('input[name=cc]:checked').value,n=+d.value;dl.textContent=n+(n==1?' Tag':' Tage');t.textContent=(p*n).toLocaleString('de-DE')+' €';k.textContent='inkl. '+(250*n).toLocaleString('de-DE')+' Freikilometer · keine Kaution*'}
+d.addEventListener('input',c);document.querySelectorAll('input[name=cc]').forEach(function(r){r.addEventListener('change',c)});c();})();
+</script>
 
 <script>
-(function(){
-  var D={"name": "myonecar", "wa": "491627517520", "mail": "info@myonecar.de", "tel": "tel:+491627517520", "fleet": [{"n": "Dacia Sandero", "c": "Kleinwagen", "p": 60}, {"n": "MG3", "c": "Kleinwagen Automatik", "p": 65}, {"n": "Dacia Dokker", "c": "Hochdach-Kombi", "p": 60}]};
-  var f=document.getElementById('bf'),veh=document.getElementById('veh'),d1=document.getElementById('d1'),d2=document.getElementById('d2');
-  var est=document.getElementById('est'),estl=document.getElementById('estl'),box=document.querySelector('.book');
-  function iso(d){return d.toISOString().slice(0,10)}
-  var t=new Date();t.setDate(t.getDate()+1);var u=new Date(t);u.setDate(u.getDate()+1);
-  d1.value=iso(t);d2.value=iso(u);d1.min=iso(new Date());d2.min=d1.value;
-  function days(){var a=new Date(d1.value),b=new Date(d2.value);var n=Math.round((b-a)/864e5);return isNaN(n)?0:Math.max(1,n)}
-  function calc(){
-    if(d2.value<d1.value){d2.value=d1.value}d2.min=d1.value;
-    var v=D.fleet[veh.value],n=days();
-    if(v.p){est.textContent='ab '+(v.p*n).toLocaleString('de-DE')+' €';estl.textContent='Geschätzt für '+n+(n==1?' Tag':' Tage')}
-    else{est.textContent='auf Anfrage';estl.textContent=n+(n==1?' Tag':' Tage')+' · individueller Preis'}
-  }
-  [veh,d1,d2].forEach(function(e){e.addEventListener('change',calc)});calc();
-  document.querySelectorAll('[data-pick]').forEach(function(a){a.addEventListener('click',function(){veh.value=a.getAttribute('data-pick');calc()})});
+document.querySelectorAll('form[data-demo]').forEach(function(f){
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var nm=document.getElementById('nm'),ph=document.getElementById('ph');
-    if(!nm.value.trim()){nm.focus();return} if(!ph.value.trim()){ph.focus();return}
-    box.classList.add('sent');
+    var bad=[].slice.call(f.querySelectorAll('[required]')).filter(function(i){return !i.value.trim()})[0];
+    if(bad){bad.focus();return}
+    f.closest('[data-box]').classList.add('sent');
   });
-  document.getElementById('again').addEventListener('click',function(){box.classList.remove('sent')});
-})();
+});
+document.querySelectorAll('[data-again]').forEach(function(a){a.addEventListener('click',function(){a.closest('[data-box]').classList.remove('sent')})});
+document.querySelectorAll('input[type=date]').forEach(function(d){d.min=new Date().toISOString().slice(0,10)});
 </script>
-</body>
-</html>
+
+<script>
+document.querySelectorAll('form[data-rent]').forEach(function(f){
+  var v=f.querySelector('[name=v]'),a=f.querySelector('[name=d1]'),b=f.querySelector('[name=d2]'),o=f.querySelector('[data-out]');
+  function iso(d){return d.toISOString().slice(0,10)}
+  var t=new Date();t.setDate(t.getDate()+1);var u=new Date(t);u.setDate(u.getDate()+1);
+  if(a&&!a.value){a.value=iso(t)} if(b&&!b.value){b.value=iso(u)}
+  function calc(){if(!o)return;if(b.value<a.value)b.value=a.value;var n=Math.max(1,Math.round((new Date(b.value)-new Date(a.value))/864e5)||1);
+    var p=+v.options[v.selectedIndex].dataset.p;o.textContent=p?('ca. '+(p*n).toLocaleString('de-DE')+' € für '+n+(n==1?' Tag':' Tage')):(n+(n==1?' Tag':' Tage')+' · Preis auf Anfrage')}
+  [v,a,b].forEach(function(e){e&&e.addEventListener('change',calc)});calc();
+});
+document.querySelectorAll('[data-pick]').forEach(function(x){x.addEventListener('click',function(){var s=document.querySelector('form[data-rent] [name=v]');if(s){s.value=x.dataset.pick;s.dispatchEvent(new Event('change'))}})});
+</script>
+</body></html>
