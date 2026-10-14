@@ -60,12 +60,17 @@ section{padding:110px 0}
 .phone-link{font-size:.88rem;font-weight:600;display:flex;gap:8px;align-items:center;color:#d4d4d8}
 .burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line)}
 .burger span{display:block;width:18px;height:2px;background:#fff;margin:4px auto;transition:.3s}
-.mobile-menu{position:fixed;inset:78px 0 0;background:var(--bg);z-index:58;padding:20px 16px calc(40px + env(safe-area-inset-bottom,0px));display:none;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.mobile-menu{position:fixed;inset:0;background:var(--bg);z-index:450;padding:0 16px calc(24px + env(safe-area-inset-bottom,0px));display:none;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.mm-head{display:flex;justify-content:space-between;align-items:center;height:78px;flex:none;position:sticky;top:0;background:var(--bg);z-index:1;border-bottom:1px solid var(--line)}
+.mm-head img{height:40px;width:auto}
+.mm-x{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:1.9rem;line-height:1;color:var(--text);background:var(--card)}
+.mm-links{display:flex;flex-direction:column;flex:none}
+.mm-cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;flex:none}
 body.menu-open{overflow:hidden}
 body.menu-open .wa,body.menu-open .mbar{display:none!important}
 .burger.x span:nth-child(1){transform:translateY(6px) rotate(45deg)}.burger.x span:nth-child(2){opacity:0}.burger.x span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 .mobile-menu.open{display:flex}
-.mobile-menu a{font-family:"Barlow Condensed";font-size:1.9rem;flex:none;font-weight:700;text-transform:uppercase;padding:8px 0;border-bottom:1px solid var(--line)}
+.mm-links a{font-family:"Barlow Condensed";font-size:1.9rem;flex:none;font-weight:700;text-transform:uppercase;padding:8px 0;border-bottom:1px solid var(--line)}
 
 /* hero */
 .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:140px 0 60px;overflow:hidden}
@@ -410,8 +415,12 @@ footer{border-top:1px solid var(--line);padding:60px 0 120px;color:var(--muted);
     </div>
   </div>
 </header>
-<div class="mobile-menu" id="mmenu" onclick="toggleMenu(false)">
+<div class="mobile-menu" id="mmenu" role="dialog" aria-label="Menü">
+  <div class="mm-head"><img src="img/logo.png" alt="Sportwagen Nürnberg"><button class="mm-x" onclick="toggleMenu(false)" aria-label="Menü schließen">×</button></div>
+  <nav class="mm-links" onclick="if(event.target.closest('a'))toggleMenu(false)">
   <a href="#flotte">Flotte</a><a href="#vergleich">Vergleich</a><a href="#ablauf">Ablauf</a><a href="#anlaesse">Anlässe</a><a href="#gutschein">Gutscheine</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a>
+  </nav>
+  <div class="mm-cta"><a class="btn btn-ghost" href="tel:+491637040640">Anrufen</a><button class="btn btn-red" onclick="toggleMenu(false);openBooking()">Jetzt buchen</button></div>
 </div>
 
 <!-- HERO -->
@@ -867,6 +876,7 @@ function closeCar(){const v=$('#gMain video');if(v)v.pause();$('#sheet').classLi
 function gal(d,i){gi=i!==undefined?i:(gi+d+gItems.length)%gItems.length;$('#gMain').innerHTML=galHTML(gi);$('#gWrap').classList.toggle('isvid',!!gItems[gi].v);$$('.thumbs img').forEach((t,j)=>t.classList.toggle('on',j===gi));}
 function lightbox(){if(gItems[gi].v)return;$('#lbImg').src=src(gItems[gi]);$('#lb').classList.add('open');}
 addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&$('#mmenu').classList.contains('open')){toggleMenu(false);return;}
   if(e.key==='Escape'){if($('#lb').classList.contains('open'))$('#lb').classList.remove('open');else if($('#bk').classList.contains('open'))closeBooking();else closeCar();}
   if($('#sheet').classList.contains('open')&&!$('#bk').classList.contains('open')){if(e.key==='ArrowRight')gal(1);if(e.key==='ArrowLeft')gal(-1);}
 });
