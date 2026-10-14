@@ -93,12 +93,21 @@ def img_src(name):
     if name not in _CACHE:
         import base64, io
         from PIL import Image
-        im = Image.open(os.path.join(OUT, "img", name + ".webp")).convert("RGB")
+        im = Image.open(os.path.join(OUT, "img", name + ".webp"))
+        im = im.convert("RGBA" if im.mode in ("RGBA", "LA", "P") else "RGB")
         im.thumbnail((1000, 1000))
         buf = io.BytesIO()
         im.save(buf, "WEBP", quality=62)
         _CACHE[name] = "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode()
     return _CACHE[name]
+
+
+ORIG_PREFIX = ("cut-", "map-", "loesch-", "es-", "myonecar-")
+
+
+def is_orig(name):
+    """Originalfoto des Vermieters (eigene Website / eigene Anzeigen)."""
+    return bool(name) and name.startswith(ORIG_PREFIX)
 
 
 def photo(name, alt, eager=False):
@@ -167,7 +176,7 @@ def intl(phone):
 # --------------------------------------------------------------------------
 BUSINESSES = [
     {
-        "slug": "map-rent-nuernberg", "hero_img": "van4",
+        "slug": "map-rent-nuernberg", "photo_credit": "MAP Rent (eigene Anzeigen), teils Unsplash-Symbolbilder", "hero_img": "map-sprinter",
         "name": "MAP Rent",
         "legal": "MAP Rent Fahrzeugvermietung",
         "city": "Nürnberg",
@@ -192,7 +201,7 @@ BUSINESSES = [
         "hero_vehicle": "transporter",
         "hero_color": "#f5b301",
         "fleet": [
-            {"name": "Mercedes Sprinter", "cat": "Transporter", "img": "van1", "kind": "transporter", "price": 79,
+            {"name": "Mercedes Sprinter", "cat": "Transporter", "img": "map-sprinter-seite", "kind": "transporter", "price": 79,
              "unit": "Tag (Mo–Fr, inkl. 100 km)", "specs": ["3 Sitze", "Führerschein B", "Wochenende 99 €/Tag", "3 Std. ab 60 €"]},
             {"name": "VW Crafter Maxi", "img": "van2", "cat": "Transporter", "kind": "transporter", "price": None,
              "specs": ["Hochdach, extralang", "Führerschein B", "Ideal für Umzüge"]},
@@ -223,7 +232,7 @@ BUSINESSES = [
                   "angle": "Lange Öffnungszeiten und Sonntagsbetrieb gehen auf der aktuellen Seite unter. Neue Seite stellt genau das in den Vordergrund und führt jeden Besucher direkt in den WhatsApp-Chat."},
     },
     {
-        "slug": "loesch-autovermietung-nuernberg", "hero_img": "nue1",
+        "slug": "loesch-autovermietung-nuernberg", "photo_credit": "Lösch Autovermietung", "hero_img": "loesch-hof",
         "name": "Lösch Autovermietung",
         "legal": "Lösch Autovermietung GmbH",
         "city": "Nürnberg",
@@ -248,11 +257,11 @@ BUSINESSES = [
         "hero_vehicle": "van",
         "hero_color": "#1f4d36",
         "fleet": [
-            {"name": "Pkw", "cat": "Kompakt bis Mittelklasse", "img": "sm2", "kind": "sedan", "price": 70, "specs": ["5 Sitze", "Alltag, Reise, Ersatzwagen"]},
-            {"name": "Transporter", "cat": "Sprinter, Crafter & Co.", "img": "van1", "kind": "transporter", "price": 64, "specs": ["Führerschein B", "Umzug & Gewerbe"]},
-            {"name": "Vans & Kleinbusse", "img": "van9", "cat": "7- bis 9-Sitzer", "kind": "van", "price": 114, "specs": ["bis 9 Sitze", "Verein, Familie, Ausflug"]},
-            {"name": "Lkw", "cat": "3,5 t bis 7,5 t", "img": "trk1", "kind": "truck", "price": 94, "specs": ["Koffer & Plane", "mit Hebebühne"]},
-            {"name": "Anhänger", "cat": "Plane & Autotransport", "img": "tr1", "kind": "trailer", "price": 29, "specs": ["Planenanhänger", "Autotransporter"]},
+            {"name": "Pkw", "cat": "Kompakt bis Mittelklasse", "img": "cut-loesch-pkw", "kind": "sedan", "price": 70, "specs": ["5 Sitze", "Alltag, Reise, Ersatzwagen"]},
+            {"name": "Transporter", "cat": "Sprinter, Crafter & Co.", "img": "cut-loesch-transporter", "kind": "transporter", "price": 64, "specs": ["Führerschein B", "Umzug & Gewerbe"]},
+            {"name": "Vans & Kleinbusse", "img": "cut-loesch-van", "cat": "7- bis 9-Sitzer", "kind": "van", "price": 114, "specs": ["bis 9 Sitze", "Verein, Familie, Ausflug"]},
+            {"name": "Lkw", "cat": "3,5 t bis 7,5 t", "img": "cut-loesch-lkw", "kind": "truck", "price": 94, "specs": ["Koffer & Plane", "mit Hebebühne"]},
+            {"name": "Anhänger", "cat": "Plane & Autotransport", "img": "cut-loesch-anhaenger", "kind": "trailer", "price": 29, "specs": ["Planenanhänger", "Autotransporter"]},
         ],
         "usps": [
             ("heart", "Familie statt Konzern", "Seit 1932 in Nürnberg-Mögeldorf. Sie sprechen mit Menschen, die den Betrieb führen – nicht mit einer Hotline."),
@@ -276,7 +285,7 @@ BUSINESSES = [
                   "angle": "Über 90 Jahre Familiengeschichte + eigene Werkstatt sind ein Vertrauensvorsprung, den kein Konzern hat. Neue Seite ist fertig statt „im Aufbau“."},
     },
     {
-        "slug": "es-autovermietung-nuernberg", "hero_img": "van8",
+        "slug": "es-autovermietung-nuernberg", "photo_credit": "ES Autovermietung", "hero_img": "es-firmenkunden",
         "name": "ES Autovermietung",
         "legal": "ES Europa-Service Autovermietung",
         "city": "Nürnberg",
@@ -301,10 +310,10 @@ BUSINESSES = [
         "hero_vehicle": "van",
         "hero_color": "#0b3a82",
         "fleet": [
-            {"name": "Pkw", "cat": "Alltag & Reise", "img": "sm1", "kind": "sedan", "price": None, "specs": ["5 Sitze", "kurzfristig verfügbar"]},
-            {"name": "Kleinbus", "cat": "bis 9 Sitze", "img": "van9", "kind": "van", "price": None, "specs": ["Gruppen & Vereine", "Urlaub & Ausflug"]},
-            {"name": "Transporter", "cat": "mehrere Größen", "img": "van2", "kind": "transporter", "price": None, "specs": ["Führerschein B", "Umzug & Gewerbe"]},
-            {"name": "Unfallersatzwagen", "img": "suv2", "cat": "Service", "kind": "suv", "price": None, "specs": ["Abwicklung mit Versicherung", "schnell mobil"]},
+            {"name": "Pkw", "cat": "Alltag & Reise", "img": "cut-es-pkw", "kind": "sedan", "price": None, "specs": ["5 Sitze", "kurzfristig verfügbar"]},
+            {"name": "Kleinbus", "cat": "bis 9 Sitze", "img": "cut-es-van", "kind": "van", "price": None, "specs": ["Gruppen & Vereine", "Urlaub & Ausflug"]},
+            {"name": "Transporter", "cat": "mehrere Größen", "img": "cut-es-transporter", "kind": "transporter", "price": None, "specs": ["Führerschein B", "Umzug & Gewerbe"]},
+            {"name": "Unfallersatzwagen", "img": "cut-es-suv", "cat": "Service", "kind": "suv", "price": None, "specs": ["Abwicklung mit Versicherung", "schnell mobil"]},
         ],
         "usps": [
             ("users", "Ansprechpartner mit Namen", "Kein Callcenter, keine Warteschleife. Sie rufen an – wir kennen Ihr Anliegen."),
@@ -328,7 +337,7 @@ BUSINESSES = [
                   "angle": "Fokus auf Firmenkunden & Unfallersatz mit eigener Landingpage + Anfrageformular, das echte Leads erzeugt. Eher Upgrade/Relaunch-Angebot als Neubau."},
     },
     {
-        "slug": "myonecar-nuernberg", "hero_img": "sm5",
+        "slug": "myonecar-nuernberg", "photo_credit": "myonecar", "hero_img": "myonecar-zeppelinfeld",
         "name": "myonecar",
         "legal": "myonecar Autovermietung",
         "city": "Nürnberg",
@@ -353,9 +362,9 @@ BUSINESSES = [
         "hero_vehicle": "sedan",
         "hero_color": "#5b3df5",
         "fleet": [
-            {"name": "Dacia Sandero", "img": "sm4", "cat": "Kleinwagen", "kind": "sedan", "price": 60, "specs": ["5 Sitze", "250 km/Tag frei", "ideal für die Stadt"]},
-            {"name": "MG3", "img": "sm1", "cat": "Kleinwagen Automatik", "kind": "sedan", "price": 65, "specs": ["5 Sitze", "Automatik", "250 km/Tag frei"]},
-            {"name": "Dacia Dokker", "img": "van2", "cat": "Hochdach-Kombi", "kind": "van", "price": 60, "specs": ["viel Laderaum", "Ikea-tauglich", "250 km/Tag frei"]},
+            {"name": "Dacia Sandero", "img": "cut-myonecar-sandero", "cat": "Kleinwagen", "kind": "sedan", "price": 60, "specs": ["5 Sitze", "250 km/Tag frei", "ideal für die Stadt"]},
+            {"name": "MG3", "img": "cut-myonecar-mg3", "cat": "Kleinwagen Automatik", "kind": "sedan", "price": 65, "specs": ["5 Sitze", "Automatik", "250 km/Tag frei"]},
+            {"name": "Dacia Dokker", "img": "cut-myonecar-dokker", "cat": "Hochdach-Kombi", "kind": "van", "price": 60, "specs": ["viel Laderaum", "Ikea-tauglich", "250 km/Tag frei"]},
         ],
         "usps": [
             ("euro", "Keine Kaution", "Mit Wohnsitz in Deutschland zahlen Sie nur den Mietpreis vorab. Kein geblockter Betrag auf der Kreditkarte."),
@@ -629,6 +638,8 @@ section{padding:64px 0}
 .vc .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .vc:hover .pic img{transform:scale(1.05)}
 img[src$="van2.webp"]{object-position:50% 82%}
+.vc .pic.cut{background:#fff}
+.vc .pic.cut img{object-fit:contain;padding:6px 8px}
 .vc .pic svg{padding:22px 14px 12px}
 .sym{position:absolute;right:8px;bottom:8px;font-size:.66rem;background:rgba(0,0,0,.55);color:#fff;padding:2px 7px;border-radius:999px}
 .vc .cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary-text)}
@@ -741,7 +752,7 @@ def build(b):
     for i, v in enumerate(b["fleet"]):
         specs = "".join(f"<li>{esc(s)}</li>" for s in v["specs"])
         fleet.append(
-            f'<article class="vc reveal"><div class="pic">{photo(v.get("img"), v["name"] + " – Symbolbild") if v.get("img") else svg(v["kind"], b["hero_color"])}<span class="sym">Symbolbild</span></div>'
+            f'<article class="vc reveal"><div class="pic{' cut' if v.get('img','').startswith('cut-') else ''}">{photo(v.get("img"), v["name"]) if v.get("img") else svg(v["kind"], b["hero_color"])}{'' if is_orig(v.get('img')) else '<span class="sym">Symbolbild</span>'}</div>'
             f'<span class="cat">{esc(v["cat"])}</span><h3>{esc(v["name"])}</h3><ul>{specs}</ul>'
             f'<div class="foot">{price_html(v)}<a href="#anfrage" class="btn btn-o btn-sm" data-pick="{i}">Anfragen</a></div></article>')
 
@@ -885,7 +896,7 @@ def build(b):
 
 <footer class="ft"><div class="wrap">
   <span>© 2026 {esc(b["legal"])} · {esc(full_addr)}</span>
-  <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a> · Fotos: Unsplash (Symbolbilder) · Website: <a href="{AGENCY["url"]}" target="_blank" rel="noopener">{AGENCY["name"]}</a></span>
+  <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a> · {"Fotos: " + b["photo_credit"] + " ·" if b.get("photo_credit") else "Fotos: Unsplash (Symbolbilder) ·"} Website: <a href="{AGENCY["url"]}" target="_blank" rel="noopener">{AGENCY["name"]}</a></span>
 </div></footer>
 
 <nav class="mb" aria-label="Schnellkontakt">

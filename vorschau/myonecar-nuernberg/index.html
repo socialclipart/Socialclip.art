@@ -102,6 +102,8 @@ section{padding:64px 0}
 .vc .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .vc:hover .pic img{transform:scale(1.05)}
 img[src$="van2.webp"]{object-position:50% 82%}
+.vc .pic.cut{background:#fff}
+.vc .pic.cut img{object-fit:contain;padding:6px 8px}
 .vc .pic svg{padding:22px 14px 12px}
 .sym{position:absolute;right:8px;bottom:8px;font-size:.66rem;background:rgba(0,0,0,.55);color:#fff;padding:2px 7px;border-radius:999px}
 .vc .cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary-text)}
@@ -205,7 +207,7 @@ details p{padding:0 0 20px;color:var(--muted)}
     <ul class="trust"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>4,9 ★ bei 150 Google-Bewertungen</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M16 7l2 2M14 9l2 2"/></svg>24/7 kontaktlose Abholung</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6.5A7 7 0 107 17.5 7 7 0 0018 17.5M4 10.5h9M4 13.5h9"/></svg>0 € Kaution*</li></ul>
   </div>
   <div>
-    <div class="stage"><img src="../img/sm5.webp" alt="myonecar – ein auto. ein preis. einfach." decoding="async" width="1400" height="933"><div class="badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>4,9 ★ bei 150 Google-Bewertungen</span></div></div>
+    <div class="stage"><img src="../img/myonecar-zeppelinfeld.webp" alt="myonecar – ein auto. ein preis. einfach." decoding="async" width="1400" height="933"><div class="badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>4,9 ★ bei 150 Google-Bewertungen</span></div></div>
     <div class="book" id="anfrage">
       <form id="bf" novalidate>
         <h3>Verfügbarkeit anfragen</h3>
@@ -230,7 +232,7 @@ details p{padding:0 0 20px;color:var(--muted)}
 
 <section id="fahrzeuge"><div class="wrap">
   <div class="sh"><div><span class="eyebrow">Unsere Flotte</span><h2>Das passende Fahrzeug<br>für jedes Vorhaben.</h2></div><p>Klare Preise, gepflegte Fahrzeuge und ehrliche Beratung – direkt vom Vermieter aus Nürnberg.</p></div>
-  <div class="grid fleet"><article class="vc reveal"><div class="pic"><img src="../img/sm4.webp" alt="Dacia Sandero – Symbolbild" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Kleinwagen</span><h3>Dacia Sandero</h3><ul><li>5 Sitze</li><li>250 km/Tag frei</li><li>ideal für die Stadt</li></ul><div class="foot"><div class="price"><small>ab</small><b>60 €</b> <small>pro Tag</small></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="0">Anfragen</a></div></article><article class="vc reveal"><div class="pic"><img src="../img/sm1.webp" alt="MG3 – Symbolbild" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Kleinwagen Automatik</span><h3>MG3</h3><ul><li>5 Sitze</li><li>Automatik</li><li>250 km/Tag frei</li></ul><div class="foot"><div class="price"><small>ab</small><b>65 €</b> <small>pro Tag</small></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="1">Anfragen</a></div></article><article class="vc reveal"><div class="pic"><img src="../img/van2.webp" alt="Dacia Dokker – Symbolbild" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Hochdach-Kombi</span><h3>Dacia Dokker</h3><ul><li>viel Laderaum</li><li>Ikea-tauglich</li><li>250 km/Tag frei</li></ul><div class="foot"><div class="price"><small>ab</small><b>60 €</b> <small>pro Tag</small></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="2">Anfragen</a></div></article></div>
+  <div class="grid fleet"><article class="vc reveal"><div class="pic cut"><img src="../img/cut-myonecar-sandero.webp" alt="Dacia Sandero" decoding="async" loading="lazy" width="1400" height="933"></div><span class="cat">Kleinwagen</span><h3>Dacia Sandero</h3><ul><li>5 Sitze</li><li>250 km/Tag frei</li><li>ideal für die Stadt</li></ul><div class="foot"><div class="price"><small>ab</small><b>60 €</b> <small>pro Tag</small></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="0">Anfragen</a></div></article><article class="vc reveal"><div class="pic cut"><img src="../img/cut-myonecar-mg3.webp" alt="MG3" decoding="async" loading="lazy" width="1400" height="933"></div><span class="cat">Kleinwagen Automatik</span><h3>MG3</h3><ul><li>5 Sitze</li><li>Automatik</li><li>250 km/Tag frei</li></ul><div class="foot"><div class="price"><small>ab</small><b>65 €</b> <small>pro Tag</small></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="1">Anfragen</a></div></article><article class="vc reveal"><div class="pic cut"><img src="../img/cut-myonecar-dokker.webp" alt="Dacia Dokker" decoding="async" loading="lazy" width="1400" height="933"></div><span class="cat">Hochdach-Kombi</span><h3>Dacia Dokker</h3><ul><li>viel Laderaum</li><li>Ikea-tauglich</li><li>250 km/Tag frei</li></ul><div class="foot"><div class="price"><small>ab</small><b>60 €</b> <small>pro Tag</small></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="2">Anfragen</a></div></article></div>
 </div></section>
 
 <section id="vorteile" class="alt"><div class="wrap">
@@ -267,7 +269,7 @@ details p{padding:0 0 20px;color:var(--muted)}
 
 <footer class="ft"><div class="wrap">
   <span>© 2026 myonecar Autovermietung · Zeppelinstraße (Nähe Dutzendteich), Nürnberg</span>
-  <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a> · Fotos: Unsplash (Symbolbilder) · Website: <a href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a></span>
+  <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a> · Fotos: myonecar · Website: <a href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a></span>
 </div></footer>
 
 <nav class="mb" aria-label="Schnellkontakt">
