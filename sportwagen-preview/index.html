@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sportwagen Nürnberg – Sportwagen & Luxusautos mieten</title>
+<meta name="description" content="Audi RS6, RS Q8, BMW M4 Competition, Mercedes C63 AMG & mehr in Nürnberg mieten. Vollkasko inklusive, 100 % digital, Preise ab 100 €/Tag. Jetzt online buchen.">
+<meta property="og:title" content="Sportwagen Nürnberg – Das ultimative Fahrerlebnis">
+<meta property="og:description" content="Sport- und Luxusautos in Nürnberg mieten. Vollkasko inklusive, 100 % digital.">
+<meta property="og:image" content="img/rsq8-4.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"AutoRental","name":"Sportwagen Nürnberg","telephone":"+491637040640","address":{"@type":"PostalAddress","addressLocality":"Nürnberg","addressCountry":"DE"},"priceRange":"€€€","sameAs":["https://instagram.com/sportwagen_nuernberg","https://www.tiktok.com/@sportwagennuernberg"]}
+</script>
+<style>
+:root{
+  --bg:#0a0a0b;--bg2:#111113;--card:#16161a;--line:#26262c;--text:#f4f4f5;--muted:#9a9aa3;
+  --red:#d62737;--red2:#ff3b4b;--gold:#daa126;--radius:18px;
+  --shadow:0 20px 60px -20px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+input,select,textarea{font:inherit;color:var(--text)}
+.wrap{width:min(1240px,100% - 32px);margin-inline:auto}
+h1,h2,h3,.cond{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:1}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red2);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--red)}
+h2{font-size:clamp(2.3rem,5vw,4rem);font-weight:800;margin:.35em 0 .3em}
+.lead{color:var(--muted);max-width:620px;font-size:1.05rem}
+section{padding:110px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 26px;border-radius:999px;font-weight:600;font-size:.95rem;transition:.25s;white-space:nowrap}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 30px -10px var(--red)}
+.btn-red:hover{background:var(--red2);transform:translateY(-2px)}
+.btn-ghost{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.btn-sm{padding:10px 18px;font-size:.85rem}
+.icon{width:20px;height:20px;flex:none}
+
+/* demo badge */
+.demo{position:fixed;left:16px;bottom:16px;z-index:90;background:#fff;color:#111;font-size:.75rem;font-weight:600;padding:8px 12px 8px 14px;border-radius:999px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow)}
+.demo button{color:#111;font-size:1rem;line-height:1}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;transition:.3s}
+.nav.scrolled{background:rgba(10,10,11,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:78px}
+.logo img{height:44px;width:auto}
+.menu{display:flex;gap:30px;font-size:.92rem;font-weight:500}
+.menu a{color:#d4d4d8;position:relative}
+.menu a:hover{color:#fff}
+.menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--red);transition:.25s}
+.menu a:hover::after{width:100%}
+.nav-r{display:flex;gap:12px;align-items:center}
+.phone-link{font-size:.88rem;font-weight:600;display:flex;gap:8px;align-items:center;color:#d4d4d8}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line)}
+.burger span{display:block;width:18px;height:2px;background:#fff;margin:4px auto;transition:.3s}
+.mobile-menu{position:fixed;inset:78px 0 0;background:var(--bg);z-index:49;padding:30px 16px;display:none;flex-direction:column;gap:6px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:"Barlow Condensed";font-size:2.2rem;font-weight:700;text-transform:uppercase;padding:8px 0;border-bottom:1px solid var(--line)}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:140px 0 60px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-1}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 60%;transform:scale(1.08);animation:zoom 14s ease-out forwards}
+@keyframes zoom{to{transform:scale(1)}}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,.55) 0%,rgba(10,10,11,.15) 35%,rgba(10,10,11,.75) 72%,var(--bg) 100%),linear-gradient(90deg,rgba(10,10,11,.7),transparent 60%)}
+.hero h1{font-size:clamp(3.4rem,10vw,8.5rem);font-weight:800;line-height:.88;margin:18px 0 22px}
+.hero h1 em{font-style:normal;color:transparent;-webkit-text-stroke:2px #fff}
+.hero p.lead{color:#d4d4d8;font-size:1.15rem}
+.hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.quick{margin-top:56px;background:rgba(22,22,26,.8);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:12px;display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:10px}
+.quick label{display:block;padding:10px 16px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid transparent;transition:.2s}
+.quick label:focus-within{border-color:var(--red)}
+.quick small{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:600}
+.quick select,.quick input{width:100%;background:none;border:0;outline:0;font-weight:600;padding-top:2px;color-scheme:dark}
+.quick select option{background:var(--card)}
+.trust{display:flex;gap:32px;flex-wrap:wrap;margin-top:30px;color:#d4d4d8;font-size:.9rem}
+.trust div{display:flex;gap:9px;align-items:center}
+.trust svg{color:var(--red2)}
+
+/* marquee */
+.marquee{border-block:1px solid var(--line);overflow:hidden;padding:22px 0;background:var(--bg2)}
+.marquee-track{display:flex;gap:60px;width:max-content;animation:mq 35s linear infinite}
+.marquee span{font-family:"Barlow Condensed";font-size:2rem;font-weight:700;text-transform:uppercase;color:#3a3a42;display:flex;align-items:center;gap:60px;white-space:nowrap}
+.marquee span::after{content:"✦";color:var(--red);font-size:1rem}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:var(--radius);overflow:hidden;margin-top:50px}
+.stat{background:var(--bg);padding:34px 26px}
+.stat b{font-family:"Barlow Condensed";font-size:3.4rem;font-weight:800;display:block;line-height:1}
+.stat b sup{font-size:1.4rem;color:var(--red2)}
+.stat>span{color:var(--muted);font-size:.9rem}
+
+/* fleet */
+.fleet-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:10px 18px;border-radius:999px;border:1px solid var(--line);font-size:.88rem;font-weight:500;color:#d4d4d8;transition:.2s}
+.chip:hover{border-color:#555}
+.chip.active{background:#fff;color:#000;border-color:#fff}
+.sort{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:10px 16px;font-size:.88rem;color-scheme:dark}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
+.car{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:.35s;position:relative}
+.car:hover{transform:translateY(-6px);border-color:#3a3a42;box-shadow:var(--shadow)}
+.car-img{aspect-ratio:4/3;position:relative;overflow:hidden;background:#000}
+.car-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s,transform .8s}
+.car-img img.alt{opacity:0}
+.car:hover .car-img img.alt{opacity:1}
+.car:hover .car-img img{transform:scale(1.05)}
+.tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:999px}
+.tag.hot{background:var(--red)}
+.car-body{padding:22px}
+.car-body h3{font-size:1.9rem;font-weight:700}
+.car-body .sub{color:var(--muted);font-size:.88rem;margin-top:4px}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}
+.specs div{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.specs b{font-family:"Barlow Condensed";font-size:1.35rem;display:block;line-height:1.1}
+.specs small{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em}
+.car-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:16px}
+.price small{color:var(--muted);font-size:.78rem;display:block}
+.price b{font-family:"Barlow Condensed";font-size:2rem}
+.price b span{font-size:1rem;color:var(--muted);font-family:Inter;font-weight:500}
+.arrow{width:46px;height:46px;border-radius:50%;background:var(--red);display:grid;place-items:center;transition:.3s}
+.car:hover .arrow{transform:rotate(-45deg)}
+.soon{display:grid;place-items:center;text-align:center;min-height:420px;border-style:dashed;cursor:default}
+.soon:hover{transform:none;box-shadow:none}
+.soon h3{font-size:2.4rem;color:#3a3a42}
+
+/* compare */
+.table-wrap{overflow-x:auto;margin-top:40px;border:1px solid var(--line);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th,td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:.92rem}
+th{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--bg2);font-weight:600;cursor:pointer;user-select:none}
+th:hover{color:#fff}
+tr:last-child td{border-bottom:0}
+tbody tr{transition:.2s;cursor:pointer}
+tbody tr:hover{background:rgba(255,255,255,.03)}
+td b{font-family:"Barlow Condensed";font-size:1.25rem}
+.bar{height:6px;background:var(--line);border-radius:6px;width:110px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--red2))}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:50px;counter-reset:s}
+.step{padding:30px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--card),var(--bg));position:relative;overflow:hidden}
+.step::before{counter-increment:s;content:"0" counter(s);position:absolute;right:16px;top:4px;font-family:"Barlow Condensed";font-size:5.5rem;font-weight:800;color:rgba(255,255,255,.04)}
+.step .ic{width:52px;height:52px;border-radius:14px;background:rgba(214,39,55,.12);color:var(--red2);display:grid;place-items:center;margin-bottom:22px}
+.step h3{font-size:1.6rem;margin-bottom:8px}
+.step p{color:var(--muted);font-size:.92rem}
+
+/* occasions */
+.occ{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:50px}
+.occ-card{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;cursor:pointer}
+.occ-card img{width:100%;height:100%;object-fit:cover;transition:.7s}
+.occ-card:hover img{transform:scale(1.08)}
+.occ-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.92))}
+.occ-card .t{position:absolute;inset:auto 0 0;padding:24px;z-index:2}
+.occ-card h3{font-size:2rem}
+.occ-card p{color:#c4c4cc;font-size:.88rem;max-height:0;overflow:hidden;transition:.4s;opacity:0}
+.occ-card:hover p,.occ-card:focus p{max-height:160px;opacity:1;margin-top:8px}
+
+/* voucher */
+.voucher{display:grid;grid-template-columns:1fr 1.1fr;gap:50px;align-items:center;margin-top:50px}
+.vform{display:grid;gap:14px}
+.field small{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:600;margin-bottom:6px}
+.input{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;outline:0;transition:.2s;color-scheme:dark}
+.input:focus{border-color:var(--red)}
+textarea.input{min-height:90px;resize:vertical}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-size:.9rem;font-weight:500}
+.seg button.active{border-color:var(--red);background:rgba(214,39,55,.15)}
+.vcard{aspect-ratio:1.7/1;border-radius:24px;position:relative;overflow:hidden;padding:30px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 40px 80px -30px rgba(214,39,55,.45);transform:perspective(1200px) rotateY(-8deg) rotateX(4deg);transition:.5s}
+.vcard:hover{transform:none}
+.vcard img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:.4s}
+.vcard::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(120deg,rgba(0,0,0,.92) 30%,rgba(0,0,0,.35)),radial-gradient(circle at 100% 0,rgba(214,39,55,.5),transparent 50%)}
+.vcard .top{display:flex;justify-content:space-between;align-items:flex-start}
+.vcard .top img{height:36px;width:auto}
+.vcard .val{font-family:"Barlow Condensed";font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;line-height:.95;text-transform:uppercase}
+.vcard .msg{color:#d4d4d8;font-size:.92rem;margin-top:10px;max-width:80%;font-style:italic}
+.vcard .bot{display:flex;justify-content:space-between;align-items:flex-end;font-size:.78rem;color:#a1a1aa;letter-spacing:.08em;text-transform:uppercase}
+.vcard .code{font-family:monospace;color:#fff;font-size:.95rem;letter-spacing:.2em}
+
+/* insta */
+.insta{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:40px}
+.insta a{aspect-ratio:1;overflow:hidden;border-radius:12px;position:relative}
+.insta img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.insta a:hover img{transform:scale(1.1);filter:brightness(.6)}
+
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1.5fr;gap:60px;margin-top:20px}
+.qa{border-bottom:1px solid var(--line)}
+.qa button{width:100%;text-align:left;padding:24px 0;display:flex;justify-content:space-between;gap:20px;font-weight:600;font-size:1.05rem}
+.qa button .pm{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:none;transition:.3s}
+.qa.open .pm{transform:rotate(45deg);background:var(--red);border-color:var(--red)}
+.qa .a{max-height:0;overflow:hidden;transition:max-height .4s;color:var(--muted)}
+.qa .a p{padding-bottom:24px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:50px}
+.cbox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:34px}
+.cline{display:flex;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.cline:last-child{border:0}
+.cline .ic{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.05);display:grid;place-items:center;flex:none}
+.cline small{color:var(--muted);display:block;font-size:.8rem}
+.cline b{font-weight:600}
+.cta-band{margin-top:24px;border-radius:var(--radius);padding:50px;background:linear-gradient(120deg,var(--red),#7a0f19);position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.cta-band h3{font-size:clamp(2rem,4vw,3.2rem);font-weight:800}
+
+footer{border-top:1px solid var(--line);padding:60px 0 120px;color:var(--muted);font-size:.9rem}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.foot h4{color:#fff;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+.foot a{display:block;padding:4px 0}
+.foot a:hover{color:#fff}
+.socials{display:flex;gap:10px;margin-top:20px}
+.socials a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center}
+.socials a:hover{background:#fff;color:#000}
+
+/* modal (car detail) */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:100;opacity:0;pointer-events:none;transition:.3s}
+.overlay.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;top:0;right:0;bottom:0;width:min(980px,100%);background:var(--bg);z-index:101;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);overflow-y:auto;border-left:1px solid var(--line)}
+.sheet.open{transform:none}
+.sheet-close{position:sticky;top:16px;float:right;margin:16px 16px 0 0;z-index:5;width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;font-size:1.3rem}
+.gal-main{aspect-ratio:16/10;background:#000;position:relative;cursor:zoom-in}
+.gal-main img{width:100%;height:100%;object-fit:cover}
+.gal-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);display:grid;place-items:center;font-size:1.2rem}
+.gal-nav.p{left:16px}.gal-nav.n{right:16px}
+.thumbs{display:flex;gap:8px;padding:12px 24px;overflow-x:auto}
+.thumbs img{width:96px;height:66px;object-fit:cover;border-radius:10px;opacity:.45;cursor:pointer;border:2px solid transparent;flex:none;transition:.2s}
+.thumbs img.on{opacity:1;border-color:var(--red)}
+.sheet-body{padding:20px 40px 60px}
+.sheet-body h2{font-size:clamp(2.4rem,5vw,3.6rem)}
+.big-specs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:28px 0}
+.big-specs div{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--card)}
+.big-specs b{font-family:"Barlow Condensed";font-size:1.8rem;display:block}
+.big-specs small{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em}
+.tariffs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0}
+.tariff{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--card);position:relative;cursor:pointer;transition:.2s}
+.tariff:hover{border-color:#555}
+.tariff.best{border-color:var(--red);background:linear-gradient(180deg,rgba(214,39,55,.14),var(--card))}
+.tariff .badge{position:absolute;top:-11px;left:16px;background:var(--red);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.tariff h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.tariff .when{font-size:.85rem;margin-top:2px}
+.tariff b{font-family:"Barlow Condensed";font-size:2.3rem;display:block;margin-top:12px}
+.tariff .km{font-size:.85rem;color:#d4d4d8}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.kv div{display:flex;justify-content:space-between;padding:14px 16px;border:1px solid var(--line);border-radius:12px;font-size:.92rem}
+.kv span{color:var(--muted)}
+.h-sm{font-size:1.5rem;margin:34px 0 4px}
+.sticky-book{position:sticky;bottom:0;background:rgba(10,10,11,.92);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:200;display:none;place-items:center}
+.lightbox.open{display:grid}
+.lightbox img{max-width:94vw;max-height:88vh;border-radius:8px}
+.lightbox .x{position:absolute;top:20px;right:20px;font-size:2rem;width:50px;height:50px}
+
+/* booking wizard */
+.bk{position:fixed;inset:0;z-index:150;display:none;background:var(--bg);overflow-y:auto}
+.bk.open{display:block}
+.bk-top{position:sticky;top:0;background:rgba(10,10,11,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:5}
+.bk-top .wrap{display:flex;justify-content:space-between;align-items:center;height:72px}
+.progress{display:flex;gap:6px;align-items:center}
+.progress span{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+.progress span i{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:.75rem;font-weight:700}
+.progress span.on{color:#fff}.progress span.on i{background:var(--red);border-color:var(--red)}
+.progress span.done i{background:#fff;color:#000;border-color:#fff}
+.progress .ln{width:28px;height:1px;background:var(--line)}
+.bk-grid{display:grid;grid-template-columns:1fr 380px;gap:40px;padding:40px 0 80px}
+.bk-step{display:none;animation:fade .4s}
+.bk-step.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+.bk h2{font-size:clamp(2rem,4vw,3rem);margin-top:0}
+.pick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.pick button{border:1px solid var(--line);border-radius:16px;overflow:hidden;text-align:left;background:var(--card);transition:.2s}
+.pick button.on{border-color:var(--red);box-shadow:0 0 0 1px var(--red)}
+.pick img{aspect-ratio:16/10;object-fit:cover;width:100%}
+.pick div{padding:12px 14px}
+.pick b{font-family:"Barlow Condensed";font-size:1.25rem;text-transform:uppercase;display:block;line-height:1.1}
+.pick small{color:var(--muted)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.opt{display:flex;gap:16px;align-items:center;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--card);cursor:pointer;margin-top:10px;transition:.2s}
+.opt:hover{border-color:#444}
+.opt.on{border-color:var(--red);background:rgba(214,39,55,.08)}
+.opt .rd{width:22px;height:22px;border-radius:50%;border:2px solid #555;flex:none;display:grid;place-items:center}
+.opt.on .rd{border-color:var(--red)}
+.opt.on .rd::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--red)}
+.opt .ck{border-radius:6px}
+.opt.on .ck::after{border-radius:2px}
+.opt div{flex:1}
+.opt small{color:var(--muted);display:block;font-size:.85rem}
+.opt b.p{font-family:"Barlow Condensed";font-size:1.4rem}
+.summary{position:sticky;top:100px;align-self:start;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card)}
+.summary img{aspect-ratio:16/9;object-fit:cover;width:100%}
+.summary .in{padding:22px}
+.summary h3{font-size:1.8rem}
+.sline{display:flex;justify-content:space-between;font-size:.9rem;padding:8px 0;color:#d4d4d8;gap:10px}
+.sline span:first-child{color:var(--muted)}
+.total{border-top:1px solid var(--line);margin-top:10px;padding-top:16px;display:flex;justify-content:space-between;align-items:baseline}
+.total b{font-family:"Barlow Condensed";font-size:2.6rem}
+.note{font-size:.75rem;color:var(--muted);margin-top:8px}
+.bk-nav{display:flex;justify-content:space-between;margin-top:34px;gap:12px}
+.err{color:var(--red2);font-size:.85rem;margin-top:10px;min-height:1.2em}
+.success{text-align:center;padding:40px 0}
+.success .ok{width:90px;height:90px;border-radius:50%;background:rgba(34,197,94,.15);color:#22c55e;display:grid;place-items:center;margin:0 auto 24px;font-size:2.6rem}
+.cal-hint{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.cal-hint button{font-size:.82rem;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.cal-hint button:hover{border-color:var(--red)}
+
+/* floating */
+.wa{position:fixed;right:20px;bottom:20px;z-index:60;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px -5px rgba(37,211,102,.6);transition:.3s}
+.wa:hover{transform:scale(1.08)}
+.mbar{display:none}
+.toast{position:fixed;left:50%;top:24px;transform:translate(-50%,-200px);background:#fff;color:#000;padding:12px 20px;border-radius:999px;font-weight:600;font-size:.9rem;z-index:300;transition:.4s}
+.toast.show{transform:translate(-50%,0)}
+
+.reveal{opacity:0;transform:translateY(40px);transition:1s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:1024px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .steps,.occ{grid-template-columns:repeat(2,1fr)}
+  .menu,.phone-link{display:none}.burger{display:block}
+  .quick{grid-template-columns:1fr 1fr}
+  .quick .btn{grid-column:1/-1}
+  .bk-grid{grid-template-columns:1fr}
+  .summary{position:static}
+  .tariffs{grid-template-columns:repeat(2,1fr)}
+  .insta{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:720px){
+  section{padding:80px 0}
+  .hero-bg img{object-position:68% 60%}
+  .nav .btn{display:none}
+  .grid,.steps,.contact,.voucher,.faq,.foot{grid-template-columns:1fr}
+  .occ{grid-template-columns:1fr 1fr}
+  .occ-card p{display:none}
+  .stats{grid-template-columns:1fr 1fr}
+  .quick{grid-template-columns:1fr}
+  .big-specs{grid-template-columns:1fr 1fr}
+  .tariffs,.kv,.row2{grid-template-columns:1fr}
+  .pick{grid-template-columns:1fr 1fr}
+  .sheet-body{padding:16px 16px 40px}
+  .sticky-book{padding:14px 16px}
+  .thumbs{padding:10px 16px}
+  .progress span em{display:none}
+  .wa{bottom:86px}
+  .demo{bottom:86px}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:55;padding:12px 16px;gap:10px;background:rgba(10,10,11,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .mbar .btn{flex:1;padding:14px}
+  .vcard{transform:none}
+  .cta-band{padding:30px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-phone2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2v-4l-2-5H5L3 13v4h2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/><path d="M10 17h4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.8 5.8 0 1 0 5 5.7V9a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.3-1.5z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.7 17.8L0 24l6.3-1.7A11.8 11.8 0 0 0 23.8 12c0-3.2-1.2-6.1-3.4-8.4z"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
+</svg>
+
+<div class="demo" id="demo">Konzept-Vorschau · socialclip.art <button aria-label="Hinweis schließen" onclick="this.parentElement.remove()">×</button></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo"><img src="img/logo.png" alt="Sportwagen Nürnberg"></a>
+    <nav class="menu">
+      <a href="#flotte">Flotte</a>
+      <a href="#vergleich">Vergleich</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#anlaesse">Anlässe</a>
+      <a href="#gutschein">Gutscheine</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="nav-r">
+      <a class="phone-link" href="tel:+491637040640"><svg class="icon"><use href="#i-phone"/></svg>0163 7040640</a>
+      <button class="btn btn-red btn-sm" onclick="openBooking()">Jetzt buchen</button>
+      <button class="burger" aria-label="Menü" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mmenu" onclick="toggleMenu(false)">
+  <a href="#flotte">Flotte</a><a href="#vergleich">Vergleich</a><a href="#ablauf">Ablauf</a><a href="#anlaesse">Anlässe</a><a href="#gutschein">Gutscheine</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"><img src="img/rsq8-4.jpg" alt="Audi RS Q8 und RS6 bei Sonnenuntergang"></div>
+  <div class="wrap">
+    <div class="eyebrow">Sportwagenvermietung Nürnberg</div>
+    <h1>Fahr nicht.<br><em>Erlebe.</em></h1>
+    <p class="lead">Audi RS6, RS Q8, BMW M4 Competition, Mercedes C63 AMG und mehr. Vollkasko inklusive, komplett digital gebucht, in wenigen Minuten bestätigt.</p>
+    <div class="hero-cta">
+      <button class="btn btn-red" onclick="openBooking()">Wunschauto buchen <svg class="icon"><use href="#i-arrow"/></svg></button>
+      <a class="btn btn-ghost" href="#flotte">Flotte ansehen</a>
+    </div>
+
+    <form class="quick" onsubmit="event.preventDefault();quickBook()">
+      <label><small>Fahrzeug</small><select id="qCar"></select></label>
+      <label><small>Abholung</small><input type="date" id="qFrom"></label>
+      <label><small>Rückgabe</small><input type="date" id="qTo"></label>
+      <button class="btn btn-red" type="submit">Preis berechnen <svg class="icon"><use href="#i-arrow"/></svg></button>
+    </form>
+
+    <div class="trust">
+      <div><svg class="icon"><use href="#i-shield"/></svg>Vollkasko bei jeder Buchung</div>
+      <div><svg class="icon"><use href="#i-phone2"/></svg>100 % digital, ohne Papierkram</div>
+      <div><svg class="icon"><use href="#i-clock"/></svg>Tel. täglich 9–21 Uhr, E-Mail 24/7</div>
+      <div><svg class="icon"><use href="#i-key"/></svg>Ab 21 Jahren</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee"><div class="marquee-track" id="mq"></div></div>
+
+<!-- INTRO / STATS -->
+<section>
+  <div class="wrap reveal">
+    <div class="eyebrow">Faszination Autofahren</div>
+    <h2>Leidenschaft trifft<br>Performance.</h2>
+    <p class="lead">Eine handverlesene Flotte, top gepflegt und mit aktueller Technik. Den gesamten Mietprozess haben wir digitalisiert: keine Formulare, keine Wartezeit. Du suchst aus, wir bestätigen, du fährst.</p>
+    <div class="stats">
+      <div class="stat"><b data-count="600">0</b><span>PS im Audi RS6 &amp; RS Q8</span></div>
+      <div class="stat"><b><span data-count="3.5" data-dec="1">0</span><sup>s</sup></b><span>0–100 km/h im BMW M4 Competition</span></div>
+      <div class="stat"><b data-count="6">0</b><span>Premium-Fahrzeuge in Nürnberg</span></div>
+      <div class="stat"><b><span data-count="100">0</span><sup>%</sup></b><span>Vollkasko bei jeder Buchung</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section id="flotte" style="padding-top:0">
+  <div class="wrap">
+    <div class="fleet-head reveal">
+      <div>
+        <div class="eyebrow">Unsere Flotte</div>
+        <h2>Wähle deine Waffe.</h2>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <div class="filters" id="filters">
+          <button class="chip active" data-f="all">Alle</button>
+          <button class="chip" data-f="sport">Sportwagen</button>
+          <button class="chip" data-f="suv">SUV</button>
+          <button class="chip" data-f="kombi">Kombi</button>
+          <button class="chip" data-f="cabrio">Cabrio</button>
+        </div>
+        <select class="sort" id="sort" aria-label="Sortieren">
+          <option value="rec">Empfohlen</option>
+          <option value="pa">Preis aufsteigend</option>
+          <option value="pd">Preis absteigend</option>
+          <option value="ps">Meiste PS</option>
+          <option value="acc">Schnellste Beschleunigung</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section id="vergleich" style="background:var(--bg2)">
+  <div class="wrap reveal">
+    <div class="eyebrow">Auf einen Blick</div>
+    <h2>Fahrzeuge vergleichen</h2>
+    <p class="lead">Klick auf eine Spalte zum Sortieren, auf eine Zeile für alle Details.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th data-k="name">Fahrzeug</th><th data-k="ps">Leistung ↕</th><th data-k="acc">0–100 km/h ↕</th><th data-k="engine">Motor</th><th data-k="drive">Antrieb</th><th data-k="from">Ab / Tag ↕</th><th data-k="we">Wochenende ↕</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="ablauf">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">So einfach geht's</div>
+      <h2>In 4 Schritten auf die Straße.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="ic"><svg class="icon"><use href="#i-car"/></svg></div><h3>Auto wählen</h3><p>Fahrzeug aussuchen, Tarif vergleichen und den Preis sofort live sehen.</p></div>
+      <div class="step reveal"><div class="ic"><svg class="icon"><use href="#i-cal"/></svg></div><h3>Termin anfragen</h3><p>Wunschzeitraum und Extras wählen und die Anfrage in unter 2 Minuten absenden.</p></div>
+      <div class="step reveal"><div class="ic"><svg class="icon"><use href="#i-phone2"/></svg></div><h3>Digital bestätigen</h3><p>Wir melden uns schnell. Vertrag und Kaution laufen komplett digital, ohne Papier.</p></div>
+      <div class="step reveal"><div class="ic"><svg class="icon"><use href="#i-flag"/></svg></div><h3>Genießen</h3><p>Schlüssel übernehmen und losfahren. Vollkasko ist immer inklusive.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- OCCASIONS -->
+<section id="anlaesse" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Für jeden Anlass</div>
+      <h2>Mach den Moment unvergesslich.</h2>
+    </div>
+    <div class="occ">
+      <div class="occ-card reveal" tabindex="0" onclick="openBooking(null,'Hochzeit')"><img src="img/m4-5.jpg" alt="" loading="lazy"><div class="t"><h3>Hochzeit</h3><p>Der Auftritt, über den eure Gäste noch lange reden. Stilvoll, kraftvoll, unvergesslich.</p></div></div>
+      <div class="occ-card reveal" tabindex="0" onclick="openBooking(null,'Event')"><img src="img/rsq8-3.jpg" alt="" loading="lazy"><div class="t"><h3>Events</h3><p>Geburtstag, Abiball, Party: An- und Abreise mit Stil, Eleganz und Sound.</p></div></div>
+      <div class="occ-card reveal" tabindex="0" onclick="location.hash='gutschein'"><img src="img/mini-2.jpg" alt="" loading="lazy"><div class="t"><h3>Geschenk</h3><p>Verschenke Adrenalin: Gutscheine für jedes Fahrzeug oder als Wertgutschein.</p></div></div>
+      <div class="occ-card reveal" tabindex="0" onclick="openBooking(null,'Business')"><img src="img/x5-1.jpg" alt="" loading="lazy"><div class="t"><h3>Business</h3><p>Prestige beim Kundentermin. Langzeitmiete und individuelle Zeiträume auf Anfrage.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VOUCHER -->
+<section id="gutschein">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Gutschein-Designer</div>
+      <h2>Verschenke Gänsehaut.</h2>
+      <p class="lead">Gestalte deinen Gutschein live. Die Anfrage geht direkt an uns, und du bekommst den Gutschein als hochwertiges PDF.</p>
+    </div>
+    <div class="voucher">
+      <div class="vform reveal">
+        <div class="field"><small>Art</small>
+          <div class="seg" id="vType"><button class="active" data-v="car">Fahrzeug-Erlebnis</button><button data-v="value">Wertgutschein</button></div>
+        </div>
+        <div class="field" id="vCarF"><small>Fahrzeug &amp; Tarif</small>
+          <div class="row2" style="margin-top:0"><select class="input" id="vCar"></select><select class="input" id="vTariff"><option value="wd">1 Tag (Mo–Do)</option><option value="fs">1 Tag (Fr–So)</option><option value="we">Wochenende</option></select></div>
+        </div>
+        <div class="field" id="vValF" style="display:none"><small>Betrag</small>
+          <div class="seg" id="vVal"><button data-a="100">100 €</button><button class="active" data-a="250">250 €</button><button data-a="500">500 €</button><button data-a="1000">1.000 €</button></div>
+        </div>
+        <div class="row2" style="margin-top:0">
+          <div class="field"><small>Für</small><input class="input" id="vTo" placeholder="z. B. Max" maxlength="28"></div>
+          <div class="field"><small>Von</small><input class="input" id="vFrom" placeholder="z. B. Lisa" maxlength="28"></div>
+        </div>
+        <div class="field"><small>Persönliche Nachricht</small><textarea class="input" id="vMsg" maxlength="120" placeholder="Alles Gute zum Geburtstag! Gib Gas 🔥"></textarea></div>
+        <button class="btn btn-red" onclick="voucherRequest()"><svg class="icon"><use href="#i-gift"/></svg>Gutschein anfragen · <span id="vPrice"></span></button>
+      </div>
+      <div class="reveal">
+        <div class="vcard" id="vcard">
+          <img class="bg" id="vImg" src="img/rs6-1.jpg" alt="">
+          <div class="top"><img src="img/logo.png" alt=""><div class="cond" style="font-size:1rem;letter-spacing:.2em;color:var(--red2)">Gutschein</div></div>
+          <div>
+            <div class="val" id="vTitle">Audi RS6<br>1 Tag</div>
+            <div class="msg" id="vMsgOut">„Alles Gute zum Geburtstag! Gib Gas 🔥“</div>
+          </div>
+          <div class="bot"><div>Für <span id="vToOut" style="color:#fff">Max</span> · von <span id="vFromOut" style="color:#fff">Lisa</span></div><div class="code" id="vCode">SWN-0000</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section style="background:var(--bg2);padding:90px 0">
+  <div class="wrap">
+    <div class="fleet-head reveal">
+      <div><div class="eyebrow">@sportwagen_nuernberg</div><h2 style="margin-bottom:0">Folge der Leidenschaft.</h2></div>
+      <div style="display:flex;gap:10px">
+        <a class="btn btn-ghost btn-sm" href="https://instagram.com/sportwagen_nuernberg" target="_blank" rel="noopener"><svg class="icon"><use href="#i-ig"/></svg>Instagram</a>
+        <a class="btn btn-ghost btn-sm" href="https://www.tiktok.com/@sportwagennuernberg" target="_blank" rel="noopener"><svg class="icon"><use href="#i-tt"/></svg>TikTok</a>
+      </div>
+    </div>
+    <div class="insta reveal" id="insta"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap faq">
+    <div class="reveal">
+      <div class="eyebrow">Gut zu wissen</div>
+      <h2>Häufige Fragen</h2>
+      <p class="lead">Noch etwas offen? Ruf uns an oder schreib uns per WhatsApp, wir antworten schnell.</p>
+      <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap">
+        <a class="btn btn-red btn-sm" href="tel:+491637040640"><svg class="icon"><use href="#i-phone"/></svg>Anrufen</a>
+        <a class="btn btn-ghost btn-sm" href="https://wa.me/491637040640" target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg>WhatsApp</a>
+      </div>
+    </div>
+    <div class="reveal" id="faqList"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="kontakt" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Kontakt</div>
+      <h2>Wir sind für dich da.</h2>
+    </div>
+    <div class="contact">
+      <div class="cbox reveal">
+        <a class="cline" href="tel:+491637040640"><div class="ic"><svg class="icon"><use href="#i-phone"/></svg></div><div><small>Telefon · täglich 9:00–21:00</small><b>+49 163 7040640</b></div></a>
+        <a class="cline" href="https://wa.me/491637040640" target="_blank" rel="noopener"><div class="ic" style="color:#25d366"><svg class="icon"><use href="#i-wa"/></svg></div><div><small>WhatsApp · schnellste Antwort</small><b>Chat starten</b></div></a>
+        <div class="cline"><div class="ic"><svg class="icon"><use href="#i-mail"/></svg></div><div><small>E-Mail · 24/7</small><b>Über das Kontaktformular</b></div></div>
+        <div class="cline"><div class="ic"><svg class="icon"><use href="#i-pin"/></svg></div><div><small>Standort</small><b>Nürnberg</b></div></div>
+      </div>
+      <form class="cbox reveal vform" onsubmit="event.preventDefault();contactSend(this)">
+        <div class="row2" style="margin-top:0">
+          <div class="field"><small>Name</small><input class="input" required name="name"></div>
+          <div class="field"><small>E-Mail</small><input class="input" type="email" required name="mail"></div>
+        </div>
+        <div class="field"><small>Nachricht</small><textarea class="input" required name="msg" placeholder="Fragen, Wünsche, Anregungen …"></textarea></div>
+        <label style="display:flex;gap:10px;font-size:.85rem;color:var(--muted);align-items:flex-start"><input type="checkbox" style="margin-top:4px;accent-color:var(--red)"> Ja, ich möchte den Newsletter erhalten und keine Neuigkeiten verpassen.</label>
+        <button class="btn btn-red" type="submit">Nachricht senden <svg class="icon"><use href="#i-arrow"/></svg></button>
+      </form>
+    </div>
+    <div class="cta-band reveal">
+      <div><div class="cond" style="opacity:.8;letter-spacing:.2em;font-size:.9rem">Bereit?</div><h3>Dein nächstes Wochenende<br>hat 600 PS.</h3></div>
+      <button class="btn" style="background:#fff;color:#000" onclick="openBooking()">Jetzt verfügbar prüfen <svg class="icon"><use href="#i-arrow"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <img src="img/logo.png" alt="Sportwagen Nürnberg" style="height:48px;width:auto">
+      <p style="margin-top:16px;max-width:320px">Sport- und Luxusautos mieten in Nürnberg. Das ultimative Fahrerlebnis, vollkaskoversichert und komplett digital.</p>
+      <div class="socials">
+        <a href="https://instagram.com/sportwagen_nuernberg" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon"><use href="#i-ig"/></svg></a>
+        <a href="https://www.tiktok.com/@sportwagennuernberg" target="_blank" rel="noopener" aria-label="TikTok"><svg class="icon"><use href="#i-tt"/></svg></a>
+        <a href="https://wa.me/491637040640" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="icon"><use href="#i-wa"/></svg></a>
+      </div>
+    </div>
+    <div><h4>Flotte</h4><div id="footCars"></div></div>
+    <div><h4>Service</h4><a href="#ablauf">Ablauf</a><a href="#gutschein">Gutscheine</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a></div>
+    <div><h4>Rechtliches</h4><a href="https://sportwagen-nbg.de/impressum/" target="_blank" rel="noopener">Impressum</a><a href="https://sportwagen-nbg.de/datenschutz/" target="_blank" rel="noopener">Datenschutz</a><p style="margin-top:14px">© <span id="yr"></span> Sportwagen Nürnberg</p></div>
+  </div>
+</footer>
+
+<!-- floating -->
+<a class="wa" href="https://wa.me/491637040640" target="_blank" rel="noopener" aria-label="WhatsApp"><svg style="width:30px;height:30px;color:#fff"><use href="#i-wa"/></svg></a>
+<div class="mbar"><a class="btn btn-ghost" href="tel:+491637040640"><svg class="icon"><use href="#i-phone"/></svg>Anrufen</a><button class="btn btn-red" onclick="openBooking()">Jetzt buchen</button></div>
+<div class="toast" id="toast"></div>
+
+<!-- CAR DETAIL -->
+<div class="overlay" id="ov" onclick="closeCar()"></div>
+<aside class="sheet" id="sheet" aria-modal="true" role="dialog"></aside>
+<div class="lightbox" id="lb" onclick="this.classList.remove('open')"><button class="x" aria-label="Schließen">×</button><img id="lbImg" alt=""></div>
+
+<!-- BOOKING WIZARD -->
+<div class="bk" id="bk" role="dialog" aria-modal="true">
+  <div class="bk-top"><div class="wrap">
+    <img src="img/logo.png" alt="" style="height:36px;width:auto">
+    <div class="progress" id="prog"></div>
+    <button class="burger" style="display:grid;place-items:center;font-size:1.3rem" onclick="closeBooking()" aria-label="Schließen">×</button>
+  </div></div>
+  <div class="wrap bk-grid">
+    <div>
+      <div class="bk-step" data-s="0">
+        <h2>Welches Auto?</h2><p class="lead">Wähle dein Fahrzeug. Den Preis siehst du rechts live.</p>
+        <div class="pick" id="pick"></div>
+      </div>
+      <div class="bk-step" data-s="1">
+        <h2>Wann?</h2><p class="lead">Wähle Abholung und Rückgabe. Wir wenden automatisch den günstigsten Tarif an.</p>
+        <div class="row2">
+          <div class="field"><small>Abholung</small><input type="date" class="input" id="bFrom"></div>
+          <div class="field"><small>Rückgabe</small><input type="date" class="input" id="bTo"></div>
+        </div>
+        <div class="cal-hint">
+          <button onclick="preset('we')">Nächstes Wochenende</button>
+          <button onclick="preset('day')">Morgen, 1 Tag</button>
+          <button onclick="preset('week')">1 Woche</button>
+        </div>
+        <div class="err" id="dErr"></div>
+      </div>
+      <div class="bk-step" data-s="2">
+        <h2>Extras</h2><p class="lead">Mehr Kilometer, weniger Risiko.</p>
+        <h3 class="h-sm">Kilometer-Paket</h3>
+        <div id="kmOpts"></div>
+        <h3 class="h-sm">Absicherung</h3>
+        <div class="opt" id="sbOpt" onclick="toggleSB()"><span class="rd ck"></span><div><b>Selbstbeteiligung halbieren</b><small id="sbTxt"></small></div><b class="p">+199 €</b></div>
+      </div>
+      <div class="bk-step" data-s="3">
+        <h2>Deine Daten</h2><p class="lead">Fast geschafft. Wir melden uns schnellstmöglich mit der Bestätigung.</p>
+        <form id="bForm" onsubmit="return false">
+          <div class="row2">
+            <div class="field"><small>Vor- &amp; Nachname *</small><input class="input" id="fName" autocomplete="name"></div>
+            <div class="field"><small>Telefon *</small><input class="input" id="fTel" type="tel" autocomplete="tel"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><small>E-Mail *</small><input class="input" id="fMail" type="email" autocomplete="email"></div>
+            <div class="field"><small>Anlass</small><select class="input" id="fOcc"><option>Einfach Fahrspaß</option><option>Hochzeit</option><option>Event</option><option>Geschenk</option><option>Business</option></select></div>
+          </div>
+          <div class="field" style="margin-top:14px"><small>Anmerkungen</small><textarea class="input" id="fNote" placeholder="Abholzeit, Wünsche …"></textarea></div>
+          <label style="display:flex;gap:10px;font-size:.85rem;color:var(--muted);margin-top:14px;align-items:flex-start"><input type="checkbox" id="fAge" style="margin-top:4px;accent-color:var(--red)"> Ich bin mindestens 21 Jahre alt und akzeptiere die Mietbedingungen. *</label>
+        </form>
+        <div class="err" id="fErr"></div>
+      </div>
+      <div class="bk-step" data-s="4">
+        <div class="success">
+          <div class="ok">✓</div>
+          <h2>Anfrage bereit!</h2>
+          <p class="lead" style="margin:0 auto">Schick sie jetzt mit einem Klick ab. Wir melden uns schnellstmöglich mit der Bestätigung.</p>
+          <div style="display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+            <a class="btn btn-red" id="sendWa" target="_blank" rel="noopener" style="background:#25d366;box-shadow:none"><svg class="icon"><use href="#i-wa"/></svg>Per WhatsApp senden</a>
+            <button class="btn btn-ghost" onclick="copyReq()">Anfrage kopieren</button>
+          </div>
+          <p class="note" style="margin-top:20px">Konzept-Vorschau: In der Live-Version landet die Anfrage zusätzlich automatisch im Postfach und Kalender.</p>
+        </div>
+      </div>
+      <div class="bk-nav" id="bkNav">
+        <button class="btn btn-ghost" id="bBack" onclick="go(-1)">← Zurück</button>
+        <button class="btn btn-red" id="bNext" onclick="go(1)">Weiter <svg class="icon"><use href="#i-arrow"/></svg></button>
+      </div>
+    </div>
+    <aside class="summary" id="summary"></aside>
+  </div>
+</div>
+
+<script>
+const PAK_STD={100:189,200:339,500:749};
+const CARS=[
+ {id:'rsq8',name:'Audi RS Q8',sub:'Performance-SUV',cat:'suv',ps:600,acc:3.8,engine:'4.0 V8 Biturbo',drive:'quattro Allrad',vmax:'250+ km/h',
+  img:['rsq8-1','rsq8-3','rsq8-2','rsq8-4'],tag:'Bestseller',hot:true,
+  wd:[349,150],fs:[399,150],we:[1000,450,'Fr–Mo'],weDays:3,pak:PAK_STD,extra:2,kaution:2000,sb:5000,
+  desc:'Fahrdynamik auf einem neuen Niveau: kraftvoller V8-Biturbo, markantes Design und luxuriöse Ausstattung. Ob besonderes Wochenende, Geschäftstermin oder unvergesslicher Anlass, der RS Q8 verbindet kompromisslose Performance mit höchstem Komfort.'},
+ {id:'m4',name:'BMW M4 Competition',sub:'Coupé · M xDrive',cat:'sport',ps:530,acc:3.5,engine:'3.0 R6 Biturbo',drive:'M xDrive Allrad',vmax:'250+ km/h',
+  img:['m4-5','m4-4','m4-1','m4-2','m4-3','m4-6'],tag:'Neu',hot:true,
+  wd:[269,150],fs:[299,200],we:[799,400,'Fr–Mo'],weDays:3,pak:PAK_STD,extra:2,kaution:2000,sb:5000,
+  desc:'Performance, die du spürst. Brachiale Leistung, messerscharfes Handling und der unverwechselbare Charakter eines echten M-Modells. Dein Moment. Dein M4.'},
+ {id:'rs6',name:'Audi RS6 Avant',sub:'Performance-Kombi',cat:'kombi',ps:600,acc:3.6,engine:'4.0 V8 Biturbo',drive:'quattro Allrad',vmax:'250+ km/h',
+  img:['rs6-1','rs6-2','rs6-6','rs6-4','rs6-3','rs6-5'],tag:'Kult',
+  wd:[349,150],fs:[399,150],we:[1000,450,'Fr–Mo'],weDays:3,pak:PAK_STD,extra:2,kaution:2000,sb:5000,
+  desc:'Der Wolf im Schafspelz: 600 PS, Platz für die ganze Crew und ein V8-Sound, der Gänsehaut macht. Der perfekte Alltags-Supersportwagen.'},
+ {id:'c63',name:'Mercedes C63 AMG',sub:'Limousine · Heckantrieb',cat:'sport',ps:457,acc:4.5,engine:'6.3 V8 Sauger',drive:'Heckantrieb',vmax:'250 km/h',
+  img:['c63-1','c63-2','c63-3'],tag:'V8 Sauger',
+  wd:[300,150],fs:[350,150],we:[800,400,'Fr–Mo'],weDays:3,pak:PAK_STD,extra:2,kaution:2000,sb:5000,
+  desc:'Ein Stück AMG-Geschichte: 6,3 Liter V8-Saugmotor, Heckantrieb und ein Klang, den es so nie wieder geben wird. Pure Emotion für Kenner.'},
+ {id:'x5',name:'BMW X5 xDrive50e',sub:'Plug-in-Hybrid SUV',cat:'suv',ps:489,acc:4.8,engine:'3.0 R6 + E-Motor',drive:'xDrive Allrad',vmax:'250 km/h',
+  img:['x5-1','x5-3','x5-2','x5-4','x5-5'],tag:'Meiste Freikilometer',
+  wd:[300,200],fs:[350,200],we:[700,500,'Fr–So · 48 h'],weDays:2,pak:{100:129,200:219,500:449},extra:null,kaution:2000,sb:3000,
+  desc:'Luxus, Platz und 489 PS Systemleistung, dazu elektrisch lautlos durch die Stadt. Der souveräne Begleiter für Business, Familie und lange Strecken.'},
+ {id:'mini',name:'Mini JCW Cabrio',sub:'Cabrio · offen fahren',cat:'cabrio',ps:231,acc:6.0,engine:'2.0 R4 Turbo',drive:'Frontantrieb',vmax:'240 km/h',
+  img:['mini-1','mini-2','mini-4','mini-3'],tag:'Ab 100 €',
+  wd:[100,100],fs:[150,100],we:[300,300,'Fr–Mo'],weDays:3,pak:{100:50,200:150,500:400},extra:1,kaution:2000,sb:5000,
+  desc:'Offen, frech und go-kart-scharf: Das John Cooper Works Cabrio ist der günstigste Einstieg in die Welt von Sportwagen Nürnberg. Perfekt für Sommertage.'}
+];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const eur=n=>n.toLocaleString('de-DE')+' €';
+const byId=id=>CARS.find(c=>c.id===id);
+const src=n=>'img/'+n+'.jpg';
+const fromPrice=c=>c.wd[0];
+
+/* nav */
+addEventListener('scroll',()=>$('#nav').classList.toggle('scrolled',scrollY>40),{passive:true});
+function toggleMenu(f){const m=$('#mmenu');m.classList.toggle('open',f);}
+$('#yr').textContent=new Date().getFullYear();
+
+/* marquee */
+const mq=CARS.map(c=>`<span>${c.name}</span>`).join('')+'<span>Vollkasko inklusive</span><span>Nürnberg</span>';
+$('#mq').innerHTML=mq+mq;
+
+/* fleet */
+let filt='all',sortBy='rec';
+function renderGrid(){
+  let list=CARS.filter(c=>filt==='all'||c.cat===filt);
+  const s={pa:(a,b)=>fromPrice(a)-fromPrice(b),pd:(a,b)=>fromPrice(b)-fromPrice(a),ps:(a,b)=>b.ps-a.ps,acc:(a,b)=>a.acc-b.acc}[sortBy];
+  if(s)list=[...list].sort(s);
+  $('#grid').innerHTML=list.map(c=>`
+   <article class="car" onclick="openCar('${c.id}')" tabindex="0" onkeydown="if(event.key==='Enter')openCar('${c.id}')">
+     <div class="car-img"><span class="tag ${c.hot?'hot':''}">${c.tag}</span><img src="${src(c.img[0])}" alt="${c.name}" loading="lazy"><img class="alt" src="${src(c.img[1])}" alt="" loading="lazy"></div>
+     <div class="car-body">
+       <h3>${c.name}</h3><div class="sub">${c.sub}</div>
+       <div class="specs"><div><b>${c.ps}</b><small>PS</small></div><div><b>${c.acc.toFixed(1).replace('.',',')} s</b><small>0–100</small></div><div><b>${c.wd[1]} km</b><small>inkl./Tag</small></div></div>
+       <div class="car-foot"><div class="price"><small>ab</small><b>${c.wd[0]} €<span> / Tag</span></b></div><span class="arrow"><svg class="icon"><use href="#i-arrow"/></svg></span></div>
+     </div>
+   </article>`).join('')+(filt==='all'?`<article class="car soon"><div><div class="eyebrow" style="justify-content:center">Bald verfügbar</div><h3>Coming soon</h3><p style="color:var(--muted);margin-top:8px">Das nächste Highlight ist unterwegs.<br>Folge uns, um es zuerst zu sehen.</p></div></article>`:'');
+}
+$('#filters').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;$$('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');filt=b.dataset.f;renderGrid();};
+$('#sort').onchange=e=>{sortBy=e.target.value;renderGrid();};
+renderGrid();
+
+/* compare */
+let tSort={k:'ps',d:-1};
+function renderTable(){
+  const maxPs=Math.max(...CARS.map(c=>c.ps));
+  const val=(c,k)=>({name:c.name,ps:c.ps,acc:c.acc,engine:c.engine,drive:c.drive,from:fromPrice(c),we:c.we[0]})[k];
+  const list=[...CARS].sort((a,b)=>{const x=val(a,tSort.k),y=val(b,tSort.k);return (x>y?1:x<y?-1:0)*tSort.d;});
+  $('#tbody').innerHTML=list.map(c=>`<tr onclick="openCar('${c.id}')">
+    <td><b>${c.name}</b><div style="color:var(--muted);font-size:.8rem">${c.sub}</div></td>
+    <td><b>${c.ps} PS</b><div class="bar"><i style="width:${c.ps/maxPs*100}%"></i></div></td>
+    <td><b>${c.acc.toFixed(1).replace('.',',')} s</b></td><td>${c.engine}</td><td>${c.drive}</td>
+    <td><b>${c.wd[0]} €</b></td><td><b>${c.we[0]} €</b><div style="color:var(--muted);font-size:.78rem">${c.we[2]}, ${c.we[1]} km</div></td></tr>`).join('');
+}
+$$('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;tSort={k,d:tSort.k===k?-tSort.d:(k==='acc'||k==='from'||k==='we'||k==='name'?1:-1)};renderTable();});
+renderTable();
+
+/* car detail */
+let gi=0,cur=null;
+function openCar(id){
+  cur=byId(id);gi=0;const c=cur;
+  const t=(cls,badge,h,when,p,km)=>`<div class="tariff ${cls}" onclick="openBooking('${c.id}')">${badge?`<span class="badge">${badge}</span>`:''}<h4>${h}</h4><div class="when">${when}</div><b>${p}</b><div class="km">${km}</div></div>`;
+  $('#sheet').innerHTML=`
+   <button class="sheet-close" onclick="closeCar()" aria-label="Schließen">×</button>
+   <div class="gal-main" onclick="lightbox()"><img id="gMain" src="${src(c.img[0])}" alt="${c.name}">
+     <button class="gal-nav p" onclick="event.stopPropagation();gal(-1)" aria-label="Vorheriges Bild">‹</button><button class="gal-nav n" onclick="event.stopPropagation();gal(1)" aria-label="Nächstes Bild">›</button></div>
+   <div class="thumbs">${c.img.map((n,i)=>`<img src="${src(n)}" class="${i?'':'on'}" onclick="gal(0,${i})" alt="">`).join('')}</div>
+   <div class="sheet-body">
+     <div class="eyebrow">${c.sub}</div><h2>${c.name}</h2>
+     <p class="lead">${c.desc}</p>
+     <div class="big-specs">
+       <div><b>${c.ps} PS</b><small>Leistung</small></div><div><b>${c.acc.toFixed(1).replace('.',',')} s</b><small>0–100 km/h</small></div>
+       <div><b style="font-size:1.3rem">${c.engine}</b><small>Motor</small></div><div><b style="font-size:1.3rem">${c.drive}</b><small>Antrieb</small></div>
+     </div>
+     <h3 class="h-sm">Tarife</h3>
+     <div class="tariffs">
+       ${t('','', '1 Tag','Mo–Do',c.wd[0]+' €','inkl. '+c.wd[1]+' km')}
+       ${t('','Beliebt','1 Tag','Fr–So',c.fs[0]+' €','inkl. '+c.fs[1]+' km')}
+       ${t('best','Bestseller','Wochenende',c.we[2],c.we[0]+' €','inkl. '+c.we[1]+' km')}
+       ${t('','','Langzeit','Individuell','Anfrage','Konditionen nach Absprache')}
+     </div>
+     <h3 class="h-sm">Kilometer-Pakete</h3>
+     <div class="kv">${Object.entries(c.pak).map(([k,v])=>`<div><span>+${k} km</span><b>${v} €</b></div>`).join('')}${c.extra?`<div><span>Mehrkilometer</span><b>${c.extra},00 € / km</b></div>`:''}</div>
+     <h3 class="h-sm">Mietbedingungen</h3>
+     <div class="kv">
+       <div><span>Mindestalter</span><b>21 Jahre</b></div><div><span>Kaution</span><b>${eur(c.kaution)}</b></div>
+       <div><span>Selbstbeteiligung</span><b>${eur(c.sb)}</b></div><div><span>SB-Reduktion</span><b>auf ${eur(c.sb/2)} für 199 €</b></div>
+       <div><span>Versicherung</span><b>Vollkasko inkl.</b></div><div><span>Kaution per</span><b>${c.id==='x5'?'Bar, PayPal':'Bar, PayPal, Fahrzeug'}</b></div>
+     </div>
+     <p class="note">Preis kann je nach Abholzeit variieren. Individueller Zeitraum oder Langzeitmiete auf Anfrage.</p>
+   </div>
+   <div class="sticky-book"><div class="price"><small>ab</small><b>${c.wd[0]} €<span> / Tag</span></b></div><button class="btn btn-red" onclick="openBooking('${c.id}')">${c.name} buchen <svg class="icon"><use href="#i-arrow"/></svg></button></div>`;
+  $('#sheet').scrollTop=0;$('#sheet').classList.add('open');$('#ov').classList.add('open');document.body.style.overflow='hidden';
+}
+function closeCar(){$('#sheet').classList.remove('open');$('#ov').classList.remove('open');document.body.style.overflow='';}
+function gal(d,i){gi=i!==undefined?i:(gi+d+cur.img.length)%cur.img.length;$('#gMain').src=src(cur.img[gi]);$$('.thumbs img').forEach((t,j)=>t.classList.toggle('on',j===gi));}
+function lightbox(){$('#lbImg').src=src(cur.img[gi]);$('#lb').classList.add('open');}
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){if($('#lb').classList.contains('open'))$('#lb').classList.remove('open');else if($('#bk').classList.contains('open'))closeBooking();else closeCar();}
+  if($('#sheet').classList.contains('open')&&!$('#bk').classList.contains('open')){if(e.key==='ArrowRight')gal(1);if(e.key==='ArrowLeft')gal(-1);}
+});
+
+/* quick bar */
+const opts=CARS.map(c=>`<option value="${c.id}">${c.name} · ab ${c.wd[0]} €</option>`).join('');
+$('#qCar').innerHTML=opts;$('#vCar').innerHTML=CARS.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+const today=new Date();today.setHours(0,0,0,0);
+$('#qFrom').min=$('#qTo').min=$('#bFrom').min=$('#bTo').min=iso(today);
+function quickBook(){B.car=$('#qCar').value;B.from=$('#qFrom').value;B.to=$('#qTo').value;openBooking(B.car,null,(B.from&&B.to)?2:1);}
+
+/* booking */
+const B={car:null,from:'',to:'',km:0,sb:false,step:0};
+const STEPS=['Fahrzeug','Termin','Extras','Daten'];
+function openBooking(id,occ,step){
+  closeCar();
+  if(id)B.car=id;if(occ)$('#fOcc').value=occ;
+  B.step=step!==undefined?step:(B.car?1:0);
+  $('#bk').classList.add('open');document.body.style.overflow='hidden';
+  $('#pick').innerHTML=CARS.map(c=>`<button class="${B.car===c.id?'on':''}" onclick="pickCar('${c.id}')"><img src="${src(c.img[0])}" alt=""><div><b>${c.name}</b><small>ab ${c.wd[0]} € · ${c.ps} PS</small></div></button>`).join('');
+  $('#bFrom').value=B.from;$('#bTo').value=B.to;
+  showStep();
+}
+function closeBooking(){$('#bk').classList.remove('open');document.body.style.overflow='';}
+function pickCar(id){B.car=id;B.km=0;$$('#pick button').forEach((b,i)=>b.classList.toggle('on',CARS[i].id===id));renderSummary();setTimeout(()=>go(1),250);}
+function preset(k){
+  let f,t;
+  if(k==='day'){f=addD(today,1);t=addD(f,1);}
+  if(k==='we'){f=addD(today,((5-today.getDay()+7)%7)||7);t=addD(f,byId(B.car||'rsq8').weDays);}
+  if(k==='week'){f=addD(today,1);t=addD(f,7);}
+  $('#bFrom').value=B.from=iso(f);$('#bTo').value=B.to=iso(t);$('#dErr').textContent='';renderSummary();
+}
+$('#bFrom').onchange=e=>{B.from=e.target.value;if(B.to&&B.to<=B.from){B.to=iso(addD(new Date(B.from),1));$('#bTo').value=B.to;}$('#bTo').min=B.from;renderSummary();};
+$('#bTo').onchange=e=>{B.to=e.target.value;renderSummary();};
+
+function calc(){
+  const c=byId(B.car);if(!c)return null;
+  const r={c,lines:[],km:0,total:0,long:false};
+  if(B.from&&B.to&&B.to>B.from){
+    const f=new Date(B.from),t=new Date(B.to);const days=Math.round((t-f)/864e5);r.days=days;
+    if(f.getDay()===5&&days===c.weDays){r.lines.push(['Wochenend-Tarif ('+c.we[2]+')',c.we[0]]);r.km=c.we[1];}
+    else{
+      let wd=0,fs=0;for(let i=0;i<days;i++){const d=addD(f,i).getDay();(d>=1&&d<=4)?wd++:fs++;}
+      if(wd)r.lines.push([wd+' × Tag Mo–Do à '+c.wd[0]+' €',wd*c.wd[0]]);
+      if(fs)r.lines.push([fs+' × Tag Fr–So à '+c.fs[0]+' €',fs*c.fs[0]]);
+      r.km=wd*c.wd[1]+fs*c.fs[1];
+      if(days>=7)r.long=true;
+    }
+  }
+  if(B.km){r.lines.push(['Kilometer-Paket +'+B.km+' km',c.pak[B.km]]);r.km+=+B.km;}
+  if(B.sb)r.lines.push(['SB-Reduktion auf '+eur(c.sb/2),199]);
+  r.total=r.lines.reduce((s,l)=>s+l[1],0);
+  return r;
+}
+const fmtD=s=>s?new Date(s).toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit'}):'–';
+function renderSummary(){
+  const r=calc();
+  if(!r){$('#summary').innerHTML=`<div class="in"><h3>Deine Buchung</h3><p class="note" style="font-size:.9rem">Wähle ein Fahrzeug, um den Preis live zu sehen.</p></div>`;return;}
+  const c=r.c;
+  $('#summary').innerHTML=`<img src="${src(c.img[0])}" alt=""><div class="in">
+    <div class="eyebrow">${c.sub}</div><h3 style="margin-top:6px">${c.name}</h3>
+    <div style="margin-top:14px">
+      <div class="sline"><span>Abholung</span><span>${fmtD(B.from)}</span></div>
+      <div class="sline"><span>Rückgabe</span><span>${fmtD(B.to)}</span></div>
+      ${r.lines.map(l=>`<div class="sline"><span>${l[0]}</span><span>${eur(l[1])}</span></div>`).join('')}
+      <div class="sline"><span>Inklusive</span><span>${r.km?r.km+' km · ':''}Vollkasko</span></div>
+      <div class="sline"><span>Kaution</span><span>${eur(c.kaution)}</span></div>
+    </div>
+    <div class="total"><span>${r.long?'Richtwert':'Gesamt'}</span><b>${r.total?eur(r.total):'–'}</b></div>
+    <p class="note">${r.long?'Ab 7 Tagen erstellen wir dir ein individuelles Langzeitangebot, meist günstiger. ':''}Unverbindliche Schätzung. Preis kann je nach Abholzeit variieren.</p>
+  </div>`;
+}
+function renderExtras(){
+  const c=byId(B.car);if(!c)return;
+  $('#kmOpts').innerHTML=[0,...Object.keys(c.pak)].map(k=>`<div class="opt ${String(B.km)===String(k)?'on':''}" onclick="B.km=${k};renderExtras();renderSummary()"><span class="rd"></span><div><b>${k?'+'+k+' km':'Kein Zusatzpaket'}</b><small>${k?(k==200?'Bestseller · ':'')+'Mehr Freiheit für längere Touren':'Inklusiv-Kilometer reichen mir'+(c.extra?' (Mehr-km '+c.extra+' €/km)':'')}</small></div><b class="p">${k?'+'+c.pak[k]+' €':'0 €'}</b></div>`).join('');
+  $('#sbTxt').textContent='Von '+eur(c.sb)+' auf '+eur(c.sb/2)+' reduzieren, entspannt fahren.';
+  $('#sbOpt').classList.toggle('on',B.sb);
+}
+function toggleSB(){B.sb=!B.sb;renderExtras();renderSummary();}
+function showStep(){
+  $$('.bk-step').forEach(s=>s.classList.toggle('on',+s.dataset.s===B.step));
+  $('#prog').innerHTML=STEPS.map((s,i)=>`${i?'<span class="ln"></span>':''}<span class="${i===B.step?'on':i<B.step?'done':''}"><i>${i<B.step?'✓':i+1}</i><em style="font-style:normal">${s}</em></span>`).join('');
+  $('#bkNav').style.display=B.step===4?'none':'flex';
+  $('#bBack').style.visibility=B.step===0?'hidden':'visible';
+  $('#bNext').innerHTML=B.step===3?'Anfrage abschließen <svg class="icon"><use href="#i-arrow"/></svg>':'Weiter <svg class="icon"><use href="#i-arrow"/></svg>';
+  if(B.step===2)renderExtras();
+  renderSummary();$('#bk').scrollTop=0;
+}
+function go(d){
+  if(d>0){
+    if(B.step===0&&!B.car){toast('Bitte zuerst ein Fahrzeug wählen');return;}
+    if(B.step===1){if(!B.from||!B.to){$('#dErr').textContent='Bitte Abhol- und Rückgabedatum wählen.';return;}if(B.to<=B.from){$('#dErr').textContent='Die Rückgabe muss nach der Abholung liegen.';return;}$('#dErr').textContent='';}
+    if(B.step===3){
+      const n=$('#fName').value.trim(),t=$('#fTel').value.trim(),m=$('#fMail').value.trim();
+      if(!n||!t||!/^\S+@\S+\.\S+$/.test(m)){$('#fErr').textContent='Bitte Name, Telefon und eine gültige E-Mail angeben.';return;}
+      if(!$('#fAge').checked){$('#fErr').textContent='Bitte bestätige das Mindestalter von 21 Jahren.';return;}
+      $('#fErr').textContent='';
+      $('#sendWa').href='https://wa.me/491637040640?text='+encodeURIComponent(reqText());
+    }
+  }
+  B.step=Math.max(0,Math.min(4,B.step+d));showStep();
+}
+function reqText(){
+  const r=calc();
+  return `Buchungsanfrage – Sportwagen Nürnberg
+Fahrzeug: ${r.c.name}
+Zeitraum: ${fmtD(B.from)} bis ${fmtD(B.to)}
+${r.lines.map(l=>'• '+l[0]+': '+eur(l[1])).join('\n')}
+Richtpreis: ${eur(r.total)}
+Name: ${$('#fName').value}
+Telefon: ${$('#fTel').value}
+E-Mail: ${$('#fMail').value}
+Anlass: ${$('#fOcc').value}
+Anmerkung: ${$('#fNote').value||'–'}`;
+}
+function copyReq(){navigator.clipboard?.writeText(reqText()).then(()=>toast('Anfrage kopiert ✓'),()=>toast('Kopieren nicht möglich'));}
+
+/* voucher */
+let vType='car',vAmt=250;
+function vUpdate(){
+  const c=byId($('#vCar').value),tf=$('#vTariff').value;
+  $('#vCarF').style.display=vType==='car'?'':'none';$('#vValF').style.display=vType==='value'?'':'none';
+  let title,price;
+  if(vType==='car'){price=tf==='we'?c.we[0]:c[tf][0];title=c.name+'<br>'+(tf==='we'?'Wochenende':'1 Tag');$('#vImg').src=src(c.img[0]);}
+  else{price=vAmt;title=eur(vAmt)+'<br>Fahrerlebnis';$('#vImg').src=src('rsq8-4');}
+  $('#vTitle').innerHTML=title;$('#vPrice').textContent=eur(price);
+  const m=$('#vMsg').value.trim()||$('#vMsg').placeholder;$('#vMsgOut').textContent='„'+m+'“';
+  $('#vToOut').textContent=$('#vTo').value.trim()||'Max';$('#vFromOut').textContent=$('#vFrom').value.trim()||'Lisa';
+}
+$('#vType').onclick=e=>{const b=e.target.closest('button');if(!b)return;$$('#vType button').forEach(x=>x.classList.remove('active'));b.classList.add('active');vType=b.dataset.v;vUpdate();};
+$('#vVal').onclick=e=>{const b=e.target.closest('button');if(!b)return;$$('#vVal button').forEach(x=>x.classList.remove('active'));b.classList.add('active');vAmt=+b.dataset.a;vUpdate();};
+['#vCar','#vTariff','#vTo','#vFrom','#vMsg'].forEach(s=>$(s).addEventListener('input',vUpdate));
+$('#vCode').textContent='SWN-'+Math.random().toString(36).slice(2,6).toUpperCase();
+vUpdate();
+function voucherRequest(){
+  const t=`Gutschein-Anfrage – Sportwagen Nürnberg
+${$('#vTitle').innerText.replace('\n',' · ')} (${$('#vPrice').textContent})
+Für: ${$('#vToOut').textContent} · Von: ${$('#vFromOut').textContent}
+Nachricht: ${$('#vMsgOut').textContent}`;
+  window.open('https://wa.me/491637040640?text='+encodeURIComponent(t),'_blank','noopener');
+}
+
+/* insta */
+$('#insta').innerHTML=['m4-5','rsq8-1','rs6-6','c63-1','mini-1','x5-3','rs6-4','m4-4','rsq8-2','c63-3','m4-1','rs6-1'].map(n=>`<a href="https://instagram.com/sportwagen_nuernberg" target="_blank" rel="noopener" aria-label="Instagram"><img src="${src(n)}" alt="" loading="lazy"></a>`).join('');
+
+/* faq */
+const FAQ=[
+ ['Wie alt muss ich sein?','Das Mindestalter beträgt 21 Jahre. Bitte bring zur Übergabe deinen gültigen Führerschein und Personalausweis mit.'],
+ ['Ist eine Versicherung inklusive?','Ja. Jedes Fahrzeug ist bei jeder Buchung vollkaskoversichert. Die Selbstbeteiligung beträgt je nach Fahrzeug 3.000 € oder 5.000 € und lässt sich für 199 € halbieren.'],
+ ['Wie hoch ist die Kaution und wie zahle ich sie?','Die Kaution beträgt 2.000 €. Du kannst sie bar oder per PayPal hinterlegen, bei vielen Fahrzeugen auch durch dein eigenes Fahrzeug als Sicherheit.'],
+ ['Wie viele Kilometer sind inklusive?','Je nach Fahrzeug und Tarif 100 bis 500 km. Zusätzlich gibt es Kilometer-Pakete mit 100, 200 oder 500 km zum Vorteilspreis. Mehrkilometer werden mit 1 bis 2 € pro km berechnet.'],
+ ['Was ist der Wochenend-Tarif?','Abholung am Freitag, Rückgabe am Montag (beim BMW X5: 48 h, Freitag bis Sonntag) zum Pauschalpreis mit vielen Freikilometern. Das ist unser Bestseller.'],
+ ['Kann ich ein Auto länger mieten?','Ja. Individuelle Zeiträume und Langzeitmieten bieten wir auf Anfrage zu Sonderkonditionen an.'],
+ ['Kann ich eine Fahrt verschenken?','Ja! Mit unserem Gutschein-Designer gestaltest du deinen persönlichen Gutschein für ein bestimmtes Fahrzeug oder als Wertgutschein.'],
+ ['Wie erreiche ich euch?','Per E-Mail rund um die Uhr, telefonisch täglich von 9 bis 21 Uhr unter +49 163 7040640 und per WhatsApp.']
+];
+$('#faqList').innerHTML=FAQ.map(([q,a])=>`<div class="qa"><button aria-expanded="false">${q}<span class="pm">+</span></button><div class="a"><p>${a}</p></div></div>`).join('');
+$('#faqList').onclick=e=>{const b=e.target.closest('button');if(!b)return;const qa=b.parentElement,o=!qa.classList.contains('open');
+  $$('.qa').forEach(x=>{x.classList.remove('open');x.querySelector('.a').style.maxHeight=0;x.querySelector('button').setAttribute('aria-expanded','false');});
+  if(o){qa.classList.add('open');const a=qa.querySelector('.a');a.style.maxHeight=a.scrollHeight+'px';b.setAttribute('aria-expanded','true');}};
+
+/* footer cars */
+$('#footCars').innerHTML=CARS.map(c=>`<a href="#flotte" onclick="openCar('${c.id}');return false">${c.name}</a>`).join('');
+
+/* contact */
+function contactSend(f){f.reset();toast('Danke! Wir melden uns schnellstmöglich.');}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),2600);}
+
+/* reveal + counters */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+$$('.reveal').forEach(el=>io.observe(el));
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,end=+el.dataset.count,dec=+(el.dataset.dec||0),t0=performance.now();
+  (function tick(t){const p=Math.min(1,(t-t0)/1600),v=end*(1-Math.pow(1-p,3));el.textContent=v.toFixed(dec).replace('.',',');if(p<1)requestAnimationFrame(tick);})(t0);co.unobserve(el);}),{threshold:.5});
+$$('[data-count]').forEach(el=>co.observe(el));
+</script>
+</body>
+</html>
