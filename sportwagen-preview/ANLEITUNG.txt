@@ -1,0 +1,27 @@
+SPORTWAGEN NÜRNBERG – VORSCHAU AUF DEM HANDY ZEIGEN
+====================================================
+
+1. ZIP auf dem Computer (Windows oder Mac) entpacken.
+
+2. Server starten (Doppelklick):
+   - Windows: "Vorschau starten (Windows).bat"
+   - Mac:     "Vorschau starten (Mac).command"
+     (Beim ersten Mal: Rechtsklick > Öffnen > Öffnen)
+
+3. Es öffnet sich ein Fenster mit zwei Adressen, z. B.:
+     Auf diesem Computer:   http://localhost:8000
+     Auf dem Handy (WLAN):  http://192.168.178.25:8000
+
+4. Auf dem Handy die zweite Adresse in Safari/Chrome eintippen.
+   Wichtig: Handy und Computer müssen im SELBEN WLAN sein.
+
+5. Fenster offen lassen, solange die Seite gezeigt wird.
+   Beenden: Fenster schließen oder Strg+C.
+
+Probleme?
+- Windows fragt nach der Firewall: "Zugriff zulassen" (private Netzwerke) klicken.
+- Handy lädt nicht: Gäste-WLAN trennt Geräte oft voneinander –
+  normales WLAN verwenden oder den Hotspot des Handys nutzen
+  (Computer mit dem Handy-Hotspot verbinden, dann Adresse neu ablesen).
+- Python fehlt: kostenlos unter https://www.python.org/downloads/
+  (Windows: beim Installieren "Add python.exe to PATH" anhaken).
