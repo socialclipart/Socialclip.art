@@ -83,8 +83,26 @@ VEHICLES = {
 }
 
 
+INLINE = False
+_CACHE = {}
+
+
+def img_src(name):
+    if not INLINE:
+        return f"../img/{name}.webp"
+    if name not in _CACHE:
+        import base64, io
+        from PIL import Image
+        im = Image.open(os.path.join(OUT, "img", name + ".webp")).convert("RGB")
+        im.thumbnail((1000, 1000))
+        buf = io.BytesIO()
+        im.save(buf, "WEBP", quality=62)
+        _CACHE[name] = "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode()
+    return _CACHE[name]
+
+
 def photo(name, alt, eager=False):
-    return (f'<img src="../img/{name}.webp" alt="{esc(alt)}" decoding="async"'
+    return (f'<img src="{img_src(name)}" alt="{esc(alt)}" decoding="async"'
             f'{"" if eager else " loading=\"lazy\""} width="1400" height="933">')
 
 
@@ -962,6 +980,15 @@ def main():
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as fh:
         fh.write(overview())
     print(f"{len(BUSINESSES)} Vorschauen erzeugt in {OUT}")
+    # Einzeldateien mit eingebetteten Bildern – zum direkten Verschicken/Öffnen
+    global INLINE
+    INLINE = True
+    d = os.path.join(OUT, "einzeldateien")
+    os.makedirs(d, exist_ok=True)
+    for b in BUSINESSES:
+        with open(os.path.join(d, b["slug"] + ".html"), "w", encoding="utf-8") as fh:
+            fh.write(build(b))
+    print(f"Einzeldateien in {d}")
 
 
 if __name__ == "__main__":
