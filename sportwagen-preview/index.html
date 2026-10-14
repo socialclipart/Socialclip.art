@@ -110,8 +110,11 @@ section{padding:110px 0}
 .car:hover{transform:translateY(-6px);border-color:#3a3a42;box-shadow:var(--shadow)}
 .car-img{aspect-ratio:4/3;position:relative;overflow:hidden;background:#000}
 .car-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s,transform .8s}
-.car-img img.alt{opacity:0}
-.car:hover .car-img img.alt{opacity:1}
+.car-img video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s}
+.car.playing .car-img video{opacity:1}
+.vbadge{position:absolute;right:14px;bottom:14px;z-index:2;display:flex;gap:7px;align-items:center;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px 6px 8px;border-radius:999px;transition:.3s}
+.vbadge i{width:18px;height:18px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-style:normal;font-size:.55rem}
+.car.playing .vbadge{opacity:0}
 .car:hover .car-img img{transform:scale(1.05)}
 .tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:999px}
 .tag.hot{background:var(--red)}
@@ -227,7 +230,10 @@ footer{border-top:1px solid var(--line);padding:60px 0 120px;color:var(--muted);
 .sheet.open{transform:none}
 .sheet-close{position:sticky;top:16px;float:right;margin:16px 16px 0 0;z-index:5;width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;font-size:1.3rem}
 .gal-main{aspect-ratio:16/10;background:#000;position:relative;cursor:zoom-in}
-.gal-main img{width:100%;height:100%;object-fit:cover}
+.gal-main img,.gal-main video{width:100%;height:100%;object-fit:cover;display:block}
+.gal-main.isvid{cursor:default}
+.thumb-v{position:relative;flex:none;cursor:pointer}
+.thumb-v::after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;font-size:.9rem;color:#fff;text-shadow:0 1px 6px #000;pointer-events:none}
 .gal-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);display:grid;place-items:center;font-size:1.2rem}
 .gal-nav.p{left:16px}.gal-nav.n{right:16px}
 .thumbs{display:flex;gap:8px;padding:12px 24px;overflow-x:auto}
@@ -778,7 +784,7 @@ function renderGrid(){
   if(s)list=[...list].sort(s);
   $('#grid').innerHTML=list.map(c=>`
    <article class="car" onclick="openCar('${c.id}')" tabindex="0" onkeydown="if(event.key==='Enter')openCar('${c.id}')">
-     <div class="car-img"><span class="tag ${c.hot?'hot':''}">${c.tag}</span><img src="${src(c.img[0])}" alt="${c.name}" loading="lazy"><img class="alt" src="${src(c.img[1])}" alt="" loading="lazy"></div>
+     <div class="car-img" data-vid><span class="tag ${c.hot?'hot':''}">${c.tag}</span><img src="${src(c.img[0])}" alt="${c.name}" loading="lazy"><video muted loop playsinline preload="none" poster="video/${c.id}.jpg" data-id="${c.id}"></video><span class="vbadge"><i>▶</i>Video</span></div>
      <div class="car-body">
        <h3>${c.name}</h3><div class="sub">${c.sub}</div>
        <div class="specs"><div><b>${c.ps}</b><small>PS</small></div><div><b>${c.acc.toFixed(1).replace('.',',')} s</b><small>0–100</small></div><div><b>${c.wd[1]} km</b><small>inkl./Tag</small></div></div>
@@ -786,9 +792,19 @@ function renderGrid(){
      </div>
    </article>`).join('')+(filt==='all'?`<article class="car soon"><div><div class="eyebrow" style="justify-content:center">Bald verfügbar</div><h3>Coming soon</h3><p style="color:var(--muted);margin-top:8px">Das nächste Highlight ist unterwegs.<br>Folge uns, um es zuerst zu sehen.</p></div></article>`:'');
 }
-$('#filters').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;$$('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');filt=b.dataset.f;renderGrid();};
-$('#sort').onchange=e=>{sortBy=e.target.value;renderGrid();};
+$('#filters').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;$$('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');filt=b.dataset.f;renderGrid();bindCards();};
+$('#sort').onchange=e=>{sortBy=e.target.value;renderGrid();bindCards();};
 renderGrid();
+
+/* card videos: hover on desktop, in-view autoplay on touch */
+function playCard(card,on){const v=card.querySelector('video');if(!v)return;
+  if(on){if(!v.dataset.ld){v.innerHTML=vidSrc(v.dataset.id);v.dataset.ld=1;v.load();}v.play().then(()=>card.classList.add('playing')).catch(()=>{});}
+  else{v.pause();card.classList.remove('playing');}}
+const touch=matchMedia('(hover:none)').matches;
+const vio=new IntersectionObserver(es=>es.forEach(e=>playCard(e.target,e.isIntersecting)),{threshold:.7});
+function bindCards(){$$('#grid .car').forEach(card=>{if(!card.querySelector('video'))return;
+  if(touch)vio.observe(card);else{card.onmouseenter=()=>playCard(card,true);card.onmouseleave=()=>playCard(card,false);}});}
+bindCards();
 
 /* compare */
 let tSort={k:'ps',d:-1};
@@ -806,15 +822,17 @@ $$('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;tSort={k,d:tSort.k===k
 renderTable();
 
 /* car detail */
-let gi=0,cur=null;
+let gi=0,cur=null,gItems=[];
+function vidSrc(id){return `<source src="video/${id}.webm" type="video/webm"><source src="video/${id}.mp4" type="video/mp4">`;}
+function galHTML(i){const it=gItems[i];return it.v?`<video poster="video/${it.v}.jpg" autoplay muted loop playsinline controls>${vidSrc(it.v)}</video>`:`<img src="${src(it)}" alt="${cur.name}">`;}
 function openCar(id){
-  cur=byId(id);gi=0;const c=cur;
+  cur=byId(id);gi=0;const c=cur;gItems=[{v:c.id},...c.img];
   const t=(cls,badge,h,when,p,km)=>`<div class="tariff ${cls}" onclick="openBooking('${c.id}')">${badge?`<span class="badge">${badge}</span>`:''}<h4>${h}</h4><div class="when">${when}</div><b>${p}</b><div class="km">${km}</div></div>`;
   $('#sheet').innerHTML=`
    <button class="sheet-close" onclick="closeCar()" aria-label="Schließen">×</button>
-   <div class="gal-main" onclick="lightbox()"><img id="gMain" src="${src(c.img[0])}" alt="${c.name}">
+   <div class="gal-main isvid" id="gWrap" onclick="lightbox()"><div id="gMain" style="position:absolute;inset:0">${galHTML(0)}</div>
      <button class="gal-nav p" onclick="event.stopPropagation();gal(-1)" aria-label="Vorheriges Bild">‹</button><button class="gal-nav n" onclick="event.stopPropagation();gal(1)" aria-label="Nächstes Bild">›</button></div>
-   <div class="thumbs">${c.img.map((n,i)=>`<img src="${src(n)}" class="${i?'':'on'}" onclick="gal(0,${i})" alt="">`).join('')}</div>
+   <div class="thumbs"><span class="thumb-v"><img src="video/${c.id}.jpg" class="on" onclick="gal(0,0)" alt="Video"></span>${c.img.map((n,i)=>`<img src="${src(n)}" onclick="gal(0,${i+1})" alt="">`).join('')}</div>
    <div class="sheet-body">
      <div class="eyebrow">${c.sub}</div><h2>${c.name}</h2>
      <p class="lead">${c.desc}</p>
@@ -842,9 +860,9 @@ function openCar(id){
    <div class="sticky-book"><div class="price"><small>ab</small><b>${c.wd[0]} €<span> / Tag</span></b></div><button class="btn btn-red" onclick="openBooking('${c.id}')">${c.name} buchen <svg class="icon"><use href="#i-arrow"/></svg></button></div>`;
   $('#sheet').scrollTop=0;$('#sheet').classList.add('open');$('#ov').classList.add('open');document.body.style.overflow='hidden';
 }
-function closeCar(){$('#sheet').classList.remove('open');$('#ov').classList.remove('open');document.body.style.overflow='';}
-function gal(d,i){gi=i!==undefined?i:(gi+d+cur.img.length)%cur.img.length;$('#gMain').src=src(cur.img[gi]);$$('.thumbs img').forEach((t,j)=>t.classList.toggle('on',j===gi));}
-function lightbox(){$('#lbImg').src=src(cur.img[gi]);$('#lb').classList.add('open');}
+function closeCar(){const v=$('#gMain video');if(v)v.pause();$('#sheet').classList.remove('open');$('#ov').classList.remove('open');document.body.style.overflow='';}
+function gal(d,i){gi=i!==undefined?i:(gi+d+gItems.length)%gItems.length;$('#gMain').innerHTML=galHTML(gi);$('#gWrap').classList.toggle('isvid',!!gItems[gi].v);$$('.thumbs img').forEach((t,j)=>t.classList.toggle('on',j===gi));}
+function lightbox(){if(gItems[gi].v)return;$('#lbImg').src=src(gItems[gi]);$('#lb').classList.add('open');}
 addEventListener('keydown',e=>{
   if(e.key==='Escape'){if($('#lb').classList.contains('open'))$('#lb').classList.remove('open');else if($('#bk').classList.contains('open'))closeBooking();else closeCar();}
   if($('#sheet').classList.contains('open')&&!$('#bk').classList.contains('open')){if(e.key==='ArrowRight')gal(1);if(e.key==='ArrowLeft')gal(-1);}
