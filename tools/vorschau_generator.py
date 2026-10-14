@@ -927,7 +927,7 @@ def overview():
     <p><b>Ist-Zustand:</b> {esc(b["pitch"]["status"])}</p>
     <p><b>Verkaufsargument:</b> {esc(b["pitch"]["angle"])}</p>
     <details><summary>Nachricht zum Kopieren</summary><textarea readonly>{esc(wa_text)}</textarea></details>
-    <a class="go" href="{b["slug"]}/">Vorschau öffnen →</a>
+    <a class="go" href="{b["slug"]}/index.html" target="_blank" rel="noopener">Vorschau öffnen →</a>
   </div>
 </article>''')
     return f'''<!DOCTYPE html>
