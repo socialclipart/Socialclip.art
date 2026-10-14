@@ -4,296 +4,134 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#f7f3ed">
-<title>Schreinerei Stegmann – Schreinerei in Erlangen</title>
+<meta name="theme-color" content="#231c15">
+<title>Schreinerei Stegmann – Innenausbau in Erlangen seit 1963</title>
 <meta name="description" content="Küchen, Wohnmöbel, Bäder und Innenausbau nach Maß – geplant mit Ihnen, gefertigt in unserer Werkstatt in Erlangen und montiert bei Ihnen vor Ort.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237a4a24'/%3E%3C/svg%3E">
-<style>:root{--bg:#f7f3ed;--surface:#fffdf9;--surface2:#efe6d8;--text:#2a211a;--muted:#6b5f54;--primary:#7a4a24;--onp:#fffdf9;--line:#e4d8c6;--primary-text:#7a4a24;--font:'Avenir Next', 'Segoe UI', system-ui, sans-serif;--head:'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;--hw:700;--upper:none;--r:12px;color-scheme:light}
-*,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;font-size:17px}
-img,svg{display:block;max-width:100%}
-a{color:inherit}
-.wrap{width:min(1160px,100% - 32px);margin-inline:auto}
-h1,h2,h3{font-family:var(--head);font-weight:var(--hw);line-height:1.08;margin:0;letter-spacing:-.02em;text-transform:var(--upper)}
-h1{font-size:clamp(2.3rem,5.6vw,4.4rem)}
-h2{font-size:clamp(1.8rem,3.6vw,2.8rem)}
-h3{font-size:1.2rem;letter-spacing:-.01em}
-p{margin:0}
-.ico{width:22px;height:22px;flex:none}
-.muted{color:var(--muted)}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary-text)}
-.eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
-
-/* Vorschau-Leiste */
-.pv{background:#111;color:#fff;font-size:.88rem;position:relative;z-index:60}
-.pv .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:9px 0;flex-wrap:wrap}
-.pv b{color:#ffd166}
-.pv a.pvbtn{background:#ffd166;color:#111;text-decoration:none;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap}
-.pv button{background:none;border:0;color:#fff;cursor:pointer;padding:4px;display:inline-flex}
-
-/* Header */
-.hd{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.hd .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--head);font-weight:var(--hw);font-size:1.15rem;letter-spacing:-.01em;text-transform:var(--upper)}
-.mark{width:40px;height:40px;border-radius:calc(var(--r) * .8);background:var(--primary);color:var(--onp);display:grid;place-items:center;font-size:.95rem;font-weight:800;letter-spacing:-.03em}
-.brand small{display:block;font-family:var(--font);font-weight:500;font-size:.72rem;color:var(--muted);letter-spacing:.02em;text-transform:none}
-.nav{display:flex;gap:26px;font-size:.95rem}
-.nav a{text-decoration:none;color:var(--muted);font-weight:500}
-.nav a:hover{color:var(--text)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:var(--r);padding:14px 22px;font-weight:700;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s,background .15s}
-.btn:hover{transform:translateY(-1px)}
-.btn-p{background:var(--primary);color:var(--onp);box-shadow:0 10px 26px -12px var(--primary)}
-.btn-o{border-color:var(--line);color:var(--text);background:var(--surface)}
-.btn-wa{background:#1fa855;color:#fff}
-.btn-sm{padding:10px 16px;font-size:.92rem}
-
-/* Hero */
-.hero{position:relative;overflow:hidden;padding:48px 0 56px}
-.hero::before{content:"";position:absolute;inset:auto -10% -40% 35%;height:110%;background:radial-gradient(closest-side,color-mix(in srgb,var(--primary) 22%,transparent),transparent);pointer-events:none}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;position:relative}
-.hero h1{margin:18px 0 20px}
-.hero .lead{font-size:1.14rem;color:var(--muted);max-width:56ch}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;padding:0;list-style:none;font-size:.93rem;font-weight:600}
-.trust li{display:flex;align-items:center;gap:8px}
-.trust .ico{color:var(--primary-text)}
-.stage{position:relative;border-radius:calc(var(--r) * 1.6);overflow:hidden;aspect-ratio:16/10;box-shadow:0 30px 60px -30px rgba(0,0,0,.5);background:var(--surface2)}
-.stage img{width:100%;height:100%;object-fit:cover}
-.badge{position:absolute;left:16px;bottom:44px;display:flex;align-items:center;gap:8px;background:var(--surface);color:var(--text);padding:10px 14px;border-radius:999px;font-size:.88rem;font-weight:700;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
-.badge .ico{color:var(--primary-text);width:18px;height:18px}
-.stage .car{width:100%;filter:drop-shadow(0 30px 30px rgba(0,0,0,.18))}
-.plate{position:absolute;left:50%;top:-6%;transform:translateX(-50%);width:84%;aspect-ratio:1;border-radius:50%;background:color-mix(in srgb,var(--primary) 14%,var(--surface2));z-index:-1}
-
-/* Buchungskarte */
-.book{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:24px;box-shadow:0 30px 60px -30px rgba(0,0,0,.35);margin-top:-30px;position:relative}
-.book h3{margin-bottom:4px}
-.book .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.book label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.book input,.book select{width:100%;font:inherit;font-size:1rem;color:var(--text);background:var(--bg);border:1.5px solid var(--line);border-radius:calc(var(--r) * .7);padding:12px 12px;min-height:48px}
-.book input:focus,.book select:focus{outline:2px solid var(--primary);outline-offset:1px}
-.est{display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 14px;padding:14px 16px;border-radius:calc(var(--r) * .7);background:var(--surface2);font-size:.95rem}
-.est strong{font-size:1.4rem;font-family:var(--head)}
-.book .btn{width:100%}
-.ok{display:none;text-align:center;padding:10px 0}
-.ok .tick{width:58px;height:58px;border-radius:50%;background:#1fa855;color:#fff;display:grid;place-items:center;margin:0 auto 12px}
-.ok .tick .ico{width:30px;height:30px}
-.ok p{color:var(--muted);font-size:.95rem;margin:8px 0 16px}
-.book.sent form{display:none}.book.sent .ok{display:block}
-
-/* Stats */
-.stats{border-block:1px solid var(--line);background:var(--surface)}
-.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
-.stat{padding:26px 18px;border-left:1px solid var(--line)}
-.stat:first-child{border-left:0}
-.stat b{display:block;font-family:var(--head);font-size:1.8rem;font-weight:var(--hw);letter-spacing:-.02em;color:var(--primary-text)}
-.stat span{font-size:.9rem;color:var(--muted)}
-
-/* Sections */
-section{padding:64px 0}
-.sh{display:flex;justify-content:space-between;align-items:end;gap:16px 24px;margin-bottom:28px;flex-wrap:wrap}
-.sh p{max-width:46ch;color:var(--muted)}
-.sh h2{margin-top:12px}
-.grid{display:grid;gap:20px}
-.fleet{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.vc{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:22px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
-.vc:hover{transform:translateY(-4px);box-shadow:0 24px 40px -28px rgba(0,0,0,.4)}
-.vc .pic{position:relative;background:var(--surface2);border-radius:var(--r);overflow:hidden;aspect-ratio:16/10;margin-bottom:18px}
-.vc .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.vc:hover .pic img{transform:scale(1.05)}
-img[src$="van2.webp"]{object-position:50% 82%}
-.vc .pic.cut{background:#fff}
-.vc .pic.cut img{object-fit:contain;padding:6px 8px}
-.vc .pic svg{padding:22px 14px 12px}
-.sym{position:absolute;right:8px;bottom:8px;font-size:.66rem;background:rgba(0,0,0,.55);color:#fff;padding:2px 7px;border-radius:999px}
-.vc .cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary-text)}
-.vc h3{margin:4px 0 12px}
-.vc ul{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-wrap:wrap;gap:6px}
-.vc li{font-size:.8rem;background:var(--surface2);border-radius:999px;padding:4px 10px;color:var(--muted)}
-.vc .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:16px}
-.price small{display:block;font-size:.75rem;color:var(--muted)}
-.price b{font-family:var(--head);font-size:1.5rem;font-weight:var(--hw)}
-.price .ask{font-size:1.05rem}
-.usps{grid-template-columns:repeat(3,1fr)}
-.usp{padding:26px;border-radius:calc(var(--r) * 1.4);background:var(--surface);border:1px solid var(--line)}
-.usp .ib{width:48px;height:48px;border-radius:var(--r);display:grid;place-items:center;background:color-mix(in srgb,var(--primary) 14%,transparent);color:var(--primary-text);margin-bottom:16px}
-.usp h3{margin-bottom:8px}
-.usp p{color:var(--muted);font-size:.97rem}
-.alt{background:var(--surface2)}
-.steps{grid-template-columns:repeat(3,1fr);counter-reset:s}
-.step{position:relative;padding:28px;background:var(--surface);border-radius:calc(var(--r) * 1.4);border:1px solid var(--line)}
-.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--primary);color:var(--onp);font-weight:800;margin-bottom:16px;font-size:1.1rem}
-.step p{color:var(--muted);margin-top:8px}
-.rate{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;background:var(--primary);color:var(--onp);border-radius:calc(var(--r) * 2);padding:44px}
-.rate .big{font-family:var(--head);font-size:clamp(3.4rem,8vw,5.6rem);font-weight:var(--hw);line-height:1;letter-spacing:-.04em}
-.stars{display:flex;gap:4px;margin:10px 0 6px}
-.stars .ico{width:24px;height:24px;fill:currentColor}
-.rate p{opacity:.88;max-width:52ch}
-.rate .btn{margin-top:18px;background:var(--onp);color:var(--primary)}
-.faq{max-width:820px}
-details{border-bottom:1px solid var(--line);padding:6px 0}
-summary{cursor:pointer;list-style:none;padding:18px 40px 18px 0;font-weight:700;font-size:1.06rem;position:relative}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";position:absolute;right:6px;top:12px;font-size:1.6rem;font-weight:400;color:var(--primary-text);transition:transform .2s}
-details[open] summary::after{transform:rotate(45deg)}
-details p{padding:0 0 20px;color:var(--muted)}
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:30px}
-.cl{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:16px}
-.cl li{display:flex;gap:14px;align-items:flex-start}
-.cl .ico{color:var(--primary-text);margin-top:3px}
-.cl a{text-decoration:none;font-weight:600}
-.hrs{width:100%;border-collapse:collapse;margin-top:16px}
-.hrs td{padding:11px 0;border-bottom:1px solid var(--line)}
-.hrs td+td{text-align:right;font-weight:600}
-.mapbtn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:22px;height:150px;border-radius:var(--r);text-decoration:none;font-weight:700;background:
-  repeating-linear-gradient(45deg,var(--surface2) 0 14px,color-mix(in srgb,var(--surface2) 70%,var(--bg)) 14px 28px);border:1px dashed var(--line)}
-.mapbtn .ico{color:var(--primary-text)}
-.ft{border-top:1px solid var(--line);padding:28px 0 96px;font-size:.88rem;color:var(--muted)}
-.ft .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
-.ft a{text-decoration:none}
-.note{font-size:.8rem;color:var(--muted);margin-top:26px}
-
-/* Mobile-Leiste */
-.mb{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;grid-template-columns:1fr 1fr 1.2fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
-.mb .btn{padding:12px 8px;font-size:.92rem}
-
-/* Inhalte sind immer sichtbar – keine Einblend-Effekte, die in manchen Viewern leere Flächen erzeugen */
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-@media (max-width:960px){
-  .hero .wrap{grid-template-columns:1fr;gap:36px}
-  .usps,.steps{grid-template-columns:1fr 1fr}
-  .nav{display:none}
-}
-@media (max-width:680px){
-  body{font-size:16px}
-  .hero{padding:36px 0 48px}
-  .stats .wrap{grid-template-columns:1fr 1fr}
-  .stat:nth-child(3){border-left:0}
-  .stat:nth-child(n+3){border-top:1px solid var(--line)}
-  .usps,.steps,.contact{grid-template-columns:1fr}
-  .rate{grid-template-columns:1fr;gap:16px;padding:30px}
-  section{padding:44px 0}
-  .sh{margin-bottom:20px}
-  .hero .wrap{gap:24px}
-  .book .row{grid-template-columns:1fr}
-  .hd .hcta{display:none}
-  .mb{display:grid}
-  .pv .wrap{font-size:.8rem}
-}
-
-.book textarea{width:100%;font:inherit;font-size:1rem;color:var(--text);background:var(--bg);border:1.5px solid var(--line);border-radius:calc(var(--r) * .7);padding:12px;min-height:84px;resize:vertical}
-.book textarea:focus{outline:2px solid var(--primary);outline-offset:1px}
-.vc p.txt{color:var(--muted);font-size:.95rem;margin:0 0 16px}
-.highlight{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.hl{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:26px}
-.hl .tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--onp);background:var(--primary);border-radius:999px;padding:4px 10px;margin-bottom:12px}
-.hl p{color:var(--muted);margin-top:6px}
-@media (max-width:680px){.highlight{grid-template-columns:1fr}}
-</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23231c15'/%3E%3C/svg%3E">
+<style>
+:root{--paper:#f4efe6;--paper2:#ebe3d5;--ink:#231c15;--mut:#6f6356;--wood:#8a5a2b;--line:#d9cdb9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;font-size:18px;line-height:1.65}
+a{color:inherit}img{display:block;max-width:100%}
+.w{width:min(1120px,100% - 32px);margin:0 auto}
+.sans{font-family:'Avenir Next','Segoe UI',system-ui,sans-serif}
+header{text-align:center;padding:34px 0 0}
+.word{font-size:clamp(1.9rem,5vw,3rem);letter-spacing:.32em;margin:0;text-decoration:none;display:inline-block;padding-left:.32em}
+.sub{font-size:.75rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mut)}
+nav.m{display:flex;justify-content:center;gap:34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:24px;padding:14px 0;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;flex-wrap:wrap}
+nav.m a{text-decoration:none}nav.m a:hover{color:var(--wood)}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:70px 0 90px}
+.hero h1{font-size:clamp(3rem,7.4vw,6rem);line-height:.98;font-weight:400;margin:0;letter-spacing:-.02em}
+.hero h1 i{color:var(--wood)}
+.hero p{font-size:1.2rem;color:var(--mut);max-width:34ch;margin:28px 0}
+.ph{position:relative}
+.ph img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.badge{position:absolute;left:-40px;bottom:40px;background:var(--paper);padding:22px 28px;border:1px solid var(--line)}
+.badge b{display:block;font-size:3.4rem;font-weight:400;line-height:1;color:var(--wood)}
+.badge span{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+.btn{display:inline-block;font-family:'Avenir Next','Segoe UI',system-ui,sans-serif;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:16px 26px;border:1px solid var(--ink);cursor:pointer;background:none;color:var(--ink)}
+.btn.f{background:var(--ink);color:var(--paper)}.btn:hover{background:var(--wood);border-color:var(--wood);color:var(--paper)}
+.intro{border-top:1px solid var(--line);padding:80px 0;display:grid;grid-template-columns:1fr 2fr;gap:60px}
+.intro .lbl{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--wood)}
+.intro p{font-size:1.5rem;line-height:1.5;margin:0}
+.intro p::first-letter{float:left;font-size:4.6rem;line-height:.8;padding:8px 10px 0 0;color:var(--wood)}
+.zz{padding:20px 0 60px}
+.zz article{display:grid;grid-template-columns:1.15fr 1fr;gap:70px;align-items:center;margin-bottom:90px}
+.zz article:nth-child(even) .pic{order:2}
+.zz .pic img{width:100%;aspect-ratio:5/4;object-fit:cover}
+.zz .no{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--wood)}
+.zz h2{font-size:clamp(2rem,4vw,3rem);font-weight:400;margin:10px 0 16px;line-height:1.05}
+.zz p{color:var(--mut);max-width:38ch}
+.more{background:var(--paper2);padding:80px 0}
+.more h2{font-weight:400;font-size:clamp(1.8rem,3.5vw,2.6rem);margin:0 0 30px}
+.more ul{list-style:none;margin:0;padding:0;columns:2;column-gap:60px}
+.more li{break-inside:avoid;border-top:1px solid var(--line);padding:18px 0}
+.more li b{display:block;font-weight:400;font-size:1.3rem}
+.more li span{color:var(--mut);font-size:.95rem}
+.proc{padding:90px 0}
+.proc .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:50px;margin-top:40px}
+.proc .r{font-size:4rem;line-height:1;color:var(--wood);font-weight:400}
+.proc h3{font-weight:400;font-size:1.5rem;margin:12px 0 6px}
+.proc p{color:var(--mut);margin:0}
+.time{display:flex;align-items:center;gap:14px;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.time i{flex:1;height:1px;background:var(--line)}
+.quote{background:var(--ink);color:var(--paper);padding:100px 0;text-align:center}
+.quote blockquote{font-size:clamp(1.6rem,3.6vw,2.6rem);line-height:1.3;margin:0 auto;max-width:24ch;font-style:italic}
+.quote cite{display:block;margin-top:24px;font-style:normal;font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;opacity:.7}
+.letter{padding:90px 0;display:grid;grid-template-columns:1fr 1fr;gap:70px}
+.letter h2{font-weight:400;font-size:clamp(2rem,4vw,3rem);margin:0 0 14px;line-height:1.05}
+form label{display:block;font-family:'Avenir Next','Segoe UI',system-ui,sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-top:22px}
+form input,form select,form textarea{width:100%;border:0;border-bottom:1px solid var(--ink);background:transparent;font:inherit;font-size:1.1rem;padding:10px 0;color:var(--ink);border-radius:0}
+form textarea{min-height:90px;resize:vertical}
+form input:focus,form select:focus,form textarea:focus{outline:none;border-color:var(--wood)}
+form .btn{margin-top:30px}
+.addr table{width:100%;border-collapse:collapse;margin-top:16px}.addr td{border-top:1px solid var(--line);padding:12px 0}.addr td+td{text-align:right}
+details.faq{border-top:1px solid var(--line)}details.faq summary{cursor:pointer;padding:20px 0;font-size:1.2rem;list-style:none}
+details.faq summary::before{content:"— ";color:var(--wood)}details.faq p{margin:0 0 20px;color:var(--mut)}
+.done{padding:30px 0}.done h3{font-weight:400;font-size:2rem;margin:0 0 10px}
+footer{border-top:1px solid var(--line);padding:30px 0 100px;font-size:.8rem;color:var(--mut)}
+footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.note{font-size:.8rem;color:var(--mut)}
+.mbar{position:fixed;bottom:0;left:0;right:0;display:none;background:var(--ink);z-index:50}
+.mbar a{flex:1;color:var(--paper);text-align:center;padding:16px;text-decoration:none;font-family:'Avenir Next','Segoe UI',system-ui,sans-serif;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase}
+@media(max-width:860px){.hero,.intro,.zz article,.letter{grid-template-columns:1fr;gap:34px}.zz article:nth-child(even) .pic{order:0}.badge{left:16px;bottom:16px}.proc .grid{grid-template-columns:1fr}.more ul{columns:1}}
+@media(max-width:600px){nav.m{gap:16px;font-size:.7rem}.hero{padding:40px 0 60px}.mbar{display:flex}}
+[data-box] .done{display:none}[data-box].sent form{display:none}[data-box].sent .done{display:block}</style>
 </head>
 <body>
 
-<div class="pv" id="pv"><div class="wrap">
-  <span><b>Vorschau</b> · Unverbindlicher Entwurf von SocialClip für Schreinerei Stegmann – keine offizielle Website. Gefällt sie Ihnen? Sie kann in wenigen Tagen live sein.</span>
-  <span style="display:flex;gap:8px;align-items:center"><a class="pvbtn" href="https://wa.me/4917646188101?text=Hallo,%20ich%20habe%20die%20Website-Vorschau%20für%20Schreinerei%20Stegmann%20gesehen%20und%20möchte%20mehr%20wissen." target="_blank" rel="noopener">Jetzt übernehmen</a><button aria-label="Hinweis schließen" onclick="document.getElementById('pv').remove()"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span>
-</div></div>
-
-<header class="hd"><div class="wrap">
-  <a class="brand" href="#top"><span class="mark">S</span><span>Schreinerei Stegmann<small>Schreinerei in Erlangen</small></span></a>
-  <nav class="nav" aria-label="Hauptnavigation"><a href="#leistungen">Leistungen</a><a href="#vorteile">Vorteile</a><a href="#ablauf">Ablauf</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a></nav>
-  <a class="btn btn-p btn-sm hcta" href="tel:+49913165165"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>09131 65165</a>
+<div id="pv" style="background:#231c15;color:#f4efe6;font:14px/1.4 system-ui,sans-serif;position:relative;z-index:99"><div style="max-width:1160px;margin:0 auto;padding:9px 16px;display:flex;gap:10px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap"><span><b style="color:#d9a66b">Vorschau</b> · Unverbindlicher Entwurf von SocialClip für Schreinerei Stegmann – keine offizielle Website.</span><span style="display:flex;gap:8px;align-items:center"><a href="https://wa.me/4917646188101?text=Hallo,%20ich%20habe%20die%20Website-Vorschau%20für%20Schreinerei%20Stegmann%20gesehen%20und%20möchte%20mehr%20wissen." target="_blank" rel="noopener" style="background:#d9a66b;color:#111;text-decoration:none;font-weight:700;padding:6px 12px;border-radius:999px">Jetzt übernehmen</a><button aria-label="Hinweis schließen" onclick="document.getElementById('pv').remove()" style="background:none;border:0;color:#f4efe6;font-size:20px;cursor:pointer;line-height:1">×</button></span></div></div>
+<header><div class="w">
+  <a class="word" href="#top">STEGMANN</a><div class="sub sans">Schreinerei für Innenausbau · Erlangen · seit 1963</div>
+  <nav class="m sans"><a href="#arbeiten">Arbeiten</a><a href="#ablauf">Ablauf</a><a href="#faq">Fragen</a><a href="#anfrage">Anfrage</a><a href="tel:+49913165165">09131 65165</a></nav>
 </div></header>
-
 <main id="top">
-<section class="hero"><div class="wrap">
-  <div>
-    <span class="eyebrow">Schreinerei für Innenausbau · seit 1963</span>
-    <h1>Über 60 Jahre<br>Handwerk aus Holz.</h1>
-    <p class="lead">Küchen, Wohnmöbel, Bäder und Innenausbau nach Maß – geplant mit Ihnen, gefertigt in unserer Werkstatt in Erlangen und montiert bei Ihnen vor Ort.</p>
-    <div class="cta"><a class="btn btn-p" href="#anfrage">Projekt anfragen <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-o" href="tel:+49913165165"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>09131 65165</a></div>
-    <ul class="trust"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-8-4.7-8-10.5A4.5 4.5 0 0112 7a4.5 4.5 0 018 2.5C20 15.3 12 20 12 20z"/></svg>Familienbetrieb seit 1963</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 005 5L12 19a2 2 0 01-3-3l7.5-7.5a4 4 0 01-2-2z"/></svg>Moderner Maschinenpark</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Planung, Fertigung, Montage</li></ul>
-  </div>
-  <div>
-    <div class="stage"><img src="../img/sc4.webp" alt="Schreinerei Stegmann" decoding="async" width="1400" height="933"><div class="badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-8-4.7-8-10.5A4.5 4.5 0 0112 7a4.5 4.5 0 018 2.5C20 15.3 12 20 12 20z"/></svg><span>Familienbetrieb seit 1963</span></div></div>
-    <div class="book" id="anfrage">
-      <form id="bf" novalidate>
-        <h3>Projekt anfragen</h3>
-        <p class="muted" style="font-size:.92rem">Unverbindlich · Rückmeldung in Kürze</p>
-        <div class="row"><div><label for="veh">Projekt</label><select id="veh"><option value="0">Küchen</option><option value="1">Wohnmöbel</option><option value="2">Bäder</option><option value="3">Medizinische Einrichtungen</option><option value="4">Fenster &amp; Türen</option><option value="5">Wohnmobil- &amp; Containerausbau</option></select></div><div><label for="d1">Wunschtermin für Beratung</label><input type="date" id="d1"></div></div>
-        <div class="row"><div><label for="nm">Name</label><input id="nm" autocomplete="name" placeholder="Ihr Name" required></div><div><label for="ph">Telefon</label><input id="ph" type="tel" autocomplete="tel" placeholder="Für die Rückmeldung" required></div></div>
-        <div class="row" style="grid-template-columns:1fr"><div><label for="msg">Nachricht</label><textarea id="msg" placeholder="Erzählen Sie kurz von Ihrem Projekt (Raum, Maße, Idee)"></textarea></div></div>
-        <div style="height:14px"></div>
-        <button class="btn btn-p" type="submit">Anfrage senden <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      </form>
-      <div class="ok" role="status">
-        <div class="tick"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <h3>Anfrage ist angekommen</h3>
-        <p>Vorschau-Demo: In der Live-Version landet diese Anfrage sofort per E-Mail bei Schreinerei Stegmann.</p>
-        <button class="btn btn-o btn-sm" type="button" id="again">Neue Anfrage</button>
-      </div>
-    </div>
-  </div>
-</div></section>
-
-<div class="stats"><div class="wrap"><div class="stat"><b>1963</b><span>gegründet</span></div><div class="stat"><b>60+ Jahre</b><span>Erfahrung</span></div><div class="stat"><b>Maß</b><span>statt Massenware</span></div><div class="stat"><b>In- &amp; Ausland</b><span>realisierte Aufträge</span></div></div></div>
-
-<section id="leistungen"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Leistungen</span><h2>Was wir für Sie<br>aus Holz bauen.</h2></div><p>Jedes Stück wird für Ihren Raum geplant und in unserer eigenen Werkstatt gefertigt.</p></div>
-  <div class="grid fleet"><article class="vc"><div class="pic"><img src="../img/sc7.webp" alt="Küchen" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">nach Maß</span><h3>Küchen</h3><p class="txt">Ihre Küche, exakt für Ihren Grundriss geplant und gefertigt.</p><div class="foot"><div class="price"><small>Projekt</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="0">Anfragen</a></div></article><article class="vc"><div class="pic"><img src="../img/sc5.webp" alt="Wohnmöbel" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Einbau &amp; Einzelstücke</span><h3>Wohnmöbel</h3><p class="txt">Schränke, Regale und Möbel, die genau in Ihre Nischen passen.</p><div class="foot"><div class="price"><small>Projekt</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="1">Anfragen</a></div></article><article class="vc"><div class="pic"><img src="../img/sc6.webp" alt="Bäder" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Badmöbel</span><h3>Bäder</h3><p class="txt">Waschtischunterbauten und Badmöbel für jeden Raum.</p><div class="foot"><div class="price"><small>Projekt</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="2">Anfragen</a></div></article><article class="vc"><div class="pic"><img src="../img/sc3.webp" alt="Medizinische Einrichtungen" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Praxis &amp; Gewerbe</span><h3>Medizinische Einrichtungen</h3><p class="txt">Funktionale Einrichtungen für Praxen und medizinische Räume.</p><div class="foot"><div class="price"><small>Projekt</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="3">Anfragen</a></div></article><article class="vc"><div class="pic"><img src="../img/sc2.webp" alt="Fenster &amp; Türen" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Innenausbau</span><h3>Fenster &amp; Türen</h3><p class="txt">Türen und Fenster aus Holz – vom Austausch bis zum Einbau.</p><div class="foot"><div class="price"><small>Projekt</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="4">Anfragen</a></div></article><article class="vc"><div class="pic"><img src="../img/sc1.webp" alt="Wohnmobil- &amp; Containerausbau" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Sonderanfertigung</span><h3>Wohnmobil- &amp; Containerausbau</h3><p class="txt">Individuelle Ausbauten für Wohnmobile und Container.</p><div class="foot"><div class="price"><small>Projekt</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="5">Anfragen</a></div></article></div>
-  <div class="highlight" style="margin-top:24px"><div class="hl"><span class="tag">Service</span><h3>Entsorgung inklusive</h3><p>Wir bauen Altes aus und entsorgen es für Sie – auch Altholz.</p></div><div class="hl"><span class="tag">Auftragsfertigung</span><h3>Für Betriebe und Handwerker</h3><p>Wir fertigen nach Ihren Plänen – zuverlässig und termintreu.</p></div></div>
-</div></section>
-
-<section id="vorteile" class="alt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Warum Schreinerei Stegmann</span><h2>Aus Erlangen.<br>Für Erlangen.</h2></div><p>Persönlich, erreichbar und mit Erfahrung – ein Betrieb, der hier zu Hause ist.</p></div>
-  <div class="grid usps"><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-8-4.7-8-10.5A4.5 4.5 0 0112 7a4.5 4.5 0 018 2.5C20 15.3 12 20 12 20z"/></svg></div><h3>Seit 1963</h3><p>Über 60 Jahre Erfahrung im Holzhandwerk – in Erlangen und darüber hinaus.</p></div><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>Termintreu</h3><p>Wir halten Termine und Zusagen. Ändert sich etwas, melden wir uns im Voraus.</p></div><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 005 5L12 19a2 2 0 01-3-3l7.5-7.5a4 4 0 01-2-2z"/></svg></div><h3>Moderner Maschinenpark</h3><p>Präzise Fertigung in der eigenen Werkstatt.</p></div><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H16a3 3 0 000-6H8a3 3 0 010-6h7.5"/></svg></div><h3>Alles aus einer Hand</h3><p>Planung, Fertigung, Montage und Entsorgung – ohne Schnittstellen.</p></div><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.5a3.5 3.5 0 010 7M18 14a6 6 0 013.5 6"/></svg></div><h3>Persönliche Beratung</h3><p>Wir planen gemeinsam mit Ihnen, nicht für Sie.</p></div><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></div><h3>Maß statt Massenware</h3><p>Möbel, die genau in Ihren Raum passen und lange halten.</p></div></div>
-</div></section>
-
-<section id="ablauf"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">So einfach geht’s</span><h2>In drei Schritten.</h2></div></div>
-  <div class="grid steps"><div class="step"><h3>Planung</h3><p>Wir planen Ihr Projekt gemeinsam mit Ihnen nach Ihren Wünschen.</p></div><div class="step"><h3>Fertigung</h3><p>In unserer Werkstatt mit modernem Maschinenpark.</p></div><div class="step"><h3>Montage</h3><p>In der Werkstatt und bei Ihnen vor Ort – inklusive Entsorgung.</p></div></div>
-</div></section>
-
-<section id="faq" class="alt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Häufige Fragen</span><h2>Gut zu wissen.</h2></div></div>
-  <div class="faq"><details><summary>Fertigen Sie auch einzelne Möbelstücke?</summary><p>Ja. Vom einzelnen Regal bis zur kompletten Küche fertigen wir nach Maß.</p></details><details><summary>Übernehmen Sie die Entsorgung alter Möbel?</summary><p>Ja. Wir bauen alte Einbauten aus und entsorgen sie für Sie, auch Altholz.</p></details><details><summary>Arbeiten Sie auch für Gewerbe und Praxen?</summary><p>Ja, zum Beispiel medizinische Einrichtungen und Auftragsfertigung für andere Betriebe.</p></details></div>
-</div></section>
-
-<section id="kontakt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Kontakt & Anfahrt</span><h2>Wir sind für Sie da.</h2></div></div>
-  <div class="contact">
-    <div class="card"><h3>Stegmann GmbH Schreinerei für Innenausbau</h3><ul class="cl"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><div><b>Adresse</b><br>Karl-Bröger-Straße 5<br>91058 Erlangen-Bruck</div></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg><div><b>Telefon</b><br><a href="tel:+49913165165">09131 65165</a></div></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><b>E-Mail</b><br><a href="mailto:info@schreinerei-stegmann.de">info@schreinerei-stegmann.de</a></div></li></ul>
-      <a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Stegmann+GmbH+Schreinerei+für+Innenausbau+Karl-Bröger-Straße+5,+91058+Erlangen" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Route in Google Maps öffnen</a></div>
-    <div class="card"><h3>Öffnungszeiten</h3><table class="hrs"><tr><td>Mo – Do</td><td>07:00 – 16:30</td></tr><tr><td>Freitag</td><td>07:00 – 12:00</td></tr></table>
-      <div class="cta"><a class="btn btn-p" href="tel:+49913165165"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>Jetzt anrufen</a><a class="btn btn-o" href="#anfrage">Online anfragen</a></div></div>
-  </div>
-  <p class="note">* Angaben in dieser Vorschau stammen aus öffentlich verfügbaren Quellen (Stand 10/2026) und werden vor dem Livegang gemeinsam mit Ihnen geprüft und ergänzt.</p>
-</div></section>
+<section class="w hero">
+  <div><div class="time sans"><span>1963</span><i></i><span>heute</span></div>
+    <h1>Möbel,<br>die <i>bleiben.</i></h1>
+    <p>Küchen, Wohnmöbel und Innenausbau nach Maß – geplant mit Ihnen, gefertigt in unserer Werkstatt in Erlangen.</p>
+    <a class="btn f" href="#anfrage">Projekt anfragen</a> &nbsp; <a class="btn" href="#arbeiten">Arbeiten ansehen</a></div>
+  <div class="ph"><img src="../img/sc4.webp" alt="Schreiner bei der Arbeit – Symbolbild"><div class="badge"><b>63</b><span class="sans">Jahre Handwerk</span></div></div>
+</section>
+<section class="w intro"><div class="lbl sans">Über uns</div>
+  <p>Seit 1963 sind wir im Holzhandwerk tätig. In dieser Zeit haben wir uns stetig weiterentwickelt – und uns einen Ruf für Qualität, Service und Zuverlässigkeit erarbeitet, in Erlangen ebenso wie bei Aufträgen im In- und Ausland.</p></section>
+<section id="arbeiten" class="w zz"><article><div class="pic"><img src="../img/sc7.webp" alt="Küchen – Symbolbild" loading="lazy"></div><div><span class="no sans">Nº 01 · nach Maß</span><h2>Küchen</h2><p>Ihre Küche, exakt für Ihren Grundriss geplant und gefertigt.</p><a class="btn" href="#anfrage">Projekt besprechen</a></div></article><article><div class="pic"><img src="../img/sc5.webp" alt="Wohnmöbel – Symbolbild" loading="lazy"></div><div><span class="no sans">Nº 02 · Einbau &amp; Einzelstücke</span><h2>Wohnmöbel</h2><p>Schränke, Regale und Möbel, die genau in Ihre Nischen passen.</p><a class="btn" href="#anfrage">Projekt besprechen</a></div></article><article><div class="pic"><img src="../img/sc6.webp" alt="Bäder – Symbolbild" loading="lazy"></div><div><span class="no sans">Nº 03 · Badmöbel</span><h2>Bäder</h2><p>Waschtischunterbauten und Badmöbel für jeden Raum.</p><a class="btn" href="#anfrage">Projekt besprechen</a></div></article></section>
+<section class="more"><div class="w"><h2>Außerdem aus unserer Werkstatt</h2><ul><li><b>Medizinische Einrichtungen</b><span>Funktionale Einrichtungen für Praxen und medizinische Räume.</span></li><li><b>Fenster &amp; Türen</b><span>Türen und Fenster aus Holz – vom Austausch bis zum Einbau.</span></li><li><b>Wohnmobil- &amp; Containerausbau</b><span>Individuelle Ausbauten für Wohnmobile und Container.</span></li><li><b>Entsorgung</b><span>Wir bauen Altes aus und entsorgen es für Sie – auch Altholz.</span></li><li><b>Auftragsfertigung</b><span>Wir fertigen nach Ihren Plänen für Betriebe und Handwerker.</span></li></ul></div></section>
+<section id="ablauf" class="w proc"><div class="time sans"><span>Unser Ablauf</span><i></i></div>
+  <div class="grid"><div><div class="r">I.</div><h3>Planung</h3><p>Wir planen Ihr Projekt gemeinsam mit Ihnen nach Ihren Wünschen.</p></div>
+  <div><div class="r">II.</div><h3>Fertigung</h3><p>In unserer Werkstatt mit modernem Maschinenpark.</p></div>
+  <div><div class="r">III.</div><h3>Montage</h3><p>Bei Ihnen vor Ort – auf Wunsch inklusive Entsorgung.</p></div></div></section>
+<section class="quote"><blockquote>„Wir halten uns an unsere Termine und Zusagen.“</blockquote><cite class="sans">Stegmann GmbH · Erlangen</cite></section>
+<section id="faq" class="w" style="padding:80px 0 0"><details class="faq"><summary>Fertigen Sie auch einzelne Möbelstücke?</summary><p>Ja. Vom einzelnen Regal bis zur kompletten Küche fertigen wir nach Maß.</p></details><details class="faq"><summary>Übernehmen Sie die Entsorgung alter Möbel?</summary><p>Ja. Wir bauen alte Einbauten aus und entsorgen sie für Sie, auch Altholz.</p></details><details class="faq"><summary>Arbeiten Sie auch für Gewerbe und Praxen?</summary><p>Ja, zum Beispiel medizinische Einrichtungen und Auftragsfertigung für andere Betriebe.</p></details></section>
+<section id="anfrage" class="w letter">
+  <div data-box><h2>Erzählen Sie uns<br>von Ihrem Projekt.</h2><p style="color:var(--mut)">Wir melden uns mit einem Terminvorschlag für die Beratung.</p>
+    <form data-demo novalidate>
+      <label for="s1">Projekt</label><select id="s1"><option>Küchen</option><option>Wohnmöbel</option><option>Bäder</option><option>Medizinische Einrichtungen</option><option>Fenster &amp; Türen</option><option>Wohnmobil- &amp; Containerausbau</option><option>Entsorgung</option><option>Auftragsfertigung</option></select>
+      <label for="s2">Name</label><input id="s2" required>
+      <label for="s3">Telefon</label><input id="s3" type="tel" required>
+      <label for="s4">Ihre Idee (Raum, Maße, Wünsche)</label><textarea id="s4"></textarea>
+      <button class="btn f" type="submit">Anfrage senden</button>
+    </form>
+    <div class="done"><h3>Vielen Dank.</h3><p>Vorschau-Demo: In der Live-Version landet Ihre Anfrage direkt bei der Schreinerei Stegmann.</p><button class="btn" type="button" data-again>Neue Anfrage</button></div></div>
+  <div class="addr"><h2>Werkstatt</h2><p>Stegmann GmbH Schreinerei für Innenausbau<br>Karl-Bröger-Straße 5<br>91058 Erlangen</p>
+    <p><a href="tel:+49913165165">09131 65165</a><br><a href="mailto:info@schreinerei-stegmann.de">info@schreinerei-stegmann.de</a></p>
+    <table><tr><td>Mo – Do</td><td class="">07:00 – 16:30</td></tr><tr><td>Freitag</td><td class="">07:00 – 12:00</td></tr></table><p style="margin-top:26px"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Stegmann+GmbH+Schreinerei+für+Innenausbau+Karl-Bröger-Straße+5+91058+Erlangen" target="_blank" rel="noopener">Anfahrt</a></p></div>
+</section>
+<div class="w"><p class="note sans">Angaben in dieser Vorschau stammen aus öffentlich verfügbaren Quellen (Stand 10/2026) und werden vor dem Livegang gemeinsam mit Ihnen geprüft und ergänzt. Fotos: Unsplash (Symbolbilder).</p></div>
 </main>
-
-<footer class="ft"><div class="wrap">
-  <span>Entwurf für Stegmann GmbH Schreinerei für Innenausbau · Karl-Bröger-Straße 5, 91058 Erlangen</span>
-  <span>Fotos: Unsplash (Symbolbilder) · Entwurf: <a href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a> · <a href="https://socialclip.art/impressum.html" target="_blank" rel="noopener">Impressum</a> · <a href="https://socialclip.art/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a></span>
-</div></footer>
-
-<nav class="mb" aria-label="Schnellkontakt">
-  <a class="btn btn-o" href="tel:+49913165165"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>Anrufen</a><a class="btn btn-o" href="#kontakt"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Anfahrt</a><a class="btn btn-p" href="#anfrage">Anfragen</a>
-</nav>
+<footer class="sans"><div class="w"><span>Entwurf für Stegmann GmbH Schreinerei für Innenausbau</span><span>Entwurf: <a style="color:inherit" href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a> · <a style="color:inherit" href="https://socialclip.art/impressum.html" target="_blank" rel="noopener">Impressum</a> · <a style="color:inherit" href="https://socialclip.art/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a></span></div></footer>
+<nav class="mbar"><a href="tel:+49913165165">Anrufen</a><a href="#anfrage" style="background:var(--wood)">Anfrage</a></nav>
 
 <script>
-(function(){
-  var f=document.getElementById('bf'),veh=document.getElementById('veh'),box=document.querySelector('.book');
-  var d1=document.getElementById('d1');d1.min=new Date().toISOString().slice(0,10);
-  document.querySelectorAll('[data-pick]').forEach(function(a){a.addEventListener('click',function(){veh.value=a.getAttribute('data-pick')})});
+document.querySelectorAll('form[data-demo]').forEach(function(f){
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var nm=document.getElementById('nm'),ph=document.getElementById('ph');
-    if(!nm.value.trim()){nm.focus();return} if(!ph.value.trim()){ph.focus();return}
-    box.classList.add('sent');
+    var bad=[].slice.call(f.querySelectorAll('[required]')).filter(function(i){return !i.value.trim()})[0];
+    if(bad){bad.focus();return}
+    f.closest('[data-box]').classList.add('sent');
   });
-  document.getElementById('again').addEventListener('click',function(){box.classList.remove('sent')});
-})();
+});
+document.querySelectorAll('[data-again]').forEach(function(a){a.addEventListener('click',function(){a.closest('[data-box]').classList.remove('sent')})});
+document.querySelectorAll('input[type=date]').forEach(function(d){d.min=new Date().toISOString().slice(0,10)});
 </script>
-</body>
-</html>
+</body></html>

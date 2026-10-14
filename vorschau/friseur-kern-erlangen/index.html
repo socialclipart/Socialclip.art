@@ -4,300 +4,137 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#faf7f4">
-<title>Friseursalon Kern – Friseur in Erlangen</title>
+<meta name="theme-color" content="#0d0b0a">
+<title>Friseursalon Kern – Friseur in Erlangen-Alterlangen</title>
 <meta name="description" content="Schneiden, Färben, Balayage und Styling mit ausführlicher Beratung – im Traditionssalon der Familie Kern, heute mit italienischem Flair von Jennifer Weißmeier.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d1a19'/%3E%3C/svg%3E">
-<style>:root{--bg:#faf7f4;--surface:#ffffff;--surface2:#f1e9e3;--text:#1d1a19;--muted:#6a625e;--primary:#1d1a19;--onp:#faf7f4;--line:#e8ddd5;--primary-text:#1d1a19;--font:'Avenir Next', 'Segoe UI', system-ui, sans-serif;--head:'Didot', 'Bodoni 72', 'Iowan Old Style', Georgia, serif;--hw:600;--upper:none;--r:2px;color-scheme:light}
-*,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;font-size:17px}
-img,svg{display:block;max-width:100%}
-a{color:inherit}
-.wrap{width:min(1160px,100% - 32px);margin-inline:auto}
-h1,h2,h3{font-family:var(--head);font-weight:var(--hw);line-height:1.08;margin:0;letter-spacing:-.02em;text-transform:var(--upper)}
-h1{font-size:clamp(2.3rem,5.6vw,4.4rem)}
-h2{font-size:clamp(1.8rem,3.6vw,2.8rem)}
-h3{font-size:1.2rem;letter-spacing:-.01em}
-p{margin:0}
-.ico{width:22px;height:22px;flex:none}
-.muted{color:var(--muted)}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary-text)}
-.eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
-
-/* Vorschau-Leiste */
-.pv{background:#111;color:#fff;font-size:.88rem;position:relative;z-index:60}
-.pv .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:9px 0;flex-wrap:wrap}
-.pv b{color:#ffd166}
-.pv a.pvbtn{background:#ffd166;color:#111;text-decoration:none;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap}
-.pv button{background:none;border:0;color:#fff;cursor:pointer;padding:4px;display:inline-flex}
-
-/* Header */
-.hd{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.hd .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--head);font-weight:var(--hw);font-size:1.15rem;letter-spacing:-.01em;text-transform:var(--upper)}
-.mark{width:40px;height:40px;border-radius:calc(var(--r) * .8);background:var(--primary);color:var(--onp);display:grid;place-items:center;font-size:.95rem;font-weight:800;letter-spacing:-.03em}
-.brand small{display:block;font-family:var(--font);font-weight:500;font-size:.72rem;color:var(--muted);letter-spacing:.02em;text-transform:none}
-.nav{display:flex;gap:26px;font-size:.95rem}
-.nav a{text-decoration:none;color:var(--muted);font-weight:500}
-.nav a:hover{color:var(--text)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:var(--r);padding:14px 22px;font-weight:700;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s,background .15s}
-.btn:hover{transform:translateY(-1px)}
-.btn-p{background:var(--primary);color:var(--onp);box-shadow:0 10px 26px -12px var(--primary)}
-.btn-o{border-color:var(--line);color:var(--text);background:var(--surface)}
-.btn-wa{background:#1fa855;color:#fff}
-.btn-sm{padding:10px 16px;font-size:.92rem}
-
-/* Hero */
-.hero{position:relative;overflow:hidden;padding:48px 0 56px}
-.hero::before{content:"";position:absolute;inset:auto -10% -40% 35%;height:110%;background:radial-gradient(closest-side,color-mix(in srgb,var(--primary) 22%,transparent),transparent);pointer-events:none}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;position:relative}
-.hero h1{margin:18px 0 20px}
-.hero .lead{font-size:1.14rem;color:var(--muted);max-width:56ch}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;padding:0;list-style:none;font-size:.93rem;font-weight:600}
-.trust li{display:flex;align-items:center;gap:8px}
-.trust .ico{color:var(--primary-text)}
-.stage{position:relative;border-radius:calc(var(--r) * 1.6);overflow:hidden;aspect-ratio:16/10;box-shadow:0 30px 60px -30px rgba(0,0,0,.5);background:var(--surface2)}
-.stage img{width:100%;height:100%;object-fit:cover}
-.badge{position:absolute;left:16px;bottom:44px;display:flex;align-items:center;gap:8px;background:var(--surface);color:var(--text);padding:10px 14px;border-radius:999px;font-size:.88rem;font-weight:700;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
-.badge .ico{color:var(--primary-text);width:18px;height:18px}
-.stage .car{width:100%;filter:drop-shadow(0 30px 30px rgba(0,0,0,.18))}
-.plate{position:absolute;left:50%;top:-6%;transform:translateX(-50%);width:84%;aspect-ratio:1;border-radius:50%;background:color-mix(in srgb,var(--primary) 14%,var(--surface2));z-index:-1}
-
-/* Buchungskarte */
-.book{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:24px;box-shadow:0 30px 60px -30px rgba(0,0,0,.35);margin-top:-30px;position:relative}
-.book h3{margin-bottom:4px}
-.book .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.book label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.book input,.book select{width:100%;font:inherit;font-size:1rem;color:var(--text);background:var(--bg);border:1.5px solid var(--line);border-radius:calc(var(--r) * .7);padding:12px 12px;min-height:48px}
-.book input:focus,.book select:focus{outline:2px solid var(--primary);outline-offset:1px}
-.est{display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 14px;padding:14px 16px;border-radius:calc(var(--r) * .7);background:var(--surface2);font-size:.95rem}
-.est strong{font-size:1.4rem;font-family:var(--head)}
-.book .btn{width:100%}
-.ok{display:none;text-align:center;padding:10px 0}
-.ok .tick{width:58px;height:58px;border-radius:50%;background:#1fa855;color:#fff;display:grid;place-items:center;margin:0 auto 12px}
-.ok .tick .ico{width:30px;height:30px}
-.ok p{color:var(--muted);font-size:.95rem;margin:8px 0 16px}
-.book.sent form{display:none}.book.sent .ok{display:block}
-
-/* Stats */
-.stats{border-block:1px solid var(--line);background:var(--surface)}
-.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
-.stat{padding:26px 18px;border-left:1px solid var(--line)}
-.stat:first-child{border-left:0}
-.stat b{display:block;font-family:var(--head);font-size:1.8rem;font-weight:var(--hw);letter-spacing:-.02em;color:var(--primary-text)}
-.stat span{font-size:.9rem;color:var(--muted)}
-
-/* Sections */
-section{padding:64px 0}
-.sh{display:flex;justify-content:space-between;align-items:end;gap:16px 24px;margin-bottom:28px;flex-wrap:wrap}
-.sh p{max-width:46ch;color:var(--muted)}
-.sh h2{margin-top:12px}
-.grid{display:grid;gap:20px}
-.fleet{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.vc{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:22px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
-.vc:hover{transform:translateY(-4px);box-shadow:0 24px 40px -28px rgba(0,0,0,.4)}
-.vc .pic{position:relative;background:var(--surface2);border-radius:var(--r);overflow:hidden;aspect-ratio:16/10;margin-bottom:18px}
-.vc .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.vc:hover .pic img{transform:scale(1.05)}
-img[src$="van2.webp"]{object-position:50% 82%}
-.vc .pic.cut{background:#fff}
-.vc .pic.cut img{object-fit:contain;padding:6px 8px}
-.vc .pic svg{padding:22px 14px 12px}
-.sym{position:absolute;right:8px;bottom:8px;font-size:.66rem;background:rgba(0,0,0,.55);color:#fff;padding:2px 7px;border-radius:999px}
-.vc .cat{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary-text)}
-.vc h3{margin:4px 0 12px}
-.vc ul{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-wrap:wrap;gap:6px}
-.vc li{font-size:.8rem;background:var(--surface2);border-radius:999px;padding:4px 10px;color:var(--muted)}
-.vc .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:16px}
-.price small{display:block;font-size:.75rem;color:var(--muted)}
-.price b{font-family:var(--head);font-size:1.5rem;font-weight:var(--hw)}
-.price .ask{font-size:1.05rem}
-.usps{grid-template-columns:repeat(3,1fr)}
-.usp{padding:26px;border-radius:calc(var(--r) * 1.4);background:var(--surface);border:1px solid var(--line)}
-.usp .ib{width:48px;height:48px;border-radius:var(--r);display:grid;place-items:center;background:color-mix(in srgb,var(--primary) 14%,transparent);color:var(--primary-text);margin-bottom:16px}
-.usp h3{margin-bottom:8px}
-.usp p{color:var(--muted);font-size:.97rem}
-.alt{background:var(--surface2)}
-.steps{grid-template-columns:repeat(3,1fr);counter-reset:s}
-.step{position:relative;padding:28px;background:var(--surface);border-radius:calc(var(--r) * 1.4);border:1px solid var(--line)}
-.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--primary);color:var(--onp);font-weight:800;margin-bottom:16px;font-size:1.1rem}
-.step p{color:var(--muted);margin-top:8px}
-.rate{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;background:var(--primary);color:var(--onp);border-radius:calc(var(--r) * 2);padding:44px}
-.rate .big{font-family:var(--head);font-size:clamp(3.4rem,8vw,5.6rem);font-weight:var(--hw);line-height:1;letter-spacing:-.04em}
-.stars{display:flex;gap:4px;margin:10px 0 6px}
-.stars .ico{width:24px;height:24px;fill:currentColor}
-.rate p{opacity:.88;max-width:52ch}
-.rate .btn{margin-top:18px;background:var(--onp);color:var(--primary)}
-.faq{max-width:820px}
-details{border-bottom:1px solid var(--line);padding:6px 0}
-summary{cursor:pointer;list-style:none;padding:18px 40px 18px 0;font-weight:700;font-size:1.06rem;position:relative}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";position:absolute;right:6px;top:12px;font-size:1.6rem;font-weight:400;color:var(--primary-text);transition:transform .2s}
-details[open] summary::after{transform:rotate(45deg)}
-details p{padding:0 0 20px;color:var(--muted)}
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:30px}
-.cl{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:16px}
-.cl li{display:flex;gap:14px;align-items:flex-start}
-.cl .ico{color:var(--primary-text);margin-top:3px}
-.cl a{text-decoration:none;font-weight:600}
-.hrs{width:100%;border-collapse:collapse;margin-top:16px}
-.hrs td{padding:11px 0;border-bottom:1px solid var(--line)}
-.hrs td+td{text-align:right;font-weight:600}
-.mapbtn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:22px;height:150px;border-radius:var(--r);text-decoration:none;font-weight:700;background:
-  repeating-linear-gradient(45deg,var(--surface2) 0 14px,color-mix(in srgb,var(--surface2) 70%,var(--bg)) 14px 28px);border:1px dashed var(--line)}
-.mapbtn .ico{color:var(--primary-text)}
-.ft{border-top:1px solid var(--line);padding:28px 0 96px;font-size:.88rem;color:var(--muted)}
-.ft .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
-.ft a{text-decoration:none}
-.note{font-size:.8rem;color:var(--muted);margin-top:26px}
-
-/* Mobile-Leiste */
-.mb{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;grid-template-columns:1fr 1fr 1.2fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
-.mb .btn{padding:12px 8px;font-size:.92rem}
-
-/* Inhalte sind immer sichtbar – keine Einblend-Effekte, die in manchen Viewern leere Flächen erzeugen */
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-@media (max-width:960px){
-  .hero .wrap{grid-template-columns:1fr;gap:36px}
-  .usps,.steps{grid-template-columns:1fr 1fr}
-  .nav{display:none}
-}
-@media (max-width:680px){
-  body{font-size:16px}
-  .hero{padding:36px 0 48px}
-  .stats .wrap{grid-template-columns:1fr 1fr}
-  .stat:nth-child(3){border-left:0}
-  .stat:nth-child(n+3){border-top:1px solid var(--line)}
-  .usps,.steps,.contact{grid-template-columns:1fr}
-  .rate{grid-template-columns:1fr;gap:16px;padding:30px}
-  section{padding:44px 0}
-  .sh{margin-bottom:20px}
-  .hero .wrap{gap:24px}
-  .book .row{grid-template-columns:1fr}
-  .hd .hcta{display:none}
-  .mb{display:grid}
-  .pv .wrap{font-size:.8rem}
-}
-
-.book textarea{width:100%;font:inherit;font-size:1rem;color:var(--text);background:var(--bg);border:1.5px solid var(--line);border-radius:calc(var(--r) * .7);padding:12px;min-height:84px;resize:vertical}
-.book textarea:focus{outline:2px solid var(--primary);outline-offset:1px}
-.vc p.txt{color:var(--muted);font-size:.95rem;margin:0 0 16px}
-.highlight{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.hl{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r) * 1.4);padding:26px}
-.hl .tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--onp);background:var(--primary);border-radius:999px;padding:4px 10px;margin-bottom:12px}
-.hl p{color:var(--muted);margin-top:6px}
-@media (max-width:680px){.highlight{grid-template-columns:1fr}}
-</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d0b0a'/%3E%3C/svg%3E">
+<style>
+:root{--k:#0d0b0a;--iv:#f6f1ec;--bl:#ead8cc;--gd:#b08d57;--mut:#8a8079}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--iv);color:var(--k);font-family:'Avenir Next','Helvetica Neue','Segoe UI',system-ui,sans-serif;font-weight:300;font-size:17px;line-height:1.7}
+a{color:inherit}img{display:block;max-width:100%}
+.w{width:min(1180px,100% - 32px);margin:0 auto}
+.serif{font-family:Didot,'Bodoni 72','Bodoni MT','Iowan Old Style',Georgia,serif;font-weight:400}
+.cap{font-size:.7rem;letter-spacing:.32em;text-transform:uppercase}
+.hero{position:relative;min-height:92vh;color:var(--iv);display:flex;flex-direction:column}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,11,10,.55),rgba(13,11,10,.15) 40%,rgba(13,11,10,.85))}
+.top{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:26px 0}
+.top nav{display:flex;gap:28px}.top nav a{text-decoration:none}.top nav:last-child{justify-content:flex-end}
+.mark{text-align:center;text-decoration:none}.mark b{display:block;font-size:2.4rem;letter-spacing:.4em;padding-left:.4em;line-height:1}
+.hero .bot{position:relative;z-index:2;margin-top:auto;padding:0 0 70px;display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap}
+.hero h1{font-size:clamp(3rem,8.6vw,7.5rem);line-height:.92;margin:0;max-width:10ch}
+.hero h1 i{color:var(--bl)}
+.out{display:inline-block;border:1px solid currentColor;padding:16px 30px;text-decoration:none;cursor:pointer;background:none;color:inherit;font:inherit;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;transition:.2s}
+.out:hover{background:var(--iv);color:var(--k)}
+.dark .out:hover,.light .out:hover{background:var(--k);color:var(--iv)}
+.rt{text-align:right}.rt b{display:block;font-size:3rem;line-height:1}.rt .st{color:var(--gd);letter-spacing:4px}
+.mq{background:var(--k);color:var(--iv);overflow:hidden;white-space:nowrap;padding:18px 0}
+.mq div{display:inline-block;animation:mq 30s linear infinite}
+.mq span{margin:0 26px}.mq span::after{content:"✦";margin-left:52px;color:var(--gd)}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.mq div{animation:none}}
+section{padding:110px 0}
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center}
+.about img{aspect-ratio:3/4;object-fit:cover;width:100%}
+.about blockquote{font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.35;margin:24px 0;font-style:italic}
+.about .sig{font-size:1.8rem;font-style:italic;color:var(--gd)}
+.menu{background:#fff}
+.menu h2,.gal h2{font-size:clamp(2.4rem,5vw,4rem);margin:12px 0 50px;line-height:1}
+.mrow{display:flex;align-items:baseline;gap:14px;padding:22px 0;border-bottom:1px solid #eee4dc}
+.mrow h3{margin:0;font-size:1.6rem}
+.mrow .d{flex:1;border-bottom:1px dotted var(--mut);transform:translateY(-6px)}
+.mrow .p{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--mut)}
+.mrow small{display:block;color:var(--mut);font-size:.9rem}
+.menu .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 70px}
+.rate{background:var(--bl);text-align:center}
+.rate b{display:block;font-size:clamp(6rem,16vw,11rem);line-height:.9}
+.rate .st{color:var(--k);font-size:1.6rem;letter-spacing:10px;margin:14px 0}
+.gal .row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gal img{aspect-ratio:1;object-fit:cover;width:100%;filter:grayscale(.25)}
+.dark{background:var(--k);color:var(--iv)}
+.book{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.book h2{font-size:clamp(2.6rem,5vw,4.2rem);line-height:1;margin:14px 0 20px}
+.book label{display:block;margin-top:22px;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--mut)}
+.book input,.book select,.book textarea{width:100%;background:transparent;border:0;border-bottom:1px solid #4a423d;color:var(--iv);font:inherit;padding:10px 0;border-radius:0}
+.book select option{color:#111}
+.book textarea{min-height:80px;resize:vertical}
+.book input:focus,.book select:focus,.book textarea:focus{outline:none;border-color:var(--gd)}
+.book .out{margin-top:30px}
+.hrs td{padding:10px 0;border-bottom:1px solid #2a2522}.hrs td+td{text-align:right}.hrs{width:100%;border-collapse:collapse}
+details.faq{border-bottom:1px solid #eee4dc}details.faq summary{cursor:pointer;padding:22px 0;list-style:none;font-size:1.3rem}
+details.faq p{margin:0 0 22px;color:var(--mut)}
+.done h3{font-size:2.4rem;margin:0}
+footer{background:var(--k);color:var(--mut);padding:30px 0 100px;font-size:.8rem;border-top:1px solid #2a2522}
+footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.note{font-size:.78rem;color:var(--mut)}
+.mbar{position:fixed;bottom:0;left:0;right:0;z-index:50;display:none;background:var(--k);color:var(--iv);text-align:center;padding:16px;text-decoration:none;font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;border-top:1px solid var(--gd)}
+@media(max-width:860px){.top{grid-template-columns:1fr}.top nav{display:none}.about,.book,.menu .grid{grid-template-columns:1fr;gap:40px}.rt{text-align:left}}
+@media(max-width:600px){section{padding:70px 0}.gal .row{grid-template-columns:1fr 1fr}.mbar{display:block}.hero{min-height:84vh}}
+[data-box] .done{display:none}[data-box].sent form{display:none}[data-box].sent .done{display:block}</style>
 </head>
 <body>
 
-<div class="pv" id="pv"><div class="wrap">
-  <span><b>Vorschau</b> · Unverbindlicher Entwurf von SocialClip für Friseursalon Kern – keine offizielle Website. Gefällt sie Ihnen? Sie kann in wenigen Tagen live sein.</span>
-  <span style="display:flex;gap:8px;align-items:center"><a class="pvbtn" href="https://wa.me/4917646188101?text=Hallo,%20ich%20habe%20die%20Website-Vorschau%20für%20Friseursalon%20Kern%20gesehen%20und%20möchte%20mehr%20wissen." target="_blank" rel="noopener">Jetzt übernehmen</a><button aria-label="Hinweis schließen" onclick="document.getElementById('pv').remove()"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span>
-</div></div>
-
-<header class="hd"><div class="wrap">
-  <a class="brand" href="#top"><span class="mark">K</span><span>Friseursalon Kern<small>Friseur in Erlangen</small></span></a>
-  <nav class="nav" aria-label="Hauptnavigation"><a href="#leistungen">Leistungen</a><a href="#vorteile">Vorteile</a><a href="#ablauf">Ablauf</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a></nav>
-  <a class="btn btn-p btn-sm hcta" href="tel:+49913141171"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>09131 41171</a>
-</div></header>
-
+<div id="pv" style="background:#0d0b0a;color:#f6f1ec;font:14px/1.4 system-ui,sans-serif;position:relative;z-index:99"><div style="max-width:1160px;margin:0 auto;padding:9px 16px;display:flex;gap:10px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap"><span><b style="color:#ead8cc">Vorschau</b> · Unverbindlicher Entwurf von SocialClip für Friseursalon Kern – keine offizielle Website.</span><span style="display:flex;gap:8px;align-items:center"><a href="https://wa.me/4917646188101?text=Hallo,%20ich%20habe%20die%20Website-Vorschau%20für%20Friseursalon%20Kern%20gesehen%20und%20möchte%20mehr%20wissen." target="_blank" rel="noopener" style="background:#ead8cc;color:#111;text-decoration:none;font-weight:700;padding:6px 12px;border-radius:999px">Jetzt übernehmen</a><button aria-label="Hinweis schließen" onclick="document.getElementById('pv').remove()" style="background:none;border:0;color:#f6f1ec;font-size:20px;cursor:pointer;line-height:1">×</button></span></div></div>
 <main id="top">
-<section class="hero"><div class="wrap">
-  <div>
-    <span class="eyebrow">Friseursalon in Alterlangen · seit über 60 Jahren</span>
-    <h1>Haare sind<br>meine Leidenschaft.</h1>
-    <p class="lead">Schneiden, Färben, Balayage und Styling mit ausführlicher Beratung – im Traditionssalon der Familie Kern, heute mit italienischem Flair von Jennifer Weißmeier.</p>
-    <div class="cta"><a class="btn btn-p" href="#anfrage">Termin buchen <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-o" href="tel:+49913141171"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>09131 41171</a></div>
-    <ul class="trust"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>4,9 ★ bei 582 Bewertungen</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-8-4.7-8-10.5A4.5 4.5 0 0112 7a4.5 4.5 0 018 2.5C20 15.3 12 20 12 20z"/></svg>Über 60 Jahre Salon Kern</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Online-Termin 24/7</li></ul>
-  </div>
-  <div>
-    <div class="stage"><img src="../img/hs6.webp" alt="Friseursalon Kern" decoding="async" width="1400" height="933"><div class="badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>4,9 ★ bei 582 Bewertungen</span></div></div>
-    <div class="book" id="anfrage">
-      <form id="bf" novalidate>
-        <h3>Termin anfragen</h3>
-        <p class="muted" style="font-size:.92rem">Unverbindlich · Rückmeldung in Kürze</p>
-        <div class="row"><div><label for="veh">Leistung</label><select id="veh"><option value="0">Schneiden &amp; Waschen</option><option value="1">Färben</option><option value="2">Styling &amp; Dauerwelle</option><option value="3">Pflege</option><option value="4">Wimpern &amp; Augenbrauen</option></select></div><div><label for="d1">Wunschtag</label><input type="date" id="d1"></div></div>
-        <div class="row"><div><label for="nm">Name</label><input id="nm" autocomplete="name" placeholder="Ihr Name" required></div><div><label for="ph">Telefon</label><input id="ph" type="tel" autocomplete="tel" placeholder="Für die Rückmeldung" required></div></div>
-        <div class="row" style="grid-template-columns:1fr"><div><label for="msg">Nachricht</label><textarea id="msg" placeholder="Wünsche oder Fragen (z. B. Länge, Farbe)"></textarea></div></div>
-        <div style="height:14px"></div>
-        <button class="btn btn-p" type="submit">Termin anfragen <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      </form>
-      <div class="ok" role="status">
-        <div class="tick"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <h3>Anfrage ist angekommen</h3>
-        <p>Vorschau-Demo: In der Live-Version landet diese Anfrage sofort per E-Mail bei Friseursalon Kern.</p>
-        <button class="btn btn-o btn-sm" type="button" id="again">Neue Anfrage</button>
-      </div>
-    </div>
-  </div>
-</div></section>
+<section class="hero" style="padding:0"><img src="../img/hs6.webp" alt="Friseurin beim Föhnen – Symbolbild">
+  <div class="w top"><nav class="cap"><a href="#salon">Salon</a><a href="#leistungen">Leistungen</a></nav>
+    <a class="mark serif" href="#top"><b>KERN</b><span class="cap" style="font-family:'Avenir Next',sans-serif">Friseursalon · Erlangen</span></a>
+    <nav class="cap"><a href="#termin">Termin</a><a href="tel:+49913141171">09131 41171</a></nav></div>
+  <div class="w bot"><div><div class="cap" style="margin-bottom:20px">Seit über 60 Jahren in Alterlangen</div><h1 class="serif">Haare sind meine <i>Leidenschaft.</i></h1>
+    <div style="margin-top:34px"><a class="out" href="#termin">Termin buchen</a></div></div>
+    <div class="rt"><b class="serif">4,9</b><div class="st">★★★★★</div><div class="cap">582 Bewertungen auf Planity</div></div></div>
+</section>
+<div class="mq"><div><span class="cap">Schneiden</span> <span class="cap">Färben</span> <span class="cap">Balayage</span> <span class="cap">Strähnen</span> <span class="cap">Styling</span> <span class="cap">Dauerwelle</span> <span class="cap">Pflege</span> <span class="cap">Augenbrauen</span><span class="cap">Schneiden</span> <span class="cap">Färben</span> <span class="cap">Balayage</span> <span class="cap">Strähnen</span> <span class="cap">Styling</span> <span class="cap">Dauerwelle</span> <span class="cap">Pflege</span> <span class="cap">Augenbrauen</span></div></div>
 
-<div class="stats"><div class="wrap"><div class="stat"><b>4,9 ★</b><span>582 Bewertungen auf Planity</span></div><div class="stat"><b>60+</b><span>Jahre Salon Kern</span></div><div class="stat"><b>24/7</b><span>online buchen</span></div><div class="stat"><b>Innung</b><span>Mitgliedsbetrieb</span></div></div></div>
+<section id="salon" class="w about light">
+  <img src="../img/hs2.webp" alt="Haare stylen – Symbolbild" loading="lazy">
+  <div><span class="cap" style="color:var(--gd)">Der Salon</span>
+    <blockquote class="serif">„Friseurin zu sein bedeutet für mich nicht nur Haare schneiden und färben – es ist meine Leidenschaft, die ich ausübe und auslebe.“</blockquote>
+    <p>Gegründet von der Familie Kern, heute geführt von Jennifer Weißmeier – mit italienischem Charme und einer ausführlichen Beratung zu Beginn jedes Termins.</p>
+    <div class="sig serif">Jennifer Weißmeier</div></div>
+</section>
 
-<section id="leistungen"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Leistungen</span><h2>Was wir für Ihr Haar tun.</h2></div><p>Jeder Termin beginnt mit einer ausführlichen Beratung – damit das Ergebnis wirklich zu Ihnen passt.</p></div>
-  <div class="grid fleet"><article class="vc"><div class="pic"><img src="../img/hs2.webp" alt="Schneiden &amp; Waschen" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Damen &amp; Herren</span><h3>Schneiden &amp; Waschen</h3><p class="txt">Ein Haarschnitt ist wie ein Outfit – er gehört zum Gesamteindruck.</p><div class="foot"><div class="price"><small>Leistung</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="0">Termin</a></div></article><article class="vc"><div class="pic"><img src="../img/hs3.webp" alt="Färben" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Strähnen · Balayage · Painting</span><h3>Färben</h3><p class="txt">Haare färben ist eine Kunst: von natürlichen Strähnen bis zum Balayage.</p><div class="foot"><div class="price"><small>Leistung</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="1">Termin</a></div></article><article class="vc"><div class="pic"><img src="../img/hs7.webp" alt="Styling &amp; Dauerwelle" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">für jeden Anlass</span><h3>Styling &amp; Dauerwelle</h3><p class="txt">Das Leben ist nicht perfekt – Ihre Frisur kann es sein.</p><div class="foot"><div class="price"><small>Leistung</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="2">Termin</a></div></article><article class="vc"><div class="pic"><img src="../img/hs1.webp" alt="Pflege" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Treatments</span><h3>Pflege</h3><p class="txt">Pflegebehandlungen, die Ihr Haar spürbar gesund machen.</p><div class="foot"><div class="price"><small>Leistung</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="3">Termin</a></div></article><article class="vc"><div class="pic"><img src="../img/hs8.webp" alt="Wimpern &amp; Augenbrauen" decoding="async" loading="lazy" width="1400" height="933"><span class="sym">Symbolbild</span></div><span class="cat">Färben &amp; Formen</span><h3>Wimpern &amp; Augenbrauen</h3><p class="txt">Augenbrauen formen, Wimpern und Brauen färben.</p><div class="foot"><div class="price"><small>Leistung</small><b class="ask">anfragen</b></div><a href="#anfrage" class="btn btn-o btn-sm" data-pick="4">Termin</a></div></article></div>
-  <div class="highlight" style="margin-top:24px"><div class="hl"><span class="tag">Online-Buchung</span><h3>Termin buchen – rund um die Uhr</h3><p>Ihren Wunschtermin buchen Sie jederzeit online, auch abends oder am Sonntag.</p></div><div class="hl"><span class="tag">Tradition</span><h3>Über 60 Jahre Salon Kern</h3><p>Gegründet von Familie Kern, heute geführt von Jennifer Weißmeier – mit italienischem Charme.</p></div></div>
-</div></section>
+<section id="leistungen" class="menu"><div class="w"><span class="cap" style="color:var(--gd)">Leistungen</span><h2 class="serif">Die Karte.</h2><div class="grid"><div class="mrow"><div><h3 class="serif">Schneiden &amp; Waschen</h3><small>Damen &amp; Herren</small></div><span class="d"></span><span class="p">auf Anfrage</span></div><div class="mrow"><div><h3 class="serif">Färben</h3><small>Strähnen · Balayage · Painting</small></div><span class="d"></span><span class="p">auf Anfrage</span></div><div class="mrow"><div><h3 class="serif">Styling &amp; Dauerwelle</h3><small>für jeden Anlass</small></div><span class="d"></span><span class="p">auf Anfrage</span></div><div class="mrow"><div><h3 class="serif">Pflege</h3><small>Treatments</small></div><span class="d"></span><span class="p">auf Anfrage</span></div><div class="mrow"><div><h3 class="serif">Wimpern &amp; Augenbrauen</h3><small>Färben &amp; Formen</small></div><span class="d"></span><span class="p">auf Anfrage</span></div></div>
+  <p class="note" style="margin-top:30px">Preise nennen wir Ihnen gern bei der Terminbuchung.</p></div></section>
 
-<section id="vorteile" class="alt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Warum Friseursalon Kern</span><h2>Aus Erlangen.<br>Für Erlangen.</h2></div><p>Persönlich, erreichbar und mit Erfahrung – ein Betrieb, der hier zu Hause ist.</p></div>
-  <div class="grid usps"><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.5a3.5 3.5 0 010 7M18 14a6 6 0 013.5 6"/></svg></div><h3>Ausführliche Beratung</h3><p>Am Anfang jedes Termins nehmen wir uns Zeit für Ihre Wünsche.</p></div><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></div><h3>4,9 von 5 Sternen</h3><p>Über 580 Bewertungen – unsere Kundinnen und Kunden sprechen für uns.</p></div><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></div><h3>Färben ist Kunst</h3><p>Strähnen, Balayage und Painting – modern und typgerecht.</p></div><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div><h3>Termin online</h3><p>Rund um die Uhr buchbar, ohne Warteschleife.</p></div><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-8-4.7-8-10.5A4.5 4.5 0 0112 7a4.5 4.5 0 018 2.5C20 15.3 12 20 12 20z"/></svg></div><h3>Mit Leidenschaft</h3><p>„Friseurin zu sein heißt für mich nicht nur Haare schneiden – es ist meine Leidenschaft.“</p></div><div class="usp"><div class="ib"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div><h3>In Alterlangen</h3><p>Schobertweg 1 – Ihr Salon in der Nachbarschaft.</p></div></div>
-</div></section>
+<section class="rate"><span class="cap">Was unsere Kundinnen sagen</span><b class="serif">4,9</b><div class="st">★★★★★</div><p class="cap">582 Bewertungen auf Planity</p></section>
 
-<section id="ablauf"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">So einfach geht’s</span><h2>In drei Schritten.</h2></div></div>
-  <div class="grid steps"><div class="step"><h3>Termin buchen</h3><p>Online rund um die Uhr oder telefonisch.</p></div><div class="step"><h3>Beratung</h3><p>Wir besprechen in Ruhe, was zu Ihnen passt.</p></div><div class="step"><h3>Wohlfühlen</h3><p>Schneiden, Färben, Styling – und mit neuem Look nach Hause.</p></div></div>
-</div></section>
+<section class="gal"><div class="w"><span class="cap" style="color:var(--gd)">Eindrücke</span><h2 class="serif">Im Salon.</h2>
+  <div class="row"><img src="../img/hs1.webp" alt="Haare waschen – Symbolbild" loading="lazy"><img src="../img/hs3.webp" alt="Werkzeug – Symbolbild" loading="lazy"><img src="../img/hs8.webp" alt="Salon – Symbolbild" loading="lazy"></div></div></section>
 
-<section><div class="wrap"><div class="rate">
-  <div><div class="big">4,9</div><div class="stars"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></div><small>582 Bewertungen auf Planity</small></div>
-  <div><h2>Kundinnen und Kunden empfehlen uns.</h2><p>Echte Bewertungen von echten Kundinnen und Kunden – in der Live-Version erscheinen hier die neuesten Bewertungen automatisch.</p></div>
-</div></div></section>
-<section id="faq" class="alt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Häufige Fragen</span><h2>Gut zu wissen.</h2></div></div>
-  <div class="faq"><details><summary>Kann ich online einen Termin buchen?</summary><p>Ja, rund um die Uhr über unsere Online-Terminbuchung.</p></details><details><summary>Bieten Sie Balayage an?</summary><p>Ja, neben Strähnen und Painting gehört Balayage zu unseren Färbetechniken.</p></details><details><summary>Färben Sie auch Wimpern und Augenbrauen?</summary><p>Ja, und wir formen auch Ihre Augenbrauen.</p></details></div>
-</div></section>
+<section id="faq" class="w" style="padding-top:0"><details class="faq"><summary>Kann ich online einen Termin buchen?</summary><p>Ja, rund um die Uhr über unsere Online-Terminbuchung.</p></details><details class="faq"><summary>Bieten Sie Balayage an?</summary><p>Ja, neben Strähnen und Painting gehört Balayage zu unseren Färbetechniken.</p></details><details class="faq"><summary>Färben Sie auch Wimpern und Augenbrauen?</summary><p>Ja, und wir formen auch Ihre Augenbrauen.</p></details></section>
 
-<section id="kontakt"><div class="wrap">
-  <div class="sh"><div><span class="eyebrow">Kontakt & Anfahrt</span><h2>Wir sind für Sie da.</h2></div></div>
-  <div class="contact">
-    <div class="card"><h3>Friseursalon Kern · Inh. Jennifer Weißmeier</h3><ul class="cl"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><div><b>Adresse</b><br>Schobertweg 1<br>91056 Erlangen-Alterlangen</div></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg><div><b>Telefon</b><br><a href="tel:+49913141171">09131 41171</a></div></li></ul>
-      <a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Friseursalon+Kern+·+Inh.+Jennifer+Weißmeier+Schobertweg+1,+91056+Erlangen" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Route in Google Maps öffnen</a></div>
-    <div class="card"><h3>Öffnungszeiten</h3><table class="hrs"><tr><td>Di – Fr</td><td>07:30 – 17:00*</td></tr><tr><td>Samstag</td><td>08:00 – 13:00*</td></tr><tr><td>So &amp; Mo</td><td>geschlossen</td></tr></table>
-      <div class="cta"><a class="btn btn-p" href="tel:+49913141171"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>Jetzt anrufen</a><a class="btn btn-o" href="#anfrage">Online anfragen</a></div></div>
-  </div>
-  <p class="note">* Angaben in dieser Vorschau stammen aus öffentlich verfügbaren Quellen (Stand 10/2026) und werden vor dem Livegang gemeinsam mit Ihnen geprüft und ergänzt.</p>
+<section id="termin" class="dark"><div class="w book">
+  <div data-box><span class="cap" style="color:var(--gd)">Termin</span><h2 class="serif">Zeit für Sie.</h2><p style="color:var(--mut)">Online rund um die Uhr buchbar – oder schreiben Sie uns Ihren Wunsch.</p>
+    <form data-demo novalidate>
+      <label for="f1">Leistung</label><select id="f1"><option>Schneiden &amp; Waschen</option><option>Färben</option><option>Styling &amp; Dauerwelle</option><option>Pflege</option><option>Wimpern &amp; Augenbrauen</option></select>
+      <label for="f2">Wunschtag</label><input id="f2" type="date">
+      <label for="f3">Name</label><input id="f3" required>
+      <label for="f4">Telefon</label><input id="f4" type="tel" required>
+      <label for="f5">Wünsche</label><textarea id="f5" placeholder="Länge, Farbe, Anlass …"></textarea>
+      <button class="out" type="submit">Termin anfragen</button></form>
+    <div class="done"><h3 class="serif">Danke.</h3><p style="color:var(--mut)">Vorschau-Demo: In der Live-Version landet Ihre Anfrage direkt im Salon – oder führt zur Online-Buchung.</p><button class="out" type="button" data-again>Neue Anfrage</button></div></div>
+  <div><span class="cap" style="color:var(--gd)">Besuchen Sie uns</span><h2 class="serif" style="font-size:2.4rem">Schobertweg 1<br>91056 Erlangen</h2>
+    <table class="hrs"><tr><td>Di – Fr</td><td class="">07:30 – 17:00*</td></tr><tr><td>Samstag</td><td class="">08:00 – 13:00*</td></tr><tr><td>So &amp; Mo</td><td class="">geschlossen</td></tr></table>
+    <p style="margin-top:26px"><a href="tel:+49913141171" style="text-decoration:none;font-size:1.3rem">09131 41171</a></p>
+    <a class="out" href="https://www.google.com/maps/search/?api=1&query=Friseursalon+Kern+·+Inh.+Jennifer+Weißmeier+Schobertweg+1+91056+Erlangen" target="_blank" rel="noopener">Route</a>
+    <p class="note" style="margin-top:30px">* Angaben in dieser Vorschau stammen aus öffentlich verfügbaren Quellen (Stand 10/2026) und werden vor dem Livegang gemeinsam mit Ihnen geprüft und ergänzt. Fotos: Unsplash (Symbolbilder).</p></div>
 </div></section>
 </main>
-
-<footer class="ft"><div class="wrap">
-  <span>Entwurf für Friseursalon Kern · Inh. Jennifer Weißmeier · Schobertweg 1, 91056 Erlangen</span>
-  <span>Fotos: Unsplash (Symbolbilder) · Entwurf: <a href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a> · <a href="https://socialclip.art/impressum.html" target="_blank" rel="noopener">Impressum</a> · <a href="https://socialclip.art/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a></span>
-</div></footer>
-
-<nav class="mb" aria-label="Schnellkontakt">
-  <a class="btn btn-o" href="tel:+49913141171"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>Anrufen</a><a class="btn btn-o" href="#kontakt"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Anfahrt</a><a class="btn btn-p" href="#anfrage">Termin</a>
-</nav>
+<footer><div class="w"><span>Entwurf für Friseursalon Kern · Inh. Jennifer Weißmeier</span><span>Entwurf: <a style="color:inherit" href="https://socialclip.art" target="_blank" rel="noopener">SocialClip</a> · <a style="color:inherit" href="https://socialclip.art/impressum.html" target="_blank" rel="noopener">Impressum</a> · <a style="color:inherit" href="https://socialclip.art/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a></span></div></footer>
+<a class="mbar" href="#termin">Termin buchen</a>
 
 <script>
-(function(){
-  var f=document.getElementById('bf'),veh=document.getElementById('veh'),box=document.querySelector('.book');
-  var d1=document.getElementById('d1');d1.min=new Date().toISOString().slice(0,10);
-  document.querySelectorAll('[data-pick]').forEach(function(a){a.addEventListener('click',function(){veh.value=a.getAttribute('data-pick')})});
+document.querySelectorAll('form[data-demo]').forEach(function(f){
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var nm=document.getElementById('nm'),ph=document.getElementById('ph');
-    if(!nm.value.trim()){nm.focus();return} if(!ph.value.trim()){ph.focus();return}
-    box.classList.add('sent');
+    var bad=[].slice.call(f.querySelectorAll('[required]')).filter(function(i){return !i.value.trim()})[0];
+    if(bad){bad.focus();return}
+    f.closest('[data-box]').classList.add('sent');
   });
-  document.getElementById('again').addEventListener('click',function(){box.classList.remove('sent')});
-})();
+});
+document.querySelectorAll('[data-again]').forEach(function(a){a.addEventListener('click',function(){a.closest('[data-box]').classList.remove('sent')})});
+document.querySelectorAll('input[type=date]').forEach(function(d){d.min=new Date().toISOString().slice(0,10)});
 </script>
-</body>
-</html>
+</body></html>
