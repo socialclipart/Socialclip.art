@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#121212">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="Verpasste Anrufe sind verlorene Kunden. KI-Assistentin Nova geht ran, wenn du keine Zeit hast – dazu Webdesign, Social Media &amp; Design aus Erlangen. Für Selbstständige und lokale Betriebe.">
+<meta name="description" content="Webdesign aus Erlangen für Selbstständige &amp; lokale Betriebe: Websites, die bei Google gefunden werden und Kunden bringen. Kostenloser Sichtbarkeits-Check.">
 <link rel="canonical" href="https://socialclip.art/">
-<title>KI-Assistentin Nova, Webdesign &amp; Social Media in Erlangen | SocialClip</title>
+<title>Webdesign Erlangen – Websites, die gefunden werden | SocialClip</title>
 
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -19,8 +19,8 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://socialclip.art/">
 <meta property="og:site_name" content="SocialClip">
-<meta property="og:title" content="KI-Assistentin Nova, Webdesign &amp; Social Media in Erlangen | SocialClip">
-<meta property="og:description" content="Verpasste Anrufe sind verlorene Kunden. KI-Assistentin Nova geht ran, wenn du keine Zeit hast – dazu Webdesign, Social Media &amp; Design aus Erlangen.">
+<meta property="og:title" content="Webdesign Erlangen – Websites, die gefunden werden | SocialClip">
+<meta property="og:description" content="Webdesign aus Erlangen für Selbstständige &amp; lokale Betriebe: Websites, die bei Google gefunden werden und Kunden bringen. Kostenloser Sichtbarkeits-Check.">
 <meta property="og:image" content="https://socialclip.art/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -3544,99 +3544,6 @@ footer strong{
 }
 
 /* =========================
-   VERLUST-RECHNER
-========================= */
-
-.loss-grid{
-  display:grid;
-  grid-template-columns:1.1fr 1fr;
-  margin-top:var(--title-gap);
-  border:1px solid var(--line);
-}
-
-.loss-inputs{
-  padding:40px;
-  display:flex;
-  flex-direction:column;
-  gap:34px;
-  border-right:1px solid var(--line);
-}
-
-.loss-field{
-  display:grid;
-  grid-template-columns:1fr auto;
-  align-items:baseline;
-  gap:14px 20px;
-}
-
-.loss-field span{
-  color:#a29e96;
-  font-size:var(--fs-label);
-  letter-spacing:var(--ls-label);
-}
-
-.loss-field strong{
-  font-size:28px;
-  font-weight:500;
-  letter-spacing:-.03em;
-}
-
-.loss-field input{
-  grid-column:1 / -1;
-  width:100%;
-  accent-color:#f4f1ea;
-  cursor:pointer;
-}
-
-.loss-note{
-  color:var(--dim);
-  font-size:var(--fs-small);
-  line-height:1.7;
-}
-
-.loss-result{
-  padding:40px;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:center;
-  gap:10px;
-  background:rgba(255,255,255,.03);
-}
-
-.loss-result span{
-  color:#a29e96;
-  font-size:var(--fs-label);
-  letter-spacing:var(--ls-label);
-}
-
-.loss-result strong{
-  font-size:clamp(52px,7vw,96px);
-  font-weight:700;
-  line-height:1;
-  letter-spacing:-.05em;
-}
-
-.loss-result em{
-  color:var(--soft);
-  font-style:normal;
-  font-size:var(--fs-body);
-}
-
-.loss-result p{
-  max-width:380px;
-  margin:12px 0 22px;
-  color:#b8b4ac;
-  font-size:var(--fs-body);
-  line-height:1.7;
-}
-
-.loss-result b{
-  color:#f4f1ea;
-  font-weight:600;
-}
-
-/* =========================
    SO EINFACH GEHT'S + PILOT
 ========================= */
 
@@ -3754,18 +3661,10 @@ footer strong{
     display:none;
   }
 
-  .loss-grid,
   .steps{
     grid-template-columns:1fr;
   }
 
-  .loss-inputs{
-    padding:28px 22px;
-    border-right:0;
-    border-bottom:1px solid var(--line);
-  }
-
-  .loss-result,
   .pilot{
     padding:28px 22px;
   }
@@ -3807,6 +3706,103 @@ footer strong{
 
   .memory-ask{
     bottom:76px;
+  }
+}
+
+/* =========================
+   DER UNTERSCHIED
+========================= */
+
+.contrast-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  margin-top:var(--title-gap);
+  border:1px solid var(--line);
+}
+
+.contrast-col{
+  padding:40px;
+}
+
+.contrast-bad{
+  border-right:1px solid var(--line);
+}
+
+.contrast-good{
+  background:rgba(255,255,255,.045);
+}
+
+.contrast-label{
+  color:#a29e96;
+  font-size:var(--fs-label);
+  letter-spacing:var(--ls-label);
+}
+
+.contrast-good .contrast-label{
+  color:#f4f1ea;
+}
+
+.contrast-col ul{
+  margin-top:28px;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.contrast-col li{
+  position:relative;
+  padding-left:30px;
+  font-size:var(--fs-body);
+  line-height:1.6;
+}
+
+.contrast-bad li{
+  color:#8f8b84;
+}
+
+.contrast-good li{
+  color:#f4f1ea;
+}
+
+.contrast-col li::before{
+  position:absolute;
+  left:0;
+  top:0;
+  font-weight:700;
+}
+
+.contrast-bad li::before{
+  content:"✕";
+  color:#7d7973;
+}
+
+.contrast-good li::before{
+  content:"✓";
+  color:#f4f1ea;
+}
+
+.contrast-more{
+  display:inline-block;
+  margin-top:30px;
+  color:#f4f1ea;
+  font-size:var(--fs-small);
+  text-underline-offset:4px;
+}
+
+@media (max-width:760px){
+
+  .contrast-grid{
+    grid-template-columns:1fr;
+  }
+
+  .contrast-col{
+    padding:28px 22px;
+  }
+
+  .contrast-bad{
+    border-right:0;
+    border-bottom:1px solid var(--line);
   }
 }
 
@@ -3951,410 +3947,84 @@ footer strong{
 <section class="hero center">
 
   <div class="chapter-line reveal">
-    PERSÖNLICH AUS ERLANGEN
+    WEBDESIGN AUS ERLANGEN
   </div>
 
   <div class="hero-greeting reveal" id="heroGreeting"></div>
 
   <div class="big-title reveal" aria-hidden="true">
-    ANRUF<br>
-    <span>VERPASST?</span><br>
-    KUNDE WEG.
+    GEGOOGELT.<br>
+    <span>NICHT</span><br>
+    GEFUNDEN.
   </div>
 
-  <h1 class="seo-home-heading reveal">Nova geht ran, wenn du keine Zeit hast.</h1>
+  <h1 class="seo-home-heading reveal">Webdesign in Erlangen: Websites, die bei Google gefunden werden und Kunden bringen.</h1>
 
   <p class="text reveal" style="margin-top:45px;">
-    Du arbeitest, das Telefon klingelt – und der Anrufer
-    bucht einfach beim Nächsten. Nova, deine KI-Assistentin,
-    nimmt Anrufe an, beantwortet Fragen und notiert Terminwünsche.
-    Auch nach Feierabend. Dazu Website, Social Media und Design
-    aus einer Hand – für Selbstständige und lokale Betriebe.
+    Deine Kunden suchen dich bei Google – und landen bei der Konkurrenz,
+    wenn deine Website fehlt, veraltet ist oder auf dem Handy nicht funktioniert.
+    Wir bauen dir eine Website, die in Sekunden zeigt, was du anbietest,
+    Vertrauen schafft und mit einem Klick zum Anruf führt.
+    Für Selbstständige und lokale Betriebe in Erlangen, Nürnberg und Fürth.
   </p>
 
   <div class="hero-actions reveal">
-    <button class="cine-btn primary" type="button" data-nova>
-      ▶ NOVA ANHÖREN <span class="arr" aria-hidden="true">→</span>
-    </button>
+    <a class="cine-btn primary" href="#check">
+      KOSTENLOSER SICHTBARKEITS-CHECK <span class="arr" aria-hidden="true">→</span>
+    </a>
     <a class="cine-btn" href="tel:+4917646188101">
       JETZT ANRUFEN <span class="arr" aria-hidden="true">→</span>
     </a>
   </div>
 
   <div class="hero-small reveal">
-    UNVERBINDLICHES GESPRÄCH · KEIN CALLCENTER · AUS ERLANGEN
+    UNVERBINDLICHES GESPRÄCH · PERSÖNLICH · AUS ERLANGEN
   </div>
 
 </section>
 
 <!-- =========================
-     SCENE 05 / NOVA
+     DER UNTERSCHIED: ohne / mit guter Website
 ========================= -->
 
-<section class="nova" id="nova">
+<section class="contrast" id="unterschied">
 
   <div class="chapter-line reveal">
-    NOVA · DEINE KI-ASSISTENTIN
-  </div>
-
-  <div class="nova-grid">
-
-    <div class="nova-intro">
-
-      <h2 class="big-title reveal">
-        HÖR<br>
-        <span>NOVA</span><br>
-        ZU.
-      </h2>
-
-      <p class="text reveal" style="margin-top:40px;">
-        Nova geht ans Telefon, wenn du keine Zeit hast. Sie beantwortet
-        Fragen zu Öffnungszeiten und Leistungen, nimmt Terminwünsche auf
-        und gibt Wichtiges an dich weiter. Auch nach Feierabend.
-        Was sie sagen darf, legen wir vorher gemeinsam fest.
-      </p>
-
-      <div class="hero-actions reveal">
-        <button class="cine-btn primary" type="button" data-open-builder="Virtueller Assistent">
-          NOVA FÜR MEINEN BETRIEB <span class="arr" aria-hidden="true">→</span>
-        </button>
-        <a class="cine-btn" href="tel:+4917646188101">
-          ANRUFEN <span class="arr" aria-hidden="true">→</span>
-        </a>
-      </div>
-
-    </div>
-
-    <div class="nova-player reveal" id="novaPlayer">
-
-      <span class="widget-spot" aria-hidden="true"></span>
-
-      <div class="nova-head">
-        <span>NOVA · KI-ASSISTENTIN</span>
-        <span class="nova-state" id="novaState">BEREIT</span>
-      </div>
-
-      <canvas class="nova-wave" id="novaWave" aria-hidden="true"></canvas>
-
-      <p class="nova-caption" id="novaCaption">
-        Drück auf Play und hör Nova zu.
-      </p>
-
-      <div class="nova-controls">
-
-        <button class="nova-play" id="novaPlay" type="button" aria-label="Nova anhören">
-          <span class="nova-play-icon" aria-hidden="true"></span>
-        </button>
-
-        <div class="nova-time">
-          <span id="novaTime">00:00</span> / <span id="novaDur">00:11</span>
-        </div>
-
-      </div>
-
-      <div class="nova-skills">
-        <span data-skill="calls">ANRUFE</span>
-        <span data-skill="mail">E-MAILS</span>
-        <span data-skill="dates">TERMINE</span>
-        <span data-skill="late">NACH FEIERABEND</span>
-      </div>
-
-      <p class="sr-only">
-        Nova sagt: Hallo, ich bin Nova, deine persönliche Assistentin.
-        Ich gehe ans Telefon, beantworte deine E-Mails und plane deine Termine.
-        Auch nach Feierabend. Du kümmerst dich um dein Business. Ich mich um den Rest.
-      </p>
-
-      <audio id="novaAudio" src="audio/nova-demo.mp3" preload="metadata"></audio>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     WAS EIN VERPASSTER ANRUF KOSTET
-     Verlust-Rechner: rechnet nur im Browser, nichts wird gesendet.
-========================= -->
-
-<section class="loss" id="rechner">
-
-  <div class="chapter-line reveal">
-    WAS EIN VERPASSTER ANRUF KOSTET
+    DER UNTERSCHIED
   </div>
 
   <h2 class="big-title reveal">
-    WAS<br>
-    <span>KOSTET</span><br>
-    DICH DAS?
+    WAS DICH<br>
+    <span>KUNDEN</span><br>
+    KOSTET.
   </h2>
 
-  <div class="loss-grid reveal">
+  <div class="contrast-grid">
 
-    <div class="loss-inputs">
-
-      <label class="loss-field">
-        <span>VERPASSTE ANRUFE PRO WOCHE</span>
-        <strong id="lossCallsOut">5</strong>
-        <input type="range" id="lossCalls" min="1" max="30" step="1" value="5">
-      </label>
-
-      <label class="loss-field">
-        <span>WAS DIR EIN KUNDE IM SCHNITT BRINGT</span>
-        <strong id="lossValueOut">60 €</strong>
-        <input type="range" id="lossValue" min="20" max="500" step="10" value="60">
-      </label>
-
-      <p class="loss-note">
-        Annahme: Jeder zweite Anrufer wäre Kunde geworden.
-        Ein Monat hat rund 4,3 Wochen.
-      </p>
-
+    <div class="contrast-col contrast-bad reveal">
+      <span class="contrast-label">OHNE GUTE WEBSITE</span>
+      <ul>
+        <li>Bei Google findet man zuerst die Konkurrenz.</li>
+        <li>Auf dem Handy schwer lesbar – Besucher sind sofort wieder weg.</li>
+        <li>Niemand versteht auf Anhieb, was du anbietest.</li>
+        <li>Anrufen oder Anfragen ist umständlich – also lässt man es.</li>
+      </ul>
     </div>
 
-    <div class="loss-result" aria-live="polite">
-      <span>DAS KOSTET DICH UNGEFÄHR</span>
-      <strong id="lossMonth">650 €</strong>
-      <em>im Monat</em>
-      <p>Das sind rund <b id="lossYear">7.800 €</b> im Jahr – Umsatz, der bei der Konkurrenz landet.</p>
-      <a class="cine-btn primary" href="tel:+4917646188101">
-        DAS WILL ICH ÄNDERN <span class="arr" aria-hidden="true">→</span>
-      </a>
+    <div class="contrast-col contrast-good reveal">
+      <span class="contrast-label">MIT DEINER NEUEN WEBSITE</span>
+      <ul>
+        <li>Sauber für Google aufgebaut: Titel, Texte, Struktur und Ladezeit.</li>
+        <li>Schnell und klar auf jedem Handy.</li>
+        <li>In Sekunden klar, was du anbietest und warum du.</li>
+        <li>Ein Klick zum Anruf, zur Nachricht oder zur Anfrage.</li>
+      </ul>
+      <a class="contrast-more" href="/webdesign-erlangen/">Mehr über Webdesign in Erlangen <span aria-hidden="true">↗</span></a>
     </div>
 
   </div>
 
 </section>
-
-<!-- =========================
-     SO EINFACH GEHT'S + PILOTPLÄTZE
-========================= -->
-
-<section class="start" id="start">
-
-  <div class="chapter-line reveal">
-    SO EINFACH GEHT'S
-  </div>
-
-  <h2 class="big-title reveal">
-    IN 3<br>
-    <span>SCHRITTEN</span><br>
-    STARTKLAR.
-  </h2>
-
-  <ol class="steps">
-    <li class="step reveal">
-      <span class="step-number">01</span>
-      <h3>Kurzes Gespräch</h3>
-      <p>10 Minuten am Telefon oder bei dir vor Ort. Kostenlos und unverbindlich.</p>
-    </li>
-    <li class="step reveal">
-      <span class="step-number">02</span>
-      <h3>Wir richten Nova ein</h3>
-      <p>Abgestimmt auf deinen Betrieb: deine Fragen, deine Zeiten, deine Abläufe. Wir testen alles gemeinsam.</p>
-    </li>
-    <li class="step reveal">
-      <span class="step-number">03</span>
-      <h3>Nova geht ran</h3>
-      <p>Du arbeitest in Ruhe weiter. Kein Anruf geht mehr verloren.</p>
-    </li>
-  </ol>
-
-  <div class="pilot reveal">
-    <div>
-      <span class="pilot-label">NUR 3 PILOTPLÄTZE</span>
-      <h3>Wir starten Nova mit 3 Betrieben aus Erlangen und Umgebung – zu Sonderkonditionen.</h3>
-      <p>Im Gegenzug wünschen wir uns ehrliches Feedback und eine Bewertung, wenn du zufrieden bist. Sind die Plätze vergeben, gelten wieder die normalen Konditionen.</p>
-    </div>
-    <div class="pilot-actions">
-      <a class="cine-btn primary" href="tel:+4917646188101">
-        PLATZ SICHERN: ANRUFEN <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="cine-btn" href="#kontakt">
-        LIEBER SCHREIBEN <span class="arr" aria-hidden="true">→</span>
-      </a>
-    </div>
-  </div>
-
-</section>
-
-<!-- =========================
-     SCENE 03
-========================= -->
-
-<section class="categories">
-
-  <div class="chapter-line reveal">
-    AUSSERDEM AUS EINER HAND
-  </div>
-
-  <h2 class="big-title reveal">
-    WEITERE<br>
-    <span>LEISTUNGEN</span><br>
-    FÜR DICH.
-  </h2>
-
-  <div class="category-grid">
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">01</span>
-      <div class="category-number">01 / WEB</div>
-      <h3>Web</h3>
-      <p>Webseiten und digitale Auftritte, die nicht nach Vorlage aussehen.</p>
-    </div>
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">02</span>
-      <div class="category-number">02 / DESIGN</div>
-      <h3>Design</h3>
-      <p>Logos, Flyer, Visitenkarten und visuelle Identitäten.</p>
-    </div>
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">03</span>
-      <div class="category-number">03 / SOCIAL</div>
-      <h3>Social Media</h3>
-      <p>Inhalte, Strategien und Marketing für digitale Aufmerksamkeit.</p>
-    </div>
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">04</span>
-      <div class="category-number">04 / MEDIA</div>
-      <h3>Foto & Video</h3>
-      <p>Bild und Bewegung für Marken, Produkte und Geschichten.</p>
-    </div>
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">05</span>
-      <div class="category-number">05 / MARKETING</div>
-      <h3>Marketing</h3>
-      <p>Neukundengewinnung, Strategie und digitale Kampagnen.</p>
-    </div>
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">06</span>
-      <div class="category-number">06 / DIGITAL</div>
-      <h3>Digitale Lösungen</h3>
-      <p>Programmierung, virtuelle Assistenz und individuelle Lösungen.</p>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     SCENE 04
-========================= -->
-
-<section class="services services-compact" id="leistungen">
-
-  <p class="seo-offer-intro">Von deiner Website über Inhalte und Gestaltung bis zu digitalen Abläufen: Wähle die Leistung, die zu deinem Projekt passt. Wir arbeiten mit Selbstständigen und Unternehmen in Erlangen, Nürnberg, Fürth und online zusammen.</p>
-  <details class="all-services">
-  <summary class="cine-btn">ALLE 14 LEISTUNGEN IM DETAIL <span class="arr" aria-hidden="true">↓</span></summary>
-  <div class="service-list seo-offer-grid">
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">01 / SOCIALCLIP</span>
-      <h3>Webdesign &amp; Websites</h3>
-      <p>Individuelle Websites mit klaren Inhalten, mobiler Darstellung und einfachen Kontaktwegen.</p>
-      <div class="seo-offer-actions"><a href="/webdesign-erlangen/" aria-label="Mehr über Webdesign &amp; Websites erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Webseite" aria-label="Webdesign &amp; Websites anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">02 / SOCIALCLIP</span>
-      <h3>Flyerdesign</h3>
-      <p>Flyer für Angebote, Aktionen und Veranstaltungen – passend zu deiner Marke und für den Druck vorbereitet.</p>
-      <div class="seo-offer-actions"><a href="/flyerdesign-erlangen/" aria-label="Mehr über Flyerdesign erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Flyer" aria-label="Flyerdesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">03 / SOCIALCLIP</span>
-      <h3>Online-Marketing</h3>
-      <p>Dein Angebot über passende digitale Kanäle sichtbar machen – mit klaren Zielen, Inhalten und Kontaktwegen.</p>
-      <div class="seo-offer-actions"><a href="/online-marketing-erlangen/" aria-label="Mehr über Online-Marketing erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Online Marketing" aria-label="Online-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">04 / SOCIALCLIP</span>
-      <h3>Visitenkartendesign</h3>
-      <p>Visitenkarten mit lesbaren Kontaktdaten und einem Auftritt, der zu deinem Unternehmen passt.</p>
-      <div class="seo-offer-actions"><a href="/visitenkarten-erlangen/" aria-label="Mehr über Visitenkartendesign erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Visitenkarte" aria-label="Visitenkartendesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">05 / SOCIALCLIP</span>
-      <h3>Social-Media-Betreuung</h3>
-      <p>Strategie, Gestaltung und Betreuung für Instagram und TikTok – mit Posts, Reels und Stories.</p>
-      <div class="seo-offer-actions"><a href="/social-media-erlangen/" aria-label="Mehr über Social-Media-Betreuung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Social Media" aria-label="Social-Media-Betreuung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">06 / SOCIALCLIP</span>
-      <h3>Logodesign &amp; Branding</h3>
-      <p>Ein Logo und eine visuelle Sprache, die auf Website, Social Media und Druckmaterialien zusammenpassen.</p>
-      <div class="seo-offer-actions"><a href="/grafikdesign-erlangen/" aria-label="Mehr über Logodesign &amp; Branding erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Logo" aria-label="Logodesign &amp; Branding anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">07 / SOCIALCLIP</span>
-      <h3>Foto- &amp; Videobearbeitung</h3>
-      <p>Fotos bearbeiten, Videos schneiden und Inhalte für Website, Reels und deinen Markenauftritt aufbereiten.</p>
-      <div class="seo-offer-actions"><a href="/foto-video-bearbeitung-erlangen/" aria-label="Mehr über Foto- &amp; Videobearbeitung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Video &amp; Foto" aria-label="Foto- &amp; Videobearbeitung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">08 / SOCIALCLIP</span>
-      <h3>Lebenslaufgestaltung</h3>
-      <p>Deinen beruflichen Weg übersichtlich darstellen – mit klarer Struktur und einem passenden PDF-Layout.</p>
-      <div class="seo-offer-actions"><a href="/lebenslauf-erstellen-erlangen/" aria-label="Mehr über Lebenslaufgestaltung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Lebenslauf" aria-label="Lebenslaufgestaltung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">09 / SOCIALCLIP</span>
-      <h3>Speisekartendesign</h3>
-      <p>Lesbare Speisekarten für Gastronomie – mit klarer Struktur, passenden Formaten und deinem Markenauftritt.</p>
-      <div class="seo-offer-actions"><a href="/speisekarten-design-erlangen/" aria-label="Mehr über Speisekartendesign erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Speisekarte" aria-label="Speisekartendesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">10 / SOCIALCLIP</span>
-      <h3>KI-Assistenz &amp; Nova</h3>
-      <p>Digitale Unterstützung für Anrufe, E-Mails und Termine – persönlich auf deine Abläufe abgestimmt.</p>
-      <div class="seo-offer-actions"><a href="/ki-assistent-erlangen/" aria-label="Mehr über KI-Assistenz &amp; Nova erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Virtueller Assistent" aria-label="KI-Assistenz &amp; Nova anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">11 / SOCIALCLIP</span>
-      <h3>Programmierung &amp; digitale Lösungen</h3>
-      <p>Individuelle Webfunktionen, digitale Werkzeuge und Automatisierungen für deine bestehenden Abläufe.</p>
-      <div class="seo-offer-actions"><a href="/programmierung-erlangen/" aria-label="Mehr über Programmierung &amp; digitale Lösungen erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Programmierung" aria-label="Programmierung &amp; digitale Lösungen anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">12 / SOCIALCLIP</span>
-      <h3>Neukundengewinnung</h3>
-      <p>Angebot, Sichtbarkeit und Kontaktwege aufeinander abstimmen, damit passende Interessenten leichter anfragen.</p>
-      <div class="seo-offer-actions"><a href="/neukundengewinnung-erlangen/" aria-label="Mehr über Neukundengewinnung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Neukundengewinnung" aria-label="Neukundengewinnung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">13 / SOCIALCLIP</span>
-      <h3>Strategieentwicklung</h3>
-      <p>Zielgruppe, Positionierung und Maßnahmen ordnen – als konkreter Plan für deinen Unternehmensauftritt.</p>
-      <div class="seo-offer-actions"><a href="/marketingstrategie-erlangen/" aria-label="Mehr über Strategieentwicklung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Strategieentwicklung" aria-label="Strategieentwicklung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">14 / SOCIALCLIP</span>
-      <h3>TikTok-Marketing</h3>
-      <p>Kurzvideo-Ideen, Gestaltung und Planung für einen TikTok-Auftritt, der zu deinem Betrieb passt.</p>
-      <div class="seo-offer-actions"><a href="/tiktok-marketing-erlangen/" aria-label="Mehr über TikTok-Marketing erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="TikTok Marketing" aria-label="TikTok-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-  </div>
-  </details>
-
-</section>
-
-
-
-
-
-
-
-
 
 <!-- =========================
      SCENE 10
@@ -4593,6 +4263,323 @@ footer strong{
   </div>
 
 </section>
+
+<!-- =========================
+     SO EINFACH GEHT'S + PILOTPLÄTZE
+========================= -->
+
+<section class="start" id="start">
+
+  <div class="chapter-line reveal">
+    SO EINFACH GEHT'S
+  </div>
+
+  <h2 class="big-title reveal">
+    IN 3<br>
+    <span>SCHRITTEN</span><br>
+    STARTKLAR.
+  </h2>
+
+  <ol class="steps">
+    <li class="step reveal">
+      <span class="step-number">01</span>
+      <h3>Kurzes Gespräch</h3>
+      <p>10 Minuten am Telefon oder bei dir vor Ort. Kostenlos und unverbindlich.</p>
+    </li>
+    <li class="step reveal">
+      <span class="step-number">02</span>
+      <h3>Entwurf &amp; Abstimmung</h3>
+      <p>Wir gestalten deine Website und stimmen Texte und Bilder mit dir ab, bis alles passt.</p>
+    </li>
+    <li class="step reveal">
+      <span class="step-number">03</span>
+      <h3>Online &amp; bei Google</h3>
+      <p>Wir prüfen alles auf Handy und Computer, schalten die Seite live und melden sie bei Google an.</p>
+    </li>
+  </ol>
+
+  <div class="pilot reveal">
+    <div>
+      <span class="pilot-label">NUR 3 PILOTPLÄTZE</span>
+      <h3>Wir bauen 3 Websites für Betriebe aus Erlangen und Umgebung – zu Sonderkonditionen.</h3>
+      <p>Im Gegenzug wünschen wir uns ehrliches Feedback und eine Bewertung, wenn du zufrieden bist. Sind die Plätze vergeben, gelten wieder die normalen Konditionen.</p>
+    </div>
+    <div class="pilot-actions">
+      <a class="cine-btn primary" href="tel:+4917646188101">
+        PLATZ SICHERN: ANRUFEN <span class="arr" aria-hidden="true">→</span>
+      </a>
+      <a class="cine-btn" href="#kontakt">
+        LIEBER SCHREIBEN <span class="arr" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- =========================
+     SCENE 05 / NOVA
+========================= -->
+
+<section class="nova" id="nova">
+
+  <div class="chapter-line reveal">
+    EXTRA: KI-ASSISTENTIN NOVA
+  </div>
+
+  <div class="nova-grid">
+
+    <div class="nova-intro">
+
+      <h2 class="big-title reveal">
+        HÖR<br>
+        <span>NOVA</span><br>
+        ZU.
+      </h2>
+
+      <p class="text reveal" style="margin-top:40px;">
+        Nova geht ans Telefon, wenn du keine Zeit hast. Sie beantwortet
+        Fragen zu Öffnungszeiten und Leistungen, nimmt Terminwünsche auf
+        und gibt Wichtiges an dich weiter. Auch nach Feierabend.
+        Was sie sagen darf, legen wir vorher gemeinsam fest.
+      </p>
+
+      <div class="hero-actions reveal">
+        <button class="cine-btn primary" type="button" data-open-builder="Virtueller Assistent">
+          NOVA FÜR MEINEN BETRIEB <span class="arr" aria-hidden="true">→</span>
+        </button>
+        <a class="cine-btn" href="tel:+4917646188101">
+          ANRUFEN <span class="arr" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="nova-player reveal" id="novaPlayer">
+
+      <span class="widget-spot" aria-hidden="true"></span>
+
+      <div class="nova-head">
+        <span>NOVA · KI-ASSISTENTIN</span>
+        <span class="nova-state" id="novaState">BEREIT</span>
+      </div>
+
+      <canvas class="nova-wave" id="novaWave" aria-hidden="true"></canvas>
+
+      <p class="nova-caption" id="novaCaption">
+        Drück auf Play und hör Nova zu.
+      </p>
+
+      <div class="nova-controls">
+
+        <button class="nova-play" id="novaPlay" type="button" aria-label="Nova anhören">
+          <span class="nova-play-icon" aria-hidden="true"></span>
+        </button>
+
+        <div class="nova-time">
+          <span id="novaTime">00:00</span> / <span id="novaDur">00:11</span>
+        </div>
+
+      </div>
+
+      <div class="nova-skills">
+        <span data-skill="calls">ANRUFE</span>
+        <span data-skill="mail">E-MAILS</span>
+        <span data-skill="dates">TERMINE</span>
+        <span data-skill="late">NACH FEIERABEND</span>
+      </div>
+
+      <p class="sr-only">
+        Nova sagt: Hallo, ich bin Nova, deine persönliche Assistentin.
+        Ich gehe ans Telefon, beantworte deine E-Mails und plane deine Termine.
+        Auch nach Feierabend. Du kümmerst dich um dein Business. Ich mich um den Rest.
+      </p>
+
+      <audio id="novaAudio" src="audio/nova-demo.mp3" preload="metadata"></audio>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SCENE 03
+========================= -->
+
+<section class="categories">
+
+  <div class="chapter-line reveal">
+    AUSSERDEM AUS EINER HAND
+  </div>
+
+  <h2 class="big-title reveal">
+    WEITERE<br>
+    <span>LEISTUNGEN</span><br>
+    FÜR DICH.
+  </h2>
+
+  <div class="category-grid">
+
+    <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">01</span>
+      <div class="category-number">01 / WEB</div>
+      <h3>Web</h3>
+      <p>Webseiten und digitale Auftritte, die nicht nach Vorlage aussehen.</p>
+    </div>
+
+    <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">02</span>
+      <div class="category-number">02 / DESIGN</div>
+      <h3>Design</h3>
+      <p>Logos, Flyer, Visitenkarten und visuelle Identitäten.</p>
+    </div>
+
+    <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">03</span>
+      <div class="category-number">03 / SOCIAL</div>
+      <h3>Social Media</h3>
+      <p>Inhalte, Strategien und Marketing für digitale Aufmerksamkeit.</p>
+    </div>
+
+    <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">04</span>
+      <div class="category-number">04 / MEDIA</div>
+      <h3>Foto & Video</h3>
+      <p>Bild und Bewegung für Marken, Produkte und Geschichten.</p>
+    </div>
+
+    <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">05</span>
+      <div class="category-number">05 / MARKETING</div>
+      <h3>Marketing</h3>
+      <p>Neukundengewinnung, Strategie und digitale Kampagnen.</p>
+    </div>
+
+    <div class="category reveal">
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost category-ghost" aria-hidden="true">06</span>
+      <div class="category-number">06 / DIGITAL</div>
+      <h3>Digitale Lösungen</h3>
+      <p>Programmierung, virtuelle Assistenz und individuelle Lösungen.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     SCENE 04
+========================= -->
+
+<section class="services services-compact" id="leistungen">
+
+  <p class="seo-offer-intro">Von deiner Website über Inhalte und Gestaltung bis zu digitalen Abläufen: Wähle die Leistung, die zu deinem Projekt passt. Wir arbeiten mit Selbstständigen und Unternehmen in Erlangen, Nürnberg, Fürth und online zusammen.</p>
+  <details class="all-services">
+  <summary class="cine-btn">ALLE 14 LEISTUNGEN IM DETAIL <span class="arr" aria-hidden="true">↓</span></summary>
+  <div class="service-list seo-offer-grid">
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">01 / SOCIALCLIP</span>
+      <h3>Webdesign &amp; Websites</h3>
+      <p>Individuelle Websites mit klaren Inhalten, mobiler Darstellung und einfachen Kontaktwegen.</p>
+      <div class="seo-offer-actions"><a href="/webdesign-erlangen/" aria-label="Mehr über Webdesign &amp; Websites erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Webseite" aria-label="Webdesign &amp; Websites anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">02 / SOCIALCLIP</span>
+      <h3>Flyerdesign</h3>
+      <p>Flyer für Angebote, Aktionen und Veranstaltungen – passend zu deiner Marke und für den Druck vorbereitet.</p>
+      <div class="seo-offer-actions"><a href="/flyerdesign-erlangen/" aria-label="Mehr über Flyerdesign erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Flyer" aria-label="Flyerdesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">03 / SOCIALCLIP</span>
+      <h3>Online-Marketing</h3>
+      <p>Dein Angebot über passende digitale Kanäle sichtbar machen – mit klaren Zielen, Inhalten und Kontaktwegen.</p>
+      <div class="seo-offer-actions"><a href="/online-marketing-erlangen/" aria-label="Mehr über Online-Marketing erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Online Marketing" aria-label="Online-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">04 / SOCIALCLIP</span>
+      <h3>Visitenkartendesign</h3>
+      <p>Visitenkarten mit lesbaren Kontaktdaten und einem Auftritt, der zu deinem Unternehmen passt.</p>
+      <div class="seo-offer-actions"><a href="/visitenkarten-erlangen/" aria-label="Mehr über Visitenkartendesign erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Visitenkarte" aria-label="Visitenkartendesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">05 / SOCIALCLIP</span>
+      <h3>Social-Media-Betreuung</h3>
+      <p>Strategie, Gestaltung und Betreuung für Instagram und TikTok – mit Posts, Reels und Stories.</p>
+      <div class="seo-offer-actions"><a href="/social-media-erlangen/" aria-label="Mehr über Social-Media-Betreuung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Social Media" aria-label="Social-Media-Betreuung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">06 / SOCIALCLIP</span>
+      <h3>Logodesign &amp; Branding</h3>
+      <p>Ein Logo und eine visuelle Sprache, die auf Website, Social Media und Druckmaterialien zusammenpassen.</p>
+      <div class="seo-offer-actions"><a href="/grafikdesign-erlangen/" aria-label="Mehr über Logodesign &amp; Branding erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Logo" aria-label="Logodesign &amp; Branding anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">07 / SOCIALCLIP</span>
+      <h3>Foto- &amp; Videobearbeitung</h3>
+      <p>Fotos bearbeiten, Videos schneiden und Inhalte für Website, Reels und deinen Markenauftritt aufbereiten.</p>
+      <div class="seo-offer-actions"><a href="/foto-video-bearbeitung-erlangen/" aria-label="Mehr über Foto- &amp; Videobearbeitung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Video &amp; Foto" aria-label="Foto- &amp; Videobearbeitung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">08 / SOCIALCLIP</span>
+      <h3>Lebenslaufgestaltung</h3>
+      <p>Deinen beruflichen Weg übersichtlich darstellen – mit klarer Struktur und einem passenden PDF-Layout.</p>
+      <div class="seo-offer-actions"><a href="/lebenslauf-erstellen-erlangen/" aria-label="Mehr über Lebenslaufgestaltung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Lebenslauf" aria-label="Lebenslaufgestaltung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">09 / SOCIALCLIP</span>
+      <h3>Speisekartendesign</h3>
+      <p>Lesbare Speisekarten für Gastronomie – mit klarer Struktur, passenden Formaten und deinem Markenauftritt.</p>
+      <div class="seo-offer-actions"><a href="/speisekarten-design-erlangen/" aria-label="Mehr über Speisekartendesign erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Speisekarte" aria-label="Speisekartendesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">10 / SOCIALCLIP</span>
+      <h3>KI-Assistenz &amp; Nova</h3>
+      <p>Digitale Unterstützung für Anrufe, E-Mails und Termine – persönlich auf deine Abläufe abgestimmt.</p>
+      <div class="seo-offer-actions"><a href="/ki-assistent-erlangen/" aria-label="Mehr über KI-Assistenz &amp; Nova erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Virtueller Assistent" aria-label="KI-Assistenz &amp; Nova anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">11 / SOCIALCLIP</span>
+      <h3>Programmierung &amp; digitale Lösungen</h3>
+      <p>Individuelle Webfunktionen, digitale Werkzeuge und Automatisierungen für deine bestehenden Abläufe.</p>
+      <div class="seo-offer-actions"><a href="/programmierung-erlangen/" aria-label="Mehr über Programmierung &amp; digitale Lösungen erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Programmierung" aria-label="Programmierung &amp; digitale Lösungen anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">12 / SOCIALCLIP</span>
+      <h3>Neukundengewinnung</h3>
+      <p>Angebot, Sichtbarkeit und Kontaktwege aufeinander abstimmen, damit passende Interessenten leichter anfragen.</p>
+      <div class="seo-offer-actions"><a href="/neukundengewinnung-erlangen/" aria-label="Mehr über Neukundengewinnung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Neukundengewinnung" aria-label="Neukundengewinnung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">13 / SOCIALCLIP</span>
+      <h3>Strategieentwicklung</h3>
+      <p>Zielgruppe, Positionierung und Maßnahmen ordnen – als konkreter Plan für deinen Unternehmensauftritt.</p>
+      <div class="seo-offer-actions"><a href="/marketingstrategie-erlangen/" aria-label="Mehr über Strategieentwicklung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Strategieentwicklung" aria-label="Strategieentwicklung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+    <article class="seo-offer reveal">
+      <span class="seo-offer-number">14 / SOCIALCLIP</span>
+      <h3>TikTok-Marketing</h3>
+      <p>Kurzvideo-Ideen, Gestaltung und Planung für einen TikTok-Auftritt, der zu deinem Betrieb passt.</p>
+      <div class="seo-offer-actions"><a href="/tiktok-marketing-erlangen/" aria-label="Mehr über TikTok-Marketing erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="TikTok Marketing" aria-label="TikTok-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+    </article>
+  </div>
+  </details>
+
+</section>
+
+
+
+
+
+
+
+
+
 
 <!-- =========================
      SCENE 11
@@ -8210,38 +8197,6 @@ window.addEventListener("pageshow",event=>{
   }
 });
 
-
-/* =========================
-   VERLUST-RECHNER
-   Verpasste Anrufe × jeder zweite wäre Kunde × Wert × 4,3 Wochen.
-========================= */
-
-(()=>{
-
-  const calls = document.getElementById("lossCalls");
-  const value = document.getElementById("lossValue");
-
-  if(!calls || !value){
-    return;
-  }
-
-  const euro = n => Math.round(n).toLocaleString("de-DE") + " €";
-
-  function update(){
-    const month = calls.value * 0.5 * value.value * 4.3;
-    // auf 50 € runden: es ist eine Schätzung, keine Rechnung
-    const rounded = Math.round(month / 50) * 50;
-    document.getElementById("lossCallsOut").textContent = calls.value;
-    document.getElementById("lossValueOut").textContent = euro(value.value);
-    document.getElementById("lossMonth").textContent = euro(rounded);
-    document.getElementById("lossYear").textContent = euro(rounded * 12);
-  }
-
-  calls.addEventListener("input", update);
-  value.addEventListener("input", update);
-  update();
-
-})();
 
 </script>
 
