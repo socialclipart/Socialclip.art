@@ -12,12 +12,14 @@
   dialog.innerHTML = `<div class="detail-builder-head"><span>SOCIALCLIP / PROJECT BUILDER</span><button class="detail-builder-close" type="button" aria-label="Schließen">×</button></div>
     <div class="detail-builder-body"><h2 id="detailProjectTitle">Was brauchst<br><span>du?</span></h2><p class="detail-builder-sub">Wähle eine oder mehrere Leistungen.</p>
     <div class="detail-builder-options" id="detailProjectOptions"></div>
-    <div class="detail-builder-summary"><div class="detail-builder-label">DEIN PROJEKT</div><div id="detailProjectSummary" class="detail-builder-tags" aria-live="polite"></div><p id="detailProjectHint" class="detail-builder-hint" aria-live="polite"></p><button class="detail-builder-submit" type="button">PROJEKT ANFRAGEN <span aria-hidden="true">→</span></button></div></div>`;
+    <div class="detail-builder-summary"><div class="detail-builder-label">DEIN PROJEKT</div><div id="detailProjectSummary" class="detail-builder-tags" aria-live="polite"></div><p id="detailProjectHint" class="detail-builder-hint" aria-live="polite"></p><button class="detail-builder-submit" type="button">PROJEKT ANFRAGEN <span aria-hidden="true">→</span></button><a class="detail-builder-price" href="/preise/">IM PREISRECHNER BERECHNEN <span aria-hidden="true">→</span></a></div></div>`;
   document.body.append(dialog);
   const options = dialog.querySelector('#detailProjectOptions');
   const summary = dialog.querySelector('#detailProjectSummary');
   const hint = dialog.querySelector('#detailProjectHint');
   const buttons = [];
+  const priceLink = dialog.querySelector('.detail-builder-price');
+  const priceIds = {"Webseite": "web", "Flyer": "flyer", "Online Marketing": "online", "Visitenkarte": "visitenkarte", "Social Media": "social", "Logo": "logo", "Video & Foto": "foto-video", "Lebenslauf": "lebenslauf", "Speisekarte": "speisekarte", "Virtueller Assistent": "nova", "Programmierung": "programmierung", "Neukundengewinnung": "neukunden", "Strategieentwicklung": "strategie", "TikTok Marketing": "tiktok"};
   function updateSelection() {
     for (const button of buttons) {
       const selected = selection.has(button.dataset.service);
@@ -31,6 +33,8 @@
       summary.append(tag);
     }
     if (!selection.size) summary.textContent = 'Noch keine Auswahl';
+    const ids = [...selection].map(service => priceIds[service]).filter(Boolean);
+    priceLink.href = `/preise/${ids.length ? `?l=${ids.join(',')}` : ''}#rechner`;
     hint.textContent = '';
   }
   services.forEach((service, index) => {

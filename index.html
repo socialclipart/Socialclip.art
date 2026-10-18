@@ -3599,6 +3599,35 @@ footer strong{
   "knowsAbout": ["Webdesign", "Logo-Design", "Flyer", "Visitenkarten", "Speisekarten", "Social Media Marketing", "TikTok Marketing", "Foto", "Video", "KI-Telefonassistent"]
 }
 </script>
+
+<style>
+/* Menü oben rechts */
+.menu-btn{gap:10px}
+.menu-lines{display:inline-grid;gap:4px;width:16px}
+.menu-lines i{display:block;height:1px;background:currentColor}
+.site-menu{position:fixed;inset:0;z-index:9995;background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.site-menu[hidden]{display:none}
+.site-menu-panel{position:absolute;top:0;right:0;width:min(460px,100%);height:100%;overflow-y:auto;overscroll-behavior:contain;background:#121212;border-left:1px solid var(--line);color:#f4f1ea;animation:siteMenuIn .35s ease}
+@keyframes siteMenuIn{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+.site-menu-head{display:flex;justify-content:space-between;align-items:center;padding:20px 25px;border-bottom:1px solid var(--line);color:#938f87;font-size:var(--fs-label);letter-spacing:var(--ls-label)}
+.site-menu-close{width:44px;height:44px;border:0;background:none;color:#fff;font-size:24px;cursor:pointer}
+.site-menu-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:25px}
+.site-menu-actions .cine-btn{justify-content:center;text-decoration:none}
+.site-menu-label{margin:0;padding:0 25px 10px;color:#d2b894;font-size:var(--fs-label);letter-spacing:var(--ls-label)}
+.site-menu-list{list-style:none;margin:0;padding:0 25px}
+.site-menu-list a{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:14px 0;border-top:1px solid var(--line);color:inherit;text-decoration:none}
+.site-menu-list strong{font-size:16px;font-weight:500;letter-spacing:-.01em}
+.site-menu-list span{grid-column:1;color:#a8a49c;font-size:13px;line-height:1.5}
+.site-menu-list em{grid-column:2;grid-row:1/3;align-self:center;font-style:normal;color:#e6d0ad;font-size:12px;white-space:nowrap}
+.site-menu-list a:hover strong,.site-menu-list a:focus-visible strong{color:#e6d0ad}
+.site-menu-foot{display:flex;flex-wrap:wrap;gap:18px;padding:25px;border-top:1px solid var(--line);font-size:13px}
+.site-menu-foot a{color:#f4f1ea}
+.site-menu a:focus-visible,.site-menu button:focus-visible{outline:2px solid #e6c99f;outline-offset:3px}
+.builder-price-link{display:inline-block;margin-left:10px;color:#e6d0ad;text-underline-offset:4px}
+.builder-price-btn{margin-top:10px;text-decoration:none}
+@media(max-width:600px){.site-menu-actions{grid-template-columns:1fr}.site-menu-list em{display:none}.builder-price-link{display:block;margin:8px 0 0}}
+@media(prefers-reduced-motion:reduce){.site-menu-panel{animation:none}}
+</style>
 </head>
 
 <body class="locked">
@@ -3619,18 +3648,52 @@ footer strong{
 
   <div class="topbar-right">
 
-    <button class="top-cta cine-btn" type="button" data-open-builder>
-      PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
-    </button>
-
     <div class="clock">
       <strong id="liveClock">--:--:--</strong>
       <span id="liveDate">--.--.----</span>
     </div>
 
+    <button class="top-cta cine-btn menu-btn" type="button" id="menuOpen" aria-expanded="false" aria-controls="siteMenu">
+      MENÜ <span class="menu-lines" aria-hidden="true"><i></i><i></i></span>
+    </button>
+
   </div>
 
 </header>
+
+<div class="site-menu" id="siteMenu" hidden>
+  <div class="site-menu-panel" role="dialog" aria-modal="true" aria-labelledby="siteMenuTitle">
+    <div class="site-menu-head">
+      <span id="siteMenuTitle">SOCIALCLIP / MENÜ</span>
+      <button class="site-menu-close" type="button" aria-label="Menü schließen">×</button>
+    </div>
+    <div class="site-menu-actions">
+      <button class="cine-btn primary" type="button" data-open-builder data-menu-close>PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span></button>
+      <a class="cine-btn" href="/preise/">PREISRECHNER <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+    <p class="site-menu-label">UNSERE LEISTUNGEN</p>
+    <ul class="site-menu-list">
+        <li><a href="/webdesign-erlangen/"><strong>Webdesign &amp; Websites</strong><span>Moderne Websites, die auf dem Handy überzeugen.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/social-media-erlangen/"><strong>Social Media</strong><span>Beiträge, Reels und Stories mit klarer Richtung.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/ki-assistent-erlangen/"><strong>KI-Telefonassistenz Nova</strong><span>Nimmt Anrufe an, wenn du gerade nicht kannst.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/tiktok-marketing-erlangen/"><strong>TikTok Marketing</strong><span>Kurzvideos, die zu deiner Marke passen.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/online-marketing-erlangen/"><strong>Online Marketing</strong><span>Google- und Meta-Anzeigen, die Anfragen bringen.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/grafikdesign-erlangen/"><strong>Logo &amp; Branding</strong><span>Ein Auftritt, der wiedererkannt wird.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/flyerdesign-erlangen/"><strong>Flyerdesign</strong><span>Druckfertige Flyer für Angebote und Aktionen.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/visitenkarten-erlangen/"><strong>Visitenkarten</strong><span>Kompakt, lesbar und wiedererkennbar.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/speisekarten-design-erlangen/"><strong>Speisekarten</strong><span>Übersichtlich und im Stil deines Betriebs.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/foto-video-bearbeitung-erlangen/"><strong>Foto &amp; Video</strong><span>Bearbeitung und Schnitt für deine Kanäle.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/lebenslauf-erstellen-erlangen/"><strong>Lebenslauf</strong><span>Klar gestaltet, auf Wunsch mit Anschreiben.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/programmierung-erlangen/"><strong>Programmierung</strong><span>Webfunktionen, Tools und Automatisierungen.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/neukundengewinnung-erlangen/"><strong>Neukundengewinnung</strong><span>Angebot und Kontaktwege, die Kunden bringen.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+        <li><a href="/marketingstrategie-erlangen/"><strong>Marketingstrategie</strong><span>Zielgruppe, Kanäle und ein klarer Plan.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
+    </ul>
+    <div class="site-menu-foot">
+      <a href="tel:+4917646188101">0176 46188101</a>
+      <a href="mailto:socialclip.art@gmail.com">socialclip.art@gmail.com</a>
+    </div>
+  </div>
+</div>
 
 <div class="progress" id="progress"></div>
 
@@ -4734,6 +4797,7 @@ footer strong{
 
       <p class="widget-sub">
         Wähle eine oder mehrere Leistungen.
+        <a class="builder-price-link" href="/preise/" data-price-link>Oder Preise direkt berechnen →</a>
       </p>
 
       <div class="service-selector" id="serviceSelector">
@@ -4813,6 +4877,10 @@ footer strong{
         <button class="widget-action cine-btn primary" type="button" id="sendProject">
           PROJEKT ANFRAGEN <span class="arr" aria-hidden="true">→</span>
         </button>
+
+        <a class="widget-action cine-btn builder-price-btn" href="/preise/" data-price-link>
+          IM PREISRECHNER BERECHNEN <span class="arr" aria-hidden="true">→</span>
+        </a>
 
       </div>
 
@@ -8102,5 +8170,37 @@ window.addEventListener("pageshow",event=>{
 
 </script>
 
+
+<script>
+/* Menü oben rechts + Verbindung Project Builder → Preisrechner */
+(()=>{
+  const menu=document.getElementById("siteMenu");
+  const openBtn=document.getElementById("menuOpen");
+  if(!menu||!openBtn) return;
+  const closeBtn=menu.querySelector(".site-menu-close");
+  let prevOverflow="";
+  function setMenu(open){
+    menu.hidden=!open;
+    openBtn.setAttribute("aria-expanded",String(open));
+    if(open){prevOverflow=document.body.style.overflow;document.body.style.overflow="hidden";closeBtn.focus();}
+    else{document.body.style.overflow=prevOverflow;}
+  }
+  openBtn.addEventListener("click",()=>setMenu(true));
+  closeBtn.addEventListener("click",()=>{setMenu(false);openBtn.focus();});
+  menu.addEventListener("click",e=>{if(e.target===menu) setMenu(false);});
+  menu.querySelectorAll("[data-menu-close]").forEach(el=>el.addEventListener("click",()=>setMenu(false)));
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!menu.hidden){setMenu(false);openBtn.focus();}});
+
+  const priceIds={"Webseite":"web","Flyer":"flyer","Online Marketing":"online","Visitenkarte":"visitenkarte","Social Media":"social","Logo":"logo","Video & Foto":"foto-video","Lebenslauf":"lebenslauf","Speisekarte":"speisekarte","Virtueller Assistent":"nova","Programmierung":"programmierung","Neukundengewinnung":"neukunden","Strategieentwicklung":"strategie","TikTok Marketing":"tiktok"};
+  const selector=document.getElementById("serviceSelector");
+  function syncPriceLinks(){
+    const ids=[...document.querySelectorAll(".select-service.selected")].map(b=>priceIds[b.dataset.service]).filter(Boolean);
+    const href="/preise/"+(ids.length?"?l="+ids.join(","):"")+"#rechner";
+    document.querySelectorAll("[data-price-link]").forEach(a=>{a.href=href;});
+  }
+  if(selector) selector.addEventListener("click",()=>setTimeout(syncPriceLinks));
+  syncPriceLinks();
+})();
+</script>
 </body>
 </html>
