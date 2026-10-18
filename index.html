@@ -3527,6 +3527,53 @@ footer strong{
     font-size:12px;
   }
 }
+/* =========================
+   ANRUFEN-LEISTE (nur Handy)
+========================= */
+
+.call-bar{
+  display:none;
+}
+
+@media (max-width:760px){
+
+  .call-bar{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:9990;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    padding:16px 16px calc(16px + env(safe-area-inset-bottom));
+
+    background:#f4f1ea;
+    color:#121212;
+
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-decoration:none;
+  }
+
+  /* Leiste erst nach dem Intro zeigen */
+  body.locked .call-bar{
+    display:none;
+  }
+
+  body{
+    padding-bottom:60px;
+  }
+
+  .memory-ask{
+    bottom:76px;
+  }
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -4951,6 +4998,10 @@ footer strong{
 <!-- =========================
      FOOTER
 ========================= -->
+
+<a class="call-bar" href="tel:+4917646188101" aria-label="SocialClip jetzt anrufen: 0176 46188101">
+  JETZT ANRUFEN · 0176 46188101
+</a>
 
 <footer>
 
