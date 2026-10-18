@@ -1,6 +1,8 @@
 (() => {
-  // Alle Preise netto in Euro. Hier zentral anpassen.
-  const UST = 0.19; // auf 0 setzen bei Kleinunternehmerregelung (§ 19 UStG)
+  // Alle Preise in Euro, hier zentral anpassen. Bei UST > 0 gelten sie als Nettopreise.
+  const UST = 0; // 0 = Kleinunternehmerregelung (§ 19 UStG), 0.19 = Regelbesteuerung
+  const UST_NOTE = UST ? `Alle Preise netto zzgl. ${UST * 100} % MwSt.` : 'Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.';
+  const TOTAL = UST ? 'netto' : 'gesamt';
   const RABATT = [[4, 0.15], [3, 0.10], [2, 0.05]]; // ab X Leistungen → Rabatt
   const SERVICES = [
     { id: 'social', name: 'Social Media', desc: 'Strategie, Beiträge, Reels und Stories für Instagram, Facebook oder TikTok.', variants: [
@@ -13,9 +15,10 @@
       { name: 'Profi · 600 Minuten/Monat, jede weitere 0,42 €', minutes: 600, once: 490, monthly: 429 },
       { name: 'Business · 1.200 Minuten/Monat, jede weitere 0,39 €', minutes: 1200, once: 490, monthly: 749 }] },
     { id: 'web', name: 'Webseite', desc: 'Moderne Website mit mobiler Darstellung, klaren Inhalten und Kontaktwegen.', variants: [
-      { name: 'Onepager', once: 990 },
-      { name: 'Business-Website bis 5 Seiten', once: 1890 },
-      { name: 'Individuelle Website', once: 2900, from: true }] },
+      { name: 'Onepager Basic · eine Seite, ohne Extras', once: 350 },
+      { name: 'Onepager Plus · mit Kontaktformular & Google-Grundoptimierung', once: 690 },
+      { name: 'Business-Website bis 5 Seiten', once: 1490 },
+      { name: 'Individuelle Website', once: 2500, from: true }] },
     { id: 'tiktok', name: 'TikTok Marketing', desc: 'Kurzvideo-Konzepte, Schnitt und Betreuung deines TikTok-Kanals.', variants: [
       { name: '8 Videos pro Monat', once: 290, monthly: 590 }] },
     { id: 'online', name: 'Online Marketing', desc: 'Einrichtung und Betreuung von Google- und Meta-Anzeigen. Werbebudget zahlst du direkt an die Plattform.', variants: [
@@ -66,6 +69,8 @@
   const price = v => `${v.from ? 'ab ' : ''}${euro(v.once)}${v.monthly ? ` + ${euro(v.monthly)}/Monat` : ''}`;
   const escape = text => text.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const discountRate = count => (RABATT.find(([min]) => count >= min) || [0, 0])[1];
+
+  document.querySelectorAll('[data-ust-note]').forEach(el => { el.textContent = UST_NOTE; });
 
   for (const service of SERVICES) {
     const card = document.createElement('div');
@@ -121,12 +126,12 @@
     const rows = [];
     if (c.once) {
       if (c.rate) rows.push(`<tr><td>Einmalig</td><td>${euro(c.once)}</td></tr><tr class="pr-discount"><td>Paketrabatt ${c.rate * 100} %</td><td>−${euro(c.once - c.onceNet)}</td></tr>`);
-      rows.push(`<tr class="pr-total"><td>Einmalig netto</td><td>${c.hasFrom ? 'ab ' : ''}${euro(c.onceNet)}</td></tr>`);
+      rows.push(`<tr class="pr-total"><td>Einmalig ${TOTAL}</td><td>${c.hasFrom ? 'ab ' : ''}${euro(c.onceNet)}</td></tr>`);
       if (UST) rows.push(`<tr class="pr-gross"><td>inkl. ${UST * 100} % MwSt.</td><td>${euro(Math.round(c.onceNet * (1 + UST) * 100) / 100)}</td></tr>`);
     }
     if (c.monthly) {
       if (c.rate) rows.push(`<tr><td>Monatlich</td><td>${euro(c.monthly)}</td></tr><tr class="pr-discount"><td>Paketrabatt ${c.rate * 100} %</td><td>−${euro(c.monthly - c.monthlyNet)}</td></tr>`);
-      rows.push(`<tr class="pr-total"><td>Monatlich netto</td><td>${euro(c.monthlyNet)}</td></tr>`);
+      rows.push(`<tr class="pr-total"><td>Monatlich ${TOTAL}</td><td>${euro(c.monthlyNet)}</td></tr>`);
       if (UST) rows.push(`<tr class="pr-gross"><td>inkl. ${UST * 100} % MwSt.</td><td>${euro(Math.round(c.monthlyNet * (1 + UST) * 100) / 100)}</td></tr>`);
     }
     return `<table class="pr-totals">${rows.join('')}</table>`;
@@ -154,9 +159,9 @@
   function offerText(c, data) {
     const lines = c.items.map(i => `- ${i.service.name} (${i.variant.name}): ${price(i.variant)}`);
     const sums = [];
-    if (c.once) sums.push(`Einmalig netto: ${c.hasFrom ? 'ab ' : ''}${euro(c.onceNet)}`);
-    if (c.monthly) sums.push(`Monatlich netto: ${euro(c.monthlyNet)}`);
-    return [`Angebot ${data.number}`, `Kunde: ${data.name}${data.company ? `, ${data.company}` : ''}`, `E-Mail: ${data.email}`, data.phone ? `Telefon: ${data.phone}` : '', '', 'Leistungen:', ...lines, '', c.rate ? `Paketrabatt: ${c.rate * 100} %` : 'Kein Paketrabatt', ...sums, UST ? 'Alle Preise zzgl. 19 % MwSt.' : '', '', data.message ? `Nachricht: ${data.message}` : ''].filter((line, i, all) => line || all[i - 1]).join('\n');
+    if (c.once) sums.push(`Einmalig ${TOTAL}: ${c.hasFrom ? 'ab ' : ''}${euro(c.onceNet)}`);
+    if (c.monthly) sums.push(`Monatlich ${TOTAL}: ${euro(c.monthlyNet)}`);
+    return [`Angebot ${data.number}`, `Kunde: ${data.name}${data.company ? `, ${data.company}` : ''}`, `E-Mail: ${data.email}`, data.phone ? `Telefon: ${data.phone}` : '', '', 'Leistungen:', ...lines, '', c.rate ? `Paketrabatt: ${c.rate * 100} %` : 'Kein Paketrabatt', ...sums, UST_NOTE, '', data.message ? `Nachricht: ${data.message}` : ''].filter((line, i, all) => line || all[i - 1]).join('\n');
   }
 
   function showOffer(c, data) {
@@ -167,7 +172,7 @@
       <div class="po-parties"><div><small>Für</small>${escape(data.name)}${data.company ? `<br>${escape(data.company)}` : ''}<br>${escape(data.email)}${data.phone ? `<br>${escape(data.phone)}` : ''}</div><div><small>Von</small>SocialClip Art · Media · Digital<br>Mircea Alin, Donato-Polli-Str. 38<br>91056 Erlangen · 0176 46188101</div></div>
       <table class="po-items"><thead><tr><th>Leistung</th><th>Einmalig</th><th>Monatlich</th></tr></thead><tbody>${c.items.map(i => `<tr><td>${i.service.name}<small>${i.variant.name}</small></td><td>${i.variant.from ? 'ab ' : ''}${euro(i.variant.once)}</td><td>${i.variant.monthly ? euro(i.variant.monthly) : '–'}</td></tr>`).join('')}</tbody></table>
       ${totalsHTML(c)}
-      <p class="po-note">Alle Preise in Euro${UST ? ', netto zzgl. 19 % MwSt.' : '.'} Monatliche Leistungen: Mindestlaufzeit 3 Monate, danach monatlich kündbar. Druckkosten und Werbebudgets sind nicht enthalten. „ab“-Preise werden nach einem kurzen Gespräch verbindlich festgelegt. Dieses Angebot wird nach persönlicher Abstimmung bestätigt.</p>
+      <p class="po-note">Alle Preise in Euro. ${UST_NOTE} Monatliche Leistungen: Mindestlaufzeit 3 Monate, danach monatlich kündbar. Druckkosten und Werbebudgets sind nicht enthalten. „ab“-Preise werden nach einem kurzen Gespräch verbindlich festgelegt. Dieses Angebot wird nach persönlicher Abstimmung bestätigt.</p>
       <div class="po-actions"><button type="button" class="service-button primary" data-print>Als PDF speichern</button></div>`;
     offer.hidden = false;
     offer.querySelector('[data-print]').addEventListener('click', () => window.print());
