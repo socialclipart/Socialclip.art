@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#121212">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="Webdesign, Logo, Flyer, Social Media, Foto &amp; Video und KI-Assistentin Nova aus Erlangen. Für Selbstständige und lokale Betriebe. Jetzt kostenlosen Sichtbarkeits-Check anfragen.">
+<meta name="description" content="Verpasste Anrufe sind verlorene Kunden. KI-Assistentin Nova geht ran, wenn du keine Zeit hast – dazu Webdesign, Social Media &amp; Design aus Erlangen. Für Selbstständige und lokale Betriebe.">
 <link rel="canonical" href="https://socialclip.art/">
-<title>Webdesign, Social Media &amp; Video in Erlangen | SocialClip</title>
+<title>KI-Assistentin Nova, Webdesign &amp; Social Media in Erlangen | SocialClip</title>
 
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -19,8 +19,8 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://socialclip.art/">
 <meta property="og:site_name" content="SocialClip">
-<meta property="og:title" content="Webdesign, Social Media &amp; Video in Erlangen | SocialClip">
-<meta property="og:description" content="Webdesign, Logo, Flyer, Social Media, Foto &amp; Video und KI-Assistentin Nova aus Erlangen. Für Selbstständige und lokale Betriebe.">
+<meta property="og:title" content="KI-Assistentin Nova, Webdesign &amp; Social Media in Erlangen | SocialClip">
+<meta property="og:description" content="Verpasste Anrufe sind verlorene Kunden. KI-Assistentin Nova geht ran, wenn du keine Zeit hast – dazu Webdesign, Social Media &amp; Design aus Erlangen.">
 <meta property="og:image" content="https://socialclip.art/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -3527,6 +3527,289 @@ footer strong{
     font-size:12px;
   }
 }
+/* =========================
+   KOPFZEILE: TELEFON
+========================= */
+
+.top-call{
+  color:#f4f1ea;
+  font-size:var(--fs-label);
+  letter-spacing:var(--ls-label);
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+.top-call:hover{
+  color:#fff;
+}
+
+/* =========================
+   VERLUST-RECHNER
+========================= */
+
+.loss-grid{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  margin-top:var(--title-gap);
+  border:1px solid var(--line);
+}
+
+.loss-inputs{
+  padding:40px;
+  display:flex;
+  flex-direction:column;
+  gap:34px;
+  border-right:1px solid var(--line);
+}
+
+.loss-field{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:baseline;
+  gap:14px 20px;
+}
+
+.loss-field span{
+  color:#a29e96;
+  font-size:var(--fs-label);
+  letter-spacing:var(--ls-label);
+}
+
+.loss-field strong{
+  font-size:28px;
+  font-weight:500;
+  letter-spacing:-.03em;
+}
+
+.loss-field input{
+  grid-column:1 / -1;
+  width:100%;
+  accent-color:#f4f1ea;
+  cursor:pointer;
+}
+
+.loss-note{
+  color:var(--dim);
+  font-size:var(--fs-small);
+  line-height:1.7;
+}
+
+.loss-result{
+  padding:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:10px;
+  background:rgba(255,255,255,.03);
+}
+
+.loss-result span{
+  color:#a29e96;
+  font-size:var(--fs-label);
+  letter-spacing:var(--ls-label);
+}
+
+.loss-result strong{
+  font-size:clamp(52px,7vw,96px);
+  font-weight:700;
+  line-height:1;
+  letter-spacing:-.05em;
+}
+
+.loss-result em{
+  color:var(--soft);
+  font-style:normal;
+  font-size:var(--fs-body);
+}
+
+.loss-result p{
+  max-width:380px;
+  margin:12px 0 22px;
+  color:#b8b4ac;
+  font-size:var(--fs-body);
+  line-height:1.7;
+}
+
+.loss-result b{
+  color:#f4f1ea;
+  font-weight:600;
+}
+
+/* =========================
+   SO EINFACH GEHT'S + PILOT
+========================= */
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  margin-top:var(--title-gap);
+  list-style:none;
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+}
+
+.step{
+  padding:35px;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.step-number{
+  color:#9b978f;
+  font-size:var(--fs-label);
+  letter-spacing:var(--ls-label);
+}
+
+.step h3{
+  margin:40px 0 12px;
+  font-size:26px;
+  font-weight:500;
+  letter-spacing:-.04em;
+}
+
+.step p{
+  color:#a8a49c;
+  font-size:var(--fs-small);
+  line-height:1.8;
+}
+
+.pilot{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  margin-top:40px;
+  padding:40px;
+  border:1px solid rgba(255,255,255,.4);
+  background:rgba(255,255,255,.04);
+}
+
+.pilot > div:first-child{
+  max-width:640px;
+}
+
+.pilot-label{
+  color:#f4f1ea;
+  font-size:var(--fs-label);
+  letter-spacing:var(--ls-label);
+}
+
+.pilot h3{
+  margin:16px 0 12px;
+  font-size:clamp(22px,2.4vw,30px);
+  font-weight:500;
+  line-height:1.25;
+  letter-spacing:-.03em;
+}
+
+.pilot p{
+  color:#b8b4ac;
+  font-size:var(--fs-small);
+  line-height:1.8;
+}
+
+.pilot-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+/* =========================
+   WEITERE LEISTUNGEN (aufklappbar)
+========================= */
+
+.categories + .services-compact{
+  padding-top:0;
+}
+
+.all-services > summary{
+  list-style:none;
+}
+
+.all-services > summary::-webkit-details-marker{
+  display:none;
+}
+
+.all-services[open] > summary .arr{
+  transform:rotate(180deg);
+}
+
+.all-services .seo-offer-grid{
+  margin-top:30px;
+}
+
+/* =========================
+   ANRUFEN-LEISTE (nur Handy)
+========================= */
+
+.call-bar{
+  display:none;
+}
+
+@media (max-width:760px){
+
+  .top-call{
+    display:none;
+  }
+
+  .loss-grid,
+  .steps{
+    grid-template-columns:1fr;
+  }
+
+  .loss-inputs{
+    padding:28px 22px;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .loss-result,
+  .pilot{
+    padding:28px 22px;
+  }
+
+  .step{
+    padding:28px 22px;
+  }
+
+  .step h3{
+    margin-top:22px;
+  }
+
+  .call-bar{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:9990;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    padding:16px 16px calc(16px + env(safe-area-inset-bottom));
+
+    background:#f4f1ea;
+    color:#121212;
+
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-decoration:none;
+  }
+
+  body{
+    padding-bottom:60px;
+  }
+
+  .memory-ask{
+    bottom:76px;
+  }
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -3554,7 +3837,7 @@ footer strong{
 </script>
 </head>
 
-<body class="locked">
+<body>
 
 <div class="vignette"></div>
 
@@ -3576,7 +3859,9 @@ footer strong{
       PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
     </button>
 
-    <div class="clock">
+    <a class="top-call" href="tel:+4917646188101">0176 46188101</a>
+
+    <div class="clock" hidden>
       <strong id="liveClock">--:--:--</strong>
       <span id="liveDate">--.--.----</span>
     </div>
@@ -3591,7 +3876,7 @@ footer strong{
      INTRO
 ========================= -->
 
-<div class="intro" id="intro">
+<div class="intro" id="intro" hidden style="display:none">
 
   <div class="intro-content">
 
@@ -3653,7 +3938,6 @@ footer strong{
 
 </div>
 
-<div class="wirkung-ghost" id="wirkungGhost" aria-hidden="true"><span>WIRKUNG.</span></div>
 
 <div class="flash-reveal" id="flashReveal" aria-hidden="true"></div>
 <div class="flash-beam" id="flashBeam" aria-hidden="true"></div>
@@ -3667,49 +3951,230 @@ footer strong{
 <section class="hero center">
 
   <div class="chapter-line reveal">
-    SCENE 02 / THE BEGINNING
+    PERSÖNLICH AUS ERLANGEN
   </div>
 
   <div class="hero-greeting reveal" id="heroGreeting"></div>
 
   <div class="big-title reveal" aria-hidden="true">
-    IDEEN<br>
-    <span>WERDEN</span><br>
-    WIRKUNG.
+    ANRUF<br>
+    <span>VERPASST?</span><br>
+    KUNDE WEG.
   </div>
 
-  <h1 class="seo-home-heading reveal">Webdesign, Social Media &amp; Grafikdesign in Erlangen</h1>
+  <h1 class="seo-home-heading reveal">Nova geht ran, wenn du keine Zeit hast.</h1>
 
   <p class="text reveal" style="margin-top:45px;">
-    SocialClip aus Erlangen verbindet Webdesign, Grafikdesign,
-    Social Media, Foto, Video und Marketing zu einer
-    visuellen Welt, die Marken sichtbar macht.
-    Für Selbstständige und lokale Betriebe.
+    Du arbeitest, das Telefon klingelt – und der Anrufer
+    bucht einfach beim Nächsten. Nova, deine KI-Assistentin,
+    nimmt Anrufe an, beantwortet Fragen und notiert Terminwünsche.
+    Auch nach Feierabend. Dazu Website, Social Media und Design
+    aus einer Hand – für Selbstständige und lokale Betriebe.
   </p>
 
   <div class="hero-actions reveal">
-    <button class="cine-btn primary" type="button" data-open-builder>
-      PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
+    <button class="cine-btn primary" type="button" data-nova>
+      ▶ NOVA ANHÖREN <span class="arr" aria-hidden="true">→</span>
     </button>
-    <a class="cine-btn" href="#check">
-      SICHTBARKEITS-CHECK <span class="arr" aria-hidden="true">→</span>
+    <a class="cine-btn" href="tel:+4917646188101">
+      JETZT ANRUFEN <span class="arr" aria-hidden="true">→</span>
     </a>
-    <a class="cine-btn" href="#kontakt">
-      KONTAKT <span class="arr" aria-hidden="true">→</span>
-    </a>
-  </div>
-
-  <!-- Wechselt bei jedem Besuch; mit Erinnerung: persönlicher Hinweis -->
-  <div class="hero-idea reveal" id="heroIdea" hidden>
-    <span class="hero-idea-label" id="heroIdeaLabel">IDEE FÜR HEUTE</span>
-    <p class="hero-idea-text" id="heroIdeaText"></p>
-    <button class="hero-idea-btn" type="button" id="heroIdeaBtn">
-      <span id="heroIdeaCta">MEHR DAZU</span> <span class="arr" aria-hidden="true">→</span>
-    </button>
   </div>
 
   <div class="hero-small reveal">
-    ART · MEDIA · DIGITAL · ERLANGEN
+    UNVERBINDLICHES GESPRÄCH · KEIN CALLCENTER · AUS ERLANGEN
+  </div>
+
+</section>
+
+<!-- =========================
+     SCENE 05 / NOVA
+========================= -->
+
+<section class="nova" id="nova">
+
+  <div class="chapter-line reveal">
+    NOVA · DEINE KI-ASSISTENTIN
+  </div>
+
+  <div class="nova-grid">
+
+    <div class="nova-intro">
+
+      <h2 class="big-title reveal">
+        HÖR<br>
+        <span>NOVA</span><br>
+        ZU.
+      </h2>
+
+      <p class="text reveal" style="margin-top:40px;">
+        Nova geht ans Telefon, wenn du keine Zeit hast. Sie beantwortet
+        Fragen zu Öffnungszeiten und Leistungen, nimmt Terminwünsche auf
+        und gibt Wichtiges an dich weiter. Auch nach Feierabend.
+        Was sie sagen darf, legen wir vorher gemeinsam fest.
+      </p>
+
+      <div class="hero-actions reveal">
+        <button class="cine-btn primary" type="button" data-open-builder="Virtueller Assistent">
+          NOVA FÜR MEINEN BETRIEB <span class="arr" aria-hidden="true">→</span>
+        </button>
+        <a class="cine-btn" href="tel:+4917646188101">
+          ANRUFEN <span class="arr" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="nova-player reveal" id="novaPlayer">
+
+      <span class="widget-spot" aria-hidden="true"></span>
+
+      <div class="nova-head">
+        <span>NOVA · KI-ASSISTENTIN</span>
+        <span class="nova-state" id="novaState">BEREIT</span>
+      </div>
+
+      <canvas class="nova-wave" id="novaWave" aria-hidden="true"></canvas>
+
+      <p class="nova-caption" id="novaCaption">
+        Drück auf Play und hör Nova zu.
+      </p>
+
+      <div class="nova-controls">
+
+        <button class="nova-play" id="novaPlay" type="button" aria-label="Nova anhören">
+          <span class="nova-play-icon" aria-hidden="true"></span>
+        </button>
+
+        <div class="nova-time">
+          <span id="novaTime">00:00</span> / <span id="novaDur">00:11</span>
+        </div>
+
+      </div>
+
+      <div class="nova-skills">
+        <span data-skill="calls">ANRUFE</span>
+        <span data-skill="mail">E-MAILS</span>
+        <span data-skill="dates">TERMINE</span>
+        <span data-skill="late">NACH FEIERABEND</span>
+      </div>
+
+      <p class="sr-only">
+        Nova sagt: Hallo, ich bin Nova, deine persönliche Assistentin.
+        Ich gehe ans Telefon, beantworte deine E-Mails und plane deine Termine.
+        Auch nach Feierabend. Du kümmerst dich um dein Business. Ich mich um den Rest.
+      </p>
+
+      <audio id="novaAudio" src="audio/nova-demo.mp3" preload="metadata"></audio>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     WAS EIN VERPASSTER ANRUF KOSTET
+     Verlust-Rechner: rechnet nur im Browser, nichts wird gesendet.
+========================= -->
+
+<section class="loss" id="rechner">
+
+  <div class="chapter-line reveal">
+    WAS EIN VERPASSTER ANRUF KOSTET
+  </div>
+
+  <h2 class="big-title reveal">
+    WAS<br>
+    <span>KOSTET</span><br>
+    DICH DAS?
+  </h2>
+
+  <div class="loss-grid reveal">
+
+    <div class="loss-inputs">
+
+      <label class="loss-field">
+        <span>VERPASSTE ANRUFE PRO WOCHE</span>
+        <strong id="lossCallsOut">5</strong>
+        <input type="range" id="lossCalls" min="1" max="30" step="1" value="5">
+      </label>
+
+      <label class="loss-field">
+        <span>WAS DIR EIN KUNDE IM SCHNITT BRINGT</span>
+        <strong id="lossValueOut">60 €</strong>
+        <input type="range" id="lossValue" min="20" max="500" step="10" value="60">
+      </label>
+
+      <p class="loss-note">
+        Annahme: Jeder zweite Anrufer wäre Kunde geworden.
+        Ein Monat hat rund 4,3 Wochen.
+      </p>
+
+    </div>
+
+    <div class="loss-result" aria-live="polite">
+      <span>DAS KOSTET DICH UNGEFÄHR</span>
+      <strong id="lossMonth">650 €</strong>
+      <em>im Monat</em>
+      <p>Das sind rund <b id="lossYear">7.800 €</b> im Jahr – Umsatz, der bei der Konkurrenz landet.</p>
+      <a class="cine-btn primary" href="tel:+4917646188101">
+        DAS WILL ICH ÄNDERN <span class="arr" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     SO EINFACH GEHT'S + PILOTPLÄTZE
+========================= -->
+
+<section class="start" id="start">
+
+  <div class="chapter-line reveal">
+    SO EINFACH GEHT'S
+  </div>
+
+  <h2 class="big-title reveal">
+    IN 3<br>
+    <span>SCHRITTEN</span><br>
+    STARTKLAR.
+  </h2>
+
+  <ol class="steps">
+    <li class="step reveal">
+      <span class="step-number">01</span>
+      <h3>Kurzes Gespräch</h3>
+      <p>10 Minuten am Telefon oder bei dir vor Ort. Kostenlos und unverbindlich.</p>
+    </li>
+    <li class="step reveal">
+      <span class="step-number">02</span>
+      <h3>Wir richten Nova ein</h3>
+      <p>Abgestimmt auf deinen Betrieb: deine Fragen, deine Zeiten, deine Abläufe. Wir testen alles gemeinsam.</p>
+    </li>
+    <li class="step reveal">
+      <span class="step-number">03</span>
+      <h3>Nova geht ran</h3>
+      <p>Du arbeitest in Ruhe weiter. Kein Anruf geht mehr verloren.</p>
+    </li>
+  </ol>
+
+  <div class="pilot reveal">
+    <div>
+      <span class="pilot-label">NUR 3 PILOTPLÄTZE</span>
+      <h3>Wir starten Nova mit 3 Betrieben aus Erlangen und Umgebung – zu Sonderkonditionen.</h3>
+      <p>Im Gegenzug wünschen wir uns ehrliches Feedback und eine Bewertung, wenn du zufrieden bist. Sind die Plätze vergeben, gelten wieder die normalen Konditionen.</p>
+    </div>
+    <div class="pilot-actions">
+      <a class="cine-btn primary" href="tel:+4917646188101">
+        PLATZ SICHERN: ANRUFEN <span class="arr" aria-hidden="true">→</span>
+      </a>
+      <a class="cine-btn" href="#kontakt">
+        LIEBER SCHREIBEN <span class="arr" aria-hidden="true">→</span>
+      </a>
+    </div>
   </div>
 
 </section>
@@ -3721,13 +4186,13 @@ footer strong{
 <section class="categories">
 
   <div class="chapter-line reveal">
-    SCENE 03 / WHAT WE CREATE
+    AUSSERDEM AUS EINER HAND
   </div>
 
   <h2 class="big-title reveal">
-    DEINE<br>
-    <span>DIGITALE</span><br>
-    WELT.
+    WEITERE<br>
+    <span>LEISTUNGEN</span><br>
+    FÜR DICH.
   </h2>
 
   <div class="category-grid">
@@ -3788,19 +4253,11 @@ footer strong{
      SCENE 04
 ========================= -->
 
-<section class="services" id="leistungen">
-
-  <div class="chapter-line reveal">
-    SCENE 04 / SERVICES
-  </div>
-
-  <h2 class="big-title reveal">
-    WAS WIR<br>
-    <span>FÜR DICH</span><br>
-    MACHEN.
-  </h2>
+<section class="services services-compact" id="leistungen">
 
   <p class="seo-offer-intro">Von deiner Website über Inhalte und Gestaltung bis zu digitalen Abläufen: Wähle die Leistung, die zu deinem Projekt passt. Wir arbeiten mit Selbstständigen und Unternehmen in Erlangen, Nürnberg, Fürth und online zusammen.</p>
+  <details class="all-services">
+  <summary class="cine-btn">ALLE 14 LEISTUNGEN IM DETAIL <span class="arr" aria-hidden="true">↓</span></summary>
   <div class="service-list seo-offer-grid">
     <article class="seo-offer reveal">
       <span class="seo-offer-number">01 / SOCIALCLIP</span>
@@ -3887,318 +4344,17 @@ footer strong{
       <div class="seo-offer-actions"><a href="/tiktok-marketing-erlangen/" aria-label="Mehr über TikTok-Marketing erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="TikTok Marketing" aria-label="TikTok-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
   </div>
+  </details>
 
 </section>
 
-<!-- =========================
-     SCENE 05 / NOVA
-========================= -->
 
-<section class="nova" id="nova">
 
-  <div class="chapter-line reveal">
-    SCENE 05 / MEET NOVA
-  </div>
 
-  <div class="nova-grid">
 
-    <div class="nova-intro">
 
-      <h2 class="big-title reveal">
-        LERN<br>
-        <span>NOVA</span><br>
-        KENNEN.
-      </h2>
 
-      <p class="text reveal" style="margin-top:40px;">
-        Nova ist deine KI-Assistentin. Sie geht ans Telefon, wenn du keine Zeit hast,
-        beantwortet E-Mails und plant Termine. Auch nach Feierabend.
-      </p>
 
-      <div class="hero-actions reveal">
-        <button class="cine-btn primary" type="button" data-open-builder="Virtueller Assistent">
-          NOVA FÜR DEIN BUSINESS <span class="arr" aria-hidden="true">→</span>
-        </button>
-      </div>
-
-    </div>
-
-    <div class="nova-player reveal" id="novaPlayer">
-
-      <span class="widget-spot" aria-hidden="true"></span>
-
-      <div class="nova-head">
-        <span>NOVA · KI-ASSISTENTIN</span>
-        <span class="nova-state" id="novaState">BEREIT</span>
-      </div>
-
-      <canvas class="nova-wave" id="novaWave" aria-hidden="true"></canvas>
-
-      <p class="nova-caption" id="novaCaption">
-        Drück auf Play und hör Nova zu.
-      </p>
-
-      <div class="nova-controls">
-
-        <button class="nova-play" id="novaPlay" type="button" aria-label="Nova anhören">
-          <span class="nova-play-icon" aria-hidden="true"></span>
-        </button>
-
-        <div class="nova-time">
-          <span id="novaTime">00:00</span> / <span id="novaDur">00:11</span>
-        </div>
-
-      </div>
-
-      <div class="nova-skills">
-        <span data-skill="calls">ANRUFE</span>
-        <span data-skill="mail">E-MAILS</span>
-        <span data-skill="dates">TERMINE</span>
-        <span data-skill="late">NACH FEIERABEND</span>
-      </div>
-
-      <p class="sr-only">
-        Nova sagt: Hallo, ich bin Nova, deine persönliche Assistentin.
-        Ich gehe ans Telefon, beantworte deine E-Mails und plane deine Termine.
-        Auch nach Feierabend. Du kümmerst dich um dein Business. Ich mich um den Rest.
-      </p>
-
-      <audio id="novaAudio" src="audio/nova-demo.mp3" preload="metadata"></audio>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     SCENE 06 / TOOLS
-========================= -->
-
-<section class="tools">
-
-  <div class="chapter-line reveal">
-    SCENE 06 / INTERACTIVE TOOLS
-  </div>
-
-  <div class="tools-intro">
-
-    <h2 class="big-title reveal">
-      MACH<br>
-      <span>DEINE IDEE</span><br>
-      KONKRET.
-    </h2>
-
-    <p class="text reveal" style="margin-top:40px;">
-      Finde heraus, was zu deinem Projekt passt,
-      erhalte eine erste Orientierung und beschreibe
-      deine Idee direkt.
-    </p>
-
-  </div>
-
-  <div class="widget-grid">
-
-    <div class="widget-card reveal" data-widget="servicesWidget">
-
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost" aria-hidden="true">01</span>
-
-      <div class="widget-number">
-        TOOL 01 / SELECTION
-      </div>
-
-      <h3>
-        Was brauchst du?
-      </h3>
-
-      <p>
-        Wähle aus unseren Leistungen dein eigenes Projekt.
-      </p>
-
-      <div class="widget-meta">14 LEISTUNGEN · 1 MINUTE</div>
-
-      <button class="widget-open cine-btn" type="button" data-widget="servicesWidget">
-        PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
-      </button>
-
-    </div>
-
-    <div class="widget-card reveal" data-widget="briefingWidget">
-
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost" aria-hidden="true">02</span>
-
-      <div class="widget-number">
-        TOOL 02 / BRIEFING
-      </div>
-
-      <h3>
-        Deine Idee
-      </h3>
-
-      <p>
-        Beantworte ein paar Fragen und erstelle dein Projekt-Briefing.
-      </p>
-
-      <div class="widget-meta">3 FRAGEN · 1 MINUTE</div>
-
-      <button class="widget-open cine-btn" type="button" data-widget="briefingWidget">
-        IDEE STARTEN <span class="arr" aria-hidden="true">→</span>
-      </button>
-
-    </div>
-
-    <div class="widget-card reveal" data-nova>
-
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost" aria-hidden="true">03</span>
-
-      <div class="widget-number">
-        TOOL 03 / NOVA
-      </div>
-
-      <h3>
-        Hör Nova zu
-      </h3>
-
-      <p>
-        Unsere KI-Assistentin stellt sich in ein paar Sekunden selbst vor.
-      </p>
-
-      <div class="widget-meta">11 SEKUNDEN · MIT TON</div>
-
-      <button class="widget-open cine-btn" type="button" data-nova-play>
-        ANHÖREN <span class="arr" aria-hidden="true">→</span>
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     SCENE 07
-========================= -->
-
-<section class="manifesto center">
-
-  <div class="chapter-line reveal">
-    SCENE 07 / THE IDEA
-  </div>
-
-  <p class="manifesto-text reveal">
-    AUS EINER IDEE WIRD ETWAS,
-    <span>DAS MAN SEHEN KANN.</span>
-  </p>
-
-  <p class="text reveal" style="margin-top:50px;">
-    Ein Bild wird zur Geschichte.
-    Eine Geschichte wird zu Aufmerksamkeit.
-    Aufmerksamkeit wird zu Bewegung.
-  </p>
-
-</section>
-
-<!-- =========================
-     KAMERAFAHRT
-     3D-Tunnel: beim Scrollen fliegt man durch
-     schwebende Wörter und Rahmen. Reines CSS-3D,
-     ein Transform pro Frame.
-========================= -->
-
-<section class="tunnel" id="tunnel" aria-label="Kamerafahrt: von der Idee zur Wirkung">
-
-  <div class="tunnel-sticky">
-
-    <canvas class="tunnel-frames" id="tunnelFrames" aria-hidden="true"></canvas>
-
-    <div class="tunnel-world" id="tunnelWorld" aria-hidden="true">
-        <span class="tunnel-word" data-z="-500" style="--x:-34vw;--y:-14vh">IDEE</span>
-        <span class="tunnel-word" data-z="-920" style="--x:32vw;--y:16vh">SKIZZE</span>
-        <span class="tunnel-word" data-z="-1340" style="--x:-30vw;--y:20vh">FORM</span>
-        <span class="tunnel-word" data-z="-1760" style="--x:34vw;--y:-18vh">FARBE</span>
-        <span class="tunnel-word" data-z="-2180" style="--x:-36vw;--y:-2vh">LICHT</span>
-        <span class="tunnel-word" data-z="-2600" style="--x:26vw;--y:22vh">BEWEGUNG</span>
-        <span class="tunnel-word" data-z="-3020" style="--x:-24vw;--y:-22vh">GESCHICHTE</span>
-        <span class="tunnel-word" data-z="-3440" style="--x:34vw;--y:8vh">MARKE</span>
-        <span class="tunnel-word" data-z="-3860" style="--x:-30vw;--y:14vh">SICHTBAR</span>
-        <span class="tunnel-word tunnel-final" data-z="-4480" style="--x:0vw;--y:0vh">WIRKUNG.</span>
-    </div>
-
-    <div class="tunnel-caption">
-      <span>KAMERAFAHRT</span>
-      <span>VON DER IDEE ZUR WIRKUNG</span>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     SCENE 08
-========================= -->
-
-<section class="visual-world">
-
-  <div class="chapter-line reveal">
-    SCENE 08 / VISUAL WORLD
-  </div>
-
-  <!-- WIRKUNG. aus der Kamerafahrt landet genau hier (wirkungGhost) -->
-  <h2 class="big-title wirkung-title">
-    <span class="wt-line wt-white">FORM.</span><br>
-    <span class="wt-line">LICHT.</span><br>
-    <span class="wirkung-target" id="wirkungTarget">WIRKUNG.</span>
-  </h2>
-
-  <div class="visual-grid">
-
-    <div class="visual-card reveal">
-      <div class="visual-word">DIGITAL FORM</div>
-    </div>
-
-    <div class="visual-card reveal">
-      <div class="visual-word">VISUAL STORY</div>
-    </div>
-
-    <div class="visual-card reveal">
-      <div class="visual-word">CREATIVE MEDIA</div>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     SCENE 09
-========================= -->
-
-<section class="make-visible">
-
-  <div>
-
-    <div class="chapter-line reveal">
-      SCENE 09 / THE MOMENT
-    </div>
-
-    <h2 class="reveal">
-      MACH ES<br>
-      SICHTBAR.
-    </h2>
-
-    <p class="reveal">
-      Deine Idee verdient mehr als nur einen
-      Platz im Internet.
-      Lass sie entstehen.
-      Lass sie wachsen.
-      Lass sie sichtbar werden.
-    </p>
-
-  </div>
-
-</section>
 
 <!-- =========================
      SCENE 10
@@ -4211,7 +4367,7 @@ footer strong{
 <section class="check" id="check">
 
   <div class="chapter-line reveal">
-    SCENE 10 / VISIBILITY CHECK
+    KOSTENLOSER CHECK
   </div>
 
   <div class="print-only check-print-head">
@@ -4449,7 +4605,7 @@ footer strong{
   <div class="ig-copy">
 
   <div class="chapter-line reveal">
-    SCENE 11 / SOCIALCLIP.ART
+    INSTAGRAM
   </div>
 
   <h2 class="big-title reveal">
@@ -4536,7 +4692,7 @@ footer strong{
 <section class="contact" id="kontakt">
 
   <div class="chapter-line reveal">
-    SCENE 12 / YOUR STORY
+    KONTAKT
   </div>
 
   <h2 class="big-title reveal">
@@ -4952,6 +5108,10 @@ footer strong{
      FOOTER
 ========================= -->
 
+<a class="call-bar" href="tel:+4917646188101" aria-label="SocialClip jetzt anrufen: 0176 46188101">
+  JETZT ANRUFEN · 0176 46188101
+</a>
+
 <footer>
 
   <div>
@@ -5202,13 +5362,14 @@ function cameFromOwnSite(){
 
 }
 
-if(cameFromOwnSite()){
+/*
+   Kein Vorschalt-Intro mehr: Wer kommt, soll in der ersten
+   Sekunde sehen, worum es geht – also direkt auf die Seite.
+*/
 
-  intro.remove();
+intro.remove();
 
-  document.body.classList.remove("locked");
-
-}
+document.body.classList.remove("locked");
 
 
 /*
@@ -7845,7 +8006,8 @@ checkForm.addEventListener(
 
   updateLink();
 
-  /* Erst fragen, wenn jemand schon etwas Zeit auf der Seite verbracht hat */
+  /* Erst fragen, wenn jemand schon etwas Zeit auf der Seite verbracht hat
+     (nicht, solange er noch die Überschrift liest) */
   if(!memory && storageWorks()){
     setTimeout(()=>{
       if(!document.body.classList.contains("locked")){
@@ -7858,7 +8020,7 @@ checkForm.addEventListener(
           }
         }, 500);
       }
-    }, 8000);
+    }, 25000);
   }
 
 })();
@@ -8047,6 +8209,39 @@ window.addEventListener("pageshow",event=>{
     window.scrollTo(0, 0);
   }
 });
+
+
+/* =========================
+   VERLUST-RECHNER
+   Verpasste Anrufe × jeder zweite wäre Kunde × Wert × 4,3 Wochen.
+========================= */
+
+(()=>{
+
+  const calls = document.getElementById("lossCalls");
+  const value = document.getElementById("lossValue");
+
+  if(!calls || !value){
+    return;
+  }
+
+  const euro = n => Math.round(n).toLocaleString("de-DE") + " €";
+
+  function update(){
+    const month = calls.value * 0.5 * value.value * 4.3;
+    // auf 50 € runden: es ist eine Schätzung, keine Rechnung
+    const rounded = Math.round(month / 50) * 50;
+    document.getElementById("lossCallsOut").textContent = calls.value;
+    document.getElementById("lossValueOut").textContent = euro(value.value);
+    document.getElementById("lossMonth").textContent = euro(rounded);
+    document.getElementById("lossYear").textContent = euro(rounded * 12);
+  }
+
+  calls.addEventListener("input", update);
+  value.addEventListener("input", update);
+  update();
+
+})();
 
 </script>
 
