@@ -8,40 +8,44 @@
     { id: 'social', name: 'Social Media', desc: 'Strategie, Beiträge, Reels und Stories für Instagram, Facebook oder TikTok.', variants: [
       { name: 'Start · Instagram, 8 Beiträge/Monat', once: 290, monthly: 740 },
       { name: 'Wachstum · 2 Kanäle, 12 Beiträge, 1 Shooting', once: 390, monthly: 1140 },
-      { name: 'Premium · 3 Kanäle, 16 Beiträge, 2 Shootings, Ads', once: 590, monthly: 1740 }] },
+      { name: 'Premium · 3 Kanäle, 16 Beiträge, 2 Shootings, Ads', once: 590, monthly: 1540 }] },
     { id: 'nova', name: 'KI-Telefonassistenz Nova', desc: 'Nimmt Anrufe an, wenn niemand abhebt, und schickt dir Rückrufwünsche per E-Mail. Inkl. Telefonnummer, Einrichtung und Pflege. Wähle, wie viele Gesprächsminuten du pro Monat brauchst.', estimator: true, variants: [
-      { name: 'Basis · 150 Minuten/Monat, jede weitere 0,49 €', minutes: 150, once: 490, monthly: 149 },
-      { name: 'Standard · 300 Minuten/Monat, jede weitere 0,45 €', minutes: 300, once: 490, monthly: 249 },
-      { name: 'Profi · 600 Minuten/Monat, jede weitere 0,42 €', minutes: 600, once: 490, monthly: 429 },
-      { name: 'Business · 1.200 Minuten/Monat, jede weitere 0,39 €', minutes: 1200, once: 490, monthly: 749 }] },
+      { name: 'Basis · 150 Minuten/Monat, jede weitere 0,50 €', minutes: 150, once: 490, monthly: 150 },
+      { name: 'Standard · 300 Minuten/Monat, jede weitere 0,45 €', minutes: 300, once: 490, monthly: 250 },
+      { name: 'Profi · 600 Minuten/Monat, jede weitere 0,40 €', minutes: 600, once: 490, monthly: 430 },
+      { name: 'Business · 1.200 Minuten/Monat, jede weitere 0,35 €', minutes: 1200, once: 490, monthly: 750 }] },
     { id: 'web', name: 'Webseite', desc: 'Moderne Website mit mobiler Darstellung, klaren Inhalten und Kontaktwegen.', variants: [
       { name: 'Onepager Basic · eine Seite, ohne Extras', once: 350 },
       { name: 'Onepager Plus · mit Kontaktformular & Google-Grundoptimierung', once: 690 },
       { name: 'Business-Website bis 5 Seiten', once: 1490 },
-      { name: 'Individuelle Website', once: 2500, from: true }] },
+      { name: 'Persönliche Idee · wir besprechen alles gemeinsam', request: true, fields: [
+        { key: 'Seiten', label: 'Wie viele Seiten ungefähr?', type: 'number', placeholder: 'z. B. 8' },
+        { key: 'Idee', label: 'Beschreib kurz deine Idee', type: 'text', placeholder: 'z. B. Online-Shop, Buchung, Galerie …' }] }] },
     { id: 'tiktok', name: 'TikTok Marketing', desc: 'Kurzvideo-Konzepte, Schnitt und Betreuung deines TikTok-Kanals.', variants: [
-      { name: '8 Videos pro Monat', once: 290, monthly: 590 }] },
+      { name: '8 Videos pro Monat', once: 290, monthly: 590 },
+      { name: 'Individuell · Anzahl Videos selbst wählen', request: true, fields: [
+        { key: 'Videos pro Monat', label: 'Wie viele Videos pro Monat?', type: 'number', placeholder: 'z. B. 12' }] }] },
     { id: 'online', name: 'Online Marketing', desc: 'Einrichtung und Betreuung von Google- und Meta-Anzeigen. Werbebudget zahlst du direkt an die Plattform.', variants: [
       { name: 'Anzeigen-Betreuung', once: 290, monthly: 390 }] },
-    { id: 'logo', name: 'Logo & Branding', desc: 'Ein Logo und eine visuelle Sprache, die wiedererkannt wird.', variants: [
-      { name: 'Logo', once: 390 },
-      { name: 'Logo + Farben, Schriften & Vorlagen', once: 890 }] },
-    { id: 'flyer', name: 'Flyer', desc: 'Druckfertiges Flyerdesign für Angebote, Aktionen und Veranstaltungen. Druck nicht enthalten.', variants: [
-      { name: 'Einseitig', once: 149 },
-      { name: 'Zweiseitig', once: 219 },
-      { name: 'Faltflyer', once: 349 }] },
-    { id: 'visitenkarte', name: 'Visitenkarte', desc: 'Druckfertiges Visitenkartendesign. Druck nicht enthalten.', variants: [
-      { name: 'Einseitig', once: 89 },
-      { name: 'Beidseitig', once: 129 }] },
-    { id: 'speisekarte', name: 'Speisekarte', desc: 'Übersichtliche Speisekarte im Stil deines Betriebs, druckfertig.', variants: [
-      { name: 'Bis 2 Seiten', once: 249 },
-      { name: 'Bis 6 Seiten', once: 449 }] },
+    { id: 'logo', name: 'Logo & Branding', desc: 'Ein Logo und eine visuelle Sprache, die wiedererkannt wird. Inkl. 2 Entwürfen und 2 Korrekturrunden, weitere Korrekturen nach Aufwand.', variants: [
+      { name: 'Logo', once: 150, from: true },
+      { name: 'Logo + Farben, Schriften & Vorlagen', once: 490, from: true }] },
+    { id: 'flyer', name: 'Flyer', desc: 'Druckfertiges Flyerdesign für Angebote, Aktionen und Veranstaltungen. Inkl. 2 Korrekturrunden, Druck nicht enthalten.', variants: [
+      { name: 'Einseitig', once: 60 },
+      { name: 'Zweiseitig', once: 90 },
+      { name: 'Faltflyer', once: 150 }] },
+    { id: 'visitenkarte', name: 'Visitenkarte', desc: 'Druckfertiges Visitenkartendesign. Inkl. 2 Korrekturrunden, Druck nicht enthalten.', variants: [
+      { name: 'Einseitig', once: 50 },
+      { name: 'Beidseitig', once: 80 }] },
+    { id: 'speisekarte', name: 'Speisekarte', desc: 'Individuelle Speisekarte im Stil deines Betriebs, druckfertig. Der genaue Preis richtet sich nach Seitenzahl und Umfang.', variants: [
+      { name: 'Individuell, je nach Seitenzahl', once: 80, from: true, fields: [
+        { key: 'Seiten', label: 'Wie viele Seiten ungefähr?', type: 'number', placeholder: 'z. B. 4' }] }] },
     { id: 'foto-video', name: 'Foto & Video', desc: 'Bearbeitung deiner Fotos und Schnitt von Kurzvideos.', variants: [
-      { name: 'Fotobearbeitung bis 20 Bilder', once: 149 },
+      { name: 'Fotobearbeitung bis 20 Bilder', once: 150 },
       { name: 'Videoschnitt bis 60 Sekunden', once: 190 }] },
-    { id: 'lebenslauf', name: 'Lebenslauf', desc: 'Klar gestalteter Lebenslauf als PDF.', variants: [
-      { name: 'Lebenslauf', once: 59 },
-      { name: 'Lebenslauf + Anschreiben', once: 99 }] },
+    { id: 'lebenslauf', name: 'Lebenslauf', desc: 'Klar gestalteter Lebenslauf als PDF. Für 20 € mehr gibt es das passende Anschreiben dazu.', variants: [
+      { name: 'Lebenslauf', once: 50 },
+      { name: 'Lebenslauf + Anschreiben (+20 €)', once: 70 }] },
     { id: 'programmierung', name: 'Programmierung', desc: 'Individuelle Webfunktionen, Tools und Automatisierungen.', variants: [
       { name: 'Individuelles Projekt', once: 690, from: true }] },
     { id: 'neukunden', name: 'Neukundengewinnung', desc: 'Angebot, Sichtbarkeit und Kontaktwege aufeinander abstimmen.', variants: [
@@ -66,7 +70,12 @@
   document.body.append(bar);
 
   const euro = value => value.toLocaleString('de-DE', { style: 'currency', currency: 'EUR', minimumFractionDigits: value % 1 ? 2 : 0, maximumFractionDigits: 2 });
-  const price = v => `${v.from ? 'ab ' : ''}${euro(v.once)}${v.monthly ? ` + ${euro(v.monthly)}/Monat` : ''}`;
+  const price = v => v.request ? 'Preis nach Absprache' : `${v.from ? 'ab ' : ''}${euro(v.once)}${v.monthly ? ` + ${euro(v.monthly)}/Monat` : ''}`;
+  const fixedFrom = service => {
+    const fixed = service.variants.filter(v => !v.request);
+    const monthly = fixed.filter(v => v.monthly).map(v => v.monthly);
+    return `${service.variants.length > 1 || fixed[0].from ? 'ab ' : ''}${euro(Math.min(...fixed.map(v => v.once)))}${monthly.length ? ` + ${euro(Math.min(...monthly))}/Monat` : ''}`;
+  };
   const escape = text => text.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const discountRate = count => (RABATT.find(([min]) => count >= min) || [0, 0])[1];
 
@@ -77,8 +86,9 @@
     card.className = 'pr-item';
     card.dataset.id = service.id;
     const estimator = service.estimator ? `<div class="pr-estimate"><label for="e-${service.id}">Wie viele Anrufe soll Nova ungefähr pro Tag annehmen?</label><input id="e-${service.id}" type="number" min="1" max="200" inputmode="numeric" placeholder="z. B. 5"><p aria-live="polite"></p></div>` : '';
-    const options = estimator + service.variants.map((v, i) => `<label class="pr-variant"><input type="radio" name="v-${service.id}" value="${i}"${i ? '' : ' checked'}><span>${v.name}</span><b>${price(v)}</b></label>`).join('');
-    card.innerHTML = `<label class="pr-head"><input type="checkbox" class="pr-check" aria-describedby="d-${service.id}"><span class="pr-name">${service.name}</span><span class="pr-from">${service.variants.length > 1 || service.variants[0].from ? 'ab ' : ''}${euro(Math.min(...service.variants.map(v => v.once)))}${service.variants[0].monthly ? ` + ${euro(Math.min(...service.variants.map(v => v.monthly)))}/Monat` : ''}</span></label><p class="pr-desc" id="d-${service.id}">${service.desc}</p><div class="pr-variants">${options}</div>`;
+    const fields = (v, i) => v.fields ? `<div class="pr-fields" data-variant="${i}"${i ? ' hidden' : ''}>${v.fields.map(f => `<label>${f.label}<input type="${f.type}" data-field="${f.key}" placeholder="${f.placeholder}"${f.type === 'number' ? ' min="1" inputmode="numeric"' : ''}></label>`).join('')}</div>` : '';
+    const options = estimator + service.variants.map((v, i) => `<label class="pr-variant"><input type="radio" name="v-${service.id}" value="${i}"${i ? '' : ' checked'}><span>${v.name}</span><b>${price(v)}</b></label>${fields(v, i)}`).join('');
+    card.innerHTML = `<label class="pr-head"><input type="checkbox" class="pr-check" aria-describedby="d-${service.id}"><span class="pr-name">${service.name}</span><span class="pr-from">${fixedFrom(service)}</span></label><p class="pr-desc" id="d-${service.id}">${service.desc}</p><div class="pr-variants">${options}</div>`;
     const check = card.querySelector('.pr-check');
     check.addEventListener('change', () => {
       if (check.checked) selected.set(service.id, Number(card.querySelector('input[type=radio]:checked').value));
@@ -89,8 +99,10 @@
     card.querySelectorAll('input[type=radio]').forEach(radio => radio.addEventListener('change', () => {
       if (!check.checked) { check.checked = true; card.classList.add('selected'); }
       selected.set(service.id, Number(radio.value));
+      card.querySelectorAll('.pr-fields').forEach(box => { box.hidden = box.dataset.variant !== radio.value; });
       render();
     }));
+    card.querySelectorAll('[data-field]').forEach(input => input.addEventListener('input', render));
     if (service.estimator) {
       // Annahme: ca. 2,5 Minuten pro Anruf, 22 Arbeitstage im Monat
       const input = card.querySelector('.pr-estimate input');
@@ -113,13 +125,17 @@
   function calculate() {
     const items = [...selected].map(([id, index]) => {
       const service = SERVICES.find(s => s.id === id);
-      return { service, variant: service.variants[index] };
+      const details = [...list.querySelectorAll(`[data-id="${id}"] .pr-fields[data-variant="${index}"] [data-field]`)]
+        .filter(input => input.value.trim()).map(input => `${input.dataset.field}: ${input.value.trim()}`).join(', ');
+      return { service, variant: service.variants[index], details };
     });
-    const once = items.reduce((sum, i) => sum + i.variant.once, 0);
-    const monthly = items.reduce((sum, i) => sum + (i.variant.monthly || 0), 0);
-    const rate = discountRate(items.length);
+    // Leistungen nach Absprache haben noch keinen Preis und zählen nicht für den Paketrabatt
+    const fixed = items.filter(i => !i.variant.request);
+    const once = fixed.reduce((sum, i) => sum + i.variant.once, 0);
+    const monthly = fixed.reduce((sum, i) => sum + (i.variant.monthly || 0), 0);
+    const rate = discountRate(fixed.length);
     const round = v => Math.round(v * 100) / 100;
-    return { items, once, monthly, rate, onceNet: round(once * (1 - rate)), monthlyNet: round(monthly * (1 - rate)), hasFrom: items.some(i => i.variant.from) };
+    return { items, fixedCount: fixed.length, hasRequest: fixed.length < items.length, once, monthly, rate, onceNet: round(once * (1 - rate)), monthlyNet: round(monthly * (1 - rate)), hasFrom: fixed.some(i => i.variant.from) };
   }
 
   function totalsHTML(c) {
@@ -134,6 +150,7 @@
       rows.push(`<tr class="pr-total"><td>Monatlich ${TOTAL}</td><td>${euro(c.monthlyNet)}</td></tr>`);
       if (UST) rows.push(`<tr class="pr-gross"><td>inkl. ${UST * 100} % MwSt.</td><td>${euro(Math.round(c.monthlyNet * (1 + UST) * 100) / 100)}</td></tr>`);
     }
+    if (c.hasRequest) rows.push(`<tr class="pr-gross"><td colspan="2">${rows.length ? 'zzgl. ' : ''}Leistungen nach Absprache – den genauen Preis erhältst du im Angebot.</td></tr>`);
     return `<table class="pr-totals">${rows.join('')}</table>`;
   }
 
@@ -148,16 +165,16 @@
     const c = calculate();
     form.hidden = !c.items.length;
     bar.hidden = !c.items.length;
-    bar.innerHTML = `<span>${c.items.length} ${c.items.length === 1 ? 'Leistung' : 'Leistungen'} · ${[c.once ? euro(c.onceNet) : '', c.monthly ? `${euro(c.monthlyNet)}/Monat` : ''].filter(Boolean).join(' + ')}</span><b>Zum Angebot →</b>`;
+    bar.innerHTML = `<span>${c.items.length} ${c.items.length === 1 ? 'Leistung' : 'Leistungen'} · ${[c.once ? euro(c.onceNet) : '', c.monthly ? `${euro(c.monthlyNet)}/Monat` : ''].filter(Boolean).join(' + ') || 'nach Absprache'}</span><b>Zum Angebot →</b>`;
     if (!c.items.length) {
       summary.innerHTML = `<p class="pr-empty">Wähle links eine oder mehrere Leistungen. Ab 2 Leistungen gibt es 5 %, ab 3 Leistungen 10 % und ab 4 Leistungen 15 % Paketrabatt.</p>`;
       return;
     }
-    summary.innerHTML = `<ul class="pr-lines">${c.items.map(i => `<li><span>${i.service.name}<small>${i.variant.name}</small></span><b>${price(i.variant)}</b></li>`).join('')}</ul>${totalsHTML(c)}<p class="pr-next">${nextDiscountHint(c.items.length)}</p>`;
+    summary.innerHTML = `<ul class="pr-lines">${c.items.map(i => `<li><span>${i.service.name}<small>${i.variant.name}${i.details ? ` · ${escape(i.details)}` : ''}</small></span><b>${price(i.variant)}</b></li>`).join('')}</ul>${totalsHTML(c)}<p class="pr-next">${nextDiscountHint(c.fixedCount)}</p>`;
   }
 
   function offerText(c, data) {
-    const lines = c.items.map(i => `- ${i.service.name} (${i.variant.name}): ${price(i.variant)}`);
+    const lines = c.items.map(i => `- ${i.service.name} (${i.variant.name}${i.details ? `; ${i.details}` : ''}): ${price(i.variant)}`);
     const sums = [];
     if (c.once) sums.push(`Einmalig ${TOTAL}: ${c.hasFrom ? 'ab ' : ''}${euro(c.onceNet)}`);
     if (c.monthly) sums.push(`Monatlich ${TOTAL}: ${euro(c.monthlyNet)}`);
@@ -170,9 +187,9 @@
     const date = d => d.toLocaleDateString('de-DE');
     offer.innerHTML = `<div class="po-head"><img src="/logo/socialclip-logo-footer-cream.svg" alt="SocialClip"><div><b>Angebot ${data.number}</b>${date(today)} · gültig bis ${date(valid)}</div></div>
       <div class="po-parties"><div><small>Für</small>${escape(data.name)}${data.company ? `<br>${escape(data.company)}` : ''}<br>${escape(data.email)}${data.phone ? `<br>${escape(data.phone)}` : ''}</div><div><small>Von</small>SocialClip Art · Media · Digital<br>Mircea Alin, Donato-Polli-Str. 38<br>91056 Erlangen · 0176 46188101</div></div>
-      <table class="po-items"><thead><tr><th>Leistung</th><th>Einmalig</th><th>Monatlich</th></tr></thead><tbody>${c.items.map(i => `<tr><td>${i.service.name}<small>${i.variant.name}</small></td><td>${i.variant.from ? 'ab ' : ''}${euro(i.variant.once)}</td><td>${i.variant.monthly ? euro(i.variant.monthly) : '–'}</td></tr>`).join('')}</tbody></table>
+      <table class="po-items"><thead><tr><th>Leistung</th><th>Einmalig</th><th>Monatlich</th></tr></thead><tbody>${c.items.map(i => `<tr><td>${i.service.name}<small>${i.variant.name}${i.details ? ` · ${escape(i.details)}` : ''}</small></td><td>${i.variant.request ? 'nach Absprache' : `${i.variant.from ? 'ab ' : ''}${euro(i.variant.once)}`}</td><td>${i.variant.monthly ? euro(i.variant.monthly) : '–'}</td></tr>`).join('')}</tbody></table>
       ${totalsHTML(c)}
-      <p class="po-note">Alle Preise in Euro. ${UST_NOTE} Monatliche Leistungen: Mindestlaufzeit 3 Monate, danach monatlich kündbar. Druckkosten und Werbebudgets sind nicht enthalten. „ab“-Preise werden nach einem kurzen Gespräch verbindlich festgelegt. Dieses Angebot wird nach persönlicher Abstimmung bestätigt.</p>
+      <p class="po-note">Alle Preise in Euro. ${UST_NOTE} Monatliche Leistungen: Mindestlaufzeit 3 Monate, danach monatlich kündbar. Druckkosten und Werbebudgets sind nicht enthalten. „ab“-Preise werden nach einem kurzen Gespräch verbindlich festgelegt. Leistungen „nach Absprache“ werden nach einem Gespräch ergänzt. Dieses Angebot wird nach persönlicher Abstimmung bestätigt.</p>
       <div class="po-actions"><button type="button" class="service-button primary" data-print>Als PDF speichern</button></div>`;
     offer.hidden = false;
     offer.querySelector('[data-print]').addEventListener('click', () => window.print());
