@@ -79,3 +79,8 @@
 .pr-estimate input:focus{outline:2px solid #e6c99f;outline-offset:1px}
 .pr-estimate p{margin:0;color:#e6d0ad;font-size:13px}
 .pr-estimate p:empty{display:none}
+.pr-fields{display:grid;gap:10px;padding:12px;border:1px dashed #655b4d;border-radius:3px}
+.pr-fields[hidden]{display:none}
+.pr-fields label{display:grid;gap:6px;font-size:13px;color:#c5c0b6}
+.pr-fields input{width:100%;max-width:420px;padding:9px 10px;border:1px solid #49453f;border-radius:3px;background:#121212;color:#f4f1ea;font:inherit;font-size:15px}
+.pr-fields input:focus{outline:2px solid #e6c99f;outline-offset:1px}
