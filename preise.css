@@ -74,3 +74,8 @@
   .pr-discount td{color:#121212}
   .po-actions,.pr-bar{display:none!important}
 }
+.pr-estimate{display:grid;gap:8px;padding:12px;border:1px dashed #655b4d;border-radius:3px;font-size:14px}
+.pr-estimate input{width:120px;padding:9px 10px;border:1px solid #49453f;border-radius:3px;background:#121212;color:#f4f1ea;font:inherit}
+.pr-estimate input:focus{outline:2px solid #e6c99f;outline-offset:1px}
+.pr-estimate p{margin:0;color:#e6d0ad;font-size:13px}
+.pr-estimate p:empty{display:none}

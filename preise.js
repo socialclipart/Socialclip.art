@@ -7,8 +7,11 @@
       { name: 'Start · Instagram, 8 Beiträge/Monat', once: 290, monthly: 740 },
       { name: 'Wachstum · 2 Kanäle, 12 Beiträge, 1 Shooting', once: 390, monthly: 1140 },
       { name: 'Premium · 3 Kanäle, 16 Beiträge, 2 Shootings, Ads', once: 590, monthly: 1740 }] },
-    { id: 'nova', name: 'KI-Telefonassistenz Nova', desc: 'Nimmt Anrufe an, wenn niemand abhebt, und schickt dir Rückrufwünsche per E-Mail. Inkl. 150 Minuten/Monat, jede weitere 0,49 €.', variants: [
-      { name: 'Nova inkl. Telefonnummer', once: 490, monthly: 149 }] },
+    { id: 'nova', name: 'KI-Telefonassistenz Nova', desc: 'Nimmt Anrufe an, wenn niemand abhebt, und schickt dir Rückrufwünsche per E-Mail. Inkl. Telefonnummer, Einrichtung und Pflege. Wähle, wie viele Gesprächsminuten du pro Monat brauchst.', estimator: true, variants: [
+      { name: 'Basis · 150 Minuten/Monat, jede weitere 0,49 €', minutes: 150, once: 490, monthly: 149 },
+      { name: 'Standard · 300 Minuten/Monat, jede weitere 0,45 €', minutes: 300, once: 490, monthly: 249 },
+      { name: 'Profi · 600 Minuten/Monat, jede weitere 0,42 €', minutes: 600, once: 490, monthly: 429 },
+      { name: 'Business · 1.200 Minuten/Monat, jede weitere 0,39 €', minutes: 1200, once: 490, monthly: 749 }] },
     { id: 'web', name: 'Webseite', desc: 'Moderne Website mit mobiler Darstellung, klaren Inhalten und Kontaktwegen.', variants: [
       { name: 'Onepager', once: 990 },
       { name: 'Business-Website bis 5 Seiten', once: 1890 },
@@ -68,7 +71,8 @@
     const card = document.createElement('div');
     card.className = 'pr-item';
     card.dataset.id = service.id;
-    const options = service.variants.map((v, i) => `<label class="pr-variant"><input type="radio" name="v-${service.id}" value="${i}"${i ? '' : ' checked'}><span>${v.name}</span><b>${price(v)}</b></label>`).join('');
+    const estimator = service.estimator ? `<div class="pr-estimate"><label for="e-${service.id}">Wie viele Anrufe soll Nova ungefähr pro Tag annehmen?</label><input id="e-${service.id}" type="number" min="1" max="200" inputmode="numeric" placeholder="z. B. 5"><p aria-live="polite"></p></div>` : '';
+    const options = estimator + service.variants.map((v, i) => `<label class="pr-variant"><input type="radio" name="v-${service.id}" value="${i}"${i ? '' : ' checked'}><span>${v.name}</span><b>${price(v)}</b></label>`).join('');
     card.innerHTML = `<label class="pr-head"><input type="checkbox" class="pr-check" aria-describedby="d-${service.id}"><span class="pr-name">${service.name}</span><span class="pr-from">${service.variants.length > 1 || service.variants[0].from ? 'ab ' : ''}${euro(Math.min(...service.variants.map(v => v.once)))}${service.variants[0].monthly ? ` + ${euro(Math.min(...service.variants.map(v => v.monthly)))}/Monat` : ''}</span></label><p class="pr-desc" id="d-${service.id}">${service.desc}</p><div class="pr-variants">${options}</div>`;
     const check = card.querySelector('.pr-check');
     check.addEventListener('change', () => {
@@ -82,6 +86,22 @@
       selected.set(service.id, Number(radio.value));
       render();
     }));
+    if (service.estimator) {
+      // Annahme: ca. 2,5 Minuten pro Anruf, 22 Arbeitstage im Monat
+      const input = card.querySelector('.pr-estimate input');
+      const result = card.querySelector('.pr-estimate p');
+      input.addEventListener('input', () => {
+        const calls = Number(input.value);
+        if (!calls || calls < 0) { result.textContent = ''; return; }
+        const minutes = Math.ceil(calls * 2.5 * 22 / 10) * 10;
+        const index = service.variants.findIndex(v => v.minutes >= minutes);
+        const pick = index === -1 ? service.variants.length - 1 : index;
+        result.textContent = `Das sind etwa ${minutes.toLocaleString('de-DE')} Minuten im Monat. Empfehlung: ${service.variants[pick].name.split(' · ')[0]}${index === -1 ? ' – sprich uns für mehr Minuten gern an' : ''}.`;
+        const radio = card.querySelectorAll('input[type=radio]')[pick];
+        radio.checked = true;
+        radio.dispatchEvent(new Event('change'));
+      });
+    }
     list.append(card);
   }
 
