@@ -12,32 +12,31 @@
 <header class="service-header"><a class="service-brand" href="/" aria-label="SocialClip, zur Startseite"><img src="/logo/socialclip-symbol-cream.svg" alt="" width="15" height="26"><img src="/logo/socialclip-wordmark-cream.svg" alt="SocialClip" width="137" height="13"></a><nav aria-label="Leistungen"><a href="/#leistungen">Alle Leistungen</a><a href="/webdesign-erlangen/">Webdesign</a><a href="/social-media-erlangen/">Social Media</a><a href="/preise/" aria-current="page">Preise</a><a href="/#kontakt">Kontakt</a></nav></header>
 <main class="service-main" id="inhalt">
 <nav class="service-breadcrumb" aria-label="Brotkrümelnavigation"><a href="/">SocialClip</a><span aria-hidden="true">/</span><span aria-current="page">Preise</span></nav>
-<section class="service-hero" aria-labelledby="seitentitel"><p class="service-eyebrow">SocialClip · Art · Media · Digital</p><h1 id="seitentitel">Klare Preise. Mehr Leistungen, mehr Rabatt.</h1><p class="service-lead">Wähle aus, was du brauchst, und sieh sofort, was es kostet. Mit einem Klick erhältst du dein persönliches Angebot, das du direkt als PDF speichern kannst.</p><div class="service-actions"><a class="service-button primary" href="#rechner">Zum Angebotsrechner →</a><a class="service-button" href="tel:+4917646188101">Lieber anrufen</a></div></section>
-<section class="service-section" aria-labelledby="rabatt"><h2 id="rabatt">Paketrabatt</h2><p>Je mehr Leistungen du kombinierst, desto günstiger wird es. Der Rabatt gilt auf einmalige und monatliche Preise.</p><div class="pr-rules"><div class="pr-rule"><b>5 %</b><span>ab 2 Leistungen</span></div><div class="pr-rule"><b>10 %</b><span>ab 3 Leistungen</span></div><div class="pr-rule"><b>15 %</b><span>ab 4 Leistungen</span></div></div></section>
-<section class="service-section pr-section" id="rechner" aria-labelledby="rechnertitel"><h2 id="rechnertitel">Angebotsrechner</h2><p>Alle Preise in Euro. <span data-ust-note>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</span> Druckkosten und Werbebudgets sind nicht enthalten.</p>
-<div class="pr-wrap" id="preisRechner">
-<div class="pr-list"></div>
-<aside class="pr-summary" id="preisSumme" aria-live="polite"><h2>Dein Angebot</h2><div class="pr-summary-body"></div>
-<form class="pr-form" id="preisForm" action="https://formspree.io/f/xwlvlqwg" method="POST" hidden>
+<section class="pk-hero" aria-labelledby="seitentitel"><p class="service-eyebrow">SocialClip · Preise</p><h1 id="seitentitel">Stell dir dein<br><span>Paket zusammen.</span></h1><p class="pk-lead">Antippen, kombinieren, sparen. Ab 2 Leistungen wird’s günstiger.</p></section>
+<section class="pr-section" id="rechner" aria-label="Preisrechner">
+<div class="pk-grid" id="pkGrid" role="group" aria-label="Leistungen auswählen"></div>
+<div class="pk-rows" id="pkRows"></div>
+<div class="pk-checkout" id="angebot" hidden>
+<div class="pk-summary"><h2>Dein Angebot</h2><div id="pkSummary" aria-live="polite"></div></div>
+<form class="pr-form" id="preisForm" action="https://formspree.io/f/xwlvlqwg" method="POST">
 <label>Name<input type="text" name="name" autocomplete="name" required></label>
 <label>Firma (optional)<input type="text" name="company" autocomplete="organization"></label>
 <label>E-Mail<input type="email" name="email" autocomplete="email" required></label>
 <label>Telefon (optional)<input type="tel" name="phone" autocomplete="tel"></label>
-<label>Nachricht (optional)<textarea name="message" placeholder="Was ist dir wichtig?"></textarea></label>
-<button class="service-button primary" type="submit">Angebot anfordern →</button>
-<p class="pr-status" id="preisStatus" role="status"></p>
-<p class="pr-privacy">Mit dem Absenden werden deine Angaben zur Bearbeitung der Anfrage an uns übermittelt. Mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>
+<label class="pk-wide">Nachricht (optional)<textarea name="message" placeholder="Was ist dir wichtig?"></textarea></label>
+<button class="service-button primary pk-wide" type="submit">Angebot anfordern →</button>
+<p class="pr-status pk-wide" id="preisStatus" role="status"></p>
+<p class="pr-privacy pk-wide">Mit dem Absenden werden deine Angaben zur Bearbeitung der Anfrage an uns übermittelt. Mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>
 </form>
 <div class="pr-success" id="preisSuccess" hidden><strong>Danke, deine Anfrage ist da.</strong><br>Dein Angebot steht unten und kann direkt als PDF gespeichert werden. Wir melden uns innerhalb von 1–2 Werktagen.</div>
-</aside>
 </div>
 <div id="preisOffer" hidden></div>
+<p class="pk-note">Alle Preise in Euro. <span data-ust-note>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</span> Druckkosten und Werbebudgets sind nicht enthalten.</p>
 </section>
-<section class="service-section" aria-labelledby="faq"><h2 id="faq">Häufige Fragen zu den Preisen</h2><div class="service-faq">
-<details><summary>Sind die Preise verbindlich?</summary><p>Die Preise gelten für den beschriebenen Umfang. Bei „ab“-Preisen legen wir den genauen Preis nach einem kurzen Gespräch fest. Dein Angebot wird nach persönlicher Abstimmung bestätigt.</p></details>
-<details><summary>Wie lange laufen monatliche Leistungen?</summary><p>Social Media, TikTok, Online Marketing und Nova haben eine Mindestlaufzeit von 3 Monaten und sind danach monatlich kündbar.</p></details>
-<details><summary>Ist der Druck von Flyern und Visitenkarten enthalten?</summary><p>Nein, die Preise gelten für das druckfertige Design. Auf Wunsch organisieren wir den Druck und berechnen die Druckkosten separat.</p></details>
-<details><summary>Was ist, wenn ich nur einen Teil brauche?</summary><p>Kein Problem. Schreib uns oder ruf an, und wir stellen den Umfang passend für dich zusammen.</p></details>
+<section class="pk-faq" aria-labelledby="faq"><h2 id="faq">Kurz erklärt</h2><div class="service-faq">
+<details><summary>Sind die Preise verbindlich?</summary><p>Ja, für den beschriebenen Umfang. „ab“-Preise und Leistungen nach Absprache legen wir nach einem kurzen Gespräch fest.</p></details>
+<details><summary>Wie lange laufen monatliche Leistungen?</summary><p>Mindestens 3 Monate, danach monatlich kündbar.</p></details>
+<details><summary>Ist der Druck enthalten?</summary><p>Nein, die Preise gelten für das druckfertige Design. Den Druck organisieren wir auf Wunsch gegen Aufpreis.</p></details>
 </div></section>
-<section class="service-contact" id="kontakt"><h2>Lieber persönlich sprechen?</h2><p>Ruf an oder schreib uns. Wir beraten dich, welche Leistungen für deinen Betrieb wirklich sinnvoll sind.</p><div class="service-contact-links"><a href="tel:+4917646188101">0176 46188101</a><a href="mailto:socialclip.art@gmail.com">socialclip.art@gmail.com</a></div></section>
+<section class="service-contact" id="kontakt"><h2>Lieber persönlich sprechen?</h2><p>Ruf an oder schreib uns, wir beraten dich gern.</p><div class="service-contact-links"><a href="tel:+4917646188101">0176 46188101</a><a href="mailto:socialclip.art@gmail.com">socialclip.art@gmail.com</a></div></section>
 </main><footer class="service-footer"><span>© 2026 SocialClip · Erlangen</span><nav aria-label="Rechtliches"><a href="/">Startseite</a><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a></nav></footer></body></html>
