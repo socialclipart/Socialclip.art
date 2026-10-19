@@ -1,0 +1,13 @@
+[
+ {"t":0.62,"type":"click","desc":"cursor starts the line"},
+ {"t":0.64,"type":"movement","desc":"line shoots across"},
+ {"t":1.04,"type":"appear","desc":"browser window snaps open"},
+ {"t":1.22,"type":"movement","desc":"camera pushes in"},
+ {"t":1.80,"type":"appear","desc":"Du fragst dich,"},
+ {"t":1.96,"type":"appear","desc":"wie ich"},
+ {"t":2.30,"type":"reveal","desc":"DAS impact"},
+ {"t":2.58,"type":"appear","desc":"gemacht habe?"},
+ {"t":3.30,"type":"click","desc":"pointer selects DAS"},
+ {"t":3.10,"type":"build_up","dur":0.86,"desc":"riser into the DAS window"},
+ {"t":3.62,"type":"movement","desc":"DAS window opens to full screen"}
+]

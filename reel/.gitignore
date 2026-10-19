@@ -1,0 +1,8 @@
+node_modules
+.sound-effects/
+cache/
+music/
+sound-effects-cache/
+renders/
+*.mp4
+assets/site/*-full.png
