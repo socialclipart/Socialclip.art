@@ -33,9 +33,9 @@
 
 /* ---------- 3 Tageszeit-Stimmung ---------- */
 .daytime-tint{position:fixed;inset:0;z-index:9983;pointer-events:none;mix-blend-mode:soft-light}
-body[data-daytime="morgen"] .daytime-tint{background:linear-gradient(180deg,rgba(190,215,255,.16),transparent 60%)}
-body[data-daytime="abend"] .daytime-tint{background:linear-gradient(180deg,rgba(240,170,90,.18),transparent 65%)}
-body[data-daytime="nacht"] .daytime-tint{background:linear-gradient(180deg,rgba(40,60,140,.2),transparent 70%)}
+body[data-daytime="morgen"] .daytime-tint{background:linear-gradient(180deg,rgba(190,215,255,.08),transparent 60%)}
+body[data-daytime="abend"] .daytime-tint{background:linear-gradient(180deg,rgba(240,170,90,.1),transparent 65%)}
+body[data-daytime="nacht"] .daytime-tint{background:linear-gradient(180deg,rgba(40,60,140,.08),transparent 70%)}
 
 /* ---------- 4 3D-Leistungskarten ---------- */
 .service-list .seo-offer{position:relative;overflow:hidden;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s ease,border-color .3s;will-change:transform}
