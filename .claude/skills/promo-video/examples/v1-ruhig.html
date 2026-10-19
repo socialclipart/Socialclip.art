@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Arimo;src:url(../../../../fonts/arimo-latin-wght.woff2) format("woff2");font-weight:400 700}
+:root{--bg:#121212;--cream:#f4f1ea;--gold:#e6d0ad;--gold2:#d2b894;--dim:#86827b;--line:#514d45}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+body{font-family:Arimo,Arial,sans-serif;color:var(--cream);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse 90% 60% at 70% 20%,#2a2620 0%,#121212 60%)}
+#glow{position:absolute;width:1400px;height:1400px;border-radius:50%;background:radial-gradient(circle,rgba(230,208,173,.16),rgba(230,208,173,0) 65%);left:-160px;top:200px}
+#bigS{position:absolute;width:1100px;left:300px;top:520px;opacity:.05}
+#grain{position:absolute;inset:0;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>")}
+.scene{position:absolute;inset:0;opacity:0}
+.brand{position:absolute;top:110px;left:90px;display:flex;align-items:center;gap:18px}
+.brand img.s{height:58px}.brand img.w{height:30px}
+.kicker{font-size:26px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2)}
+/* S1 */
+#s1 .words{position:absolute;left:90px;top:520px}
+#s1 .w{font-size:150px;font-weight:600;letter-spacing:-.05em;line-height:1.02;will-change:transform}
+#s1 .sub{position:absolute;left:94px;top:1360px;font-size:64px;color:var(--gold);letter-spacing:-.03em}
+/* S2 */
+#s2 .row{position:absolute;left:90px;font-size:118px;font-weight:600;letter-spacing:-.05em;color:var(--dim)}
+#s2 .row i{position:absolute;left:-10px;top:56%;height:12px;background:var(--gold2);transform-origin:left;width:calc(100% + 20px)}
+#s2 .ki{position:absolute;left:90px;top:1180px;font-size:210px;font-weight:600;letter-spacing:-.06em;color:var(--gold);line-height:1}
+#s2 .ki b{color:var(--cream);font-weight:600}
+/* S3 */
+#s3 .head{position:absolute;left:90px;top:330px;font-size:100px;font-weight:600;letter-spacing:-.05em;line-height:1.02}
+#s3 .head span{color:var(--gold)}
+#s3 .card{position:absolute;left:70px;right:70px;top:720px;padding:46px 46px 120px;border:2px solid #36332e;border-left:6px solid var(--gold2);border-radius:8px;background:#1b1a18;box-shadow:0 40px 120px rgba(0,0,0,.55)}
+#s3 .card .lbl{font-size:24px;letter-spacing:.18em;color:var(--gold2);text-transform:uppercase;margin-bottom:28px}
+#s3 pre{font-family:Menlo,Consolas,"DejaVu Sans Mono",monospace;font-size:35px;line-height:1.6;white-space:pre-wrap;color:#ece6da;min-height:740px}
+#s3 pre em{font-style:normal;color:#121212;background:var(--gold);border-radius:4px;padding:0 4px}
+#s3 .cur{display:inline-block;width:18px;height:40px;background:var(--gold);vertical-align:-6px;margin-left:2px}
+#s3 .btn{position:absolute;right:40px;bottom:34px;font-size:28px;padding:16px 30px;border-radius:40px;border:2px solid var(--line);color:var(--cream)}
+/* S4 */
+#s4 .stat{position:absolute;left:90px;right:90px;display:flex;align-items:baseline;gap:40px;border-top:2px solid #2f2c28;padding-top:34px}
+#s4 .num{font-size:200px;font-weight:600;letter-spacing:-.06em;line-height:.9;color:var(--gold);min-width:330px}
+#s4 .lab{font-size:60px;letter-spacing:-.03em}
+/* S5 */
+#s5 .head{position:absolute;left:90px;top:300px;font-size:104px;font-weight:600;letter-spacing:-.05em;line-height:1.02}
+#s5 .head span{color:var(--gold)}
+#s5 .grid{position:absolute;left:90px;top:740px;display:grid;grid-template-columns:repeat(6,1fr);gap:22px;width:900px}
+#s5 .d{height:128px;border:2px solid var(--line);border-radius:10px;position:relative;font-size:24px;color:var(--dim);padding:12px 14px}
+#s5 .d svg{position:absolute;right:14px;bottom:12px;width:56px;height:56px}
+#s5 .foot{position:absolute;left:90px;top:1560px;font-size:46px;color:#cfc9bd;letter-spacing:-.02em;line-height:1.3}
+/* S6 */
+#s6 .persp{position:absolute;left:0;right:0;top:300px;height:1100px;perspective:2200px}
+#s6 .book{position:absolute;left:250px;width:580px;height:820px;top:90px;border-radius:6px;background:linear-gradient(160deg,#2a2722,#141414 60%);box-shadow:0 60px 140px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.06);overflow:hidden;transform-style:preserve-3d;padding:56px 50px}
+#s6 .book .bs{position:absolute;width:640px;right:-260px;bottom:-140px;opacity:.07}
+#s6 .book .lg{display:flex;align-items:center;gap:10px}
+#s6 .book .lg img.s{height:30px}#s6 .book .lg img.w{height:16px}
+#s6 .book .k{margin-top:150px;font-size:13px;letter-spacing:.2em;color:var(--gold2)}
+#s6 .book h2{margin-top:22px;font-size:66px;font-weight:500;letter-spacing:-.05em;line-height:1}
+#s6 .book h2 span{color:var(--gold)}
+#s6 .book .ft{position:absolute;left:50px;right:50px;bottom:40px;border-top:1px solid #3a3731;padding-top:16px;font-size:15px;color:#a9a397;display:flex;justify-content:space-between}
+#s6 .shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.14) 45%,transparent 60%)}
+#s6 .price{position:absolute;left:0;right:0;top:1350px;text-align:center}
+#s6 .price strong{font-size:170px;font-weight:600;letter-spacing:-.06em;color:var(--gold);line-height:1}
+#s6 .price div{font-size:40px;color:#cfc9bd;margin-top:16px}
+#s6 .cta{position:absolute;left:50%;top:1640px;transform:translateX(-50%);padding:30px 48px;border-radius:60px;background:var(--cream);color:#121212;font-size:40px;font-weight:600;white-space:nowrap;letter-spacing:-.02em}
+</style></head><body>
+<div id="stage">
+  <div id="glow"></div>
+  <img id="bigS" src="../../../../logo/socialclip-symbol-cream.svg">
+  <div class="brand" id="brand"><img class="s" src="../../../../logo/socialclip-symbol-cream.svg"><img class="w" src="../../../../logo/socialclip-wordmark-cream.svg"></div>
+
+  <section class="scene" id="s1">
+    <div class="words"><div class="w">Website.</div><div class="w">Logo.</div><div class="w">Social Media.</div><div class="w">Google.</div><div class="w">Werbung.</div></div>
+    <div class="sub">Alles selbst gemacht. Mit KI.</div>
+  </section>
+
+  <section class="scene" id="s2">
+    <div class="kicker" style="position:absolute;left:94px;top:430px">Was du nicht brauchst</div>
+    <div class="row" style="top:540px"><span>Agentur-Budget</span><i></i></div>
+    <div class="row" style="top:720px"><span>Vorkenntnisse</span><i></i></div>
+    <div class="row" style="top:900px"><span>Ausreden</span><i></i></div>
+    <div class="ki"><b>Du</b> + KI.</div>
+  </section>
+
+  <section class="scene" id="s3">
+    <div class="head"><span>60+ Prompts</span><br>zum Kopieren.</div>
+    <div class="card"><div class="lbl">Prompt · Website-Texte</div><pre id="typed"></pre><div class="btn" id="copy">Kopieren</div></div>
+  </section>
+
+  <section class="scene" id="s4">
+    <div class="kicker" style="position:absolute;left:94px;top:400px">Das steckt drin</div>
+    <div class="stat" style="top:520px"><div class="num" data-to="11">0</div><div class="lab">Kapitel</div></div>
+    <div class="stat" style="top:820px"><div class="num" data-to="60" data-suf="+">0</div><div class="lab">Prompts</div></div>
+    <div class="stat" style="top:1120px"><div class="num" data-to="55">0</div><div class="lab">Seiten PDF</div></div>
+    <div class="stat" style="top:1420px"><div class="num" data-to="30">0</div><div class="lab">Tage-Plan</div></div>
+  </section>
+
+  <section class="scene" id="s5">
+    <div class="head">Jeden Tag<br><span>eine Aufgabe.</span></div>
+    <div class="grid" id="grid"></div>
+    <div class="foot">In 30 Tagen steht dein<br>kompletter Auftritt.</div>
+  </section>
+
+  <section class="scene" id="s6">
+    <div class="persp"><div class="book" id="book">
+      <img class="bs" src="../../../../logo/socialclip-symbol-cream.svg">
+      <div class="lg"><img class="s" src="../../../../logo/socialclip-symbol-cream.svg"><img class="w" src="../../../../logo/socialclip-wordmark-cream.svg"></div>
+      <div class="k">DAS SELBERMACHER-HANDBUCH · 2026</div>
+      <h2>Marketing<br>wie die Profis.<br><span>Einfach selbst<br>gemacht.</span></h2>
+      <div class="ft"><span>Mircea Alin · SocialClip</span><span>socialclip.art</span></div>
+      <div class="shine" id="shine"></div>
+    </div></div>
+    <div class="price"><strong>14 €</strong><div>einmalig · sofort als PDF</div></div>
+    <div class="cta" id="cta">socialclip.art/marketing-handbuch</div>
+  </section>
+  <div id="grain"></div>
+</div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const oCubic=x=>1-Math.pow(1-x,3), ioCubic=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const oBack=x=>{const c=1.70158,d=c+1;return 1+d*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const oExpo=x=>x===1?1:1-Math.pow(2,-10*x);
+// scene windows [in, out]
+const W={s1:[0,4.3],s2:[4.3,7.6],s3:[7.6,12.9],s4:[12.9,16.3],s5:[16.3,19.8],s6:[19.8,99]};
+const PROMPT="Hier ist mein Marketing-Fundament: [FUNDAMENT].\n\nSchreib mir alle Texte für eine One-Page-Website: Start, Leistungen, Warum wir, Ablauf, Über uns, FAQ, Kontakt.\n\nAnsprache: [Du/Sie]\nTon: [3 WÖRTER]\n\nStell mir zuerst Rückfragen.";
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+function hl(s){let out='',open=false;for(const ch of s){if(ch==='['){open=true;out+='<em>[';}else if(ch===']'&&open){open=false;out+=']</em>';}else out+=esc(ch);}return open?out+'</em>':out;}
+const grid=$('#grid');for(let i=1;i<=30;i++){const d=document.createElement('div');d.className='d';d.innerHTML=i+'<svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#e6d0ad"/><path d="M16 29 l8 8 l16 -18" fill="none" stroke="#121212" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>';grid.appendChild(d);}
+
+function sceneFade(el,t,[a,b]){
+  const i=oCubic(seg(t,a,a+.35)), o=ioCubic(seg(t,b-.35,b));
+  el.style.opacity=t<a||t>b?0:Math.min(i,1-o);
+  el.style.transform=`translateY(${(1-i)*60-o*120}px)`;
+}
+window.seek=function(t){
+  for(const k in W) sceneFade($('#'+k),t,W[k]);
+  $('#glow').style.transform=`translate(${Math.sin(t*.4)*120}px,${Math.cos(t*.3)*160}px)`;
+  $('#bigS').style.transform=`rotate(${t*3}deg) scale(${1+.04*Math.sin(t*.6)})`;
+  $('#brand').style.opacity=t<19.8?oCubic(seg(t,.1,.6)):1-seg(t,19.8,20.1);
+  // S1 slam words
+  $$('#s1 .w').forEach((w,i)=>{const p=seg(t,.15+i*.42,.15+i*.42+.32),e=oBack(p);
+    w.style.opacity=clamp(p*3);w.style.transform=`translateX(${(1-oExpo(p))*-180}px) scale(${1.25-.25*e})`;w.style.transformOrigin='left center';
+    w.style.color=(t>.15+i*.42&&t<.15+(i+1)*.42&&i<4)||(i===4&&t<2.6)?'#e6d0ad':'#f4f1ea';});
+  const sp=oCubic(seg(t,2.55,3));$('#s1 .sub').style.opacity=sp;$('#s1 .sub').style.transform=`translateY(${(1-sp)*40}px)`;
+  // S2 strikes
+  $$('#s2 .row').forEach((r,i)=>{const a=4.55+i*.45,p=oCubic(seg(t,a,a+.3)),s=ioCubic(seg(t,a+.3,a+.55));
+    r.style.opacity=p;r.style.transform=`translateY(${(1-p)*50}px)`;r.querySelector('i').style.transform=`scaleX(${s})`;});
+  const kp=seg(t,6.05,6.5);$('#s2 .ki').style.opacity=clamp(kp*2);$('#s2 .ki').style.transform=`scale(${.6+.4*oBack(kp)})`;$('#s2 .ki').style.transformOrigin='left bottom';
+  // S3 typing
+  const n=Math.floor(PROMPT.length*seg(t,8.1,11.6));const blink=(Math.floor(t*2.4)%2===0)||(t>8&&t<11.6);
+  $('#typed').innerHTML=hl(PROMPT.slice(0,n))+(blink?'<span class="cur"></span>':'');
+  const cp=seg(t,11.9,12.2),btn=$('#copy');
+  if(t>=11.9){btn.textContent='✓ Kopiert';btn.style.background='#e6d0ad';btn.style.color='#121212';btn.style.borderColor='#e6d0ad';btn.style.transform=`scale(${1+.15*Math.sin(cp*Math.PI)})`;}
+  else{btn.textContent='Kopieren';btn.style.background='transparent';btn.style.color='#f4f1ea';btn.style.borderColor='#514d45';btn.style.transform='none';}
+  // S4 counters
+  $$('#s4 .stat').forEach((s,i)=>{const a=13.2+i*.35,p=oCubic(seg(t,a,a+.35)),c=oCubic(seg(t,a,a+1.1));
+    s.style.opacity=p;s.style.transform=`translateX(${(1-p)*-80}px)`;const nm=s.querySelector('.num');nm.textContent=Math.round(c*nm.dataset.to)+(c>=1?(nm.dataset.suf||''):'');});
+  // S5 grid
+  $$('#s5 .d').forEach((d,i)=>{const a=16.55+i*.025,p=oBack(seg(t,a,a+.3));d.style.opacity=clamp(seg(t,a,a+.15));d.style.transform=`scale(${.6+.4*p})`;
+    const c=seg(t,17.2+i*.06,17.2+i*.06+.18);const path=d.querySelector('path'),circ=d.querySelector('circle');
+    circ.style.opacity=c;circ.setAttribute('r',26*oBack(c)||0.01);path.setAttribute('stroke-dashoffset',1-seg(t,17.2+i*.06+.08,17.2+i*.06+.28));
+    d.style.borderColor=c>0?'#e6d0ad':'#514d45';d.style.color=c>0?'#e6d0ad':'#86827b';});
+  const fp=oCubic(seg(t,18.8,19.2));$('#s5 .foot').style.opacity=fp;
+  // S6 book
+  const bp=oCubic(seg(t,19.9,21.1)),fl=Math.sin((t-21)*.9);
+  $('#book').style.transform=`translateY(${(1-bp)*500}px) rotateX(${(1-bp)*35+3}deg) rotateY(${-28+bp*14+(t>21?fl*4:0)}deg) rotateZ(${(1-bp)*-6}deg)`;
+  $('#shine').style.transform=`translateX(${-700+seg(t,20.9,22)*1500}px)`;
+  const pp=oBack(seg(t,21.1,21.5));$('#s6 .price').style.opacity=clamp(seg(t,21.1,21.3));$('#s6 .price').style.transform=`scale(${.7+.3*pp})`;
+  const cta=oCubic(seg(t,21.6,22));$('#cta').style.opacity=cta;$('#cta').style.transform=`translateX(-50%) translateY(${(1-cta)*60}px) scale(${1+.03*Math.max(0,Math.sin((t-22.5)*4))*(t>22.5?1:0)})`;
+};
+seek(0);
+</script></body></html>
