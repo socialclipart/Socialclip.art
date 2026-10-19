@@ -3633,8 +3633,6 @@ footer strong{
 @media(max-width:600px){.site-menu-list em{display:none}}
 @media(prefers-reduced-motion:reduce){.site-menu-panel{animation:none}}
 </style>
-<link rel="stylesheet" href="/visual-world.css?v=1">
-<script src="/visual-world.js?v=1" defer></script>
 
 <style>
 /* Leistungen auf dem Handy als Wisch-Leiste statt 14 Karten untereinander */
@@ -3646,6 +3644,8 @@ footer strong{
   .seo-swipe-hint{display:block;margin:-8px 0 18px;color:#938f87;font-size:var(--fs-label);letter-spacing:var(--ls-label)}
 }
 </style>
+<link rel="stylesheet" href="/extras.css?v=1">
+<script src="/extras.js?v=1" defer></script>
 </head>
 
 <body class="locked">
@@ -3949,13 +3949,56 @@ footer strong{
 </section>
 
 <!-- =========================
+     IDEEN-GENERATOR + WAS BRAUCHST DU?
+     Branche wählen, Idee mischen, oder Wunsch eintippen (extras.js)
+========================= -->
+
+<section class="ideas" id="ideen" aria-labelledby="ideasTitle">
+
+  <div class="chapter-line reveal">
+    SCENE 04 / IDEAS
+  </div>
+
+  <h2 class="big-title reveal" id="ideasTitle">
+    KEINE IDEE?<br>
+    <span>WIR MISCHEN DIR EINE.</span>
+  </h2>
+
+  <p class="ideas-lead reveal">Wähl deine Branche und lass dir eine Idee für mehr Sichtbarkeit mischen. Oder sag uns einfach, was du brauchst.</p>
+
+  <div class="ideas-box reveal">
+    <div class="ideas-panel">
+      <span class="ideas-label">DEINE BRANCHE</span>
+      <div class="chip-row ideas-chips" role="radiogroup" aria-label="Branche">
+        <button type="button" role="radio" aria-checked="true" class="on" data-branch="cafe">Café</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="friseur">Friseur</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="handwerk">Handwerk</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="praxis">Praxis</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="restaurant">Restaurant</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="laden">Laden</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="andere">Andere</button>
+      </div>
+      <div class="slot" aria-live="polite"><div class="slot-reel"></div></div>
+      <p class="ideas-result" aria-live="polite"></p>
+      <button class="cine-btn primary ideas-mix" type="button">IDEE MISCHEN <span class="arr" aria-hidden="true">→</span></button>
+    </div>
+    <div class="ideas-panel">
+      <label class="ideas-label" for="ideasSearch">WAS BRAUCHST DU?</label>
+      <input class="ideas-search" id="ideasSearch" type="text" placeholder="z. B. mehr Kunden" autocomplete="off">
+      <ul class="ideas-hits" aria-live="polite"></ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- =========================
      SCENE 04 / NOVA
 ========================= -->
 
 <section class="nova" id="nova">
 
   <div class="chapter-line reveal">
-    SCENE 04 / MEET NOVA
+    SCENE 05 / MEET NOVA
   </div>
 
   <div class="nova-grid">
@@ -4030,39 +4073,54 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 08
+     WEBSITE IN 10 SEKUNDEN
+     Besucher tippt seinen Namen, die Vorschau baut sich live auf (extras.js)
 ========================= -->
 
-<section class="visual-world">
+<section class="gen" id="website-vorschau" aria-labelledby="genTitle">
 
   <div class="chapter-line reveal">
-    SCENE 05 / VISUAL WORLD
+    SCENE 06 / YOUR WEBSITE
   </div>
 
-  <!-- WIRKUNG. aus der Kamerafahrt landet genau hier (wirkungGhost) -->
-  <h2 class="big-title wirkung-title">
-    <span class="wt-line wt-white">FORM.</span><br>
-    <span class="wt-line">LICHT.</span><br>
-    <span class="wirkung-target" id="wirkungTarget">WIRKUNG.</span>
+  <h2 class="big-title reveal" id="genTitle">
+    DEINE WEBSITE<br>
+    <span>IN 10 SEKUNDEN.</span>
   </h2>
 
-  <div class="visual-grid">
+  <p class="gen-lead reveal">Tipp deinen Firmennamen ein, wähl deine Branche und sieh zu, wie deine neue Website entsteht. So könnte sie mit SocialClip aussehen.</p>
 
-    <div class="visual-card reveal">
-      <div class="visual-word">DIGITAL FORM</div>
+  <div class="gen-wrap reveal">
+    <div class="gen-controls">
+      <label>DEIN FIRMENNAME
+        <input class="gen-name" type="text" maxlength="32" autocomplete="organization" placeholder="z. B. Café Lena">
+      </label>
+      <div>
+        <span class="ideas-label">DEINE BRANCHE</span>
+        <div class="chip-row gen-chips" role="radiogroup" aria-label="Branche">
+          <button type="button" role="radio" aria-checked="true" class="on" data-type="cafe">Café</button>
+          <button type="button" role="radio" aria-checked="false" data-type="friseur">Friseur</button>
+          <button type="button" role="radio" aria-checked="false" data-type="handwerk">Handwerk</button>
+          <button type="button" role="radio" aria-checked="false" data-type="praxis">Praxis</button>
+          <button type="button" role="radio" aria-checked="false" data-type="restaurant">Restaurant</button>
+          <button type="button" role="radio" aria-checked="false" data-type="laden">Laden</button>
+        </div>
+      </div>
+      <button class="cine-btn primary" type="button" data-open-builder="Webseite">
+        DAS WILL ICH ECHT <span class="arr" aria-hidden="true">→</span>
+      </button>
     </div>
-
-    <div class="visual-card reveal">
-      <div class="visual-word">VISUAL STORY</div>
+    <div class="gen-stage" aria-live="polite" aria-label="Vorschau deiner Website">
+      <div class="gen-browser">
+        <div class="gen-bar"><i></i><i></i><i></i><span class="gen-url">cafe-lena.de</span></div>
+        <div class="gen-site"></div>
+      </div>
+      <div class="gen-phone" aria-hidden="true"><div class="gen-site"></div></div>
     </div>
-
-    <div class="visual-card reveal">
-      <div class="visual-word">CREATIVE MEDIA</div>
-    </div>
-
   </div>
 
 </section>
+
 
 <!-- =========================
      SCENE 10
@@ -4075,7 +4133,7 @@ footer strong{
 <section class="check" id="check">
 
   <div class="chapter-line reveal">
-    SCENE 06 / VISIBILITY CHECK
+    SCENE 07 / VISIBILITY CHECK
   </div>
 
   <div class="print-only check-print-head">
@@ -4309,7 +4367,7 @@ footer strong{
 <section class="tools">
 
   <div class="chapter-line reveal">
-    SCENE 07 / INTERACTIVE TOOLS
+    SCENE 08 / INTERACTIVE TOOLS
   </div>
 
   <div class="tools-intro">
@@ -4420,7 +4478,7 @@ footer strong{
   <div class="ig-copy">
 
   <div class="chapter-line reveal">
-    SCENE 08 / SOCIALCLIP.ART
+    SCENE 09 / SOCIALCLIP.ART
   </div>
 
   <h2 class="big-title reveal">
@@ -4507,7 +4565,7 @@ footer strong{
 <section class="contact" id="kontakt">
 
   <div class="chapter-line reveal">
-    SCENE 09 / YOUR STORY
+    SCENE 10 / YOUR STORY
   </div>
 
   <h2 class="big-title reveal">
@@ -7636,12 +7694,12 @@ checkForm.addEventListener(
   const DAYS = ["SONNTAG","MONTAG","DIENSTAG","MITTWOCH","DONNERSTAG","FREITAG","SAMSTAG"];
 
   function timeGreeting(){
-    if(hour < 5) return "NOCH WACH? DIE BESTEN IDEEN KOMMEN NACHTS";
-    if(hour < 11) return "GUTEN MORGEN";
+    if(hour < 5) return "NOCH WACH? NOVA IST ES AUCH";
+    if(hour < 11) return "GUTEN MORGEN, ERLANGEN";
     if(hour < 14) return "SCHÖNEN MITTAG";
     if(hour < 18) return weekend ? "SCHÖNES WOCHENENDE" : "SCHÖNEN NACHMITTAG";
     if(hour < 23) return "GUTEN ABEND";
-    return "SPÄT DRAN? PERFEKT FÜR NEUE IDEEN";
+    return "NOCH WACH? NOVA IST ES AUCH";
   }
 
   /* Begrüßung */
