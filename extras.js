@@ -1,5 +1,5 @@
 /* Neue Effekte auf der Startseite (extras.css)
-   1 Story-Leiste · 2 Lampe mit Zugschnur · 3 Tageszeit-Stimmung
+   1 Story-Leiste · 3 Tageszeit-Stimmung
    4 3D-Leistungskarten · 5 Ideen-Generator · 6 Website in 10 Sekunden */
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -143,64 +143,6 @@
     });
   }
 
-  /* ---------- 2 Lampe mit Zugschnur ---------- */
-  const wash = document.createElement('div');
-  wash.className = 'light-wash';
-  wash.setAttribute('aria-hidden', 'true');
-  const lamp = document.createElement('button');
-  lamp.type = 'button';
-  lamp.className = 'lamp';
-  lamp.setAttribute('aria-label', 'Licht an- oder ausschalten');
-  lamp.innerHTML = '<span class="lamp-cord"></span><span class="lamp-knob"></span>';
-  lamp.style.border = '0';
-  lamp.style.padding = '0';
-  lamp.style.background = 'none';
-  const tip = document.createElement('div');
-  tip.className = 'lamp-tip';
-  tip.textContent = 'ZIEH MICH';
-  tip.setAttribute('aria-hidden', 'true');
-  document.body.append(wash, lamp, tip);
-  const topbar = document.getElementById('topbar');
-  const baseCord = () => (topbar ? topbar.offsetHeight : 70) - 6;
-  const setCord = px => lamp.style.setProperty('--cord', `${px}px`);
-  setCord(baseCord());
-  addEventListener('resize', () => setCord(baseCord()));
-  const setLight = on => {
-    document.body.classList.toggle('light-on', on);
-    lamp.setAttribute('aria-pressed', String(on));
-    store.set('sc-light', on ? '1' : '0');
-  };
-  setLight(store.get('sc-light') === '1');
-  const toggle = () => {
-    setLight(!document.body.classList.contains('light-on'));
-    lamp.classList.remove('swing');
-    void lamp.offsetWidth;
-    if (!reduce) lamp.classList.add('swing');
-    tip.classList.remove('show');
-    store.set('sc-lamp-used', '1');
-  };
-  let pull = null;
-  lamp.addEventListener('pointerdown', event => { pull = { y: event.clientY, moved: false }; lamp.setPointerCapture(event.pointerId); });
-  lamp.addEventListener('pointermove', event => {
-    if (!pull) return;
-    const dy = Math.max(0, Math.min(60, event.clientY - pull.y));
-    if (dy > 4) pull.moved = true;
-    setCord(baseCord() + dy);
-  });
-  lamp.addEventListener('pointerup', event => {
-    if (!pull) return;
-    const dy = event.clientY - pull.y;
-    setCord(baseCord());
-    if (dy > 18 || !pull.moved) toggle();
-    pull = null;
-  });
-  lamp.addEventListener('pointercancel', () => { pull = null; setCord(baseCord()); });
-  lamp.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle(); } });
-  lamp.addEventListener('click', event => event.preventDefault());
-  if (!store.get('sc-lamp-used')) {
-    setTimeout(() => { if (!document.body.classList.contains('locked')) { tip.classList.add('show'); setTimeout(() => tip.classList.remove('show'), 3200); } }, 6000);
-  }
-
   /* ---------- 3 Tageszeit-Stimmung ---------- */
   const tint = document.createElement('div');
   tint.className = 'daytime-tint';
@@ -326,13 +268,14 @@
   }
 
   /* ---------- 6 Website in 10 Sekunden ---------- */
+  const SERIF = 'Georgia, "Times New Roman", serif';
   const TYPES = {
-    cafe: { label: 'Café', name: 'Café Lena', accent: '#e6b980', bg1: '#2a2018', bg2: '#100c09', eyebrow: 'ERLANGEN · ALTSTADT', head: ['KAFFEE,', 'DER BLEIBT.'], sub: 'Frisch geröstet, hausgemachter Kuchen und Platz für dich.', cta: 'TISCH RESERVIEREN →', visual: 'Kuchen des Tages', tiles: ['SPEISEKARTE', 'FRÜHSTÜCK', 'ANFAHRT'], nav: 'KARTE · BUCHEN · KONTAKT' },
-    friseur: { label: 'Friseur', name: 'Salon Mia', accent: '#e9a6b4', bg1: '#241a1e', bg2: '#0f0b0d', eyebrow: 'HAIR & STYLE · ERLANGEN', head: ['DEIN LOOK.', 'DEIN MOMENT.'], sub: 'Schnitt, Farbe und Styling, Termin in 30 Sekunden online.', cta: 'TERMIN BUCHEN →', visual: 'Neu: Balayage', tiles: ['PREISE', 'TEAM', 'TERMIN'], nav: 'LEISTUNGEN · TEAM · TERMIN' },
-    handwerk: { label: 'Handwerk', name: 'Huber Haustechnik', accent: '#f0a64a', bg1: '#1f1c17', bg2: '#0c0b09', eyebrow: 'MEISTERBETRIEB · ERLANGEN', head: ['SAUBER', 'GEMACHT.'], sub: 'Heizung, Sanitär und Bad aus einer Hand, pünktlich und fair.', cta: 'ANFRAGE STELLEN →', visual: 'Neues Bad in 10 Tagen', tiles: ['LEISTUNGEN', 'REFERENZEN', 'NOTDIENST'], nav: 'LEISTUNGEN · PROJEKTE · KONTAKT' },
-    praxis: { label: 'Praxis', name: 'Praxis Dr. Weber', accent: '#8fc7c0', bg1: '#162020', bg2: '#0a0f0f', eyebrow: 'GESUNDHEIT · ERLANGEN', head: ['IN GUTEN', 'HÄNDEN.'], sub: 'Ruhig, persönlich und mit Zeit für dich. Termine auch online.', cta: 'TERMIN ANFRAGEN →', visual: 'Sprechzeiten', tiles: ['PRAXIS', 'LEISTUNGEN', 'ANFAHRT'], nav: 'PRAXIS · TEAM · TERMINE' },
-    restaurant: { label: 'Restaurant', name: 'Trattoria Roma', accent: '#e07b5a', bg1: '#24160f', bg2: '#0e0907', eyebrow: 'ITALIENISCH · ERLANGEN', head: ['WIE IN', 'ROM.'], sub: 'Hausgemachte Pasta, Holzofenpizza und Wein aus Italien.', cta: 'TISCH BUCHEN →', visual: 'Pasta des Tages', tiles: ['SPEISEKARTE', 'MITTAGSTISCH', 'EVENTS'], nav: 'KARTE · RESERVIEREN · KONTAKT' },
-    laden: { label: 'Laden', name: 'Laden No. 7', accent: '#c9b6f0', bg1: '#1c1a24', bg2: '#0c0b10', eyebrow: 'CONCEPT STORE · ERLANGEN', head: ['SCHÖNE', 'DINGE.'], sub: 'Ausgewählte Lieblingsstücke, neu jede Woche, mitten in der Stadt.', cta: 'NEUHEITEN ANSEHEN →', visual: 'Neu eingetroffen', tiles: ['NEUHEITEN', 'MARKEN', 'ÖFFNUNGSZEITEN'], nav: 'SHOP · NEU · BESUCHEN' }
+    cafe: { layout: 'center', name: 'Café Lena', accent: '#9a6a3a', bg: '#efe4d2', ink: '#3a2a1c', font: SERIF, btnInk: '#fff8ec', eyebrow: 'ERLANGEN · ALTSTADT', head: ['Kaffee,', 'der bleibt.'], sub: 'Frisch geröstet, hausgemachter Kuchen und Platz für dich.', cta: 'TISCH RESERVIEREN', visual: '', tiles: ['Speisekarte', 'Frühstück', 'Anfahrt'], nav: 'KARTE · BUCHEN', navCta: 'Reservieren' },
+    friseur: { layout: 'split', name: 'Salon Mia', accent: '#c98b98', bg: '#f7ecee', ink: '#3b2a2f', btnInk: '#fff', eyebrow: 'HAIR & STYLE · ERLANGEN', head: ['Dein Look.', 'Dein Moment.'], sub: 'Schnitt, Farbe und Styling. Termin in 30 Sekunden online.', cta: 'TERMIN BUCHEN', visual: 'Neu: Balayage', tiles: ['Preise', 'Team', 'Termin'], nav: 'LEISTUNGEN · TEAM', navCta: 'Termin' },
+    handwerk: { layout: 'bold', name: 'Huber Haustechnik', accent: '#f39a1e', bg: '#1b1b1b', ink: '#f4f1ea', eyebrow: 'MEISTERBETRIEB · ERLANGEN', head: ['Sauber', 'gemacht.'], sub: 'Heizung, Sanitär und Bad aus einer Hand, pünktlich und fair.', cta: 'ANFRAGE STELLEN', visual: 'Neues Bad in 10 Tagen', tiles: ['Notdienst', 'Meisterbetrieb', 'Festpreis'], nav: 'LEISTUNGEN · PROJEKTE', navCta: 'Anrufen' },
+    praxis: { layout: 'clean', name: 'Praxis Dr. Weber', accent: '#2f9c95', bg: '#f3f8f8', ink: '#1d3534', btnInk: '#fff', eyebrow: 'GESUNDHEIT · ERLANGEN', head: ['In guten', 'Händen.'], sub: 'Ruhig, persönlich und mit Zeit für dich. Termine auch online.', cta: 'TERMIN ANFRAGEN', visual: 'Sprechzeiten', tiles: ['Unsere Praxis', 'Leistungen', 'Anfahrt'], nav: 'PRAXIS · TEAM', navCta: 'Termin' },
+    restaurant: { layout: 'full', name: 'Trattoria Roma', accent: '#e8a25a', bg: '#100906', ink: '#fbf3e8', font: SERIF, eyebrow: 'CUCINA ITALIANA · ERLANGEN', head: ['Wie in', 'Rom.'], sub: 'Hausgemachte Pasta, Holzofenpizza und Wein aus Italien.', cta: 'TISCH BUCHEN', visual: '', tiles: ['Speisekarte', 'Mittagstisch', 'Reservieren'], nav: 'KARTE · EVENTS', navCta: 'Buchen' },
+    laden: { layout: 'grid', name: 'Laden No. 7', accent: '#7c6cd8', bg: '#f5f3ee', ink: '#1f1d24', btnInk: '#fff', eyebrow: 'CONCEPT STORE · ERLANGEN', head: ['Schöne Dinge,', 'jede Woche neu.'], sub: '', cta: 'ALLE NEUHEITEN', visual: '', tiles: ['Vase „Ton“', 'Leinentasche', 'Duftkerze'], prices: ['39 €', '24 €', '18 €'], nav: 'SHOP · NEU', navCta: 'Warenkorb' }
   };
   const gen = document.querySelector('.gen');
   if (gen) {
@@ -341,19 +284,22 @@
     const url = gen.querySelector('.gen-url');
     const sites = gen.querySelectorAll('.gen-site');
     let type = 'cafe';
-    const slug = text => text.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'deine-firma';
+    const slug = text => text.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'deine-firma';
     function build() {
       const t = TYPES[type];
       const name = nameInput.value.trim() || t.name;
       url.textContent = `${slug(name)}.de`;
       sites.forEach(site => {
+        site.dataset.layout = t.layout;
         site.style.setProperty('--accent', t.accent);
-        site.style.setProperty('--bg1', t.bg1);
-        site.style.setProperty('--bg2', t.bg2);
-        site.innerHTML = `<div class="gs-nav" style="--i:0"><b>${escape(name.toUpperCase())}</b><span>${t.nav}</span></div>
-          <div class="gs-hero" style="--i:1"><small>${t.eyebrow}</small><h4>${t.head[0]}<br><span style="color:var(--accent)">${t.head[1]}</span></h4><p>${t.sub}</p><span class="gs-btn">${t.cta}</span></div>
-          <div class="gs-visual" style="--i:2"><span>${t.visual}</span></div>
-          <div class="gs-tiles" style="--i:3">${t.tiles.map(x => `<span>${x}</span>`).join('')}</div>`;
+        site.style.setProperty('--bg', t.bg);
+        site.style.setProperty('--ink', t.ink);
+        site.style.setProperty('--font', t.font || 'inherit');
+        site.style.setProperty('--btn-ink', t.btnInk || '#141414');
+        site.innerHTML = `<div class="gs-nav" style="--i:0"><b>${escape(name)}</b><span>${t.nav}</span><em>${t.navCta}</em></div>
+          <div class="gs-visual" style="--i:1"><span>${t.visual}</span></div>
+          <div class="gs-hero" style="--i:2"><small>${t.eyebrow}</small><h4>${t.head[0]}<br><span>${t.head[1]}</span></h4>${t.sub ? `<p>${t.sub}</p>` : ''}<span class="gs-btn">${t.cta} →</span></div>
+          <div class="gs-tiles" style="--i:3">${t.tiles.map((x, i) => `<span${t.prices ? ` data-price="${t.prices[i]}"` : ''}>${x}</span>`).join('')}</div>`;
       });
     }
     let typing = 0;
