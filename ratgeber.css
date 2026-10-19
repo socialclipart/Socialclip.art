@@ -22,3 +22,6 @@
   .rg-table div:first-child span:nth-child(2){display:none}
   .rg-list{font-size:16px}
 }
+.rg-offer{margin-top:28px}
+.rg-offer strong{color:#e6d0ad;font-weight:600}
+.rg-offer .service-button{margin-top:18px}
