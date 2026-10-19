@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ \"$CLAUDE_CODE_REMOTE\" = \"true\" ] || exit 0; [ -f ~/.claude/skills/motion-video-director/SKILL.md ] && exit 0; T=$(mktemp -d) && git -c advice.detachedHead=false clone -q --depth 1 --branch v3.5.2 https://github.com/Miftahul-Islam-Efaz/Motion-graphics-skill \"$T\" && mkdir -p ~/.claude/skills && cp -r \"$T/skills/motion-video-director\" ~/.claude/skills/; rm -rf \"$T\"; exit 0",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}
