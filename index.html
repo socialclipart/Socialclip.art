@@ -3629,6 +3629,12 @@ footer strong{
 .site-menu-list a:hover strong,.site-menu-list a:focus-visible strong{color:#e6d0ad}
 .site-menu-foot{display:flex;flex-wrap:wrap;gap:18px;padding:25px;border-top:1px solid var(--line);font-size:13px}
 .site-menu-foot a{color:#f4f1ea}
+.site-menu-shop{display:grid;grid-template-columns:1fr auto;gap:4px 14px;margin:0 25px 25px;padding:16px 18px;border:1px solid #6b5e4b;border-radius:4px;background:linear-gradient(135deg,#2a2622,#171615);color:inherit;text-decoration:none}
+.site-menu-shop small{grid-column:1;color:#d2b894;font-size:var(--fs-label);letter-spacing:var(--ls-label)}
+.site-menu-shop strong{grid-column:1;font-size:16px;font-weight:500;letter-spacing:-.01em}
+.site-menu-shop span{grid-column:1;color:#a8a49c;font-size:13px;line-height:1.5}
+.site-menu-shop em{grid-column:2;grid-row:1/4;align-self:center;font-style:normal;color:#e6d0ad;font-size:13px;white-space:nowrap}
+.site-menu-shop:hover,.site-menu-shop:focus-visible{border-color:#e6d0ad}
 .site-menu a:focus-visible,.site-menu button:focus-visible{outline:2px solid #e6c99f;outline-offset:3px}
 @media(max-width:600px){.site-menu-list em{display:none}}
 @media(prefers-reduced-motion:reduce){.site-menu-panel{animation:none}}
@@ -3689,6 +3695,7 @@ footer strong{
       <button class="cine-btn primary" type="button" data-open-builder data-menu-close>PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span></button>
       <a class="cine-btn" href="/ratgeber/">RATGEBER <span class="arr" aria-hidden="true">→</span></a>
     </div>
+    <a class="site-menu-shop" href="/marketing-handbuch/"><small>NEU · HANDBUCH ALS PDF</small><strong>Marketing wie die Profis</strong><span>Website, Logo und Social Media mit KI selbst erstellen.</span><em>27 € <span aria-hidden="true">→</span></em></a>
     <p class="site-menu-label">UNSERE LEISTUNGEN</p>
     <ul class="site-menu-list">
         <li><a href="/webdesign-erlangen/"><strong>Webdesign &amp; Websites</strong><span>Moderne Websites, die auf dem Handy überzeugen.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
