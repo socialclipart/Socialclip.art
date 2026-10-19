@@ -3635,6 +3635,17 @@ footer strong{
 </style>
 <link rel="stylesheet" href="/visual-world.css?v=1">
 <script src="/visual-world.js?v=1" defer></script>
+
+<style>
+/* Leistungen auf dem Handy als Wisch-Leiste statt 14 Karten untereinander */
+.seo-swipe-hint{display:none}
+@media(max-width:640px){
+  .service-list.seo-offer-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px 14px;scrollbar-width:none}
+  .service-list.seo-offer-grid::-webkit-scrollbar{display:none}
+  .service-list.seo-offer-grid .seo-offer{flex:0 0 82%;scroll-snap-align:start}
+  .seo-swipe-hint{display:block;margin:-8px 0 18px;color:#938f87;font-size:var(--fs-label);letter-spacing:var(--ls-label)}
+}
+</style>
 </head>
 
 <body class="locked">
@@ -3831,83 +3842,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 03
-========================= -->
-
-<section class="categories">
-
-  <div class="chapter-line reveal">
-    SCENE 03 / WHAT WE CREATE
-  </div>
-
-  <h2 class="big-title reveal">
-    DEINE<br>
-    <span>DIGITALE</span><br>
-    WELT.
-  </h2>
-
-  <div class="category-grid">
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">01</span>
-      <div class="category-number">01 / WEB</div>
-      <h3>Web</h3>
-      <p>Webseiten und digitale Auftritte, die nicht nach Vorlage aussehen.</p>
-    </div>
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">02</span>
-      <div class="category-number">02 / DESIGN</div>
-      <h3>Design</h3>
-      <p>Logos, Flyer, Visitenkarten und visuelle Identitäten.</p>
-    </div>
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">03</span>
-      <div class="category-number">03 / SOCIAL</div>
-      <h3>Social Media</h3>
-      <p>Inhalte, Strategien und Marketing für digitale Aufmerksamkeit.</p>
-    </div>
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">04</span>
-      <div class="category-number">04 / MEDIA</div>
-      <h3>Foto & Video</h3>
-      <p>Bild und Bewegung für Marken, Produkte und Geschichten.</p>
-    </div>
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">05</span>
-      <div class="category-number">05 / MARKETING</div>
-      <h3>Marketing</h3>
-      <p>Neukundengewinnung, Strategie und digitale Kampagnen.</p>
-    </div>
-
-    <div class="category reveal">
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost category-ghost" aria-hidden="true">06</span>
-      <div class="category-number">06 / DIGITAL</div>
-      <h3>Digitale Lösungen</h3>
-      <p>Programmierung, virtuelle Assistenz und individuelle Lösungen.</p>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
      SCENE 04
 ========================= -->
 
 <section class="services" id="leistungen">
 
   <div class="chapter-line reveal">
-    SCENE 04 / SERVICES
+    SCENE 03 / SERVICES
   </div>
 
   <h2 class="big-title reveal">
@@ -3917,6 +3858,7 @@ footer strong{
   </h2>
 
   <p class="seo-offer-intro">Von deiner Website über Inhalte und Gestaltung bis zu digitalen Abläufen: Wähle die Leistung, die zu deinem Projekt passt. Wir arbeiten mit Selbstständigen und Unternehmen in Erlangen, Nürnberg, Fürth und online zusammen.</p>
+  <p class="seo-swipe-hint" aria-hidden="true">← WISCHEN FÜR ALLE 14 LEISTUNGEN →</p>
   <div class="service-list seo-offer-grid">
     <article class="seo-offer reveal">
       <span class="seo-offer-number">01 / SOCIALCLIP</span>
@@ -4007,13 +3949,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 05 / NOVA
+     SCENE 04 / NOVA
 ========================= -->
 
 <section class="nova" id="nova">
 
   <div class="chapter-line reveal">
-    SCENE 05 / MEET NOVA
+    SCENE 04 / MEET NOVA
   </div>
 
   <div class="nova-grid">
@@ -4088,178 +4030,13 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 06 / TOOLS
-========================= -->
-
-<section class="tools">
-
-  <div class="chapter-line reveal">
-    SCENE 06 / INTERACTIVE TOOLS
-  </div>
-
-  <div class="tools-intro">
-
-    <h2 class="big-title reveal">
-      MACH<br>
-      <span>DEINE IDEE</span><br>
-      KONKRET.
-    </h2>
-
-    <p class="text reveal" style="margin-top:40px;">
-      Finde heraus, was zu deinem Projekt passt,
-      erhalte eine erste Orientierung und beschreibe
-      deine Idee direkt.
-    </p>
-
-  </div>
-
-  <div class="widget-grid">
-
-    <div class="widget-card reveal" data-widget="servicesWidget">
-
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost" aria-hidden="true">01</span>
-
-      <div class="widget-number">
-        TOOL 01 / SELECTION
-      </div>
-
-      <h3>
-        Was brauchst du?
-      </h3>
-
-      <p>
-        Wähle aus unseren Leistungen dein eigenes Projekt.
-      </p>
-
-      <div class="widget-meta">14 LEISTUNGEN · 1 MINUTE</div>
-
-      <button class="widget-open cine-btn" type="button" data-widget="servicesWidget">
-        PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
-      </button>
-
-    </div>
-
-    <div class="widget-card reveal" data-widget="briefingWidget">
-
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost" aria-hidden="true">02</span>
-
-      <div class="widget-number">
-        TOOL 02 / BRIEFING
-      </div>
-
-      <h3>
-        Deine Idee
-      </h3>
-
-      <p>
-        Beantworte ein paar Fragen und erstelle dein Projekt-Briefing.
-      </p>
-
-      <div class="widget-meta">3 FRAGEN · 1 MINUTE</div>
-
-      <button class="widget-open cine-btn" type="button" data-widget="briefingWidget">
-        IDEE STARTEN <span class="arr" aria-hidden="true">→</span>
-      </button>
-
-    </div>
-
-    <div class="widget-card reveal" data-nova>
-
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost" aria-hidden="true">03</span>
-
-      <div class="widget-number">
-        TOOL 03 / NOVA
-      </div>
-
-      <h3>
-        Hör Nova zu
-      </h3>
-
-      <p>
-        Unsere KI-Assistentin stellt sich in ein paar Sekunden selbst vor.
-      </p>
-
-      <div class="widget-meta">11 SEKUNDEN · MIT TON</div>
-
-      <button class="widget-open cine-btn" type="button" data-nova-play>
-        ANHÖREN <span class="arr" aria-hidden="true">→</span>
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     SCENE 07
-========================= -->
-
-<section class="manifesto center">
-
-  <div class="chapter-line reveal">
-    SCENE 07 / THE IDEA
-  </div>
-
-  <p class="manifesto-text reveal">
-    AUS EINER IDEE WIRD ETWAS,
-    <span>DAS MAN SEHEN KANN.</span>
-  </p>
-
-  <p class="text reveal" style="margin-top:50px;">
-    Ein Bild wird zur Geschichte.
-    Eine Geschichte wird zu Aufmerksamkeit.
-    Aufmerksamkeit wird zu Bewegung.
-  </p>
-
-</section>
-
-<!-- =========================
-     KAMERAFAHRT
-     3D-Tunnel: beim Scrollen fliegt man durch
-     schwebende Wörter und Rahmen. Reines CSS-3D,
-     ein Transform pro Frame.
-========================= -->
-
-<section class="tunnel" id="tunnel" aria-label="Kamerafahrt: von der Idee zur Wirkung">
-
-  <div class="tunnel-sticky">
-
-    <canvas class="tunnel-frames" id="tunnelFrames" aria-hidden="true"></canvas>
-
-    <div class="tunnel-world" id="tunnelWorld" aria-hidden="true">
-        <span class="tunnel-word" data-z="-500" style="--x:-34vw;--y:-14vh">IDEE</span>
-        <span class="tunnel-word" data-z="-920" style="--x:32vw;--y:16vh">SKIZZE</span>
-        <span class="tunnel-word" data-z="-1340" style="--x:-30vw;--y:20vh">FORM</span>
-        <span class="tunnel-word" data-z="-1760" style="--x:34vw;--y:-18vh">FARBE</span>
-        <span class="tunnel-word" data-z="-2180" style="--x:-36vw;--y:-2vh">LICHT</span>
-        <span class="tunnel-word" data-z="-2600" style="--x:26vw;--y:22vh">BEWEGUNG</span>
-        <span class="tunnel-word" data-z="-3020" style="--x:-24vw;--y:-22vh">GESCHICHTE</span>
-        <span class="tunnel-word" data-z="-3440" style="--x:34vw;--y:8vh">MARKE</span>
-        <span class="tunnel-word" data-z="-3860" style="--x:-30vw;--y:14vh">SICHTBAR</span>
-        <span class="tunnel-word tunnel-final" data-z="-4480" style="--x:0vw;--y:0vh">WIRKUNG.</span>
-    </div>
-
-    <div class="tunnel-caption">
-      <span>KAMERAFAHRT</span>
-      <span>VON DER IDEE ZUR WIRKUNG</span>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
      SCENE 08
 ========================= -->
 
 <section class="visual-world">
 
   <div class="chapter-line reveal">
-    SCENE 08 / VISUAL WORLD
+    SCENE 05 / VISUAL WORLD
   </div>
 
   <!-- WIRKUNG. aus der Kamerafahrt landet genau hier (wirkungGhost) -->
@@ -4288,35 +4065,6 @@ footer strong{
 </section>
 
 <!-- =========================
-     SCENE 09
-========================= -->
-
-<section class="make-visible">
-
-  <div>
-
-    <div class="chapter-line reveal">
-      SCENE 09 / THE MOMENT
-    </div>
-
-    <h2 class="reveal">
-      MACH ES<br>
-      SICHTBAR.
-    </h2>
-
-    <p class="reveal">
-      Deine Idee verdient mehr als nur einen
-      Platz im Internet.
-      Lass sie entstehen.
-      Lass sie wachsen.
-      Lass sie sichtbar werden.
-    </p>
-
-  </div>
-
-</section>
-
-<!-- =========================
      SCENE 10
      Lead Magnet: interaktiver Sichtbarkeits-Check.
      Alles läuft im Browser, gespeichert wird nichts.
@@ -4327,7 +4075,7 @@ footer strong{
 <section class="check" id="check">
 
   <div class="chapter-line reveal">
-    SCENE 10 / VISIBILITY CHECK
+    SCENE 06 / VISIBILITY CHECK
   </div>
 
   <div class="print-only check-print-head">
@@ -4555,6 +4303,113 @@ footer strong{
 </section>
 
 <!-- =========================
+     SCENE 07 / TOOLS
+========================= -->
+
+<section class="tools">
+
+  <div class="chapter-line reveal">
+    SCENE 07 / INTERACTIVE TOOLS
+  </div>
+
+  <div class="tools-intro">
+
+    <h2 class="big-title reveal">
+      MACH<br>
+      <span>DEINE IDEE</span><br>
+      KONKRET.
+    </h2>
+
+    <p class="text reveal" style="margin-top:40px;">
+      Finde heraus, was zu deinem Projekt passt,
+      erhalte eine erste Orientierung und beschreibe
+      deine Idee direkt.
+    </p>
+
+  </div>
+
+  <div class="widget-grid">
+
+    <div class="widget-card reveal" data-widget="servicesWidget">
+
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost" aria-hidden="true">01</span>
+
+      <div class="widget-number">
+        TOOL 01 / SELECTION
+      </div>
+
+      <h3>
+        Was brauchst du?
+      </h3>
+
+      <p>
+        Wähle aus unseren Leistungen dein eigenes Projekt.
+      </p>
+
+      <div class="widget-meta">14 LEISTUNGEN · 1 MINUTE</div>
+
+      <button class="widget-open cine-btn" type="button" data-widget="servicesWidget">
+        PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
+      </button>
+
+    </div>
+
+    <div class="widget-card reveal" data-widget="briefingWidget">
+
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost" aria-hidden="true">02</span>
+
+      <div class="widget-number">
+        TOOL 02 / BRIEFING
+      </div>
+
+      <h3>
+        Deine Idee
+      </h3>
+
+      <p>
+        Beantworte ein paar Fragen und erstelle dein Projekt-Briefing.
+      </p>
+
+      <div class="widget-meta">3 FRAGEN · 1 MINUTE</div>
+
+      <button class="widget-open cine-btn" type="button" data-widget="briefingWidget">
+        IDEE STARTEN <span class="arr" aria-hidden="true">→</span>
+      </button>
+
+    </div>
+
+    <div class="widget-card reveal" data-nova>
+
+      <span class="widget-spot" aria-hidden="true"></span>
+      <span class="widget-ghost" aria-hidden="true">03</span>
+
+      <div class="widget-number">
+        TOOL 03 / NOVA
+      </div>
+
+      <h3>
+        Hör Nova zu
+      </h3>
+
+      <p>
+        Unsere KI-Assistentin stellt sich in ein paar Sekunden selbst vor.
+      </p>
+
+      <div class="widget-meta">11 SEKUNDEN · MIT TON</div>
+
+      <button class="widget-open cine-btn" type="button" data-nova-play>
+        ANHÖREN <span class="arr" aria-hidden="true">→</span>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
      SCENE 11
 ========================= -->
 
@@ -4565,7 +4420,7 @@ footer strong{
   <div class="ig-copy">
 
   <div class="chapter-line reveal">
-    SCENE 11 / SOCIALCLIP.ART
+    SCENE 08 / SOCIALCLIP.ART
   </div>
 
   <h2 class="big-title reveal">
@@ -4652,7 +4507,7 @@ footer strong{
 <section class="contact" id="kontakt">
 
   <div class="chapter-line reveal">
-    SCENE 12 / YOUR STORY
+    SCENE 09 / YOUR STORY
   </div>
 
   <h2 class="big-title reveal">
@@ -4760,18 +4615,6 @@ footer strong{
 
   </div>
 
-</section>
-
-<!-- =========================
-     FINALE
-     Lichtpunkte im Raum ziehen sich zu
-     SOCIALCLIP zusammen. Maus oder Finger
-     wirbeln sie auf. Canvas, kein externes Skript.
-========================= -->
-
-<section class="particles" id="particles" aria-label="SocialClip">
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
-  <div class="particles-hint">BERÜHREN · BEWEGEN</div>
 </section>
 
 </main>
