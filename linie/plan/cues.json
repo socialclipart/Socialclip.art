@@ -1,0 +1,122 @@
+[
+{
+"t": 0.3,
+"type": "hover_or_small_ui",
+"desc": "dot appears"
+},
+{
+"t": 0.62,
+"type": "appear",
+"desc": "Jedes Business beginnt mit einer Linie"
+},
+{
+"t": 0.8,
+"type": "movement",
+"desc": "dot starts wandering"
+},
+{
+"t": 2.65,
+"type": "build_up",
+"dur": 1.15,
+"desc": "line traces Cafe"
+},
+{
+"t": 3.8,
+"type": "reveal",
+"desc": "Cafe revealed"
+},
+{
+"t": 4.05,
+"type": "appear",
+"desc": "Cafe label"
+},
+{
+"t": 6.3,
+"type": "movement",
+"desc": "line morphs into Friseur"
+},
+{
+"t": 6.55,
+"type": "build_up",
+"dur": 1.15,
+"desc": "line traces Friseur"
+},
+{
+"t": 7.7,
+"type": "reveal",
+"desc": "Friseur revealed"
+},
+{
+"t": 7.95,
+"type": "appear",
+"desc": "Friseur label"
+},
+{
+"t": 10.2,
+"type": "movement",
+"desc": "line morphs into Handwerk"
+},
+{
+"t": 10.45,
+"type": "build_up",
+"dur": 1.15,
+"desc": "line traces Handwerk"
+},
+{
+"t": 11.6,
+"type": "reveal",
+"desc": "Handwerk revealed"
+},
+{
+"t": 11.85,
+"type": "appear",
+"desc": "Handwerk label"
+},
+{
+"t": 14.11,
+"type": "movement",
+"desc": "line morphs into Floristik"
+},
+{
+"t": 14.36,
+"type": "build_up",
+"dur": 1.15,
+"desc": "line traces Floristik"
+},
+{
+"t": 15.51,
+"type": "reveal",
+"desc": "Floristik revealed"
+},
+{
+"t": 15.76,
+"type": "appear",
+"desc": "Floristik label"
+},
+{
+"t": 18.01,
+"type": "movement",
+"desc": "line morphs into Logo"
+},
+{
+"t": 18.26,
+"type": "build_up",
+"dur": 1.15,
+"desc": "line traces Logo"
+},
+{
+"t": 19.41,
+"type": "reveal",
+"desc": "Logo revealed"
+},
+{
+"t": 19.73,
+"type": "appear",
+"desc": "Logo label"
+},
+{
+"t": 20.41,
+"type": "appear",
+"desc": "SOCIALCLIP.ART"
+}
+]
