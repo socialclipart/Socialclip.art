@@ -1,0 +1,25 @@
+/* Laufschrift nach dem Start + das S setzt sich zusammen (wow.js) */
+
+/* Laufschrift */
+.kinetic{min-height:0;padding:50px 0;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.kinetic-row{display:flex;width:max-content;white-space:nowrap;will-change:transform}
+.kinetic-row span{font-size:clamp(56px,11vw,150px);font-weight:700;line-height:1.05;letter-spacing:var(--ls-title);padding-right:.35em}
+.kinetic-row span::after{content:"·";padding-left:.35em;color:#d2b894}
+.kinetic-row.outline span{color:transparent;-webkit-text-stroke:1px rgba(244,241,234,.55)}
+.kinetic-row.outline span::after{-webkit-text-stroke:0;color:#d2b894}
+.kinetic-row.filled span{color:var(--white)}
+
+/* Das S setzt sich zusammen */
+.assemble{height:210vh;min-height:0;padding:0;position:relative}
+.assemble-sticky{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;overflow:hidden}
+.assemble svg{width:min(42vw,250px);height:auto;overflow:visible}
+.assemble svg g{will-change:transform,opacity}
+.assemble-glow{position:absolute;width:60vmin;height:60vmin;border-radius:50%;background:radial-gradient(circle,rgba(230,208,173,.28),transparent 65%);opacity:0;transform:scale(.6);transition:opacity .8s ease,transform 1.2s ease;pointer-events:none}
+.assemble-text{position:absolute;bottom:14vh;left:0;right:0;text-align:center;opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
+.assemble-text strong{display:block;font-size:clamp(28px,5vw,56px);font-weight:700;letter-spacing:var(--ls-title);line-height:1}
+.assemble-text small{display:block;margin-top:12px;color:#938f87;font-size:var(--fs-label);letter-spacing:var(--ls-label)}
+.assemble.done .assemble-glow{opacity:1;transform:scale(1)}
+.assemble.done .assemble-text{opacity:1;transform:none}
+
+@media(max-width:800px){.kinetic{padding:34px 0}.assemble{height:190vh}.assemble svg{width:46vw}}
+@media(prefers-reduced-motion:reduce){.assemble{height:auto}.assemble-sticky{position:relative;height:80vh}.assemble-glow,.assemble-text{transition:none}}
