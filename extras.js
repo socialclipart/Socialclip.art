@@ -1,6 +1,6 @@
 /* Neue Effekte auf der Startseite (extras.css)
    1 Story-Leiste · 3 Tageszeit-Stimmung
-   4 3D-Leistungskarten · 5 Ideen-Generator · 6 Website in 10 Sekunden */
+   4 3D-Leistungskarten · 5 Ideen-Generator */
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const escape = text => String(text).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -51,7 +51,7 @@
   const hero = document.querySelector('.hero');
   if (hero) {
     const bar = document.createElement('div');
-    bar.className = 'stories reveal';
+    bar.className = 'stories';
     bar.setAttribute('role', 'list');
     bar.setAttribute('aria-label', 'Leistungen als Story');
     const seen = new Set((store.get('sc-stories') || '').split(',').filter(Boolean));
@@ -267,51 +267,4 @@
     showHits();
   }
 
-  /* ---------- 6 Website in 10 Sekunden ---------- */
-  const SERIF = 'Georgia, "Times New Roman", serif';
-  const TYPES = {
-    cafe: { layout: 'center', name: 'Café Lena', accent: '#9a6a3a', bg: '#efe4d2', ink: '#3a2a1c', font: SERIF, btnInk: '#fff8ec', eyebrow: 'ERLANGEN · ALTSTADT', head: ['Kaffee,', 'der bleibt.'], sub: 'Frisch geröstet, hausgemachter Kuchen und Platz für dich.', cta: 'TISCH RESERVIEREN', visual: '', tiles: ['Speisekarte', 'Frühstück', 'Anfahrt'], nav: 'KARTE · BUCHEN', navCta: 'Reservieren' },
-    friseur: { layout: 'split', name: 'Salon Mia', accent: '#c98b98', bg: '#f7ecee', ink: '#3b2a2f', btnInk: '#fff', eyebrow: 'HAIR & STYLE · ERLANGEN', head: ['Dein Look.', 'Dein Moment.'], sub: 'Schnitt, Farbe und Styling. Termin in 30 Sekunden online.', cta: 'TERMIN BUCHEN', visual: 'Neu: Balayage', tiles: ['Preise', 'Team', 'Termin'], nav: 'LEISTUNGEN · TEAM', navCta: 'Termin' },
-    handwerk: { layout: 'bold', name: 'Huber Haustechnik', accent: '#f39a1e', bg: '#1b1b1b', ink: '#f4f1ea', eyebrow: 'MEISTERBETRIEB · ERLANGEN', head: ['Sauber', 'gemacht.'], sub: 'Heizung, Sanitär und Bad aus einer Hand, pünktlich und fair.', cta: 'ANFRAGE STELLEN', visual: 'Neues Bad in 10 Tagen', tiles: ['Notdienst', 'Meisterbetrieb', 'Festpreis'], nav: 'LEISTUNGEN · PROJEKTE', navCta: 'Anrufen' },
-    praxis: { layout: 'clean', name: 'Praxis Dr. Weber', accent: '#2f9c95', bg: '#f3f8f8', ink: '#1d3534', btnInk: '#fff', eyebrow: 'GESUNDHEIT · ERLANGEN', head: ['In guten', 'Händen.'], sub: 'Ruhig, persönlich und mit Zeit für dich. Termine auch online.', cta: 'TERMIN ANFRAGEN', visual: 'Sprechzeiten', tiles: ['Unsere Praxis', 'Leistungen', 'Anfahrt'], nav: 'PRAXIS · TEAM', navCta: 'Termin' },
-    restaurant: { layout: 'full', name: 'Trattoria Roma', accent: '#e8a25a', bg: '#100906', ink: '#fbf3e8', font: SERIF, eyebrow: 'CUCINA ITALIANA · ERLANGEN', head: ['Wie in', 'Rom.'], sub: 'Hausgemachte Pasta, Holzofenpizza und Wein aus Italien.', cta: 'TISCH BUCHEN', visual: '', tiles: ['Speisekarte', 'Mittagstisch', 'Reservieren'], nav: 'KARTE · EVENTS', navCta: 'Buchen' },
-    laden: { layout: 'grid', name: 'Laden No. 7', accent: '#7c6cd8', bg: '#f5f3ee', ink: '#1f1d24', btnInk: '#fff', eyebrow: 'CONCEPT STORE · ERLANGEN', head: ['Schöne Dinge,', 'jede Woche neu.'], sub: '', cta: 'ALLE NEUHEITEN', visual: '', tiles: ['Vase „Ton“', 'Leinentasche', 'Duftkerze'], prices: ['39 €', '24 €', '18 €'], nav: 'SHOP · NEU', navCta: 'Warenkorb' }
-  };
-  const gen = document.querySelector('.gen');
-  if (gen) {
-    const nameInput = gen.querySelector('.gen-name');
-    const chips = gen.querySelector('.gen-chips');
-    const url = gen.querySelector('.gen-url');
-    const sites = gen.querySelectorAll('.gen-site');
-    let type = 'cafe';
-    const slug = text => text.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'deine-firma';
-    function build() {
-      const t = TYPES[type];
-      const name = nameInput.value.trim() || t.name;
-      url.textContent = `${slug(name)}.de`;
-      sites.forEach(site => {
-        site.dataset.layout = t.layout;
-        site.style.setProperty('--accent', t.accent);
-        site.style.setProperty('--bg', t.bg);
-        site.style.setProperty('--ink', t.ink);
-        site.style.setProperty('--font', t.font || 'inherit');
-        site.style.setProperty('--btn-ink', t.btnInk || '#141414');
-        site.innerHTML = `<div class="gs-nav" style="--i:0"><b>${escape(name)}</b><span>${t.nav}</span><em>${t.navCta}</em></div>
-          <div class="gs-visual" style="--i:1"><span>${t.visual}</span></div>
-          <div class="gs-hero" style="--i:2"><small>${t.eyebrow}</small><h4>${t.head[0]}<br><span>${t.head[1]}</span></h4>${t.sub ? `<p>${t.sub}</p>` : ''}<span class="gs-btn">${t.cta} →</span></div>
-          <div class="gs-tiles" style="--i:3">${t.tiles.map((x, i) => `<span${t.prices ? ` data-price="${t.prices[i]}"` : ''}>${x}</span>`).join('')}</div>`;
-      });
-    }
-    let typing = 0;
-    nameInput.addEventListener('input', () => { clearTimeout(typing); typing = setTimeout(build, 250); });
-    chips.addEventListener('click', event => {
-      const btn = event.target.closest('button');
-      if (!btn) return;
-      type = btn.dataset.type;
-      chips.querySelectorAll('button').forEach(b => { b.classList.toggle('on', b === btn); b.setAttribute('aria-checked', String(b === btn)); });
-      if (!nameInput.value.trim()) nameInput.placeholder = `z. B. ${TYPES[type].name}`;
-      build();
-    });
-    build();
-  }
 })();
