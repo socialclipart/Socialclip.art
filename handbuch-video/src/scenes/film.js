@@ -98,10 +98,10 @@ function drawSymbol(ctx, col, off = [[0, 0], [0, 0]]) {
 // =====================================================================
 const SAND = '#e6d0ad', PAPER = '#f3eee4', INK = '#1a1816', GREY = '#a29e96';
 async function initLate() {}
-const R1 = 3.0, R2 = 6.48, R3 = 20.41, R4 = 22.14;
+const R1 = 3.13, R2 = 6.59, R3 = 20.41, R4 = 22.14;
 
 export function shutter(t) {
-  const win = [[0.15, 0.9, .8], [1.75, 2.1, .6], [2.15, 3.0, .5], [2.95, 3.3, 1], [3.5, 4.8, 1], [6.2, 6.75, .5], [7.15, 7.7, .9],
+  const win = [[0.15, 0.9, .8], [1.75, 2.1, .6], [2.15, 3.0, .5], [3.08, 3.43, 1], [3.5, 4.8, 1], [6.31, 6.9, .5], [7.15, 7.7, .9],
     [8.4, 8.85, 1], [9.35, 9.8, 1], [10.3, 10.75, 1], [11.25, 11.7, 1], [12.45, 12.9, 1], [15.55, 16.6, .6], [16.65, 17.3, 1],
     [R3 - .03, R3 + .3, .8], [21.25, 22.3, 1], [23.2, 23.5, .5]];
   let s = 0; for (const [a, b, v] of win) if (t > a && t < b) s = Math.max(s, v); return s;
@@ -155,10 +155,10 @@ function scene1(ctx, t) {
   ctx.save(); ctx.translate(sx, sy);
   const drop = spring(P(t, .15, 1.15), 6, 10), out = inOutCubic(P(t, 3.5, 4.0));
   const cy = lerp(-520, 1010, drop) + out * 1300, cx = 540 - out * 400;
-  const sc = lerp(1, .9, inOutCubic(P(t, 2.8, 3.1)));
+  const sc = lerp(1, .9, inOutCubic(P(t, R1 - .25, R1 + .05)));
   ctx.save(); ctx.translate(cx, cy); ctx.rotate(lerp(-.14, -.025, drop) - out * .5); ctx.scale(sc, sc);
   ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 80; ctx.shadowOffsetY = 40; rr(ctx, -390, -350, 780, 700, 18); ctx.fillStyle = PAPER; ctx.fill(); ctx.shadowColor = 'transparent';
-  invoice(ctx, t, .62 * P(t, 2.8, 3.05));
+  invoice(ctx, t, .62 * P(t, R1 - .25, R1));
   ctx.restore();
   textBlock(ctx, [{ text: 'Was kostet', y: 330 }, { text: 'gutes Marketing?', y: 430, col: GREY }], t, .55, 2.8);
   // cursor strikes the total
@@ -230,7 +230,7 @@ function scene2(ctx, t) {
   if (open <= 0) {
     if (Math.abs(t - R2) < .6) glow(ctx, 0, 0, 760, .35 * (1 - Math.abs(t - R2) / .6), '255,226,190');
     ctx.rotate(c.rot); ctx.scale(c.s, c.s); tilt(ctx, c.ry);
-    drawCover(ctx, t, P(t, 6.2, 6.8)); badge(ctx, t, c);
+    drawCover(ctx, t, P(t, R2 - .28, R2 + .32)); badge(ctx, t, c);
   } else if (open < 1) {
     // the cover swings open around the spine and grows into the first page
     const pr = pageRect(t), sc = lerp(c.s, pr.w / 600, inOutCubic(open));
