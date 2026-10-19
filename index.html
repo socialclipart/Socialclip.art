@@ -2199,6 +2199,73 @@ section{
    Ergebnis und Anfrage rechts (sticky).
 ========================= */
 
+.handbook{
+  min-height:auto;
+}
+
+.handbook-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:center;
+  gap:60px;
+}
+
+.handbook-facts{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  list-style:none;
+  margin:32px 0 0;
+  padding:0;
+}
+
+.handbook-facts li{
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:6px 14px;
+  color:var(--soft);
+  font-size:var(--fs-small);
+}
+
+.handbook-price{
+  margin:34px 0 22px;
+  color:var(--soft);
+  font-size:var(--fs-small);
+}
+
+.handbook-price strong{
+  display:block;
+  color:#e6d0ad;
+  font-size:40px;
+  font-weight:500;
+  letter-spacing:-.04em;
+  line-height:1;
+  margin-bottom:6px;
+}
+
+.handbook-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.handbook-actions .cine-btn{
+  text-decoration:none;
+}
+
+.handbook-image img{
+  display:block;
+  width:100%;
+  height:auto;
+  -webkit-mask-image:radial-gradient(ellipse 58% 58% at 50% 50%,#000 70%,transparent 100%);
+  mask-image:radial-gradient(ellipse 58% 58% at 50% 50%,#000 70%,transparent 100%);
+}
+
+@media(max-width:900px){
+  .handbook-grid{grid-template-columns:1fr;gap:30px}
+  .handbook-image{order:-1;max-width:520px}
+}
+
 .check{
   min-height:auto;
 }
@@ -3695,7 +3762,7 @@ footer strong{
       <button class="cine-btn primary" type="button" data-open-builder data-menu-close>PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span></button>
       <a class="cine-btn" href="/ratgeber/">RATGEBER <span class="arr" aria-hidden="true">→</span></a>
     </div>
-    <a class="site-menu-shop" href="/marketing-handbuch/"><small>NEU · HANDBUCH ALS PDF</small><strong>Marketing wie die Profis</strong><span>Website, Logo und Social Media mit KI selbst erstellen.</span><em>27 € <span aria-hidden="true">→</span></em></a>
+    <a class="site-menu-shop" href="/marketing-handbuch/"><small>NEU · HANDBUCH ALS PDF</small><strong>Marketing wie die Profis</strong><span>Website, Logo und Social Media mit KI selbst erstellen.</span><em>14 € <span aria-hidden="true">→</span></em></a>
     <p class="site-menu-label">UNSERE LEISTUNGEN</p>
     <ul class="site-menu-list">
         <li><a href="/webdesign-erlangen/"><strong>Webdesign &amp; Websites</strong><span>Moderne Websites, die auf dem Handy überzeugen.</span><em>Mehr erfahren <span aria-hidden="true">↗</span></em></a></li>
@@ -4315,6 +4382,57 @@ footer strong{
       </button>
 
     </aside>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     BONUS / HANDBUCH
+     Verkauf des PDF-Handbuchs über Digistore24.
+========================= -->
+
+<section class="handbook" id="handbuch">
+
+  <div class="chapter-line reveal">
+    BONUS / DAS HANDBUCH
+  </div>
+
+  <div class="handbook-grid">
+
+    <div>
+
+      <h2 class="big-title reveal">
+        MACH ES<br>
+        <span>EINFACH</span><br>
+        SELBST.
+      </h2>
+
+      <p class="text reveal" style="margin-top:40px;">
+        Du willst deinen Auftritt lieber selbst aufbauen? In unserem Handbuch
+        „Marketing wie die Profis“ zeigen wir Schritt für Schritt, wie du
+        Website, Logo, Social Media, Google und Werbung mit KI selbst erstellst,
+        ohne Vorkenntnisse und ohne Agentur-Budget.
+      </p>
+
+      <ul class="handbook-facts reveal">
+        <li>PDF · 55 Seiten</li>
+        <li>60+ Prompts</li>
+        <li>Checklisten</li>
+        <li>30-Tage-Plan</li>
+      </ul>
+
+      <p class="handbook-price reveal"><strong>14 €</strong>einmalig · inkl. MwSt. · sofort als Download</p>
+
+      <div class="handbook-actions reveal">
+        <a class="cine-btn primary" href="/marketing-handbuch/">ZUM HANDBUCH <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+
+    </div>
+
+    <figure class="handbook-image reveal" style="margin:0;">
+      <img src="/marketing-handbuch/handbuch-vorschau.jpg" alt="Vorschau des Handbuchs Marketing wie die Profis" width="1200" height="1000" loading="lazy">
+    </figure>
 
   </div>
 
