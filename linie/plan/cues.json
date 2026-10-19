@@ -31,91 +31,91 @@
 "desc": "Cafe label"
 },
 {
-"t": 6.3,
+"t": 6.32,
 "type": "movement",
 "desc": "line morphs into Friseur"
 },
 {
-"t": 6.55,
+"t": 6.57,
 "type": "build_up",
 "dur": 1.15,
 "desc": "line traces Friseur"
 },
 {
-"t": 7.7,
+"t": 7.72,
 "type": "reveal",
 "desc": "Friseur revealed"
 },
 {
-"t": 7.95,
+"t": 7.97,
 "type": "appear",
 "desc": "Friseur label"
 },
 {
-"t": 10.2,
+"t": 10.24,
 "type": "movement",
 "desc": "line morphs into Handwerk"
 },
 {
-"t": 10.45,
+"t": 10.49,
 "type": "build_up",
-"dur": 1.15,
+"dur": 1.16,
 "desc": "line traces Handwerk"
 },
 {
-"t": 11.6,
+"t": 11.64,
 "type": "reveal",
 "desc": "Handwerk revealed"
 },
 {
-"t": 11.85,
+"t": 11.89,
 "type": "appear",
 "desc": "Handwerk label"
 },
 {
-"t": 14.11,
+"t": 14.18,
 "type": "movement",
 "desc": "line morphs into Floristik"
 },
 {
-"t": 14.36,
+"t": 14.43,
 "type": "build_up",
-"dur": 1.15,
+"dur": 1.14,
 "desc": "line traces Floristik"
 },
 {
-"t": 15.51,
+"t": 15.58,
 "type": "reveal",
 "desc": "Floristik revealed"
 },
 {
-"t": 15.76,
+"t": 15.83,
 "type": "appear",
 "desc": "Floristik label"
 },
 {
-"t": 18.01,
+"t": 18.1,
 "type": "movement",
 "desc": "line morphs into Logo"
 },
 {
-"t": 18.26,
+"t": 18.35,
 "type": "build_up",
 "dur": 1.15,
 "desc": "line traces Logo"
 },
 {
-"t": 19.41,
+"t": 19.5,
 "type": "reveal",
 "desc": "Logo revealed"
 },
 {
-"t": 19.73,
+"t": 19.82,
 "type": "appear",
 "desc": "Logo label"
 },
 {
-"t": 20.41,
+"t": 20.5,
 "type": "appear",
 "desc": "SOCIALCLIP.ART"
 }

@@ -98,7 +98,7 @@ function drawSymbol(ctx, col, off = [[0, 0], [0, 0]]) {
 // "Eine Linie" — one continuous line traces real photos, then becomes the logo
 // =====================================================================
 const SAND = '#e6d0ad';
-const P8 = 8 * 60 / 123;              // 8 beats of the track
+const P8 = 8 * 0.4906;                // 8 beats of the track (122.3 BPM, measured)
 const R0 = 3.8, RS = [0, 1, 2, 3, 4].map(k => R0 + k * P8); // reveal times (4 photos + logo)
 const SUBJ = [
   { key: 'cafe', img: '1-cafe', word: 'Café.', tag: '01 · GASTRONOMIE' },
