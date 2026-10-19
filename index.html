@@ -3618,7 +3618,7 @@ footer strong{
 @keyframes siteMenuIn{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
 .site-menu-head{display:flex;justify-content:space-between;align-items:center;padding:20px 25px;border-bottom:1px solid var(--line);color:#938f87;font-size:var(--fs-label);letter-spacing:var(--ls-label)}
 .site-menu-close{width:44px;height:44px;border:0;background:none;color:#fff;font-size:24px;cursor:pointer}
-.site-menu-actions{display:grid;gap:10px;padding:25px}
+.site-menu-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:25px}
 .site-menu-actions .cine-btn{justify-content:center;text-decoration:none}
 .site-menu-label{margin:0;padding:0 25px 10px;color:#d2b894;font-size:var(--fs-label);letter-spacing:var(--ls-label)}
 .site-menu-list{list-style:none;margin:0;padding:0 25px}
@@ -3687,6 +3687,7 @@ footer strong{
     </div>
     <div class="site-menu-actions">
       <button class="cine-btn primary" type="button" data-open-builder data-menu-close>PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span></button>
+      <a class="cine-btn" href="/ratgeber/">RATGEBER <span class="arr" aria-hidden="true">→</span></a>
     </div>
     <p class="site-menu-label">UNSERE LEISTUNGEN</p>
     <ul class="site-menu-list">
@@ -4938,6 +4939,7 @@ footer strong{
   </div>
 
   <div class="footer-legal">
+    <a href="ratgeber/">RATGEBER</a>
     <a href="impressum.html">IMPRESSUM</a>
     <a href="datenschutz.html">DATENSCHUTZ</a>
     <button class="memory-link" id="memoryLink" type="button" hidden></button>
