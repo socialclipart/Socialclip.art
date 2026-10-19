@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "motion-graphics-skill": {
+      "source": {
+        "source": "github",
+        "repo": "Miftahul-Islam-Efaz/Motion-graphics-skill"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "motion-video-director@motion-graphics-skill": true
+  }
+}
