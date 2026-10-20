@@ -1,5 +1,6 @@
-"""Piper-TTS (lokal, Stimme Thorsten, CC0): erzeugt pro Regel eine WAV + Satz-Zeitstempel.
-Aufruf: whisper-venv/bin/python -I tts_piper.py <script.json> <outdir>"""
+"""Piper-TTS (lokal): erzeugt pro Regel eine WAV + Satz-Zeitstempel.
+Aufruf: whisper-venv/bin/python -I tts_piper.py <script.json> <outdir> <model.onnx> [speaker_id]
+script.json: {"rules": [[[text, pause], ...], ...]}"""
 import json, sys, wave
 from pathlib import Path
 import numpy as np
@@ -7,9 +8,10 @@ from piper import PiperVoice, SynthesisConfig
 
 script, outdir = json.load(open(sys.argv[1])), Path(sys.argv[2])
 outdir.mkdir(parents=True, exist_ok=True)
-voice = PiperVoice.load('/root/.cache/motion-video-director/models/piper/de_DE-thorsten-high.onnx')
+voice = PiperVoice.load(sys.argv[3])
+spk = int(sys.argv[4]) if len(sys.argv) > 4 else None
 SR = voice.config.sample_rate
-cfg = SynthesisConfig(length_scale=1.12, noise_scale=0.6, noise_w_scale=0.75)
+cfg = SynthesisConfig(speaker_id=spk, length_scale=1.08, noise_scale=0.5, noise_w_scale=0.6)
 
 def trim(x, thr=200):
     idx = np.where(np.abs(x) > thr)[0]

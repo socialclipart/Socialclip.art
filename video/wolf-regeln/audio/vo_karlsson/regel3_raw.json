@@ -1,0 +1,81 @@
+{
+ "sr": 16000,
+ "duration": 28.683,
+ "sentences": [
+  {
+   "text": "Wolf-Regel Nummer drei:",
+   "a": 0.35,
+   "b": 1.774
+  },
+  {
+   "text": "Verkaufe nicht.",
+   "a": 2.124,
+   "b": 2.955
+  },
+  {
+   "text": "Lass sie fragen.",
+   "a": 3.255,
+   "b": 4.062
+  },
+  {
+   "text": "Jetzt kaufen!",
+   "a": 4.762,
+   "b": 5.648
+  },
+  {
+   "text": "Nur heute!",
+   "a": 5.798,
+   "b": 6.602
+  },
+  {
+   "text": "Minus fünfzig Prozent!",
+   "a": 6.752,
+   "b": 8.297
+  },
+  {
+   "text": "Wer ständig schreit, wird überhört.",
+   "a": 8.797,
+   "b": 10.677
+  },
+  {
+   "text": "Der Profi macht es leise.",
+   "a": 11.377,
+   "b": 12.859
+  },
+  {
+   "text": "Er zeigt, was er kann.",
+   "a": 13.159,
+   "b": 14.467
+  },
+  {
+   "text": "Er gibt Tipps, die wirklich helfen.",
+   "a": 14.717,
+   "b": 16.384
+  },
+  {
+   "text": "Er beweist es, Video für Video.",
+   "a": 16.634,
+   "b": 18.617
+  },
+  {
+   "text": "Und irgendwann kommt die Nachricht:",
+   "a": 19.217,
+   "b": 20.668
+  },
+  {
+   "text": "Was kostet das eigentlich?",
+   "a": 20.968,
+   "b": 22.674
+  },
+  {
+   "text": "Das ist der Moment, in dem du gewonnen hast.",
+   "a": 23.374,
+   "b": 25.711
+  },
+  {
+   "text": "Folge für Regel Nummer vier.",
+   "a": 26.611,
+   "b": 28.083
+  }
+ ]
+}

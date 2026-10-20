@@ -1,0 +1,81 @@
+{
+ "sr": 16000,
+ "duration": 29.048,
+ "sentences": [
+  {
+   "text": "Wolf-Regel Nummer fünf:",
+   "a": 0.35,
+   "b": 1.755
+  },
+  {
+   "text": "Zahlen lügen nicht.",
+   "a": 2.105,
+   "b": 3.13
+  },
+  {
+   "text": "Zehntausend Likes.",
+   "a": 3.83,
+   "b": 5.422
+  },
+  {
+   "text": "Fühlt sich großartig an.",
+   "a": 5.672,
+   "b": 7.067
+  },
+  {
+   "text": "Aber Likes bezahlen nicht deine Miete.",
+   "a": 7.517,
+   "b": 9.582
+  },
+  {
+   "text": "Anfragen tun es.",
+   "a": 10.282,
+   "b": 11.393
+  },
+  {
+   "text": "Termine tun es.",
+   "a": 11.593,
+   "b": 12.599
+  },
+  {
+   "text": "Kunden tun es.",
+   "a": 12.799,
+   "b": 13.748
+  },
+  {
+   "text": "Der Profi schaut nicht, was glänzt.",
+   "a": 14.448,
+   "b": 16.344
+  },
+  {
+   "text": "Er misst, was zählt.",
+   "a": 16.594,
+   "b": 17.945
+  },
+  {
+   "text": "Und das ist die letzte Regel:",
+   "a": 18.745,
+   "b": 20.49
+  },
+  {
+   "text": "Marketing ist kein Beliebtheitswettbewerb.",
+   "a": 20.84,
+   "b": 23.438
+  },
+  {
+   "text": "Es ist ein Geschäft.",
+   "a": 23.738,
+   "b": 24.667
+  },
+  {
+   "text": "Du willst, dass wir das für dich machen?",
+   "a": 25.567,
+   "b": 27.074
+  },
+  {
+   "text": "Link in der Bio.",
+   "a": 27.374,
+   "b": 28.448
+  }
+ ]
+}

@@ -1,0 +1,76 @@
+{
+ "sr": 16000,
+ "duration": 29.332,
+ "sentences": [
+  {
+   "text": "Wolf-Regel Nummer eins:",
+   "a": 0.35,
+   "b": 1.833
+  },
+  {
+   "text": "Rede nie über dein Produkt.",
+   "a": 2.183,
+   "b": 3.784
+  },
+  {
+   "text": "Die meisten Unternehmen posten:",
+   "a": 4.484,
+   "b": 6.165
+  },
+  {
+   "text": "Unser neues Modell.",
+   "a": 6.415,
+   "b": 7.674
+  },
+  {
+   "text": "Jetzt mit noch mehr Leistung.",
+   "a": 7.874,
+   "b": 9.869
+  },
+  {
+   "text": "Interessiert keinen.",
+   "a": 10.369,
+   "b": 11.576
+  },
+  {
+   "text": "Denn keiner will einen Bohrer.",
+   "a": 12.276,
+   "b": 14.099
+  },
+  {
+   "text": "Er will ein Loch in der Wand.",
+   "a": 14.399,
+   "b": 15.673
+  },
+  {
+   "text": "Und eigentlich will er nicht mal das Loch.",
+   "a": 16.173,
+   "b": 17.9
+  },
+  {
+   "text": "Er will das Bild, das daran hängt.",
+   "a": 18.2,
+   "b": 19.837
+  },
+  {
+   "text": "Das Zuhause, das sich fertig anfühlt.",
+   "a": 20.087,
+   "b": 22.19
+  },
+  {
+   "text": "Also hör auf, Bohrer zu verkaufen.",
+   "a": 22.79,
+   "b": 24.689
+  },
+  {
+   "text": "Verkauf das Gefühl.",
+   "a": 24.989,
+   "b": 26.238
+  },
+  {
+   "text": "Folge für Regel Nummer zwei.",
+   "a": 27.138,
+   "b": 28.732
+  }
+ ]
+}

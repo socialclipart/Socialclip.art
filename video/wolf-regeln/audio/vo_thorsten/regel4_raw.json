@@ -1,0 +1,81 @@
+{
+ "sr": 22050,
+ "duration": 25.909,
+ "sentences": [
+  {
+   "text": "Wolf-Regel Nummer vier:",
+   "a": 0.35,
+   "b": 1.61
+  },
+  {
+   "text": "Konstanz schlägt Talent.",
+   "a": 1.96,
+   "b": 3.129
+  },
+  {
+   "text": "Ein perfektes Video im Monat?",
+   "a": 3.829,
+   "b": 5.584
+  },
+  {
+   "text": "Verliert.",
+   "a": 6.034,
+   "b": 6.543
+  },
+  {
+   "text": "Gegen drei gute Videos pro Woche.",
+   "a": 6.843,
+   "b": 8.421
+  },
+  {
+   "text": "Jedes Mal.",
+   "a": 8.671,
+   "b": 9.364
+  },
+  {
+   "text": "Der Algorithmus belohnt nicht den, der am besten ist.",
+   "a": 10.064,
+   "b": 12.708
+  },
+  {
+   "text": "Er belohnt den, der dranbleibt.",
+   "a": 13.008,
+   "b": 14.647
+  },
+  {
+   "text": "Die Erfolgreichen sind nicht talentierter als du.",
+   "a": 15.247,
+   "b": 17.661
+  },
+  {
+   "text": "Sie haben nur nicht aufgehört.",
+   "a": 18.011,
+   "b": 19.241
+  },
+  {
+   "text": "Also:",
+   "a": 19.941,
+   "b": 20.382
+  },
+  {
+   "text": "Plan machen.",
+   "a": 20.582,
+   "b": 21.278
+  },
+  {
+   "text": "Posten.",
+   "a": 21.478,
+   "b": 21.967
+  },
+  {
+   "text": "Wiederholen.",
+   "a": 22.167,
+   "b": 22.889
+  },
+  {
+   "text": "Folge für Regel Nummer fünf.",
+   "a": 23.789,
+   "b": 25.31
+  }
+ ]
+}
