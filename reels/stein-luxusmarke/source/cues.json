@@ -1,0 +1,370 @@
+{
+ "cues": [
+  {
+   "t": 0.33,
+   "file": "impactPlank_medium_000.ogg",
+   "gain_db": -4,
+   "align": "onset",
+   "desc": "stone hits table (wood body)",
+   "src": "dl/impact-sounds/Audio/impactPlank_medium_000.ogg"
+  },
+  {
+   "t": 0.33,
+   "file": "impactGeneric_light_000.ogg",
+   "gain_db": -6,
+   "align": "onset",
+   "desc": "stone hits table (click)",
+   "src": "dl/impact-sounds/Audio/impactGeneric_light_000.ogg"
+  },
+  {
+   "t": 0.33,
+   "file": "impactMining_000.ogg",
+   "gain_db": -16,
+   "align": "onset",
+   "desc": "stone hits table (stone grit)",
+   "src": "dl/impact-sounds/Audio/impactMining_000.ogg"
+  },
+  {
+   "t": 0.486,
+   "file": "impactGeneric_light_002.ogg",
+   "gain_db": -15,
+   "align": "onset",
+   "desc": "small bounce",
+   "src": "dl/impact-sounds/Audio/impactGeneric_light_002.ogg"
+  },
+  {
+   "t": 3.28,
+   "file": "click.ogg",
+   "gain_db": -9,
+   "align": "onset",
+   "desc": "cursor selects stone",
+   "src": "sound-effects/sfx/kit/click.ogg"
+  },
+  {
+   "t": 3.31,
+   "file": "tick.ogg",
+   "gain_db": -14,
+   "align": "onset",
+   "desc": "selection box",
+   "src": "sound-effects/sfx/kit/tick.ogg"
+  },
+  {
+   "t": 3.74,
+   "file": "fs-702773-swipe-wav.ogg",
+   "gain_db": -16,
+   "align": "onset",
+   "desc": "grid draws in",
+   "src": "sound-effects/sfx/transition/fs-702773-swipe-wav.ogg"
+  },
+  {
+   "t": 4.21,
+   "file": "kenney-interface-click-001.ogg",
+   "gain_db": -10,
+   "align": "onset",
+   "desc": "click black swatch",
+   "src": "sound-effects/sfx/click/kenney-interface-click-001.ogg"
+  },
+  {
+   "t": 4.21,
+   "file": "whoosh.ogg",
+   "gain_db": -9,
+   "align": "onset",
+   "desc": "black floods frame",
+   "src": "sound-effects/sfx/kit/whoosh.ogg"
+  },
+  {
+   "t": 4.25,
+   "file": "kenney-impact-impactsoft-heavy-000.ogg",
+   "gain_db": -14,
+   "align": "onset",
+   "desc": "flood weight",
+   "src": "sound-effects/sfx/impact/kenney-impact-impactsoft-heavy-000.ogg"
+  },
+  {
+   "t": 4.44,
+   "file": "kenney-interface-pluck-001.ogg",
+   "gain_db": -12,
+   "align": "onset",
+   "desc": "champagne swatch",
+   "src": "sound-effects/sfx/pop/kenney-interface-pluck-001.ogg"
+  },
+  {
+   "t": 4.67,
+   "file": "kenney-interface-pluck-002.ogg",
+   "gain_db": -12,
+   "align": "onset",
+   "desc": "warm white swatch",
+   "src": "sound-effects/sfx/pop/kenney-interface-pluck-002.ogg"
+  },
+  {
+   "t": 5.14,
+   "file": "kenney-interface-select-001.ogg",
+   "gain_db": -13,
+   "align": "onset",
+   "desc": "letter S",
+   "src": "sound-effects/sfx/click/kenney-interface-select-001.ogg"
+  },
+  {
+   "t": 5.256,
+   "file": "kenney-interface-select-002.ogg",
+   "gain_db": -13,
+   "align": "onset",
+   "desc": "letter T",
+   "src": "sound-effects/sfx/click/kenney-interface-select-002.ogg"
+  },
+  {
+   "t": 5.372,
+   "file": "kenney-interface-select-003.ogg",
+   "gain_db": -13,
+   "align": "onset",
+   "desc": "letter O",
+   "src": "sound-effects/sfx/click/kenney-interface-select-003.ogg"
+  },
+  {
+   "t": 5.488,
+   "file": "kenney-interface-select-001.ogg",
+   "gain_db": -13,
+   "align": "onset",
+   "desc": "letter N",
+   "src": "sound-effects/sfx/click/kenney-interface-select-001.ogg"
+  },
+  {
+   "t": 5.604,
+   "file": "kenney-interface-select-002.ogg",
+   "gain_db": -12,
+   "align": "onset",
+   "desc": "letter E",
+   "src": "sound-effects/sfx/click/kenney-interface-select-002.ogg"
+  },
+  {
+   "t": 5.62,
+   "file": "kenney-interface-glass-001.ogg",
+   "gain_db": -13,
+   "align": "onset",
+   "desc": "wordmark locks",
+   "src": "sound-effects/sfx/ding/kenney-interface-glass-001.ogg"
+  },
+  {
+   "t": 6.05,
+   "file": "fs810485.ogg",
+   "gain_db": -9,
+   "align": "peak",
+   "desc": "podium rises",
+   "src": "sound-effects/sfx/whoosh/fs810485.ogg"
+  },
+  {
+   "t": 6.47,
+   "file": "kenney-impact-impactsoft-heavy-001.ogg",
+   "gain_db": -10,
+   "align": "onset",
+   "desc": "podium meets stone",
+   "src": "sound-effects/sfx/impact/kenney-impact-impactsoft-heavy-001.ogg"
+  },
+  {
+   "t": 6.6,
+   "file": "fs-264777-swoosh.ogg",
+   "gain_db": -20,
+   "align": "onset",
+   "desc": "camera orbit",
+   "src": "sound-effects/sfx/whoosh/fs-264777-swoosh.ogg"
+  },
+  {
+   "t": 8.02,
+   "file": "1530.mp3",
+   "gain_db": -6,
+   "align": "onset",
+   "desc": "box net slides in",
+   "src": "dl/mixkit/1530.mp3"
+  },
+  {
+   "t": 8.39,
+   "file": "bookFlip1.ogg",
+   "gain_db": -4,
+   "align": "peak",
+   "desc": "front flap folds",
+   "src": "dl/rpg-audio/Audio/bookFlip1.ogg"
+  },
+  {
+   "t": 8.62,
+   "file": "bookFlip2.ogg",
+   "gain_db": -4,
+   "align": "peak",
+   "desc": "right flap",
+   "src": "dl/rpg-audio/Audio/bookFlip2.ogg"
+  },
+  {
+   "t": 8.85,
+   "file": "bookFlip3.ogg",
+   "gain_db": -7,
+   "align": "peak",
+   "desc": "back flap",
+   "src": "dl/rpg-audio/Audio/bookFlip3.ogg"
+  },
+  {
+   "t": 9.08,
+   "file": "bookFlip1.ogg",
+   "gain_db": -4,
+   "align": "peak",
+   "desc": "left flap",
+   "src": "dl/rpg-audio/Audio/bookFlip1.ogg"
+  },
+  {
+   "t": 9.45,
+   "file": "fs-816262-broomstick-whoosh-3-quiet-okm1.ogg",
+   "gain_db": -10,
+   "align": "onset",
+   "desc": "lid descends",
+   "src": "sound-effects/sfx/transition/fs-816262-broomstick-whoosh-3-quiet-okm1.ogg"
+  },
+  {
+   "t": 9.78,
+   "file": "bookPlace1.ogg",
+   "gain_db": -8,
+   "align": "onset",
+   "desc": "lid closes",
+   "src": "dl/rpg-audio/Audio/bookPlace1.ogg"
+  },
+  {
+   "t": 9.78,
+   "file": "kenney-impact-impactsoft-heavy-000.ogg",
+   "gain_db": -15,
+   "align": "onset",
+   "desc": "lid weight",
+   "src": "sound-effects/sfx/impact/kenney-impact-impactsoft-heavy-000.ogg"
+  },
+  {
+   "t": 9.92,
+   "file": "fs-786514-swoosh-v2.ogg",
+   "gain_db": -14,
+   "align": "onset",
+   "desc": "website slides up",
+   "src": "sound-effects/sfx/transition/fs-786514-swoosh-v2.ogg"
+  },
+  {
+   "t": 10.4,
+   "file": "kenney-interface-scroll-001.ogg",
+   "gain_db": -15,
+   "align": "onset",
+   "desc": "scroll",
+   "src": "sound-effects/sfx/transition/kenney-interface-scroll-001.ogg"
+  },
+  {
+   "t": 10.7,
+   "file": "kenney-interface-scroll-002.ogg",
+   "gain_db": -17,
+   "align": "onset",
+   "desc": "scroll",
+   "src": "sound-effects/sfx/transition/kenney-interface-scroll-002.ogg"
+  },
+  {
+   "t": 11.0,
+   "file": "kenney-interface-scroll-001.ogg",
+   "gain_db": -20,
+   "align": "onset",
+   "desc": "scroll",
+   "src": "sound-effects/sfx/transition/kenney-interface-scroll-001.ogg"
+  },
+  {
+   "t": 11.64,
+   "file": "click.ogg",
+   "gain_db": -8,
+   "align": "onset",
+   "desc": "add to cart click",
+   "src": "sound-effects/sfx/kit/click.ogg"
+  },
+  {
+   "t": 11.7,
+   "file": "kenney-interface-confirmation-001.ogg",
+   "gain_db": -13,
+   "align": "onset",
+   "desc": "added",
+   "src": "sound-effects/sfx/ding/kenney-interface-confirmation-001.ogg"
+  },
+  {
+   "t": 11.94,
+   "file": "fs830856.ogg",
+   "gain_db": -10,
+   "align": "onset",
+   "desc": "website drops away",
+   "src": "sound-effects/sfx/whoosh/fs830856.ogg"
+  },
+  {
+   "t": 12.57,
+   "file": "fs-177242-cinematic-impact.ogg",
+   "gain_db": -14,
+   "align": "onset",
+   "desc": "Millionen Jahre",
+   "src": "sound-effects/sfx/impact/fs-177242-cinematic-impact.ogg"
+  },
+  {
+   "t": 14.0,
+   "file": "riser.ogg",
+   "gain_db": -12,
+   "align": "peak",
+   "desc": "build into the hit",
+   "src": "sound-effects/sfx/kit/riser.ogg"
+  },
+  {
+   "t": 14.0,
+   "file": "fs-222517-dramatic-hit.ogg",
+   "gain_db": -8,
+   "align": "onset",
+   "desc": "campaign hit",
+   "src": "sound-effects/sfx/impact/fs-222517-dramatic-hit.ogg"
+  },
+  {
+   "t": 14.46,
+   "file": "fs-349504-triangle-open-04.ogg",
+   "gain_db": -20,
+   "align": "onset",
+   "desc": "glint",
+   "src": "sound-effects/sfx/ding/fs-349504-triangle-open-04.ogg"
+  },
+  {
+   "t": 15.39,
+   "file": "kenney-interface-glass-002.ogg",
+   "gain_db": -21,
+   "align": "onset",
+   "desc": "glint",
+   "src": "sound-effects/sfx/ding/kenney-interface-glass-002.ogg"
+  },
+  {
+   "t": 16.31,
+   "file": "kenney-interface-glass-001.ogg",
+   "gain_db": -21,
+   "align": "onset",
+   "desc": "glint",
+   "src": "sound-effects/sfx/ding/kenney-interface-glass-001.ogg"
+  },
+  {
+   "t": 18.55,
+   "file": "kenney-interface-pluck-001.ogg",
+   "gain_db": -13,
+   "align": "onset",
+   "desc": "question pops",
+   "src": "sound-effects/sfx/pop/kenney-interface-pluck-001.ogg"
+  }
+ ],
+ "vo": [
+  [
+   0.48,
+   "vo1.wav"
+  ],
+  [
+   17.3,
+   "vo2.wav"
+  ]
+ ],
+ "music_segments": [
+  [
+   3.0,
+   3.68,
+   11.0
+  ],
+  [
+   14.0,
+   29.618,
+   3.0
+  ]
+ ]
+}
