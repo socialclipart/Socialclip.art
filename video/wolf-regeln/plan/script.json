@@ -2,7 +2,7 @@
  "rules": [
   [
    [
-    "Wolf-Regel Nummer eins:",
+    "Wolfs-Regel Nummer eins:",
     0.35
    ],
    [
@@ -22,7 +22,7 @@
     0.5
    ],
    [
-    "Interessiert keinen.",
+    "Das interessiert keinen.",
     0.7
    ],
    [
@@ -54,13 +54,13 @@
     0.9
    ],
    [
-    "Folge für Regel Nummer zwei.",
+    "Folge für Wolfs-Regel Nummer zwei.",
     0.2
    ]
   ],
   [
    [
-    "Wolf-Regel Nummer zwei:",
+    "Wolfs-Regel Nummer zwei:",
     0.35
    ],
    [
@@ -112,13 +112,13 @@
     0.9
    ],
    [
-    "Folge für Regel Nummer drei.",
+    "Folge für Wolfs-Regel Nummer drei.",
     0.2
    ]
   ],
   [
    [
-    "Wolf-Regel Nummer drei:",
+    "Wolfs-Regel Nummer drei:",
     0.35
    ],
    [
@@ -174,13 +174,13 @@
     0.9
    ],
    [
-    "Folge für Regel Nummer vier.",
+    "Folge für Wolfs-Regel Nummer vier.",
     0.2
    ]
   ],
   [
    [
-    "Wolf-Regel Nummer vier:",
+    "Wolfs-Regel Nummer vier:",
     0.35
    ],
    [
@@ -224,7 +224,7 @@
     0.2
    ],
    [
-    "Plan machen.",
+    "Einen Plan machen.",
     0.2
    ],
    [
@@ -236,13 +236,13 @@
     0.9
    ],
    [
-    "Folge für Regel Nummer fünf.",
+    "Folge für Wolfs-Regel Nummer fünf.",
     0.2
    ]
   ],
   [
    [
-    "Wolf-Regel Nummer fünf:",
+    "Wolfs-Regel Nummer fünf:",
     0.35
    ],
    [
@@ -250,7 +250,7 @@
     0.7
    ],
    [
-    "Zehntausend Likes.",
+    "Zehntausend Leiks.",
     0.25
    ],
    [
@@ -258,7 +258,7 @@
     0.45
    ],
    [
-    "Aber Likes bezahlen nicht deine Miete.",
+    "Aber Leiks bezahlen nicht deine Miete.",
     0.7
    ],
    [
@@ -282,11 +282,11 @@
     0.8
    ],
    [
-    "Und das ist die letzte Regel:",
+    "Und das ist die letzte Wolfs-Regel:",
     0.35
    ],
    [
-    "Marketing ist kein Beliebtheitswettbewerb.",
+    "Marketing ist kein Beliebtheits-Wettbewerb.",
     0.3
    ],
    [
@@ -294,11 +294,11 @@
     0.9
    ],
    [
-    "Du willst, dass wir das für dich machen?",
+    "Willst du, dass wir das für dich machen?",
     0.3
    ],
    [
-    "Link in der Bio.",
+    "Link in der Bi-o.",
     0.2
    ]
   ]

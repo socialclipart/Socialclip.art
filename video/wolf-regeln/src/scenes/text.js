@@ -171,7 +171,7 @@ export function draw(ctx, t, { W, TL }) {
       }
     } else {
       const ask = L.find(l => l.fx === 'outro'), cta = L.find(l => l.fx === 'cta');
-      kinetic(ctx, { ...ask, show: 'Du willst, dass wir das|*für dich* machen?' }, t, W, 1110, { size: 78, font: SERIF, weight: 700 });
+      kinetic(ctx, { ...ask, show: 'Willst du, dass wir das|*für dich* machen?' }, t, W, 1110, { size: 78, font: SERIF, weight: 700 });
       const fk = easeOutBack(prog(t, cta.a - .05, cta.a + .3), 2);
       if (fk > 0) {
         ctx.save(); ctx.translate(W / 2, 1420); ctx.scale(fk, fk);

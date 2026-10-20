@@ -1,76 +1,76 @@
 {
  "sr": 22050,
- "duration": 26.431,
+ "duration": 26.934,
  "sentences": [
   {
-   "text": "Wolf-Regel Nummer eins:",
+   "text": "Wolfs-Regel Nummer eins:",
    "a": 0.35,
-   "b": 1.61
+   "b": 1.699
   },
   {
    "text": "Rede nie über dein Produkt.",
-   "a": 1.96,
-   "b": 3.171
+   "a": 2.049,
+   "b": 3.325
   },
   {
    "text": "Die meisten Unternehmen posten:",
-   "a": 3.871,
-   "b": 5.547
+   "a": 4.025,
+   "b": 5.611
   },
   {
    "text": "Unser neues Modell.",
-   "a": 5.797,
-   "b": 6.801
+   "a": 5.861,
+   "b": 6.857
   },
   {
    "text": "Jetzt mit noch mehr Leistung.",
-   "a": 7.001,
-   "b": 8.157
+   "a": 7.057,
+   "b": 8.208
   },
   {
-   "text": "Interessiert keinen.",
-   "a": 8.657,
-   "b": 9.527
+   "text": "Das interessiert keinen.",
+   "a": 8.708,
+   "b": 9.715
   },
   {
    "text": "Denn keiner will einen Bohrer.",
-   "a": 10.227,
-   "b": 11.572
+   "a": 10.415,
+   "b": 11.693
   },
   {
    "text": "Er will ein Loch in der Wand.",
-   "a": 11.872,
-   "b": 13.051
+   "a": 11.993,
+   "b": 13.22
   },
   {
    "text": "Und eigentlich will er nicht mal das Loch.",
-   "a": 13.551,
-   "b": 15.086
+   "a": 13.72,
+   "b": 15.207
   },
   {
    "text": "Er will das Bild, das daran hängt.",
-   "a": 15.386,
-   "b": 17.079
+   "a": 15.507,
+   "b": 17.18
   },
   {
    "text": "Das Zuhause, das sich fertig anfühlt.",
-   "a": 17.329,
-   "b": 19.538
+   "a": 17.43,
+   "b": 19.55
   },
   {
    "text": "Also hör auf, Bohrer zu verkaufen.",
-   "a": 20.138,
-   "b": 22.133
+   "a": 20.15,
+   "b": 22.207
   },
   {
    "text": "Verkauf das Gefühl.",
-   "a": 22.433,
-   "b": 23.464
+   "a": 22.507,
+   "b": 23.512
   },
   {
-   "text": "Folge für Regel Nummer zwei.",
-   "a": 24.364,
-   "b": 25.832
+   "text": "Folge für Wolfs-Regel Nummer zwei.",
+   "a": 24.412,
+   "b": 26.334
   }
  ]
 }

@@ -103,7 +103,7 @@ Der Profi schaut nicht, was glänzt. Er misst, was zählt.
 Und das ist die letzte Regel:
 Marketing ist kein Beliebtheitswettbewerb. Es ist ein Geschäft.
 
-Du willst, dass wir das für dich machen?
+Willst du, dass wir das für dich machen?
 👉 Link in der Bio oder schreib uns „WOLF“ per DM.
 
 #wolfregeln #socialmediamarketing #marketing #marketingtipps #contentmarketing #onlinemarketing #instagramtipps #reelstipps #unternehmer #selbstständig #kmu #verkaufen #socialclipart

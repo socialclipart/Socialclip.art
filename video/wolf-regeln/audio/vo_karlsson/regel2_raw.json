@@ -1,76 +1,76 @@
 {
  "sr": 16000,
- "duration": 28.268,
+ "duration": 28.959,
  "sentences": [
   {
-   "text": "Wolf-Regel Nummer zwei:",
+   "text": "Wolfs-Regel Nummer zwei:",
    "a": 0.35,
-   "b": 1.778
+   "b": 1.867
   },
   {
    "text": "Du hast zwei Sekunden.",
-   "a": 2.128,
-   "b": 3.386
+   "a": 2.217,
+   "b": 3.54
   },
   {
    "text": "Nicht zehn.",
-   "a": 3.986,
-   "b": 4.663
+   "a": 4.14,
+   "b": 4.883
   },
   {
    "text": "Nicht fünf.",
-   "a": 4.913,
-   "b": 5.62
+   "a": 5.133,
+   "b": 5.723
   },
   {
    "text": "Zwei.",
-   "a": 5.92,
-   "b": 6.358
+   "a": 6.023,
+   "b": 6.538
   },
   {
    "text": "Wenn dein Video anfängt mit:",
-   "a": 7.058,
-   "b": 8.94
+   "a": 7.238,
+   "b": 9.329
   },
   {
    "text": "Hallo, ich bin der Thomas, und heute zeige ich euch",
-   "a": 9.14,
-   "b": 13.619
+   "a": 9.529,
+   "b": 14.124
   },
   {
    "text": "ist der Daumen schon weg.",
-   "a": 13.969,
-   "b": 15.034
+   "a": 14.474,
+   "b": 15.537
   },
   {
    "text": "Der Profi startet mit dem Ergebnis.",
-   "a": 15.734,
-   "b": 18.249
+   "a": 16.237,
+   "b": 18.691
   },
   {
    "text": "Mit der Überraschung.",
-   "a": 18.499,
-   "b": 19.534
+   "a": 18.941,
+   "b": 19.905
   },
   {
    "text": "Mit dem Satz, bei dem man nicht weiterwischen kann.",
-   "a": 19.784,
-   "b": 22.304
+   "a": 20.155,
+   "b": 22.495
   },
   {
    "text": "Erst der Haken.",
-   "a": 22.904,
-   "b": 23.76
+   "a": 23.095,
+   "b": 24.044
   },
   {
    "text": "Dann die Geschichte.",
-   "a": 24.06,
-   "b": 25.112
+   "a": 24.344,
+   "b": 25.538
   },
   {
-   "text": "Folge für Regel Nummer drei.",
-   "a": 26.012,
-   "b": 27.668
+   "text": "Folge für Wolfs-Regel Nummer drei.",
+   "a": 26.438,
+   "b": 28.359
   }
  ]
 }

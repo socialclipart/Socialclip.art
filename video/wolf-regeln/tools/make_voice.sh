@@ -2,7 +2,7 @@
 # TTS (Piper) für beide Stimmen + Nachbearbeitung + src/timing.js. Aufruf aus dem Projektordner.
 set -euo pipefail
 V=/root/.cache/motion-video-director/whisper-venv/bin/python; M=/root/.cache/motion-video-director/models/piper
-node -e "import('./src/rules.js').then(m=>require('fs').writeFileSync('plan/script.json',JSON.stringify({rules:m.RULES.map(r=>r.lines.map(l=>[l.say,l.pause]))},null,1)))"
+node -e "import('./src/rules.js').then(m=>require('fs').writeFileSync('plan/script.json',JSON.stringify({rules:m.RULES.map(r=>r.lines.map(l=>[l.tts||l.say,l.pause]))},null,1)))"
 $V -I tools/tts_piper.py plan/script.json audio/vo_karlsson $M/de_DE-karlsson-low.onnx
 $V -I tools/tts_piper.py plan/script.json audio/vo_thorsten $M/de_DE-thorsten-high.onnx
 for n in 1 2 3 4 5; do

@@ -1,81 +1,81 @@
 {
  "sr": 22050,
- "duration": 26.543,
+ "duration": 27.153,
  "sentences": [
   {
-   "text": "Wolf-Regel Nummer fünf:",
+   "text": "Wolfs-Regel Nummer fünf:",
    "a": 0.35,
-   "b": 1.699
+   "b": 1.658
   },
   {
    "text": "Zahlen lügen nicht.",
-   "a": 2.049,
-   "b": 3.009
+   "a": 2.008,
+   "b": 3.0
   },
   {
-   "text": "Zehntausend Likes.",
-   "a": 3.709,
-   "b": 4.833
+   "text": "Zehntausend Leiks.",
+   "a": 3.7,
+   "b": 4.926
   },
   {
    "text": "Fühlt sich großartig an.",
-   "a": 5.083,
-   "b": 6.356
+   "a": 5.176,
+   "b": 6.511
   },
   {
-   "text": "Aber Likes bezahlen nicht deine Miete.",
-   "a": 6.806,
-   "b": 8.553
+   "text": "Aber Leiks bezahlen nicht deine Miete.",
+   "a": 6.961,
+   "b": 8.67
   },
   {
    "text": "Anfragen tun es.",
-   "a": 9.253,
-   "b": 10.288
+   "a": 9.37,
+   "b": 10.428
   },
   {
    "text": "Termine tun es.",
-   "a": 10.488,
-   "b": 11.376
+   "a": 10.628,
+   "b": 11.549
   },
   {
    "text": "Kunden tun es.",
-   "a": 11.576,
-   "b": 12.464
+   "a": 11.749,
+   "b": 12.63
   },
   {
    "text": "Der Profi schaut nicht, was glänzt.",
-   "a": 13.164,
-   "b": 15.043
+   "a": 13.33,
+   "b": 15.278
   },
   {
    "text": "Er misst, was zählt.",
-   "a": 15.293,
-   "b": 16.52
+   "a": 15.528,
+   "b": 16.821
   },
   {
-   "text": "Und das ist die letzte Regel:",
-   "a": 17.32,
-   "b": 18.62
+   "text": "Und das ist die letzte Wolfs-Regel:",
+   "a": 17.621,
+   "b": 19.291
   },
   {
-   "text": "Marketing ist kein Beliebtheitswettbewerb.",
-   "a": 18.97,
-   "b": 21.154
+   "text": "Marketing ist kein Beliebtheits-Wettbewerb.",
+   "a": 19.641,
+   "b": 21.763
   },
   {
    "text": "Es ist ein Geschäft.",
-   "a": 21.454,
-   "b": 22.399
+   "a": 22.063,
+   "b": 22.993
   },
   {
-   "text": "Du willst, dass wir das für dich machen?",
-   "a": 23.299,
-   "b": 24.74
+   "text": "Willst du, dass wir das für dich machen?",
+   "a": 23.893,
+   "b": 25.434
   },
   {
-   "text": "Link in der Bio.",
-   "a": 25.04,
-   "b": 25.943
+   "text": "Link in der Bi-o.",
+   "a": 25.734,
+   "b": 26.553
   }
  ]
 }
