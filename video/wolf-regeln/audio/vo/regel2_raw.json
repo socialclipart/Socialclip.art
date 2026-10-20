@@ -1,0 +1,81 @@
+{
+ "sr": 22050,
+ "duration": 25.942,
+ "sentences": [
+  {
+   "text": "Wolf-Regel Nummer zwei:",
+   "a": 0.35,
+   "b": 1.686
+  },
+  {
+   "text": "Du hast zwei Sekunden.",
+   "a": 2.036,
+   "b": 3.272
+  },
+  {
+   "text": "Nicht zehn.",
+   "a": 3.872,
+   "b": 4.427
+  },
+  {
+   "text": "Nicht fünf.",
+   "a": 4.677,
+   "b": 5.271
+  },
+  {
+   "text": "Zwei.",
+   "a": 5.571,
+   "b": 6.07
+  },
+  {
+   "text": "Wenn dein Video anfängt mit:",
+   "a": 6.77,
+   "b": 8.185
+  },
+  {
+   "text": "Hallo, ich bin der Thomas, und heute zeige ich euch",
+   "a": 8.385,
+   "b": 11.532
+  },
+  {
+   "text": "ist der Daumen schon weg.",
+   "a": 11.882,
+   "b": 13.021
+  },
+  {
+   "text": "Der Profi startet mit dem Ergebnis.",
+   "a": 13.721,
+   "b": 15.617
+  },
+  {
+   "text": "Mit der Überraschung.",
+   "a": 15.867,
+   "b": 16.761
+  },
+  {
+   "text": "Mit dem Satz, bei dem man nicht weiterwischen kann.",
+   "a": 17.011,
+   "b": 19.267
+  },
+  {
+   "text": "Erst der Haken.",
+   "a": 19.867,
+   "b": 20.597
+  },
+  {
+   "text": "Dann die Geschichte.",
+   "a": 20.897,
+   "b": 21.764
+  },
+  {
+   "text": "Folge für Regel Nummer drei.",
+   "a": 22.664,
+   "b": 24.125
+  },
+  {
+   "text": "Social Clip Art.",
+   "a": 24.425,
+   "b": 25.542
+  }
+ ]
+}

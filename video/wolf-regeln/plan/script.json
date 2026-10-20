@@ -1,0 +1,30 @@
+{
+ "rules": [
+  [["Wolf-Regel Nummer eins:", 0.35], ["Rede nie über dein Produkt.", 0.7],
+   ["Die meisten Unternehmen posten:", 0.25], ["Unser neues Modell.", 0.2], ["Jetzt mit noch mehr Leistung.", 0.5], ["Interessiert keinen.", 0.7],
+   ["Denn keiner will einen Bohrer.", 0.3], ["Er will ein Loch in der Wand.", 0.5], ["Und eigentlich will er nicht mal das Loch.", 0.3],
+   ["Er will das Bild, das daran hängt.", 0.25], ["Das Zuhause, das sich fertig anfühlt.", 0.6],
+   ["Also hör auf, Bohrer zu verkaufen.", 0.3], ["Verkauf das Gefühl.", 0.9], ["Folge für Regel Nummer zwei.", 0.3], ["Social Clip Art.", 0.0]],
+  [["Wolf-Regel Nummer zwei:", 0.35], ["Du hast zwei Sekunden.", 0.6],
+   ["Nicht zehn.", 0.25], ["Nicht fünf.", 0.3], ["Zwei.", 0.7],
+   ["Wenn dein Video anfängt mit:", 0.2], ["Hallo, ich bin der Thomas, und heute zeige ich euch", 0.35], ["ist der Daumen schon weg.", 0.7],
+   ["Der Profi startet mit dem Ergebnis.", 0.25], ["Mit der Überraschung.", 0.25], ["Mit dem Satz, bei dem man nicht weiterwischen kann.", 0.6],
+   ["Erst der Haken.", 0.3], ["Dann die Geschichte.", 0.9], ["Folge für Regel Nummer drei.", 0.3], ["Social Clip Art.", 0.0]],
+  [["Wolf-Regel Nummer drei:", 0.35], ["Verkaufe nicht.", 0.3], ["Lass sie fragen.", 0.7],
+   ["Jetzt kaufen!", 0.15], ["Nur heute!", 0.15], ["Minus fünfzig Prozent!", 0.5], ["Wer ständig schreit, wird überhört.", 0.7],
+   ["Der Profi macht es leise.", 0.3], ["Er zeigt, was er kann.", 0.25], ["Er gibt Tipps, die wirklich helfen.", 0.25], ["Er beweist es, Video für Video.", 0.6],
+   ["Und irgendwann kommt die Nachricht:", 0.3], ["Was kostet das eigentlich?", 0.7], ["Das ist der Moment, in dem du gewonnen hast.", 0.9],
+   ["Folge für Regel Nummer vier.", 0.3], ["Social Clip Art.", 0.0]],
+  [["Wolf-Regel Nummer vier:", 0.35], ["Konstanz schlägt Talent.", 0.7],
+   ["Ein perfektes Video im Monat?", 0.45], ["Verliert.", 0.3], ["Gegen drei gute Videos pro Woche.", 0.25], ["Jedes Mal.", 0.7],
+   ["Der Algorithmus belohnt nicht den, der am besten ist.", 0.3], ["Er belohnt den, der dranbleibt.", 0.6],
+   ["Die Erfolgreichen sind nicht talentierter als du.", 0.35], ["Sie haben nur nicht aufgehört.", 0.7],
+   ["Also:", 0.2], ["Plan machen.", 0.2], ["Posten.", 0.2], ["Wiederholen.", 0.9], ["Folge für Regel Nummer fünf.", 0.3], ["Social Clip Art.", 0.0]],
+  [["Wolf-Regel Nummer fünf:", 0.35], ["Zahlen lügen nicht.", 0.7],
+   ["Zehntausend Likes.", 0.25], ["Fühlt sich großartig an.", 0.45], ["Aber Likes bezahlen nicht deine Miete.", 0.7],
+   ["Anfragen tun es.", 0.2], ["Termine tun es.", 0.2], ["Kunden tun es.", 0.7],
+   ["Der Profi schaut nicht, was glänzt.", 0.25], ["Er misst, was zählt.", 0.8],
+   ["Und das ist die letzte Regel:", 0.35], ["Marketing ist kein Beliebtheitswettbewerb.", 0.3], ["Es ist ein Geschäft.", 0.9],
+   ["Du willst, dass wir das für dich machen?", 0.3], ["Link in der Bio.", 0.3], ["Social Clip Art.", 0.0]]
+ ]
+}
