@@ -1,0 +1,38 @@
+{
+ "slot_stopp": {
+  "text": "Stopp!",
+  "dur": 0.357
+ },
+ "slot_pause": {
+  "text": "Drück auf Pause. Genau jetzt.",
+  "dur": 1.836
+ },
+ "slot_was": {
+  "text": "Was hast du bekommen?",
+  "dur": 0.828
+ },
+ "slot_komm": {
+  "text": "Schreib es in die Kommentare.",
+  "dur": 1.194
+ },
+ "gold_eins": {
+  "text": "Nur ein Prozent schafft das.",
+  "dur": 1.31
+ },
+ "gold_regel": {
+  "text": "Halte das Video an, sobald das Logo golden wird.",
+  "dur": 2.492
+ },
+ "gold_bereit": {
+  "text": "Bereit? Drei. Zwei. Eins.",
+  "dur": 2.134
+ },
+ "gold_und": {
+  "text": "Und? Hast du es geschafft?",
+  "dur": 1.262
+ },
+ "gold_komm": {
+  "text": "Schreib Gold in die Kommentare.",
+  "dur": 1.322
+ }
+}

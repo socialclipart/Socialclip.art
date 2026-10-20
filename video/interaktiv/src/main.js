@@ -1,0 +1,20 @@
+import { W, H, HOOKS } from './data.js';
+import { loadFonts, makeGrain } from './lib.js';
+const q = new URLSearchParams(location.search);
+const scale = Number(q.get('scale')) || 1, id = q.get('hook') || 'slot';
+const canvas = document.getElementById('c');
+canvas.width = Math.max(2, 2 * Math.round(W * scale / 2));
+canvas.height = Math.max(2, 2 * Math.round(H * scale / 2));
+const ctx = canvas.getContext('2d');
+await loadFonts(); makeGrain();
+const mod = await import(`./scenes/${id}.js`);
+await mod.init?.({ W, H, scale });
+await document.fonts.ready;
+window.renderFrame = async t => {
+  ctx.setTransform(1,0,0,1,0,0); ctx.fillStyle='#000'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.save(); ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);
+  await mod.draw(ctx, t, { W, H, dur: HOOKS[id].dur });
+  ctx.restore();
+};
+window.grab=(type,quality=.92)=>canvas.toDataURL(type,quality);
+window.__ready=true;
