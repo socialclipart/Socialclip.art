@@ -1,10 +1,10 @@
 """Builds the 48 kHz stereo mix for the STONE reel from cue data (same times the renderer uses)."""
+import os
 import json, subprocess, sys, numpy as np, librosa, soundfile as sf, scipy.signal as ss
 from pathlib import Path
 
 SR, DUR = 48000, 20.0
 ROOT = Path(__file__).parent
-import os
 SKILL = Path(os.environ.get('SFX_LIBRARY', ROOT / 'sfx'))  # bundled CC0 library of the sound-effects skill
 K_IMP, K_RPG = ROOT / 'dl/impact-sounds/Audio', ROOT / 'dl/rpg-audio/Audio'
 MX = ROOT / 'dl/mixkit'
@@ -131,7 +131,7 @@ mus[:, a:b] *= 10 ** ((-24 - rms_db(mus, 3.0, 13.9)) / 20)
 mus[:, b:] *= 10 ** ((-15.5 - rms_db(mus, 14.0, 17.0)) / 20)
 room *= 10 ** ((-50 - rms_db(room, 0, 3)) / 20)
 vo *= 10 ** ((-15 - rms_db(vo, .5, 1.75)) / 20)
-mix = vo + sfx + mus + room
+mix = (vo if os.environ.get("NO_VO") is None else 0) + sfx + mus + room
 mix *= 10 ** (float(sys.argv[1]) / 20) if len(sys.argv) > 1 else 1
 (ROOT / 'audio').mkdir(exist_ok=True)
 sf.write(ROOT / 'audio/mix_pre.wav', mix.T.astype(np.float32), SR, subtype='FLOAT')
