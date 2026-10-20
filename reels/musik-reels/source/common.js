@@ -23,7 +23,7 @@ export const hash = (n) => { const r = mulberry32(Math.floor(n * 1000) + 17); re
 // fonts
 const FONTS = [
   ['Bodoni', 'BodoniModa.woff2', {weight: '400 900'}], ['Bodoni', 'BodoniModa-Italic.woff2', {weight: '400 900', style: 'italic'}],
-  ['Inter', 'Inter.woff2', {weight: '300 900'}], ['Comic', 'ComicNeue.woff2', {weight: '700'}], ['Anton', 'Anton.woff2', {weight: '400'}],
+  ['Inter', 'Inter.woff2', {weight: '300 900'}], ['Comic', 'ComicNeue.woff2', {weight: '700'}], ['Anton', 'Anton.woff2', {weight: '400'}], ['Sacramento', 'Sacramento.woff2', {weight: '400'}],
 ];
 for (const [n, f, o] of FONTS) { const ff = new FontFace(n, `url(fonts/${f})`, o); await ff.load(); document.fonts.add(ff); }
 
