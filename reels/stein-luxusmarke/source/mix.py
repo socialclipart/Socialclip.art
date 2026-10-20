@@ -68,7 +68,7 @@ CUES = [
     (16.31, SKILL / 'ding/kenney-interface-glass-001.ogg', -21, 'onset', .2, None, 'glint'),
     (18.55, SKILL / 'pop/kenney-interface-pluck-001.ogg', -13, 'onset', 0, None, 'question pops'),
 ]
-VO = [(0.48, ROOT / 'audio/vo/vo1.wav', 0), (17.30, ROOT / 'audio/vo/vo2.wav', 0)]
+VO = [(0.26, ROOT / 'audio/vo/k_vo1.wav', 0), (17.02, ROOT / 'audio/vo/k_vo2.wav', 0)]  # kikiri-tts voice 'martin'
 MUSIC = ROOT / 'dl/music/371.mp3'
 MUSIC_SEGS = [(3.0, 3.68, 11.0), (14.0, 29.618, 3.0)]  # (video start, track start, length) — hard stop at 17.0
 
@@ -130,7 +130,7 @@ a, b = int(3.0 * SR), int(14.0 * SR)
 mus[:, a:b] *= 10 ** ((-24 - rms_db(mus, 3.0, 13.9)) / 20)
 mus[:, b:] *= 10 ** ((-15.5 - rms_db(mus, 14.0, 17.0)) / 20)
 room *= 10 ** ((-50 - rms_db(room, 0, 3)) / 20)
-vo *= 10 ** ((-15 - rms_db(vo, .5, 1.75)) / 20)
+vo *= 10 ** ((-15 - rms_db(vo, .5, 1.96)) / 20)
 mix = (vo if os.environ.get("NO_VO") is None else 0) + sfx + mus + room
 mix *= 10 ** (float(sys.argv[1]) / 20) if len(sys.argv) > 1 else 1
 (ROOT / 'audio').mkdir(exist_ok=True)

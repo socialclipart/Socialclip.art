@@ -1,7 +1,7 @@
 # Reel: „Ich mache aus einem Stein eine Luxusmarke“
 
-**Dateien:** `SocialClip_Stein_Luxusmarke_v3_ohne-Stimme.mp4` (empfohlen, gleiches Bild, ohne synthetische Stimme, −16,2 LUFS / TP −5,4 dBFS) und `SocialClip_Stein_Luxusmarke_v2.mp4` (mit Piper-Stimme) — 1080 × 1920 (9:16), 30 fps, 20,0 s, H.264 + AAC 48 kHz Stereo.
-Ton gemessen am fertigen MP4: −16,3 LUFS integriert, True Peak −5,3 dBFS (Stereo und Mono).
+**Dateien:** `SocialClip_Stein_Luxusmarke_v4.mp4` (Hauptversion, mit Stimme) und `SocialClip_Stein_Luxusmarke_v3_ohne-Stimme.mp4` (gleiches Bild, nur Musik + Sounddesign, −16,2 LUFS / TP −5,4 dBFS) — 1080 × 1920 (9:16), 30 fps, 20,0 s, H.264 + AAC 48 kHz Stereo.
+Ton v4 gemessen am fertigen MP4: −16,1 LUFS integriert, True Peak −5,3 dBFS (Stereo und Mono).
 
 ## Ablauf
 | Zeit | Szene | Ton |
@@ -18,7 +18,7 @@ Ton gemessen am fertigen MP4: −16,3 LUFS integriert, True Peak −5,3 dBFS (St
 Das letzte Bild zeigt dieselbe Tisch-Einstellung wie der Anfang (Texte blenden bis 19,95 s aus), dadurch läuft der Loop nahtlos weiter: Der Stein liegt da — und fällt gleich wieder.
 
 ## Quellen und Lizenzen
-- **Stimme (nur v2):** lokal erzeugt mit Piper TTS, Stimme „thorsten (high)“ (Datensatz Thorsten-Voice, CC0).
+- **Stimme (v4):** lokal erzeugt mit [kikiri-tts](https://github.com/semidark/kikiri-tts) (deutsches Kokoro-82M-Finetuning), Stimme „kikiri-german-martin“ (Sprecher Martin Harbecke, Apache 2.0, https://huggingface.co/kikiri-tts/kikiri-german-martin). Tempo 1,05 bzw. 0,9.
 - **Musik:** „Cat Walk“ von Arulo, Mixkit #371 — Mixkit Stock Music Free License (https://mixkit.co/license/#musicFree). Erlaubt u. a. Instagram/Social Media, auch kommerziell; nicht erlaubt: Registrierung bei Content ID, Weitergabe der Musikdatei allein. Verwendet: 3,68–14,68 s und 29,62–32,62 s des Tracks.
 - **Geräusche:** Kenney (Impact Sounds, RPG Audio, Interface Sounds; CC0), Freesound CC0 (Shinplaster, deleted_user_3277771, qubodup, cabled_mess, LilMati, migoreng1, Sadiquecat, cMilan, MeanRaccoon, CVLTIV8R), Mixkit SFX #1530 „Paper slide“ (Mixkit Sound Effects Free License).
 - **Schriften:** Bodoni Moda und Inter (SIL Open Font License, Google Fonts).
@@ -26,7 +26,7 @@ Das letzte Bild zeigt dieselbe Tisch-Einstellung wie der Anfang (Texte blenden b
 
 Paste-fertige Credits (optional, CC0 braucht keine Nennung):
 ```
-Musik: „Cat Walk“ – Arulo (Mixkit) · Sounds: Kenney, Freesound (CC0), Mixkit · Stimme: Thorsten-Voice (CC0)
+Musik: „Cat Walk“ – Arulo (Mixkit) · Sounds: Kenney, Freesound (CC0), Mixkit · Stimme: kikiri-tts „Martin“ (Apache 2.0)
 ```
 
 ## Quellcode (`source/`)

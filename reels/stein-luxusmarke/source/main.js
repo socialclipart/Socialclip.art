@@ -380,7 +380,7 @@ function frame(t) {
     orbit(TABLE_CAM[0], TABLE_CAM[1] + sh * .5 * Math.sin(t * 90), TABLE_CAM[2] + sh * .4 * Math.sin(t * 70), TABLE_CAM[3]);
     draw3D(); finish(t, .035, 0);
     if (t < 3.0) {
-      const out = seg(t, 2.85, 3.1), words = [['Ich', .53], ['mache', .72], ['diesen', .92], ['Stein', 1.2], ['teuer.', 1.4]];
+      const out = seg(t, 2.85, 3.1), words = [['Ich', .48], ['mache', .69], ['diesen', .99], ['Stein', 1.22], ['teuer.', 1.6]];
       ctx.save(); ctx.globalAlpha = 1 - out; ctx.translate(0, -40 * eo3(out));
       const lines = [[0, 1, 2], [3, 4]];
       ctx.font = '800 112px Inter'; ctx.letterSpacing = '-2px';
@@ -394,11 +394,11 @@ function frame(t) {
         });
       });
       // underline swash under "teuer."
-      const ul = seg(t, 1.72, 2.05);
+      const ul = seg(t, 1.86, 2.2);
       if (ul > 0) { ctx.strokeStyle = C.champDeep; ctx.lineWidth = 10; ctx.lineCap = 'round'; ctx.beginPath(); const x0 = 560, x1 = 860; ctx.moveTo(x0, 700); ctx.quadraticCurveTo((x0 + x1) / 2, 685, lerp(x0, x1, eo3(ul)), 696 - 6 * eo3(ul)); ctx.stroke(); }
       ctx.restore();
     } else {
-      const w1 = [['Immer', 17.33], ['noch', 17.63]], w2 = [['ein', 17.79], ['Stein.', 17.93]], fadeOut = 1 - seg(t, 19.55, 19.95);
+      const w1 = [['Immer', 17.29], ['noch', 17.65]], w2 = [['ein', 17.86], ['Stein.', 17.99]], fadeOut = 1 - seg(t, 19.55, 19.95);
       ctx.save(); ctx.globalAlpha = fadeOut;
       [[w1, 540], [w2, 668]].forEach(([ws, y]) => {
         ctx.font = '800 118px Inter'; ctx.letterSpacing = '-2px';

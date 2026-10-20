@@ -347,12 +347,12 @@
  ],
  "vo": [
   [
-   0.48,
-   "vo1.wav"
+   0.26,
+   "k_vo1.wav"
   ],
   [
-   17.3,
-   "vo2.wav"
+   17.02,
+   "k_vo2.wav"
   ]
  ],
  "music_segments": [
