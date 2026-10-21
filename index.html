@@ -231,10 +231,11 @@ body.locked .topbar{
   color:#a8a49c;
 }
 
-.clock strong{
+.clock .clock-time{
   display:block;
   color:#f4f1ea;
   font-size:12px;
+  font-weight:700;
   margin-bottom:3px;
   letter-spacing:.12em;
 }
@@ -1831,6 +1832,10 @@ section{
   font-size:var(--fs-small);
 }
 
+.brief-value{
+  font-weight:700;
+}
+
 .brief-line span:first-child{
   color:#87837c;
 }
@@ -3152,8 +3157,9 @@ footer{
   letter-spacing:var(--ls-label);
 }
 
-footer strong{
+footer .clock-time{
   color:#fff;
+  font-weight:700;
 }
 
 .footer-legal{
@@ -3227,7 +3233,7 @@ footer strong{
     font-size:8px;
   }
 
-  .clock strong{
+  .clock .clock-time{
     font-size:10px;
   }
 
@@ -3761,7 +3767,8 @@ footer strong{
 <header class="topbar" id="topbar">
 
   <a class="logo" href="#" aria-label="SocialClip, zum Seitenanfang">
-    <img class="logo-symbol" src="logo/socialclip-symbol-cream.svg" alt="" width="15" height="26">
+    <!-- Dekoratives Symbol: Der folgende Schriftzug benennt die Marke bereits. -->
+    <img class="logo-symbol" src="logo/socialclip-symbol-cream.svg" alt="" aria-hidden="true" width="15" height="26">
     <img class="logo-wordmark" src="logo/socialclip-wordmark-cream.svg" alt="SocialClip" width="137" height="13">
     <span class="logo-tag">ART · MEDIA · DIGITAL</span>
   </a>
@@ -3769,7 +3776,7 @@ footer strong{
   <div class="topbar-right">
 
     <div class="clock">
-      <strong id="liveClock">--:--:--</strong>
+      <span class="clock-time" id="liveClock">--:--:--</span>
       <span id="liveDate">--.--.----</span>
     </div>
 
@@ -3971,85 +3978,85 @@ footer strong{
       <span class="seo-offer-number">01 / SOCIALCLIP</span>
       <h3>Webdesign &amp; Websites</h3>
       <p>Individuelle Websites mit klaren Inhalten, mobiler Darstellung und einfachen Kontaktwegen.</p>
-      <div class="seo-offer-actions"><a href="/webdesign-erlangen/" aria-label="Mehr über Webdesign &amp; Websites erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Webseite" aria-label="Webdesign &amp; Websites anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/webdesign-erlangen/">Webdesign entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Webseite" aria-label="Webdesign &amp; Websites anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">02 / SOCIALCLIP</span>
       <h3>Flyerdesign</h3>
       <p>Flyer für Angebote, Aktionen und Veranstaltungen – passend zu deiner Marke und für den Druck vorbereitet.</p>
-      <div class="seo-offer-actions"><a href="/flyerdesign-erlangen/" aria-label="Mehr über Flyerdesign erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Flyer" aria-label="Flyerdesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/flyerdesign-erlangen/">Flyerdesign entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Flyer" aria-label="Flyerdesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">03 / SOCIALCLIP</span>
       <h3>Online-Marketing</h3>
       <p>Dein Angebot über passende digitale Kanäle sichtbar machen – mit klaren Zielen, Inhalten und Kontaktwegen.</p>
-      <div class="seo-offer-actions"><a href="/online-marketing-erlangen/" aria-label="Mehr über Online-Marketing erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Online Marketing" aria-label="Online-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/online-marketing-erlangen/">Online-Marketing entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Online Marketing" aria-label="Online-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">04 / SOCIALCLIP</span>
       <h3>Visitenkartendesign</h3>
       <p>Visitenkarten mit lesbaren Kontaktdaten und einem Auftritt, der zu deinem Unternehmen passt.</p>
-      <div class="seo-offer-actions"><a href="/visitenkarten-erlangen/" aria-label="Mehr über Visitenkartendesign erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Visitenkarte" aria-label="Visitenkartendesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/visitenkarten-erlangen/">Visitenkarten entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Visitenkarte" aria-label="Visitenkartendesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">05 / SOCIALCLIP</span>
       <h3>Social-Media-Betreuung</h3>
       <p>Strategie, Gestaltung und Betreuung für Instagram und TikTok – mit Posts, Reels und Stories.</p>
-      <div class="seo-offer-actions"><a href="/social-media-erlangen/" aria-label="Mehr über Social-Media-Betreuung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Social Media" aria-label="Social-Media-Betreuung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/social-media-erlangen/">Social Media entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Social Media" aria-label="Social-Media-Betreuung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">06 / SOCIALCLIP</span>
       <h3>Logodesign &amp; Branding</h3>
       <p>Ein Logo und eine visuelle Sprache, die auf Website, Social Media und Druckmaterialien zusammenpassen.</p>
-      <div class="seo-offer-actions"><a href="/grafikdesign-erlangen/" aria-label="Mehr über Logodesign &amp; Branding erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Logo" aria-label="Logodesign &amp; Branding anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/grafikdesign-erlangen/">Logo &amp; Branding entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Logo" aria-label="Logodesign &amp; Branding anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">07 / SOCIALCLIP</span>
       <h3>Foto- &amp; Videobearbeitung</h3>
       <p>Fotos bearbeiten, Videos schneiden und Inhalte für Website, Reels und deinen Markenauftritt aufbereiten.</p>
-      <div class="seo-offer-actions"><a href="/foto-video-bearbeitung-erlangen/" aria-label="Mehr über Foto- &amp; Videobearbeitung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Video &amp; Foto" aria-label="Foto- &amp; Videobearbeitung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/foto-video-bearbeitung-erlangen/">Foto &amp; Video entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Video &amp; Foto" aria-label="Foto- &amp; Videobearbeitung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">08 / SOCIALCLIP</span>
       <h3>Lebenslaufgestaltung</h3>
       <p>Deinen beruflichen Weg übersichtlich darstellen – mit klarer Struktur und einem passenden PDF-Layout.</p>
-      <div class="seo-offer-actions"><a href="/lebenslauf-erstellen-erlangen/" aria-label="Mehr über Lebenslaufgestaltung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Lebenslauf" aria-label="Lebenslaufgestaltung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/lebenslauf-erstellen-erlangen/">Lebenslaufgestaltung entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Lebenslauf" aria-label="Lebenslaufgestaltung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">09 / SOCIALCLIP</span>
       <h3>Speisekartendesign</h3>
       <p>Lesbare Speisekarten für Gastronomie – mit klarer Struktur, passenden Formaten und deinem Markenauftritt.</p>
-      <div class="seo-offer-actions"><a href="/speisekarten-design-erlangen/" aria-label="Mehr über Speisekartendesign erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Speisekarte" aria-label="Speisekartendesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/speisekarten-design-erlangen/">Speisekartendesign entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Speisekarte" aria-label="Speisekartendesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">10 / SOCIALCLIP</span>
       <h3>KI-Assistenz &amp; Nova</h3>
       <p>Digitale Unterstützung für Anrufe, E-Mails und Termine – persönlich auf deine Abläufe abgestimmt.</p>
-      <div class="seo-offer-actions"><a href="/ki-assistent-erlangen/" aria-label="Mehr über KI-Assistenz &amp; Nova erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Virtueller Assistent" aria-label="KI-Assistenz &amp; Nova anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/ki-assistent-erlangen/">Nova kennenlernen <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Virtueller Assistent" aria-label="KI-Assistenz &amp; Nova anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">11 / SOCIALCLIP</span>
       <h3>Programmierung &amp; digitale Lösungen</h3>
       <p>Individuelle Webfunktionen, digitale Werkzeuge und Automatisierungen für deine bestehenden Abläufe.</p>
-      <div class="seo-offer-actions"><a href="/programmierung-erlangen/" aria-label="Mehr über Programmierung &amp; digitale Lösungen erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Programmierung" aria-label="Programmierung &amp; digitale Lösungen anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/programmierung-erlangen/">Programmierung entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Programmierung" aria-label="Programmierung &amp; digitale Lösungen anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">12 / SOCIALCLIP</span>
       <h3>Neukundengewinnung</h3>
       <p>Angebot, Sichtbarkeit und Kontaktwege aufeinander abstimmen, damit passende Interessenten leichter anfragen.</p>
-      <div class="seo-offer-actions"><a href="/neukundengewinnung-erlangen/" aria-label="Mehr über Neukundengewinnung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Neukundengewinnung" aria-label="Neukundengewinnung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/neukundengewinnung-erlangen/">Neukundengewinnung entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Neukundengewinnung" aria-label="Neukundengewinnung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">13 / SOCIALCLIP</span>
       <h3>Strategieentwicklung</h3>
       <p>Zielgruppe, Positionierung und Maßnahmen ordnen – als konkreter Plan für deinen Unternehmensauftritt.</p>
-      <div class="seo-offer-actions"><a href="/marketingstrategie-erlangen/" aria-label="Mehr über Strategieentwicklung erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Strategieentwicklung" aria-label="Strategieentwicklung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/marketingstrategie-erlangen/">Marketingstrategie entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Strategieentwicklung" aria-label="Strategieentwicklung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
     <article class="seo-offer reveal">
       <span class="seo-offer-number">14 / SOCIALCLIP</span>
       <h3>TikTok-Marketing</h3>
       <p>Kurzvideo-Ideen, Gestaltung und Planung für einen TikTok-Auftritt, der zu deinem Betrieb passt.</p>
-      <div class="seo-offer-actions"><a href="/tiktok-marketing-erlangen/" aria-label="Mehr über TikTok-Marketing erfahren">Mehr erfahren <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="TikTok Marketing" aria-label="TikTok-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
+      <div class="seo-offer-actions"><a href="/tiktok-marketing-erlangen/">TikTok-Marketing entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="TikTok Marketing" aria-label="TikTok-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
     </article>
   </div>
 
@@ -4851,8 +4858,8 @@ footer strong{
     <div class="widget-body">
 
       <h3>
-        Was brauchst<br>
-        <span>du?</span>
+        Wähle deine<br>
+        <span>Leistungen.</span>
       </h3>
 
       <p class="widget-sub">
@@ -5091,17 +5098,17 @@ footer strong{
 
           <div class="brief-line">
             <span>PROJEKT</span>
-            <strong id="resultIdea"></strong>
+            <span class="brief-value" id="resultIdea"></span>
           </div>
 
           <div class="brief-line">
             <span>ZIELGRUPPE</span>
-            <strong id="resultTarget"></strong>
+            <span class="brief-value" id="resultTarget"></span>
           </div>
 
           <div class="brief-line">
             <span>ZIEL</span>
-            <strong id="resultGoal"></strong>
+            <span class="brief-value" id="resultGoal"></span>
           </div>
 
         </div>
@@ -5135,7 +5142,7 @@ footer strong{
   <div>
     LOCAL TIME
     <br><br>
-    <strong id="footerClock">--:--:--</strong>
+    <span class="clock-time" id="footerClock">--:--:--</span>
   </div>
 
   <div class="footer-legal">
@@ -5158,7 +5165,7 @@ footer strong{
   <p class="memory-ask-text">
     Dann begrüßen wir dich beim nächsten Besuch persönlich.
     Gespeichert wird nur in deinem Browser, nichts davon geht an uns.
-    <a href="datenschutz.html#erinnerung">Mehr erfahren</a>
+    <a href="datenschutz.html#erinnerung">Datenschutz zur Erinnerung</a>
   </p>
   <div class="memory-ask-actions">
     <button class="cine-btn primary" type="button" id="memoryYes">JA, GERN</button>
@@ -8250,3 +8257,4 @@ window.addEventListener("pageshow",event=>{
 </script>
 </body>
 </html>
+
