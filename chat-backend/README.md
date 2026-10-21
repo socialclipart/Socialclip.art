@@ -40,4 +40,4 @@ The "Anfrage vorbereiten" button transfers an explicitly requested draft into th
 
 ## Verification
 
-`npm ci && npm test` tests disabled activation, origins/preflight, explicit consent, role/input/byte limits, public health, safe tool links, model failure handling, flood limits, and widget consent/rendering/draft/reset/retry behavior. These use mocks, incur no AI charges, and do not establish real model quality or dashboard receipt.
+`npm ci && npm test` tests disabled activation, origins/preflight, explicit consent, role/input/byte limits, public health, safe tool links, model failure handling, and flood limits. The widget was additionally checked with a local jsdom harness for consent, safe rendering, draft handoff, reset, and retry behavior. These use mocks, incur no AI charges, and do not establish real model quality or dashboard receipt.
