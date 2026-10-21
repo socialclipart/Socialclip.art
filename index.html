@@ -3719,6 +3719,31 @@ footer strong{
 </style>
 <link rel="stylesheet" href="/extras.css?v=5">
 <script src="/extras.js?v=5" defer></script>
+<style>
+
+/* Google-Bewertungen: feste Auswahl, zuletzt geprüft am 21.10.2026. */
+.google-reviews{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:radial-gradient(ellipse at 90% 0%,rgba(210,184,148,.055),transparent 60%);scroll-margin-top:80px}
+.google-reviews-header{display:flex;align-items:flex-end;justify-content:space-between;gap:36px;margin-bottom:38px}
+.google-reviews .big-title{font-size:clamp(44px,7vw,105px)}
+.google-reviews-summary{flex:0 0 auto;display:grid;gap:7px;max-width:100%;padding-bottom:5px}
+.google-reviews-score{display:flex;align-items:baseline;gap:8px}
+.google-reviews-score strong{font-size:clamp(44px,5vw,64px);font-weight:400;letter-spacing:-.06em;line-height:1}
+.google-reviews-score span{color:var(--soft);font-size:16px}
+.google-review-stars{color:#d2b894;font-size:21px;letter-spacing:.12em;line-height:1.3}
+.google-reviews-summary p{color:var(--white);font-size:14px;line-height:1.5}
+.google-reviews-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.google-review-card{display:flex;flex-direction:column;gap:22px;min-width:0;margin:0;padding:clamp(22px,2.5vw,34px);border:1px solid var(--line);background:rgba(255,255,255,.018);border-radius:4px}
+.google-review-card blockquote{flex:1;min-width:0;margin:0}
+.google-review-card blockquote p{color:var(--white);font-size:clamp(16px,1.5vw,19px);line-height:1.7;overflow-wrap:anywhere}
+.google-review-card figcaption{display:grid;gap:6px;padding-top:20px;border-top:1px solid var(--line-soft)}
+.google-review-card figcaption strong{font-size:14px;font-weight:500}
+.google-review-card figcaption span{color:var(--soft);font-size:12px;line-height:1.6}
+.google-reviews-footer{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:28px}
+.google-reviews-note{max-width:460px;color:var(--soft);font-size:12px;line-height:1.7}
+.google-reviews-footer .cine-btn{max-width:100%;flex:0 1 auto;white-space:normal;line-height:1.5;text-align:center}
+.google-reviews a:focus-visible{outline:2px solid #d2b894;outline-offset:5px}
+@media(max-width:900px){.google-reviews-header{align-items:flex-start;flex-direction:column;gap:28px}.google-reviews-grid{grid-template-columns:1fr}.google-review-card{gap:18px}.google-reviews-footer{align-items:flex-start;flex-direction:column}}
+</style>
 </head>
 
 <body class="locked">
@@ -4639,6 +4664,49 @@ footer strong{
 
 </section>
 
+<!-- Google-Bewertungen: Originaltexte aus dem Unternehmensprofil. -->
+<section class="google-reviews" id="bewertungen" aria-labelledby="reviews-title">
+  <div class="chapter-line reveal">SCENE 09 / CUSTOMER VOICES</div>
+  <div class="google-reviews-header">
+    <h2 class="big-title reveal" id="reviews-title">ECHTE<br><span>STIMMEN.</span></h2>
+    <div class="google-reviews-summary">
+      <div class="google-reviews-score"><strong>5,0</strong><span>/ 5</span></div>
+      <div class="google-review-stars" role="img" aria-label="Gesamtbewertung: 5 von 5 Sternen">★★★★★</div>
+      <p>Aus 13 Google-Bewertungen</p>
+    </div>
+  </div>
+  <div class="google-reviews-grid">
+    <figure class="google-review-card">
+      <div class="google-review-stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
+      <blockquote><p>Danke für das tolle Ergebnis, die Bilder sind genial.<br>Preis und Leistung tip top<br>Kann ich nur weiter empfehlen.</p></blockquote>
+      <figcaption>
+        <strong>D Buzhala</strong>
+        <span>Google-Rezension · <time datetime="2024-01-12">12. Januar 2024</time></span>
+      </figcaption>
+    </figure>
+    <figure class="google-review-card">
+      <div class="google-review-stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
+      <blockquote><p>Tolle Arbeit und schnelle Rückmeldung</p></blockquote>
+      <figcaption>
+        <strong>Andrei Parvu</strong>
+        <span>Google-Rezension · <time datetime="2026-10-05">5. Oktober 2026</time></span>
+      </figcaption>
+    </figure>
+    <figure class="google-review-card">
+      <div class="google-review-stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
+      <blockquote><p>Super kompetentes Team. Nur zum weiterempfehlen</p></blockquote>
+      <figcaption>
+        <strong>J D</strong>
+        <span>Google-Rezension · <time datetime="2026-10-05">5. Oktober 2026</time></span>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="google-reviews-footer">
+    <p class="google-reviews-note">Ausgewählte Google-Rezensionen im Originalwortlaut.<br>Gesamtwertung und Anzahl: Stand 21. Oktober 2026.</p>
+    <a class="cine-btn" href="https://maps.google.com/maps?cid=14242139189001064114" target="_blank" rel="noopener noreferrer">ALLE BEWERTUNGEN AUF GOOGLE ANSEHEN <span class="arr" aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
 <!-- =========================
      SCENE 12
 ========================= -->
@@ -4646,7 +4714,7 @@ footer strong{
 <section class="contact" id="kontakt">
 
   <div class="chapter-line reveal">
-    SCENE 09 / YOUR STORY
+    SCENE 10 / YOUR STORY
   </div>
 
   <h2 class="big-title reveal">
