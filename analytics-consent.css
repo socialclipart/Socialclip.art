@@ -1,0 +1,18 @@
+.sc-analytics-banner{box-sizing:border-box;position:fixed;z-index:10020;right:20px;bottom:20px;width:min(450px,calc(100% - 40px));max-height:calc(100dvh - 40px);overflow:auto;padding:22px;border:1px solid #7f725f;border-radius:5px;background:#191817;color:#f4f1ea;box-shadow:0 12px 45px rgba(0,0,0,.4);font-family:Arimo,Arial,Helvetica,sans-serif;text-align:left;line-height:1.6;letter-spacing:normal}
+.sc-analytics-banner[hidden],.sc-analytics-banner [hidden]{display:none!important}
+.sc-analytics-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.sc-analytics-heading h2{margin:0 0 12px;font-size:19px;line-height:1.35;font-weight:500;letter-spacing:-.02em;color:#f4f1ea}
+.sc-analytics-banner p{margin:0 0 16px;color:#d6d2cb;font-size:13px;line-height:1.65}
+.sc-analytics-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sc-analytics-actions button{box-sizing:border-box;min-height:46px;padding:10px;border:1px solid #9d8c72;border-radius:2px;background:#292621;color:#f4f1ea;font:inherit;font-size:13px;line-height:1.35;cursor:pointer;letter-spacing:normal;text-transform:none}
+.sc-analytics-actions button:hover{background:#39332b}
+.sc-analytics-banner .sc-analytics-status{margin:13px 0 8px;color:#b8b3a9;font-size:11px}
+.sc-analytics-links{display:flex;flex-wrap:wrap;gap:18px}
+.sc-analytics-links a{color:#e4ceb0;text-decoration:underline;text-underline-offset:3px;font-size:12px}
+.sc-analytics-close{flex:0 0 32px;min-height:32px;margin:-6px -8px 0 0;padding:0;border:0;background:none;color:#f4f1ea;font:inherit;font-size:24px;line-height:32px;cursor:pointer}
+.sc-analytics-settings{display:inline-flex;align-items:center;min-height:32px;max-width:100%;padding:0;border:0;background:none;color:inherit;font:inherit;font-size:10px;letter-spacing:.12em;line-height:1.6;text-align:left;white-space:normal;cursor:pointer}
+.sc-analytics-settings:hover{color:#d2b894}
+.sc-analytics-settings[data-analytics-open]{min-height:44px;font-size:13px;letter-spacing:.03em;text-decoration:underline;text-underline-offset:3px}
+.sc-analytics-banner button:focus-visible,.sc-analytics-banner a:focus-visible,.sc-analytics-settings:focus-visible,[data-analytics-open]:focus-visible{outline:2px solid #e6c99f;outline-offset:4px}
+.sc-analytics-prompt-open #memoryAsk{display:none!important}
+@media(max-width:760px){.sc-analytics-banner{right:16px;bottom:76px;width:calc(100% - 32px);max-height:calc(100dvh - 100px);padding:18px}.sc-analytics-heading h2{font-size:18px}.sc-analytics-actions{gap:8px}.sc-analytics-actions button{font-size:12px}}

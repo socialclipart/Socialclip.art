@@ -11,6 +11,10 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="legal.css">
+
+<!-- Besuchsstatistik: Google Analytics wird erst nach Zustimmung geladen. -->
+<link rel="stylesheet" href="/analytics-consent.css?v=1">
+<script src="/analytics-consent.js?v=1" defer></script>
 </head>
 
 <body>
@@ -33,7 +37,7 @@
   <p>
     Der Schutz deiner Daten ist uns wichtig. Hier erklären wir, welche Daten beim
     Besuch dieser Website verarbeitet werden, wozu und welche Rechte du hast.
-    Kurz gesagt: Wir setzen kein Tracking, keine Analyse-Tools und keine Cookies ein.
+    Eine Besuchsstatistik mit Google Analytics 4 wird nur nach deiner freiwilligen Zustimmung aktiviert. Du kannst die Website auch ohne diese Statistik nutzen.
   </p>
 
   <h2>1. Verantwortlicher</h2>
@@ -93,12 +97,54 @@
     mehr bestehen.
   </p>
 
-  <h2>4. Keine Cookies, kein Tracking</h2>
+  <h2 id="statistik">4. Besuchsstatistik mit Google Analytics 4 (freiwillig)</h2>
   <p>
-    Diese Website setzt keine Cookies. Wir nutzen keine Analyse-Tools, keine
-    Werbe-Netzwerke und laden keine Schriften oder Skripte von fremden Servern
-    nach. Im Speicher deines Browsers legen wir nur dann etwas ab, wenn du dem
-    persönlichen Empfang zustimmst (siehe Punkt 5).
+    Nur wenn du im Statistik-Hinweis ausdrücklich „Statistik erlauben“ auswählst,
+    laden wir Google Analytics 4. Damit werten wir aus, wie oft unsere Website
+    besucht wird, welche Seiten aufgerufen werden und über welche Quellen
+    Besucher zu uns kommen. Anbieter ist Google Ireland Limited, Gordon House,
+    Barrow Street, Dublin 4, Irland. Google kann auch Daten in den USA verarbeiten.
+  </p>
+  <p>
+    Nach deiner Zustimmung werden insbesondere aufgerufene Seiten, Zeitpunkte,
+    Interaktionen, eine pseudonyme Cookie-Kennung sowie technische Angaben zu
+    Browser und Gerät an Google übermittelt. Beim Verbindungsaufbau wird auch
+    deine IP-Adresse technisch verarbeitet. Wir übergeben keine Namen,
+    E-Mail-Adressen, Nachrichtentexte oder Angaben aus dem persönlichen Empfang
+    als eigene Analytics-Ereignisse. Seitenadressen werden ohne Suchparameter
+    und URL-Fragmente an Analytics übergeben. Google Signals und Funktionen für
+    personalisierte Werbung sind in unserer Einbindung deaktiviert.
+  </p>
+  <p>
+    Vor deiner Zustimmung und bei einer Ablehnung laden wir das Google-Tag nicht.
+    Die zugehörigen Analytics-Cookies (<code>_ga</code> und <code>_ga_…</code>)
+    werden auf unserer Website mit einer Laufzeit von bis zu 180 Tagen
+    konfiguriert. Die Speicherdauer bereits übermittelter Ereignisdaten richtet
+    sich nach den Einstellungen in Google Analytics; ein Widerruf beendet die
+    künftige Erhebung und löscht die Analytics-Cookies auf deinem Gerät, aber
+    nicht rückwirkend bereits an Google übermittelte Daten.
+  </p>
+  <p>
+    Rechtsgrundlage für die Besuchsstatistik ist deine Einwilligung
+    (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Du kannst sie jederzeit
+    mit Wirkung für die Zukunft widerrufen: Öffne unten auf einer beliebigen
+    Seite „Statistik-Einstellungen“ und wähle „Ablehnen“. Falls die Statistik
+    bereits geladen war, wird die Seite dafür neu geladen.
+    <button class="sc-analytics-settings" type="button" data-analytics-open>STATISTIK-EINSTELLUNGEN ÖFFNEN</button>
+  </p>
+  <p>
+    Deine Auswahl, der Zeitpunkt und ihre Gültigkeit werden für 180 Tage unter
+    <code>socialclip.analytics-consent.v1</code> im lokalen Speicher deines
+    Browsers (localStorage) festgehalten. Das dient ausschließlich dazu, deine
+    Datenschutzentscheidung zu beachten. Es werden dabei keine Besuchsstatistiken
+    gespeichert. Die Auswahl zur Statistik ist unabhängig von der optionalen
+    persönlichen Begrüßung im folgenden Abschnitt.
+  </p>
+  <p>
+    Weitere Informationen:
+    <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von Google</a>,
+    <a href="https://policies.google.com/technologies/partner-sites?hl=de" target="_blank" rel="noopener noreferrer">Datennutzung durch Google bei Partner-Websites</a>
+    und <a href="https://support.google.com/analytics/answer/7667196?hl=de" target="_blank" rel="noopener noreferrer">Aufbewahrung von Analytics-Daten</a>.
   </p>
 
   <h2 id="erinnerung">5. Persönlicher Empfang (nur mit deiner Zustimmung)</h2>
