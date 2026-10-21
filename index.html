@@ -3754,6 +3754,31 @@ footer .clock-time{
 <!-- Besuchsstatistik: Google Analytics wird erst nach Zustimmung geladen. -->
 <link rel="stylesheet" href="/analytics-consent.css?v=1">
 <script src="/analytics-consent.js?v=1" defer></script>
+<style>
+/* Vier Leistungsbereiche und ein gemeinsamer Projekt-Einstieg. */
+main section[id]{scroll-margin-top:100px}
+.offer-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:38px}
+.offer-group{min-width:0;padding:clamp(24px,3vw,42px);border:1px solid var(--line);background:rgba(255,255,255,.018)}
+.offer-group-number{display:block;color:#d2b894;font-size:11px;letter-spacing:.14em;margin-bottom:24px}
+.offer-group h3{font-size:clamp(24px,2.8vw,38px);font-weight:400;letter-spacing:-.035em;line-height:1.16}
+.offer-group p,.process-grid p{margin-top:18px;color:var(--soft);font-size:16px;line-height:1.75}
+.offer-group ul{list-style:none;margin-top:26px}
+.offer-group li+li{border-top:1px solid var(--line-soft)}
+.offer-group li a{display:flex;justify-content:space-between;gap:16px;padding:14px 0;font-size:15px;line-height:1.5}
+.offer-group li a span{color:#d2b894}
+.offer-group a:hover,.section-nav a:hover{color:#e6d0ad}
+.offer-group a:focus-visible,.section-nav a:focus-visible{outline:2px solid #d2b894;outline-offset:4px}
+.process-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;gap:30px;margin-top:48px}
+.process-grid li{padding-top:26px;border-top:1px solid var(--line)}
+.process-grid h3{font-size:25px;font-weight:400;line-height:1.25;letter-spacing:-.025em}
+.project-paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin:36px 0}
+.project-paths>div{min-width:0;padding:28px;border:1px solid var(--line)}
+.project-paths p:not(.ideas-label){color:var(--soft);font-size:16px;line-height:1.7;margin:14px 0 24px}
+.project-paths .cine-btn{max-width:100%;white-space:normal;text-align:left;line-height:1.5}
+.section-nav{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;padding:0 25px 25px}
+.section-nav a{padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:14px;line-height:1.4}
+@media(max-width:760px){.offer-groups,.process-grid,.project-paths{grid-template-columns:1fr}.offer-groups{gap:16px}.process-grid{gap:28px}.project-paths{gap:16px}.offer-group{padding:26px}.offer-group h3{font-size:29px}}
+</style>
 </head>
 
 <body class="locked">
@@ -3798,6 +3823,9 @@ footer .clock-time{
       <button class="cine-btn primary" type="button" data-open-builder data-menu-close>PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span></button>
       <a class="cine-btn" href="/ratgeber/">RATGEBER <span class="arr" aria-hidden="true">→</span></a>
     </div>
+<nav class="section-nav" aria-label="Auf dieser Seite">
+<a href="#leistungen" data-menu-close>Leistungen</a><a href="#bewertungen" data-menu-close>Bewertungen</a><a href="#ablauf" data-menu-close>Zusammenarbeit</a><a href="#nova" data-menu-close>Nova kennenlernen</a><a href="#ideen" data-menu-close>Projekt-Assistent</a><a href="#check" data-menu-close>Sichtbarkeits-Check</a><a href="#kontakt" data-menu-close>Kontakt</a>
+</nav>
     <a class="site-menu-shop" href="/marketing-handbuch/"><small>NEU · HANDBUCH ALS PDF</small><strong>Marketing wie die Profis</strong><span>Website, Logo und Social Media mit KI selbst erstellen.</span><em>14 € <span aria-hidden="true">→</span></em></a>
     <p class="site-menu-label">UNSERE LEISTUNGEN</p>
     <ul class="site-menu-list">
@@ -3898,14 +3926,10 @@ footer .clock-time{
 
 <main>
 
-<!-- =========================
-     SCENE 02
-========================= -->
-
 <section class="hero center">
 
   <div class="chapter-line reveal">
-    SCENE 02 / THE BEGINNING
+    SCENE 02 / DER ANFANG
   </div>
 
   <div class="hero-greeting reveal" id="heroGreeting"></div>
@@ -3926,18 +3950,8 @@ footer .clock-time{
   </p>
 
   <div class="hero-actions reveal">
-    <button class="cine-btn primary" type="button" data-open-builder>
-      PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
-    </button>
-    <a class="cine-btn" href="#check">
-      SICHTBARKEITS-CHECK <span class="arr" aria-hidden="true">→</span>
-    </a>
-    <a class="cine-btn" href="#kontakt">
-      KONTAKT <span class="arr" aria-hidden="true">→</span>
-    </a>
-    <a class="cine-btn" href="#handbuch">
-      HANDBUCH: SELBST MACHEN <span class="arr" aria-hidden="true">↓</span>
-    </a>
+    <a class="cine-btn primary" href="#kontakt">PROJEKT BESPRECHEN <span class="arr" aria-hidden="true">→</span></a>
+    <a class="cine-btn" href="#leistungen">LEISTUNGEN ANSEHEN <span class="arr" aria-hidden="true">↓</span></a>
   </div>
 
   <!-- Wechselt bei jedem Besuch; mit Erinnerung: persönlicher Hinweis -->
@@ -3955,14 +3969,10 @@ footer .clock-time{
 
 </section>
 
-<!-- =========================
-     SCENE 04
-========================= -->
-
 <section class="services" id="leistungen">
 
   <div class="chapter-line reveal">
-    SCENE 03 / SERVICES
+    SCENE 03 / LEISTUNGEN
   </div>
 
   <h2 class="big-title reveal">
@@ -3972,147 +3982,85 @@ footer .clock-time{
   </h2>
 
   <p class="seo-offer-intro">Von deiner Website über Inhalte und Gestaltung bis zu digitalen Abläufen: Wähle die Leistung, die zu deinem Projekt passt. Wir arbeiten mit Selbstständigen und Unternehmen in Erlangen, Nürnberg, Fürth und online zusammen.</p>
-  <p class="seo-swipe-hint" aria-hidden="true">← WISCHEN FÜR ALLE 14 LEISTUNGEN →</p>
-  <div class="service-list seo-offer-grid">
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">01 / SOCIALCLIP</span>
-      <h3>Webdesign &amp; Websites</h3>
-      <p>Individuelle Websites mit klaren Inhalten, mobiler Darstellung und einfachen Kontaktwegen.</p>
-      <div class="seo-offer-actions"><a href="/webdesign-erlangen/">Webdesign entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Webseite" aria-label="Webdesign &amp; Websites anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">02 / SOCIALCLIP</span>
-      <h3>Flyerdesign</h3>
-      <p>Flyer für Angebote, Aktionen und Veranstaltungen – passend zu deiner Marke und für den Druck vorbereitet.</p>
-      <div class="seo-offer-actions"><a href="/flyerdesign-erlangen/">Flyerdesign entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Flyer" aria-label="Flyerdesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">03 / SOCIALCLIP</span>
-      <h3>Online-Marketing</h3>
-      <p>Dein Angebot über passende digitale Kanäle sichtbar machen – mit klaren Zielen, Inhalten und Kontaktwegen.</p>
-      <div class="seo-offer-actions"><a href="/online-marketing-erlangen/">Online-Marketing entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Online Marketing" aria-label="Online-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">04 / SOCIALCLIP</span>
-      <h3>Visitenkartendesign</h3>
-      <p>Visitenkarten mit lesbaren Kontaktdaten und einem Auftritt, der zu deinem Unternehmen passt.</p>
-      <div class="seo-offer-actions"><a href="/visitenkarten-erlangen/">Visitenkarten entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Visitenkarte" aria-label="Visitenkartendesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">05 / SOCIALCLIP</span>
-      <h3>Social-Media-Betreuung</h3>
-      <p>Strategie, Gestaltung und Betreuung für Instagram und TikTok – mit Posts, Reels und Stories.</p>
-      <div class="seo-offer-actions"><a href="/social-media-erlangen/">Social Media entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Social Media" aria-label="Social-Media-Betreuung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">06 / SOCIALCLIP</span>
-      <h3>Logodesign &amp; Branding</h3>
-      <p>Ein Logo und eine visuelle Sprache, die auf Website, Social Media und Druckmaterialien zusammenpassen.</p>
-      <div class="seo-offer-actions"><a href="/grafikdesign-erlangen/">Logo &amp; Branding entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Logo" aria-label="Logodesign &amp; Branding anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">07 / SOCIALCLIP</span>
-      <h3>Foto- &amp; Videobearbeitung</h3>
-      <p>Fotos bearbeiten, Videos schneiden und Inhalte für Website, Reels und deinen Markenauftritt aufbereiten.</p>
-      <div class="seo-offer-actions"><a href="/foto-video-bearbeitung-erlangen/">Foto &amp; Video entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Video &amp; Foto" aria-label="Foto- &amp; Videobearbeitung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">08 / SOCIALCLIP</span>
-      <h3>Lebenslaufgestaltung</h3>
-      <p>Deinen beruflichen Weg übersichtlich darstellen – mit klarer Struktur und einem passenden PDF-Layout.</p>
-      <div class="seo-offer-actions"><a href="/lebenslauf-erstellen-erlangen/">Lebenslaufgestaltung entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Lebenslauf" aria-label="Lebenslaufgestaltung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">09 / SOCIALCLIP</span>
-      <h3>Speisekartendesign</h3>
-      <p>Lesbare Speisekarten für Gastronomie – mit klarer Struktur, passenden Formaten und deinem Markenauftritt.</p>
-      <div class="seo-offer-actions"><a href="/speisekarten-design-erlangen/">Speisekartendesign entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Speisekarte" aria-label="Speisekartendesign anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">10 / SOCIALCLIP</span>
-      <h3>KI-Assistenz &amp; Nova</h3>
-      <p>Digitale Unterstützung für Anrufe, E-Mails und Termine – persönlich auf deine Abläufe abgestimmt.</p>
-      <div class="seo-offer-actions"><a href="/ki-assistent-erlangen/">Nova kennenlernen <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Virtueller Assistent" aria-label="KI-Assistenz &amp; Nova anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">11 / SOCIALCLIP</span>
-      <h3>Programmierung &amp; digitale Lösungen</h3>
-      <p>Individuelle Webfunktionen, digitale Werkzeuge und Automatisierungen für deine bestehenden Abläufe.</p>
-      <div class="seo-offer-actions"><a href="/programmierung-erlangen/">Programmierung entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Programmierung" aria-label="Programmierung &amp; digitale Lösungen anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">12 / SOCIALCLIP</span>
-      <h3>Neukundengewinnung</h3>
-      <p>Angebot, Sichtbarkeit und Kontaktwege aufeinander abstimmen, damit passende Interessenten leichter anfragen.</p>
-      <div class="seo-offer-actions"><a href="/neukundengewinnung-erlangen/">Neukundengewinnung entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Neukundengewinnung" aria-label="Neukundengewinnung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">13 / SOCIALCLIP</span>
-      <h3>Strategieentwicklung</h3>
-      <p>Zielgruppe, Positionierung und Maßnahmen ordnen – als konkreter Plan für deinen Unternehmensauftritt.</p>
-      <div class="seo-offer-actions"><a href="/marketingstrategie-erlangen/">Marketingstrategie entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="Strategieentwicklung" aria-label="Strategieentwicklung anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-    <article class="seo-offer reveal">
-      <span class="seo-offer-number">14 / SOCIALCLIP</span>
-      <h3>TikTok-Marketing</h3>
-      <p>Kurzvideo-Ideen, Gestaltung und Planung für einen TikTok-Auftritt, der zu deinem Betrieb passt.</p>
-      <div class="seo-offer-actions"><a href="/tiktok-marketing-erlangen/">TikTok-Marketing entdecken <span aria-hidden="true">↗</span></a><button type="button" data-open-builder="TikTok Marketing" aria-label="TikTok-Marketing anfragen">Anfragen <span aria-hidden="true">→</span></button></div>
-    </article>
-  </div>
-
+  <div class="offer-groups">
+<article class="offer-group reveal"><span class="offer-group-number">01 / SOCIALCLIP</span><h3>Websites &amp; Programmierung</h3><p>Dein digitaler Auftritt: verständlich aufgebaut, für das Handy gestaltet und passend zu deinen Abläufen.</p><ul><li><a href="/webdesign-erlangen/">Webdesign &amp; Websites <span aria-hidden="true">↗</span></a></li>
+<li><a href="/programmierung-erlangen/">Programmierung &amp; digitale Lösungen <span aria-hidden="true">↗</span></a></li></ul></article>
+<article class="offer-group reveal"><span class="offer-group-number">02 / SOCIALCLIP</span><h3>Design &amp; Branding</h3><p>Ein wiedererkennbarer Auftritt – vom Logo bis zu den Materialien, die deine Kunden in der Hand halten.</p><ul><li><a href="/grafikdesign-erlangen/">Logo &amp; Branding <span aria-hidden="true">↗</span></a></li>
+<li><a href="/flyerdesign-erlangen/">Flyerdesign <span aria-hidden="true">↗</span></a></li>
+<li><a href="/visitenkarten-erlangen/">Visitenkartendesign <span aria-hidden="true">↗</span></a></li>
+<li><a href="/speisekarten-design-erlangen/">Speisekartendesign <span aria-hidden="true">↗</span></a></li>
+<li><a href="/lebenslauf-erstellen-erlangen/">Lebenslaufgestaltung <span aria-hidden="true">↗</span></a></li></ul></article>
+<article class="offer-group reveal"><span class="offer-group-number">03 / SOCIALCLIP</span><h3>Social Media &amp; Content</h3><p>Inhalte für deine Marke: Beiträge, Kurzvideos und die Bearbeitung deiner Fotos und Videos.</p><ul><li><a href="/social-media-erlangen/">Social-Media-Betreuung <span aria-hidden="true">↗</span></a></li>
+<li><a href="/tiktok-marketing-erlangen/">TikTok-Marketing <span aria-hidden="true">↗</span></a></li>
+<li><a href="/foto-video-bearbeitung-erlangen/">Foto- &amp; Videobearbeitung <span aria-hidden="true">↗</span></a></li></ul></article>
+<article class="offer-group reveal"><span class="offer-group-number">04 / SOCIALCLIP</span><h3>Marketing &amp; KI</h3><p>Klare Ziele für deine Sichtbarkeit und digitale Unterstützung für den Arbeitsalltag.</p><ul><li><a href="/online-marketing-erlangen/">Online-Marketing <span aria-hidden="true">↗</span></a></li>
+<li><a href="/neukundengewinnung-erlangen/">Neukundengewinnung <span aria-hidden="true">↗</span></a></li>
+<li><a href="/marketingstrategie-erlangen/">Marketingstrategie <span aria-hidden="true">↗</span></a></li>
+<li><a href="/ki-assistent-erlangen/">KI-Telefonassistenz Nova <span aria-hidden="true">↗</span></a></li></ul></article>
+</div>
 </section>
 
-<!-- =========================
-     IDEEN-GENERATOR + WAS BRAUCHST DU?
-     Branche wählen, Idee mischen, oder Wunsch eintippen (extras.js)
-========================= -->
-
-<section class="ideas" id="ideen" aria-labelledby="ideasTitle">
-
+<section class="google-reviews" id="bewertungen" aria-labelledby="reviews-title">
   <div class="chapter-line reveal">
-    SCENE 04 / IDEAS
+    SCENE 04 / BEWERTUNGEN
   </div>
-
-  <h2 class="big-title reveal" id="ideasTitle">
-    KEINE IDEE?<br>
-    <span>WIR MISCHEN DIR EINE.</span>
-  </h2>
-
-  <p class="ideas-lead reveal">Wähl deine Branche und lass dir eine Idee für mehr Sichtbarkeit mischen. Oder sag uns einfach, was du brauchst.</p>
-
-  <div class="ideas-box reveal">
-    <div class="ideas-panel">
-      <span class="ideas-label">DEINE BRANCHE</span>
-      <div class="chip-row ideas-chips" role="radiogroup" aria-label="Branche">
-        <button type="button" role="radio" aria-checked="true" class="on" data-branch="cafe">Café</button>
-        <button type="button" role="radio" aria-checked="false" data-branch="friseur">Friseur</button>
-        <button type="button" role="radio" aria-checked="false" data-branch="handwerk">Handwerk</button>
-        <button type="button" role="radio" aria-checked="false" data-branch="praxis">Praxis</button>
-        <button type="button" role="radio" aria-checked="false" data-branch="restaurant">Restaurant</button>
-        <button type="button" role="radio" aria-checked="false" data-branch="laden">Laden</button>
-        <button type="button" role="radio" aria-checked="false" data-branch="andere">Andere</button>
-      </div>
-      <div class="slot" aria-live="polite"><div class="slot-reel"></div></div>
-      <p class="ideas-result" aria-live="polite"></p>
-      <button class="cine-btn primary ideas-mix" type="button">IDEE MISCHEN <span class="arr" aria-hidden="true">→</span></button>
-    </div>
-    <div class="ideas-panel">
-      <label class="ideas-label" for="ideasSearch">WAS BRAUCHST DU?</label>
-      <input class="ideas-search" id="ideasSearch" type="text" placeholder="z. B. mehr Kunden" autocomplete="off">
-      <ul class="ideas-hits" aria-live="polite"></ul>
+  <div class="google-reviews-header">
+    <h2 class="big-title reveal" id="reviews-title">ECHTE<br><span>STIMMEN.</span></h2>
+    <div class="google-reviews-summary">
+      <div class="google-reviews-score"><strong>5,0</strong><span>/ 5</span></div>
+      <div class="google-review-stars" role="img" aria-label="Gesamtbewertung: 5 von 5 Sternen">★★★★★</div>
+      <p>Aus 13 Google-Bewertungen</p>
     </div>
   </div>
-
+  <div class="google-reviews-grid">
+    <figure class="google-review-card">
+      <div class="google-review-stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
+      <blockquote><p>Danke für das tolle Ergebnis, die Bilder sind genial.<br>Preis und Leistung tip top<br>Kann ich nur weiter empfehlen.</p></blockquote>
+      <figcaption>
+        <strong>D Buzhala</strong>
+        <span>Google-Rezension · <time datetime="2024-01-12">12. Januar 2024</time></span>
+      </figcaption>
+    </figure>
+    <figure class="google-review-card">
+      <div class="google-review-stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
+      <blockquote><p>Tolle Arbeit und schnelle Rückmeldung</p></blockquote>
+      <figcaption>
+        <strong>Andrei Parvu</strong>
+        <span>Google-Rezension · <time datetime="2026-10-05">5. Oktober 2026</time></span>
+      </figcaption>
+    </figure>
+    <figure class="google-review-card">
+      <div class="google-review-stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
+      <blockquote><p>Super kompetentes Team. Nur zum weiterempfehlen</p></blockquote>
+      <figcaption>
+        <strong>J D</strong>
+        <span>Google-Rezension · <time datetime="2026-10-05">5. Oktober 2026</time></span>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="google-reviews-footer">
+    <p class="google-reviews-note">Ausgewählte Google-Rezensionen im Originalwortlaut.<br>Gesamtwertung und Anzahl: Stand 21. Oktober 2026.</p>
+    <a class="cine-btn" href="https://maps.google.com/maps?cid=14242139189001064114" target="_blank" rel="noopener noreferrer">ALLE BEWERTUNGEN AUF GOOGLE ANSEHEN <span class="arr" aria-hidden="true">↗</span></a>
+  </div>
 </section>
 
-<!-- =========================
-     SCENE 04 / NOVA
-========================= -->
+<section class="collaboration" id="ablauf" aria-labelledby="processTitle">
+<div class="chapter-line reveal">
+    SCENE 05 / ZUSAMMENARBEIT
+  </div>
+<h2 class="big-title reveal" id="processTitle">VON DER IDEE<br><span>ZUR UMSETZUNG.</span></h2>
+<p class="text reveal" style="margin-top:32px">Du bringst dein Vorhaben mit. Gemeinsam machen wir daraus ein Projekt mit klaren nächsten Schritten.</p>
+<ol class="process-grid">
+<li class="reveal"><span class="offer-group-number">01 / GESPRÄCH</span><h3>Wir hören zu.</h3><p>Was bietest du an, wen möchtest du erreichen und was brauchst du? Wir klären Ziele, Umfang und Rahmen.</p></li>
+<li class="reveal"><span class="offer-group-number">02 / KONZEPT</span><h3>Wir planen deinen Auftritt.</h3><p>Wir entwickeln Struktur, Gestaltung und Inhalte. Du gibst Feedback, bevor wir die Richtung gemeinsam festlegen.</p></li>
+<li class="reveal"><span class="offer-group-number">03 / UMSETZUNG</span><h3>Deine Idee wird sichtbar.</h3><p>Wir setzen die abgestimmten Leistungen um, prüfen das Ergebnis und stimmen die Veröffentlichung mit dir ab.</p></li>
+</ol><div class="hero-actions reveal"><a class="cine-btn" href="#ideen">PROJEKT VORBEREITEN <span class="arr" aria-hidden="true">→</span></a></div>
+</section>
 
 <section class="nova" id="nova">
 
   <div class="chapter-line reveal">
-    SCENE 05 / MEET NOVA
+    SCENE 06 / NOVA
   </div>
 
   <div class="nova-grid">
@@ -4186,20 +4134,52 @@ footer .clock-time{
 
 </section>
 
+<section class="ideas" id="ideen" aria-labelledby="ideasTitle">
 
+  <div class="chapter-line reveal">
+    SCENE 07 / DEIN PROJEKT
+  </div>
 
-<!-- =========================
-     SCENE 10
-     Lead Magnet: interaktiver Sichtbarkeits-Check.
-     Alles läuft im Browser, gespeichert wird nichts.
-     Erst wenn jemand den Check anfragt, geht das
-     Ergebnis über Formspree an uns.
-========================= -->
+  <h2 class="big-title reveal" id="ideasTitle">
+    DEIN PROJEKT.<br>
+    <span>DER ERSTE SCHRITT.</span>
+  </h2>
+
+  <p class="ideas-lead reveal">Schon eine Idee? Wähle deine Leistungen oder beschreibe dein Vorhaben in drei kurzen Fragen. Noch unsicher? Nutze die Branchenideen und die Suche darunter.</p>
+
+<div class="project-paths reveal" aria-label="Projekt vorbereiten">
+<div><p class="ideas-label">ICH WEISS, WAS ICH BRAUCHE</p><p>Stelle die passenden Leistungen für dein Projekt zusammen.</p><button class="cine-btn primary" type="button" data-open-builder>LEISTUNGEN WÄHLEN <span class="arr" aria-hidden="true">→</span></button></div>
+<div><p class="ideas-label">ICH MÖCHTE MEINE IDEE BESCHREIBEN</p><p>Drei Fragen zu deiner Idee, deiner Zielgruppe und deinem Ziel.</p><button class="widget-open cine-btn" type="button" data-widget="briefingWidget">IDEE BESCHREIBEN <span class="arr" aria-hidden="true">→</span></button></div>
+</div>
+  <div class="ideas-box reveal">
+    <div class="ideas-panel">
+      <span class="ideas-label">DEINE BRANCHE</span>
+      <div class="chip-row ideas-chips" role="radiogroup" aria-label="Branche">
+        <button type="button" role="radio" aria-checked="true" class="on" data-branch="cafe">Café</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="friseur">Friseur</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="handwerk">Handwerk</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="praxis">Praxis</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="restaurant">Restaurant</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="laden">Laden</button>
+        <button type="button" role="radio" aria-checked="false" data-branch="andere">Andere</button>
+      </div>
+      <div class="slot" aria-live="polite"><div class="slot-reel"></div></div>
+      <p class="ideas-result" aria-live="polite"></p>
+      <button class="cine-btn primary ideas-mix" type="button">IDEE MISCHEN <span class="arr" aria-hidden="true">→</span></button>
+    </div>
+    <div class="ideas-panel">
+      <label class="ideas-label" for="ideasSearch">WAS BRAUCHST DU?</label>
+      <input class="ideas-search" id="ideasSearch" type="text" placeholder="z. B. mehr Kunden" autocomplete="off">
+      <ul class="ideas-hits" aria-live="polite"></ul>
+    </div>
+  </div>
+
+</section>
 
 <section class="check" id="check">
 
   <div class="chapter-line reveal">
-    SCENE 06 / VISIBILITY CHECK
+    SCENE 08 / SICHTBARKEITS-CHECK
   </div>
 
   <div class="print-only check-print-head">
@@ -4426,15 +4406,10 @@ footer .clock-time{
 
 </section>
 
-<!-- =========================
-     BONUS / HANDBUCH
-     Verkauf des PDF-Handbuchs über Digistore24.
-========================= -->
-
 <section class="handbook" id="handbuch">
 
   <div class="chapter-line reveal">
-    BONUS / DAS HANDBUCH
+    SCENE 09 / DAS HANDBUCH
   </div>
 
   <div class="handbook-grid">
@@ -4477,117 +4452,6 @@ footer .clock-time{
 
 </section>
 
-<!-- =========================
-     SCENE 07 / TOOLS
-========================= -->
-
-<section class="tools">
-
-  <div class="chapter-line reveal">
-    SCENE 07 / INTERACTIVE TOOLS
-  </div>
-
-  <div class="tools-intro">
-
-    <h2 class="big-title reveal">
-      MACH<br>
-      <span>DEINE IDEE</span><br>
-      KONKRET.
-    </h2>
-
-    <p class="text reveal" style="margin-top:40px;">
-      Finde heraus, was zu deinem Projekt passt,
-      erhalte eine erste Orientierung und beschreibe
-      deine Idee direkt.
-    </p>
-
-  </div>
-
-  <div class="widget-grid">
-
-    <div class="widget-card reveal" data-widget="servicesWidget">
-
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost" aria-hidden="true">01</span>
-
-      <div class="widget-number">
-        TOOL 01 / SELECTION
-      </div>
-
-      <h3>
-        Was brauchst du?
-      </h3>
-
-      <p>
-        Wähle aus unseren Leistungen dein eigenes Projekt.
-      </p>
-
-      <div class="widget-meta">14 LEISTUNGEN · 1 MINUTE</div>
-
-      <button class="widget-open cine-btn" type="button" data-widget="servicesWidget">
-        PROJEKT STARTEN <span class="arr" aria-hidden="true">→</span>
-      </button>
-
-    </div>
-
-    <div class="widget-card reveal" data-widget="briefingWidget">
-
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost" aria-hidden="true">02</span>
-
-      <div class="widget-number">
-        TOOL 02 / BRIEFING
-      </div>
-
-      <h3>
-        Deine Idee
-      </h3>
-
-      <p>
-        Beantworte ein paar Fragen und erstelle dein Projekt-Briefing.
-      </p>
-
-      <div class="widget-meta">3 FRAGEN · 1 MINUTE</div>
-
-      <button class="widget-open cine-btn" type="button" data-widget="briefingWidget">
-        IDEE STARTEN <span class="arr" aria-hidden="true">→</span>
-      </button>
-
-    </div>
-
-    <div class="widget-card reveal" data-nova>
-
-      <span class="widget-spot" aria-hidden="true"></span>
-      <span class="widget-ghost" aria-hidden="true">03</span>
-
-      <div class="widget-number">
-        TOOL 03 / NOVA
-      </div>
-
-      <h3>
-        Hör Nova zu
-      </h3>
-
-      <p>
-        Unsere KI-Assistentin stellt sich in ein paar Sekunden selbst vor.
-      </p>
-
-      <div class="widget-meta">11 SEKUNDEN · MIT TON</div>
-
-      <button class="widget-open cine-btn" type="button" data-nova-play>
-        ANHÖREN <span class="arr" aria-hidden="true">→</span>
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     SCENE 11
-========================= -->
-
 <section class="instagram">
 
   <div class="ig-grid">
@@ -4595,7 +4459,7 @@ footer .clock-time{
   <div class="ig-copy">
 
   <div class="chapter-line reveal">
-    SCENE 08 / SOCIALCLIP.ART
+    SCENE 10 / INSTAGRAM
   </div>
 
   <h2 class="big-title reveal">
@@ -4675,57 +4539,10 @@ footer .clock-time{
 
 </section>
 
-<!-- Google-Bewertungen: Originaltexte aus dem Unternehmensprofil. -->
-<section class="google-reviews" id="bewertungen" aria-labelledby="reviews-title">
-  <div class="chapter-line reveal">SCENE 09 / CUSTOMER VOICES</div>
-  <div class="google-reviews-header">
-    <h2 class="big-title reveal" id="reviews-title">ECHTE<br><span>STIMMEN.</span></h2>
-    <div class="google-reviews-summary">
-      <div class="google-reviews-score"><strong>5,0</strong><span>/ 5</span></div>
-      <div class="google-review-stars" role="img" aria-label="Gesamtbewertung: 5 von 5 Sternen">★★★★★</div>
-      <p>Aus 13 Google-Bewertungen</p>
-    </div>
-  </div>
-  <div class="google-reviews-grid">
-    <figure class="google-review-card">
-      <div class="google-review-stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
-      <blockquote><p>Danke für das tolle Ergebnis, die Bilder sind genial.<br>Preis und Leistung tip top<br>Kann ich nur weiter empfehlen.</p></blockquote>
-      <figcaption>
-        <strong>D Buzhala</strong>
-        <span>Google-Rezension · <time datetime="2024-01-12">12. Januar 2024</time></span>
-      </figcaption>
-    </figure>
-    <figure class="google-review-card">
-      <div class="google-review-stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
-      <blockquote><p>Tolle Arbeit und schnelle Rückmeldung</p></blockquote>
-      <figcaption>
-        <strong>Andrei Parvu</strong>
-        <span>Google-Rezension · <time datetime="2026-10-05">5. Oktober 2026</time></span>
-      </figcaption>
-    </figure>
-    <figure class="google-review-card">
-      <div class="google-review-stars" role="img" aria-label="5 von 5 Sternen">★★★★★</div>
-      <blockquote><p>Super kompetentes Team. Nur zum weiterempfehlen</p></blockquote>
-      <figcaption>
-        <strong>J D</strong>
-        <span>Google-Rezension · <time datetime="2026-10-05">5. Oktober 2026</time></span>
-      </figcaption>
-    </figure>
-  </div>
-  <div class="google-reviews-footer">
-    <p class="google-reviews-note">Ausgewählte Google-Rezensionen im Originalwortlaut.<br>Gesamtwertung und Anzahl: Stand 21. Oktober 2026.</p>
-    <a class="cine-btn" href="https://maps.google.com/maps?cid=14242139189001064114" target="_blank" rel="noopener noreferrer">ALLE BEWERTUNGEN AUF GOOGLE ANSEHEN <span class="arr" aria-hidden="true">↗</span></a>
-  </div>
-</section>
-
-<!-- =========================
-     SCENE 12
-========================= -->
-
 <section class="contact" id="kontakt">
 
   <div class="chapter-line reveal">
-    SCENE 10 / YOUR STORY
+    SCENE 11 / KONTAKT
   </div>
 
   <h2 class="big-title reveal">
