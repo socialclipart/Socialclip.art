@@ -1,0 +1,1 @@
+{"name":"socialclip-chat-backend","version":"1.0.0","private":true,"type":"module","engines":{"node":">=22"},"scripts":{"test":"node --test test/*.test.mjs"},"dependencies":{"ai":"7.0.148","zod":"^4.0.0"}}
