@@ -232,7 +232,7 @@ text("previewUrl","SocialClip / "+state.name+" · Designkonzept");text("webName"
 text("postBrand",state.name.toUpperCase()+" / SOCIALCLIP");text("postHeadline",i.post);$("postHeadline").style.whiteSpace="pre-line";text("postTag",i.tag);text("postCaption",i.caption);
 text("filmTitle",state.name+": Die Story in 15 Sekunden.");text("filmDescription","Drei Szenen. Ein Markenmoment. Eine Idee für Reels, Storys oder bezahlte Werbung.");
 text("scene1",i.hook);text("scene2",i.reveal);text("scene3",i.finish);
-text("leadBrief","Unternehmen: "+state.name+"\nBranche: "+state.industry+"\nLook: "+state.look+"\nGewünschtes Konzept: Website / Instagram / Werbeclip\nVision: "+i.title+"\nGeteilter Link: "+shareURL()+"\nHinweis: automatisch erzeugter Konzeptentwurf aus Vorlagen, kein Website-Scan.");
+$("leadBrief").value="Unternehmen: "+state.name+"\nBranche: "+state.industry+"\nLook: "+state.look+"\nGewünschtes Konzept: Website / Instagram / Werbeclip\nVision: "+i.title+"\nGeteilter Link: "+shareURL()+"\nHinweis: automatisch erzeugter Konzeptentwurf aus Vorlagen, kein Website-Scan.";
 $("reveal").hidden=false}
 function showTab(key){active=key;["web","post","film"].forEach(function(k){$("view-"+k).hidden=k!==key;$("tab-"+k).setAttribute("aria-selected",String(k===key))})}
 document.querySelectorAll(".tab").forEach(function(t){t.addEventListener("click",function(){showTab(t.dataset.tab)})});
