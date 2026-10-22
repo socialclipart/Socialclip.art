@@ -7,6 +7,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Unverbindlicher Website-Entwurf von socialclip.art für G&amp;S Immobilienkonzept, Koblenz.">
 <link rel="stylesheet" href="/fonts/fonts.css">
+<script>document.documentElement.className+=' js'</script>
 <style>
 :root{
   --bg:#0b0b0c; --bg2:#121214; --card:#17171a; --line:#2a2a2e;
@@ -191,9 +192,9 @@ footer{border-top:1px solid var(--line);padding:50px 0 34px;color:var(--muted);f
   body{padding-bottom:80px}
 }
 
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -348,7 +349,7 @@ footer{border-top:1px solid var(--line);padding:50px 0 34px;color:var(--muted);f
     <p class="lead reveal">Egal ob Mieter, Eigenheimbesitzer, Hausverwaltung oder Investor – wähle deinen Bereich.</p>
 
     <div class="tabs" role="tablist" id="tabs"></div>
-    <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
+    <div class="panel" id="panel" role="tabpanel" aria-live="polite"><div><h3>Mieter</h3><p class="serif gold" style="font-size:24px;margin-bottom:10px">Wohnqualität, die man spürt</p><p>Kleine Reparatur oder großer Schaden: Wir kümmern uns schnell und unkompliziert – in Abstimmung mit deinem Vermieter.</p></div><ul><li>Schnelle Hilfe bei Schäden</li><li>Reparaturen &amp; Kleinmontagen</li><li>Küchenmontage beim Einzug</li></ul></div>
   </div>
 </section>
 
