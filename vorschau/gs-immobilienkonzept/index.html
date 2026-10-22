@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>G&amp;S Immobilienkonzept – Designvorschau</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Unverbindlicher Website-Entwurf von socialclip.art für G&amp;S Immobilienkonzept, Koblenz.">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+:root{
+  --bg:#0b0b0c; --bg2:#121214; --card:#17171a; --line:#2a2a2e;
+  --gold:#c9a45c; --gold2:#e8cf96; --gold3:#8a6a2f;
+  --text:#f3efe6; --muted:#a8a29a; --red:#d94b3d;
+  --serif:'Instrument Serif',Georgia,serif; --sans:'Geist',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --r:14px; --max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+.gold{background:linear-gradient(100deg,var(--gold2),var(--gold) 45%,var(--gold3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold)}
+h1,h2,h3{line-height:1.05;letter-spacing:-.02em}
+h2{font-size:clamp(32px,4.6vw,54px);font-weight:700;text-transform:uppercase;margin:14px 0 16px}
+h2 .serif{text-transform:none;font-size:1.08em}
+.lead{color:var(--muted);font-size:18px;max-width:640px}
+section{padding:110px 0;position:relative}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;font-family:inherit}
+.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#141008;box-shadow:0 10px 30px -10px rgba(201,164,92,.6)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 40px -12px rgba(201,164,92,.8)}
+.btn-ghost{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{border-color:var(--gold)}
+
+/* Vorschau-Hinweis */
+.preview{background:var(--gold);color:#141008;font-size:13px;text-align:center;padding:8px 16px;font-weight:500}
+.preview a{text-decoration:underline;font-weight:700}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px;gap:20px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-txt b{display:block;font-size:15px;letter-spacing:.28em;font-weight:600}
+.brand-txt small{display:block;font-size:9.5px;letter-spacing:.34em;color:var(--gold);text-transform:uppercase}
+.menu{display:flex;gap:30px;font-size:14px;color:var(--muted)}
+.menu a:hover{color:var(--gold2)}
+.nav .btn{padding:11px 18px;font-size:14px}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:44px;height:44px;color:var(--text);cursor:pointer}
+@media(max-width:900px){
+  .menu{position:fixed;inset:76px 0 auto 0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 20px 20px;transform:translateY(-130%);transition:transform .3s;z-index:-1}
+  .menu.open{transform:none}
+  .menu a{padding:14px 0;border-bottom:1px solid var(--line);font-size:16px;color:var(--text)}
+  .burger{display:grid;place-items:center}
+  .nav .btn{display:none}
+}
+
+/* Hero */
+.hero{padding:70px 0 0;min-height:calc(100vh - 110px);display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 75% 70%,rgba(232,150,60,.28),transparent 60%),
+  radial-gradient(700px 400px at 20% 10%,rgba(201,164,92,.12),transparent 60%),
+  linear-gradient(180deg,#0b0b0c 0%,#15110b 60%,#0b0b0c 100%)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(44px,7.2vw,96px);font-weight:800;text-transform:uppercase;margin:22px 0 22px}
+.hero h1 .serif{display:block;text-transform:none;font-size:.82em;font-weight:400;margin-top:6px}
+.hero p{font-size:19px;color:#cfc8bc;max-width:560px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.hero-facts{display:flex;flex-wrap:wrap;gap:28px;margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
+.hero-facts div{font-size:13px;color:var(--muted)}
+.hero-facts b{display:block;font-size:22px;color:var(--text);font-weight:700}
+.emblem{position:relative;aspect-ratio:1;max-width:460px;margin-left:auto;width:100%}
+.emblem .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(201,164,92,.35);animation:spin 40s linear infinite}
+.emblem .ring::after{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 20px var(--gold)}
+.emblem .ring.r2{inset:9%;border-style:dashed;border-color:rgba(201,164,92,.18);animation-duration:70s;animation-direction:reverse}
+.emblem .ring.r2::after{display:none}
+.emblem .core{position:absolute;inset:17%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#24201a,#0d0c0b 70%);border:2px solid #3a332a;box-shadow:0 40px 90px -20px rgba(0,0,0,.9),inset 0 0 60px rgba(201,164,92,.08);display:grid;place-items:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.skyline{margin-top:70px;width:100%;height:auto;opacity:.9}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.emblem{max-width:300px;margin:10px auto 0}}
+
+/* Notfall-Leiste */
+.alert{background:linear-gradient(90deg,#1b1410,#120f0c);border-top:1px solid #3a2a1a;border-bottom:1px solid #3a2a1a;padding:28px 0}
+.alert .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.alert-l{display:flex;align-items:center;gap:18px}
+.alert-ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:rgba(217,75,61,.12);border:1px solid rgba(217,75,61,.4);flex:none}
+.alert h3{font-size:20px;text-transform:uppercase;letter-spacing:.02em}
+.alert p{color:var(--muted);font-size:14.5px}
+
+/* Leistungen */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:50px}
+.card{background:linear-gradient(180deg,var(--card),#121214);border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;transition:border-color .25s,transform .25s;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 160px at 0 0,rgba(201,164,92,.12),transparent 70%);opacity:0;transition:opacity .3s}
+.card:hover{border-color:rgba(201,164,92,.55);transform:translateY(-4px)}
+.card:hover::before{opacity:1}
+.card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;border:1px solid rgba(201,164,92,.35);color:var(--gold);margin-bottom:22px;background:rgba(201,164,92,.06)}
+.card h3{font-size:17px;margin-bottom:8px;font-weight:650}
+.card p{font-size:14px;color:var(--muted)}
+.card.wide{display:flex;flex-direction:column;justify-content:flex-end;min-height:220px;background:linear-gradient(135deg,#2a2114,#121214 70%)}
+.card.wide h3{font-size:24px}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+
+/* Zielgruppen */
+.alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:44px 0 26px}
+.tab{background:transparent;border:1px solid var(--line);color:var(--muted);padding:10px 16px;border-radius:999px;font:500 14px var(--sans);cursor:pointer;transition:.2s}
+.tab:hover{color:var(--text);border-color:#444}
+.tab[aria-selected=true]{background:var(--gold);border-color:var(--gold);color:#141008}
+.panel{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:44px}
+.panel h3{font-size:32px;text-transform:uppercase;margin-bottom:12px}
+.panel p{color:var(--muted)}
+.panel ul{list-style:none;display:grid;gap:12px}
+.panel li{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid var(--line);font-size:15px}
+.panel li::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23141008' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/11px no-repeat}
+.panel .fade{animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:800px){.panel{grid-template-columns:1fr;padding:28px}}
+
+/* Upgrade */
+.upgrade{overflow:hidden}
+.checker{height:18px;background:repeating-conic-gradient(#f3efe6 0 25%,#0b0b0c 0 50%) 0 0/18px 18px;opacity:.9}
+.up-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.up-quote{font-size:clamp(30px,4vw,48px);font-weight:800;text-transform:uppercase;line-height:1.05}
+.up-quote .serif{text-transform:none}
+.track{position:relative;display:grid;gap:14px}
+.lap{display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:center;padding:20px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.lap .n{font:700 28px var(--sans);color:var(--gold);text-align:center;border-right:1px solid var(--line)}
+.lap h4{font-size:17px;margin-bottom:2px}
+.lap p{font-size:14px;color:var(--muted)}
+.lap.finish{background:linear-gradient(135deg,#2a2114,var(--card));border-color:rgba(201,164,92,.45)}
+@media(max-width:900px){.up-grid{grid-template-columns:1fr;gap:36px}}
+
+/* Ablauf */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;counter-reset:s;border-top:1px solid var(--line)}
+.step{padding:30px 24px 0 0;position:relative}
+.step::before{counter-increment:s;content:"0" counter(s);display:block;font:500 13px 'Geist Mono',monospace;color:var(--gold);margin-bottom:18px}
+.step::after{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--gold)}
+.step h3{font-size:19px;margin-bottom:8px}
+.step p{font-size:14.5px;color:var(--muted)}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr;row-gap:30px}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* Werte */
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px}
+.value{padding:32px;border-radius:var(--r);border:1px solid var(--line);background:var(--card)}
+.value .big{font-family:var(--serif);font-style:italic;font-size:44px;color:var(--gold);line-height:1;margin-bottom:14px}
+.value h3{font-size:18px;margin-bottom:6px}
+.value p{color:var(--muted);font-size:14.5px}
+@media(max-width:800px){.values{grid-template-columns:1fr}}
+
+/* Kontakt */
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:start}
+.c-info{display:grid;gap:14px;margin-top:30px}
+.c-row{display:flex;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.c-row svg{color:var(--gold);flex:none}
+.c-row small{display:block;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.c-row b{font-weight:600;font-size:15px;word-break:break-all}
+form{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 20px}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:inline-block;padding:9px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--muted);cursor:pointer;transition:.2s}
+.chip input:checked+span{background:rgba(201,164,92,.14);border-color:var(--gold);color:var(--gold2)}
+.chip input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+label.f{display:block;font-size:13px;color:var(--muted);margin-bottom:16px}
+label.f input,label.f textarea,label.f select{display:block;width:100%;margin-top:6px;background:#0f0f11;border:1px solid var(--line);border-radius:10px;padding:13px 14px;color:var(--text);font:15px var(--sans)}
+label.f input:focus,label.f textarea:focus,label.f select:focus{outline:none;border-color:var(--gold)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-note{font-size:12px;color:var(--muted);margin-top:14px}
+.ok{display:none;text-align:center;padding:40px 10px}
+.ok.show{display:block}
+.ok .tick{width:64px;height:64px;border-radius:50%;background:var(--gold);display:grid;place-items:center;margin:0 auto 18px}
+@media(max-width:900px){.contact{grid-template-columns:1fr}}
+@media(max-width:520px){.row2{grid-template-columns:1fr}form{padding:24px}}
+
+/* Footer */
+footer{border-top:1px solid var(--line);padding:50px 0 34px;color:var(--muted);font-size:14px}
+.f-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+.f-links{display:flex;gap:22px;flex-wrap:wrap}
+.f-links a:hover{color:var(--gold2)}
+.f-bottom{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px}
+
+/* Mobile Sticky-CTA */
+.m-cta{display:none}
+@media(max-width:700px){
+  .m-cta{display:flex;gap:10px;position:fixed;left:12px;right:12px;bottom:12px;z-index:60}
+  .m-cta a{flex:1;justify-content:center;padding:14px}
+  body{padding-bottom:80px}
+}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="preview">Designvorschau – unverbindlicher Website-Entwurf für G&amp;S Immobilienkonzept, erstellt von <a href="https://socialclip.art/webdesign-erlangen/">socialclip.art</a></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand" aria-label="G&amp;S Immobilien – Startseite">
+      <svg width="46" height="46" viewBox="0 0 64 64" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8cf96"/><stop offset=".55" stop-color="#c9a45c"/><stop offset="1" stop-color="#8a6a2f"/></linearGradient></defs>
+        <circle cx="32" cy="32" r="30" fill="#111" stroke="#3a332a" stroke-width="2"/>
+        <text x="21" y="38" font-family="Georgia,serif" font-size="28" fill="url(#lg)" text-anchor="middle">G</text>
+        <text x="40" y="44" font-family="Georgia,serif" font-size="30" fill="url(#lg)" text-anchor="middle">S</text>
+        <path d="M30 24l4-3.5 4 3.5v4h-8z" fill="url(#lg)"/>
+      </svg>
+      <span class="brand-txt"><b>IMMOBILIEN</b><small>Wir bewegen Werte</small></span>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#fuer-wen">Für wen</a>
+      <a href="#upgrade">Immobilien-Upgrade</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a href="#kontakt" class="btn btn-gold">Anfrage stellen</a>
+    <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Immobilienservice · Koblenz am Rhein</span>
+      <h1><span class="gold">Ein Kontakt.</span><span class="serif">Viele Lösungen.</span></h1>
+      <p>Dein Allround-Konzept für deine Immobilie: von der Schadensanierung über den Innenausbau bis zur Objektbetreuung. Wir koordinieren alle Gewerke – von SHK bis Elektro – und du hast nur einen Ansprechpartner.</p>
+      <div class="hero-cta">
+        <a href="#kontakt" class="btn btn-gold">Kostenlose Anfrage
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#leistungen" class="btn btn-ghost">Leistungen ansehen</a>
+      </div>
+      <div class="hero-facts">
+        <div><b>1</b>Ansprechpartner</div>
+        <div><b>10+</b>Gewerke koordiniert</div>
+        <div><b>SHK – Elektro</b>Partnernetzwerk</div>
+      </div>
+    </div>
+    <div class="emblem" aria-hidden="true">
+      <div class="ring"></div><div class="ring r2"></div>
+      <div class="core">
+        <svg width="62%" viewBox="0 0 200 200">
+          <defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1dca8"/><stop offset=".5" stop-color="#c9a45c"/><stop offset="1" stop-color="#7d5f28"/></linearGradient></defs>
+          <text x="72" y="112" font-family="Georgia,serif" font-size="104" fill="url(#lg2)" text-anchor="middle">G</text>
+          <text x="124" y="136" font-family="Georgia,serif" font-size="112" fill="url(#lg2)" text-anchor="middle">S</text>
+          <path d="M113 74l11-10 11 10v11h-22z" fill="url(#lg2)"/>
+          <rect x="120" y="76" width="3.5" height="3.5" fill="#0d0c0b"/><rect x="125" y="76" width="3.5" height="3.5" fill="#0d0c0b"/><rect x="120" y="81" width="3.5" height="3.5" fill="#0d0c0b"/><rect x="125" y="81" width="3.5" height="3.5" fill="#0d0c0b"/>
+          <text x="100" y="172" font-family="Georgia,serif" font-size="14" letter-spacing="5" fill="#c9a45c" text-anchor="middle">IMMOBILIEN</text>
+          <text x="100" y="188" font-family="Georgia,serif" font-size="7" letter-spacing="3.5" fill="#8a7a5c" text-anchor="middle">WIR BEWEGEN WERTE</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <!-- Stilisierte Koblenzer Silhouette mit Festung Ehrenbreitstein -->
+  <svg class="skyline" viewBox="0 0 1440 170" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2116"/><stop offset="1" stop-color="#0b0b0c"/></linearGradient>
+      <linearGradient id="river" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(201,164,92,0)"/><stop offset=".6" stop-color="rgba(232,170,90,.45)"/><stop offset="1" stop-color="rgba(201,164,92,0)"/></linearGradient>
+    </defs>
+    <path fill="url(#sk)" d="M0 120 L80 110 L160 96 L240 88 L300 70 L320 70 L320 58 L360 58 L360 52 L470 52 L470 58 L520 58 L520 70 L560 74 L640 92 L700 104 L760 104 L760 80 L772 80 L772 64 L778 56 L784 64 L784 80 L800 80 L800 96 L840 96 L840 84 L870 84 L870 96 L900 96 L900 76 L912 76 L912 60 L918 50 L924 60 L924 76 L936 76 L936 100 L980 100 L980 88 L1010 88 L1010 100 L1060 100 L1060 82 L1100 82 L1100 100 L1160 104 L1240 98 L1320 106 L1440 100 L1440 170 L0 170 Z"/>
+    <g fill="#e8cf96" opacity=".7">
+      <rect x="380" y="62" width="4" height="4"/><rect x="400" y="62" width="4" height="4"/><rect x="420" y="62" width="4" height="4"/><rect x="440" y="62" width="4" height="4"/>
+      <rect x="850" y="90" width="3" height="3"/><rect x="1072" y="90" width="3" height="3"/><rect x="1086" y="90" width="3" height="3"/><rect x="990" y="94" width="3" height="3"/>
+    </g>
+    <rect x="0" y="140" width="1440" height="3" fill="url(#river)"/>
+    <rect x="200" y="152" width="1000" height="2" fill="url(#river)" opacity=".5"/>
+  </svg>
+</section>
+
+<div class="alert">
+  <div class="wrap">
+    <div class="alert-l">
+      <div class="alert-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d94b3d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z"/></svg></div>
+      <div>
+        <h3>Sie haben einen Schaden an Ihrer Immobilie?</h3>
+        <p>Wasser, Feuer, Schimmel – wir sind Ihr Ansprechpartner und koordinieren einen reibungslosen Ablauf.</p>
+      </div>
+    </div>
+    <a href="#kontakt" class="btn btn-gold" data-topic="Schadensanierung">Schaden melden</a>
+  </div>
+</div>
+
+<section id="leistungen">
+  <div class="wrap">
+    <span class="eyebrow reveal">Leistungen</span>
+    <h2 class="reveal">Alles rund um <span class="serif gold">deine Immobilie</span></h2>
+    <p class="lead reveal">Statt zehn Handwerker zu suchen, rufst du einmal an. Wir planen, koordinieren und übernehmen die fachgerechte Ausführung mit zuverlässigen Partnern.</p>
+
+    <div class="grid">
+      <div class="card wide reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div>
+        <h3>Objektbetreuung</h3>
+        <p>Regelmäßige Kontrolle, Pflege und schnelle Reaktion – damit deine Immobilie ihren Wert behält.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z"/></svg></div>
+        <h3>Schadensanierung</h3>
+        <p>Wasser-, Brand- und Schimmelschäden – von der Trocknung bis zur Wiederherstellung.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 3v18M14 12h2"/></svg></div>
+        <h3>Innenausbau</h3>
+        <p>Fenster, Türen, Zargen, Regale und Trockenbau – sauber und maßgenau.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></div>
+        <h3>Holz- &amp; Bautenschutz</h3>
+        <p>Schutz für Bausubstanz und Holz gegen Feuchtigkeit, Schädlinge und Witterung.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div>
+        <h3>Betonbohr- &amp; Schneidearbeiten</h3>
+        <p>Kernbohrungen, Wand- und Deckenschnitte – präzise und staubarm.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 10h18M8 14h.01M12 14h.01"/></svg></div>
+        <h3>Küchenmontage</h3>
+        <p>Aufbau, Anschluss und Anpassung – deine Küche fertig zum Kochen.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M6 21V8l6-4 6 4v13M10 21v-5h4v5"/></svg></div>
+        <h3>Räumung &amp; Reinigung</h3>
+        <p>Entrümpelung, Bau- und Grundreinigung vor Übergabe oder Neuvermietung.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <h3>SHK bis Elektro</h3>
+        <p>Sanitär, Heizung, Klima und Elektrik über unser geprüftes Partnernetzwerk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fuer-wen" class="alt">
+  <div class="wrap">
+    <span class="eyebrow reveal">Für wen</span>
+    <h2 class="reveal">Maßgeschneiderte Lösungen <span class="serif gold">für jede Immobilie</span></h2>
+    <p class="lead reveal">Egal ob Mieter, Eigenheimbesitzer, Hausverwaltung oder Investor – wähle deinen Bereich.</p>
+
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="upgrade" class="upgrade">
+  <div class="checker" style="position:absolute;top:0;left:0;right:0"></div>
+  <div class="wrap up-grid">
+    <div>
+      <span class="eyebrow reveal">Immobilien-Upgrade</span>
+      <p class="up-quote reveal" style="margin-top:18px">Andere tunen ihre Autos – <span class="serif gold">wir tunen deine Immobilie.</span></p>
+      <p class="lead reveal" style="margin-top:20px">Ein Auto begleitet dich ein paar Jahre, deine Immobilie ein Leben lang. Wir sind die Rennstrecke deiner Immobilie: Wir machen sie fit für mehr Wohnqualität, höhere Mieteinnahmen und eine nachhaltige Wertsteigerung.</p>
+      <a href="#kontakt" class="btn btn-gold reveal" style="margin-top:30px" data-topic="Modernisierung">Upgrade anfragen</a>
+    </div>
+    <div class="track">
+      <div class="lap reveal"><div class="n">P1</div><div><h4>Boxenstopp – Check</h4><p>Wir nehmen deine Immobilie unter die Lupe und zeigen Potenziale.</p></div></div>
+      <div class="lap reveal"><div class="n">P2</div><div><h4>Tuning – Modernisierung</h4><p>Bad, Küche, Böden, Fenster, Technik: gezielt dort, wo es Wert schafft.</p></div></div>
+      <div class="lap reveal"><div class="n">P3</div><div><h4>Feinschliff – Bautenschutz</h4><p>Langlebige Substanz, damit das Upgrade auch nach Jahren hält.</p></div></div>
+      <div class="lap finish reveal"><div class="n">🏁</div><div><h4>Zielflagge – Wertsteigerung</h4><p>Mehr Komfort, bessere Vermietbarkeit, nachhaltige Rendite.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="ablauf" class="alt">
+  <div class="wrap">
+    <span class="eyebrow reveal">So läuft's</span>
+    <h2 class="reveal">In vier Schritten <span class="serif gold">zum Ergebnis</span></h2>
+    <div class="steps">
+      <div class="step reveal"><h3>Anfrage</h3><p>Kurz per Formular, E-Mail oder Telefon schildern, worum es geht.</p></div>
+      <div class="step reveal"><h3>Besichtigung</h3><p>Wir schauen uns alles vor Ort an und klären die Details.</p></div>
+      <div class="step reveal"><h3>Angebot &amp; Plan</h3><p>Transparentes Angebot, abgestimmter Zeitplan, ein fester Ansprechpartner.</p></div>
+      <div class="step reveal"><h3>Ausführung</h3><p>Wir koordinieren alle Gewerke – du bekommst die fertige Lösung.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow reveal">Warum G&amp;S</span>
+    <h2 class="reveal">Wir bewegen <span class="serif gold">Werte</span></h2>
+    <div class="values">
+      <div class="value reveal"><div class="big">Eins</div><h3>Ein Ansprechpartner</h3><p>Keine Koordination zwischen zehn Firmen – wir übernehmen das für dich.</p></div>
+      <div class="value reveal"><div class="big">Fair</div><h3>Zuverlässige Partner</h3><p>Fachgerechte Ausführung durch geprüfte Handwerksbetriebe aus der Region.</p></div>
+      <div class="value reveal"><div class="big">Maß</div><h3>Individuelle Lösungen</h3><p>Jede Immobilie ist anders. Darum gibt es bei uns keine Lösung von der Stange.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" class="alt">
+  <div class="wrap contact">
+    <div>
+      <span class="eyebrow reveal">Kontakt</span>
+      <h2 class="reveal">Lass uns über <span class="serif gold">deine Immobilie</span> sprechen</h2>
+      <p class="lead reveal">Schreib uns kurz, worum es geht – wir melden uns schnellstmöglich zurück.</p>
+      <div class="c-info">
+        <a class="c-row reveal" href="mailto:kontakt@gs-immokonzept-koblenz.de">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <span><small>E-Mail</small><b>kontakt@gs-immokonzept-koblenz.de</b></span>
+        </a>
+        <div class="c-row reveal">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span><small>Einsatzgebiet</small><b>Koblenz am Rhein &amp; Umgebung</b></span>
+        </div>
+        <a class="c-row reveal" href="https://www.instagram.com/gsimmokonzept/" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>
+          <span><small>Instagram</small><b>@gsimmokonzept</b></span>
+        </a>
+      </div>
+    </div>
+
+    <form id="form" class="reveal" novalidate>
+      <div id="formBody">
+        <div style="font-size:13px;color:var(--muted)">Worum geht es?</div>
+        <div class="chips" id="chips"></div>
+        <div class="row2">
+          <label class="f">Name<input name="name" required autocomplete="name"></label>
+          <label class="f">Telefon<input name="tel" type="tel" autocomplete="tel"></label>
+        </div>
+        <label class="f">E-Mail<input name="mail" type="email" required autocomplete="email"></label>
+        <label class="f">Ich bin …
+          <select name="rolle"><option>Mieter</option><option>Eigenheimbesitzer</option><option>Hausverwaltung</option><option>Investor</option><option>Gewerbe</option></select>
+        </label>
+        <label class="f">Nachricht<textarea name="msg" rows="4" placeholder="z. B. Wasserschaden im Bad, 2. OG, Koblenz-Lützel"></textarea></label>
+        <button class="btn btn-gold" type="submit" style="width:100%;justify-content:center">Anfrage senden</button>
+        <p class="form-note">Vorschau: Das Formular verschickt in diesem Entwurf noch nichts.</p>
+      </div>
+      <div class="ok" id="ok">
+        <div class="tick"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#141008" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+        <h3 style="font-size:24px;margin-bottom:8px">Danke für deine Anfrage!</h3>
+        <p style="color:var(--muted)">Wir melden uns schnellstmöglich bei dir.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <div style="color:var(--text);font-weight:600;letter-spacing:.2em">G&amp;S IMMOBILIENKONZEPT</div>
+        <div class="serif gold" style="font-size:20px">Wir bewegen Werte.</div>
+      </div>
+      <div class="f-links">
+        <a href="#leistungen">Leistungen</a><a href="#fuer-wen">Für wen</a><a href="#kontakt">Kontakt</a><a href="#top">Impressum</a><a href="#top">Datenschutz</a>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 G&amp;S Immobilienkonzept · Koblenz am Rhein</span>
+      <span>Webdesign: <a href="https://socialclip.art" style="color:var(--gold)">socialclip.art</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="m-cta">
+  <a href="mailto:kontakt@gs-immokonzept-koblenz.de" class="btn btn-ghost" style="background:#17171a">E-Mail</a>
+  <a href="#kontakt" class="btn btn-gold">Anfrage stellen</a>
+</div>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),menu=document.getElementById('menu');
+  burger.addEventListener('click',function(){var o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  menu.addEventListener('click',function(e){if(e.target.tagName==='A'){menu.classList.remove('open');burger.setAttribute('aria-expanded',false)}});
+
+  var groups=[
+    ['Mieter','Wohnqualität, die man spürt','Kleine Reparatur oder großer Schaden: Wir kümmern uns schnell und unkompliziert – in Abstimmung mit deinem Vermieter.',['Schnelle Hilfe bei Schäden','Reparaturen & Kleinmontagen','Küchenmontage beim Einzug']],
+    ['Eigenheim','Wertsteigerung fürs Zuhause','Modernisieren, sanieren, schützen – wir bringen dein Eigenheim auf den neuesten Stand und erhalten seinen Wert.',['Modernisierung von Bad, Küche & Böden','Holz- und Bautenschutz','Innenausbau: Fenster, Türen, Regale']],
+    ['Investoren','Nachhaltige Rendite','Wir machen Bestandsobjekte schnell wieder vermietbar und steigern ihren Wert – planbar und mit einem Ansprechpartner.',['Sanierung vor Neuvermietung','Kapitalanlage-Objekte aufwerten','Koordination aller Gewerke']],
+    ['Hausverwaltung','Ihr verlässlicher Servicepartner','Ein Partner für alle Gewerke: Wir entlasten Hausverwaltungen bei Schadensfällen, Instandhaltung und Objektbetreuung.',['Feste Ansprechperson','Schadensabwicklung inkl. Doku','Regelmäßige Objektbetreuung']],
+    ['Gewerbe & Büro','Moderne Arbeitswelten','Umbau, Instandhaltung und Ausbau von Gewerbe- und Büroflächen – mit minimalen Ausfallzeiten für deinen Betrieb.',['Flächen-Umbau & Trockenbau','Betonbohr- und Schneidearbeiten','Arbeiten außerhalb der Geschäftszeiten']],
+    ['Logistik & Industrie','Effizienz & Werterhalt','Robuste Lösungen für Hallen, Lager und Produktionsflächen – fachgerecht und termintreu.',['Kernbohrungen & Durchbrüche','Bautenschutz für Hallen','Instandhaltung im laufenden Betrieb']],
+    ['Betreiberimmobilie','Individuelle Lösungen','Hotels, Pflege, Gastronomie: Wir verstehen die Anforderungen von Betreiberimmobilien und planen entsprechend.',['Sanierung im laufenden Betrieb','Schnelle Schadenbehebung','Langfristige Betreuung']]
+  ];
+  var tabs=document.getElementById('tabs'),panel=document.getElementById('panel');
+  function show(i){
+    [].forEach.call(tabs.children,function(t,j){t.setAttribute('aria-selected',i===j)});
+    var g=groups[i];
+    panel.innerHTML='<div class="fade"><h3>'+g[0]+'</h3><p class="serif gold" style="font-size:24px;margin-bottom:10px">'+g[1]+'</p><p>'+g[2]+'</p></div><ul class="fade">'+g[3].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>';
+  }
+  groups.forEach(function(g,i){
+    var b=document.createElement('button');b.className='tab';b.type='button';b.setAttribute('role','tab');b.textContent=g[0];
+    b.addEventListener('click',function(){show(i)});tabs.appendChild(b);
+  });
+  show(0);
+
+  var topics=['Schadensanierung','Modernisierung','Innenausbau','Objektbetreuung','Bautenschutz','Betonbohrung','Küchenmontage','Sonstiges'];
+  var chips=document.getElementById('chips');
+  topics.forEach(function(t){
+    var l=document.createElement('label');l.className='chip';
+    l.innerHTML='<input type="checkbox" name="thema" value="'+t+'"><span>'+t+'</span>';chips.appendChild(l);
+  });
+  document.querySelectorAll('[data-topic]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var c=chips.querySelector('input[value="'+a.dataset.topic+'"]');if(c)c.checked=true;
+    });
+  });
+
+  var form=document.getElementById('form');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var bad=[].filter.call(form.querySelectorAll('[required]'),function(f){return !f.checkValidity()});
+    form.querySelectorAll('[required]').forEach(function(f){f.style.borderColor=''});
+    if(bad.length){bad.forEach(function(f){f.style.borderColor='#d94b3d'});bad[0].focus();return}
+    document.getElementById('formBody').style.display='none';
+    document.getElementById('ok').classList.add('show');
+  });
+
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){
+    es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+  },{threshold:.12}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in')});
+})();
+</script>
+</body>
+</html>
