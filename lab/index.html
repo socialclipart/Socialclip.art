@@ -57,9 +57,9 @@ input::placeholder,textarea::placeholder{color:#817b73}.grid2{display:grid;grid-
 <div class="panel">
 <div class="topline"><span class="labeltiny">SocialClip / Customer Journey Lab</span><span class="counter" id="stepCounter">01 / 04</span></div>
 <section id="setup" data-screen>
-<h2>Starte deinen Selbsttest.</h2><p class="sub">Keine Anmeldung, kein Abo und kein Zugriff auf deine Website erforderlich.</p>
+<h2>Starte deinen Selbsttest.</h2><p class="sub">Du bleibst beim Start hier im SocialClip LAB. Danach kannst du deine Website selbst in einem zweiten Tab öffnen und testen. Das ist ein Selbsttest, kein automatischer Website-Scan.</p>
 <form id="setupForm">
-<label class="field" for="url">Unternehmenswebsite<input id="url" name="url" type="text" inputmode="url" autocomplete="url" placeholder="www.dein-unternehmen.de" required><span class="hint">Wir öffnen nur deine Website in einem neuen Tab. Wir analysieren keine fremden, privaten Daten.</span></label>
+<label class="field" for="url">Unternehmenswebsite<input id="url" name="url" type="text" inputmode="url" autocomplete="url" placeholder="www.dein-unternehmen.de" required><span class="hint">Wichtig: Trägst du socialclip.art ein, öffnet sich später natürlich die SocialClip-Homepage – das ist die Website, die du als Besucher testen sollst.</span></label>
 <label class="field" for="goal">Was soll ein Besucher auf deiner Website tun?
 <select id="goal" name="goal" required>
 <option value="termin">Einen Termin buchen</option><option value="anfrage">Ein Angebot anfordern</option><option value="anruf">Das Unternehmen anrufen</option><option value="kauf">Etwas kaufen</option>
@@ -71,9 +71,10 @@ input::placeholder,textarea::placeholder{color:#817b73}.grid2{display:grid;grid-
 </section>
 <section id="test" data-screen hidden>
 <h2>Du bist jetzt ein Neukunde.</h2><p class="sub" id="testInstruction"></p>
-<div class="stage"><div class="stage-label">Deine Test-Website</div><p class="hostname" id="testHost"></p><div class="timer"><span id="seconds">30</span><span style="font-size:.28em;letter-spacing:0;color:var(--muted)"> Sekunden</span></div><div class="meter" aria-label="Verstrichene Testzeit"><div id="timerMeter"></div></div></div>
-<p class="note">Die Website wurde in einem neuen Tab geöffnet. Kehre danach hierher zurück und beantworte die Fragen. Falls der Tab blockiert wurde, öffne die Website über den Button unten.</p>
-<div class="actions"><button id="reopen" type="button" class="btn">Website erneut öffnen ↗</button><button id="testDone" type="button" class="btn primary">Ich bin zurück – auswerten →</button></div>
+<div class="stage"><div class="stage-label">Schritt 1: Deine Test-Website</div><p class="hostname" id="testHost"></p><div class="timer"><span id="seconds">30</span><span style="font-size:.28em;letter-spacing:0;color:var(--muted)"> Sekunden</span></div><div class="meter" aria-label="Verstrichene Testzeit"><div id="timerMeter"></div></div></div>
+<p class="note">So funktioniert es: 1. Tippe auf „Website öffnen“. Deine eingegebene Website (z. B. deren Homepage) wird im zweiten Tab angezeigt – das ist beabsichtigt. 2. Suche dort in 30 Sekunden nach der Aktion. 3. Wechsle zurück zum SocialClip-LAB-Tab und tippe auf „Fragen beantworten“.</p>
+<div class="actions"><a id="reopen" href="#" target="_blank" rel="noopener noreferrer" class="btn">1. Website zum Test öffnen ↗</a><button id="testDone" type="button" class="btn primary">2. Fragen beantworten →</button></div>
+<p class="small-success" id="testStatus" role="status">Der Timer startet, sobald du „Website zum Test öffnen“ tippst.</p>
 </section>
 <section id="audit" data-screen hidden>
 <h2>Wie einfach war dein Kundenweg?</h2><p class="sub">Antworte aus der Sicht eines Menschen, der dein Unternehmen noch nicht kennt. Es gibt kein Richtig oder Falsch.</p>
@@ -136,13 +137,12 @@ var state={url:"",host:"",goal:"termin",start:0,elapsed:0,answers:{},score:0};
 var timerHandle=null;
 function screen(id,step){document.querySelectorAll("[data-screen]").forEach(function(el){el.hidden=el.id!==id});$("stepCounter").textContent=step+" / 04";window.scrollTo({top:0,behavior:"smooth"});}
 function validSite(input){try{var u=new URL(/^https?:\/\//i.test(input)?input:"https://"+input);if(!["http:","https:"].includes(u.protocol)||!u.hostname.includes(".")||u.username||u.password) return null;return u;}catch(e){return null}}
-function openSite(){window.open(state.url,"_blank","noopener,noreferrer")}
 function refreshTimer(){if(!state.start)return;var elapsed=Math.floor((Date.now()-state.start)/1000);state.elapsed=elapsed;var left=Math.max(0,30-elapsed);$("seconds").textContent=left;$("timerMeter").style.width=(Math.min(100,elapsed/30*100))+"%";if(left===0&&timerHandle){clearInterval(timerHandle);timerHandle=null}}
-function startTest(){state.start=Date.now();$("testHost").textContent=state.host;$("testInstruction").textContent="Finde heraus, ob du als neuer Besucher innerhalb von 30 Sekunden "+goalText[state.goal]+" kannst.";screen("test","02");refreshTimer();if(timerHandle)clearInterval(timerHandle);timerHandle=setInterval(refreshTimer,300);openSite()}
+function startTest(){state.start=0;state.elapsed=0;$("seconds").textContent="30";$("timerMeter").style.width="0%";$("testStatus").textContent="Der Timer startet, sobald du „Website zum Test öffnen“ tippst.";$("reopen").href=state.url;$("testHost").textContent=state.host;$("testInstruction").textContent="Finde heraus, ob du als neuer Besucher innerhalb von 30 Sekunden "+goalText[state.goal]+" kannst. Der Test bleibt hier im SocialClip LAB.";if(timerHandle)clearInterval(timerHandle);timerHandle=null;screen("test","02")}
 $("setupForm").addEventListener("submit",function(e){e.preventDefault();var u=validSite($("url").value.trim());if(!u){$("setupError").hidden=false;$("setupError").textContent="Bitte gib eine gültige öffentliche Website-Adresse ein.";return}$("setupError").hidden=true;state.url=u.href;state.host=u.hostname;state.goal=$("goal").value;startTest()});
-$("reopen").addEventListener("click",openSite);
+$("reopen").addEventListener("click",function(){state.start=Date.now();$("testStatus").textContent="Die Website wird im zweiten Tab geöffnet. Kehre für die Fragen zu SocialClip LAB zurück.";if(timerHandle)clearInterval(timerHandle);refreshTimer();timerHandle=setInterval(refreshTimer,300)});
 $("testDone").addEventListener("click",function(){refreshTimer();if(timerHandle)clearInterval(timerHandle);timerHandle=null;screen("audit","03")});
-window.addEventListener("focus",refreshTimer);
+window.addEventListener("focus",refreshTimer);document.addEventListener("visibilitychange",function(){if(!document.hidden)refreshTimer()});
 $("auditForm").addEventListener("submit",function(e){e.preventDefault();var form=new FormData(e.currentTarget),answers={};var valid=issue.every(function(item){var v=form.get(item.key);if(!["yes","partly","no"].includes(v))return false;answers[item.key]=v;return true});$("auditError").hidden=valid;if(!valid)return;state.answers=answers;state.score=issue.reduce(function(sum,item){return sum+item.weight*({yes:1,partly:.5,no:0}[answers[item.key]])},0);renderReport();screen("report","04")});
 function addText(parent,tag,value,cls){var el=document.createElement(tag);if(cls)el.className=cls;el.textContent=value;parent.appendChild(el);return el}
 function renderReport(){
