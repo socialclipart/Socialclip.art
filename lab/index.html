@@ -3,164 +3,258 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0d0d0d">
-<meta name="description" content="Teste deinen digitalen Kundenweg: Findet ein Neukunde in 30 Sekunden den nächsten Schritt? Kostenloser Selbsttest mit konkreten Tipps von SocialClip.">
-<title>Kundenweg-Simulator – SocialClip LAB</title>
-<link rel="canonical" href="https://socialclip.art/lab/">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Würdest du bei deinem eigenen Unternehmen Kunde werden? – SocialClip LAB">
-<meta property="og:description" content="Die 30-Sekunden-Challenge für Unternehmen. Teste deinen Kundenweg kostenlos und erhalte konkrete Tipps.">
-<meta property="og:url" content="https://socialclip.art/lab/">
+<meta name="theme-color" content="#090909">
+<title>SocialClip MAKEOVER – Erlebe dein Business neu</title>
+<meta name="description" content="Dein Unternehmen. Ein neuer Look. Erstelle in wenigen Sekunden ein kostenloses, teilbares Website-Konzept mit Social-Media-Idee und Mini-Werbespot. SocialClip LAB.">
+<meta property="og:title" content="SocialClip MAKEOVER – Wie könnte deine Marke aussehen?">
+<meta property="og:description" content="Erlebe eine neue kreative Vision für dein Unternehmen – kostenlos und direkt zum Teilen.">
 <meta property="og:image" content="https://socialclip.art/og-image.png">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
-:root{color-scheme:dark;--bg:#0d0d0d;--panel:#171717;--panel2:#202020;--line:#35322c;--text:#f7f4ee;--muted:#aaa49b;--accent:#e9c69a;--green:#9fe1be;--radius:22px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
-body:before{content:"";position:fixed;pointer-events:none;z-index:-1;inset:0;background:radial-gradient(ellipse at 85% -10%,rgba(209,156,93,.13),transparent 42%),radial-gradient(ellipse at 0% 80%,rgba(129,91,56,.07),transparent 47%)}
-a{color:inherit}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.6}
-button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-[hidden]{display:none!important}.shell{width:min(1080px,calc(100% - 36px));margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:25px 0;border-bottom:1px solid #252525}
-.wordmark{text-decoration:none;letter-spacing:.12em;font-size:16px;font-weight:800}.wordmark span{color:var(--accent)}.back{font-size:13px;color:var(--muted);text-decoration:none}.back:hover{color:#fff}
-main{padding:76px 0 80px}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.19em;font-size:11px;font-weight:700;margin:0 0 20px}.eyebrow:before{content:"";width:22px;height:1px;background:var(--accent)}
-h1{font-size:clamp(40px,7.8vw,84px);letter-spacing:-.065em;line-height:1.03;font-weight:600;max-width:1000px;margin:0 0 24px}h1 em{font-style:normal;color:var(--accent)}.intro{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:690px;margin:0 0 38px}
-.panel{background:linear-gradient(145deg,#1c1b1a,#111);border:1px solid var(--line);box-shadow:0 15px 70px #0005;border-radius:var(--radius);padding:clamp(22px,4vw,42px)}
-.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:30px}.labeltiny{text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--muted);font-weight:700}.counter{color:var(--accent);font-size:12px}
-h2{letter-spacing:-.045em;font-size:clamp(24px,3.8vw,38px);line-height:1.12;font-weight:600;margin:0 0 10px}.sub{color:var(--muted);font-size:15px;margin:0 0 26px}
-label.field{display:block;color:#e2ddd5;font-size:14px;font-weight:600;margin:0 0 20px}.hint{display:block;color:var(--muted);font-weight:400;font-size:12px;margin:7px 0 0}
-input[type=url],input[type=text],input[type=email],select,textarea{display:block;width:100%;background:#101010;border:1px solid #484037;border-radius:12px;color:var(--text);padding:14px 16px;margin-top:8px;min-height:50px}select{appearance:auto}textarea{min-height:105px;resize:vertical}
-input::placeholder,textarea::placeholder{color:#817b73}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px}
-.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
-.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;border-radius:100px;padding:14px 23px;font-size:14px;font-weight:700;text-decoration:none;border:1px solid #5a4a37;background:transparent;color:var(--text);min-height:48px}
-.btn:hover{border-color:var(--accent);background:#2c251d}.btn.primary{background:var(--accent);color:#1b1510;border-color:var(--accent)}.btn.primary:hover{background:#f3d3a9}
-.privacy{font-size:12px;color:var(--muted);margin-top:20px}.privacy a{text-underline-offset:3px}.error{color:#ffc29b;font-size:13px;margin:12px 0}
-.stage{margin:28px 0;background:#131313;border:1px solid #302c27;border-radius:17px;padding:22px}.stage-label{font-size:12px;letter-spacing:.12em;color:var(--accent);font-weight:800;text-transform:uppercase}.hostname{word-break:break-word;color:#ddd;font-size:18px;margin:11px 0}
-.timer{font-variant-numeric:tabular-nums;font-size:clamp(52px,10vw,93px);letter-spacing:-.08em;line-height:1.1;font-weight:500;margin:10px 0}.meter{height:6px;background:#3a322b;border-radius:100px;overflow:hidden}.meter>div{width:0;height:100%;background:var(--accent);transition:width .25s}
-.note{font-size:13px;color:var(--muted)}.question{padding:20px 0;border-top:1px solid #38332c}.question legend{padding:0;color:var(--text);font-weight:600;font-size:15px;margin-bottom:14px}.choices{display:flex;flex-wrap:wrap;gap:8px}.choices label{display:flex;align-items:center;gap:7px;border:1px solid #4d453a;border-radius:100px;padding:9px 13px;color:#d8d1c5;font-size:13px;cursor:pointer}
-.choices label:has(input:checked){border-color:var(--accent);background:#3a3024;color:#fff}.choices input{accent-color:var(--accent);margin:0}
-.scoreline{display:flex;align-items:center;flex-wrap:wrap;gap:20px;margin-bottom:20px}.score{width:124px;height:124px;border-radius:50%;display:grid;place-items:center;border:7px solid var(--accent);font-size:42px;font-weight:700;letter-spacing:-.05em}.score small{font-size:15px;color:var(--muted);margin-left:2px}.scorecopy{flex:1;min-width:200px}.scorecopy h2{font-size:29px}
-.reco{display:grid;grid-template-columns:42px 1fr;gap:12px;border-top:1px solid #363029;padding:18px 0}.num{border:1px solid #5a4835;color:var(--accent);border-radius:100px;width:34px;height:34px;display:grid;place-items:center;font-size:12px}.reco h3{margin:0 0 5px;font-size:16px}.reco p{margin:0;color:var(--muted);font-size:14px}
-.cta{background:linear-gradient(130deg,#3a3025,#1d1b19);border-radius:16px;padding:22px;margin-top:26px;border:1px solid #695137}.cta p{color:#c6bdb0;font-size:14px}
-.footer{border-top:1px solid #282828;padding:22px 0 32px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--muted)}.footer a{color:var(--muted)}.pill{display:inline-block;padding:5px 10px;border:1px solid #5e503f;color:var(--accent);border-radius:100px;font-size:11px;letter-spacing:.06em}
-.small-success{color:var(--green);font-size:13px;min-height:20px}
-@media(max-width:680px){main{padding:48px 0 65px}.grid2{grid-template-columns:1fr}.panel{padding:23px 19px}.score{width:106px;height:106px;font-size:36px}.back{font-size:12px}.topbar{padding:19px 0}.btn{width:100%}.choices label{flex:1;justify-content:center}.actions{flex-direction:column;align-items:stretch}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
-@media print{body{color:#000;background:#fff}body:before,.topbar,.footer,.actions,.cta,.privacy,.no-print{display:none!important}.shell{width:100%}main{padding:0}.panel{border:0;box-shadow:none;padding:0;background:#fff}.reco{border-top:1px solid #aaa}.reco p,.scorecopy p,.sub,.note{color:#333}.score{color:#111;border-color:#111}.eyebrow,.num{color:#111}.scorecopy h2{color:#111}h1{font-size:28px}#report{display:block!important}[data-screen]:not(#report){display:none!important}}
+:root{color-scheme:dark;--bg:#090909;--paper:#f4eee4;--cream:#eac9a1;--text:#f9f7f2;--muted:#98938c;--line:#35312c}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:absolute;pointer-events:none;inset:0 0 auto;height:1100px;background:radial-gradient(ellipse at 83% 20%,#81613a30,transparent 35%),radial-gradient(ellipse at -8% 45%,#60472a16,transparent 40%)}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #ebc89e;outline-offset:4px}
+[hidden]{display:none!important}
+.wrap{width:min(1200px,calc(100% - 36px));margin:auto;position:relative}
+nav{height:86px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #282520}
+.logo{letter-spacing:.13em;font-weight:800;font-size:17px}.logo em{color:var(--cream);font-style:normal}.logo small{font-weight:500;color:#96918b;font-size:10px;letter-spacing:.14em;margin-left:13px}
+.navright{display:flex;align-items:center;gap:22px}.navright a{font-size:12px;color:#aaa39b}.navright a:hover{color:#fff}
+.pill{border:1px solid #66523e;padding:7px 12px;border-radius:100px;letter-spacing:.12em;text-transform:uppercase;font-size:10px;color:var(--cream)}
+.hero{padding:85px 0 60px;display:grid;grid-template-columns:minmax(0,1.16fr) minmax(0,.84fr);align-items:center;gap:25px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.23em;color:var(--cream);font-weight:650;display:flex;align-items:center;gap:12px}
+.eyebrow:before{content:"";width:27px;height:1px;background:var(--cream)}
+h1{font-size:clamp(54px,7.8vw,111px);font-weight:600;line-height:.96;letter-spacing:-.085em;margin:26px 0 28px;max-width:850px}
+h1 em{font-style:normal;color:var(--cream)}
+.hero p,.sub{color:var(--muted);font-size:16px;line-height:1.7;max-width:570px}
+.hero p{margin:0 0 30px}
+.hintline{font-size:11px;text-transform:uppercase;letter-spacing:.11em;color:#858079;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.hintline i{display:inline-block;background:#8c7354;width:5px;height:5px;border-radius:50%;margin-right:8px}
+.orbit{height:380px;position:relative;display:grid;place-items:center;isolation:isolate}
+.orbit:before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;border:1px solid #70543855;transform:rotateX(64deg) rotateZ(-27deg) scale(1.4);box-shadow:0 0 70px #a17b3522}
+.orbit:after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff3da,#b98f63 30%,#3e2c1e 68%,#100e0c 85%);box-shadow:-18px 22px 65px #000, 22px 6px 80px #bd8a4733;animation:float 6s ease-in-out infinite}
+.orbit-label{z-index:1;position:absolute;top:22px;right:10px;color:#b09a7f;font-size:10px;letter-spacing:.15em;text-transform:uppercase}
+.orbit-outline{position:absolute;width:280px;height:280px;border:1px solid #9879574a;border-radius:50%;transform:rotateX(65deg) rotate(-30deg);animation:spin 17s linear infinite}
+.orbit-corner{position:absolute;z-index:2;bottom:21px;left:4px;border:1px solid #6c5641;background:#14110fcc;backdrop-filter:blur(10px);padding:18px 20px;border-radius:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.orbit-corner strong{font-size:29px;display:block;letter-spacing:-.06em;font-weight:500;color:var(--cream);margin-bottom:5px}
+@keyframes float{50%{transform:translateY(-15px)}}@keyframes spin{to{transform:rotateX(65deg) rotate(330deg)}}
+.studio{border:1px solid #524232;background:linear-gradient(150deg,#201b15,#13110f 38%,#141311);box-shadow:0 35px 100px #0009;border-radius:24px;padding:clamp(23px,5vw,48px);position:relative;overflow:hidden}
+.studio:after{content:"";position:absolute;pointer-events:none;right:-90px;top:-80px;width:350px;height:230px;background:radial-gradient(#8e603927,transparent 65%)}
+.sectiontop{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:36px}
+.sectionnum{color:#c4a480;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+h2{font-size:clamp(31px,5vw,54px);letter-spacing:-.065em;font-weight:550;line-height:1.1;margin:0 0 10px}
+.formintro{font-size:14px;color:#a39b90;line-height:1.6;margin:0 0 34px}
+.formgrid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.lablabel{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#b3a99b;margin:0 0 12px}
+.input,select,textarea{width:100%;background:#0b0b0b;border:1px solid #49413a;border-radius:10px;color:#fff;padding:15px 17px;min-height:52px;outline:none}
+.input:focus,select:focus,textarea:focus{border-color:var(--cream)}input::placeholder,textarea::placeholder{color:#726d68}
+.full{grid-column:1/-1}
+.styles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stylebtn{border:1px solid #51453a;background:#181512;border-radius:11px;min-height:85px;padding:14px;text-align:left;color:#ddd;transition:transform .2s,border-color .2s}
+.stylebtn:hover{transform:translateY(-2px);border-color:#9e8060}
+.stylebtn[aria-pressed="true"]{border-color:#e6c49d;box-shadow:inset 0 0 0 1px #e6c49d;background:#28211a}
+.swatches{display:flex;gap:3px;margin-bottom:11px}.swatches i{width:17px;height:17px;border-radius:50%;border:1px solid #ffffff29}
+.stylebtn strong{font-size:13px;font-weight:600}
+.primary{border:0;background:#eac9a1;color:#1b1209;border-radius:100px;min-height:54px;padding:15px 27px;font-size:13px;font-weight:750;letter-spacing:.01em;display:inline-flex;gap:18px;align-items:center;justify-content:center;transition:background .2s,transform .2s}
+.primary:hover{background:#f5ddbc;transform:translateY(-2px)}
+.secondary{border:1px solid #5b5147;background:transparent;color:#e9e0d5;border-radius:100px;padding:13px 21px;min-height:47px;font-size:12px;font-weight:650;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.secondary:hover{border-color:#d7b58e}
+.formbottom{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:29px}
+.micro{font-size:11px;color:#8f887e;max-width:350px;line-height:1.6}
+.loading{position:fixed;inset:0;z-index:20;background:#080808f5;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}
+.loading strong{font-size:clamp(30px,7vw,76px);font-weight:500;letter-spacing:-.07em}
+.loading p{color:#d2ab7c;font-size:12px;letter-spacing:.24em;text-transform:uppercase}
+.loader{height:2px;width:230px;background:#39302a;overflow:hidden}.loader:before{content:"";width:52%;height:100%;background:#efc798;display:block;animation:loading 1s ease-in-out infinite alternate}
+@keyframes loading{from{transform:translateX(-100%)}to{transform:translateX(200%)}}
+.reveal{padding:100px 0 75px}
+.reveal-title{display:flex;justify-content:space-between;gap:30px;align-items:flex-end;margin-bottom:28px}
+.reveal-title p{font-size:14px;color:#98938b;max-width:440px;line-height:1.6;margin:0}
+.tabs{display:flex;gap:9px;overflow-x:auto;padding:2px 0 18px}
+.tab{border:1px solid #39342e;background:#141311;color:#b7afa4;padding:13px 20px;border-radius:100px;white-space:nowrap;font-size:12px;font-weight:700}
+.tab[aria-selected="true"]{background:#eac9a1;color:#17110a;border-color:#eac9a1}
+.preview-shell{padding:12px;border-radius:22px;background:linear-gradient(145deg,#27231e,#131313);border:1px solid #524434;box-shadow:0 24px 80px #0008;min-height:530px}
+.web-stage,.post-stage{--card-bg:#15120f;--card-fg:#fbebd7;--card-accent:#f2ca97;--card-sub:#c6ad8b;position:relative;overflow:hidden;background:var(--card-bg);color:var(--card-fg)}
+[data-look="electric"]{--card-bg:#10101d;--card-fg:#f4f2ff;--card-accent:#9dffdf;--card-sub:#a9a2db}
+[data-look="editorial"]{--card-bg:#f0ebe1;--card-fg:#171613;--card-accent:#986745;--card-sub:#5f5950}
+.web-stage{border-radius:13px;min-height:510px}
+.browser{height:44px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid currentColor;opacity:.55}
+.dots{display:flex;gap:5px}.dots i{height:6px;width:6px;border-radius:100%;background:currentColor;opacity:.6}
+.browser-url{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.web-nav{padding:25px 36px 0;display:flex;align-items:center;justify-content:space-between;gap:15px;position:relative;z-index:2}
+.brandname{font-size:clamp(13px,2vw,19px);font-weight:850;letter-spacing:-.045em;max-width:60%;overflow-wrap:anywhere}
+.navitems{display:flex;gap:18px;align-items:center;font-size:11px;opacity:.83}
+.web-hero{min-height:385px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(180px,.9fr);align-items:center;gap:0;padding:25px 36px;position:relative}
+.web-hero:after,.post-art:after{position:absolute;content:"";pointer-events:none;width:360px;height:360px;border:1px solid var(--card-accent);border-radius:50%;right:5%;top:45%;transform:translateY(-50%) rotate(-30deg);opacity:.22}
+.web-copy{position:relative;z-index:2}
+.web-small{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--card-accent);font-weight:800;display:block;margin-bottom:17px}
+.web-heading{font-size:clamp(34px,6vw,73px);font-weight:650;letter-spacing:-.075em;line-height:.99;margin:0 0 20px;overflow-wrap:anywhere}
+.web-description{font-size:clamp(12px,1.6vw,15px);line-height:1.6;max-width:440px;color:var(--card-sub);margin-bottom:24px}
+.web-cta{display:inline-flex;padding:14px 18px;background:var(--card-accent);color:var(--card-bg);font-size:12px;font-weight:800;border-radius:100px}
+.art{position:relative;min-height:350px;display:grid;place-items:center;isolation:isolate}
+.art:before{content:"";width:min(75%,310px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 25%,#ffffffc2,var(--card-accent) 32%,#70543c 58%,#13100f 78%);box-shadow:20px 27px 65px #0008,inset -12px -12px 35px #0007;transform:rotate(-20deg)}
+[data-look="electric"] .art:before{background:radial-gradient(circle at 33% 23%,#ffffff,#b3ffd7 20%,#486ae2 52%,#100e29 83%)}
+[data-look="editorial"] .art:before{background:radial-gradient(circle at 30% 26%,#fff,#d0bba2 25%,#a27852 54%,#5d4535 83%)}
+.art:after{content:"";width:83%;height:25%;border-radius:50%;border:1px solid var(--card-accent);position:absolute;transform:rotate(-32deg);box-shadow:0 0 20px #ffffff10}
+.art-number{position:absolute;right:12%;bottom:4%;font-size:10px;letter-spacing:.2em;color:var(--card-accent)}
+.web-footer{padding:18px 36px;border-top:1px solid #ffffff30;display:flex;justify-content:space-between;align-items:center;gap:15px;font-size:11px;color:var(--card-sub);position:relative;z-index:2}
+.post-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,.8fr);gap:45px;align-items:center;padding:34px}
+.post-stage{aspect-ratio:4/5;max-width:430px;margin:auto;width:100%;border:1px solid #6a5b4c66;border-radius:6px}
+.post-content{position:absolute;inset:0;padding:30px;display:flex;flex-direction:column;justify-content:space-between;z-index:2}
+.post-content small{font-size:10px;letter-spacing:.17em;text-transform:uppercase}
+.post-content strong{font-size:clamp(36px,5vw,66px);line-height:.99;letter-spacing:-.07em;font-weight:650;overflow-wrap:anywhere}
+.post-content .postcta{font-size:12px;color:var(--card-accent);letter-spacing:.08em}
+.post-art{position:absolute;inset:23% 0 8%;opacity:.75}
+.post-art:before{content:"";position:absolute;width:50%;aspect-ratio:1;border-radius:50%;top:10%;right:13%;background:radial-gradient(circle at 30% 30%,#fffc,var(--card-accent) 35%,transparent 75%);filter:blur(5px)}
+.caption-panel{padding:18px}
+.caption-panel h3{font-size:30px;letter-spacing:-.06em;margin:0 0 13px;font-weight:600}
+.caption-panel p,.caption-panel blockquote{color:#b1aaa1;font-size:15px;line-height:1.65}
+.caption-panel blockquote{border-left:2px solid #cbad87;padding-left:16px;margin:22px 0;white-space:pre-wrap}
+.video-stage{padding:34px}.filmhead{font-size:30px;font-weight:600;letter-spacing:-.05em;margin:0 0 10px}
+.scene-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:32px 0}
+.scene{border:1px solid #514437;background:linear-gradient(140deg,#282019,#101010);border-radius:13px;padding:18px;min-height:230px;display:flex;flex-direction:column;gap:15px;overflow:hidden}
+.scene span{font-size:11px;letter-spacing:.12em;color:#cba980}.scene .scene-number{font-size:64px;line-height:1;font-weight:650;letter-spacing:-.08em;color:#71593f}
+.scene strong{font-size:17px;line-height:1.25}.scene p{font-size:12px;line-height:1.55;color:#a7a097;margin:auto 0 0}
+.tip{font-size:12px;color:#a39b91;line-height:1.7;max-width:820px;margin:21px 6px 0}
+.aftercontrols{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-top:21px}
+.aftercontrols>div{display:flex;gap:10px;flex-wrap:wrap}
+.featurefooter{border-top:1px solid #302922;margin-top:60px;padding:26px 0 45px;display:flex;align-items:center;justify-content:space-between;color:#918b83;font-size:12px;gap:20px;flex-wrap:wrap}
+.featurefooter a{text-decoration:underline;text-underline-offset:3px}
+.lead{padding:36px;border:1px solid #5b4937;background:linear-gradient(140deg,#1e1914,#100f0f);border-radius:18px;margin:37px 0}
+.lead h3{font-size:clamp(26px,4vw,43px);letter-spacing:-.06em;margin:15px 0}
+.lead p{color:#b4a99c;font-size:14px;line-height:1.65;max-width:700px}
+.formfields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;margin:24px 0}
+.formfields label{font-size:12px;color:#d1c4b1;font-weight:600}
+.formfields input,.formfields select{margin-top:9px}
+.privacy{display:flex;gap:12px;font-size:12px;color:#b7aa9b;line-height:1.5;align-items:flex-start;margin:18px 0}
+.privacy input{accent-color:#eac9a1;margin-top:4px}
+.privacy a{text-decoration:underline}
+.status{min-height:20px;color:#a4e2bd;font-size:13px}
+@media(max-width:840px){.hero{grid-template-columns:1fr;padding:65px 0 30px}.orbit{height:180px;overflow:hidden}.orbit:after{width:100px;height:100px}.orbit:before{width:170px;height:170px}.orbit-outline{width:150px;height:150px}.orbit-corner{bottom:10px;left:15px}.reveal-title{align-items:flex-start;flex-direction:column}.web-hero{grid-template-columns:1fr .7fr}}
+@media(max-width:650px){nav{height:72px}.logo{font-size:14px}.logo small{font-size:9px;margin-left:5px}.navright .pill{display:none}.hero{padding:47px 0 28px}.hero h1{font-size:clamp(50px,13vw,77px)}.hero p{font-size:14px}.orbit{height:135px}.orbit-corner{bottom:1px;padding:10px}.orbit-corner strong{font-size:18px}.formgrid,.formfields{grid-template-columns:1fr}.styles{gap:6px}.stylebtn{padding:10px;min-height:74px}.stylebtn strong{font-size:11px}.swatches i{width:13px;height:13px}.studio{padding:24px 19px}.formbottom .primary{width:100%}.reveal{padding:60px 0 30px}.preview-shell{padding:6px;min-height:0}.web-stage{min-height:0}.browser{height:30px;padding:0 10px}.web-nav{padding:15px 16px 0}.navitems{display:none}.web-hero{grid-template-columns:1fr;min-height:340px;padding:28px 17px 110px}.web-heading{font-size:clamp(37px,9.4vw,61px)}.web-description{font-size:12px;max-width:280px}.art{position:absolute;right:-30px;bottom:4px;min-height:150px;width:180px;opacity:.54}.art:after{display:none}.art-number{display:none}.web-footer{padding:12px 15px;font-size:9px}.post-layout{grid-template-columns:1fr;gap:20px;padding:18px}.post-content strong{font-size:52px}.caption-panel{padding:12px}.video-stage{padding:18px}.scene-grid{grid-template-columns:1fr;gap:10px}.scene{min-height:130px}.scene .scene-number{font-size:30px}.lead{padding:22px}.aftercontrols{align-items:stretch}.aftercontrols>div{width:100%}.aftercontrols .secondary,.aftercontrols .primary{flex:1}.featurefooter{margin-top:40px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="shell">
-<header class="topbar"><a class="wordmark" href="/" aria-label="SocialClip Startseite">SOCIAL<span>CLIP</span><span style="font-size:11px;font-weight:500;color:#aaa;letter-spacing:.1em"> / LAB</span></a><a class="back" href="/">← Zurück zu SocialClip</a></header>
-<main>
-<p class="eyebrow">Kostenloser Kundenweg-Selbsttest</p>
-<h1>Würdest du bei deinem <em>eigenen Unternehmen</em> Kunde werden?</h1>
-<p class="intro">Versetze dich für 30 Sekunden in einen Neukunden. Entdecke Hürden, die Anfragen unnötig schwer machen – und erfahre, was du konkret verbessern kannst.</p>
-<div class="panel">
-<div class="topline"><span class="labeltiny">SocialClip / Customer Journey Lab</span><span class="counter" id="stepCounter">01 / 04</span></div>
-<section id="setup" data-screen>
-<h2>Starte deinen Selbsttest.</h2><p class="sub">Du bleibst beim Start hier im SocialClip LAB. Danach kannst du deine Website selbst in einem zweiten Tab öffnen und testen. Das ist ein Selbsttest, kein automatischer Website-Scan.</p>
-<form id="setupForm">
-<label class="field" for="url">Unternehmenswebsite<input id="url" name="url" type="text" inputmode="url" autocomplete="url" placeholder="www.dein-unternehmen.de" required><span class="hint">Wichtig: Trägst du socialclip.art ein, öffnet sich später natürlich die SocialClip-Homepage – das ist die Website, die du als Besucher testen sollst.</span></label>
-<label class="field" for="goal">Was soll ein Besucher auf deiner Website tun?
-<select id="goal" name="goal" required>
-<option value="termin">Einen Termin buchen</option><option value="anfrage">Ein Angebot anfordern</option><option value="anruf">Das Unternehmen anrufen</option><option value="kauf">Etwas kaufen</option>
-</select></label>
-<p id="setupError" class="error" hidden role="alert"></p>
-<div class="actions"><button type="submit" class="btn primary">30-Sekunden-Challenge starten ↗</button></div>
-</form>
-<p class="privacy">Die Ergebnisse werden lokal in deinem Browser berechnet. Erst wenn du selbst eine Anfrage absendest, übermittelst du deine Kontaktdaten an SocialClip. <a href="/datenschutz.html">Datenschutzhinweise</a></p>
+<div class="loading" id="loading" hidden><span class="eyebrow">SocialClip creative engine</span><strong>Deine Vision entsteht.</strong><div class="loader"></div><p>Komponiere Design · Text · Kampagne</p></div>
+<div class="wrap">
+<nav><a href="/" class="logo" aria-label="SocialClip Startseite">SOCIAL<em>CLIP</em><small> / MAKEOVER</small></a><div class="navright"><a href="/">← Zur Hauptseite</a><span class="pill">Beta · 100 % kostenlos</span></div></nav>
+<section class="hero">
+<div><div class="eyebrow">Ein digitales Experiment für Unternehmer</div><h1>Dein Business.<br><em>Unvergesslich.</em></h1><p>Was wäre, wenn dein Unternehmen morgen wie eine Premium-Marke auftreten würde? Erlebe in Sekunden ein personalisiertes Website-Konzept, einen Instagram-Post und eine Werbespot-Idee.</p><div class="hintline"><span><i></i> Kein Account</span><span><i></i> Sofort erlebbar</span><span><i></i> Kostenlos teilbar</span></div></div>
+<div class="orbit" aria-hidden="true"><div class="orbit-outline"></div><span class="orbit-label">Makeover in progress / 001</span><div class="orbit-corner"><strong>01 — ∞</strong>Eine Idee. Neue Wirkung.</div></div>
 </section>
-<section id="test" data-screen hidden>
-<h2>Du bist jetzt ein Neukunde.</h2><p class="sub" id="testInstruction"></p>
-<div class="stage"><div class="stage-label">Schritt 1: Deine Test-Website</div><p class="hostname" id="testHost"></p><div class="timer"><span id="seconds">30</span><span style="font-size:.28em;letter-spacing:0;color:var(--muted)"> Sekunden</span></div><div class="meter" aria-label="Verstrichene Testzeit"><div id="timerMeter"></div></div></div>
-<p class="note">So funktioniert es: 1. Tippe auf „Website öffnen“. Deine eingegebene Website (z. B. deren Homepage) wird im zweiten Tab angezeigt – das ist beabsichtigt. 2. Suche dort in 30 Sekunden nach der Aktion. 3. Wechsle zurück zum SocialClip-LAB-Tab und tippe auf „Fragen beantworten“.</p>
-<div class="actions"><a id="reopen" href="#" target="_blank" rel="noopener noreferrer" class="btn">1. Website zum Test öffnen ↗</a><button id="testDone" type="button" class="btn primary">2. Fragen beantworten →</button></div>
-<p class="small-success" id="testStatus" role="status">Der Timer startet, sobald du „Website zum Test öffnen“ tippst.</p>
-</section>
-<section id="audit" data-screen hidden>
-<h2>Wie einfach war dein Kundenweg?</h2><p class="sub">Antworte aus der Sicht eines Menschen, der dein Unternehmen noch nicht kennt. Es gibt kein Richtig oder Falsch.</p>
-<form id="auditForm">
-<fieldset class="question" style="border-left:0;border-right:0;border-bottom:0;margin:0"><legend>1. Ich habe in wenigen Sekunden verstanden, was das Unternehmen anbietet.</legend><div class="choices"><label><input type="radio" name="clarity" value="yes"> Ja</label><label><input type="radio" name="clarity" value="partly"> Teilweise</label><label><input type="radio" name="clarity" value="no"> Nein</label></div></fieldset>
-<fieldset class="question" style="border-left:0;border-right:0;border-bottom:0;margin:0"><legend>2. Ich konnte die gewünschte Aktion innerhalb von 30 Sekunden finden.</legend><div class="choices"><label><input type="radio" name="action" value="yes"> Ja</label><label><input type="radio" name="action" value="partly"> Teilweise</label><label><input type="radio" name="action" value="no"> Nein</label></div></fieldset>
-<fieldset class="question" style="border-left:0;border-right:0;border-bottom:0;margin:0"><legend>3. Die Seite war auf meinem Smartphone leicht zu bedienen.</legend><div class="choices"><label><input type="radio" name="mobile" value="yes"> Ja</label><label><input type="radio" name="mobile" value="partly"> Teilweise</label><label><input type="radio" name="mobile" value="no"> Nein</label></div></fieldset>
-<fieldset class="question" style="border-left:0;border-right:0;border-bottom:0;margin:0"><legend>4. Ich habe echte Vertrauenssignale gesehen (z. B. Referenzen, Kundenstimmen, Team).</legend><div class="choices"><label><input type="radio" name="trust" value="yes"> Ja</label><label><input type="radio" name="trust" value="partly"> Teilweise</label><label><input type="radio" name="trust" value="no"> Nein</label></div></fieldset>
-<fieldset class="question" style="border-left:0;border-right:0;border-bottom:0;margin:0"><legend>5. Ich hätte die Aktion problemlos abschließen können – ohne unnötige Hürden.</legend><div class="choices"><label><input type="radio" name="finish" value="yes"> Ja</label><label><input type="radio" name="finish" value="partly"> Teilweise</label><label><input type="radio" name="finish" value="no"> Nein</label></div></fieldset>
-<p id="auditError" class="error" hidden role="alert">Bitte beantworte alle fünf Fragen.</p><div class="actions"><button type="submit" class="btn primary">Meine Empfehlungen ansehen →</button></div>
-</form>
-</section>
-<section id="report" data-screen hidden>
-<span class="pill">Dein persönlicher Selbsttest</span>
-<h2 style="margin-top:18px" id="reportTitle">Dein Kundenweg im Überblick.</h2>
-<p class="sub" id="reportDomain"></p>
-<div class="scoreline"><div class="score" aria-label="Selbsteinschätzung" id="score"><span>–</span></div><div class="scorecopy"><h2 id="scoreHead">Auswertung</h2><p class="sub" id="scoreText" style="margin:0"></p></div></div>
-<p class="note">Transparenz: Der Wert ist eine Orientierung aus deinen fünf Antworten (gewichtet: Verständnis 20 %, Aktion auffinden 30 %, Mobil 20 %, Vertrauen 15 %, Abschluss 15 %). Er ist weder ein technischer Website-Scan noch eine Messung deiner tatsächlichen Conversion-Rate.</p>
-<h2 style="margin-top:32px;font-size:26px">Das kannst du verbessern</h2>
-<div id="recommendations" aria-live="polite"></div>
-<div class="actions no-print"><button class="btn" id="share" type="button">Challenge weiterempfehlen ↗</button><button class="btn" id="print" type="button">Ergebnis als PDF speichern ↓</button><button class="btn" id="restart" type="button">Neuen Test machen ↻</button></div>
-<p id="shareStatus" class="small-success no-print" role="status"></p>
-<div class="cta" id="contactArea">
-<span class="labeltiny" style="color:var(--accent)">SocialClip hilft dir bei der Umsetzung</span>
-<h2 style="margin-top:14px;font-size:28px">Möchtest du diese Hürden beseitigen?</h2>
-<p>Schick uns auf Wunsch deinen Bericht. Wir melden uns persönlich mit einer Einschätzung – kostenlos und unverbindlich.</p>
-<form id="leadForm" action="https://formspree.io/f/xwlvlqwg" method="POST">
-<input type="hidden" name="_subject" value="Neue SocialClip LAB Beratungsanfrage"><input type="hidden" name="message" id="leadMessage"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-<div class="grid2">
-<label class="field" for="leadName">Dein Name<input type="text" id="leadName" name="name" autocomplete="name" required placeholder="Vor- und Nachname"></label>
-<label class="field" for="leadEmail">Deine E-Mail<input type="email" id="leadEmail" name="email" autocomplete="email" required placeholder="du@unternehmen.de"></label>
-<label class="field" for="service">Wobei brauchst du Unterstützung?
-<select id="service" name="interesse" required><option value="">Bitte auswählen</option><option>Website / Conversion</option><option>Online-Marketing / Sichtbarkeit</option><option>KI-Assistent / Automatisierung</option><option>Ich bin noch unsicher</option></select></label>
-<label class="field" for="timing">Wann möchtest du starten?
-<select id="timing" name="zeitrahmen" required><option value="">Bitte auswählen</option><option>Sofort / innerhalb 2 Wochen</option><option>In 1–2 Monaten</option><option>Später / erstmal informieren</option></select></label>
+<section id="studio" class="studio" aria-labelledby="startTitle">
+<div class="sectiontop"><span class="sectionnum">01 / Das Studio</span><span class="pill">30 Sekunden · 3 Ergebnisse</span></div>
+<h2 id="startTitle">Erschaffe deinen neuen Auftritt.</h2>
+<p class="formintro">Gib uns drei kleine Hinweise zu deinem Unternehmen. Die Designkonzepte entstehen lokal aus kreativen Vorlagen – keine KI-Abfrage, kein Website-Scan.</p>
+<form id="makeForm">
+<div class="formgrid">
+<label><span class="lablabel">Wie heißt dein Unternehmen?</span><input class="input" id="business" required maxlength="50" autocomplete="organization" placeholder="z. B. Studio Amberg" value=""></label>
+<label><span class="lablabel">Deine Branche</span><select id="industry"><option value="friseur">Friseur / Barbershop</option><option value="gastro">Restaurant / Café</option><option value="optik">Optiker / Gesundheit</option><option value="beauty">Beauty / Kosmetik</option><option value="auto">Auto / Fahrzeugpflege</option><option value="fitness">Fitness / Studio</option><option value="handwerk">Handwerk / Service</option><option value="retail">Einzelhandel / Boutique</option><option value="sonstige">Sonstiges Unternehmen</option></select></label>
+<div class="full"><span class="lablabel">Welche Wirkung soll deine Marke haben?</span><div class="styles" role="group" aria-label="Designstil">
+<button type="button" class="stylebtn" data-style="signature" aria-pressed="true"><span class="swatches"><i style="background:#1b1410"></i><i style="background:#eac9a1"></i><i style="background:#8f6f4b"></i></span><strong>Signature Luxury</strong></button>
+<button type="button" class="stylebtn" data-style="electric" aria-pressed="false"><span class="swatches"><i style="background:#10101d"></i><i style="background:#9dffdf"></i><i style="background:#5774ff"></i></span><strong>Electric Future</strong></button>
+<button type="button" class="stylebtn" data-style="editorial" aria-pressed="false"><span class="swatches"><i style="background:#f0ebe1"></i><i style="background:#181818"></i><i style="background:#986745"></i></span><strong>Modern Editorial</strong></button>
+</div></div>
 </div>
-<label class="field" for="notes">Was soll sich ändern? (optional)<textarea id="notes" name="anliegen" placeholder="Was stört dich aktuell am meisten?"></textarea></label>
-<label style="font-size:12px;display:flex;align-items:flex-start;gap:9px;color:#d2c7b6;margin:12px 0 20px"><input type="checkbox" id="dataAck" required style="margin-top:4px;accent-color:var(--accent)">Ich habe die <a href="/datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzhinweise</a> zur Kenntnis genommen. SocialClip darf meine Angaben verwenden, um meine Anfrage zu beantworten. Keine Newsletter-Anmeldung.</label>
-<div class="actions"><button type="submit" class="btn primary">Bericht an SocialClip senden ↗</button></div>
+<div class="formbottom"><span class="micro">Das Ergebnis ist ein kreativer Designentwurf, keine Analyse deiner aktuellen Website. Du kannst das Ergebnis kostenlos als Bild speichern.</span><button type="submit" class="primary">Mein Makeover erstellen <span aria-hidden="true">↗</span></button></div>
+</form>
+</section>
+<section class="reveal" id="reveal" hidden aria-labelledby="revealTitle">
+<div class="reveal-title"><div><div class="eyebrow">02 / Der Reveal</div><h2 id="revealTitle">So könnte deine Marke wirken.</h2></div><p>Eine kreative Vision für dein Geschäft. Probiere die verschiedenen Formate aus und teile deinen Favoriten mit Geschäftspartnern oder Freunden.</p></div>
+<div class="tabs" role="tablist" aria-label="Vorschauformate"><button class="tab" role="tab" aria-selected="true" id="tab-web" aria-controls="view-web" data-tab="web">01 / Website</button><button class="tab" role="tab" aria-selected="false" id="tab-post" aria-controls="view-post" data-tab="post">02 / Instagram</button><button class="tab" role="tab" aria-selected="false" id="tab-film" aria-controls="view-film" data-tab="film">03 / Werbespot</button></div>
+<div class="preview-shell">
+<div id="view-web" role="tabpanel" aria-labelledby="tab-web">
+<div class="web-stage" data-look="signature" id="webStage"><div class="browser"><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><div class="browser-url" id="previewUrl">Deine Website · Konzept</div><span style="font-size:10px">◎</span></div>
+<div class="web-nav"><div class="brandname" id="webName"></div><div class="navitems"><span>Über uns</span><span>Leistungen</span><span>Kontakt</span></div></div>
+<div class="web-hero"><div class="web-copy"><span class="web-small" id="webKicker">Lokal. Besonders. Anders.</span><h3 class="web-heading" id="webHeading"></h3><p class="web-description" id="webDesc"></p><span class="web-cta" id="webCta">Jetzt entdecken ↗</span></div><div class="art" aria-hidden="true"><span class="art-number">SC / 001</span></div></div>
+<div class="web-footer"><span id="webFooterLeft">Qualität. Charakter. Vertrauen.</span><span>Designkonzept by SOCIALCLIP ↗</span></div></div>
+<p class="tip">Konzeptansicht – noch keine fertige Website. Ein echter Auftritt braucht eigene Bilder, passende Inhalte und technische Umsetzung.</p></div>
+<div id="view-post" role="tabpanel" aria-labelledby="tab-post" hidden>
+<div class="post-layout"><div class="post-stage" id="postStage" data-look="signature"><div class="post-art" aria-hidden="true"></div><div class="post-content"><small id="postBrand"></small><div><strong id="postHeadline"></strong></div><span class="postcta" id="postTag"></span></div></div>
+<div class="caption-panel"><span class="eyebrow">Instagram / 4:5</span><h3>Ein Post, der auffällt.</h3><p>Du erhältst eine gestaltete Motividee und eine Caption, die du direkt als Ausgangspunkt verwenden kannst.</p><blockquote id="postCaption"></blockquote><button type="button" id="copyCaption" class="secondary">Caption kopieren ↗</button></div></div>
+</div>
+<div id="view-film" role="tabpanel" aria-labelledby="tab-film" hidden><div class="video-stage"><span class="eyebrow">15 Sekunden / Cinematic Storyboard</span><h3 class="filmhead" id="filmTitle">Deine Story in drei Szenen.</h3><p class="sub" id="filmDescription">Aus der Idee zum Werbespot.</p><div class="scene-grid"><div class="scene"><span>00:00 — 00:04</span><div class="scene-number">01</div><strong>Der Hook</strong><p id="scene1"></p></div><div class="scene"><span>00:04 — 00:10</span><div class="scene-number">02</div><strong>Die Verwandlung</strong><p id="scene2"></p></div><div class="scene"><span>00:10 — 00:15</span><div class="scene-number">03</div><strong>Der Moment</strong><p id="scene3"></p></div></div><p class="tip">Storyboard-Konzept, noch kein gerendertes Video. SocialClip kann daraus einen realen Werbeclip produzieren.</p><button type="button" id="copyScript" class="secondary">Storyboard kopieren ↗</button></div></div>
+</div>
+<div class="aftercontrols"><div><button id="save" type="button" class="secondary">Bild speichern ↓</button><button id="share" type="button" class="secondary">Mein Makeover teilen ↗</button></div><button id="change" type="button" class="secondary">Anderen Stil ausprobieren ↻</button></div>
+<p class="status" id="shareStatus" role="status" aria-live="polite"></p>
+<div class="lead">
+<span class="eyebrow">03 / Aus Vision wird Realität</span><h3>Und wenn dein Business wirklich so aussehen könnte?</h3>
+<p>Du hast gesehen, was eine andere Markenwirkung verändern kann. Wenn du möchtest, besprechen wir kostenlos, wie wir daraus einen echten Auftritt für dein Unternehmen machen.</p>
+<button id="openLead" type="button" class="primary" aria-expanded="false" aria-controls="leadForm">Dieses Konzept mit SocialClip umsetzen ↗</button>
+<form id="leadForm" action="https://formspree.io/f/xwlvlqwg" method="POST" hidden>
+<div class="formfields">
+<label>Dein Name<input class="input" type="text" id="leadName" name="name" autocomplete="name" required placeholder="Name"></label>
+<label>Geschäftliche E-Mail<input class="input" type="email" id="leadEmail" name="email" autocomplete="email" required placeholder="name@firma.de"></label>
+<label>Wobei brauchst du Hilfe?<select id="service" name="interesse"><option>Neue Website</option><option>Branding / Design</option><option>Video / Social Media</option><option>Gesamter Markenauftritt</option></select></label>
+<label>Wie bald möchtest du starten?<select id="startWhen" name="zeitrahmen"><option>So bald wie möglich</option><option>In 1–2 Monaten</option><option>Erstmal unverbindlich beraten lassen</option></select></label>
+</div>
+<input type="hidden" name="_subject" value="SocialClip MAKEOVER – neue Projektanfrage">
+<input type="hidden" id="leadBrief" name="message">
+<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-99999px" aria-hidden="true">
+<label class="privacy"><input id="ack" type="checkbox" required><span>Ich habe die <a href="/datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzhinweise</a> zur Kenntnis genommen. Meine Angaben dürfen zur Bearbeitung dieser Anfrage verwendet werden. Keine Newsletter-Anmeldung.</span></label>
+<button type="submit" class="primary">Anfrage kostenlos absenden ↗</button>
 </form>
 </div>
 </section>
-</div>
-</main>
-<footer class="footer"><span>© SocialClip · Erlangen · Ideen werden Wirkung.</span><span><a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a> · <a href="/">Zur Hauptseite</a></span></footer>
+<footer class="featurefooter"><span>© SocialClip · Erlangen · Ideen werden Wirkung.</span><div><a href="/impressum.html">Impressum</a> &nbsp;·&nbsp; <a href="/datenschutz.html">Datenschutz</a> &nbsp;·&nbsp; <a href="/">socialclip.art</a></div></footer>
 </div>
 <script>
 (function(){
 "use strict";
 var $=function(id){return document.getElementById(id)};
-var goalText={termin:"einen Termin buchen",anfrage:"ein Angebot anfordern",anruf:"das Unternehmen anrufen",kauf:"etwas kaufen"};
-var issue=[
-{key:"clarity",weight:20,title:"Zeige in fünf Sekunden, was du anbietest",tip:"Formuliere im oberen Bereich einen klaren Satz: Wem hilfst du, wobei und was soll der Besucher als Nächstes tun?"},
-{key:"action",weight:30,title:"Mache den nächsten Schritt unübersehbar",tip:"Platziere eine eindeutige Schaltfläche wie „Termin buchen“ oder „Angebot anfragen“ im sofort sichtbaren Bereich."},
-{key:"mobile",weight:20,title:"Entferne mobile Bedienhürden",tip:"Prüfe Buttons, Menüs und Formulare am Smartphone. Alles Wichtige sollte auch mit einer Hand erreichbar sein."},
-{key:"trust",weight:15,title:"Schaffe Vertrauen vor der ersten Anfrage",tip:"Zeige echte Arbeiten, Referenzen oder Teamfotos nah am Angebot und gib klare Kontaktdaten an."},
-{key:"finish",weight:15,title:"Verkürze den Weg bis zur Anfrage",tip:"Reduziere unnötige Pflichtfelder und Schritte. Bestätige anschließend eindeutig, dass die Anfrage angekommen ist."}
-];
-var state={url:"",host:"",goal:"termin",start:0,elapsed:0,answers:{},score:0};
-var timerHandle=null;
-function screen(id,step){document.querySelectorAll("[data-screen]").forEach(function(el){el.hidden=el.id!==id});$("stepCounter").textContent=step+" / 04";window.scrollTo({top:0,behavior:"smooth"});}
-function validSite(input){try{var u=new URL(/^https?:\/\//i.test(input)?input:"https://"+input);if(!["http:","https:"].includes(u.protocol)||!u.hostname.includes(".")||u.username||u.password) return null;return u;}catch(e){return null}}
-function refreshTimer(){if(!state.start)return;var elapsed=Math.floor((Date.now()-state.start)/1000);state.elapsed=elapsed;var left=Math.max(0,30-elapsed);$("seconds").textContent=left;$("timerMeter").style.width=(Math.min(100,elapsed/30*100))+"%";if(left===0&&timerHandle){clearInterval(timerHandle);timerHandle=null}}
-function startTest(){state.start=0;state.elapsed=0;$("seconds").textContent="30";$("timerMeter").style.width="0%";$("testStatus").textContent="Der Timer startet, sobald du „Website zum Test öffnen“ tippst.";$("reopen").href=state.url;$("testHost").textContent=state.host;$("testInstruction").textContent="Finde heraus, ob du als neuer Besucher innerhalb von 30 Sekunden "+goalText[state.goal]+" kannst. Der Test bleibt hier im SocialClip LAB.";if(timerHandle)clearInterval(timerHandle);timerHandle=null;screen("test","02")}
-$("setupForm").addEventListener("submit",function(e){e.preventDefault();var u=validSite($("url").value.trim());if(!u){$("setupError").hidden=false;$("setupError").textContent="Bitte gib eine gültige öffentliche Website-Adresse ein.";return}$("setupError").hidden=true;state.url=u.href;state.host=u.hostname;state.goal=$("goal").value;startTest()});
-$("reopen").addEventListener("click",function(){state.start=Date.now();$("testStatus").textContent="Die Website wird im zweiten Tab geöffnet. Kehre für die Fragen zu SocialClip LAB zurück.";if(timerHandle)clearInterval(timerHandle);refreshTimer();timerHandle=setInterval(refreshTimer,300)});
-$("testDone").addEventListener("click",function(){refreshTimer();if(timerHandle)clearInterval(timerHandle);timerHandle=null;screen("audit","03")});
-window.addEventListener("focus",refreshTimer);document.addEventListener("visibilitychange",function(){if(!document.hidden)refreshTimer()});
-$("auditForm").addEventListener("submit",function(e){e.preventDefault();var form=new FormData(e.currentTarget),answers={};var valid=issue.every(function(item){var v=form.get(item.key);if(!["yes","partly","no"].includes(v))return false;answers[item.key]=v;return true});$("auditError").hidden=valid;if(!valid)return;state.answers=answers;state.score=issue.reduce(function(sum,item){return sum+item.weight*({yes:1,partly:.5,no:0}[answers[item.key]])},0);renderReport();screen("report","04")});
-function addText(parent,tag,value,cls){var el=document.createElement(tag);if(cls)el.className=cls;el.textContent=value;parent.appendChild(el);return el}
-function renderReport(){
-$("reportTitle").textContent="Dein Kundenweg im Überblick.";$("reportDomain").textContent=state.host+" · Ziel: "+goalText[state.goal];
-$("score").textContent="";var amount=addText($("score"),"span",String(Math.round(state.score)));addText(amount,"small","/100");
-$("scoreHead").textContent=state.score>=80?"Starker erster Eindruck.":state.score>=50?"Hier liegt Potenzial.":"Hier gibt es klare Hürden.";
-$("scoreText").textContent="Deine persönliche Einschätzung nach "+Math.min(state.elapsed,30)+" von 30 Sekunden Testzeit. Die Punktzahl beschreibt nur deine Antworten.";
-var items=issue.filter(function(it){return state.answers[it.key]!=="yes"}).sort(function(a,b){return (a.weight*(state.answers[a.key]==="no"?1:.5))-(b.weight*(state.answers[b.key]==="no"?1:.5))}).reverse();
-var holder=$("recommendations");holder.textContent="";
-if(!items.length){var box=addText(holder,"p","Du hast in diesem Selbsttest keine offensichtlichen Hürden gefunden. Lass als nächsten Schritt eine Person testen, die dein Unternehmen noch nicht kennt.","sub");}
-items.slice(0,3).forEach(function(it,i){var row=document.createElement("div");row.className="reco";addText(row,"div",String(i+1).padStart(2,"0"),"num");var detail=document.createElement("div");addText(detail,"h3",it.title);addText(detail,"p",it.tip);row.appendChild(detail);holder.appendChild(row)});
-}
-function challengeLink(){var link=new URL("/lab/",location.origin);link.searchParams.set("challenge",state.goal);return link.href}
-$("share").addEventListener("click",async function(){var link=challengeLink(),txt="Findest du auf deiner eigenen Website innerhalb von 30 Sekunden den nächsten Schritt? Probier die SocialClip Challenge: "+link;try{if(navigator.share){await navigator.share({title:"SocialClip 30-Sekunden-Challenge",text:"Teste deinen digitalen Kundenweg.",url:link});$("shareStatus").textContent="Vielen Dank fürs Weiterempfehlen!";return}if(navigator.clipboard){await navigator.clipboard.writeText(txt);$("shareStatus").textContent="Challenge-Link kopiert!";return}}catch(e){if(e.name==="AbortError")return}window.prompt("Challenge-Link kopieren:",link)});
-$("print").addEventListener("click",function(){window.print()});
-$("restart").addEventListener("click",function(){state.start=0;state.answers={};$("auditForm").reset();screen("setup","01")});
-$("leadForm").addEventListener("submit",function(){var lines=["SOCIALCLIP LAB – freiwillig gesendeter Selbsttest","Website: "+state.url,"Kundenziel: "+goalText[state.goal],"Selbsteinschätzung: "+Math.round(state.score)+"/100","Antworten:"];issue.forEach(function(it){lines.push("- "+it.key+": "+state.answers[it.key])});lines.push("Hinweis: Selbsttest, kein automatischer technischer Scan.");$("leadMessage").value=lines.join("\n")});
-var challenge=new URLSearchParams(location.search).get("challenge");if(challenge&&goalText[challenge])$("goal").value=challenge;
+var selected="signature", active="web", state=null;
+var ideas={
+friseur:{cat:"HAIR / STYLE / IDENTITY",title:"Dein Style. Dein Statement.",sub:"Mehr als ein Haarschnitt. Ein Ort für Persönlichkeit, Präzision und deinen ganz eigenen Look.",cta:"Termin sichern",post:"NICHT EINFACH.\nANDERS.",caption:"Dein Look ist deine Visitenkarte. ✂️ Zeit für einen Style, der wirklich zu dir passt. Jetzt Termin anfragen.",hook:"Nahaufnahme: Schere, Spiegel, Licht. Ein harter Beat setzt ein.",reveal:"Drei präzise Schnitte im Rhythmus. Dann der Reveal im Spiegel.",finish:"Logo und Claim erscheinen. Close-up. Call-to-Action: Termin buchen.",tag:"STYLE, DER BLEIBT."},
+gastro:{cat:"FOOD / EXPERIENCE / CULTURE",title:"Geschmack, der bleibt.",sub:"Ein besonderer Moment beginnt nicht erst mit dem ersten Bissen. Entdecke Atmosphäre, die man schmecken kann.",cta:"Tisch reservieren",post:"GUTER GESCHMACK.\nBLEIBT.",caption:"Nicht nur essen gehen. Einen Abend erleben. ✨ Wir freuen uns auf deinen Besuch. Reserviere deinen Platz.",hook:"Ein Teller wird in dramatischem Licht angerichtet. Der Raum bleibt still.",reveal:"Dampf, Details, Lachen. Schnelle Schnitte auf Speisen und Gäste.",finish:"Der letzte Teller landet auf dem Tisch. Logo. Jetzt reservieren.",tag:"MEHR ALS EIN ABEND."},
+optik:{cat:"VISION / PRECISION / CONFIDENCE",title:"Mehr sehen. Mehr sein.",sub:"Klare Sicht trifft auf Persönlichkeit. Individuelle Beratung und ausgewählte Designs, die zu dir passen.",cta:"Beratung vereinbaren",post:"SIEH DICH.\nNEU.",caption:"Eine Brille ist mehr als ein Accessoire. 👓 Sie zeigt, wer du bist. Entdecke deinen neuen Blick.",hook:"Ein unscharfes Bild. Ein leises Einrasten des Brillengestells.",reveal:"Die Szene wird glasklar: Beratung, Fassungen, Details.",finish:"Blick in die Kamera. Brand Reveal. Jetzt Beratung vereinbaren.",tag:"KLARER BLICK. KLARER STIL."},
+beauty:{cat:"BEAUTY / CARE / CONFIDENCE",title:"Deine Ausstrahlung. Neu.",sub:"Zeit für dich. Individuelle Behandlungen, echte Aufmerksamkeit und ein gutes Gefühl, das bleibt.",cta:"Wunschtermin buchen",post:"DU VERDIENST\nDAS BESTE.",caption:"Deine Zeit. Dein Wohlgefühl. ✨ Gönn dir einen Moment nur für dich. Sichere dir jetzt deinen Termin.",hook:"Sanfte Texturen und Lichtreflexe füllen den Bildschirm.",reveal:"Detailaufnahmen einer Behandlung, ruhige Kamerafahrt, authentische Momente.",finish:"Strahlendes Ergebnis. Eleganter Logo-Reveal und Termin-CTA.",tag:"FEEL GOOD. LOOK GOOD."},
+auto:{cat:"CARS / PERFORMANCE / PASSION",title:"Liebe zum Detail.",sub:"Dein Fahrzeug verdient einen Auftritt, der Eindruck hinterlässt. Präzision, Leidenschaft und kompromisslose Qualität.",cta:"Angebot anfragen",post:"NICHT NUR\nEIN AUTO.",caption:"Jede Linie. Jedes Detail. Jeder Blick. 🏁 Dein Fahrzeug verdient echte Aufmerksamkeit. Frag jetzt an.",hook:"Dunkle Silhouette. Ein Scheinwerfer geht an. Tiefer Bass.",reveal:"Makroaufnahmen von Lack, Felgen und Handarbeit. Schnelle präzise Cuts.",finish:"Hero-Shot des Fahrzeugs. Logo und Angebots-CTA.",tag:"DETAILS MACHEN DEN UNTERSCHIED."},
+fitness:{cat:"MOVE / FOCUS / EVOLVE",title:"Mehr als dein Limit.",sub:"Dein Training. Deine Community. Dein nächstes Level. Starte dort, wo Motivation zu Ergebnissen wird.",cta:"Probetraining buchen",post:"GEH WEITER.\nWERD STÄRKER.",caption:"Du musst nicht perfekt starten. Du musst nur starten. 💪 Dein nächstes Kapitel beginnt heute. Probetraining anfragen.",hook:"Stille vor der Wiederholung. Nahaufnahme der Hände.",reveal:"Bewegung, Fokus, Schweiß. Der Beat baut sich dynamisch auf.",finish:"Starker Abschluss in Zeitlupe. Logo und Probetraining-CTA.",tag:"DEIN NÄCHSTES LEVEL."},
+handwerk:{cat:"CRAFT / QUALITY / TRUST",title:"Qualität sieht man.",sub:"Handwerk mit Haltung. Saubere Lösungen, ehrliche Beratung und Ergebnisse, auf die du dich verlassen kannst.",cta:"Projekt besprechen",post:"ECHTES HANDWERK.\nECHTE WERTE.",caption:"Kein leeres Versprechen, sondern Arbeit, die man sieht. 🛠️ Lass uns über dein Projekt sprechen.",hook:"Werkzeug trifft Material. Prägnanter Originalton.",reveal:"Material, Konzentration, Arbeitsschritte. Präzise, authentische Aufnahmen.",finish:"Fertiges Werk. Logo. Jetzt Projekt anfragen.",tag:"ECHT. SAUBER. DURCHDACHT."},
+retail:{cat:"CURATED / LOCAL / SPECIAL",title:"Entdecke das Besondere.",sub:"Für Dinge, die du nicht überall findest. Persönlich ausgewählt, mit Liebe präsentiert und für dich entdeckt.",cta:"Kollektion entdecken",post:"NICHT VON\nDER STANGE.",caption:"Lieblingsstücke, die man entdeckt und nicht vergisst. 🛍️ Komm vorbei und finde dein neues Highlight.",hook:"Eine geschlossene Schachtel. Licht zeichnet eine Kontur.",reveal:"Schnitt auf die Auswahl – spannende Details, Material und Stil.",finish:"Das Produkt im Mittelpunkt. Logo und Einladung zum Besuch.",tag:"BESONDERS IST STANDARD."},
+sonstige:{cat:"BRAND / EXPERIENCE / CONNECTION",title:"Mach Eindruck. Bleib im Kopf.",sub:"Ein starkes Angebot verdient einen Auftritt, der es sichtbar macht. Modern, klar und unverwechselbar.",cta:"Jetzt anfragen",post:"MEHR ALS\nGEWÖHNLICH.",caption:"Was wäre, wenn dein Unternehmen einen ganz neuen Eindruck hinterlässt? ✨ Entdecke, was möglich ist.",hook:"Schwarzer Bildschirm. Ein kurzer Impuls. Frage als Typografie.",reveal:"Markante Motive, echte Menschen und die Idee hinter dem Unternehmen.",finish:"Neue Markenwelt erscheint. Logo, Claim und klare Handlungsaufforderung.",tag:"IDEEN WERDEN WIRKUNG."}
+};
+function text(id,val){$(id).textContent=val}
+function shortName(s,max){return s.length>max?s.slice(0,max-1)+"…":s}
+function read(){var name=$("business").value.trim().replace(/\s+/g," ");if(!name){$("business").focus();return null}return {name:name.slice(0,50),industry:$("industry").value,look:selected}}
+function setLook(look){selected=look;document.querySelectorAll(".stylebtn").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.style===look))})}
+document.querySelectorAll(".stylebtn").forEach(function(b){b.addEventListener("click",function(){setLook(b.dataset.style);if(state){state.look=selected;render()}})});
+function shareURL(){var u=new URL(location.href);u.search="";u.hash="";u.searchParams.set("business",state.name);u.searchParams.set("industry",state.industry);u.searchParams.set("style",state.look);return u.href}
+function render(){if(!state)return;var i=ideas[state.industry]||ideas.sonstige;
+$("webStage").dataset.look=state.look;$("postStage").dataset.look=state.look;
+text("previewUrl","SocialClip / "+state.name+" · Designkonzept");text("webName",state.name);text("webKicker",i.cat);text("webHeading",i.title);text("webDesc",i.sub);text("webCta",i.cta+" ↗");text("webFooterLeft",state.name+" · Neue Markenvision");
+text("postBrand",state.name.toUpperCase()+" / SOCIALCLIP");text("postHeadline",i.post);$("postHeadline").style.whiteSpace="pre-line";text("postTag",i.tag);text("postCaption",i.caption);
+text("filmTitle",state.name+": Die Story in 15 Sekunden.");text("filmDescription","Drei Szenen. Ein Markenmoment. Eine Idee für Reels, Storys oder bezahlte Werbung.");
+text("scene1",i.hook);text("scene2",i.reveal);text("scene3",i.finish);
+text("leadBrief","Unternehmen: "+state.name+"\nBranche: "+state.industry+"\nLook: "+state.look+"\nGewünschtes Konzept: Website / Instagram / Werbeclip\nVision: "+i.title+"\nGeteilter Link: "+shareURL()+"\nHinweis: automatisch erzeugter Konzeptentwurf aus Vorlagen, kein Website-Scan.");
+$("reveal").hidden=false}
+function showTab(key){active=key;["web","post","film"].forEach(function(k){$("view-"+k).hidden=k!==key;$("tab-"+k).setAttribute("aria-selected",String(k===key))})}
+document.querySelectorAll(".tab").forEach(function(t){t.addEventListener("click",function(){showTab(t.dataset.tab)})});
+function begin(){var v=read();if(!v)return;state=v;var load=$("loading");load.hidden=false;render();showTab("web");setTimeout(function(){load.hidden=true;$("reveal").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"})},600)}
+$("makeForm").addEventListener("submit",function(e){e.preventDefault();begin()});
+$("change").addEventListener("click",function(){$("studio").scrollIntoView({behavior:"smooth",block:"center"});$("business").focus({preventScroll:true})});
+$("openLead").addEventListener("click",function(){var f=$("leadForm");f.hidden=!f.hidden;this.setAttribute("aria-expanded",String(!f.hidden));if(!f.hidden)$("leadName").focus()});
+async function copy(value,success){try{await navigator.clipboard.writeText(value);text("shareStatus",success)}catch(e){window.prompt("Zum Kopieren:",value)}}
+$("copyCaption").addEventListener("click",function(){if(state)copy(ideas[state.industry].caption,"Instagram-Caption kopiert.")});
+$("copyScript").addEventListener("click",function(){if(!state)return;var i=ideas[state.industry];copy("Werbespot-Idee für "+state.name+"\n0–4s: "+i.hook+"\n4–10s: "+i.reveal+"\n10–15s: "+i.finish,"Storyboard kopiert.")});
+$("share").addEventListener("click",async function(){if(!state)return;var url=shareURL();try{if(navigator.share){await navigator.share({title:state.name+" × SocialClip MAKEOVER",text:"So könnte "+state.name+" aussehen! Probier dein eigenes Makeover:",url:url});return}}catch(e){if(e.name==="AbortError")return}copy(url,"Dein Makeover-Link ist kopiert. Jetzt weiterempfehlen!")});
+function wrap(ctx,value,max){var words=value.split(/\s+/),lines=[],line="";for(var n=0;n<words.length;n++){var test=line?line+" "+words[n]:words[n];if(ctx.measureText(test).width>max&&line){lines.push(line);line=words[n]}else line=test}if(line)lines.push(line);return lines}
+$("save").addEventListener("click",function(){if(!state)return;var i=ideas[state.industry],c=document.createElement("canvas");c.width=1080;c.height=1350;var g=c.getContext("2d");if(!g){text("shareStatus","Der Bildexport wird von deinem Browser nicht unterstützt.");return}
+var palettes={signature:["#15120f","#f0d0a5","#f7e9d7"],electric:["#10101d","#9dffdf","#f5f1ff"],editorial:["#f0ebe1","#9c6e4b","#171613"]},p=palettes[state.look];g.fillStyle=p[0];g.fillRect(0,0,1080,1350);
+var glow=g.createRadialGradient(760,530,30,760,530,420);glow.addColorStop(0,p[1]);glow.addColorStop(1,p[0]);g.globalAlpha=.7;g.fillStyle=glow;g.beginPath();g.arc(770,520,360,0,Math.PI*2);g.fill();g.globalAlpha=1;
+g.strokeStyle=p[1];g.lineWidth=2;g.globalAlpha=.45;g.beginPath();g.ellipse(745,560,420,160,-.45,0,Math.PI*2);g.stroke();g.globalAlpha=1;
+g.fillStyle=p[2];g.font="bold 27px Arial";g.fillText(shortName(state.name.toUpperCase(),29),73,100);
+g.fillStyle=p[1];g.font="bold 21px Arial";g.fillText(i.cat,73,168);
+g.fillStyle=p[2];g.font="bold 92px Arial";wrap(g,i.post.replace("\n"," "),920).slice(0,4).forEach(function(line,n){g.fillText(line,73,825+n*106)});
+g.fillStyle=p[1];g.font="bold 30px Arial";g.fillText(i.tag,73,1150);g.fillStyle=p[2];g.globalAlpha=.7;g.font="22px Arial";g.fillText("BRAND VISION  /  SOCIALCLIP MAKEOVER",73,1270);
+var link=document.createElement("a");link.download="socialclip-makeover-"+state.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")+".png";link.href=c.toDataURL("image/png");document.body.appendChild(link);link.click();link.remove();text("shareStatus","Deine Markenvision wurde als Bild erstellt.")});
+var params=new URLSearchParams(location.search);if(params.has("business")){$("business").value=(params.get("business")||"").slice(0,50);var ind=params.get("industry");if(ideas[ind])$("industry").value=ind;var style=params.get("style");if(["signature","electric","editorial"].includes(style))setLook(style);if($("business").value.trim()){state=read();render();showTab("web");}}
 })();
 </script>
 </body>
