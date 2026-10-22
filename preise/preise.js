@@ -1,0 +1,16 @@
+(() => {
+ 'use strict';
+ const groups=JSON.parse(document.getElementById('offerData').textContent);
+ const container=document.getElementById('detailPlans');
+ const picker=document.getElementById('categorySelect');
+ let category='websites';
+ const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const contact=p=>'/?anfrage='+encodeURIComponent(p.name+(p.price?' · ab '+p.price+' € '+p.period:''))+'#kontakt';
+ function card(p){return `<article class="card${p.featured?' featured':''}" id="plan-${esc(p.id)}"><h2 class="plan-name">${esc(p.name).toUpperCase()}</h2>${p.featured?'<span class="recommended">Empfohlen</span>':''}<div class="price">${p.price?`<span class="from">ab</span><span class="amount">${esc(p.price)}</span><span class="currency">€</span>`:'<span class="request-price">Auf Anfrage</span>'}</div><p class="period">${esc(p.period)}</p><p class="desc">${esc(p.desc)}</p><ul class="features">${p.features.map(f=>`<li><span class="check" aria-hidden="true">✓</span><span>${esc(f)}</span></li>`).join('')}</ul><details class="expand" id="expand-${esc(p.id)}"><summary>Alle Leistungen anzeigen</summary><div class="extra"><ul>${p.extra.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><p><a class="service-link" href="${esc(p.href)}">Mehr zur Leistung ↗</a></p></div></details><div class="card-bottom"><a class="btn${p.featured?' primary':''}" href="${esc(contact(p))}">Anfragen <span aria-hidden="true">↗</span></a></div></article>`;}
+ function show(key,push=false,focus=false){category=groups[key]?key:'websites';const g=groups[category];container.classList.toggle('one',g.plans.length===1);container.classList.toggle('two',g.plans.length===2);container.innerHTML=g.plans.map(card).join('');document.getElementById('categoryIntro').textContent=g.intro;document.getElementById('sharedContent').innerHTML=g.notes.map(x=>`<p>${esc(x)}</p>`).join('');document.getElementById('sharedNotes').open=false;document.querySelectorAll('[data-category]').forEach(t=>{const on=t.dataset.category===category;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1});picker.value=category;document.getElementById('plansPanel').setAttribute('aria-labelledby','tab-'+category);if(push)history.pushState({},'','/preise/'+(category==='websites'?'':'?bereich='+category));if(focus)document.getElementById('tab-'+category).focus();}
+ function fromUrl(){const u=new URL(location.href);let selected=u.searchParams.get('bereich')||'websites';const id=u.searchParams.get('paket');if(id){for(const [k,g] of Object.entries(groups)){if(g.plans.some(p=>p.id===id)){selected=k;break}}}show(selected);if(id){const details=document.getElementById('expand-'+id);if(details)details.open=true;}}
+ document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('[data-category]');if(b)show(b.dataset.category,true)});
+ document.querySelector('.tabs').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const keys=Object.keys(groups),i=keys.indexOf(category),next=e.key==='Home'?0:e.key==='End'?keys.length-1:(i+(e.key==='ArrowRight'?1:-1)+keys.length)%keys.length;show(keys[next],true,true)});
+ picker.addEventListener('change',()=>show(picker.value,true));
+ window.addEventListener('popstate',fromUrl);fromUrl();
+})();
