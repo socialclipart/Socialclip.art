@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Lead-Zentrale | SocialClip intern</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0c0c0d">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Leads">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/geist-400-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css?v=1">
+<style>
+  /* Layout: Sprachleiste oben, darunter Kennzahlen und Pipeline, dann Liste links und Lead-Akte rechts. Auf dem Handy alles untereinander. */
+  :root {
+    --bg: #0c0c0d; --card: #151517; --card2: #1b1b1e; --line: rgba(255,255,255,.08); --line2: rgba(255,255,255,.14);
+    --fg: #f4f1ea; --soft: #b9b4ac; --dim: #7d7973;
+    --orange: #e78a53; --orange2: #f2b48a; --teal: #6fa3a3; --green: #8bc49a; --red: #e07a6c; --violet: #b49ae0; --blue: #7fa8e0;
+    --f: Geist, Arimo, 'Helvetica Neue', Arial, sans-serif;
+    --f-mono: 'Geist Mono', ui-monospace, Menlo, monospace;
+    --gl: max(16px, env(safe-area-inset-left, 0px)); --gr: max(16px, env(safe-area-inset-right, 0px));
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.45 var(--f); }
+  button, input, textarea, select { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+  h1, h2, h3 { margin: 0; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(1.4rem, 4vw, 1.9rem); }
+  h2 { font-size: 1.1rem; }
+  h3 { font-size: .95rem; color: var(--soft); font-weight: 600; }
+  p { margin: 0; }
+  .muted { color: var(--soft); }
+  .dim { color: var(--dim); }
+  .small { font-size: .82rem; }
+
+  .btn { border: 1px solid var(--line2); background: var(--card2); border-radius: 10px; padding: 8px 12px; font-size: .9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .btn:hover { border-color: var(--soft); }
+  .btn.primary { background: var(--orange); border-color: var(--orange); color: #1a0f08; font-weight: 600; }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .field { width: 100%; border: 1px solid var(--line2); background: var(--bg); border-radius: 10px; padding: 9px 11px; }
+
+  /* Anmeldung */
+  .login { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: 24px var(--gr) 24px var(--gl); }
+  .login form { width: min(100%, 24rem); display: grid; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+  .login .err { color: var(--red); font-size: .88rem; min-height: 1.2em; }
+  .check { display: flex; gap: 8px; align-items: center; font-size: .88rem; color: var(--soft); }
+
+  /* App */
+  .wrap { max-width: 84rem; margin: 0 auto; padding: calc(16px + env(safe-area-inset-top, 0px)) var(--gr) calc(40px + env(safe-area-inset-bottom, 0px)) var(--gl); display: grid; gap: 16px; }
+  .top { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+  .top .acts { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .ask { background: var(--card); border: 1px solid var(--line2); border-radius: 16px; padding: 14px; display: grid; gap: 10px; }
+  .ask form { display: flex; gap: 8px; }
+  .ask input { flex: 1; min-width: 0; font-size: 1rem; }
+  .mic { width: 46px; flex: none; justify-content: center; font-size: 1.15rem; padding: 0; }
+  .mic[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: #1a0f08; }
+  .reply { white-space: pre-wrap; line-height: 1.55; background: var(--bg); border-radius: 10px; padding: 10px 12px; }
+  .sugg { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sugg button { border: 1px solid var(--line2); background: transparent; border-radius: 999px; padding: 5px 11px; font-size: .82rem; color: var(--soft); }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); gap: 8px; }
+  .kpi { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; text-align: left; display: grid; gap: 2px; }
+  .kpi .n { font: 600 1.45rem var(--f-mono); font-variant-numeric: tabular-nums; }
+  .kpi .l { font-size: .8rem; color: var(--soft); }
+  .kpi[aria-pressed="true"] { border-color: var(--orange); }
+
+  .pipe { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 7.5rem), 1fr)); gap: 6px; }
+  .stage { text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; display: grid; gap: 0; position: relative; overflow: hidden; }
+  .stage::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--c); }
+  .stage .n { font: 600 1.15rem var(--f-mono); font-variant-numeric: tabular-nums; }
+  .stage .l { font-size: .76rem; color: var(--soft); }
+  .stage[aria-pressed="true"] { border-color: var(--c); background: var(--card2); }
+
+  @media (max-width: 40rem) {
+    .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+    .kpi { padding: 7px 8px; }
+    .kpi .n { font-size: 1.1rem; }
+    .kpi .l, .stage .l { font-size: .7rem; line-height: 1.2; }
+    .pipe { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .stage { padding: 6px 7px; }
+    .stage .n { font-size: 1rem; }
+  }
+  .main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 16px; align-items: start; }
+  @media (max-width: 60rem) { .main { grid-template-columns: minmax(0, 1fr); } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 10px; min-width: 0; }
+  .tools { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tools .field { flex: 1 1 10rem; width: auto; min-width: 0; }
+  .tools select.field { flex: 0 1 auto; }
+  .count { font-size: .8rem; color: var(--soft); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .list { list-style: none; margin: 0; padding: 0; max-height: min(70vh, 46rem); overflow: auto; border-top: 1px solid var(--line); }
+  .list li button { width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 10px 4px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: center; }
+  .list li button:hover { background: var(--card2); }
+  .list li button[aria-current="true"] { background: rgba(231,138,83,.12); }
+  .list .nm { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .list .meta { font-size: .8rem; color: var(--soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .list .right { grid-row: 1 / span 2; grid-column: 2; display: grid; justify-items: end; gap: 4px; }
+  .score { font: .76rem var(--f-mono); color: var(--dim); }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font-size: .74rem; border-radius: 999px; padding: 2px 8px; border: 1px solid var(--line2); white-space: nowrap; }
+  .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
+
+  .akte { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); }
+  @media (max-width: 60rem) { .akte { position: static; } }
+  .empty { text-align: center; color: var(--soft); padding: 24px 8px; display: grid; gap: 6px; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr)); gap: 8px; }
+  .fact { background: var(--bg); border-radius: 10px; padding: 8px 10px; min-width: 0; }
+  .fact .k { font-size: .74rem; color: var(--dim); }
+  .fact .v { overflow-wrap: anywhere; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .sbtn { border: 1px solid var(--line2); background: transparent; border-radius: 999px; padding: 6px 11px; font-size: .84rem; display: inline-flex; gap: 6px; align-items: center; }
+  .sbtn::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+  .sbtn[aria-pressed="true"] { background: var(--c); border-color: var(--c); color: #120c08; }
+  .sbtn[aria-pressed="true"]::before { background: #120c08; }
+  textarea.field { min-height: 4.5rem; resize: vertical; }
+  .pitch { background: var(--bg); border-radius: 10px; padding: 10px 12px; line-height: 1.55; }
+  details summary { cursor: pointer; color: var(--soft); font-size: .88rem; }
+  details[open] { display: grid; gap: 8px; }
+  .log { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: .82rem; color: var(--soft); }
+  .log time { font: .76rem var(--f-mono); color: var(--dim); margin-right: 8px; }
+  .saved { font-size: .8rem; color: var(--green); }
+
+  /* Mail-Fenster */
+  .sheet { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.6); display: grid; place-items: end center; }
+  .sheet .box { width: min(100%, 40rem); max-height: 92vh; overflow: auto; background: var(--card); border: 1px solid var(--line2); border-radius: 16px 16px 0 0; padding: 16px var(--gr) calc(16px + env(safe-area-inset-bottom, 0px)) var(--gl); display: grid; gap: 10px; }
+  @media (min-width: 40rem) { .sheet { place-items: center; } .sheet .box { border-radius: 16px; padding: 18px; } }
+  .sheet textarea.field { min-height: 16rem; }
+  .note-legal { font-size: .78rem; color: var(--dim); }
+</style>
+</head>
+<body>
+
+<section class="login" id="login">
+  <form id="loginForm" autocomplete="on">
+    <h1>Lead-Zentrale</h1>
+    <p class="muted small">Interner Bereich von SocialClip. Die Daten sind verschlüsselt und werden erst mit dem Passwort auf diesem Gerät lesbar.</p>
+    <input type="text" name="username" value="socialclip" autocomplete="username" hidden>
+    <input class="field" id="pw" type="password" autocomplete="current-password" placeholder="Passwort" aria-label="Passwort" required>
+    <label class="check"><input type="checkbox" id="remember"> Auf diesem Gerät angemeldet bleiben</label>
+    <button class="btn primary" id="loginBtn" type="submit">Öffnen</button>
+    <p class="err" id="loginErr" role="alert"></p>
+  </form>
+</section>
+
+<div class="wrap" id="app" hidden>
+  <header class="top">
+    <div>
+      <h1>Lead-Zentrale</h1>
+      <p class="muted small" id="sub"></p>
+    </div>
+    <div class="acts">
+      <button class="btn" id="speakBtn" type="button" aria-pressed="false">Vorlesen: aus</button>
+      <button class="btn" id="backupBtn" type="button">Sicherung speichern</button>
+      <label class="btn" for="restoreIn">Sicherung laden</label>
+      <input type="file" id="restoreIn" accept="application/json,.json" hidden>
+      <button class="btn" id="logoutBtn" type="button">Abmelden</button>
+    </div>
+  </header>
+
+  <section class="ask" aria-label="Assistent">
+    <form id="askForm">
+      <input class="field" id="askIn" type="text" enterkeyhint="send" autocomplete="off" placeholder="z. B. Zeig mir 5 Firmen ohne Website" aria-label="Frage oder Befehl">
+      <button class="btn mic" id="micBtn" type="button" aria-label="Sprechen" aria-pressed="false">🎤</button>
+      <button class="btn primary" type="submit">Los</button>
+    </form>
+    <p class="reply" id="reply" aria-live="polite">Sag oder tippe, was du brauchst. Tippe auf „Hilfe“, um alle Befehle zu sehen.</p>
+    <div class="sugg" id="sugg"></div>
+  </section>
+
+  <nav class="kpis" id="kpis" aria-label="Kennzahlen"></nav>
+  <nav class="pipe" id="pipe" aria-label="Pipeline"></nav>
+
+  <div class="main">
+    <section class="card" aria-labelledby="listTitle">
+      <h2 id="listTitle">Betriebe</h2>
+      <div class="tools">
+        <input id="q" class="field" type="search" placeholder="Firma, Ort, Branche…" aria-label="Suchen">
+        <select id="fSort" class="field" aria-label="Sortierung">
+          <option value="score">Nach Akquise-Score</option>
+          <option value="google">Nach Google-Bewertung</option>
+          <option value="recent">Zuletzt bearbeitet</option>
+        </select>
+      </div>
+      <div class="count" id="count"></div>
+      <ul class="list" id="list"></ul>
+    </section>
+
+    <section class="card akte" id="akte" aria-live="polite">
+      <div class="empty" id="akteEmpty">
+        <h2>Kein Betrieb ausgewählt</h2>
+        <p>Wähle links einen Betrieb oder frag den Assistenten.</p>
+      </div>
+      <div id="akteBody" hidden></div>
+    </section>
+  </div>
+</div>
+
+<div class="sheet" id="mailSheet" hidden role="dialog" aria-modal="true" aria-labelledby="mailTitle">
+  <div class="box">
+    <div class="row" style="justify-content: space-between;"><h2 id="mailTitle">E-Mail</h2><button class="btn" id="mailClose" type="button">Schließen</button></div>
+    <input class="field" id="mailTo" type="email" placeholder="E-Mail-Adresse" aria-label="An">
+    <input class="field" id="mailSubj" type="text" aria-label="Betreff">
+    <textarea class="field" id="mailBody" aria-label="Text"></textarea>
+    <div class="row">
+      <a class="btn primary" id="mailOpen" href="#">In Mail-App öffnen</a>
+      <button class="btn" id="mailCopy" type="button">Text kopieren</button>
+      <button class="btn" id="mailSent" type="button">Als „E-Mail geschickt“ markieren</button>
+    </div>
+    <p class="note-legal">Prüf den Text vor dem Senden. Unaufgeforderte Werbe-E-Mails an Firmen sind ohne Einwilligung nach § 7 UWG riskant. Ein Anruf oder eine Antwort auf eine Anfrage ist der sicherere Erstkontakt.</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  const STATUSES = [
+    { id: 'neu', label: 'Neu', c: 'var(--dim)' },
+    { id: 'angerufen', label: 'Angerufen', c: 'var(--blue)' },
+    { id: 'nachricht', label: 'Nachricht geschickt', c: 'var(--blue)' },
+    { id: 'email', label: 'E-Mail geschickt', c: 'var(--teal)' },
+    { id: 'gespraech', label: 'Im Gespräch', c: 'var(--violet)' },
+    { id: 'angebot', label: 'Angebot raus', c: 'var(--orange)' },
+    { id: 'gewonnen', label: 'Gewonnen', c: 'var(--green)' },
+    { id: 'verloren', label: 'Verloren', c: 'var(--red)' },
+  ];
+  const ST = Object.fromEntries(STATUSES.map((s) => [s.id, s]));
+  const STORE = 'sc-leads-state-v1';
+  const KEYSTORE = 'sc-leads-key-v1';
+  const SIGNATUR = 'SocialClip · Art · Media · Digital\nDonato-Polli-Str. 38, 91056 Erlangen\n0176 46188101 · socialclip.art@gmail.com · socialclip.art';
+
+  const $ = (id) => document.getElementById(id);
+  const el = (tag, props = {}, kids = []) => { const e = document.createElement(tag); Object.assign(e, props); kids.forEach((k) => k != null && e.append(k)); return e; };
+  const store = {
+    get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: (k, v) => { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+    del: (k) => { try { localStorage.removeItem(k); } catch (e) {} },
+  };
+  const norm = (s) => String(s || '').toLowerCase().replace(/ß/g, 'ss').normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const fmt = (n) => Number(n).toLocaleString('de-DE');
+  const fmtDate = (iso) => { try { return new Date(iso).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } };
+  const safeUrl = (u) => /^https?:\/\//i.test(String(u || '')) ? String(u) : null;
+  const telHref = (t) => { const d = String(t || '').replace(/[^\d+]/g, ''); return d.length >= 6 ? 'tel:' + d : null; };
+  const waHref = (t) => {
+    let d = String(t || '').replace(/[^\d+]/g, '');
+    if (d.startsWith('+')) d = d.slice(1); else if (d.startsWith('00')) d = d.slice(2); else if (d.startsWith('0')) d = '49' + d.slice(1);
+    return /^491[5-7]\d{7,}$/.test(d) ? 'https://wa.me/' + d : null;
+  };
+
+  // ---------- Entschlüsseln ----------
+  const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+  let enc = null;
+  const loadEnc = async () => {
+    if (enc) return enc;
+    const res = await fetch('daten.enc.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('fetch');
+    enc = await res.json();
+    return enc;
+  };
+  const deriveKey = async (pw, e) => {
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: b64(e.salt), iterations: e.iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, true, ['decrypt']);
+  };
+  const decrypt = async (key, e) => {
+    const buf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(e.iv) }, key, b64(e.data));
+    return JSON.parse(new TextDecoder().decode(buf));
+  };
+
+  // ---------- Daten ----------
+  let leads = [];
+  const byId = new Map();
+  let state = {};
+  const ui = { q: '', st: '', kpi: '', sort: 'score', sel: null, ids: null, label: '' };
+  const stOf = (id) => (state[id] && state[id].status) || 'neu';
+  const saveState = () => store.set(STORE, JSON.stringify(state));
+
+  const start = (data) => {
+    leads = data.leads || [];
+    leads.forEach((l) => byId.set(l.id, l));
+    let local = null;
+    try { local = JSON.parse(store.get(STORE) || 'null'); } catch (e) { local = null; }
+    state = {};
+    Object.entries(data.status || {}).forEach(([id, s]) => { if (byId.has(id)) state[id] = s; });
+    if (local && typeof local === 'object') Object.entries(local).forEach(([id, s]) => {
+      if (!byId.has(id) || !s) return;
+      const a = state[id];
+      if (!a || String(s.updatedAt || '') >= String(a.updatedAt || '')) state[id] = s;
+    });
+    saveState();
+    $('sub').textContent = fmt(leads.length) + ' Betriebe · Stand der Liste ' + (data.stand || '') + ' · Status und Notizen werden auf diesem Gerät gespeichert';
+    $('login').hidden = true; $('app').hidden = false;
+    renderAll();
+    initAsk();
+  };
+
+  const tryKey = async (key) => { const e = await loadEnc(); return decrypt(key, e); };
+
+  (async () => {
+    const saved = store.get(KEYSTORE);
+    if (!saved || !window.crypto || !crypto.subtle) return;
+    try {
+      const key = await crypto.subtle.importKey('jwk', JSON.parse(saved), { name: 'AES-GCM' }, true, ['decrypt']);
+      start(await tryKey(key));
+    } catch (e) { store.del(KEYSTORE); }
+  })();
+
+  $('loginForm').addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const btn = $('loginBtn'); btn.disabled = true; $('loginErr').textContent = '';
+    if (!window.crypto || !crypto.subtle) { $('loginErr').textContent = 'Dieser Browser kann die Daten nicht entschlüsseln. Bitte Safari oder Chrome verwenden.'; btn.disabled = false; return; }
+    btn.textContent = 'Wird geöffnet…';
+    try {
+      const e = await loadEnc();
+      const key = await deriveKey($('pw').value, e);
+      const data = await decrypt(key, e);
+      if ($('remember').checked) store.set(KEYSTORE, JSON.stringify(await crypto.subtle.exportKey('jwk', key)));
+      $('pw').value = '';
+      start(data);
+    } catch (err) {
+      $('loginErr').textContent = err && err.message === 'fetch' ? 'Die Daten konnten nicht geladen werden. Prüf die Internetverbindung.' : 'Das Passwort stimmt nicht.';
+    }
+    btn.disabled = false; btn.textContent = 'Öffnen';
+  });
+
+  $('logoutBtn').addEventListener('click', () => {
+    store.del(KEYSTORE);
+    location.reload();
+  });
+
+  // ---------- Filter ----------
+  const KPIS = [
+    { id: 'alle', label: 'Betriebe', test: () => true },
+    { id: 'ohneweb', label: 'Ohne Website', test: (l) => !l.web },
+    { id: 'veraltet', label: 'Website veraltet', test: (l) => /veraltet/i.test(l.design || '') },
+    { id: 'mail', label: 'Mit E-Mail', test: (l) => !!l.mail },
+    { id: 'hoch', label: 'Potenzial hoch', test: (l) => l.pot === 'Hoch' },
+    { id: 'offen', label: 'In Arbeit', test: (l) => !['neu', 'gewonnen', 'verloren'].includes(stOf(l.id)) },
+  ];
+  const KP = Object.fromEntries(KPIS.map((k) => [k.id, k]));
+
+  const matches = (l) => {
+    if (ui.ids && !ui.ids.has(l.id)) return false;
+    if (ui.st && stOf(l.id) !== ui.st) return false;
+    if (ui.kpi && ui.kpi !== 'alle' && !KP[ui.kpi].test(l)) return false;
+    if (!ui.q) return true;
+    const hay = norm([l.name, l.ort, l.kat, l.mail, l.web, l.chef, l.adr].join(' '));
+    return norm(ui.q).split(/\s+/).every((w) => hay.includes(w));
+  };
+  const recentOf = (id) => Date.parse((state[id] || {}).updatedAt || '') || 0;
+  const sorter = (k) => k === 'google'
+    ? (a, b) => (Number(b.google) || 0) - (Number(a.google) || 0) || (b.score ?? -1) - (a.score ?? -1)
+    : k === 'recent'
+      ? (a, b) => recentOf(b.id) - recentOf(a.id) || (b.score ?? -1) - (a.score ?? -1)
+      : (a, b) => (b.score ?? -1) - (a.score ?? -1) || (Number(b.google) || 0) - (Number(a.google) || 0);
+
+  // ---------- Rendern ----------
+  const renderKpis = () => {
+    const nav = $('kpis'); nav.textContent = '';
+    KPIS.forEach((k) => {
+      const n = leads.filter(k.test).length;
+      const b = el('button', { type: 'button', className: 'kpi' }, [el('span', { className: 'n', textContent: fmt(n) }), el('span', { className: 'l', textContent: k.label })]);
+      b.setAttribute('aria-pressed', String(ui.kpi === k.id));
+      b.addEventListener('click', () => { ui.kpi = ui.kpi === k.id || k.id === 'alle' ? '' : k.id; ui.ids = null; renderAll(); });
+      nav.append(b);
+    });
+  };
+
+  const renderPipe = () => {
+    const counts = Object.fromEntries(STATUSES.map((s) => [s.id, 0]));
+    leads.forEach((l) => { counts[stOf(l.id)]++; });
+    const nav = $('pipe'); nav.textContent = '';
+    STATUSES.forEach((s) => {
+      const b = el('button', { type: 'button', className: 'stage' }, [el('span', { className: 'n', textContent: fmt(counts[s.id]) }), el('span', { className: 'l', textContent: s.label })]);
+      b.style.setProperty('--c', s.c);
+      b.setAttribute('aria-pressed', String(ui.st === s.id));
+      b.addEventListener('click', () => { ui.st = ui.st === s.id ? '' : s.id; ui.ids = null; renderAll(); });
+      nav.append(b);
+    });
+  };
+
+  const renderList = () => {
+    const rows = ui.ids ? [...ui.ids].map((id) => byId.get(id)).filter((l) => l && matches(l)) : leads.filter(matches).sort(sorter(ui.sort));
+    const c = $('count'); c.textContent = '';
+    c.append((ui.ids ? (ui.label || 'Auswahl des Assistenten') + ': ' : '') + fmt(rows.length) + ' von ' + fmt(leads.length) + ' Betrieben');
+    if (ui.ids || ui.st || ui.kpi || ui.q) {
+      const r = el('button', { type: 'button', className: 'btn small', textContent: 'Alle zeigen' });
+      r.addEventListener('click', () => resetFilters());
+      c.append(r);
+    }
+    const ul = $('list'); ul.textContent = '';
+    const frag = document.createDocumentFragment();
+    rows.slice(0, 400).forEach((l) => {
+      const s = ST[stOf(l.id)];
+      const pill = el('span', { className: 'pill', textContent: s.label }); pill.style.setProperty('--c', s.c);
+      const meta = [l.ort, l.web ? (l.design ? 'Website ' + l.design.toLowerCase() : 'mit Website') : 'ohne Website', l.google ? l.google + ' ★' : ''].filter(Boolean).join(' · ');
+      const btn = el('button', { type: 'button' }, [
+        el('span', { className: 'nm', textContent: l.name }),
+        el('span', { className: 'right' }, [pill, l.score != null ? el('span', { className: 'score', textContent: 'Score ' + l.score }) : null]),
+        el('span', { className: 'meta', textContent: meta }),
+      ]);
+      btn.setAttribute('aria-current', String(ui.sel === l.id));
+      btn.addEventListener('click', () => select(l.id, true));
+      frag.append(el('li', {}, [btn]));
+    });
+    ul.append(frag);
+    if (rows.length > 400) ul.append(el('li', { className: 'dim small', textContent: 'Weitere ' + fmt(rows.length - 400) + ' Betriebe: bitte suchen oder filtern.' }));
+  };
+
+  const resetFilters = () => { ui.ids = null; ui.label = ''; ui.st = ''; ui.kpi = ''; ui.q = ''; $('q').value = ''; renderAll(); };
+
+  const select = (id, scroll) => {
+    ui.sel = id; renderList(); renderAkte();
+    if (scroll && window.matchMedia('(max-width: 60rem)').matches) $('akte').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const fact = (k, v) => v ? el('div', { className: 'fact' }, [el('div', { className: 'k', textContent: k }), el('div', { className: 'v', textContent: v })]) : null;
+  const link = (href, text, primary) => href ? el('a', { className: 'btn' + (primary ? ' primary' : ''), href, textContent: text, target: /^https?:/.test(href) ? '_blank' : '', rel: 'noopener noreferrer' }) : null;
+
+  const renderAkte = () => {
+    const l = byId.get(ui.sel);
+    $('akteEmpty').hidden = !!l; const body = $('akteBody'); body.hidden = !l; body.textContent = '';
+    if (!l) return;
+    const s = state[l.id] || {};
+    const cur = stOf(l.id);
+    const mailBtn = el('button', { type: 'button', className: 'btn', textContent: 'E-Mail schreiben' });
+    mailBtn.addEventListener('click', () => openMail(l));
+    const parts = [
+      el('div', {}, [el('h2', { textContent: l.name }), el('p', { className: 'small muted', textContent: [l.kat, l.adr].filter(Boolean).join(' · ') })]),
+      el('div', { className: 'row' }, [link(telHref(l.tel), 'Anrufen', true), mailBtn, link(waHref(l.tel), 'WhatsApp'), link(safeUrl(l.web), 'Website'), link(safeUrl(l.maps), 'Maps'), link(safeUrl(l.insta), 'Instagram'), link(safeUrl(l.fb), 'Facebook')]),
+      el('div', { className: 'facts' }, [
+        fact('Telefon', l.tel), fact('E-Mail', l.mail || 'keine bekannt'), fact('Entscheider', l.chef),
+        fact('Website', l.web ? (l.design || 'vorhanden') + (l.dring ? ', Dringlichkeit ' + l.dring : '') : 'keine'),
+        fact('Akquise-Score', l.score != null ? String(l.score) : ''), fact('Google', l.google ? l.google + ' Sterne' : ''),
+        fact('Potenzial', l.pot), fact('Technik', [l.cms, l.sec ? 'Sicherheit ' + l.sec : '', l.bfsg ? 'Barrierefreiheit: ' + l.bfsg : ''].filter(Boolean).join(' · ')),
+      ]),
+      el('h3', { textContent: 'Status' }),
+    ];
+    const sg = el('div', { className: 'row', role: 'group' }); sg.setAttribute('aria-label', 'Status');
+    STATUSES.forEach((st) => {
+      const b = el('button', { type: 'button', className: 'sbtn', textContent: st.label });
+      b.style.setProperty('--c', st.c);
+      b.setAttribute('aria-pressed', String(cur === st.id));
+      b.addEventListener('click', () => { setStatus(l.id, st.id); });
+      sg.append(b);
+    });
+    parts.push(sg, el('h3', { textContent: 'Notiz' }));
+    const note = el('textarea', { className: 'field', value: s.note || '', placeholder: 'z. B. Rückruf Donnerstag, will erst Beispiele sehen' });
+    const saved = el('span', { className: 'saved' });
+    const saveBtn = el('button', { type: 'button', className: 'btn primary', textContent: 'Notiz speichern' });
+    saveBtn.addEventListener('click', () => { setNote(l.id, note.value); saved.textContent = 'Gespeichert'; });
+    parts.push(note, el('div', { className: 'row' }, [saveBtn, saved]));
+    if (l.pitch) parts.push(el('h3', { textContent: 'Sales-Pitch' }), el('p', { className: 'pitch', textContent: l.pitch }));
+    if (l.probD || l.probM) {
+      const det = el('details', {}, [el('summary', { textContent: 'Probleme der Website' })]);
+      if (l.probD) det.append(el('p', {}, [el('b', { textContent: 'Computer: ' }), l.probD.replace(/ \| /g, ' · ')]));
+      if (l.probM) det.append(el('p', {}, [el('b', { textContent: 'Handy: ' }), l.probM.replace(/ \| /g, ' · ')]));
+      parts.push(det);
+    }
+    if (s.log && s.log.length) {
+      const ul = el('ul', { className: 'log' });
+      s.log.slice().reverse().forEach((e) => ul.append(el('li', {}, [el('time', { textContent: fmtDate(e.at) }), (ST[e.s] ? ST[e.s].label : e.s) + (e.t ? ' · ' + e.t : '')])));
+      parts.push(el('h3', { textContent: 'Verlauf' }), ul);
+    }
+    parts.forEach((p) => p && body.append(p));
+  };
+
+  const renderAll = () => { renderKpis(); renderPipe(); renderList(); renderAkte(); };
+  $('q').addEventListener('input', (e) => { ui.q = e.target.value.trim(); ui.ids = null; renderList(); });
+  $('fSort').addEventListener('change', (e) => { ui.sort = e.target.value; renderList(); });
+
+  // ---------- Speichern ----------
+  const touch = (id, patch, logEntry) => {
+    const prev = state[id] || {};
+    state[id] = { status: prev.status || 'neu', note: prev.note || '', ...patch, log: (prev.log || []).concat(logEntry ? [logEntry] : []).slice(-30), updatedAt: new Date().toISOString(), name: byId.get(id).name };
+    saveState(); renderAll();
+  };
+  const setStatus = (id, st, t) => { if (stOf(id) !== st) touch(id, { status: st }, { s: st, at: new Date().toISOString(), t: t || '' }); };
+  const setNote = (id, note) => touch(id, { note: String(note).slice(0, 4000) }, null);
+  const addNote = (id, text) => { const prev = (state[id] || {}).note || ''; const line = new Date().toLocaleDateString('de-DE') + ': ' + text; setNote(id, prev ? prev + '\n' + line : line); };
+
+  $('backupBtn').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify({ app: 'sc-leads', at: new Date().toISOString(), state }, null, 1)], { type: 'application/json' });
+    const a = el('a', { href: URL.createObjectURL(blob), download: 'lead-status-' + new Date().toISOString().slice(0, 10) + '.json' });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+  $('restoreIn').addEventListener('change', async (e) => {
+    const f = e.target.files && e.target.files[0]; if (!f) return;
+    try {
+      const d = JSON.parse(await f.text());
+      if (!d || d.app !== 'sc-leads' || typeof d.state !== 'object') throw 0;
+      let n = 0;
+      Object.entries(d.state).forEach(([id, s]) => {
+        if (!byId.has(id) || !s) return;
+        const a = state[id];
+        if (!a || String(s.updatedAt || '') > String(a.updatedAt || '')) { state[id] = s; n++; }
+      });
+      saveState(); renderAll(); say(n ? n + ' Einträge aus der Sicherung übernommen.' : 'Die Sicherung enthielt nichts Neueres.');
+    } catch (err) { say('Diese Datei ist keine Sicherung der Lead-Zentrale.'); }
+    e.target.value = '';
+  });
+
+  // ---------- Mail ----------
+  let mailLead = null;
+  const mailDraft = (l) => {
+    const anrede = 'Guten Tag,';
+    let subj, mid;
+    if (!l.web) {
+      subj = 'Ihr Auftritt im Internet – ' + l.name;
+      mid = 'ich bin bei Google auf ' + l.name + ' gestoßen' + (l.google ? ' und habe Ihre guten Bewertungen (' + l.google + ' Sterne) gesehen' : '') + '. Dabei ist mir aufgefallen, dass Sie noch keine eigene Website haben. Viele Kunden suchen heute zuerst online und entscheiden sich dann für den Betrieb, bei dem sie Leistungen, Öffnungszeiten und Kontakt sofort finden.\n\nWir von SocialClip aus Erlangen bauen für lokale Betriebe moderne, schnelle Websites, die auf dem Handy gut aussehen, und kümmern uns auf Wunsch auch um Ihr Google-Profil.';
+    } else if (l.pitch) {
+      subj = 'Ihre Website – ein paar Ideen für ' + l.name;
+      mid = 'ich habe mir die Website von ' + l.name + ' angesehen und mir ein paar Gedanken gemacht: ' + l.pitch + '\n\nWir von SocialClip aus Erlangen gestalten Websites für lokale Betriebe neu: modern, schnell und gut auf dem Handy.';
+    } else {
+      subj = 'Kurze Idee für ' + l.name;
+      mid = 'ich bin bei der Suche nach Betrieben in ' + (l.ort || 'der Region') + ' auf ' + l.name + ' gestoßen. Wir von SocialClip aus Erlangen unterstützen lokale Betriebe mit Websites, Social Media, Flyern und Google-Auftritt, damit neue Kunden Sie schneller finden.';
+    }
+    const body = anrede + '\n\n' + mid + '\n\nHätten Sie nächste Woche Zeit für ein kurzes Telefonat von etwa 15 Minuten? Ich zeige Ihnen gern unverbindlich, was wir für Sie umsetzen würden.\n\nViele Grüße\n\n' + SIGNATUR;
+    return { subj, body };
+  };
+  const mailHref = () => 'mailto:' + encodeURIComponent($('mailTo').value.trim()).replace(/%40/g, '@') + '?subject=' + encodeURIComponent($('mailSubj').value) + '&body=' + encodeURIComponent($('mailBody').value);
+  const syncMail = () => { $('mailOpen').href = mailHref(); };
+  const openMail = (l) => {
+    mailLead = l;
+    const d = mailDraft(l);
+    $('mailTitle').textContent = 'E-Mail an ' + l.name;
+    $('mailTo').value = l.mail || ''; $('mailSubj').value = d.subj; $('mailBody').value = d.body;
+    syncMail();
+    $('mailSheet').hidden = false;
+    $('mailBody').scrollTop = 0;
+  };
+  ['mailTo', 'mailSubj', 'mailBody'].forEach((id) => $(id).addEventListener('input', syncMail));
+  $('mailClose').addEventListener('click', () => { $('mailSheet').hidden = true; });
+  $('mailSheet').addEventListener('click', (e) => { if (e.target === $('mailSheet')) $('mailSheet').hidden = true; });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $('mailSheet').hidden = true; });
+  $('mailCopy').addEventListener('click', async () => {
+    const t = 'Betreff: ' + $('mailSubj').value + '\n\n' + $('mailBody').value;
+    try { await navigator.clipboard.writeText(t); $('mailCopy').textContent = 'Kopiert ✓'; }
+    catch (e) { $('mailBody').select(); $('mailCopy').textContent = 'Markiert – jetzt kopieren'; }
+    setTimeout(() => { $('mailCopy').textContent = 'Text kopieren'; }, 2000);
+  });
+  $('mailSent').addEventListener('click', () => { if (mailLead) setStatus(mailLead.id, 'email', 'Mail: ' + $('mailSubj').value.slice(0, 80)); $('mailSheet').hidden = true; });
+
+  // ---------- Vorlesen ----------
+  const canSpeak = 'speechSynthesis' in window;
+  let speakOn = store.get('sc-leads-speak') === '1';
+  const paintSpeak = () => { $('speakBtn').textContent = 'Vorlesen: ' + (speakOn ? 'an' : 'aus'); $('speakBtn').setAttribute('aria-pressed', String(speakOn)); };
+  if (!canSpeak) $('speakBtn').hidden = true; else paintSpeak();
+  const voice = () => { try { return speechSynthesis.getVoices().find((v) => /^de/i.test(v.lang)) || null; } catch (e) { return null; } };
+  const speak = (t) => {
+    if (!speakOn || !canSpeak) return;
+    try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(String(t).slice(0, 1200)); u.lang = 'de-DE'; const v = voice(); if (v) u.voice = v; speechSynthesis.speak(u); } catch (e) {}
+  };
+  $('speakBtn').addEventListener('click', () => {
+    speakOn = !speakOn; store.set('sc-leads-speak', speakOn ? '1' : '0'); paintSpeak();
+    if (speakOn) speak('Vorlesen ist an.'); else try { speechSynthesis.cancel(); } catch (e) {}
+  });
+
+  // ---------- Assistent (versteht feste Befehle, ohne KI) ----------
+  const NUMS = { ein: 1, eine: 1, einen: 1, eins: 1, zwei: 2, drei: 3, vier: 4, funf: 5, sechs: 6, sieben: 7, acht: 8, neun: 9, zehn: 10, elf: 11, zwolf: 12, funfzehn: 15, zwanzig: 20, dreissig: 30, funfzig: 50 };
+  const BRANCHEN = [
+    { key: 'Zahnärzte', trig: ['zahnarzt', 'zahnarzte', 'zahnarztpraxis', 'kieferorthop'], match: ['zahnarzt', 'zahnmedizin', 'kieferorthop', 'zahnheil'] },
+    { key: 'Friseure', trig: ['friseur', 'frisor', 'barber', 'haarsalon'], match: ['friseur', 'barber', 'haarsalon', 'hair'] },
+    { key: 'Kosmetik & Nägel', trig: ['kosmetik', 'beauty', 'nagel', 'nails', 'wimpern'], match: ['kosmetik', 'beauty', 'nagel', 'nails', 'wimpern', 'schonheit', 'lash'] },
+    { key: 'Steuerberater', trig: ['steuer'], match: ['steuerber', 'steuerkanzlei', 'lohnsteuer', 'steuerbuero', 'steuerburo'] },
+    { key: 'Anwälte', trig: ['anwalt', 'anwalte', 'kanzlei', 'kanzleien', 'rechtsanw', 'notar'], match: ['anwalt', 'rechtsanw', 'kanzlei', 'notar'] },
+    { key: 'Physiotherapie', trig: ['physio', 'krankengymn', 'ergo', 'osteopath'], match: ['physio', 'krankengymn', 'ergothera', 'osteopath'] },
+    { key: 'Ärzte & Praxen', trig: ['arzt', 'arzte', 'arztpraxis', 'praxis', 'praxen', 'mediziner', 'doktor'], match: ['arzt', 'praxis', 'medizin', 'dr. med', 'klinik', 'orthop', 'internist', 'dermatolog', 'gynakolog', 'kinderheil'] },
+    { key: 'Autohäuser & Werkstätten', trig: ['auto', 'autohaus', 'autohauser', 'autohandler', 'kfz', 'werkstatt', 'werkstatten'], match: ['autohaus', 'autohandel', 'autohandl', 'autohaendl', 'kfz', 'autowerkstatt', 'autoreparatur', 'reifen', 'gebrauchtwagen', 'automobil', 'autoservice', 'autolackier', 'autoteile'] },
+    { key: 'Gastronomie', trig: ['restaurant', 'restaurants', 'gastro', 'gastronomie', 'pizzeria', 'cafe', 'cafes', 'imbiss', 'essen', 'bistro'], match: ['restaurant', 'pizz', 'cafe', 'bistro', 'imbiss', 'gastst', 'kneipe', 'kebab', 'doner', 'sushi', 'burger', 'trattoria', 'biergarten', 'brauerei'] },
+    { key: 'Handwerk', trig: ['handwerk', 'handwerker', 'elektriker', 'maler', 'sanitar', 'heizung', 'schreiner', 'tischler', 'dachdecker', 'fliesenleger', 'sattler'], match: ['handwerk', 'elektr', 'maler', 'sanitar', 'heizung', 'schreiner', 'tischler', 'dachdeck', 'fliesen', 'zimmerei', 'installat', 'schlosser', 'sattler', 'glaser', 'raumausstatt', 'bauunternehm'] },
+    { key: 'Immobilien', trig: ['immobil', 'makler', 'hausverwaltung'], match: ['immobil', 'makler', 'hausverwalt'] },
+    { key: 'Fitness & Sport', trig: ['fitness', 'yoga', 'gym', 'sportstudio', 'pilates', 'kampfsport'], match: ['fitness', 'yoga', 'gym', 'sportstudio', 'pilates', 'kampfsport', 'personal trainer'] },
+    { key: 'Optiker', trig: ['optik', 'optiker', 'brille', 'horakustik'], match: ['optik', 'optiker', 'brille', 'akustik'] },
+    { key: 'Hotels', trig: ['hotel', 'hotels', 'pension', 'unterkunft'], match: ['hotel', 'pension', 'ferienwohn', 'gastehaus'] },
+    { key: 'Fahrschulen', trig: ['fahrschul'], match: ['fahrschule'] },
+    { key: 'Blumen', trig: ['blumen', 'florist'], match: ['blumen', 'florist'] },
+    { key: 'Bäckereien & Metzgereien', trig: ['backer', 'backerei', 'metzger', 'metzgerei', 'konditor'], match: ['backerei', 'backer', 'metzger', 'konditor', 'fleischer'] },
+  ];
+  const STATUS_WORDS = [
+    { id: 'gewonnen', w: ['gewonnen', 'auftrag bekommen', 'zugesagt', 'zusage', 'kunde geworden'] },
+    { id: 'verloren', w: ['verloren', 'kein interesse', 'abgesagt', 'absage', 'will nicht'] },
+    { id: 'angebot', w: ['angebot geschickt', 'angebot raus', 'angebot geschrieben', 'angebot geschickt', 'angebot'] },
+    { id: 'gespraech', w: ['im gesprach', 'termin', 'interesse', 'interessiert', 'gesprach'] },
+    { id: 'email', w: ['mail geschickt', 'e-mail geschickt', 'email geschickt', 'mail gesendet', 'gemailt', 'angeschrieben'] },
+    { id: 'nachricht', w: ['whatsapp', 'sms', 'nachricht geschickt', 'nachricht'] },
+    { id: 'angerufen', w: ['angerufen', 'telefoniert', 'nicht erreicht', 'mailbox'] },
+    { id: 'neu', w: ['auf neu', 'zuruck auf neu'] },
+  ];
+  const STOP = new Set(['zeig', 'zeige', 'mir', 'bitte', 'firma', 'firmen', 'betrieb', 'betriebe', 'mit', 'ohne', 'und', 'oder', 'die', 'der', 'das', 'den', 'dem', 'des', 'ein', 'eine', 'einen', 'fur', 'bei', 'beim', 'von', 'vom', 'zum', 'zur', 'auf', 'aus', 'ist', 'hat', 'habe', 'haben', 'heute', 'morgen', 'gerade', 'schon', 'noch', 'setze', 'setz', 'status', 'notiz', 'offne', 'oeffne', 'zeige', 'website', 'webseite', 'homepage', 'mail', 'email', 'e-mail', 'telefon', 'nummer', 'erlangen', 'gmbh', 'inh', 'inhaber', 'und', 'co', 'kg', 'mbh', 'praxis', 'salon', 'studio', 'angerufen', 'geschickt', 'angebot', 'termin', 'interesse', 'gewonnen', 'verloren', 'nachricht', 'whatsapp', 'wurde', 'worden', 'will', 'kein', 'keine', 'gesprach', 'schreib', 'schreibe', 'anrufen', 'nicht', 'erreicht', 'neu']);
+
+  let ORTE = [];
+  const findCount = (t) => {
+    const m = t.match(/\b(\d{1,3})\b/); if (m) return Math.min(Number(m[1]), 500);
+    for (const [w, n] of Object.entries(NUMS)) if (new RegExp('\\b' + w + '\\b').test(t)) return n;
+    if (/\balle\b/.test(t)) return 500;
+    return null;
+  };
+  const findBranche = (t) => BRANCHEN.find((b) => b.trig.some((w) => new RegExp('\\b' + w).test(t))) || null;
+  const findOrt = (t) => ORTE.find((o) => new RegExp('\\b' + o.n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b').test(t)) || null;
+  const findStatus = (t) => { for (const s of STATUS_WORDS) for (const w of s.w) if (t.includes(w)) return { id: s.id, w }; return null; };
+  const findLeads = (t) => {
+    const words = t.split(/[^a-z0-9-]+/).filter((w) => w.length >= 3 && !STOP.has(w));
+    if (!words.length) return [];
+    const scored = [];
+    leads.forEach((l) => {
+      const n = norm(l.name);
+      const hits = words.filter((w) => new RegExp('\\b' + w.replace(/[-]/g, '\\-')).test(n)).length;
+      if (hits) scored.push({ l, hits });
+    });
+    scored.sort((a, b) => b.hits - a.hits || (b.l.score ?? -1) - (a.l.score ?? -1));
+    if (!scored.length) return [];
+    const best = scored[0].hits;
+    return scored.filter((x) => x.hits === best).map((x) => x.l);
+  };
+
+  const show = (rows, label) => {
+    ui.ids = new Set(rows.map((l) => l.id)); ui.label = label; ui.st = ''; ui.kpi = ''; ui.q = ''; $('q').value = '';
+    renderAll();
+    if (rows.length === 1) select(rows[0].id, false);
+  };
+  const line = (l, i) => (i + 1) + '. ' + l.name + (l.ort ? ', ' + l.ort : '') + (l.tel ? ', ' + l.tel : '') + (l.google ? ', ' + l.google + ' ★' : '');
+  let lastText = '';
+  const say = (text, spoken) => { $('reply').textContent = text; lastText = text; speak(spoken || text); };
+
+  const HELP = 'So kannst du mit mir reden:\n'
+    + '• „Zeig mir 5 Firmen ohne Website“\n'
+    + '• „10 Friseure mit E-Mail“ · „Steuerberater mit veralteter Website“\n'
+    + '• „Beste Restaurants in Herzogenaurach“ · „Autohäuser nach Bewertung“\n'
+    + '• „Wen soll ich heute anrufen?“\n'
+    + '• „Wie viele Ärzte ohne Website?“\n'
+    + '• „Welche sind im Gespräch?“ · „Zeig alle Angebote“\n'
+    + '• „Sattlerei angerufen“ · „CarZone Angebot geschickt“ · „HaarRaum kein Interesse“\n'
+    + '• „Notiz Sattlerei: Rückruf Donnerstag“\n'
+    + '• „Öffne CarZone“ · „Mail an HaarRaum“\n'
+    + '• „Alle zeigen“ setzt die Auswahl zurück.';
+
+  const handle = (raw) => {
+    const text = String(raw || '').trim();
+    if (!text) return;
+    const t = ' ' + norm(text).replace(/[?!.,;]/g, ' ').replace(/\s+/g, ' ') + ' ';
+
+    if (/\b(hilfe|was kannst du|befehle)\b/.test(t)) { say(HELP, 'Hier sind Beispiele, was du sagen kannst.'); return; }
+    if (/\b(alle zeigen|zurucksetzen|reset|alles zeigen)\b/.test(t)) { resetFilters(); say('Ich zeige wieder alle ' + fmt(leads.length) + ' Betriebe.'); return; }
+
+    // Notiz: "Notiz Sattlerei: Rückruf Donnerstag"
+    const nm = text.match(/^\s*notiz\s+(?:zu|für|fur|bei)?\s*(.+?)\s*[:\-–]\s*(.+)$/i);
+    if (nm) {
+      const c = findLeads(' ' + norm(nm[1]) + ' ');
+      if (c.length === 1) { addNote(c[0].id, nm[2].trim()); select(c[0].id, false); say('Notiz bei ' + c[0].name + ' gespeichert.'); }
+      else if (c.length > 1) { show(c.slice(0, 10), 'Mehrere Treffer'); say('Ich habe mehrere passende Betriebe gefunden. Sag den Namen genauer:\n' + c.slice(0, 5).map(line).join('\n'), 'Mehrere Treffer. Sag den Namen genauer.'); }
+      else say('Ich finde keinen Betrieb mit dem Namen „' + nm[1] + '“.');
+      return;
+    }
+
+    // Mail an X
+    const mm = t.match(/\b(?:mail|e-mail|email)\s+(?:an|fur|für)\s+(.+)$/) || t.match(/\bschreib\w*\s+(.+?)\s+(?:eine\s+)?(?:mail|e-mail|email)\b/);
+    if (mm) {
+      const c = findLeads(' ' + mm[1] + ' ');
+      if (c.length === 1) { select(c[0].id, false); openMail(c[0]); say('Hier ist ein Mail-Entwurf an ' + c[0].name + '. Prüf ihn und tippe auf „In Mail-App öffnen“.'); }
+      else if (c.length > 1) { show(c.slice(0, 10), 'Mehrere Treffer'); say('Welchen meinst du?\n' + c.slice(0, 5).map(line).join('\n'), 'Mehrere Treffer. Welchen meinst du?'); }
+      else say('Ich finde keinen passenden Betrieb.');
+      return;
+    }
+
+    // Öffnen
+    const om = t.match(/\b(?:offne|oeffne|offnen|zeig mir|zeige mir|details zu|details von)\s+(.+)$/);
+    const st = findStatus(t);
+    const n = findCount(t);
+    const br = findBranche(t);
+    const ort = findOrt(t);
+    const wantsList = /\b(zeig|zeige|liste|welche|wer|gib|finde|such|suche|beste|top|wie viele|wieviele|anzahl)\b/.test(t) || n != null || br || /\bohne\b|\bmit\b/.test(t);
+
+    // Status setzen: "<Firma> angerufen"
+    if (st && !/\b(welche|wer|zeig|zeige|liste|alle|wie viele|wieviele)\b/.test(t)) {
+      const c = findLeads(t);
+      if (c.length === 1) {
+        const l = c[0];
+        setStatus(l.id, st.id, text.slice(0, 120));
+        const extra = t.slice(t.indexOf(st.w) + st.w.length).trim().length > 3;
+        if (extra) addNote(l.id, text);
+        select(l.id, false);
+        say(l.name + ' steht jetzt auf „' + ST[st.id].label + '“.' + (extra ? ' Deinen Satz habe ich als Notiz gespeichert.' : ''));
+        return;
+      }
+      if (c.length > 1) { show(c.slice(0, 10), 'Mehrere Treffer'); say('Bei welchem Betrieb? Sag den Namen genauer:\n' + c.slice(0, 5).map(line).join('\n'), 'Mehrere Treffer. Bei welchem Betrieb?'); return; }
+    }
+
+    if (om && !br && !/\bohne\b|\bmit\b/.test(t)) {
+      const c = findLeads(' ' + om[1] + ' ');
+      if (c.length === 1) { select(c[0].id, true); show([c[0]], c[0].name); say(c[0].name + ' ist geöffnet.' + (c[0].tel ? ' Telefon ' + c[0].tel + '.' : '')); return; }
+      if (c.length > 1) { show(c.slice(0, 20), 'Treffer für „' + om[1].trim() + '“'); say('Ich habe ' + c.length + ' passende Betriebe gefunden:\n' + c.slice(0, 5).map(line).join('\n'), c.length + ' Treffer.'); return; }
+    }
+
+    // Heute anrufen
+    if (/\b(anrufen|telefonieren)\b/.test(t) && /\b(heute|wen|wer|soll)\b/.test(t)) {
+      const rows = leads.filter((l) => stOf(l.id) === 'neu' && l.tel && (!br || br.match.some((m) => norm((l.kat || '') + ' ' + l.name).includes(m))) && (!ort || norm(l.ort) === ort.n)).sort(sorter('score')).slice(0, n || 5);
+      show(rows, 'Heute anrufen');
+      say('Diese ' + rows.length + ' würde ich heute anrufen (neu, mit Telefon, höchster Score):\n' + rows.map(line).join('\n'), 'Diese würde ich heute anrufen: ' + rows.map((l) => l.name).join(', '));
+      return;
+    }
+
+    if (!wantsList && !st) {
+      const c = findLeads(t);
+      if (c.length === 1) { select(c[0].id, true); show([c[0]], c[0].name); say(c[0].name + ' ist geöffnet.'); return; }
+      if (c.length > 1) { show(c.slice(0, 20), 'Treffer'); say(c.length + ' passende Betriebe:\n' + c.slice(0, 5).map(line).join('\n'), c.length + ' Treffer.'); return; }
+      say('Das habe ich nicht verstanden. Sag zum Beispiel „Zeig mir 5 Firmen ohne Website“ oder „Hilfe“.');
+      return;
+    }
+
+    // Liste filtern
+    const f = [];
+    const tests = [];
+    if (/\bohne\s+(eigene\s+)?(website|webseite|homepage|internetseite|seite)\b/.test(t)) { tests.push((l) => !l.web); f.push('ohne Website'); }
+    else if (/\bmit\s+(eigener\s+)?(website|webseite|homepage)\b/.test(t)) { tests.push((l) => !!l.web); f.push('mit Website'); }
+    if (/\bstark veraltet/.test(t)) { tests.push((l) => l.design === 'Stark veraltet'); f.push('Website stark veraltet'); }
+    else if (/\bveraltet|\balte(n|r)? (website|webseite|seite)/.test(t)) { tests.push((l) => /veraltet/i.test(l.design || '')); f.push('Website veraltet'); }
+    if (/\bmit\s+(e-?mail|mail|mailadresse)/.test(t)) { tests.push((l) => !!l.mail); f.push('mit E-Mail'); }
+    if (/\bohne\s+(e-?mail|mail)/.test(t)) { tests.push((l) => !l.mail); f.push('ohne E-Mail'); }
+    if (/\bmit\s+(telefon|nummer|handy)/.test(t)) { tests.push((l) => !!l.tel); f.push('mit Telefon'); }
+    if (/\bmit\s+(entscheider|ansprechpartner|namen|chef)/.test(t)) { tests.push((l) => !!l.chef); f.push('mit Ansprechpartner'); }
+    if (/\bohne\s+(instagram|insta)/.test(t)) { tests.push((l) => !l.insta); f.push('ohne Instagram'); }
+    if (/\bpotenzial hoch|hohes potenzial|hohem potenzial/.test(t)) { tests.push((l) => l.pot === 'Hoch'); f.push('Potenzial hoch'); }
+    else if (/\bpotenzial mittel|mittleres potenzial/.test(t)) { tests.push((l) => l.pot === 'Mittel'); f.push('Potenzial mittel'); }
+    if (st) { tests.push((l) => stOf(l.id) === st.id); f.push('Status „' + ST[st.id].label + '“'); }
+    else if (/\b(offen|in arbeit|laufend)\b/.test(t)) { tests.push((l) => !['neu', 'gewonnen', 'verloren'].includes(stOf(l.id))); f.push('in Arbeit'); }
+    else if (/\b(neue|noch nicht kontaktiert|unbearbeitet)\b/.test(t)) { tests.push((l) => stOf(l.id) === 'neu'); f.push('noch neu'); }
+    if (br) { tests.push((l) => br.match.some((m) => norm((l.kat || '') + ' ' + l.name).includes(m))); f.unshift(br.key); }
+    if (ort) { tests.push((l) => norm(l.ort) === ort.n); f.push('in ' + ort.o); }
+    const byGoogle = /\b(bewertung|bewertungen|sterne|google)\b/.test(t);
+
+    if (!tests.length) {
+      const c = findLeads(t);
+      if (c.length) { show(c.slice(0, 20), 'Treffer'); say(c.length === 1 ? c[0].name + ' ist geöffnet.' : c.length + ' passende Betriebe:\n' + c.slice(0, 5).map(line).join('\n')); if (c.length === 1) select(c[0].id, true); return; }
+      say('Das habe ich nicht verstanden. Sag zum Beispiel „Zeig mir 5 Firmen ohne Website“ oder „Hilfe“.');
+      return;
+    }
+
+    const all = leads.filter((l) => tests.every((fn) => fn(l))).sort(sorter(byGoogle ? 'google' : 'score'));
+    const label = f.join(', ');
+    if (/\b(wie viele|wieviele|anzahl)\b/.test(t)) {
+      show(all, label);
+      say('Es gibt ' + fmt(all.length) + ' Betriebe: ' + label + '. Sie stehen jetzt links in der Liste.');
+      return;
+    }
+    const take = all.slice(0, n || (st ? 500 : 5));
+    show(take, label);
+    if (!all.length) { say('Dazu habe ich keine Betriebe gefunden (' + label + ').'); return; }
+    const head = 'Ich habe ' + fmt(all.length) + ' Betriebe gefunden (' + label + ').' + (take.length < all.length ? ' Die besten ' + take.length + (byGoogle ? ' nach Google-Bewertung' : ' nach Akquise-Score') + ':' : '');
+    say(head + '\n' + take.slice(0, 25).map(line).join('\n') + (take.length > 25 ? '\n… und ' + (take.length - 25) + ' weitere in der Liste.' : ''),
+      'Ich habe ' + all.length + ' gefunden. ' + take.slice(0, 10).map((l) => l.name).join(', ') + '.');
+  };
+
+  // ---------- Spracheingabe ----------
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let rec = null, hinted = false;
+  const micHint = (why) => {
+    $('askIn').focus();
+    if (hinted) return; hinted = true;
+    say((why || 'Die Spracheingabe ist hier nicht verfügbar.') + ' So geht es trotzdem: ins Feld tippen, dann auf der Tastatur das Mikrofon 🎤 antippen, sprechen und auf „Los“ tippen.');
+  };
+  const initAsk = () => {
+    ORTE = [...new Set(leads.map((l) => l.ort).filter(Boolean))].map((o) => ({ o, n: norm(o) })).filter((x) => x.n.length >= 4).sort((a, b) => b.n.length - a.n.length);
+    const sg = $('sugg'); sg.textContent = '';
+    ['Zeig mir 5 Firmen ohne Website', 'Wen soll ich heute anrufen?', 'Friseure mit E-Mail', 'Welche sind im Gespräch?', 'Hilfe'].forEach((q) => {
+      const b = el('button', { type: 'button', textContent: q });
+      b.addEventListener('click', () => { $('askIn').value = q; handle(q); });
+      sg.append(b);
+    });
+  };
+  $('askForm').addEventListener('submit', (e) => { e.preventDefault(); handle($('askIn').value); });
+  $('micBtn').addEventListener('click', () => {
+    if (rec) { try { rec.stop(); } catch (e) {} return; }
+    if (!SR) { micHint(); return; }
+    let heard = '';
+    try {
+      rec = new SR(); rec.lang = 'de-DE'; rec.interimResults = true; rec.continuous = false; rec.maxAlternatives = 1;
+      rec.onresult = (e) => { let s = ''; for (const r of e.results) s += r[0].transcript; heard = s; $('askIn').value = s; };
+      rec.onerror = (e) => {
+        heard = '';
+        if (e.error === 'not-allowed' || e.error === 'service-not-allowed') micHint('Das Mikrofon ist für diese Seite nicht erlaubt (in den Einstellungen unter Safari → Mikrofon änderbar).');
+        else if (e.error === 'no-speech') say('Ich habe nichts gehört. Tippe nochmal auf 🎤 und sprich.');
+        else if (e.error === 'audio-capture') micHint('Es wurde kein Mikrofon gefunden.');
+      };
+      rec.onend = () => { rec = null; $('micBtn').textContent = '🎤'; $('micBtn').setAttribute('aria-pressed', 'false'); if (heard.trim()) handle(heard); };
+      rec.start();
+      $('micBtn').textContent = '■'; $('micBtn').setAttribute('aria-pressed', 'true');
+      $('reply').textContent = 'Ich höre zu…';
+    } catch (e) { rec = null; micHint(); }
+  });
+})();
+</script>
+</body>
+</html>
