@@ -18,7 +18,7 @@
 <style>
   /* Layout: Sprachleiste oben, darunter Kennzahlen und Pipeline, dann Liste links und Lead-Akte rechts. Auf dem Handy alles untereinander. */
   :root {
-    --bg: #0c0c0d; --card: #151517; --card2: #1b1b1e; --line: rgba(255,255,255,.08); --line2: rgba(255,255,255,.14);
+    --bg: #0b0c0f; --card: #12151b; --card2: #1a1e26; --blue2: #5fa8d3; --line: rgba(255,255,255,.08); --line2: rgba(255,255,255,.14);
     --fg: #f4f1ea; --soft: #b9b4ac; --dim: #7d7973;
     --orange: #e78a53; --orange2: #f2b48a; --teal: #6fa3a3; --green: #8bc49a; --red: #e07a6c; --violet: #b49ae0; --blue: #7fa8e0;
     --f: Geist, Arimo, 'Helvetica Neue', Arial, sans-serif;
@@ -29,7 +29,7 @@
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
   html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.45 var(--f); }
+  body { margin: 0; background: radial-gradient(120% 70% at 50% -10%, #2a1a10 0%, rgba(42,26,16,0) 60%), var(--bg); background-attachment: fixed; color: var(--fg); font: 15px/1.45 var(--f); }
   button, input, textarea, select { font: inherit; color: inherit; }
   button { cursor: pointer; }
   a { color: inherit; }
@@ -70,8 +70,9 @@
   .sugg button { border: 1px solid var(--line2); background: transparent; border-radius: 999px; padding: 5px 11px; font-size: .82rem; color: var(--soft); }
 
   .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); gap: 8px; }
-  .kpi { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; text-align: left; display: grid; gap: 2px; }
-  .kpi .n { font: 600 1.45rem var(--f-mono); font-variant-numeric: tabular-nums; }
+  .kpi { background: linear-gradient(180deg, var(--card2), var(--card)); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; text-align: left; display: grid; gap: 2px; position: relative; overflow: hidden; }
+  .kpi::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 0; height: 2px; background: var(--c, var(--orange)); opacity: .7; border-radius: 2px; }
+  .kpi .n { font: 600 1.6rem var(--f-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
   .kpi .l { font-size: .8rem; color: var(--soft); }
   .kpi[aria-pressed="true"] { border-color: var(--orange); }
 
@@ -129,6 +130,58 @@
   .log time { font: .76rem var(--f-mono); color: var(--dim); margin-right: 8px; }
   .saved { font-size: .8rem; color: var(--green); }
 
+  /* Diagramme im Stil eines Analytics-Dashboards */
+  .charts { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; }
+  .ch { background: linear-gradient(180deg, var(--card2), var(--card)); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; align-content: start; min-width: 0; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .ch-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .ch-head h2 { font-size: .95rem; font-weight: 600; }
+  .ch-head .tag { font: .74rem var(--f-mono); color: var(--dim); white-space: nowrap; }
+  .ch .big { font: 600 2rem var(--f-mono); letter-spacing: -0.03em; }
+  .ch .big small { font-size: .8rem; color: var(--soft); font-family: var(--f); letter-spacing: 0; margin-left: 6px; }
+  .w-score { grid-column: span 4; } .w-donut { grid-column: span 4; } .w-branche { grid-column: span 4; }
+  .w-top { grid-column: span 5; } .w-akt { grid-column: span 4; } .w-ort { grid-column: span 3; }
+  @media (max-width: 75rem) { .w-score, .w-donut, .w-branche, .w-top, .w-akt, .w-ort { grid-column: span 6; } }
+  @media (max-width: 48rem) { .charts > * { grid-column: 1 / -1 !important; } }
+  .ch svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .ch svg text { font: 11px var(--f-mono); fill: var(--dim); }
+  .ch .clickable { cursor: pointer; }
+  .ch .clickable:hover { opacity: .8; }
+  .donut-wrap { display: grid; grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr); gap: 12px; align-items: center; }
+  @media (max-width: 48rem) { .donut-wrap { grid-template-columns: minmax(0, 8rem) minmax(0, 1fr); } }
+  .legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: .8rem; }
+  .legend button { all: unset; cursor: pointer; display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; gap: 8px; align-items: center; width: 100%; }
+  .legend button:hover span:nth-child(2) { color: var(--fg); }
+  .legend .dot { width: 10px; height: 10px; border-radius: 3px; background: var(--c); }
+  .legend span:nth-child(2) { color: var(--soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .legend b { font: 500 .78rem var(--f-mono); }
+  .hbars { display: grid; gap: 7px; }
+  .hbar { all: unset; cursor: pointer; display: grid; grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr) 2.6rem; gap: 10px; align-items: center; font-size: .8rem; }
+  .hbar .nm { color: var(--soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .hbar:hover .nm { color: var(--fg); }
+  .hbar .tr { height: 8px; background: rgba(255,255,255,.05); border-radius: 99px; overflow: hidden; }
+  .hbar .fl { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--c1), var(--c2)); }
+  .hbar .v { font: 500 .78rem var(--f-mono); text-align: right; }
+  .toplist { display: grid; gap: 8px; }
+  .toprow { all: unset; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) 5.5rem 2.2rem; gap: 10px; align-items: center; font-size: .84rem; padding: 4px 0; border-bottom: 1px solid var(--line); }
+  .toprow:hover .nm { color: var(--orange2); }
+  .toprow .nm { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .toprow .sub { display: block; font-size: .74rem; color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .toprow .tr { height: 6px; background: rgba(255,255,255,.05); border-radius: 99px; overflow: hidden; }
+  .toprow .fl { height: 100%; background: linear-gradient(90deg, #8a4a26, var(--orange)); border-radius: 99px; }
+  .toprow .v { font: 600 .82rem var(--f-mono); text-align: right; color: var(--orange2); }
+  .ch-empty { color: var(--dim); font-size: .85rem; padding: 18px 0; text-align: center; }
+
+  /* Seitenleiste auf großen Bildschirmen */
+  .side { display: none; }
+  @media (min-width: 80rem) {
+    .side { display: flex; flex-direction: column; gap: 6px; position: fixed; left: 16px; top: 16px; bottom: 16px; width: 64px; padding: 12px 8px; background: rgba(18,21,27,.85); border: 1px solid var(--line); border-radius: 18px; align-items: center; backdrop-filter: blur(8px); z-index: 5; }
+    .side a { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; color: var(--soft); text-decoration: none; }
+    .side a:hover { background: var(--card2); color: var(--orange2); }
+    .side svg { width: 20px; height: 20px; }
+    .side .logo { font: 700 .8rem var(--f); color: var(--orange); margin-bottom: 8px; }
+    .wrap { padding-left: 100px; max-width: 90rem; }
+  }
+
   /* Mail-Fenster */
   .sheet { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.6); display: grid; place-items: end center; }
   .sheet .box { width: min(100%, 40rem); max-height: 92vh; overflow: auto; background: var(--card); border: 1px solid var(--line2); border-radius: 16px 16px 0 0; padding: 16px var(--gr) calc(16px + env(safe-area-inset-bottom, 0px)) var(--gl); display: grid; gap: 10px; }
@@ -152,6 +205,14 @@
 </section>
 
 <div class="wrap" id="app" hidden>
+<nav class="side" aria-label="Bereiche">
+  <span class="logo">SC</span>
+  <a href="#askForm" title="Assistent" aria-label="Assistent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></a>
+  <a href="#charts" title="Übersicht" aria-label="Übersicht"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></a>
+  <a href="#pipe" title="Pipeline" aria-label="Pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg></a>
+  <a href="#listTitle" title="Betriebe" aria-label="Betriebe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></a>
+</nav>
+
   <header class="top">
     <div>
       <h1>Lead-Zentrale</h1>
@@ -177,6 +238,35 @@
   </section>
 
   <nav class="kpis" id="kpis" aria-label="Kennzahlen"></nav>
+
+  <section class="charts" id="charts" aria-label="Auswertung">
+    <article class="ch w-score">
+      <div class="ch-head"><h2>Akquise-Score</h2><span class="tag" id="scoreTag"></span></div>
+      <div class="big" id="scoreBig">–</div>
+      <div id="chScore"></div>
+    </article>
+    <article class="ch w-donut">
+      <div class="ch-head"><h2>Website-Zustand</h2><span class="tag">antippen = filtern</span></div>
+      <div class="donut-wrap"><div id="chDonut"></div><ul class="legend" id="chDonutLeg"></ul></div>
+    </article>
+    <article class="ch w-branche">
+      <div class="ch-head"><h2>Branchen</h2><span class="tag">Top 8</span></div>
+      <div class="hbars" id="chBranche"></div>
+    </article>
+    <article class="ch w-top">
+      <div class="ch-head"><h2>Beste Chancen</h2><span class="tag">neu · nach Score</span></div>
+      <div class="toplist" id="chTop"></div>
+    </article>
+    <article class="ch w-akt">
+      <div class="ch-head"><h2>Deine Aktivität</h2><span class="tag">letzte 14 Tage</span></div>
+      <div class="big" id="aktBig">–</div>
+      <div id="chAkt"></div>
+    </article>
+    <article class="ch w-ort">
+      <div class="ch-head"><h2>Orte</h2><span class="tag">Top 6</span></div>
+      <div class="hbars" id="chOrt"></div>
+    </article>
+  </section>
   <nav class="pipe" id="pipe" aria-label="Pipeline"></nav>
 
   <div class="main">
@@ -338,12 +428,12 @@
 
   // ---------- Filter ----------
   const KPIS = [
-    { id: 'alle', label: 'Betriebe', test: () => true },
-    { id: 'ohneweb', label: 'Ohne Website', test: (l) => !l.web },
-    { id: 'veraltet', label: 'Website veraltet', test: (l) => /veraltet/i.test(l.design || '') },
-    { id: 'mail', label: 'Mit E-Mail', test: (l) => !!l.mail },
-    { id: 'hoch', label: 'Potenzial hoch', test: (l) => l.pot === 'Hoch' },
-    { id: 'offen', label: 'In Arbeit', test: (l) => !['neu', 'gewonnen', 'verloren'].includes(stOf(l.id)) },
+    { id: 'alle', c: '#f4f1ea', label: 'Betriebe', test: () => true },
+    { id: 'ohneweb', c: '#e07a6c', label: 'Ohne Website', test: (l) => !l.web },
+    { id: 'veraltet', c: '#e78a53', label: 'Website veraltet', test: (l) => /veraltet/i.test(l.design || '') },
+    { id: 'mail', c: '#5fa8d3', label: 'Mit E-Mail', test: (l) => !!l.mail },
+    { id: 'hoch', c: '#f2b48a', label: 'Potenzial hoch', test: (l) => l.pot === 'Hoch' },
+    { id: 'offen', c: '#8bc49a', label: 'In Arbeit', test: (l) => !['neu', 'gewonnen', 'verloren'].includes(stOf(l.id)) },
   ];
   const KP = Object.fromEntries(KPIS.map((k) => [k.id, k]));
 
@@ -368,6 +458,7 @@
     KPIS.forEach((k) => {
       const n = leads.filter(k.test).length;
       const b = el('button', { type: 'button', className: 'kpi' }, [el('span', { className: 'n', textContent: fmt(n) }), el('span', { className: 'l', textContent: k.label })]);
+      b.style.setProperty('--c', k.c);
       b.setAttribute('aria-pressed', String(ui.kpi === k.id));
       b.addEventListener('click', () => { ui.kpi = ui.kpi === k.id || k.id === 'alle' ? '' : k.id; ui.ids = null; renderAll(); });
       nav.append(b);
@@ -473,7 +564,144 @@
     parts.forEach((p) => p && body.append(p));
   };
 
-  const renderAll = () => { renderKpis(); renderPipe(); renderList(); renderAkte(); };
+  // ---------- Diagramme ----------
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const sv = (tag, attrs = {}, kids = []) => { const e = document.createElementNS(SVGNS, tag); Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v)); kids.forEach((k) => k && e.append(k)); return e; };
+  const pick = (rows, label) => { show(rows.sort(sorter(ui.sort)), label); say(fmt(rows.length) + ' Betriebe: ' + label + '. Sie stehen jetzt in der Liste.'); document.getElementById('listTitle').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  const brancheOf = (l) => { const h = norm((l.kat || '') + ' ' + l.name); const b = BRANCHEN.find((x) => x.match.some((m) => h.includes(m))); return b ? b.key : 'Sonstige'; };
+  const WEB = [
+    { label: 'Ohne Website', c: '#e07a6c', test: (l) => !l.web },
+    { label: 'Stark veraltet', c: '#e78a53', test: (l) => l.web && l.design === 'Stark veraltet' },
+    { label: 'Veraltet', c: '#f2b48a', test: (l) => l.web && l.design === 'Veraltet' },
+    { label: 'Akzeptabel', c: '#5fa8d3', test: (l) => l.web && l.design === 'Akzeptabel' },
+    { label: 'Modern', c: '#8bc49a', test: (l) => l.web && l.design === 'Modern' },
+    { label: 'Nicht bewertet', c: '#4a4f58', test: (l) => l.web && !['Stark veraltet', 'Veraltet', 'Akzeptabel', 'Modern'].includes(l.design) },
+  ];
+
+  const drawScore = () => {
+    const box = $('chScore'); box.textContent = '';
+    const scored = leads.filter((l) => l.score != null);
+    const bins = Array.from({ length: 10 }, () => []);
+    scored.forEach((l) => bins[Math.min(9, Math.floor(l.score / 10))].push(l));
+    const avg = scored.length ? Math.round(scored.reduce((a, l) => a + l.score, 0) / scored.length) : 0;
+    $('scoreBig').innerHTML = ''; $('scoreBig').append(String(avg), el('small', { textContent: 'Ø Score von ' + fmt(scored.length) + ' bewerteten Betrieben' }));
+    $('scoreTag').textContent = 'Verteilung 0–100';
+    const W = 600, H = 190, P = { l: 30, r: 10, t: 10, b: 24 };
+    const max = Math.max(1, ...bins.map((b) => b.length));
+    const x = (i) => P.l + (i + 0.5) * (W - P.l - P.r) / 10;
+    const y = (v) => P.t + (H - P.t - P.b) * (1 - v / max);
+    const pts = bins.map((b, i) => [x(i), y(b.length)]);
+    const curve = pts.map((p, i) => {
+      if (!i) return 'M' + p[0] + ',' + p[1];
+      const q = pts[i - 1], cx = (q[0] + p[0]) / 2;
+      return 'C' + cx + ',' + q[1] + ' ' + cx + ',' + p[1] + ' ' + p[0] + ',' + p[1];
+    }).join(' ');
+    const svg = sv('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Verteilung des Akquise-Scores' });
+    const defs = sv('defs', {}, [sv('linearGradient', { id: 'gScore', x1: 0, y1: 0, x2: 0, y2: 1 }, [sv('stop', { offset: '0%', 'stop-color': '#e78a53', 'stop-opacity': '.55' }), sv('stop', { offset: '100%', 'stop-color': '#e78a53', 'stop-opacity': '0' })])]);
+    svg.append(defs);
+    [0, 0.5, 1].forEach((f) => { const v = Math.round(max * f); svg.append(sv('line', { x1: P.l, x2: W - P.r, y1: y(v), y2: y(v), stroke: 'rgba(255,255,255,.06)' }), sv('text', { x: P.l - 6, y: y(v) + 4, 'text-anchor': 'end' }, [document.createTextNode(String(v))])); });
+    svg.append(sv('path', { d: curve + ' L' + x(9) + ',' + y(0) + ' L' + x(0) + ',' + y(0) + ' Z', fill: 'url(#gScore)' }));
+    svg.append(sv('path', { d: curve, fill: 'none', stroke: '#e78a53', 'stroke-width': 2.5 }));
+    bins.forEach((b, i) => {
+      const g = sv('g', { class: 'clickable', tabindex: 0, role: 'button', 'aria-label': 'Score ' + (i * 10) + ' bis ' + (i * 10 + 9) + ': ' + b.length + ' Betriebe' });
+      g.append(sv('title', {}, [document.createTextNode('Score ' + (i * 10) + '–' + (i * 10 + 9) + ': ' + b.length + ' Betriebe')]));
+      g.append(sv('rect', { x: x(i) - (W - P.l - P.r) / 20, y: P.t, width: (W - P.l - P.r) / 10, height: H - P.t - P.b, fill: 'transparent' }));
+      if (b.length) g.append(sv('circle', { cx: x(i), cy: y(b.length), r: 3.5, fill: '#0b0c0f', stroke: '#f2b48a', 'stroke-width': 2 }));
+      g.append(sv('text', { x: x(i), y: H - 6, 'text-anchor': 'middle' }, [document.createTextNode(String(i * 10))]));
+      const go = () => b.length && pick(b.slice(), 'Score ' + (i * 10) + '–' + (i * 10 + 9));
+      g.addEventListener('click', go); g.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
+      svg.append(g);
+    });
+    box.append(svg);
+  };
+
+  const drawDonut = () => {
+    const box = $('chDonut'), leg = $('chDonutLeg'); box.textContent = ''; leg.textContent = '';
+    const segs = WEB.map((w) => ({ ...w, rows: leads.filter(w.test) })).filter((w) => w.rows.length);
+    const total = segs.reduce((a, s) => a + s.rows.length, 0) || 1;
+    const R = 52, C = 2 * Math.PI * R;
+    const svg = sv('svg', { viewBox: '0 0 140 140', role: 'img', 'aria-label': 'Zustand der Websites' });
+    svg.append(sv('circle', { cx: 70, cy: 70, r: R, fill: 'none', stroke: 'rgba(255,255,255,.05)', 'stroke-width': 16 }));
+    let off = 0;
+    segs.forEach((s) => {
+      const len = C * s.rows.length / total;
+      const c = sv('circle', { cx: 70, cy: 70, r: R, fill: 'none', stroke: s.c, 'stroke-width': 16, 'stroke-dasharray': Math.max(0, len - 2) + ' ' + C, 'stroke-dashoffset': -off, transform: 'rotate(-90 70 70)', class: 'clickable' });
+      c.append(sv('title', {}, [document.createTextNode(s.label + ': ' + s.rows.length)]));
+      c.addEventListener('click', () => pick(s.rows.slice(), 'Website: ' + s.label));
+      svg.append(c); off += len;
+    });
+    const share = Math.round(100 * (leads.filter((l) => !l.web || /veraltet/i.test(l.design || '')).length) / (leads.length || 1));
+    svg.append(sv('text', { x: 70, y: 68, 'text-anchor': 'middle', style: 'font: 600 22px var(--f-mono); fill: var(--fg)' }, [document.createTextNode(share + '%')]));
+    svg.append(sv('text', { x: 70, y: 86, 'text-anchor': 'middle', style: 'font: 10px var(--f); fill: var(--soft)' }, [document.createTextNode('mit Bedarf')]));
+    box.append(svg);
+    segs.forEach((s) => {
+      const b = el('button', { type: 'button' }, [el('span', { className: 'dot' }), el('span', { textContent: s.label }), el('b', { textContent: fmt(s.rows.length) })]);
+      b.querySelector('.dot').style.setProperty('--c', s.c);
+      b.addEventListener('click', () => pick(s.rows.slice(), 'Website: ' + s.label));
+      leg.append(el('li', {}, [b]));
+    });
+  };
+
+  const drawHbars = (boxId, groups, n, c1, c2, labelFn) => {
+    const box = $(boxId); box.textContent = '';
+    const top = [...groups.entries()].sort((a, b) => b[1].length - a[1].length).slice(0, n);
+    const max = Math.max(1, ...top.map(([, r]) => r.length));
+    top.forEach(([k, rows]) => {
+      const fl = el('div', { className: 'fl' }); fl.style.width = (100 * rows.length / max) + '%'; fl.style.setProperty('--c1', c1); fl.style.setProperty('--c2', c2);
+      const b = el('button', { type: 'button', className: 'hbar', title: k + ': ' + rows.length }, [el('span', { className: 'nm', textContent: k }), el('div', { className: 'tr' }, [fl]), el('span', { className: 'v', textContent: fmt(rows.length) })]);
+      b.addEventListener('click', () => pick(rows.slice(), labelFn(k)));
+      box.append(b);
+    });
+  };
+
+  const drawTop = () => {
+    const box = $('chTop'); box.textContent = '';
+    const rows = leads.filter((l) => stOf(l.id) === 'neu' && l.score != null).sort(sorter('score')).slice(0, 6);
+    if (!rows.length) { box.append(el('p', { className: 'ch-empty', textContent: 'Keine neuen Betriebe mit Score mehr.' })); return; }
+    rows.forEach((l) => {
+      const fl = el('div', { className: 'fl' }); fl.style.width = Math.max(4, l.score) + '%';
+      const b = el('button', { type: 'button', className: 'toprow' }, [
+        el('span', {}, [el('span', { className: 'nm', textContent: l.name }), el('span', { className: 'sub', textContent: [l.ort, l.web ? (l.design ? 'Website ' + l.design.toLowerCase() : 'mit Website') : 'ohne Website'].filter(Boolean).join(' · ') })]),
+        el('div', { className: 'tr' }, [fl]), el('span', { className: 'v', textContent: String(l.score) }),
+      ]);
+      b.addEventListener('click', () => { show([l], l.name); select(l.id, true); });
+      box.append(b);
+    });
+  };
+
+  const drawAkt = () => {
+    const box = $('chAkt'); box.textContent = '';
+    const days = []; const today = new Date(); today.setHours(0, 0, 0, 0);
+    for (let i = 13; i >= 0; i--) { const d = new Date(today); d.setDate(d.getDate() - i); days.push({ d, key: d.toDateString(), n: 0 }); }
+    const idx = Object.fromEntries(days.map((d, i) => [d.key, i]));
+    Object.values(state).forEach((s) => (s.log || []).forEach((e) => { const d = new Date(e.at); d.setHours(0, 0, 0, 0); const i = idx[d.toDateString()]; if (i != null) days[i].n++; }));
+    const sum = days.reduce((a, d) => a + d.n, 0);
+    $('aktBig').innerHTML = ''; $('aktBig').append(String(sum), el('small', { textContent: sum === 1 ? 'Kontakt eingetragen' : 'Kontakte eingetragen' }));
+    const W = 420, H = 150, P = { l: 6, r: 6, t: 8, b: 22 };
+    const max = Math.max(1, ...days.map((d) => d.n));
+    const bw = (W - P.l - P.r) / days.length;
+    const svg = sv('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Eingetragene Kontakte pro Tag' });
+    svg.append(sv('defs', {}, [sv('linearGradient', { id: 'gAkt', x1: 0, y1: 0, x2: 0, y2: 1 }, [sv('stop', { offset: '0%', 'stop-color': '#7fc3ea' }), sv('stop', { offset: '100%', 'stop-color': '#2d5f80' })])]));
+    days.forEach((d, i) => {
+      const h = d.n ? Math.max(4, (H - P.t - P.b) * d.n / max) : 2;
+      const r = sv('rect', { x: P.l + i * bw + bw * 0.18, y: H - P.b - h, width: bw * 0.64, height: h, rx: 3, fill: d.n ? 'url(#gAkt)' : 'rgba(255,255,255,.08)' });
+      r.append(sv('title', {}, [document.createTextNode(d.d.toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit' }) + ': ' + d.n)]));
+      svg.append(r);
+      if (i % 2 === 1 || i === 13) svg.append(sv('text', { x: P.l + i * bw + bw / 2, y: H - 6, 'text-anchor': 'middle' }, [document.createTextNode(i === 13 ? 'heute' : d.d.getDate() + '.')]));
+    });
+    box.append(svg);
+  };
+
+  const renderCharts = () => {
+    if (!leads.length) return;
+    drawScore(); drawDonut(); drawTop(); drawAkt();
+    const br = new Map(); leads.forEach((l) => { const k = brancheOf(l); if (k === 'Sonstige') return; if (!br.has(k)) br.set(k, []); br.get(k).push(l); });
+    drawHbars('chBranche', br, 8, '#8a4a26', '#e78a53', (k) => k);
+    const ort = new Map(); leads.forEach((l) => { const k = l.ort || 'Ohne Ort'; if (!ort.has(k)) ort.set(k, []); ort.get(k).push(l); });
+    drawHbars('chOrt', ort, 6, '#2d5f80', '#7fc3ea', (k) => 'in ' + k);
+  };
+
+  const renderAll = () => { renderKpis(); renderCharts(); renderPipe(); renderList(); renderAkte(); };
   $('q').addEventListener('input', (e) => { ui.q = e.target.value.trim(); ui.ids = null; renderList(); });
   $('fSort').addEventListener('change', (e) => { ui.sort = e.target.value; renderList(); });
 
