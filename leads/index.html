@@ -199,6 +199,20 @@
   .prow .pa .btn { padding: 6px 10px; font-size: .82rem; }
   .prow.cur { border-color: var(--orange); }
 
+  /* Tagebuch */
+  .journal { background: var(--card); border-color: var(--line); }
+  .jchips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .jchip { font-size: .8rem; border: 1px solid var(--line2); border-radius: 999px; padding: 3px 10px; color: var(--soft); }
+  .jchip b { font-family: var(--f-mono); color: var(--fg); margin-right: 4px; }
+  .jlist { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; max-height: 18rem; overflow: auto; }
+  .jlist li { display: grid; grid-template-columns: 3rem 1.4rem minmax(0, 1fr); gap: 6px; align-items: baseline; font-size: .86rem; padding: 4px 0; border-bottom: 1px solid var(--line); }
+  .jlist time { font: .76rem var(--f-mono); color: var(--dim); }
+  .jlist button { all: unset; cursor: pointer; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .jlist button:hover b { color: var(--orange2); }
+  .jlist .t { color: var(--soft); }
+  .jempty { color: var(--dim); font-size: .85rem; }
+  .jwarn { font-size: .82rem; color: var(--orange2); background: rgba(231,138,83,.1); border-radius: 10px; padding: 8px 10px; }
+
   /* Mail-Fenster */
   .sheet { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.6); display: grid; place-items: end center; }
   .sheet .box { width: min(100%, 40rem); max-height: 92vh; overflow: auto; background: var(--card); border: 1px solid var(--line2); border-radius: 16px 16px 0 0; padding: 16px var(--gr) calc(16px + env(safe-area-inset-bottom, 0px)) var(--gl); display: grid; gap: 10px; }
@@ -268,6 +282,24 @@
     </div>
     <div class="plan-prog" id="planProg" hidden><div id="planBar"></div></div>
     <div id="planBody"></div>
+  </section>
+
+  <section class="plan journal" id="journal" aria-labelledby="jTitle">
+    <div class="plan-head">
+      <div>
+        <h2 id="jTitle">Erledigt</h2>
+        <p class="small muted" id="jSub"></p>
+      </div>
+      <div class="row">
+        <button class="btn" id="jPrev" type="button" aria-label="Vorheriger Tag">‹</button>
+        <button class="btn" id="jToday" type="button">Heute</button>
+        <button class="btn" id="jNext" type="button" aria-label="Nächster Tag">›</button>
+        <button class="btn" id="jCopy" type="button">Bericht kopieren</button>
+      </div>
+    </div>
+    <div class="jchips" id="jChips"></div>
+    <ul class="jlist" id="jList"></ul>
+    <p class="jwarn" id="jWarn" hidden></p>
   </section>
 
   <nav class="kpis" id="kpis" aria-label="Kennzahlen"></nav>
@@ -734,16 +766,93 @@
     drawHbars('chOrt', ort, 6, '#2d5f80', '#7fc3ea', (k) => 'in ' + k);
   };
 
-  const renderAll = () => { renderPlan(); renderKpis(); renderCharts(); renderPipe(); renderList(); renderAkte(); };
+  const renderAll = () => { renderJournal(); renderPlan(); renderKpis(); renderCharts(); renderPipe(); renderList(); renderAkte(); };
   $('q').addEventListener('input', (e) => { ui.q = e.target.value.trim(); ui.ids = null; renderList(); });
   $('fSort').addEventListener('change', (e) => { ui.sort = e.target.value; renderList(); });
+
+  // ---------- Tagebuch: alles, was du machst, mit Uhrzeit ----------
+  const JSTORE = 'sc-leads-journal-v1';
+  const JTYP = {
+    anruf: { i: '📞', l: 'Anruf gewählt' }, mail: { i: '✉️', l: 'Mail geöffnet' }, whatsapp: { i: '💬', l: 'WhatsApp geöffnet' },
+    status: { i: '●', l: 'Status' }, notiz: { i: '✎', l: 'Notiz' }, plan: { i: '✨', l: 'Tagesplan' },
+  };
+  let journal = [];
+  try { journal = JSON.parse(store.get(JSTORE) || '[]'); if (!Array.isArray(journal)) journal = []; } catch (e) { journal = []; }
+  let jDay = null;
+  const jKey = (iso) => { const d = new Date(iso); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  const jot = (typ, id, text) => {
+    const l = id ? byId.get(id) : null;
+    journal.push({ at: new Date().toISOString(), typ, id: id || '', name: l ? l.name : '', text: String(text || '').slice(0, 300) });
+    if (journal.length > 20000) journal = journal.slice(-20000);
+    if (!store.set(JSTORE, JSON.stringify(journal))) say('Achtung: Der Speicher auf diesem Gerät ist voll. Bitte „Sicherung speichern“ tippen.');
+  };
+  const dayEntries = (key) => journal.filter((e) => jKey(e.at) === key);
+  const countJ = (list) => {
+    const c = { anruf: 0, mail: 0, whatsapp: 0, notiz: 0, status: 0 };
+    list.forEach((e) => { if (c[e.typ] != null) c[e.typ]++; });
+    const betriebe = new Set(list.filter((e) => e.id).map((e) => e.id)).size;
+    return { ...c, betriebe };
+  };
+  const renderJournal = () => {
+    if (!$('jList')) return;
+    const today = jKey(new Date().toISOString());
+    const key = jDay || today;
+    const list = dayEntries(key);
+    const d = new Date(key + 'T12:00:00');
+    $('jTitle').textContent = key === today ? 'Heute erledigt' : 'Erledigt am ' + d.toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' });
+    const c = countJ(list);
+    $('jSub').textContent = list.length ? fmt(list.length) + ' Einträge bei ' + fmt(c.betriebe) + ' Betrieben · wird automatisch gespeichert' : 'Alles, was du machst, wird hier mit Uhrzeit notiert und automatisch gespeichert.';
+    const chips = $('jChips'); chips.textContent = '';
+    [['anruf', 'Anrufe'], ['mail', 'Mails'], ['whatsapp', 'WhatsApp'], ['status', 'Status'], ['notiz', 'Notizen']].forEach(([k, label]) => {
+      if (c[k]) chips.append(el('span', { className: 'jchip' }, [el('b', { textContent: String(c[k]) }), label]));
+    });
+    const ul = $('jList'); ul.textContent = '';
+    if (!list.length) ul.append(el('li', { className: 'jempty', textContent: key === today ? 'Heute noch nichts eingetragen.' : 'An diesem Tag wurde nichts eingetragen.' }));
+    list.slice().reverse().forEach((e) => {
+      const t = JTYP[e.typ] || { i: '•', l: e.typ };
+      const b = el('button', { type: 'button' }, [el('b', { textContent: e.name || t.l }), el('span', { className: 't', textContent: ' · ' + (e.text || t.l) })]);
+      if (e.id && byId.has(e.id)) b.addEventListener('click', () => { show([byId.get(e.id)], byId.get(e.id).name); select(e.id, true); });
+      ul.append(el('li', {}, [el('time', { textContent: new Date(e.at).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }) }), el('span', { textContent: t.i }), b]));
+    });
+    $('jNext').disabled = key >= today;
+    const last = Date.parse(store.get('sc-leads-lastbackup') || '') || 0;
+    const days = last ? Math.floor((Date.now() - last) / 864e5) : null;
+    const warn = journal.length > 0 && (days == null || days >= 7);
+    $('jWarn').hidden = !warn;
+    if (warn) $('jWarn').textContent = (days == null ? 'Du hast noch nie eine Sicherung gespeichert.' : 'Deine letzte Sicherung ist ' + days + ' Tage her.') + ' Alles liegt nur auf diesem Gerät. Tippe oben auf „Sicherung speichern“ und leg die Datei in iCloud oder schick sie dir per Mail.';
+  };
+  const shiftDay = (n) => { const d = new Date((jDay || jKey(new Date().toISOString())) + 'T12:00:00'); d.setDate(d.getDate() + n); const k = jKey(d.toISOString()); jDay = k >= jKey(new Date().toISOString()) ? null : k; renderJournal(); };
+  $('jPrev').addEventListener('click', () => shiftDay(-1));
+  $('jNext').addEventListener('click', () => shiftDay(1));
+  $('jToday').addEventListener('click', () => { jDay = null; renderJournal(); });
+  $('jCopy').addEventListener('click', async () => {
+    const key = jDay || jKey(new Date().toISOString());
+    const list = dayEntries(key); const c = countJ(list);
+    const head = 'Tagesbericht ' + new Date(key + 'T12:00:00').toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+      + '\n' + c.anruf + ' Anrufe · ' + c.mail + ' Mails · ' + c.whatsapp + ' WhatsApp · ' + c.status + ' Status-Änderungen · ' + c.notiz + ' Notizen · ' + c.betriebe + ' Betriebe\n';
+    const lines = list.map((e) => new Date(e.at).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }) + '  ' + (e.name ? e.name + ': ' : '') + (e.text || (JTYP[e.typ] || {}).l || e.typ));
+    const txt = head + '\n' + (lines.join('\n') || 'Keine Einträge.');
+    try { await navigator.clipboard.writeText(txt); $('jCopy').textContent = 'Kopiert ✓'; } catch (e) { say(txt); $('jCopy').textContent = 'Steht oben im Assistenten'; }
+    setTimeout(() => { $('jCopy').textContent = 'Bericht kopieren'; }, 2200);
+  });
+  // Anrufe, WhatsApp und Mails mitschreiben, sobald du sie antippst
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+    const href = a.getAttribute('href') || '';
+    const id = a.dataset.id || ui.sel;
+    if (href.startsWith('tel:')) { jot('anruf', id, 'Anruf gewählt ' + href.slice(4)); renderJournal(); }
+    else if (href.includes('wa.me/')) { jot('whatsapp', id, 'WhatsApp geöffnet'); renderJournal(); }
+    else if (a.id === 'mailOpen') { jot('mail', mailLead ? mailLead.id : id, 'Mail geöffnet: ' + $('mailSubj').value.slice(0, 120)); renderJournal(); }
+  }, true);
+  if (navigator.storage && navigator.storage.persist) { try { navigator.storage.persist(); } catch (e) {} }
 
   // ---------- Speichern ----------
   const touch = (id, patch, logEntry) => {
     const prev = state[id] || {};
     state[id] = { status: prev.status || 'neu', note: prev.note || '', ...patch, log: (prev.log || []).concat(logEntry ? [logEntry] : []).slice(-30), updatedAt: new Date().toISOString(), name: byId.get(id).name };
     saveState();
-    if (logEntry) planDone(id);
+    if (logEntry) { planDone(id); jot('status', id, '→ ' + (ST[logEntry.s] ? ST[logEntry.s].label : logEntry.s) + (logEntry.t ? ' · ' + logEntry.t : '')); }
+    else if (patch.note != null && patch.note !== (prev.note || '')) { const nl = String(patch.note).split('\n').pop(); jot('notiz', id, nl.slice(0, 200)); }
     renderAll();
   };
   const setStatus = (id, st, t) => { if (stOf(id) !== st) touch(id, { status: st }, { s: st, at: new Date().toISOString(), t: t || '' }); };
@@ -751,7 +860,8 @@
   const addNote = (id, text) => { const prev = (state[id] || {}).note || ''; const line = new Date().toLocaleDateString('de-DE') + ': ' + text; setNote(id, prev ? prev + '\n' + line : line); };
 
   $('backupBtn').addEventListener('click', () => {
-    const blob = new Blob([JSON.stringify({ app: 'sc-leads', at: new Date().toISOString(), state }, null, 1)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify({ app: 'sc-leads', at: new Date().toISOString(), state, journal }, null, 1)], { type: 'application/json' });
+    store.set('sc-leads-lastbackup', new Date().toISOString()); setTimeout(renderJournal, 0);
     const a = el('a', { href: URL.createObjectURL(blob), download: 'lead-status-' + new Date().toISOString().slice(0, 10) + '.json' });
     document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 4000);
@@ -767,7 +877,14 @@
         const a = state[id];
         if (!a || String(s.updatedAt || '') > String(a.updatedAt || '')) { state[id] = s; n++; }
       });
-      saveState(); renderAll(); say(n ? n + ' Einträge aus der Sicherung übernommen.' : 'Die Sicherung enthielt nichts Neueres.');
+      let m = 0;
+      if (Array.isArray(d.journal)) {
+        const seen = new Set(journal.map((x) => x.at + '|' + x.typ + '|' + x.id));
+        d.journal.forEach((x) => { if (x && x.at && !seen.has(x.at + '|' + x.typ + '|' + x.id)) { journal.push(x); seen.add(x.at + '|' + x.typ + '|' + x.id); m++; } });
+        journal.sort((a, b) => String(a.at).localeCompare(String(b.at)));
+        store.set(JSTORE, JSON.stringify(journal));
+      }
+      saveState(); renderAll(); say((n || m) ? n + ' Betriebe und ' + m + ' Tagebuch-Einträge aus der Sicherung übernommen.' : 'Die Sicherung enthielt nichts Neueres.');
     } catch (err) { say('Diese Datei ist keine Sicherung der Lead-Zentrale.'); }
     e.target.value = '';
   });
@@ -833,6 +950,7 @@
         const info = el('button', { type: 'button', className: 'pinfo' }, [el('span', { className: 'pn', textContent: l.name }), el('span', { className: 'pr', textContent: i.grund + (l.ort ? ' · ' + l.ort : '') })]);
         info.addEventListener('click', () => select(l.id, true));
         const call = telHref(l.tel) ? el('a', { className: 'btn primary', href: telHref(l.tel), textContent: 'Anrufen' }) : null;
+        if (call) call.dataset.id = l.id;
         const ok = el('button', { type: 'button', className: 'btn', textContent: plan.done[i.id] ? '↺' : '✓', title: plan.done[i.id] ? 'Wieder öffnen' : 'Erledigt' });
         ok.setAttribute('aria-label', plan.done[i.id] ? 'Wieder öffnen' : 'Erledigt');
         ok.addEventListener('click', () => { plan.done[i.id] = !plan.done[i.id]; savePlan(); renderPlan(); });
@@ -860,7 +978,7 @@
     const l = byId.get(nxt.id);
     say('Als Nächstes: ' + l.name + '. ' + nxt.grund + '.' + (l.tel ? ' Telefon ' + l.tel + '.' : '') + '\nTrag danach den Status ein, dann hake ich es automatisch ab.');
   };
-  $('planMake').addEventListener('click', () => { makePlan(); renderPlan(); say(planSummary()); $('plan').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  $('planMake').addEventListener('click', () => { makePlan(); jot('plan', '', plan.items.length + ' Punkte geplant'); renderJournal(); renderPlan(); say(planSummary()); $('plan').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   $('planNext').addEventListener('click', planStart);
   $('planRead').addEventListener('click', () => { const was = speakOn; speakOn = true; speak(planSummary()); speakOn = was; });
 
