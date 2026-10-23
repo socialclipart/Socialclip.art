@@ -327,6 +327,7 @@
         <button class="btn" id="backupBtn" type="button">Sicherung speichern</button>
         <label class="btn" for="restoreIn">Sicherung laden</label>
         <input type="file" id="restoreIn" accept="application/json,.json" hidden>
+        <button class="btn" id="dailyBtn" type="button">📅 Tägliche Erinnerung</button>
         <button class="btn" id="logoutBtn" type="button">Abmelden</button>
       </div>
     </details>
@@ -598,6 +599,7 @@
     btn.disabled = false; btn.textContent = 'Öffnen';
   });
 
+  $('dailyBtn').addEventListener('click', () => { dailyIcs(); say('Tippe im Kalender auf „Hinzufügen“. Ab jetzt erinnert dich dein iPhone jeden Werktag um 8:45 Uhr. Die Uhrzeit kannst du im Kalender ändern.'); });
   $('logoutBtn').addEventListener('click', () => {
     store.del(KEYSTORE);
     location.reload();
@@ -703,7 +705,7 @@
     mailBtn.addEventListener('click', () => openMail(l));
     const parts = [
       el('div', {}, [el('h2', { textContent: l.name }), el('p', { className: 'small muted', textContent: [l.kat, l.adr].filter(Boolean).join(' · ') })]),
-      el('div', { className: 'row' }, [link(telHref(l.tel), 'Anrufen', true), mailBtn, link(waHref(l.tel), 'WhatsApp'), link(safeUrl(l.web), 'Website'), link(safeUrl(l.maps), 'Maps'), link(safeUrl(l.insta), 'Instagram'), link(safeUrl(l.fb), 'Facebook')]),
+      el('div', { className: 'row' }, [link(telHref(l.tel), 'Anrufen', true), mailBtn, (() => { const b = el('button', { type: 'button', className: 'btn', textContent: '📅 Rückruf' }); b.addEventListener('click', () => callbackIcs(l)); return b; })(), link(waHref(l.tel), 'WhatsApp'), link(safeUrl(l.web), 'Website'), link(safeUrl(l.maps), 'Maps'), link(safeUrl(l.insta), 'Instagram'), link(safeUrl(l.fb), 'Facebook')]),
       el('div', { className: 'facts' }, [
         fact('Telefon', l.tel), fact('E-Mail', l.mail || 'keine bekannt'), fact('Entscheider', l.chef),
         fact('Website', l.web ? (l.design || 'vorhanden') + (l.dring ? ', Dringlichkeit ' + l.dring : '') : 'keine'),
@@ -881,6 +883,59 @@
   const renderAll = () => { renderJournal(); renderPlan(); renderKpis(); renderCharts(); renderPipe(); renderList(); renderAkte(); };
   $('q').addEventListener('input', (e) => { ui.q = e.target.value.trim(); ui.ids = null; renderList(); });
   $('fSort').addEventListener('change', (e) => { ui.sort = e.target.value; renderList(); });
+
+  // ---------- Kalender: Rückrufe und tägliche Erinnerung als Termin fürs iPhone ----------
+  const WT = ['sonntag', 'montag', 'dienstag', 'mittwoch', 'donnerstag', 'freitag', 'samstag'];
+  const icsEsc = (t) => String(t || '').replace(/\\/g, '\\\\').replace(/;/g, '\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+  const icsDate = (d) => d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + 'T' + String(d.getHours()).padStart(2, '0') + String(d.getMinutes()).padStart(2, '0') + '00';
+  const icsFold = (line) => { const out = []; let x = line; while (x.length > 72) { out.push(x.slice(0, 72)); x = ' ' + x.slice(72); } out.push(x); return out.join('\r\n'); };
+  const makeIcs = ({ uid, title, start, minutes, desc, rrule, alarmMin }) => {
+    const end = new Date(start.getTime() + (minutes || 15) * 60000);
+    const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//SocialClip//Lead-Zentrale//DE', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT',
+      'UID:' + uid + '@socialclip.art', 'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z',
+      'DTSTART:' + icsDate(start), 'DTEND:' + icsDate(end), rrule ? 'RRULE:' + rrule : '',
+      'SUMMARY:' + icsEsc(title), 'DESCRIPTION:' + icsEsc(desc), 'URL:https://socialclip.art/leads/',
+      'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(title), 'TRIGGER:-PT' + (alarmMin || 0) + 'M', 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'].filter(Boolean);
+    return lines.map(icsFold).join('\r\n') + '\r\n';
+  };
+  const openIcs = (ics, name) => {
+    const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+    const a = el('a', { href: url, download: name + '.ics' });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  };
+  // nächster passender Wochentag (heute zählt nicht), 9:30 Uhr
+  const nextDay = (tag) => {
+    const d = new Date(); d.setHours(9, 30, 0, 0);
+    const want = WT.indexOf(norm(tag || ''));
+    if (norm(tag) === 'morgen' || want < 0) { d.setDate(d.getDate() + 1); if (d.getDay() === 6) d.setDate(d.getDate() + 2); if (d.getDay() === 0) d.setDate(d.getDate() + 1); return d; }
+    do { d.setDate(d.getDate() + 1); } while (d.getDay() !== want);
+    return d;
+  };
+  const tagFromNote = (l) => {
+    const last = norm(((state[l.id] || {}).note || '').split('\n').pop());
+    return WT.find((w) => last.includes(w)) || (/\bmorgen\b/.test(last) ? 'morgen' : '');
+  };
+  const callbackIcs = (l, tag) => {
+    const when = nextDay(tag || tagFromNote(l));
+    const note = ((state[l.id] || {}).note || '').split('\n').slice(-2).join('\n');
+    openIcs(makeIcs({ uid: 'rr-' + l.id + '-' + icsDate(when), title: 'Rückruf: ' + l.name, start: when, minutes: 15, alarmMin: 0,
+      desc: [l.tel ? 'Telefon: ' + l.tel : '', l.chef ? 'Ansprechpartner: ' + l.chef : '', note ? 'Notiz: ' + note : '', 'Lead-Zentrale: https://socialclip.art/leads/'].filter(Boolean).join('\n') }), 'rueckruf');
+    jot('notiz', l.id, 'Rückruf in Kalender: ' + when.toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'numeric' }) + ' 9:30');
+    renderJournal();
+  };
+  const calBtn = (l, tag, after) => {
+    const b = el('button', { type: 'button', className: 'btn primary', textContent: '📅 In Kalender' });
+    b.addEventListener('click', () => { callbackIcs(l, tag); b.textContent = '📅 Eingetragen ✓'; b.disabled = true; if (after) setTimeout(after, 1200); });
+    return b;
+  };
+  const dailyIcs = () => {
+    const d = new Date(); d.setHours(8, 45, 0, 0); d.setDate(d.getDate() + 1);
+    while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);
+    openIcs(makeIcs({ uid: 'sc-akquise-taeglich', title: 'Akquise-Zeit: Lead-Zentrale öffnen', start: d, minutes: 30, alarmMin: 0, rrule: 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR',
+      desc: 'Dein Tagesplan wartet: https://socialclip.art/leads/\nTipp auf „Mit dem Coach reden“ und los geht’s.' }), 'akquise-erinnerung');
+  };
 
   // ---------- Tagebuch: alles, was du machst, mit Uhrzeit ----------
   const JSTORE = 'sc-leads-journal-v1';
@@ -1273,6 +1328,11 @@
     planDone(l.id); renderPlan();
     coach.step = 'saved';
     const msg = o.say || (tag ? 'Notiert: Rückruf ' + tag + '. Ich erinnere dich dann im Tagesplan.' : 'Notiert.');
+    if (tag) {
+      cShow('✓ ' + l.name, msg + ' Tippe auf „In Kalender“, dann erinnert dich dein iPhone.', [calBtn(l, tag, () => coachNext()), cBtn('Weiter', () => coachNext())]);
+      cSpeak(msg);
+      return;
+    }
     cShow('✓ ' + l.name, msg, []);
     cSpeak(msg);
     setTimeout(() => coachNext(), 2200);
@@ -1679,6 +1739,7 @@
       addNote(l.id, n);
       planDone(l.id); renderPlan();
       try { localStorage.removeItem(LPEND); } catch (err) {}
+      if (rueckruf_tag) $('lLog').append(calBtn(l, rueckruf_tag));
       return 'Gespeichert bei ' + l.name + ': Status ' + ST[e.st].label + ', Notiz „' + n + '“.';
     },
     leads_suchen: ({ anfrage }) => { quiet(() => handle(String(anfrage || ''))); return lastText.slice(0, 1500); },
