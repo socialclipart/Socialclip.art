@@ -213,6 +213,27 @@
   .jempty { color: var(--dim); font-size: .85rem; }
   .jwarn { font-size: .82rem; color: var(--orange2); background: rgba(231,138,83,.1); border-radius: 10px; padding: 8px 10px; }
 
+  /* Coach */
+  .coach-start { background: linear-gradient(135deg, #5fa8d3, #3d7fae); border-color: #5fa8d3; color: #06121b; font-weight: 600; }
+  .coach { position: fixed; z-index: 40; left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); max-width: 34rem; margin: 0 auto; background: linear-gradient(160deg, #1d2633, #12151b 70%); border: 1px solid rgba(95,168,211,.5); border-radius: 20px; padding: 14px 16px 16px; display: grid; gap: 10px; box-shadow: 0 20px 60px rgba(0,0,0,.6); max-height: 80vh; overflow: auto; }
+  .c-head { display: flex; align-items: center; gap: 8px; }
+  .c-head h2 { font-size: 1rem; flex: 1; }
+  .c-head .btn { padding: 6px 10px; font-size: .82rem; }
+  .c-dot { width: 10px; height: 10px; border-radius: 50%; background: #5fa8d3; box-shadow: 0 0 0 0 rgba(95,168,211,.6); }
+  .coach.talking .c-dot { animation: pulse 1.2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(95,168,211,.6); } 100% { box-shadow: 0 0 0 12px rgba(95,168,211,0); } }
+  @media (prefers-reduced-motion: reduce) { .coach.talking .c-dot { animation: none; } }
+  .c-prog { font: .76rem var(--f-mono); color: var(--dim); }
+  .c-msg { font-size: 1.12rem; line-height: 1.45; font-weight: 600; }
+  .c-sub { font-size: .86rem; color: var(--soft); white-space: pre-wrap; }
+  .c-sub:empty { display: none; }
+  .c-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .c-btns .btn { padding: 10px 14px; font-size: .95rem; }
+  .c-btns .big { flex: 1 1 100%; justify-content: center; padding: 14px; font-size: 1.05rem; }
+  .c-free { display: flex; gap: 8px; }
+  .c-free .field { flex: 1; min-width: 0; }
+  body.coach-on .wrap { padding-bottom: 22rem; }
+
   /* Mail-Fenster */
   .sheet { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.6); display: grid; place-items: end center; }
   .sheet .box { width: min(100%, 40rem); max-height: 92vh; overflow: auto; background: var(--card); border: 1px solid var(--line2); border-radius: 16px 16px 0 0; padding: 16px var(--gr) calc(16px + env(safe-area-inset-bottom, 0px)) var(--gl); display: grid; gap: 10px; }
@@ -275,6 +296,7 @@
         <p class="small muted" id="planSub">Ein Tipp, und der Autopilot sucht dir heraus, wen du heute anrufst und bei wem du nachfasst.</p>
       </div>
       <div class="row">
+        <button class="btn coach-start" id="coachStart" type="button">🎧 Coach starten</button>
         <button class="btn primary" id="planMake" type="button">✨ Tagesplan erstellen</button>
         <button class="btn" id="planNext" type="button" hidden>▶ Nächster</button>
         <button class="btn" id="planRead" type="button" hidden>Vorlesen</button>
@@ -358,6 +380,23 @@
     </section>
   </div>
 </div>
+
+<section class="coach" id="coach" hidden aria-live="polite" aria-labelledby="cTitle">
+  <div class="c-head">
+    <span class="c-dot" aria-hidden="true"></span>
+    <h2 id="cTitle">Coach</h2>
+    <span class="c-prog" id="cProg"></span>
+    <button class="btn" id="cVoice" type="button" aria-pressed="true" title="Stimme an/aus">🔊</button>
+    <button class="btn" id="cClose" type="button">Pause</button>
+  </div>
+  <p class="c-msg" id="cMsg"></p>
+  <p class="c-sub" id="cSub"></p>
+  <div class="c-btns" id="cBtns"></div>
+  <div class="c-free" id="cFree" hidden>
+    <input class="field" id="cNote" type="text" placeholder="Was wurde besprochen? (optional)" aria-label="Notiz zum Anruf">
+    <button class="btn mic" id="cMic" type="button" aria-label="Antwort sprechen">🎤</button>
+  </div>
+</section>
 
 <div class="sheet" id="mailSheet" hidden role="dialog" aria-modal="true" aria-labelledby="mailTitle">
   <div class="box">
@@ -1038,6 +1077,162 @@
     if (speakOn) speak('Vorlesen ist an.'); else try { speechSynthesis.cancel(); } catch (e) {}
   });
 
+  // ---------- Coach: spricht mit dir, schickt dich zum nächsten Anruf und fragt danach nach ----------
+  const WTAGE = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+  const coach = { on: false, step: '', id: null, callAt: 0, voice: store.get('sc-leads-coachvoice') !== '0', calls: 0 };
+  const cSpeak = (t) => {
+    if (!coach.voice || !canSpeak) return;
+    try {
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(String(t).slice(0, 600)); u.lang = 'de-DE'; const v = voice(); if (v) u.voice = v;
+      u.onstart = () => $('coach').classList.add('talking'); u.onend = u.onerror = () => $('coach').classList.remove('talking');
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  };
+  const cBtn = (label, fn, cls) => { const b = el('button', { type: 'button', className: 'btn' + (cls ? ' ' + cls : ''), textContent: label }); b.addEventListener('click', fn); return b; };
+  const cShow = (msg, sub, btns, free) => {
+    $('cMsg').textContent = msg; $('cSub').textContent = sub || '';
+    const box = $('cBtns'); box.textContent = ''; btns.forEach((b) => b && box.append(b));
+    $('cFree').hidden = !free; if (free) $('cNote').value = '';
+    const open = planOpen().length, all = plan ? plan.items.length : 0;
+    $('cProg').textContent = all ? (all - open) + '/' + all : '';
+  };
+  const paintCVoice = () => { $('cVoice').textContent = coach.voice ? '🔊' : '🔇'; $('cVoice').setAttribute('aria-pressed', String(coach.voice)); };
+  paintCVoice();
+  $('cVoice').addEventListener('click', () => { coach.voice = !coach.voice; store.set('sc-leads-coachvoice', coach.voice ? '1' : '0'); paintCVoice(); if (!coach.voice) try { speechSynthesis.cancel(); } catch (e) {} });
+
+  const coachStart = () => {
+    // iOS gibt die Stimme erst nach einem Tippen frei: hier im Tipp einmal kurz anstoßen
+    if (canSpeak) try { speechSynthesis.cancel(); speechSynthesis.speak(Object.assign(new SpeechSynthesisUtterance(' '), { lang: 'de-DE', volume: 0 })); } catch (e) {}
+    if (!plan || !planOpen().length) { makePlan(); jot('plan', '', plan.items.length + ' Punkte geplant'); }
+    coach.on = true; coach.calls = 0; document.body.classList.add('coach-on'); $('coach').hidden = false;
+    renderAll();
+    const c = (t) => plan.items.filter((i) => i.typ === t && !plan.done[i.id]).length;
+    const h = new Date().getHours();
+    const gruss = h < 11 ? 'Guten Morgen!' : h < 17 ? 'Hallo!' : 'Guten Abend!';
+    const teile = [];
+    if (c('rueckruf')) teile.push(c('rueckruf') + (c('rueckruf') === 1 ? ' Rückruf' : ' Rückrufe'));
+    if (c('nachfassen')) teile.push(c('nachfassen') + ' zum Nachfassen');
+    if (c('neu')) teile.push(c('neu') + ' neue Anrufe');
+    const intro = gruss + ' Heute stehen an: ' + (teile.join(', ') || 'keine Aufgaben') + '.';
+    coachNext(intro);
+  };
+
+  const coachNext = (intro) => {
+    if (!coach.on) return;
+    const nxt = planOpen()[0];
+    if (!nxt) {
+      const c = countJ(dayEntries(jKey(new Date().toISOString())));
+      const msg = 'Geschafft! Dein Plan für heute ist erledigt.';
+      const sub = 'Heute: ' + c.anruf + ' Anrufe, ' + c.mail + ' Mails, ' + c.status + ' Status-Änderungen. Denk an „Sicherung speichern“.';
+      cShow(msg, sub, [cBtn('Neuen Plan erstellen', () => { makePlan(); coachNext(); }, 'primary'), cBtn('Coach beenden', coachStop)]);
+      cSpeak((intro ? intro + ' ' : '') + msg + ' Du hast heute ' + c.anruf + ' Anrufe gemacht. Stark!');
+      return;
+    }
+    const l = byId.get(nxt.id);
+    coach.step = 'next'; coach.id = l.id;
+    select(l.id, false); renderPlan();
+    const art = nxt.typ === 'rueckruf' ? 'Zeit für deinen Rückruf bei ' : nxt.typ === 'nachfassen' ? 'Fass nach bei ' : 'Ruf jetzt an: ';
+    const msg = art + l.name + '.';
+    const tipps = [];
+    if (!l.web) tipps.push('Hat keine Website' + (l.google ? ', aber ' + l.google + ' Sterne bei Google' : '') + '.');
+    else if (l.design && /veraltet/i.test(l.design)) tipps.push('Website ist ' + l.design.toLowerCase() + '.');
+    if (l.chef) tipps.push('Ansprechpartner: ' + l.chef + '.');
+    const note = ((state[l.id] || {}).note || '').split('\n').pop();
+    if (note) tipps.push('Letzte Notiz: ' + note);
+    const sub = nxt.grund + (l.tel ? ' · ' + l.tel : ' · keine Telefonnummer') + (tipps.length ? '\n' + tipps.join(' ') : '');
+    const call = telHref(l.tel) ? el('a', { className: 'btn primary big', href: telHref(l.tel), textContent: '📞 Jetzt anrufen' }) : null;
+    if (call) { call.dataset.id = l.id; call.addEventListener('click', () => { coach.step = 'call'; coach.callAt = Date.now(); coach.calls++; setTimeout(() => { if (coach.step === 'call') coachDebrief(true); }, 1500); }); }
+    cShow(msg, sub, [
+      call,
+      l.mail ? cBtn('✉️ Lieber Mail', () => { openMail(l); coach.step = 'mail'; }) : null,
+      cBtn('Überspringen', () => { plan.done[l.id] = true; savePlan(); jot('plan', l.id, 'Übersprungen'); renderJournal(); coachNext(); }),
+    ]);
+    cSpeak([intro, msg, tipps.slice(0, 2).join(' '), call ? 'Tippe auf Jetzt anrufen.' : ''].filter(Boolean).join(' '));
+  };
+
+  const OUTCOMES = [
+    { label: 'Nicht erreicht', st: 'angerufen', note: 'Nicht erreicht', say: 'Okay, nicht erreicht. Ich setze ihn in ein paar Tagen wieder auf den Plan.' },
+    { label: 'Rückruf vereinbart', st: 'angerufen', ask: 'tag' },
+    { label: 'Interesse / Termin', st: 'gespraech', note: 'Interesse', say: 'Sehr gut! Ich habe ihn auf Im Gespräch gesetzt.' },
+    { label: 'Will ein Angebot', st: 'gespraech', note: 'Will ein Angebot', say: 'Super! Denk daran, das Angebot zu schicken. Danach setzt du ihn auf Angebot raus.' },
+    { label: 'Auftrag! 🎉', st: 'gewonnen', note: 'Auftrag erhalten', say: 'Glückwunsch! Neuer Kunde!' },
+    { label: 'Kein Interesse', st: 'verloren', note: 'Kein Interesse', say: 'Kein Problem, das gehört dazu. Weiter zum Nächsten.' },
+  ];
+  const applyOutcome = (o, extra, tag) => {
+    const l = byId.get(coach.id); if (!l) return;
+    const free = (extra || '').trim();
+    const note = [o.note, tag ? 'Rückruf ' + tag : '', free].filter(Boolean).join('. ');
+    setStatus(l.id, o.st, o.label);
+    if (note) addNote(l.id, note);
+    planDone(l.id); renderPlan();
+    coach.step = 'saved';
+    const msg = o.say || (tag ? 'Notiert: Rückruf ' + tag + '. Ich erinnere dich dann im Tagesplan.' : 'Notiert.');
+    cShow('✓ ' + l.name, msg, []);
+    cSpeak(msg);
+    setTimeout(() => coachNext(), 2200);
+  };
+  const askTag = (extra) => {
+    const heute = new Date().getDay();
+    const tage = [];
+    for (let i = 1; tage.length < 5 && i < 10; i++) { const d = (heute + i) % 7; if (d !== 0 && d !== 6) tage.push({ label: i === 1 ? 'Morgen (' + WTAGE[d] + ')' : WTAGE[d], tag: WTAGE[d] }); }
+    cShow('Wann sollst du zurückrufen?', '', tage.map((t) => cBtn(t.label, () => applyOutcome(OUTCOMES[1], extra, t.tag))));
+    cSpeak('Wann sollst du zurückrufen?');
+  };
+  const coachDebrief = (early) => {
+    if (!coach.on || !coach.id) return;
+    const l = byId.get(coach.id);
+    coach.step = 'debrief';
+    const msg = 'Wie war dein Anruf bei ' + l.name + '?';
+    cShow(msg, early ? 'Tippe nach dem Gespräch eine Antwort an oder sag sie mit 🎤.' : 'Tippe an oder sag es mit 🎤, z. B. „Rückruf Donnerstag, will Preise sehen“.',
+      OUTCOMES.map((o) => cBtn(o.label, () => (o.ask ? askTag($('cNote').value) : applyOutcome(o, $('cNote').value)), o.st === 'gewonnen' ? 'primary' : '')), true);
+    if (!early) cSpeak(msg);
+  };
+  // Wenn du vom Telefonat zurück in die Seite kommst, fragt der Coach nach
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible' || !coach.on) return;
+    if (coach.step === 'call' || (coach.step === 'debrief' && Date.now() - coach.callAt > 4000)) coachDebrief(false);
+  });
+  $('mailSent').addEventListener('click', () => { if (coach.on && coach.step === 'mail') { cSpeak('Mail notiert.'); setTimeout(() => coachNext(), 900); } });
+
+  // Antwort per Sprache verstehen
+  const parseOutcome = (txt) => {
+    const t = ' ' + norm(txt) + ' ';
+    const tag = WTAGE.find((w) => t.includes(' ' + norm(w))) || (/\bmorgen\b/.test(t) ? WTAGE[(new Date().getDay() + 1) % 7] : null);
+    if (/kein interesse|will nicht|abgesagt|absage|nein danke/.test(t)) return { o: OUTCOMES[5] };
+    if (/auftrag|gewonnen|zugesagt|macht mit|gebucht/.test(t)) return { o: OUTCOMES[4] };
+    if (/angebot/.test(t)) return { o: OUTCOMES[3], tag };
+    if (/ruckruf|zuruckrufen|ruft zuruck|melde mich|nochmal anrufen/.test(t)) return { o: OUTCOMES[1], tag };
+    if (/termin|interesse|interessiert|treffen|vorbeikommen|gut gelaufen/.test(t)) return { o: OUTCOMES[2], tag };
+    if (/nicht erreicht|mailbox|niemand|keiner|besetzt|nicht da|nicht ran/.test(t)) return { o: OUTCOMES[0], tag };
+    return null;
+  };
+  let cRec = null;
+  $('cMic').addEventListener('click', () => {
+    if (cRec) { try { cRec.stop(); } catch (e) {} return; }
+    if (!SR) { $('cNote').focus(); $('cSub').textContent = 'Tippe ins Feld und nutze das Mikrofon deiner Tastatur. Danach eine Antwort oben antippen.'; return; }
+    let heard = '';
+    try { speechSynthesis.cancel(); } catch (e) {}
+    try {
+      cRec = new SR(); cRec.lang = 'de-DE'; cRec.interimResults = true; cRec.continuous = false;
+      cRec.onresult = (e) => { let s2 = ''; for (const r of e.results) s2 += r[0].transcript; heard = s2; $('cNote').value = s2; };
+      cRec.onerror = () => { heard = ''; };
+      cRec.onend = () => {
+        cRec = null; $('cMic').textContent = '🎤'; $('cMic').setAttribute('aria-pressed', 'false');
+        if (!heard.trim() || coach.step !== 'debrief') return;
+        const r = parseOutcome(heard);
+        if (!r) { $('cSub').textContent = 'Ich habe „' + heard + '“ verstanden. Tippe noch an, wie es war – der Text wird als Notiz gespeichert.'; cSpeak('Wie war es? Tippe eine Antwort an.'); return; }
+        if (r.o.ask && !r.tag) { askTag(heard); return; }
+        applyOutcome(r.o, heard, r.o.ask ? r.tag : (r.tag && r.o.st !== 'verloren' ? r.tag : null));
+      };
+      cRec.start(); $('cMic').textContent = '■'; $('cMic').setAttribute('aria-pressed', 'true');
+    } catch (e) { cRec = null; $('cNote').focus(); }
+  });
+
+  const coachStop = () => { coach.on = false; coach.step = ''; $('coach').hidden = true; document.body.classList.remove('coach-on'); try { speechSynthesis.cancel(); } catch (e) {} };
+  $('coachStart').addEventListener('click', coachStart);
+  $('cClose').addEventListener('click', coachStop);
+
   // ---------- Assistent (versteht feste Befehle, ohne KI) ----------
   const NUMS = { ein: 1, eine: 1, einen: 1, eins: 1, zwei: 2, drei: 3, vier: 4, funf: 5, sechs: 6, sieben: 7, acht: 8, neun: 9, zehn: 10, elf: 11, zwolf: 12, funfzehn: 15, zwanzig: 20, dreissig: 30, funfzig: 50 };
   const BRANCHEN = [
@@ -1123,6 +1318,7 @@
     if (!text) return;
     const t = ' ' + norm(text).replace(/[?!.,;]/g, ' ').replace(/\s+/g, ' ') + ' ';
 
+    if (/\b(coach|trainer|sprich mit mir|leg los|los geht)\b/.test(t)) { coachStart(); return; }
     if (/\b(tagesplan|plan fur heute|was steht (heute )?an|was mache ich heute|autopilot)\b/.test(t)) { if (!plan || /\bneu\b/.test(t)) makePlan(); renderPlan(); say(planSummary()); $('plan').scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
     if (/\b(nachster|nachste|weiter)\b/.test(t) && plan) { planStart(); return; }
     if (/\b(hilfe|was kannst du|befehle)\b/.test(t)) { say(HELP, 'Hier sind Beispiele, was du sagen kannst.'); return; }
