@@ -182,6 +182,23 @@
     .wrap { padding-left: 100px; max-width: 90rem; }
   }
 
+  /* Tagesplan */
+  .plan { background: linear-gradient(135deg, rgba(231,138,83,.14), rgba(95,168,211,.06) 60%), var(--card); border: 1px solid rgba(231,138,83,.35); border-radius: 16px; padding: 14px 16px; display: grid; gap: 12px; }
+  .plan-head { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+  .plan-prog { height: 6px; background: rgba(255,255,255,.07); border-radius: 99px; overflow: hidden; }
+  .plan-prog div { height: 100%; width: 0; background: linear-gradient(90deg, var(--orange), var(--green)); border-radius: 99px; transition: width .3s; }
+  .plan-sec { display: grid; gap: 6px; }
+  .plan-sec h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); }
+  .prow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; background: rgba(0,0,0,.25); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; }
+  .prow.done { opacity: .45; }
+  .prow.done .pn { text-decoration: line-through; }
+  .prow .pinfo { all: unset; cursor: pointer; min-width: 0; display: grid; gap: 1px; }
+  .prow .pn { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .prow .pr { font-size: .8rem; color: var(--soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .prow .pa { display: flex; gap: 6px; }
+  .prow .pa .btn { padding: 6px 10px; font-size: .82rem; }
+  .prow.cur { border-color: var(--orange); }
+
   /* Mail-Fenster */
   .sheet { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.6); display: grid; place-items: end center; }
   .sheet .box { width: min(100%, 40rem); max-height: 92vh; overflow: auto; background: var(--card); border: 1px solid var(--line2); border-radius: 16px 16px 0 0; padding: 16px var(--gr) calc(16px + env(safe-area-inset-bottom, 0px)) var(--gl); display: grid; gap: 10px; }
@@ -235,6 +252,22 @@
     </form>
     <p class="reply" id="reply" aria-live="polite">Sag oder tippe, was du brauchst. Tippe auf „Hilfe“, um alle Befehle zu sehen.</p>
     <div class="sugg" id="sugg"></div>
+  </section>
+
+  <section class="plan" id="plan" aria-labelledby="planTitle">
+    <div class="plan-head">
+      <div>
+        <h2 id="planTitle">Dein Tagesplan</h2>
+        <p class="small muted" id="planSub">Ein Tipp, und der Autopilot sucht dir heraus, wen du heute anrufst und bei wem du nachfasst.</p>
+      </div>
+      <div class="row">
+        <button class="btn primary" id="planMake" type="button">✨ Tagesplan erstellen</button>
+        <button class="btn" id="planNext" type="button" hidden>▶ Nächster</button>
+        <button class="btn" id="planRead" type="button" hidden>Vorlesen</button>
+      </div>
+    </div>
+    <div class="plan-prog" id="planProg" hidden><div id="planBar"></div></div>
+    <div id="planBody"></div>
   </section>
 
   <nav class="kpis" id="kpis" aria-label="Kennzahlen"></nav>
@@ -701,7 +734,7 @@
     drawHbars('chOrt', ort, 6, '#2d5f80', '#7fc3ea', (k) => 'in ' + k);
   };
 
-  const renderAll = () => { renderKpis(); renderCharts(); renderPipe(); renderList(); renderAkte(); };
+  const renderAll = () => { renderPlan(); renderKpis(); renderCharts(); renderPipe(); renderList(); renderAkte(); };
   $('q').addEventListener('input', (e) => { ui.q = e.target.value.trim(); ui.ids = null; renderList(); });
   $('fSort').addEventListener('change', (e) => { ui.sort = e.target.value; renderList(); });
 
@@ -709,7 +742,9 @@
   const touch = (id, patch, logEntry) => {
     const prev = state[id] || {};
     state[id] = { status: prev.status || 'neu', note: prev.note || '', ...patch, log: (prev.log || []).concat(logEntry ? [logEntry] : []).slice(-30), updatedAt: new Date().toISOString(), name: byId.get(id).name };
-    saveState(); renderAll();
+    saveState();
+    if (logEntry) planDone(id);
+    renderAll();
   };
   const setStatus = (id, st, t) => { if (stOf(id) !== st) touch(id, { status: st }, { s: st, at: new Date().toISOString(), t: t || '' }); };
   const setNote = (id, note) => touch(id, { note: String(note).slice(0, 4000) }, null);
@@ -736,6 +771,98 @@
     } catch (err) { say('Diese Datei ist keine Sicherung der Lead-Zentrale.'); }
     e.target.value = '';
   });
+
+  // ---------- Tagesplan (Autopilot ohne KI) ----------
+  const PLANSTORE = 'sc-leads-plan-v1';
+  const WOCHENTAGE = ['sonntag', 'montag', 'dienstag', 'mittwoch', 'donnerstag', 'freitag', 'samstag'];
+  const dayKey = (d = new Date()) => d.toISOString().slice(0, 10);
+  const daysSince = (iso) => { const t = Date.parse(iso || ''); return t ? Math.floor((Date.now() - t) / 864e5) : null; };
+  const lastLog = (id) => { const lg = (state[id] || {}).log || []; return lg.length ? lg[lg.length - 1] : null; };
+  let plan = null;
+  try { plan = JSON.parse(store.get(PLANSTORE) || 'null'); } catch (e) { plan = null; }
+  if (plan && plan.date !== dayKey()) plan = null;
+  const savePlan = () => store.set(PLANSTORE, JSON.stringify(plan));
+  const planDone = (id) => { if (plan && plan.items.some((i) => i.id === id) && !plan.done[id]) { plan.done[id] = true; savePlan(); } };
+
+  const makePlan = () => {
+    const heute = WOCHENTAGE[new Date().getDay()];
+    const items = [], used = new Set();
+    const add = (l, typ, grund) => { if (!l || used.has(l.id)) return; used.add(l.id); items.push({ id: l.id, typ, grund }); };
+    // 1. Rückrufe: Notiz nennt heute oder den heutigen Wochentag
+    leads.forEach((l) => {
+      const st = state[l.id]; if (!st || ['gewonnen', 'verloren'].includes(stOf(l.id))) return;
+      const last = (st.note || '').split('\n').pop() || '';
+      const n = norm(last);
+      if (n.includes(heute) || /\bheute\b/.test(n)) add(l, 'rueckruf', 'Notiz: ' + (st.note || '').split('\n').pop().slice(0, 90));
+    });
+    // 2. Nachfassen: Kontakt liegt einige Tage zurück
+    const WARTE = { angerufen: 2, nachricht: 3, email: 4, angebot: 5, gespraech: 7 };
+    leads.filter((l) => WARTE[stOf(l.id)] != null).map((l) => ({ l, d: daysSince((lastLog(l.id) || {}).at || (state[l.id] || {}).updatedAt) }))
+      .filter((x) => x.d != null && x.d >= WARTE[stOf(x.l.id)]).sort((a, b) => b.d - a.d).slice(0, 6)
+      .forEach((x) => add(x.l, 'nachfassen', ST[stOf(x.l.id)].label + ' vor ' + x.d + (x.d === 1 ? ' Tag' : ' Tagen') + ', noch kein nächster Schritt'));
+    // 3. Neue Anrufe: beste Scores mit Telefon, dazu Betriebe ohne Website mit guten Bewertungen
+    const neu = leads.filter((l) => stOf(l.id) === 'neu' && l.tel && !used.has(l.id));
+    neu.filter((l) => l.score != null).sort(sorter('score')).slice(0, 5)
+      .forEach((l) => add(l, 'neu', 'Score ' + l.score + (l.design ? ' · Website ' + l.design.toLowerCase() : '') + (l.dring ? ', Dringlichkeit ' + l.dring : '')));
+    neu.filter((l) => !l.web && !used.has(l.id)).sort(sorter('google')).slice(0, 3)
+      .forEach((l) => add(l, 'neu', 'Ohne Website' + (l.google ? ' · ' + l.google + ' ★ bei Google' : '')));
+    plan = { date: dayKey(), items, done: {} };
+    savePlan();
+    return plan;
+  };
+
+  const TYP = { rueckruf: 'Rückrufe heute', nachfassen: 'Nachfassen', neu: 'Neue Anrufe' };
+  const planOpen = () => plan ? plan.items.filter((i) => !plan.done[i.id] && byId.has(i.id)) : [];
+  const renderPlan = () => {
+    const body = $('planBody'); if (!body) return;
+    body.textContent = '';
+    const has = !!(plan && plan.items.length);
+    $('planNext').hidden = !has || !planOpen().length; $('planRead').hidden = !has || !canSpeak; $('planProg').hidden = !has;
+    $('planMake').textContent = has ? '↻ Neu erstellen' : '✨ Tagesplan erstellen';
+    $('planMake').className = has ? 'btn' : 'btn primary'; $('planNext').className = has ? 'btn primary' : 'btn';
+    if (!plan) return;
+    if (!plan.items.length) { body.append(el('p', { className: 'muted small', textContent: 'Heute gibt es nichts zu tun: keine Rückrufe, nichts zum Nachfassen und keine neuen Betriebe mit Telefonnummer.' })); return; }
+    const done = plan.items.filter((i) => plan.done[i.id]).length;
+    $('planSub').textContent = done === plan.items.length ? 'Alles erledigt für heute. Stark!' : done + ' von ' + plan.items.length + ' erledigt · ' + new Date().toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' });
+    $('planBar').style.width = (100 * done / plan.items.length) + '%';
+    ['rueckruf', 'nachfassen', 'neu'].forEach((typ) => {
+      const its = plan.items.filter((i) => i.typ === typ && byId.has(i.id)); if (!its.length) return;
+      const sec = el('div', { className: 'plan-sec' }, [el('h3', { textContent: TYP[typ] + ' · ' + its.length })]);
+      its.forEach((i) => {
+        const l = byId.get(i.id);
+        const info = el('button', { type: 'button', className: 'pinfo' }, [el('span', { className: 'pn', textContent: l.name }), el('span', { className: 'pr', textContent: i.grund + (l.ort ? ' · ' + l.ort : '') })]);
+        info.addEventListener('click', () => select(l.id, true));
+        const call = telHref(l.tel) ? el('a', { className: 'btn primary', href: telHref(l.tel), textContent: 'Anrufen' }) : null;
+        const ok = el('button', { type: 'button', className: 'btn', textContent: plan.done[i.id] ? '↺' : '✓', title: plan.done[i.id] ? 'Wieder öffnen' : 'Erledigt' });
+        ok.setAttribute('aria-label', plan.done[i.id] ? 'Wieder öffnen' : 'Erledigt');
+        ok.addEventListener('click', () => { plan.done[i.id] = !plan.done[i.id]; savePlan(); renderPlan(); });
+        const row = el('div', { className: 'prow' + (plan.done[i.id] ? ' done' : '') + (ui.sel === i.id ? ' cur' : '') }, [info, el('div', { className: 'pa' }, [call, ok])]);
+        sec.append(row);
+      });
+      body.append(sec);
+    });
+  };
+
+  const planSummary = () => {
+    if (!plan || !plan.items.length) return 'Für heute gibt es nichts zu tun.';
+    const c = (t) => plan.items.filter((i) => i.typ === t).length;
+    const parts = [];
+    if (c('rueckruf')) parts.push(c('rueckruf') + (c('rueckruf') === 1 ? ' Rückruf' : ' Rückrufe'));
+    if (c('nachfassen')) parts.push(c('nachfassen') + ' zum Nachfassen');
+    if (c('neu')) parts.push(c('neu') + ' neue Anrufe');
+    const first = planOpen()[0];
+    return 'Dein Tagesplan: ' + parts.join(', ') + '.' + (first ? ' Fang an mit ' + byId.get(first.id).name + '.' : '');
+  };
+  const planStart = () => {
+    const nxt = planOpen()[0];
+    if (!nxt) { say('Alles erledigt für heute.'); renderPlan(); return; }
+    select(nxt.id, true); renderPlan();
+    const l = byId.get(nxt.id);
+    say('Als Nächstes: ' + l.name + '. ' + nxt.grund + '.' + (l.tel ? ' Telefon ' + l.tel + '.' : '') + '\nTrag danach den Status ein, dann hake ich es automatisch ab.');
+  };
+  $('planMake').addEventListener('click', () => { makePlan(); renderPlan(); say(planSummary()); $('plan').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  $('planNext').addEventListener('click', planStart);
+  $('planRead').addEventListener('click', () => { const was = speakOn; speakOn = true; speak(planSummary()); speakOn = was; });
 
   // ---------- Mail ----------
   let mailLead = null;
@@ -864,6 +991,7 @@
     + '• „Zeig mir 5 Firmen ohne Website“\n'
     + '• „10 Friseure mit E-Mail“ · „Steuerberater mit veralteter Website“\n'
     + '• „Beste Restaurants in Herzogenaurach“ · „Autohäuser nach Bewertung“\n'
+    + '• „Tagesplan“ · „Nächster“\n'
     + '• „Wen soll ich heute anrufen?“\n'
     + '• „Wie viele Ärzte ohne Website?“\n'
     + '• „Welche sind im Gespräch?“ · „Zeig alle Angebote“\n'
@@ -877,6 +1005,8 @@
     if (!text) return;
     const t = ' ' + norm(text).replace(/[?!.,;]/g, ' ').replace(/\s+/g, ' ') + ' ';
 
+    if (/\b(tagesplan|plan fur heute|was steht (heute )?an|was mache ich heute|autopilot)\b/.test(t)) { if (!plan || /\bneu\b/.test(t)) makePlan(); renderPlan(); say(planSummary()); $('plan').scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    if (/\b(nachster|nachste|weiter)\b/.test(t) && plan) { planStart(); return; }
     if (/\b(hilfe|was kannst du|befehle)\b/.test(t)) { say(HELP, 'Hier sind Beispiele, was du sagen kannst.'); return; }
     if (/\b(alle zeigen|zurucksetzen|reset|alles zeigen)\b/.test(t)) { resetFilters(); say('Ich zeige wieder alle ' + fmt(leads.length) + ' Betriebe.'); return; }
 
@@ -999,7 +1129,7 @@
   const initAsk = () => {
     ORTE = [...new Set(leads.map((l) => l.ort).filter(Boolean))].map((o) => ({ o, n: norm(o) })).filter((x) => x.n.length >= 4).sort((a, b) => b.n.length - a.n.length);
     const sg = $('sugg'); sg.textContent = '';
-    ['Zeig mir 5 Firmen ohne Website', 'Wen soll ich heute anrufen?', 'Friseure mit E-Mail', 'Welche sind im Gespräch?', 'Hilfe'].forEach((q) => {
+    ['Tagesplan', 'Zeig mir 5 Firmen ohne Website', 'Friseure mit E-Mail', 'Welche sind im Gespräch?', 'Hilfe'].forEach((q) => {
       const b = el('button', { type: 'button', textContent: q });
       b.addEventListener('click', () => { $('askIn').value = q; handle(q); });
       sg.append(b);
