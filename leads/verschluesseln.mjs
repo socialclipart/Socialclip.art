@@ -15,7 +15,7 @@ const payload = {
   leads: JSON.parse(readFileSync(leadsPath, 'utf8')),
   status: statusPath ? JSON.parse(readFileSync(statusPath, 'utf8')) : {},
 };
-const iter = 310000;
+const iter = 600000;
 const salt = crypto.getRandomValues(new Uint8Array(16));
 const iv = crypto.getRandomValues(new Uint8Array(12));
 const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
