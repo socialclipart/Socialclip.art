@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /leads/
 
 Sitemap: https://socialclip.art/sitemap.xml
