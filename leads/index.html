@@ -57,7 +57,7 @@
 
   /* App */
   .wrap { max-width: 84rem; margin: 0 auto; padding: calc(16px + env(safe-area-inset-top, 0px)) var(--gr) calc(40px + env(safe-area-inset-bottom, 0px)) var(--gl); display: grid; gap: 16px; }
-  .top { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+  .top { display: flex; gap: 8px 16px; align-items: center; justify-content: space-between; }
   .top .acts { display: flex; flex-wrap: wrap; gap: 6px; }
 
   .ask { background: var(--card); border: 1px solid var(--line2); border-radius: 16px; padding: 14px; display: grid; gap: 10px; }
@@ -198,6 +198,18 @@
   .prow .pa { display: flex; gap: 6px; }
   .prow .pa .btn { padding: 6px 10px; font-size: .82rem; }
   .prow.cur { border-color: var(--orange); }
+  .pprob { grid-column: 1 / -1; display: grid; gap: 6px; }
+  .pchips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .pchip { font-size: .72rem; line-height: 1.2; padding: 3px 8px; border-radius: 999px; border: 1px solid; white-space: nowrap; }
+  .pchip.rot { color: #f3a093; border-color: rgba(224,122,108,.5); background: rgba(224,122,108,.12); }
+  .pchip.orange { color: var(--orange2); border-color: rgba(231,138,83,.45); background: rgba(231,138,83,.1); }
+  .pchip.grau { color: var(--soft); border-color: var(--line2); background: rgba(255,255,255,.03); }
+  .pbar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: .72rem; color: var(--dim); }
+  .pbar .tr { height: 6px; border-radius: 99px; background: rgba(255,255,255,.07); overflow: hidden; }
+  .pbar .fl { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #8a4a26, var(--orange), #f2c48a); }
+  .pbar b { font: 600 .74rem var(--f-mono); color: var(--orange2); }
+  .ptext { font-size: .78rem; color: var(--soft); line-height: 1.4; }
+  .prow.done .pprob { display: none; }
 
   /* Tagebuch */
   .journal { background: var(--card); border-color: var(--line); }
@@ -255,6 +267,23 @@
   .l-hint { font-size: .76rem; color: var(--dim); margin: 0; }
   body.live-on .wrap { padding-bottom: 24rem; }
 
+  /* Aufgeräumte Startansicht */
+  .hero-btn { width: 100%; justify-content: center; padding: 16px; font-size: 1.1rem; font-weight: 700; border-radius: 14px; background: linear-gradient(135deg, #e78a53, #c4622c); border-color: #e78a53; color: #1a0f08; box-shadow: 0 8px 24px rgba(231,138,83,.25); }
+  .reply:empty { display: none; }
+  .menu { position: relative; }
+  .menu summary { list-style: none; cursor: pointer; font-size: 1.1rem; padding: 6px 14px; }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu-box { position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; display: grid; gap: 6px; min-width: 13rem; background: var(--card2); border: 1px solid var(--line2); border-radius: 12px; padding: 8px; box-shadow: 0 12px 30px rgba(0,0,0,.45); }
+  .fold { background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+  .fold > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 12px 16px; font-weight: 600; }
+  .fold > summary::-webkit-details-marker { display: none; }
+  .fold > summary::after { content: "▾"; color: var(--dim); }
+  .fold[open] > summary::after { content: "▴"; }
+  .fold-sum { flex: 1; text-align: right; font-weight: 400; font-size: .82rem; color: var(--soft); }
+  .fold[open] > .plan, .fold-body { margin: 0 12px 12px; }
+  .fold-body { display: grid; gap: 12px; }
+  .fold .journal { border: 0; padding: 0; background: none; }
+
   /* Mail-Fenster */
   .sheet { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.6); display: grid; place-items: end center; }
   .sheet .box { width: min(100%, 40rem); max-height: 92vh; overflow: auto; background: var(--card); border: 1px solid var(--line2); border-radius: 16px 16px 0 0; padding: 16px var(--gr) calc(16px + env(safe-area-inset-bottom, 0px)) var(--gl); display: grid; gap: 10px; }
@@ -281,8 +310,8 @@
 <nav class="side" aria-label="Bereiche">
   <span class="logo">SC</span>
   <a href="#askForm" title="Assistent" aria-label="Assistent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></a>
-  <a href="#charts" title="Übersicht" aria-label="Übersicht"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></a>
-  <a href="#pipe" title="Pipeline" aria-label="Pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg></a>
+  <a href="#stats" title="Auswertung" aria-label="Auswertung"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></a>
+  <a href="#plan" title="Tagesplan" aria-label="Tagesplan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg></a>
   <a href="#listTitle" title="Betriebe" aria-label="Betriebe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></a>
 </nav>
 
@@ -291,36 +320,39 @@
       <h1>Lead-Zentrale</h1>
       <p class="muted small" id="sub"></p>
     </div>
-    <div class="acts">
-      <button class="btn" id="speakBtn" type="button" aria-pressed="false">Vorlesen: aus</button>
-      <button class="btn" id="backupBtn" type="button">Sicherung speichern</button>
-      <label class="btn" for="restoreIn">Sicherung laden</label>
-      <input type="file" id="restoreIn" accept="application/json,.json" hidden>
-      <button class="btn" id="logoutBtn" type="button">Abmelden</button>
-    </div>
+    <details class="menu">
+      <summary class="btn" aria-label="Menü">⋯</summary>
+      <div class="menu-box">
+        <button class="btn" id="speakBtn" type="button" aria-pressed="false">Vorlesen: aus</button>
+        <button class="btn" id="backupBtn" type="button">Sicherung speichern</button>
+        <label class="btn" for="restoreIn">Sicherung laden</label>
+        <input type="file" id="restoreIn" accept="application/json,.json" hidden>
+        <button class="btn" id="logoutBtn" type="button">Abmelden</button>
+      </div>
+    </details>
   </header>
 
-  <section class="ask" aria-label="Assistent">
+  <section class="ask" aria-label="Coach">
+    <button class="btn hero-btn" id="liveStart" type="button"><span aria-hidden="true">🎙️</span> Mit dem Coach reden</button>
     <form id="askForm">
-      <input class="field" id="askIn" type="text" enterkeyhint="send" autocomplete="off" placeholder="z. B. Zeig mir 5 Firmen ohne Website" aria-label="Frage oder Befehl">
-      <button class="btn mic" id="micBtn" type="button" aria-label="Sprechen" aria-pressed="false">🎤</button>
+      <input class="field" id="askIn" type="text" enterkeyhint="send" autocomplete="off" placeholder="Oder tippen: z. B. 5 Firmen ohne Website" aria-label="Frage oder Suche">
+      <button class="btn mic" id="micBtn" type="button" aria-label="Sprechen" aria-pressed="false" hidden>🎤</button>
       <button class="btn primary" type="submit">Los</button>
     </form>
-    <p class="reply" id="reply" aria-live="polite">Sag oder tippe, was du brauchst. Tippe auf „Hilfe“, um alle Befehle zu sehen.</p>
-    <div class="sugg" id="sugg"></div>
+    <p class="reply" id="reply" aria-live="polite"></p>
+    <div class="sugg" id="sugg" hidden></div>
   </section>
 
   <section class="plan" id="plan" aria-labelledby="planTitle">
     <div class="plan-head">
       <div>
         <h2 id="planTitle">Dein Tagesplan</h2>
-        <p class="small muted" id="planSub">Ein Tipp, und der Autopilot sucht dir heraus, wen du heute anrufst und bei wem du nachfasst.</p>
+        <p class="small muted" id="planSub"></p>
       </div>
       <div class="row">
-        <button class="btn live-start" id="liveStart" type="button">🎙️ Live-Coach</button>
-        <button class="btn coach-start" id="coachStart" type="button">🎧 Coach starten</button>
-        <button class="btn primary" id="planMake" type="button">✨ Tagesplan erstellen</button>
+        <button class="btn" id="coachStart" type="button" hidden>Coach ohne KI</button>
         <button class="btn" id="planNext" type="button" hidden>▶ Nächster</button>
+        <button class="btn" id="planMake" type="button" title="Plan neu erstellen">↻</button>
         <button class="btn" id="planRead" type="button" hidden>Vorlesen</button>
       </div>
     </div>
@@ -328,6 +360,9 @@
     <div id="planBody"></div>
   </section>
 
+  <p class="jwarn" id="jWarn" hidden></p>
+  <details class="fold" id="journalFold">
+  <summary><span>Heute erledigt</span><span class="fold-sum" id="jSum"></span></summary>
   <section class="plan journal" id="journal" aria-labelledby="jTitle">
     <div class="plan-head">
       <div>
@@ -343,9 +378,12 @@
     </div>
     <div class="jchips" id="jChips"></div>
     <ul class="jlist" id="jList"></ul>
-    <p class="jwarn" id="jWarn" hidden></p>
   </section>
+  </details>
 
+  <details class="fold" id="stats">
+  <summary><span>Auswertung &amp; Pipeline</span><span class="fold-sum">Zahlen, Diagramme, Status</span></summary>
+  <div class="fold-body">
   <nav class="kpis" id="kpis" aria-label="Kennzahlen"></nav>
 
   <section class="charts" id="charts" aria-label="Auswertung">
@@ -377,6 +415,8 @@
     </article>
   </section>
   <nav class="pipe" id="pipe" aria-label="Pipeline"></nav>
+  </div>
+  </details>
 
   <div class="main">
     <section class="card" aria-labelledby="listTitle">
@@ -423,7 +463,7 @@
 <section class="live" id="live" hidden aria-live="polite" aria-labelledby="lTitle">
   <div class="l-head">
     <div class="l-orb" id="lOrb" aria-hidden="true"></div>
-    <div class="l-tt"><h2 id="lTitle">Live-Coach</h2><span id="lState">Verbinde…</span></div>
+    <div class="l-tt"><h2 id="lTitle">Coach</h2><span id="lState">Verbinde…</span></div>
     <button class="btn" id="lMute" type="button" aria-pressed="false">Stumm</button>
     <button class="btn" id="lEnd" type="button">Beenden</button>
   </div>
@@ -523,7 +563,7 @@
       if (!a || String(s.updatedAt || '') >= String(a.updatedAt || '')) state[id] = s;
     });
     saveState();
-    $('sub').textContent = fmt(leads.length) + ' Betriebe · Stand der Liste ' + (data.stand || '') + ' · Status und Notizen werden auf diesem Gerät gespeichert';
+    $('sub').textContent = fmt(leads.length) + ' Betriebe · Stand ' + (data.stand || '');
     $('login').hidden = true; $('app').hidden = false;
     renderAll();
     initAsk();
@@ -873,6 +913,7 @@
     const d = new Date(key + 'T12:00:00');
     $('jTitle').textContent = key === today ? 'Heute erledigt' : 'Erledigt am ' + d.toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' });
     const c = countJ(list);
+    if ($('jSum')) $('jSum').textContent = list.length ? [c.anruf && c.anruf + ' Anrufe', c.mail && c.mail + ' Mails', c.status && c.status + ' Status'].filter(Boolean).join(' · ') || list.length + ' Einträge' : 'noch nichts';
     $('jSub').textContent = list.length ? fmt(list.length) + ' Einträge bei ' + fmt(c.betriebe) + ' Betrieben · wird automatisch gespeichert' : 'Alles, was du machst, wird hier mit Uhrzeit notiert und automatisch gespeichert.';
     const chips = $('jChips'); chips.textContent = '';
     [['anruf', 'Anrufe'], ['mail', 'Mails'], ['whatsapp', 'WhatsApp'], ['status', 'Status'], ['notiz', 'Notizen']].forEach(([k, label]) => {
@@ -1001,14 +1042,44 @@
   };
 
   const TYP = { rueckruf: 'Rückrufe heute', nachfassen: 'Nachfassen', neu: 'Neue Anrufe' };
+  // Was dem Betrieb fehlt: kurze Hinweise für den Anruf
+  const problemsOf = (l) => {
+    const c = [];
+    if (!l.web) c.push(['Keine Website', 'rot']);
+    else if (l.design === 'Stark veraltet') c.push(['Website stark veraltet', 'rot']);
+    else if (l.design === 'Veraltet') c.push(['Website veraltet', 'orange']);
+    else if (!l.design) c.push(['Website noch nicht bewertet', 'grau']);
+    if (l.dring === 'kritisch') c.push(['Dringend', 'rot']);
+    if (l.probM && /mobil|handy|smartphone|herunterskal|responsive/i.test(l.probM)) c.push(['Schlecht am Handy', 'orange']);
+    if (!l.insta && !l.fb) c.push(['Kein Social Media', 'orange']);
+    else if (!l.insta) c.push(['Kein Instagram', 'grau']);
+    if (['D', 'E', 'F'].includes(l.sec)) c.push(['Sicherheit mangelhaft', 'orange']);
+    if (l.bfsg && /Lücken|Handlungsbedarf/.test(l.bfsg)) c.push(['Barrierefreiheit fehlt', 'grau']);
+    if (l.google && Number(l.google) < 4) c.push(['Google ' + l.google + ' ★', 'grau']);
+    if (!l.mail) c.push(['Keine E-Mail bekannt', 'grau']);
+    const first = (l.probM || l.probD || '').split(' | ')[0] || '';
+    const text = first ? (l.probM ? 'Handy: ' : 'Website: ') + first : (!l.web ? 'Kunden finden bei Google nur den Eintrag, keine eigene Seite mit Leistungen und Kontakt.' : '');
+    return { chips: c, text };
+  };
+  const problemBox = (l) => {
+    const pr = problemsOf(l);
+    const box = el('div', { className: 'pprob' });
+    if (pr.chips.length) box.append(el('div', { className: 'pchips' }, pr.chips.slice(0, 5).map(([t, k]) => el('span', { className: 'pchip ' + k, textContent: t }))));
+    if (l.score != null) {
+      const fl = el('div', { className: 'fl' }); fl.style.width = Math.max(4, Math.min(100, l.score)) + '%';
+      box.append(el('div', { className: 'pbar' }, [el('span', { textContent: 'Chance' }), el('div', { className: 'tr' }, [fl]), el('b', { textContent: String(l.score) })]));
+    }
+    if (pr.text) box.append(el('p', { className: 'ptext', textContent: pr.text.length > 160 ? pr.text.slice(0, 157) + '…' : pr.text }));
+    return box.childElementCount ? box : null;
+  };
   const planOpen = () => plan ? plan.items.filter((i) => !plan.done[i.id] && byId.has(i.id)) : [];
   const renderPlan = () => {
     const body = $('planBody'); if (!body) return;
     body.textContent = '';
     const has = !!(plan && plan.items.length);
-    $('planNext').hidden = !has || !planOpen().length; $('planRead').hidden = !has || !canSpeak; $('planProg').hidden = !has;
-    $('planMake').textContent = has ? '↻ Neu erstellen' : '✨ Tagesplan erstellen';
-    $('planMake').className = has ? 'btn' : 'btn primary'; $('planNext').className = has ? 'btn primary' : 'btn';
+    $('planNext').hidden = !has || !planOpen().length; $('planRead').hidden = true; $('planProg').hidden = !has;
+    $('planMake').textContent = has ? '↻' : '✨ Plan erstellen';
+    $('planNext').className = 'btn';
     if (!plan) return;
     if (!plan.items.length) { body.append(el('p', { className: 'muted small', textContent: 'Heute gibt es nichts zu tun: keine Rückrufe, nichts zum Nachfassen und keine neuen Betriebe mit Telefonnummer.' })); return; }
     const done = plan.items.filter((i) => plan.done[i.id]).length;
@@ -1026,7 +1097,7 @@
         const ok = el('button', { type: 'button', className: 'btn', textContent: plan.done[i.id] ? '↺' : '✓', title: plan.done[i.id] ? 'Wieder öffnen' : 'Erledigt' });
         ok.setAttribute('aria-label', plan.done[i.id] ? 'Wieder öffnen' : 'Erledigt');
         ok.addEventListener('click', () => { plan.done[i.id] = !plan.done[i.id]; savePlan(); renderPlan(); });
-        const row = el('div', { className: 'prow' + (plan.done[i.id] ? ' done' : '') + (ui.sel === i.id ? ' cur' : '') }, [info, el('div', { className: 'pa' }, [call, ok])]);
+        const row = el('div', { className: 'prow' + (plan.done[i.id] ? ' done' : '') + (ui.sel === i.id ? ' cur' : '') }, [info, el('div', { className: 'pa' }, [call, ok]), problemBox(l)]);
         sec.append(row);
       });
       body.append(sec);
@@ -1173,7 +1244,8 @@
     if (l.chef) tipps.push('Ansprechpartner: ' + l.chef + '.');
     const note = ((state[l.id] || {}).note || '').split('\n').pop();
     if (note) tipps.push('Letzte Notiz: ' + note);
-    const sub = nxt.grund + (l.tel ? ' · ' + l.tel : ' · keine Telefonnummer') + (tipps.length ? '\n' + tipps.join(' ') : '');
+    const fehlt = problemsOf(l).chips.slice(0, 4).map((x) => x[0]).join(' · ');
+    const sub = nxt.grund + (l.tel ? ' · ' + l.tel : ' · keine Telefonnummer') + (fehlt ? '\nProbleme: ' + fehlt : '') + (tipps.length ? '\n' + tipps.join(' ') : '');
     const call = telHref(l.tel) ? el('a', { className: 'btn primary big', href: telHref(l.tel), textContent: '📞 Jetzt anrufen' }) : null;
     if (call) { call.dataset.id = l.id; call.addEventListener('click', () => { coach.step = 'call'; coach.callAt = Date.now(); coach.calls++; setTimeout(() => { if (coach.step === 'call') coachDebrief(true); }, 1500); }); }
     cShow(msg, sub, [
@@ -1475,6 +1547,7 @@
     say((why || 'Die Spracheingabe ist hier nicht verfügbar.') + ' So geht es trotzdem: ins Feld tippen, dann auf der Tastatur das Mikrofon 🎤 antippen, sprechen und auf „Los“ tippen.');
   };
   const initAsk = () => {
+    if (!plan) { makePlan(); renderPlan(); }
     ORTE = [...new Set(leads.map((l) => l.ort).filter(Boolean))].map((o) => ({ o, n: norm(o) })).filter((x) => x.n.length >= 4).sort((a, b) => b.n.length - a.n.length);
     const sg = $('sugg'); sg.textContent = '';
     ['Tagesplan', 'Zeig mir 5 Firmen ohne Website', 'Friseure mit E-Mail', 'Welche sind im Gespräch?', 'Hilfe'].forEach((q) => {
@@ -1653,6 +1726,9 @@
       if (String(e && e.message) === 'sdk') lLog('sys', 'Die Sprachverbindung konnte nicht geladen werden. Prüf die Internetverbindung.');
       else if (!/Mikrofon/.test($('lState').textContent)) lLog('sys', 'Verbindung fehlgeschlagen: ' + String(e && e.message || e).slice(0, 160));
       lState('Nicht verbunden');
+      const fb = el('button', { type: 'button', className: 'btn primary', textContent: 'Ohne KI weitermachen' });
+      fb.addEventListener('click', () => { liveStop(false); coachStart(); });
+      $('lLog').append(fb);
     }
   };
   const liveStop = async (keepOpen) => {
