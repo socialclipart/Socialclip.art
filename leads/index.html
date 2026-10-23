@@ -198,6 +198,18 @@
   .prow .pa { display: flex; gap: 6px; }
   .prow .pa .btn { padding: 6px 10px; font-size: .82rem; }
   .prow.cur { border-color: var(--orange); }
+  .pprob { grid-column: 1 / -1; display: grid; gap: 6px; }
+  .pchips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .pchip { font-size: .72rem; line-height: 1.2; padding: 3px 8px; border-radius: 999px; border: 1px solid; white-space: nowrap; }
+  .pchip.rot { color: #f3a093; border-color: rgba(224,122,108,.5); background: rgba(224,122,108,.12); }
+  .pchip.orange { color: var(--orange2); border-color: rgba(231,138,83,.45); background: rgba(231,138,83,.1); }
+  .pchip.grau { color: var(--soft); border-color: var(--line2); background: rgba(255,255,255,.03); }
+  .pbar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: .72rem; color: var(--dim); }
+  .pbar .tr { height: 6px; border-radius: 99px; background: rgba(255,255,255,.07); overflow: hidden; }
+  .pbar .fl { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #8a4a26, var(--orange), #f2c48a); }
+  .pbar b { font: 600 .74rem var(--f-mono); color: var(--orange2); }
+  .ptext { font-size: .78rem; color: var(--soft); line-height: 1.4; }
+  .prow.done .pprob { display: none; }
 
   /* Tagebuch */
   .journal { background: var(--card); border-color: var(--line); }
@@ -1001,6 +1013,36 @@
   };
 
   const TYP = { rueckruf: 'Rückrufe heute', nachfassen: 'Nachfassen', neu: 'Neue Anrufe' };
+  // Was dem Betrieb fehlt: kurze Hinweise für den Anruf
+  const problemsOf = (l) => {
+    const c = [];
+    if (!l.web) c.push(['Keine Website', 'rot']);
+    else if (l.design === 'Stark veraltet') c.push(['Website stark veraltet', 'rot']);
+    else if (l.design === 'Veraltet') c.push(['Website veraltet', 'orange']);
+    else if (!l.design) c.push(['Website noch nicht bewertet', 'grau']);
+    if (l.dring === 'kritisch') c.push(['Dringend', 'rot']);
+    if (l.probM && /mobil|handy|smartphone|herunterskal|responsive/i.test(l.probM)) c.push(['Schlecht am Handy', 'orange']);
+    if (!l.insta && !l.fb) c.push(['Kein Social Media', 'orange']);
+    else if (!l.insta) c.push(['Kein Instagram', 'grau']);
+    if (['D', 'E', 'F'].includes(l.sec)) c.push(['Sicherheit mangelhaft', 'orange']);
+    if (l.bfsg && /Lücken|Handlungsbedarf/.test(l.bfsg)) c.push(['Barrierefreiheit fehlt', 'grau']);
+    if (l.google && Number(l.google) < 4) c.push(['Google ' + l.google + ' ★', 'grau']);
+    if (!l.mail) c.push(['Keine E-Mail bekannt', 'grau']);
+    const first = (l.probM || l.probD || '').split(' | ')[0] || '';
+    const text = first ? (l.probM ? 'Handy: ' : 'Website: ') + first : (!l.web ? 'Kunden finden bei Google nur den Eintrag, keine eigene Seite mit Leistungen und Kontakt.' : '');
+    return { chips: c, text };
+  };
+  const problemBox = (l) => {
+    const pr = problemsOf(l);
+    const box = el('div', { className: 'pprob' });
+    if (pr.chips.length) box.append(el('div', { className: 'pchips' }, pr.chips.slice(0, 5).map(([t, k]) => el('span', { className: 'pchip ' + k, textContent: t }))));
+    if (l.score != null) {
+      const fl = el('div', { className: 'fl' }); fl.style.width = Math.max(4, Math.min(100, l.score)) + '%';
+      box.append(el('div', { className: 'pbar' }, [el('span', { textContent: 'Chance' }), el('div', { className: 'tr' }, [fl]), el('b', { textContent: String(l.score) })]));
+    }
+    if (pr.text) box.append(el('p', { className: 'ptext', textContent: pr.text.length > 160 ? pr.text.slice(0, 157) + '…' : pr.text }));
+    return box.childElementCount ? box : null;
+  };
   const planOpen = () => plan ? plan.items.filter((i) => !plan.done[i.id] && byId.has(i.id)) : [];
   const renderPlan = () => {
     const body = $('planBody'); if (!body) return;
@@ -1026,7 +1068,7 @@
         const ok = el('button', { type: 'button', className: 'btn', textContent: plan.done[i.id] ? '↺' : '✓', title: plan.done[i.id] ? 'Wieder öffnen' : 'Erledigt' });
         ok.setAttribute('aria-label', plan.done[i.id] ? 'Wieder öffnen' : 'Erledigt');
         ok.addEventListener('click', () => { plan.done[i.id] = !plan.done[i.id]; savePlan(); renderPlan(); });
-        const row = el('div', { className: 'prow' + (plan.done[i.id] ? ' done' : '') + (ui.sel === i.id ? ' cur' : '') }, [info, el('div', { className: 'pa' }, [call, ok])]);
+        const row = el('div', { className: 'prow' + (plan.done[i.id] ? ' done' : '') + (ui.sel === i.id ? ' cur' : '') }, [info, el('div', { className: 'pa' }, [call, ok]), problemBox(l)]);
         sec.append(row);
       });
       body.append(sec);
@@ -1173,7 +1215,8 @@
     if (l.chef) tipps.push('Ansprechpartner: ' + l.chef + '.');
     const note = ((state[l.id] || {}).note || '').split('\n').pop();
     if (note) tipps.push('Letzte Notiz: ' + note);
-    const sub = nxt.grund + (l.tel ? ' · ' + l.tel : ' · keine Telefonnummer') + (tipps.length ? '\n' + tipps.join(' ') : '');
+    const fehlt = problemsOf(l).chips.slice(0, 4).map((x) => x[0]).join(' · ');
+    const sub = nxt.grund + (l.tel ? ' · ' + l.tel : ' · keine Telefonnummer') + (fehlt ? '\nProbleme: ' + fehlt : '') + (tipps.length ? '\n' + tipps.join(' ') : '');
     const call = telHref(l.tel) ? el('a', { className: 'btn primary big', href: telHref(l.tel), textContent: '📞 Jetzt anrufen' }) : null;
     if (call) { call.dataset.id = l.id; call.addEventListener('click', () => { coach.step = 'call'; coach.callAt = Date.now(); coach.calls++; setTimeout(() => { if (coach.step === 'call') coachDebrief(true); }, 1500); }); }
     cShow(msg, sub, [
