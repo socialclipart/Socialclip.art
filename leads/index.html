@@ -234,6 +234,27 @@
   .c-free .field { flex: 1; min-width: 0; }
   body.coach-on .wrap { padding-bottom: 22rem; }
 
+  /* Live-Coach */
+  .live-start { background: linear-gradient(135deg, #e78a53, #c4622c); border-color: #e78a53; color: #1a0f08; font-weight: 700; }
+  .live { position: fixed; z-index: 45; left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); max-width: 34rem; margin: 0 auto; background: radial-gradient(120% 120% at 0% 0%, #3a2416, #13161c 60%); border: 1px solid rgba(231,138,83,.55); border-radius: 22px; padding: 14px 16px 12px; display: grid; gap: 10px; box-shadow: 0 24px 70px rgba(0,0,0,.65); max-height: 70vh; }
+  .l-head { display: flex; align-items: center; gap: 10px; }
+  .l-head .btn { padding: 6px 10px; font-size: .82rem; }
+  .l-tt { flex: 1; display: grid; }
+  .l-tt h2 { font-size: 1rem; }
+  .l-tt span { font-size: .8rem; color: var(--soft); }
+  .l-orb { width: 38px; height: 38px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffd2b0, #e78a53 45%, #8a3f17); box-shadow: 0 0 0 0 rgba(231,138,83,.5); flex: none; }
+  .live.speaking .l-orb { animation: orb 1s ease-in-out infinite; }
+  .live.listening .l-orb { background: radial-gradient(circle at 35% 35%, #d4ecff, #5fa8d3 45%, #234e6b); }
+  @keyframes orb { 0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231,138,83,.5); } 50% { transform: scale(1.08); box-shadow: 0 0 0 10px rgba(231,138,83,0); } }
+  @media (prefers-reduced-motion: reduce) { .live.speaking .l-orb { animation: none; } }
+  .l-log { overflow: auto; display: grid; gap: 6px; max-height: 40vh; align-content: start; }
+  .l-log p { margin: 0; font-size: .9rem; line-height: 1.45; padding: 7px 10px; border-radius: 12px; max-width: 90%; }
+  .l-log .ai { background: rgba(255,255,255,.06); justify-self: start; }
+  .l-log .me { background: rgba(231,138,83,.18); justify-self: end; }
+  .l-log .sys { font-size: .78rem; color: var(--dim); justify-self: center; background: none; padding: 0; }
+  .l-hint { font-size: .76rem; color: var(--dim); margin: 0; }
+  body.live-on .wrap { padding-bottom: 24rem; }
+
   /* Mail-Fenster */
   .sheet { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.6); display: grid; place-items: end center; }
   .sheet .box { width: min(100%, 40rem); max-height: 92vh; overflow: auto; background: var(--card); border: 1px solid var(--line2); border-radius: 16px 16px 0 0; padding: 16px var(--gr) calc(16px + env(safe-area-inset-bottom, 0px)) var(--gl); display: grid; gap: 10px; }
@@ -296,6 +317,7 @@
         <p class="small muted" id="planSub">Ein Tipp, und der Autopilot sucht dir heraus, wen du heute anrufst und bei wem du nachfasst.</p>
       </div>
       <div class="row">
+        <button class="btn live-start" id="liveStart" type="button">🎙️ Live-Coach</button>
         <button class="btn coach-start" id="coachStart" type="button">🎧 Coach starten</button>
         <button class="btn primary" id="planMake" type="button">✨ Tagesplan erstellen</button>
         <button class="btn" id="planNext" type="button" hidden>▶ Nächster</button>
@@ -396,6 +418,17 @@
     <input class="field" id="cNote" type="text" placeholder="Was wurde besprochen? (optional)" aria-label="Notiz zum Anruf">
     <button class="btn mic" id="cMic" type="button" aria-label="Antwort sprechen">🎤</button>
   </div>
+</section>
+
+<section class="live" id="live" hidden aria-live="polite" aria-labelledby="lTitle">
+  <div class="l-head">
+    <div class="l-orb" id="lOrb" aria-hidden="true"></div>
+    <div class="l-tt"><h2 id="lTitle">Live-Coach</h2><span id="lState">Verbinde…</span></div>
+    <button class="btn" id="lMute" type="button" aria-pressed="false">Stumm</button>
+    <button class="btn" id="lEnd" type="button">Beenden</button>
+  </div>
+  <div class="l-log" id="lLog"></div>
+  <p class="l-hint">Sprich einfach los, z. B. „Was steht heute an?“, „Weiter“, „Ruf an“, „War nicht erreichbar, Rückruf Donnerstag“ oder „Zeig mir 5 Firmen ohne Website“.</p>
 </section>
 
 <div class="sheet" id="mailSheet" hidden role="dialog" aria-modal="true" aria-labelledby="mailTitle">
@@ -1318,6 +1351,7 @@
     if (!text) return;
     const t = ' ' + norm(text).replace(/[?!.,;]/g, ' ').replace(/\s+/g, ' ') + ' ';
 
+    if (/\b(live|live-coach|ki-coach)\b/.test(t)) { liveStart(); return; }
     if (/\b(coach|trainer|sprich mit mir|leg los|los geht)\b/.test(t)) { coachStart(); return; }
     if (/\b(tagesplan|plan fur heute|was steht (heute )?an|was mache ich heute|autopilot)\b/.test(t)) { if (!plan || /\bneu\b/.test(t)) makePlan(); renderPlan(); say(planSummary()); $('plan').scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
     if (/\b(nachster|nachste|weiter)\b/.test(t) && plan) { planStart(); return; }
@@ -1468,6 +1502,182 @@
       $('micBtn').textContent = '■'; $('micBtn').setAttribute('aria-pressed', 'true');
       $('reply').textContent = 'Ich höre zu…';
     } catch (e) { rec = null; micHint(); }
+  });
+
+  // ---------- Live-Coach: echtes Gespräch mit einer KI-Stimme (ElevenLabs) ----------
+  const LIVE = {
+    agentId: 'agent_8901m5mv4rmafhe8efae2jm95hwa',
+    sdk: 'https://unpkg.com/@elevenlabs/client@1.26.0/dist/lib.iife.js',
+    sri: 'sha384-GAgUf1yx/dGreo/QTqLRVycB5sMQdsPKOmbMWlKec+fjMXzz+OXy4c6EfjB7Anb7',
+  };
+  const LPEND = 'sc-leads-livepending';
+  let conv = null, liveMuted = false;
+  const loadSdk = () => new Promise((res, rej) => {
+    if (window.ElevenLabsClient) return res(window.ElevenLabsClient);
+    const sc = document.createElement('script');
+    sc.src = LIVE.sdk; sc.integrity = LIVE.sri; sc.crossOrigin = 'anonymous';
+    sc.onload = () => window.ElevenLabsClient ? res(window.ElevenLabsClient) : rej(new Error('sdk'));
+    sc.onerror = () => rej(new Error('sdk'));
+    document.head.append(sc);
+  });
+  const lLog = (cls, text) => { const p = el('p', { className: cls, textContent: text }); $('lLog').append(p); $('lLog').scrollTop = $('lLog').scrollHeight; };
+  const lState = (t) => { $('lState').textContent = t; };
+  const leadInfo = (l, grund) => {
+    const s = state[l.id] || {};
+    return {
+      name: l.name, grund_im_plan: grund || '', ort: l.ort || '', branche: l.kat || '', telefon: l.tel || 'keine', email: l.mail || 'keine',
+      ansprechpartner: l.chef || 'unbekannt', website: l.web ? (l.design || 'vorhanden') + (l.dring ? ', Dringlichkeit ' + l.dring : '') : 'keine Website',
+      google: l.google ? l.google + ' Sterne' : 'unbekannt', status: ST[stOf(l.id)].label,
+      notizen: (s.note || '').split('\n').slice(-3).join(' | ') || 'keine',
+      sales_hinweis: (l.pitch || '').slice(0, 400) || (l.web ? '' : 'Hat keine eigene Website.'),
+      probleme_website: [l.probD, l.probM].filter(Boolean).join(' | ').slice(0, 300),
+    };
+  };
+  const findOne = (name) => {
+    const c = findLeads(' ' + norm(name || '').replace(/[^a-z0-9 -]/g, ' ') + ' ');
+    if (c.length === 1) return { l: c[0] };
+    if (c.length > 1) {
+      const exact = c.filter((x) => norm(x.name).includes(norm(name)));
+      if (exact.length === 1) return { l: exact[0] };
+      return { many: c.slice(0, 5).map((x) => x.name + (x.ort ? ' (' + x.ort + ')' : '')) };
+    }
+    return {};
+  };
+  const ERG = {
+    nicht_erreicht: { st: 'angerufen', note: 'Nicht erreicht' },
+    rueckruf: { st: 'angerufen', note: 'Rückruf vereinbart' },
+    interesse: { st: 'gespraech', note: 'Interesse' },
+    will_angebot: { st: 'gespraech', note: 'Will ein Angebot' },
+    angebot_geschickt: { st: 'angebot', note: 'Angebot geschickt' },
+    nachricht_geschickt: { st: 'nachricht', note: 'Nachricht geschickt' },
+    mail_geschickt: { st: 'email', note: 'Mail geschickt' },
+    gewonnen: { st: 'gewonnen', note: 'Auftrag erhalten' },
+    kein_interesse: { st: 'verloren', note: 'Kein Interesse' },
+  };
+  const quiet = (fn) => { const was = speakOn; speakOn = false; try { return fn(); } finally { speakOn = was; } };
+  const clientTools = {
+    tagesplan: ({ neu_erstellen } = {}) => {
+      if (neu_erstellen || !plan || !planOpen().length) { makePlan(); jot('plan', '', plan.items.length + ' Punkte geplant'); }
+      renderAll();
+      const c = countJ(dayEntries(jKey(new Date().toISOString())));
+      return JSON.stringify({
+        offen: planOpen().map((i) => { const l = byId.get(i.id); return { name: l.name, art: TYP[i.typ], grund: i.grund, ort: l.ort || '' }; }),
+        erledigt_im_plan: plan.items.length - planOpen().length,
+        heute_gemacht: { anrufe: c.anruf, mails: c.mail, status_aenderungen: c.status },
+      });
+    },
+    naechster_betrieb: ({ ueberspringen } = {}) => {
+      if (ueberspringen) { const f = findOne(ueberspringen); if (f.l && plan) { plan.done[f.l.id] = true; savePlan(); jot('plan', f.l.id, 'Übersprungen'); } }
+      if (!plan) makePlan();
+      const nxt = planOpen()[0];
+      renderAll();
+      if (!nxt) return 'Der Tagesplan ist komplett erledigt.';
+      const l = byId.get(nxt.id); select(l.id, false); renderPlan();
+      return JSON.stringify(leadInfo(l, nxt.grund));
+    },
+    betrieb_details: ({ name }) => {
+      const f = findOne(name);
+      if (f.many) return 'Mehrere Treffer: ' + f.many.join('; ') + '. Frag nach, welcher gemeint ist.';
+      if (!f.l) return 'Kein Betrieb mit diesem Namen gefunden.';
+      show([f.l], f.l.name); select(f.l.id, false);
+      const info = leadInfo(f.l, '');
+      info.verlauf = ((state[f.l.id] || {}).log || []).slice(-4).map((e) => (ST[e.s] ? ST[e.s].label : e.s) + ' am ' + new Date(e.at).toLocaleDateString('de-DE')).join(', ');
+      return JSON.stringify(info);
+    },
+    anrufen: ({ name }) => {
+      const f = name ? findOne(name) : { l: byId.get(ui.sel) };
+      if (f.many) return 'Mehrere Treffer: ' + f.many.join('; ') + '. Frag nach, welcher gemeint ist.';
+      const l = f.l; if (!l) return 'Betrieb nicht gefunden.';
+      const href = telHref(l.tel); if (!href) return 'Für ' + l.name + ' ist keine Telefonnummer bekannt.';
+      select(l.id, false);
+      try { localStorage.setItem(LPEND, JSON.stringify({ id: l.id, at: Date.now() })); } catch (e) {}
+      jot('anruf', l.id, 'Anruf gewählt ' + l.tel + ' (Live-Coach)'); renderJournal();
+      setTimeout(() => { liveStop(true); location.href = href; }, 600);
+      return 'Anruf bei ' + l.name + ' wird gestartet.';
+    },
+    ergebnis_speichern: ({ name, ergebnis, notiz, rueckruf_tag }) => {
+      const f = findOne(name);
+      if (f.many) return 'Mehrere Treffer: ' + f.many.join('; ') + '. Frag nach, welcher gemeint ist.';
+      const l = f.l; const e = ERG[ergebnis];
+      if (!l) return 'Betrieb nicht gefunden, nichts gespeichert.';
+      if (!e) return 'Unbekanntes Ergebnis, nichts gespeichert.';
+      setStatus(l.id, e.st, e.note + ' (Live-Coach)');
+      const n = [e.note, rueckruf_tag ? 'Rückruf ' + rueckruf_tag : '', (notiz || '').trim()].filter(Boolean).join('. ');
+      addNote(l.id, n);
+      planDone(l.id); renderPlan();
+      try { localStorage.removeItem(LPEND); } catch (err) {}
+      return 'Gespeichert bei ' + l.name + ': Status ' + ST[e.st].label + ', Notiz „' + n + '“.';
+    },
+    leads_suchen: ({ anfrage }) => { quiet(() => handle(String(anfrage || ''))); return lastText.slice(0, 1500); },
+    mail_entwurf: ({ name }) => {
+      const f = findOne(name);
+      if (f.many) return 'Mehrere Treffer: ' + f.many.join('; ') + '.';
+      if (!f.l) return 'Betrieb nicht gefunden.';
+      select(f.l.id, false); openMail(f.l);
+      return 'Der Mail-Entwurf an ' + f.l.name + ' ist offen' + (f.l.mail ? '' : ', aber es ist keine E-Mail-Adresse bekannt') + '. Er prüft und schickt ihn selbst.';
+    },
+  };
+  const wrapTools = () => Object.fromEntries(Object.entries(clientTools).map(([k, fn]) => [k, async (p) => {
+    lLog('sys', '⚙︎ ' + ({ tagesplan: 'Tagesplan', naechster_betrieb: 'Nächster Betrieb', betrieb_details: 'Details', anrufen: 'Anruf', ergebnis_speichern: 'Gespeichert', leads_suchen: 'Suche', mail_entwurf: 'Mail-Entwurf' }[k] || k));
+    try { return await fn(p || {}); } catch (e) { return 'Fehler in der Lead-Zentrale: ' + (e && e.message || e); }
+  }]));
+
+  const liveStart = async () => {
+    if (conv) return;
+    coachStop();
+    $('live').hidden = false; document.body.classList.add('live-on'); $('lLog').textContent = '';
+    lState('Verbinde…');
+    let pend = null; try { pend = JSON.parse(localStorage.getItem(LPEND) || 'null'); } catch (e) {}
+    if (pend && (Date.now() - pend.at > 6 * 3600e3 || !byId.has(pend.id))) pend = null;
+    const pl = pend ? byId.get(pend.id) : null;
+    const h = new Date().getHours();
+    const begr = pl ? 'Na, wie war dein Anruf bei ' + pl.name + '?'
+      : (h < 11 ? 'Guten Morgen' : h < 17 ? 'Hey' : 'Guten Abend') + '! Coach hier. Soll ich dir sagen, was heute ansteht?';
+    try {
+      const C = await loadSdk();
+      try { await navigator.mediaDevices.getUserMedia({ audio: true }).then((st) => st.getTracks().forEach((t) => t.stop())); }
+      catch (e) { lState('Kein Mikrofon'); lLog('sys', 'Bitte erlaube den Mikrofon-Zugriff (Safari: aA → Website-Einstellungen → Mikrofon).'); throw e; }
+      conv = await C.Conversation.startSession({
+        agentId: LIVE.agentId,
+        connectionType: 'websocket',
+        dynamicVariables: { begruessung: begr, letzter_anruf: pl ? pl.name : '' },
+        clientTools: wrapTools(),
+        onConnect: () => { lState('Verbunden – sprich einfach'); },
+        onDisconnect: () => { conv = null; lState('Beendet'); $('live').classList.remove('speaking', 'listening'); },
+        onModeChange: ({ mode }) => { $('live').classList.toggle('speaking', mode === 'speaking'); $('live').classList.toggle('listening', mode === 'listening'); lState(mode === 'speaking' ? 'Coach spricht…' : 'Ich höre zu…'); },
+        onMessage: (m) => { const t = m && (m.message || m.text); if (t) lLog(m.source === 'user' || m.role === 'user' ? 'me' : 'ai', t); },
+        onError: (msg) => { lLog('sys', 'Fehler: ' + String(msg).slice(0, 160)); },
+      });
+    } catch (e) {
+      conv = null;
+      if (String(e && e.message) === 'sdk') lLog('sys', 'Die Sprachverbindung konnte nicht geladen werden. Prüf die Internetverbindung.');
+      else if (!/Mikrofon/.test($('lState').textContent)) lLog('sys', 'Verbindung fehlgeschlagen: ' + String(e && e.message || e).slice(0, 160));
+      lState('Nicht verbunden');
+    }
+  };
+  const liveStop = async (keepOpen) => {
+    const c = conv; conv = null;
+    if (c) { try { await c.endSession(); } catch (e) {} }
+    if (!keepOpen) { $('live').hidden = true; document.body.classList.remove('live-on'); }
+  };
+  $('liveStart').addEventListener('click', liveStart);
+  $('lEnd').addEventListener('click', () => liveStop(false));
+  $('lMute').addEventListener('click', () => {
+    liveMuted = !liveMuted; $('lMute').setAttribute('aria-pressed', String(liveMuted)); $('lMute').textContent = liveMuted ? 'Mikro an' : 'Stumm';
+    try { conv && conv.setMicMuted(liveMuted); } catch (e) {}
+  });
+  // Zurück vom Telefonat: Coach bietet die Nachfrage an (iOS braucht dafür einen Tipp)
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible' || conv) return;
+    let pend = null; try { pend = JSON.parse(localStorage.getItem(LPEND) || 'null'); } catch (e) {}
+    if (!pend || !byId.has(pend.id) || Date.now() - pend.at < 3000) return;
+    $('live').hidden = false; document.body.classList.add('live-on');
+    lState('Zurück vom Anruf');
+    $('lLog').textContent = '';
+    const b = el('button', { type: 'button', className: 'btn primary', textContent: '🎙️ Wie war der Anruf bei ' + byId.get(pend.id).name + '? Weiter' });
+    b.style.justifySelf = 'stretch'; b.style.padding = '14px';
+    b.addEventListener('click', () => { b.remove(); liveStart(); });
+    $('lLog').append(b);
   });
 })();
 </script>
