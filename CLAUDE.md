@@ -75,3 +75,17 @@ Dann im Browser `http://localhost:8080` öffnen.
   Facebook-Gruppenbeitrag mit Bild.
 - Für Motion-Graphics-Videos gibt es die Skills „motion-video-director“ und „sound-effects“.
 - Werbe-Tipp für 30 €: Reel „Kamerafahrt“ bewerben, Erlangen + 20 km, 5 €/Tag für 6 Tage.
+
+### App-Idee „SocialClip Map“ (Stand 25.10.2026, noch nicht gebaut)
+- Inhaber will eine eigene App fertigstellen. Gewählte Idee: Karte zum **Entdecken** statt Suchen –
+  „In deiner Nähe gibt es 3 Webdesigner, 5 Friseure …“, mit Profilen, was jede Firma kann/anbietet.
+- Start nur Erlangen, als Web-App unter `socialclip.art/map/` (0 € Kosten, App Stores erst später).
+- Firmendaten aus OpenStreetMap (legal mit Hinweis „© OpenStreetMap-Mitwirkende“), nie von Google kopieren.
+- Version 1 = Karte mit Kategorien, Übersicht „In deiner Nähe“, Firmen-Infos, Button
+  „Ist das Ihre Firma? Profil kostenlos ergänzen“. Alles Weitere erst in Version 2.
+- Geld: Premium-Profil 15–29 €/Monat; Hauptnutzen am Anfang = Türöffner für Agentur-Aufträge.
+- Erfolgstest nach 30 Tagen: 10 Firmen wollen ihr Profil ergänzen, 1–2 Agentur-Anfragen.
+- Stand Inhaber: noch kein Umsatz, viel Zeit, Budget 150–300 €. Engpass = erste zahlende Kunden.
+  Offen: Hat CarZone schon bezahlt?
+- Verworfene Alternativen: allgemeiner KI-Assistent (zu viel Konkurrenz), „SocialClip Check“
+  (Online-Check als Kundenmagnet), Bewertungs-Helfer (Google-Bewertungen sammeln, 29 €/Monat).
