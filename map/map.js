@@ -535,11 +535,42 @@
     if (/roundabout|rotary/.test(m.type)) return '<b class="kreis">↻</b>';
     return '<svg viewBox="0 0 24 24" style="transform:rotate(' + (DREH[m.modifier] || 0) + 'deg)" aria-hidden="true"><path d="M12 2l7.5 8.5H15V22H9V10.5H4.5z" fill="currentColor"/></svg>';
   }
-  function sprechen(text) {
-    if (!ton || !window.speechSynthesis) return;
-    var u = new SpeechSynthesisUtterance(text); u.lang = 'de-DE';
+  // Ansagen über die Sprachausgabe des Geräts; Stimme und Tempo wählt man im Menü
+  var stimmeName = '', tempo = 1;
+  try { stimmeName = localStorage.getItem('scmap-stimme') || ''; tempo = +localStorage.getItem('scmap-tempo') || 1; } catch (e) {}
+  function deutscheStimmen() {
+    return window.speechSynthesis ? speechSynthesis.getVoices().filter(function (v) { return /^de/i.test(v.lang); }) : [];
+  }
+  function sprechen(text, immer) {
+    if ((!ton && !immer) || !window.speechSynthesis) return;
+    var u = new SpeechSynthesisUtterance(text); u.lang = 'de-DE'; u.rate = tempo;
+    var v = deutscheStimmen().filter(function (x) { return x.name === stimmeName; })[0];
+    if (v) u.voice = v;
     speechSynthesis.cancel(); speechSynthesis.speak(u);
   }
+  function stimmenListe() {
+    var liste = deutscheStimmen(), sel = $('stimme');
+    sel.innerHTML = '<option value="">Standard des Geräts</option>' + liste.map(function (v) {
+      var name = v.name.replace(/\s*\(.*\)\s*/, ' ').replace(/Microsoft |Google /, '').replace(/\s*-\s*(German|Deutsch).*$/i, '').trim();
+      return '<option value="' + esc(v.name) + '"' + (v.name === stimmeName ? ' selected' : '') + '>' + esc(name) + (/premium|enhanced|natural|neural/i.test(v.name + v.voiceURI) ? ' ✨' : '') + '</option>';
+    }).join('');
+    $('stimmeHinweis').textContent = liste.length ? liste.length + ' deutsche Stimmen auf diesem Gerät. Mehr und schönere Stimmen (✨) kannst du in den Einstellungen deines Handys unter Bedienungshilfen → Gesprochene Inhalte → Stimmen laden.'
+      : 'Auf diesem Gerät wurde keine deutsche Stimme gefunden. In den Handy-Einstellungen unter Bedienungshilfen kannst du welche laden.';
+    document.querySelectorAll('[data-tempo]').forEach(function (b) { b.setAttribute('aria-pressed', +b.dataset.tempo === tempo); });
+  }
+  if (window.speechSynthesis) speechSynthesis.addEventListener('voiceschanged', stimmenListe);
+  $('stimme').addEventListener('change', function () {
+    stimmeName = this.value;
+    try { localStorage.setItem('scmap-stimme', stimmeName); } catch (e) {}
+    sprechen('Hallo, so klinge ich bei deinen Ansagen.', true);
+  });
+  document.querySelector('.tempo').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-tempo]'); if (!b) return;
+    tempo = +b.dataset.tempo;
+    try { localStorage.setItem('scmap-tempo', tempo); } catch (x) {}
+    stimmenListe(); sprechen('In 50 Metern rechts abbiegen.', true);
+  });
+  $('stimmeTest').addEventListener('click', function () { sprechen('In 50 Metern rechts abbiegen. Danach kommt dein Bus in 3 Minuten.', true); });
   // Nächster Punkt auf der Strecke: wie weit sind wir schon (km) und wie weit daneben (weg)
   function aufStrecke(p, r) {
     var c = r.geometry.coordinates, kx = Math.cos(p[1] * Math.PI / 180) * 111320, ky = 110540, best = { weg: Infinity, km: 0, i: 1 };
@@ -1118,7 +1149,7 @@
     if (!map) start(); else if (all.length) { if (rolle === 'chef') chefStart(); else liste(); }
   });
   // Menü hinter dem „S“
-  $('menuKnopf').addEventListener('click', function () { $('menu').hidden = false; });
+  $('menuKnopf').addEventListener('click', function () { stimmenListe(); $('menu').hidden = false; });
   $('menu').addEventListener('click', function (e) {
     if (e.target === this || e.target.closest('[data-close]')) { this.hidden = true; return; }
     var b = e.target.closest('[data-rolle]');

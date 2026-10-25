@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://socialclip.art/og-image.png">
 <link rel="stylesheet" href="/fonts/fonts.css?v=1">
 <link rel="stylesheet" href="/map/lib/maplibre-gl.css">
-<link rel="stylesheet" href="/map/map.css?v=10">
+<link rel="stylesheet" href="/map/map.css?v=11">
 </head>
 <body>
 <h1 class="sr">SocialClip Map – Geschäfte in Nürnberg, Fürth und Erlangen entdecken</h1>
@@ -98,6 +98,15 @@
       <button class="rolle" type="button" data-rolle="nutzer"><span>🧭</span><b>Nutzer</b></button>
       <button class="rolle" type="button" data-rolle="chef"><span>🏪</span><b>Geschäftsführer</b></button>
     </div>
+    <div class="stimme-wahl">
+      <p class="frage">🔊 Stimme für Ansagen</p>
+      <select id="stimme" aria-label="Stimme auswählen"></select>
+      <div class="tempo" role="group" aria-label="Sprechtempo">
+        <button type="button" data-tempo="0.85">Langsam</button><button type="button" data-tempo="1">Normal</button><button type="button" data-tempo="1.15">Schnell</button>
+      </div>
+      <button id="stimmeTest" class="menu-punkt" type="button">▶ Probehören</button>
+      <p id="stimmeHinweis" class="small"></p>
+    </div>
     <button class="menu-punkt" type="button" data-join>🏪 Mein Geschäft eintragen oder ergänzen</button>
     <a class="menu-punkt" href="/">🌐 SocialClip – Websites, Logos &amp; Werbung für Betriebe</a>
     <p class="small links"><a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a></p>
@@ -137,6 +146,6 @@
 
 <noscript><p class="nojs">Die SocialClip Map braucht JavaScript.</p></noscript>
 <script src="/map/lib/maplibre-gl.js"></script>
-<script src="/map/map.js?v=12"></script>
+<script src="/map/map.js?v=13"></script>
 </body>
 </html>

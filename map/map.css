@@ -252,3 +252,13 @@ body.nacht .start-leiste { background: linear-gradient(rgba(22,19,46,0), var(--b
 .nav-frage button { flex: 1; height: 48px; border-radius: 999px; border: 0; font-weight: 600; font-size: 15px; cursor: pointer; }
 #navJa { background: var(--lime); color: #203c32; }
 #navNein { background: rgba(255,255,255,.14); color: #fff; }
+
+/* Stimmen-Auswahl im Menü */
+.stimme-wahl { display: grid; gap: 8px; padding: 12px; border-radius: 16px; background: #f6f8ee; }
+.stimme-wahl .frage { font-size: 17px; }
+.stimme-wahl select { width: 100%; height: 44px; padding: 0 10px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font: inherit; font-size: 16px; }
+.tempo { display: flex; gap: 6px; }
+.tempo button { flex: 1; height: 38px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font-size: 14px; cursor: pointer; }
+.tempo button[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: var(--lime); }
+.stimme-wahl .menu-punkt { text-align: center; }
+body.nacht .stimme-wahl { background: #1c1838; }
