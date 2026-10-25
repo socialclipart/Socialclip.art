@@ -539,17 +539,17 @@
     } }, vor);
     // Häuser, in denen ein Geschäft ist, in der Farbe der Kategorie (füllt laedenFaerben())
     map.addLayer({ id: 'gebaeude-wand', type: 'fill-extrusion', source: 'openmaptiles', 'source-layer': 'building', minzoom: 16, paint: {
-      'fill-extrusion-height': ['-', HOEHE, 0.05], 'fill-extrusion-base': BASIS, 'fill-extrusion-vertical-gradient': true
+      'fill-extrusion-height': HOEHE, 'fill-extrusion-base': BASIS, 'fill-extrusion-vertical-gradient': true
     } }, vor);
     map.addLayer({ id: 'gebaeude-dach', type: 'fill-extrusion', source: 'openmaptiles', 'source-layer': 'building', minzoom: 16, paint: {
-      'fill-extrusion-height': HOEHE, 'fill-extrusion-base': ['-', HOEHE, 0.5], 'fill-extrusion-vertical-gradient': false
+      'fill-extrusion-height': ['+', HOEHE, 0.4], 'fill-extrusion-base': HOEHE, 'fill-extrusion-vertical-gradient': false
     } }, vor);
     map.addSource('laeden', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
     map.addLayer({ id: 'laeden-wand', type: 'fill-extrusion', source: 'laeden', minzoom: 16, paint: {
-      'fill-extrusion-height': ['+', 0.5, ['get', 'h']], 'fill-extrusion-base': ['get', 'b'], 'fill-extrusion-vertical-gradient': true
+      'fill-extrusion-height': ['+', 0.6, ['get', 'h']], 'fill-extrusion-base': ['get', 'b'], 'fill-extrusion-vertical-gradient': true
     } }, vor);
     map.addLayer({ id: 'laeden-dach', type: 'fill-extrusion', source: 'laeden', minzoom: 16, paint: {
-      'fill-extrusion-height': ['+', 0.6, ['get', 'h']], 'fill-extrusion-base': ['+', 0.05, ['get', 'h']]
+      'fill-extrusion-height': ['+', 1, ['get', 'h']], 'fill-extrusion-base': ['+', 0.6, ['get', 'h']]
     } }, vor);
     map.addLayer({ id: 'laeden-3d', type: 'fill-extrusion', source: 'laeden', minzoom: 14.5, maxzoom: 16, paint: {
       'fill-extrusion-color': ['get', 'farbe'],
@@ -583,6 +583,24 @@
     var n = parseInt(hex.slice(1), 16), m = function (c) { return Math.round(c + (255 - c) * 0.3); };
     return 'rgb(' + m(n >> 16) + ',' + m((n >> 8) & 255) + ',' + m(n & 255) + ')';
   }
+  // Umriss um etwa m Meter nach außen schieben (vom Mittelpunkt weg)
+  function aufblasen(geo, m) {
+    var polys = geo.type === 'Polygon' ? [geo.coordinates] : geo.coordinates;
+    var neu = polys.map(function (poly) {
+      var ring = poly[0], cx = 0, cy = 0;
+      ring.forEach(function (p) { cx += p[0]; cy += p[1]; });
+      cx /= ring.length; cy /= ring.length;
+      var kx = Math.cos(cy * Math.PI / 180) * 111320, ky = 110540;
+      return poly.map(function (r) {
+        return r.map(function (p) {
+          var dx = (p[0] - cx) * kx, dy = (p[1] - cy) * ky, l = Math.sqrt(dx * dx + dy * dy) || 1;
+          return [p[0] + dx / l * m / kx, p[1] + dy / l * m / ky];
+        });
+      });
+    });
+    return geo.type === 'Polygon' ? { type: 'Polygon', coordinates: neu[0] } : { type: 'MultiPolygon', coordinates: neu };
+  }
+
   function haeuserFaerben() {
     if (!all.length || map.getZoom() < 15) return;
     var b = map.getBounds(), neu = false;
@@ -593,7 +611,7 @@
       var g = h.geometry.coordinates, schluessel = JSON.stringify(g[0] && g[0][0] && g[0][0][0] !== undefined && g[0][0].length ? g[0][0] : g[0]);
       if (hausCache[schluessel]) { hausCache[f.id] = true; return; }
       hausCache[f.id] = true;
-      hausCache[schluessel] = { type: 'Feature', geometry: h.geometry, properties: { farbe: pastell(CATS[f.kat].farbe), neon: CATS[f.kat].farbe, kat: f.kat, dach: hell(CATS[f.kat].farbe, 0.6),
+      hausCache[schluessel] = { type: 'Feature', geometry: aufblasen(h.geometry, 0.6), properties: { farbe: pastell(CATS[f.kat].farbe), neon: CATS[f.kat].farbe, kat: f.kat, dach: hell(CATS[f.kat].farbe, 0.6),
         h: Math.max(6, h.properties.render_height || 8), b: h.properties.render_min_height || 0 } };
       neu = true;
     });
