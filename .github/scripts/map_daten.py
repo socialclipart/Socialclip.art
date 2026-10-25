@@ -7,7 +7,7 @@ import time
 import urllib.parse
 import urllib.request
 
-BBOX = "49.54,10.93,49.64,11.08"
+BBOX = "49.36,10.85,49.65,11.22"  # Nürnberg, Fürth, Erlangen
 SERVERS = [
     "https://overpass-api.de/api/interpreter",
     "https://overpass.kumi.systems/api/interpreter",

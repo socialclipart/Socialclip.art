@@ -87,8 +87,15 @@ Dann im Browser `http://localhost:8080` öffnen.
 - Beim Start fragt die Map jedes Mal „Bist du Nutzer oder Geschäftsführer?“ (Inhaber-Wunsch). Geschäftsführer
   bekommen einen eigenen Bereich (Geschäft suchen / neu eintragen, Profil-Knopf oben). Das „S“ öffnet ein Menü
   (Rolle wechseln, Geschäft eintragen, Link zur SocialClip-Website, Impressum/Datenschutz).
-- Bus & Bahn: Modus „🚌 Bus“ fragt Transitous (api.transitous.org, offene VGN/DELFI-Daten, CORS erlaubt) ab,
-  zeigt bis zu 4 Verbindungen mit Linie, Steig, Echtzeit (Verspätung/„Fällt aus“) und führt zu Fuß zur Haltestelle.
+- Gebiet seit 25.10.2026: Nürnberg, Fürth und Erlangen (BBOX in `.github/scripts/map_daten.py`, Stadt-Auswahl
+  oben in der Liste, `STAEDTE` in `map.js`).
+- Bus & Bahn: Modus „🚆 Bus/Bahn“ (vorher nur Bus) fragt Transitous (api.transitous.org, offene VGN/DELFI-Daten, CORS erlaubt) ab,
+  zeigt bis zu 4 Verbindungen (Bus, Tram, U-/S-Bahn, RE, ICE) mit Linienfarbe, Steig/Gleis, Echtzeit (Verspätung/„Fällt aus“),
+  Störungsmeldungen falls vorhanden, und führt zu Fuß zur Haltestelle. Echtzeit nur so weit VGN/DB sie liefern.
+- Reisebegleitung („Los geht’s – ich begleite dich“): Fußweg mit Pfeilen + Live-Abfahrt unten, an der Haltestelle
+  Countdown, Fragen „Bist du an der Haltestelle / eingestiegen / ausgestiegen?“, Stationen-Zähler, Ansage
+  „Nächste aussteigen“, minütlicher Echtzeit-Abgleich (Ausfall/verpasst → neue Verbindung). Code: `reise…` in `map.js`.
+- Unteres Blatt lässt sich am Handy ziehen (24/52/90 % Höhe), Start-Knopf klebt unten (`.start-leiste`).
 - Wunsch für später: Inhaber-Bereich, in dem z. B. der Chef einer Pizzeria nach Freischaltung sein
   Profil (Fotos, Angebote, Öffnungszeiten) selbst bearbeitet. Braucht Anmeldung + Datenbank (Backend).
 - Ideen aus der Designstudie noch offen: Merkliste (Herz), Gehzeit-Filter 5/10/15 Min., „Streifzug“.

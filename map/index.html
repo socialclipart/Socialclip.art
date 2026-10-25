@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#e9efdc">
-<title>SocialClip Map | Was gibt es in deiner Nähe? Geschäfte in Erlangen entdecken</title>
-<meta name="description" content="Entdecke Geschäfte und Firmen in Erlangen auf einer Karte: Friseure, Handwerker, Restaurants, Webdesigner und mehr – sieh, wer was kann, und lass dir den Weg zeigen.">
+<title>SocialClip Map | Was gibt es in deiner Nähe? Geschäfte in Nürnberg, Fürth & Erlangen entdecken</title>
+<meta name="description" content="Entdecke Geschäfte und Firmen in Nürnberg, Fürth und Erlangen auf einer Karte: Friseure, Handwerker, Restaurants, Webdesigner und mehr – sieh, wer was kann, und lass dir den Weg zeigen – zu Fuß, mit Rad, Auto, Bus und Bahn.">
 <link rel="canonical" href="https://socialclip.art/map/">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -14,16 +14,16 @@
 <meta property="og:locale" content="de_DE">
 <meta property="og:site_name" content="SocialClip">
 <meta property="og:title" content="SocialClip Map | Was gibt es in deiner Nähe?">
-<meta property="og:description" content="Geschäfte und Firmen in Erlangen entdecken – ohne zu wissen, wonach man sucht.">
+<meta property="og:description" content="Geschäfte und Firmen in Nürnberg, Fürth und Erlangen entdecken – ohne zu wissen, wonach man sucht.">
 <meta property="og:url" content="https://socialclip.art/map/">
 <meta property="og:image" content="https://socialclip.art/og-image.png">
 <link rel="stylesheet" href="/fonts/fonts.css?v=1">
 <link rel="stylesheet" href="/map/lib/maplibre-gl.css">
-<link rel="stylesheet" href="/map/map.css?v=9">
+<link rel="stylesheet" href="/map/map.css?v=10">
 </head>
 <body>
-<h1 class="sr">SocialClip Map – Geschäfte in Erlangen entdecken</h1>
-<div id="map" aria-label="Karte mit Geschäften in Erlangen"></div>
+<h1 class="sr">SocialClip Map – Geschäfte in Nürnberg, Fürth und Erlangen entdecken</h1>
+<div id="map" aria-label="Karte mit Geschäften in Nürnberg, Fürth und Erlangen"></div>
 
 <header class="bar">
   <button id="menuKnopf" class="logo" type="button" aria-label="Menü öffnen">S</button>
@@ -62,6 +62,10 @@
     <div id="navPfeil" class="nav-pfeil"></div>
     <div class="nav-txt"><b id="navDist"></b><span id="navText"></span><small id="navStr"></small></div>
   </div>
+  <div id="navFrage" class="nav-frage" hidden>
+    <p id="navFrageText"></p>
+    <div><button id="navJa" type="button">Ja</button><button id="navNein" type="button">Noch nicht</button></div>
+  </div>
   <button id="navMitte" class="fab nav-mitte" type="button" hidden>⌖ Zentrieren</button>
   <div class="nav-bottom">
     <div class="nav-rest"><b id="navZeit"></b><span id="navRest"></span></div>
@@ -74,7 +78,7 @@
   <div class="gate-card">
     <p class="gate-logo">Social<b>Clip</b> Map</p>
     <h2 id="gateT">Was gibt es in deiner Nähe?</h2>
-    <p>Entdecke über 2.000 Geschäfte in Erlangen – und lass dir den Weg zu Fuß, mit dem Rad oder dem Auto zeigen.</p>
+    <p>Entdecke Geschäfte in Nürnberg, Fürth und Erlangen – und lass dir den Weg zeigen: zu Fuß, mit Rad, Auto, Bus und Bahn.</p>
     <p class="small">Für Karte und Wegbeschreibung lädt dein Browser Daten von OpenFreeMap und OpenStreetMap. Dabei wird deine IP-Adresse an deren Server übertragen. Mehr in der <a href="/datenschutz.html#map">Datenschutzerklärung</a>.</p>
     <p class="frage">Bist du …</p>
     <div class="rollen">
@@ -111,7 +115,7 @@
       <li>🔥 Aktion der Woche</li>
       <li>💬 Ein Tipp zu WhatsApp, Anruf oder Weg</li>
     </ul>
-    <p class="small">Zum Start kostenlos für die ersten Erlanger Betriebe – wir machen sogar das Foto.</p>
+    <p class="small">Zum Start kostenlos für die ersten Betriebe aus Nürnberg, Fürth und Erlangen – wir machen sogar das Foto.</p>
     <form id="joinForm" class="form" action="https://formspree.io/f/xwlvlqwg" method="POST">
       <input type="hidden" name="_subject" value="SocialClip Map: Profil-Anfrage">
       <input type="hidden" name="quelle" value="SocialClip Map">
@@ -133,6 +137,6 @@
 
 <noscript><p class="nojs">Die SocialClip Map braucht JavaScript.</p></noscript>
 <script src="/map/lib/maplibre-gl.js"></script>
-<script src="/map/map.js?v=11"></script>
+<script src="/map/map.js?v=12"></script>
 </body>
 </html>
