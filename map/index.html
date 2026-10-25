@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c0c0d">
+<title>SocialClip Map | Was gibt es in deiner Nähe? Geschäfte in Erlangen entdecken</title>
+<meta name="description" content="Entdecke Geschäfte und Firmen in Erlangen auf einer Karte: Friseure, Handwerker, Restaurants, Webdesigner und mehr – und sieh sofort, wer was kann.">
+<link rel="canonical" href="https://socialclip.art/map/">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="SocialClip">
+<meta property="og:title" content="SocialClip Map | Was gibt es in deiner Nähe?">
+<meta property="og:description" content="Geschäfte und Firmen in Erlangen entdecken – ohne zu wissen, wonach man sucht.">
+<meta property="og:url" content="https://socialclip.art/map/">
+<meta property="og:image" content="https://socialclip.art/og-image.png">
+<link rel="stylesheet" href="/fonts/fonts.css?v=1">
+<link rel="stylesheet" href="/map/leaflet/leaflet.css">
+<link rel="stylesheet" href="/map/map.css?v=1">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/">Social<b>Clip</b> <span>Map</span></a>
+  <a class="join" href="#mitmachen">Mein Geschäft zeigen</a>
+</header>
+
+<main>
+  <section class="intro">
+    <h1>Was gibt es <em>in deiner Nähe?</em></h1>
+    <p>Nicht suchen, sondern entdecken: Alle Geschäfte und Firmen in Erlangen auf einen Blick – und wer was kann.</p>
+  </section>
+
+  <section class="map-wrap">
+    <div id="map" aria-label="Karte mit Geschäften"></div>
+    <div id="gate" class="gate">
+      <p><b>Karte laden?</b><br>Die Karte und die Firmendaten kommen von OpenStreetMap. Dabei wird deine IP-Adresse an deren Server übertragen. Mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>
+      <button id="load" class="btn">Karte anzeigen</button>
+    </div>
+    <div class="map-tools">
+      <button id="locate" class="chip-btn" type="button">📍 Mein Standort</button>
+      <button id="surprise" class="chip-btn" type="button">🎲 Überrasch mich</button>
+    </div>
+  </section>
+
+  <section class="near">
+    <div class="near-head">
+      <h2 id="nearTitle">In deiner Nähe</h2>
+      <input id="q" type="search" placeholder="Was brauchst du? z. B. Logo, Haare, Reifen …" autocomplete="off">
+    </div>
+    <div id="cats" class="cats"></div>
+    <p id="status" class="status">Tippe auf „Karte anzeigen“, um loszulegen.</p>
+    <div id="list" class="list"></div>
+  </section>
+
+  <section id="mitmachen" class="join-box">
+    <h2>Zeig dein Geschäft im <em>Schaufenster</em></h2>
+    <p>Dein Betrieb ist vielleicht schon auf der Karte – aber nur als grauer Punkt. Mit einem Schaufenster-Profil leuchtest du hervor:</p>
+    <ul>
+      <li>⭐ Goldener Pin auf der Karte und ganz oben in der Liste</li>
+      <li>📸 Titelbild und „Wer steckt dahinter?“ – Menschen kaufen bei Menschen</li>
+      <li>🛠️ „Das kann ich“: Leute finden dich über deine Fähigkeiten, nicht nur über deinen Namen</li>
+      <li>🔥 Aktion der Woche direkt auf deinem Profil</li>
+      <li>💬 Ein Klick zu WhatsApp, Anruf oder Route</li>
+    </ul>
+    <p class="small">Zum Start kostenlos für die ersten Erlanger Betriebe – wir machen sogar das Foto.</p>
+    <a class="btn" href="https://wa.me/4917646188101?text=Hallo%20SocialClip%2C%20ich%20m%C3%B6chte%20mein%20Gesch%C3%A4ft%20auf%20der%20SocialClip%20Map%20zeigen.">Per WhatsApp anmelden</a>
+  </section>
+</main>
+
+<footer class="foot">
+  <a href="/">SocialClip</a> · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a>
+  <br>Firmendaten: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-Mitwirkende</a> (ODbL). Angaben ohne Gewähr.
+</footer>
+
+<script src="/map/leaflet/leaflet.js"></script>
+<script src="/map/map.js?v=1"></script>
+</body>
+</html>
