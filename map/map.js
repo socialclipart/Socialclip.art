@@ -275,6 +275,8 @@
     if (f.star && f.bild) h += '<img class="hero" src="' + esc(f.bild) + '" alt="">';
     if (f.star) h += '<span class="badge">⭐ Schaufenster</span>';
     h += '<h2>' + esc(f.name) + '</h2><p class="kind">' + (f.adresse ? '📍' : c.ico) + ' ' + esc(art(f)) + ' · ' + meter(f.dist) + '</p>';
+    var kannClaim = !f.star && !f.adresse;
+    if (kannClaim && rolle === 'chef') h += '<button class="claim" type="button" data-claim><span>🏪</span><span><b>Ist das deine Firma?</b><br>Profil kostenlos ergänzen →</span></button>';
 
     h += '<div class="modes">' + Object.keys(MODES).map(function (k) {
       var info = routeInfo && routeInfo.modus === k && routeInfo.dauer ? minuten(routeInfo.dauer) : MODES[k].name;
@@ -312,7 +314,7 @@
       .map(function (x) { return { f: x, d: abstand(ll(f), ll(x)) }; })
       .sort(function (a, b) { return a.d - b.d; }).slice(0, 6);
     if (umgebung.length) h += '<h3 class="nah-titel">Geschäfte in der Nähe</h3>' + umgebung.map(function (u) { return zeile(u.f, u.d); }).join('');
-    if (!f.star && !f.adresse) h += '<button class="claim" type="button" data-claim><span>🏪</span><span><b>Ist das deine Firma?</b><br>Profil kostenlos ergänzen →</span></button>';
+    if (kannClaim && rolle !== 'chef') h += '<button class="claim" type="button" data-claim><span>🏪</span><span><b>Ist das deine Firma?</b><br>Profil kostenlos ergänzen →</span></button>';
     $('sheetBody').innerHTML = h + '</div>';
   }
 
@@ -721,8 +723,7 @@
   }
 
   function start() {
-    $('gate').hidden = true;
-    try { localStorage.setItem(OK_KEY, '1'); } catch (e) {}
+    if (map) return;
     blatt('34vh');
     $('sheetBody').innerHTML = '<p class="muted">Lade Geschäfte aus Erlangen …</p>';
     map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 16, pitch: 55, bearing: -20, maxPitch: 65, attributionControl: false });
@@ -778,13 +779,51 @@
         m._id = f.id; starMarkers.push(m);
       });
       liste();
+      if (rolle === 'chef') chefStart();
     }).catch(function () {
       $('sheetBody').innerHTML = '<p class="muted">Die Geschäfte konnten gerade nicht geladen werden. Bitte später noch einmal versuchen.</p>';
     });
   }
 
   // ---------- Bedienung ----------
-  $('load').addEventListener('click', start);
+  // ---------- Rolle: Nutzer oder Geschäftsführer ----------
+  var rolle = 'nutzer';
+  function rolleSetzen(neu) {
+    rolle = neu;
+    document.querySelectorAll('[data-rolle]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.rolle === neu); });
+    $('q').placeholder = neu === 'chef' ? 'Name deines Geschäfts …' : 'Geschäft, Adresse oder was du brauchst …';
+  }
+  // Bereich für Geschäftsführer im unteren Blatt
+  function chefStart() {
+    sel = null; routeWeg(); if (selMarker) { selMarker.remove(); selMarker = null; }
+    blatt('52vh');
+    $('sheetBody').innerHTML = '<div class="chef"><button class="back" type="button" data-alle>‹ Erst mal nur umschauen</button>' +
+      '<h2>Willkommen, Geschäftsführer 👋</h2><p class="muted">Zeig dein Geschäft auf der SocialClip Map – zum Start kostenlos für Erlanger Betriebe.</p>' +
+      '<button class="act main" type="button" data-chef-suche>🔍 Mein Geschäft auf der Karte suchen</button>' +
+      '<button class="act" type="button" data-join>➕ Mein Geschäft fehlt – neu eintragen</button>' +
+      '<ul class="perks"><li>⭐ Goldener Pin und ganz oben in der Liste</li><li>📸 Titelbild und „Wer steckt dahinter?“</li>' +
+      '<li>🛠️ „Das kann ich“ – Kunden finden dich über deine Leistungen</li><li>🔥 Aktion der Woche</li></ul></div>';
+    $('sheetBody').scrollTop = 0;
+  }
+  $('gate').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-rolle]'); if (!b) return;
+    try { localStorage.setItem(OK_KEY, '1'); } catch (x) {}
+    rolleSetzen(b.dataset.rolle);
+    $('gate').hidden = true;
+    if (!map) start(); else if (all.length) { if (rolle === 'chef') chefStart(); else liste(); }
+  });
+  // Menü hinter dem „S“
+  $('menuKnopf').addEventListener('click', function () { $('menu').hidden = false; });
+  $('menu').addEventListener('click', function (e) {
+    if (e.target === this || e.target.closest('[data-close]')) { this.hidden = true; return; }
+    var b = e.target.closest('[data-rolle]');
+    if (b) {
+      rolleSetzen(b.dataset.rolle); this.hidden = true;
+      if (all.length) { if (rolle === 'chef') chefStart(); else liste(); }
+      return;
+    }
+    if (e.target.closest('[data-join]')) { this.hidden = true; beitreten(null); }
+  });
   $('grip').addEventListener('click', function () {
     var jetzt = getComputedStyle(document.documentElement).getPropertyValue('--sheet').trim();
     blatt(jetzt === '78vh' ? '34vh' : '78vh');
@@ -814,6 +853,7 @@
     var r = e.target.closest('.row'); if (r) return detail(r.dataset.id);
     var m = e.target.closest('[data-mode]'); if (m) return weg(m.dataset.mode);
     if (e.target.closest('[data-go]')) return navStart();
+    if (e.target.closest('[data-chef-suche]')) { liste(); blatt('34vh'); return $('q').focus(); }
     if (e.target.closest('[data-back]') || e.target.closest('[data-alle]')) return zurueck();
     if (e.target.closest('[data-claim]')) return beitreten(sel);
     if (e.target.closest('[data-join]')) beitreten(null);
@@ -879,6 +919,6 @@
     if (nah.length) detail(nah[Math.floor(Math.random() * nah.length)].id);
   });
 
-  // Wer schon einmal zugestimmt hat, sieht die Karte direkt
+  // Wer schon einmal zugestimmt hat: Karte lädt im Hintergrund, die Rollen-Frage kommt trotzdem jedes Mal
   try { if (localStorage.getItem(OK_KEY)) start(); } catch (e) {}
 })();

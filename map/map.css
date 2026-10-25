@@ -185,3 +185,25 @@ body.nacht .schild b { color: #f3eeff; }
 body.nacht .s-ic, body.nacht .route-info, body.nacht .sp { background: #2a2452; }
 body.nacht .join-link, body.nacht .claim { background: #241e46; border-color: #3b2f72; }
 body.nacht .logo { color: #0c0a1d; }
+
+/* Startfrage „Bist du Nutzer oder Geschäftsführer?“ und Menü */
+.frage { font: 400 20px/1.2 var(--serif); margin-top: 4px; }
+.rollen { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rolle { display: grid; justify-items: start; gap: 2px; padding: 14px; border-radius: 16px; border: 1px solid var(--line); background: #f6f8ee; text-align: left; cursor: pointer; }
+.rolle span { font-size: 26px; }
+.rolle b { font-size: 16px; }
+.rolle small { font-size: 12px; color: var(--soft); line-height: 1.3; }
+.rolle:hover { border-color: var(--blue); }
+.rolle[aria-pressed="true"] { background: var(--blue); color: #fff; border-color: var(--blue); }
+.rolle[aria-pressed="true"] small { color: #c9d9a4; }
+.rollen.klein .rolle { grid-auto-flow: column; justify-content: start; align-items: center; gap: 8px; padding: 10px 12px; }
+.rollen.klein .rolle span { font-size: 20px; }
+.menu-punkt { display: block; width: 100%; padding: 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg); text-align: left; text-decoration: none; font-size: 15px; font-weight: 500; cursor: pointer; }
+.logo { border: 0; cursor: pointer; font-size: 18px; }
+
+/* Bereich für Geschäftsführer */
+.chef { display: grid; gap: 10px; }
+.chef h2 { margin-top: 2px; }
+.chef .act { width: 100%; min-height: 48px; font-size: 15px; }
+.chef .perks { margin-top: 6px; font-size: 14px; }
+body.nacht .rolle { background: #1c1838; }

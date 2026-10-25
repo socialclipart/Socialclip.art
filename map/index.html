@@ -19,14 +19,14 @@
 <meta property="og:image" content="https://socialclip.art/og-image.png">
 <link rel="stylesheet" href="/fonts/fonts.css?v=1">
 <link rel="stylesheet" href="/map/lib/maplibre-gl.css">
-<link rel="stylesheet" href="/map/map.css?v=7">
+<link rel="stylesheet" href="/map/map.css?v=8">
 </head>
 <body>
 <h1 class="sr">SocialClip Map – Geschäfte in Erlangen entdecken</h1>
 <div id="map" aria-label="Karte mit Geschäften in Erlangen"></div>
 
 <header class="bar">
-  <a class="logo" href="/" aria-label="Zur SocialClip-Startseite">S</a>
+  <button id="menuKnopf" class="logo" type="button" aria-label="Menü öffnen">S</button>
   <label class="search">
     <span aria-hidden="true">🔍</span>
     <input id="q" type="search" placeholder="Geschäft, Adresse oder was du brauchst …" autocomplete="off" enterkeyhint="search">
@@ -76,7 +76,27 @@
     <h2 id="gateT">Was gibt es in deiner Nähe?</h2>
     <p>Entdecke über 2.000 Geschäfte in Erlangen – und lass dir den Weg zu Fuß, mit dem Rad oder dem Auto zeigen.</p>
     <p class="small">Für Karte und Wegbeschreibung lädt dein Browser Daten von OpenFreeMap und OpenStreetMap. Dabei wird deine IP-Adresse an deren Server übertragen. Mehr in der <a href="/datenschutz.html#map">Datenschutzerklärung</a>.</p>
-    <button id="load" class="btn" type="button">Karte öffnen</button>
+    <p class="frage">Bist du …</p>
+    <div class="rollen">
+      <button class="rolle" type="button" data-rolle="nutzer"><span>🧭</span><b>Nutzer</b><small>Geschäfte entdecken und hinfinden</small></button>
+      <button class="rolle" type="button" data-rolle="chef"><span>🏪</span><b>Geschäftsführer</b><small>Mein Geschäft auf der Karte zeigen</small></button>
+    </div>
+  </div>
+</div>
+
+<div id="menu" class="gate" role="dialog" aria-modal="true" aria-labelledby="menuT" hidden>
+  <div class="gate-card">
+    <button class="close" type="button" data-close aria-label="Schließen">✕</button>
+    <p class="gate-logo">Social<b>Clip</b> Map</p>
+    <h2 id="menuT">Menü</h2>
+    <p class="frage">Ich bin …</p>
+    <div class="rollen klein">
+      <button class="rolle" type="button" data-rolle="nutzer"><span>🧭</span><b>Nutzer</b></button>
+      <button class="rolle" type="button" data-rolle="chef"><span>🏪</span><b>Geschäftsführer</b></button>
+    </div>
+    <button class="menu-punkt" type="button" data-join>🏪 Mein Geschäft eintragen oder ergänzen</button>
+    <a class="menu-punkt" href="/">🌐 SocialClip – Websites, Logos &amp; Werbung für Betriebe</a>
+    <p class="small links"><a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a></p>
   </div>
 </div>
 
@@ -113,6 +133,6 @@
 
 <noscript><p class="nojs">Die SocialClip Map braucht JavaScript.</p></noscript>
 <script src="/map/lib/maplibre-gl.js"></script>
-<script src="/map/map.js?v=9"></script>
+<script src="/map/map.js?v=10"></script>
 </body>
 </html>

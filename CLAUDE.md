@@ -84,6 +84,9 @@ Dann im Browser `http://localhost:8080` öffnen.
   Knöpfe „3D“ und 🌙: Nacht = Neon-Stil. Stile in `STILE` (`tag`, `nacht`) in `map.js`.
 - Inhaber findet normale Karten „zu Standard/wie Google Maps“ – Look soll einzigartig sein.
 - SocialClip selbst sitzt in der Donato-Polli-Str. 38, 91056 Erlangen (Pin in `map/profile.json`).
+- Beim Start fragt die Map jedes Mal „Bist du Nutzer oder Geschäftsführer?“ (Inhaber-Wunsch). Geschäftsführer
+  bekommen einen eigenen Bereich (Geschäft suchen / neu eintragen, Profil-Knopf oben). Das „S“ öffnet ein Menü
+  (Rolle wechseln, Geschäft eintragen, Link zur SocialClip-Website, Impressum/Datenschutz).
 - Wunsch für später: Inhaber-Bereich, in dem z. B. der Chef einer Pizzeria nach Freischaltung sein
   Profil (Fotos, Angebote, Öffnungszeiten) selbst bearbeitet. Braucht Anmeldung + Datenbank (Backend).
 - Ideen aus der Designstudie noch offen: Merkliste (Herz), Gehzeit-Filter 5/10/15 Min., „Streifzug“.
