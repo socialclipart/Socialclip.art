@@ -32,7 +32,7 @@
       haus: '#f4f7ec', hausDeckkraft: 0.97, dach: '#fbfcf6',
       licht: { anchor: 'viewport', color: '#fffdf2', intensity: 0.32, position: [1.5, 215, 35] },
       baum: '#a9c78b', baumRand: '#8fb173',
-      weg: '#ddf77b', wegRand: '#203c32', wegStrich: '#203c32', rand: '#fffef8', text: '#203c32', halo: '#fffef8',
+      weg: '#ddf77b', wegRand: '#203c32', bus: '#ff9a52', wegStrich: '#203c32', rand: '#fffef8', text: '#203c32', halo: '#fffef8',
       glow: false, theme: '#e9efdc'
     },
     nacht: {
@@ -42,7 +42,7 @@
       haus: ['interpolate', ['linear'], ['coalesce', ['get', 'render_height'], 8], 0, '#211c48', 30, '#3b2d82', 60, '#6a3fb0'], hausDeckkraft: 0.92, dach: '#3a3270',
       licht: { anchor: 'viewport', color: '#ffffff', intensity: 0.3, position: [1.15, 210, 30] },
       baum: '#1f5c47', baumRand: '#2f8a68',
-      weg: '#22e6ff', wegRand: '#0c0a1d', wegStrich: '#0c0a1d', rand: '#0c0a1d', text: '#f3eeff', halo: '#0c0a1d',
+      weg: '#22e6ff', wegRand: '#0c0a1d', bus: '#ff4fd8', wegStrich: '#0c0a1d', rand: '#0c0a1d', text: '#f3eeff', halo: '#0c0a1d',
       glow: true, theme: '#0c0a1d'
     }
   };
@@ -52,13 +52,15 @@
   if (!STILE[stilName]) stilName = 'tag';
   var STIL = STILE[stilName];
   var PHOTON = 'https://photon.komoot.io/api/';
+  var TRANSIT = 'https://api.transitous.org/api/v1/plan';   // Bus & Bahn mit Echtzeit (Transitous, offene Fahrplandaten)
   var ROUTER = 'https://routing.openstreetmap.de/routed-';
   var CACHE_KEY = 'scmap-v1', OK_KEY = 'scmap-ok';
   var SERVERS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'];
   var MODES = {
     foot: { name: 'Zu Fuß', wie: 'zu Fuß', e: '🚶', apple: 'w', google: 'walking' },
     bike: { name: 'Rad', wie: 'mit dem Rad', e: '🚲', apple: 'w', google: 'bicycling' },
-    car:  { name: 'Auto', wie: 'mit dem Auto', e: '🚗', apple: 'd', google: 'driving' }
+    car:  { name: 'Auto', wie: 'mit dem Auto', e: '🚗', apple: 'd', google: 'driving' },
+    bus:  { name: 'Bus', wie: 'mit Bus & Bahn', e: '🚌' }
   };
 
   // Kategorien: Symbol, Farbe und welche OSM-Merkmale dazugehören
@@ -280,14 +282,18 @@
 
     h += '<div class="modes">' + Object.keys(MODES).map(function (k) {
       var info = routeInfo && routeInfo.modus === k && routeInfo.dauer ? minuten(routeInfo.dauer) : MODES[k].name;
-      return '<button class="mode" type="button" data-mode="' + k + '" aria-pressed="' + (routeInfo && routeInfo.modus === k) + '"><span class="e">' + MODES[k].e + '</span><b>' + info + '</b></button>';
+      if (k === 'bus' && bus && bus.verbindungen) info = minuten(bus.verbindungen[bus.wahl].duration);
+      var an = k === 'bus' ? !!bus : (routeInfo && routeInfo.modus === k);
+      return '<button class="mode" type="button" data-mode="' + k + '" aria-pressed="' + an + '"><span class="e">' + MODES[k].e + '</span><b>' + info + '</b></button>';
     }).join('') + '</div>';
+    if (bus) h += busHtml();
     if (routeInfo && routeInfo.fehler) h += '<div class="route-info">' + esc(routeInfo.fehler) + '</div>';
     else if (routeInfo && routeInfo.laedt) h += '<div class="route-info">Weg wird berechnet …</div>';
     else if (routeInfo) h += '<div class="route-info"><span class="ri-ic">' + MODES[routeInfo.modus].e + '</span><span><b>Dein Weg zu ' + esc(f.name) + '</b><br>' + minuten(routeInfo.dauer) + ' · ' + meter(routeInfo.strecke) + ' ' + MODES[routeInfo.modus].wie + '</span></div>';
 
     var m = routeInfo ? routeInfo.modus : modus;
-    h += '<div class="acts"><button class="act main" type="button" data-go>▶ ' + MODES[m].e + ' Los geht’s</button>';
+    if (bus && bus.verbindungen) h += '<div class="acts"><button class="act main" type="button" data-haltestelle>▶ 🚶 Zu Fuß zur Haltestelle</button>';
+    else h += '<div class="acts"><button class="act main" type="button" data-go>▶ ' + MODES[m === 'bus' ? 'foot' : m].e + ' Los geht’s</button>';
     if (f.whatsapp) h += '<a class="act" href="https://wa.me/' + esc(f.whatsapp) + '">💬 WhatsApp</a>';
     if (tel) h += '<a class="act" href="tel:' + esc(tel.replace(/[^+\d]/g, '')) + '">📞 Anrufen</a>';
     if (web && /^https?:\/\//.test(web)) h += '<a class="act" href="' + esc(web) + '" target="_blank" rel="noopener">🌐 Website</a>';
@@ -319,7 +325,7 @@
   }
 
   function routeWeg() {
-    routeInfo = null;
+    routeInfo = null; bus = null;
     var src = map && map.getSource('route');
     if (src) src.setData({ type: 'FeatureCollection', features: [] });
     if (src) map.getSource('schritte').setData({ type: 'FeatureCollection', features: [] });
@@ -332,6 +338,103 @@
     map.getSource('schritte').setData({ type: 'FeatureCollection', features: echte.map(function (s, i) {
       return { type: 'Feature', properties: { nr: String(i + 1) }, geometry: { type: 'Point', coordinates: s.maneuver.location } };
     }) });
+  }
+
+  // ---------- Bus & Bahn (Transitous) ----------
+  var bus = null;
+  function uhr(iso) { return new Date(iso).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }); }
+  function verspaetung(ist, plan) { return Math.round((new Date(ist) - new Date(plan)) / 60000); }
+  // Linienverlauf entpacken (Google-Polyline mit wählbarer Genauigkeit)
+  function polyline(str, p) {
+    var f = Math.pow(10, p), i = 0, lat = 0, lon = 0, out = [];
+    while (i < str.length) {
+      var b, sh = 0, v = 0;
+      do { b = str.charCodeAt(i++) - 63; v |= (b & 31) << sh; sh += 5; } while (b >= 32);
+      lat += (v & 1) ? ~(v >> 1) : (v >> 1);
+      sh = 0; v = 0;
+      do { b = str.charCodeAt(i++) - 63; v |= (b & 31) << sh; sh += 5; } while (b >= 32);
+      lon += (v & 1) ? ~(v >> 1) : (v >> 1);
+      out.push([lon / f, lat / f]);
+    }
+    return out;
+  }
+  function busSuchen() {
+    var ziel = sel;
+    modus = 'bus'; routeInfo = null;
+    map.getSource('route').setData({ type: 'FeatureCollection', features: [] });
+    var los = function () {
+      bus = { laedt: true }; zeichneDetail();
+      fetch(TRANSIT + '?fromPlace=' + me[1] + ',' + me[0] + '&toPlace=' + ziel.lat + ',' + ziel.lon + '&numItineraries=5')
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (sel !== ziel) return;
+          var v = (j.itineraries || []).filter(function (it) { return it.legs.some(function (l) { return l.mode !== 'WALK'; }); }).slice(0, 4);
+          if (!v.length) throw new Error('keine');
+          bus = { verbindungen: v, wahl: 0 };
+          zeichneDetail(); busZeigen(true);
+        })
+        .catch(function () {
+          if (sel !== ziel) return;
+          bus = { fehler: 'Gerade keine Verbindung mit Bus oder Bahn gefunden. Vielleicht ist es zu Fuß schneller.' };
+          zeichneDetail();
+        });
+    };
+    if (me) return los();
+    bus = { laedt: true }; zeichneDetail();
+    standort(function (ok) {
+      if (ok) los(); else { bus = { fehler: 'Erlaube deinen Standort, damit wir Verbindungen suchen können.' }; zeichneDetail(); }
+    });
+  }
+  function abfahrt(l) {
+    var d = verspaetung(l.startTime, l.scheduledStartTime);
+    return l.cancelled ? '<s>' + uhr(l.scheduledStartTime) + '</s> <em class="aus">Fällt aus</em>'
+      : uhr(l.scheduledStartTime) + (l.realTime ? (d > 0 ? ' <em class="spaet">+' + d + ' Min.</em>' : ' <em class="puenktlich">pünktlich</em>') : '');
+  }
+  function busHtml() {
+    if (bus.laedt) return '<div class="route-info">Verbindungen werden gesucht …</div>';
+    if (bus.fehler) return '<div class="route-info">' + esc(bus.fehler) + '</div>';
+    var h = '<div class="bus-liste">' + bus.verbindungen.map(function (v, i) {
+      var fahrt = v.legs.filter(function (l) { return l.mode !== 'WALK'; }), erste = fahrt[0];
+      var aus = v.legs.some(function (l) { return l.cancelled; });
+      return '<button class="verb' + (i === bus.wahl ? ' aktiv' : '') + (aus ? ' faellt-aus' : '') + '" type="button" data-verb="' + i + '">' +
+        '<span class="v-zeit"><b>' + uhr(v.startTime) + ' – ' + uhr(v.endTime) + '</b><span>' + minuten(v.duration) + '</span></span>' +
+        '<span class="v-legs">' + v.legs.map(function (l) {
+          return l.mode === 'WALK' ? '<span class="v-fuss">🚶 ' + Math.max(1, Math.round(l.duration / 60)) + '</span>'
+            : '<span class="linie">' + esc(l.routeShortName || l.displayName || l.mode) + '</span>';
+        }).join('<i>›</i>') + '</span>' +
+        '<small>ab ' + esc(erste.from.name) + (erste.from.track ? ' · Steig ' + esc(erste.from.track) : '') + ' · ' + abfahrt(erste) + '</small></button>';
+    }).join('') + '</div>';
+    // Ablauf der gewählten Verbindung
+    var v = bus.verbindungen[bus.wahl];
+    h += '<ol class="bus-schritte">' + v.legs.map(function (l, i) {
+      if (l.mode === 'WALK') {
+        var bis = i === v.legs.length - 1 ? 'zum Ziel' : 'bis ' + esc(l.to.name);
+        return '<li><span class="sp">🚶</span><span>' + Math.max(1, Math.round(l.duration / 60)) + ' Min. zu Fuß ' + bis + '<small>' + meter(l.distance || 0) + '</small></span></li>';
+      }
+      var n = (l.intermediateStops || []).length + 1;
+      return '<li><span class="sp linie-rund">' + esc(l.routeShortName || '🚌') + '</span><span><b>' + (l.mode === 'BUS' ? 'Bus ' : '') + esc(l.displayName || l.routeShortName || '') + '</b> Richtung ' + esc(l.headsign || l.to.name) +
+        '<small>ab ' + esc(l.from.name) + (l.from.track ? ' (Steig ' + esc(l.from.track) + ')' : '') + ' · ' + abfahrt(l) + '</small>' +
+        '<small>' + n + (n === 1 ? ' Station' : ' Stationen') + ' bis ' + esc(l.to.name) + ' · an ' + uhr(l.endTime) + '</small></span></li>';
+    }).join('') + '</ol><p class="quelle">Fahrplan & Echtzeit: <a href="https://transitous.org/sources/" target="_blank" rel="noopener">Transitous</a> · Angaben ohne Gewähr</p>';
+    return h;
+  }
+  // Gewählte Verbindung auf die Karte: Fußwege gestrichelt, Bus & Bahn als farbiges Band
+  function busZeigen(einpassen) {
+    var v = bus.verbindungen[bus.wahl], b = new maplibregl.LngLatBounds(), stopps = [];
+    var feats = v.legs.map(function (l) {
+      var c = polyline(l.legGeometry.points, l.legGeometry.precision || 6);
+      c.forEach(function (p) { b.extend(p); });
+      if (l.mode !== 'WALK') stopps.push(l.from, l.to);
+      return { type: 'Feature', properties: { modus: l.mode === 'WALK' ? 'foot' : 'bus' }, geometry: { type: 'LineString', coordinates: c } };
+    });
+    map.getSource('route').setData({ type: 'FeatureCollection', features: feats });
+    map.getSource('schritte').setData({ type: 'FeatureCollection', features: stopps.map(function (st) {
+      return { type: 'Feature', properties: { nr: '' }, geometry: { type: 'Point', coordinates: [st.lon, st.lat] } };
+    }) });
+    if (einpassen) {
+      blatt('52vh');
+      map.fitBounds(b, { padding: { top: 130, bottom: window.innerHeight * 0.55, left: 40, right: 70 }, maxZoom: 16.5, duration: 800 });
+    }
   }
 
   // Weg mit Abbiege-Schritten holen; s.km = wo der Schritt entlang der Strecke beginnt
@@ -350,6 +453,8 @@
 
   function weg(k, danach) {
     if (!sel) return;
+    if (k === 'bus') return busSuchen();
+    bus = null;
     modus = k;
     var ziel = sel;
     var los = function () {
@@ -424,6 +529,7 @@
   }
 
   function navStart() {
+    if (modus === 'bus') modus = 'foot';
     if (!sel || !routeInfo || !routeInfo.route) return weg(modus, navStart);
     nav = { ziel: sel, modus: routeInfo.modus, route: routeInfo.route, schritt: -1, jetzt: false, folgen: true };
     document.body.classList.add('navigating');
@@ -711,7 +817,7 @@
     map.setLayoutProperty('baeume-nacht', 'visibility', name === 'nacht' ? 'visible' : 'none');
     map.setLight(STIL.licht);
     map.setPaintProperty('route-rand', 'line-color', STIL.wegRand);
-    map.setPaintProperty('route', 'line-color', STIL.weg);
+    map.setPaintProperty('route', 'line-color', ['case', ['==', ['get', 'modus'], 'bus'], STIL.bus, STIL.weg]);
     map.setPaintProperty('route-strich', 'line-color', STIL.wegStrich);
     map.setPaintProperty('firmen', 'circle-stroke-color', STIL.rand);
     map.setPaintProperty('firmen-name', 'text-color', STIL.text);
@@ -728,7 +834,7 @@
     $('sheetBody').innerHTML = '<p class="muted">Lade Geschäfte aus Erlangen …</p>';
     map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 16, pitch: 55, bearing: -20, maxPitch: 65, attributionControl: false });
     map.on('dragstart', function () { if (nav && nav.folgen) { nav.folgen = false; $('navMitte').hidden = false; } });
-    map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'Wege: <a href="https://routing.openstreetmap.de">FOSSGIS</a>' }), 'bottom-left');
+    map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'Wege: <a href="https://routing.openstreetmap.de">FOSSGIS</a> · Fahrplan: <a href="https://transitous.org/sources/">Transitous</a>' }), 'bottom-left');
 
     var bereit = new Promise(function (ok) { map.on('load', ok); });
     var daten = Promise.all([laden(), fetch('/map/profile.json').then(function (r) { return r.json(); }).catch(function () { return []; })]);
@@ -740,7 +846,7 @@
         paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 13, 7, 18, 16] } });
       map.addLayer({ id: 'route', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 13, 4.5, 18, 11] } });
-      map.addLayer({ id: 'route-strich', type: 'line', source: 'route', layout: { 'line-join': 'round' },
+      map.addLayer({ id: 'route-strich', type: 'line', source: 'route', filter: ['!=', ['get', 'modus'], 'bus'], layout: { 'line-join': 'round' },
         paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 13, 1, 18, 2.2], 'line-dasharray': [2, 2.5], 'line-opacity': 0.8 } });
       map.addSource('schritte', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
       map.addLayer({ id: 'schritte', type: 'circle', source: 'schritte', minzoom: 16, paint: { 'circle-radius': 9, 'circle-color': '#203c32', 'circle-stroke-color': '#ddf77b', 'circle-stroke-width': 2 } });
@@ -853,6 +959,14 @@
     var r = e.target.closest('.row'); if (r) return detail(r.dataset.id);
     var m = e.target.closest('[data-mode]'); if (m) return weg(m.dataset.mode);
     if (e.target.closest('[data-go]')) return navStart();
+    var vb = e.target.closest('[data-verb]');
+    if (vb) { bus.wahl = +vb.dataset.verb; zeichneDetail(); return busZeigen(true); }
+    if (e.target.closest('[data-haltestelle]')) {
+      var fahrt = bus.verbindungen[bus.wahl].legs.filter(function (l) { return l.mode !== 'WALK'; })[0].from;
+      var hs = { id: 'hs-' + fahrt.lat + fahrt.lon, adresse: true, kat: 'sonst', t: {}, lat: fahrt.lat, lon: fahrt.lon, name: fahrt.name, ort: 'Haltestelle' };
+      hs.dist = abstand(center, ll(hs)); byId[hs.id] = hs;
+      detail(hs.id); return weg('foot', navStart);
+    }
     if (e.target.closest('[data-chef-suche]')) { liste(); blatt('34vh'); return $('q').focus(); }
     if (e.target.closest('[data-back]') || e.target.closest('[data-alle]')) return zurueck();
     if (e.target.closest('[data-claim]')) return beitreten(sel);
