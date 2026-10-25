@@ -1,9 +1,17 @@
-/* SocialClip Map: Geschäfte in Erlangen entdecken (Daten: OpenStreetMap) */
+/* SocialClip Map: Geschäfte in Erlangen entdecken und hinfinden
+   Karte: OpenFreeMap · Firmen: OpenStreetMap (map/firmen.json, wöchentlich per GitHub Actions) · Wege: FOSSGIS-Routing */
 (function () {
-  var START = [49.5897, 11.0039];          // Erlangen Mitte
-  var RADIUS = 1000;                        // „In deiner Nähe“ in Metern
-  var CACHE_KEY = 'scmap-v1';
+  var START = [11.0039, 49.5897];           // Erlangen Mitte [Länge, Breite]
+  var RADIUS = 1000;                         // „In deiner Nähe“ in Metern
+  var STYLE = 'https://tiles.openfreemap.org/styles/liberty';
+  var ROUTER = 'https://routing.openstreetmap.de/routed-';
+  var CACHE_KEY = 'scmap-v1', OK_KEY = 'scmap-ok';
   var SERVERS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'];
+  var MODES = {
+    foot: { name: 'Zu Fuß', wie: 'zu Fuß', e: '🚶', apple: 'w', google: 'walking' },
+    bike: { name: 'Rad', wie: 'mit dem Rad', e: '🚲', apple: 'w', google: 'bicycling' },
+    car:  { name: 'Auto', wie: 'mit dem Auto', e: '🚗', apple: 'd', google: 'driving' }
+  };
 
   // Kategorien: Symbol, Farbe und welche OSM-Merkmale dazugehören
   var CATS = {
@@ -23,23 +31,25 @@
   };
   var ORDER = ['essen', 'lebensm', 'schoen', 'gesund', 'handwerk', 'auto', 'mode', 'wohnen', 'technik', 'web', 'dienst', 'freizeit', 'sonst'];
 
-  // Deutsche Namen für häufige Arten (für Liste und Popup)
+  // Deutsche Namen für häufige Arten
   var ART = {
     restaurant: 'Restaurant', cafe: 'Café', fast_food: 'Imbiss', bar: 'Bar', pub: 'Kneipe', ice_cream: 'Eisdiele', biergarten: 'Biergarten',
     bakery: 'Bäckerei', butcher: 'Metzgerei', supermarket: 'Supermarkt', convenience: 'Laden', greengrocer: 'Obst & Gemüse', kiosk: 'Kiosk', beverages: 'Getränke',
     hairdresser: 'Friseur', beauty: 'Kosmetik', cosmetics: 'Kosmetik', massage: 'Massage', tattoo: 'Tattoo', nails: 'Nagelstudio',
-    doctors: 'Arztpraxis', dentist: 'Zahnarzt', pharmacy: 'Apotheke', veterinary: 'Tierarzt', optician: 'Optiker', physiotherapist: 'Physiotherapie',
+    doctors: 'Arztpraxis', clinic: 'Praxis & Klinik', physiotherapy: 'Physiotherapie', psychotherapist: 'Psychotherapie', alternative: 'Heilpraktiker', hearing_aids: 'Hörakustik', dentist: 'Zahnarzt', pharmacy: 'Apotheke', veterinary: 'Tierarzt', optician: 'Optiker', physiotherapist: 'Physiotherapie',
     car: 'Autohandel', car_repair: 'Autowerkstatt', tyres: 'Reifen', bicycle: 'Fahrradladen', car_wash: 'Waschanlage', fuel: 'Tankstelle',
     clothes: 'Mode', shoes: 'Schuhe', jewelry: 'Schmuck', tailor: 'Schneiderei', florist: 'Blumen', books: 'Buchhandlung', gift: 'Geschenke', furniture: 'Möbel',
     electronics: 'Elektronik', mobile_phone: 'Handyladen', computer: 'Computer', photo: 'Foto',
     it: 'IT-Firma', advertising_agency: 'Werbeagentur', graphic_design: 'Grafikdesign', photographer: 'Fotograf', printer: 'Druckerei', copyshop: 'Copyshop',
     electrician: 'Elektriker', plumber: 'Installateur', carpenter: 'Schreiner', painter: 'Maler', roofer: 'Dachdecker', locksmith: 'Schlüsseldienst', hvac: 'Heizung & Klima',
-    bank: 'Bank', post_office: 'Post', driving_school: 'Fahrschule', lawyer: 'Anwalt', tax_advisor: 'Steuerberatung', insurance: 'Versicherung', estate_agent: 'Makler',
+    company: 'Firma', bank: 'Bank', post_office: 'Post', driving_school: 'Fahrschule', lawyer: 'Anwalt', tax_advisor: 'Steuerberatung', insurance: 'Versicherung', estate_agent: 'Makler',
     fitness_centre: 'Fitnessstudio', sports: 'Sportgeschäft', pet: 'Tierbedarf', laundry: 'Wäscherei', travel_agency: 'Reisebüro'
   };
 
   var $ = function (id) { return document.getElementById(id); };
-  var map, layer, meMarker, center = START, all = [], stars = [], aktiv = null, markers = {};
+  var map, all = [], byId = {}, center = START, me = null, meMarker = null, selMarker = null;
+  var aktiv = null, sel = null, modus = 'foot', routeInfo = null, starMarkers = [];
+  var IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
@@ -53,183 +63,299 @@
     }
     return 'sonst';
   }
-
-  function art(t) {
-    var v = t.shop || t.amenity || t.craft || t.office || t.healthcare || t.leisure || '';
-    return ART[v] || (v ? v.replace(/_/g, ' ') : 'Geschäft');
+  function art(f) {
+    if (f.star) return f.slogan || CATS[f.kat].name;
+    var t = f.t, v = t.shop || t.amenity || t.craft || t.office || t.healthcare || t.leisure || '';
+    return ART[v] || (v ? v.charAt(0).toUpperCase() + v.slice(1).replace(/_/g, ' ') : 'Geschäft');
   }
-
   function abstand(a, b) {
-    var R = 6371000, r = Math.PI / 180;
-    var dLat = (b[0] - a[0]) * r, dLon = (b[1] - a[1]) * r;
-    var x = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var R = 6371000, r = Math.PI / 180, dLat = (b[1] - a[1]) * r, dLon = (b[0] - a[0]) * r;
+    var x = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a[1] * r) * Math.cos(b[1] * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     return 2 * R * Math.asin(Math.sqrt(x));
   }
   function meter(m) { return m < 1000 ? Math.round(m / 10) * 10 + ' m' : (m / 1000).toFixed(1).replace('.', ',') + ' km'; }
+  function minuten(s) { var m = Math.max(1, Math.round(s / 60)); return m < 60 ? m + ' Min.' : Math.floor(m / 60) + ' Std. ' + (m % 60) + ' Min.'; }
+  function blatt(h) { document.documentElement.style.setProperty('--sheet', h); setTimeout(function () { map && map.resize(); }, 320); }
+  function ll(f) { return [f.lon, f.lat]; }
 
-  // Daten laden: zuerst die fertige Datei (wöchentlich per GitHub Actions erzeugt),
-  // sonst Zwischenspeicher (1 Tag), sonst kleinere Live-Abfrage bei OpenStreetMap
+  // ---------- Daten ----------
   function laden() {
     return fetch('/map/firmen.json', { cache: 'no-cache' })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (d) { if (!d.length) throw new Error('leer'); return d; })
       .catch(live);
   }
-
   function live() {
     try {
       var c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
       if (c && Date.now() - c.zeit < 864e5) return Promise.resolve(c.daten);
     } catch (e) {}
-    var um = '(around:2000,' + START[0] + ',' + START[1] + ')';
-    var q = '[out:json][timeout:25];(' +
-      ['shop', 'craft', 'office', 'healthcare'].map(function (k) { return 'nwr["' + k + '"]["name"]' + um + ';'; }).join('') +
-      'nwr["amenity"~"^(restaurant|cafe|fast_food|bar|pub|ice_cream|biergarten|doctors|dentist|pharmacy|clinic|veterinary|car_wash|fuel|car_rental|bank|post_office|driving_school)$"]["name"]' + um + ';' +
-      ');out center tags;';
+    var um = '(around:2000,' + START[1] + ',' + START[0] + ')';
+    var q = '[out:json][timeout:25];(' + ['shop', 'craft', 'office', 'healthcare', 'amenity'].map(function (k) { return 'nwr["' + k + '"]["name"]' + um + ';'; }).join('') + ');out center tags;';
     var versuch = function (i) {
-      var ctrl = window.AbortController ? new AbortController() : null;
-      var uhr = ctrl && setTimeout(function () { ctrl.abort(); }, 30000);
-      return fetch(SERVERS[i] + '?data=' + encodeURIComponent(q), ctrl ? { signal: ctrl.signal } : {})
-        .then(function (r) { clearTimeout(uhr); if (!r.ok) throw new Error(r.status); return r.json(); })
-        .catch(function (e) { clearTimeout(uhr); if (i + 1 < SERVERS.length) return versuch(i + 1); throw e; });
+      return fetch(SERVERS[i] + '?data=' + encodeURIComponent(q))
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(function (e) { if (i + 1 < SERVERS.length) return versuch(i + 1); throw e; });
     };
     return versuch(0).then(function (j) {
       var daten = j.elements.map(function (e) {
         var lat = e.lat || (e.center && e.center.lat), lon = e.lon || (e.center && e.center.lon);
-        if (!lat) return null;
-        return { id: e.type + e.id, name: e.tags.name, lat: lat, lon: lon, t: e.tags };
+        return lat ? { id: e.type + e.id, name: e.tags.name, lat: lat, lon: lon, t: e.tags } : null;
       }).filter(Boolean);
       try { localStorage.setItem(CACHE_KEY, JSON.stringify({ zeit: Date.now(), daten: daten })); } catch (e) {}
       return daten;
     });
   }
 
-  function popup(f) {
-    var t = f.t || {}, h = '<div class="pop">';
-    if (f.star) {
-      if (f.bild) h += '<img src="' + esc(f.bild) + '" alt="">';
-      h += '<h3>⭐ ' + esc(f.name) + '</h3><div class="k">' + esc(f.slogan || '') + '</div>';
-      if (f.story) h += '<p style="margin-top:6px">' + esc(f.story) + '</p>';
-      if (f.kann) h += '<p style="margin-top:6px"><b>Das kann ich:</b> ' + f.kann.map(esc).join(' · ') + '</p>';
-      if (f.aktion) h += '<p style="margin-top:6px;color:#b25a24">🔥 ' + esc(f.aktion) + '</p>';
-    } else {
-      h += '<h3>' + esc(f.name) + '</h3><div class="k">' + esc(art(t)) + '</div>';
-      var adr = [t['addr:street'] && (t['addr:street'] + ' ' + (t['addr:housenumber'] || '')), t['addr:city']].filter(Boolean).join(', ');
-      if (adr) h += '<div>' + esc(adr) + '</div>';
-      if (t.opening_hours) h += '<div class="k">🕒 ' + esc(t.opening_hours) + '</div>';
-    }
-    var web = f.web || t.website || t['contact:website'], tel = f.telefon || t.phone || t['contact:phone'];
-    h += '<div class="acts">';
-    if (f.whatsapp) h += '<a href="https://wa.me/' + esc(f.whatsapp) + '">WhatsApp</a>';
-    if (tel) h += '<a href="tel:' + esc(tel.replace(/[^+\d]/g, '')) + '">Anrufen</a>';
-    if (web && /^https?:\/\//.test(web)) h += '<a href="' + esc(web) + '" target="_blank" rel="noopener">Website</a>';
-    h += '<a href="https://www.openstreetmap.org/directions?to=' + f.lat + ',' + f.lon + '" target="_blank" rel="noopener">Route</a></div>';
-    if (!f.star) h += '<a class="claim" href="https://wa.me/4917646188101?text=' + encodeURIComponent('Hallo SocialClip, ich bin von „' + f.name + '“ und möchte mein Schaufenster-Profil auf der SocialClip Map.') + '">Ist das dein Geschäft? Schaufenster-Profil holen →</a>';
-    return h + '</div>';
-  }
-
-  function zeichnen() {
-    layer.clearLayers(); markers = {};
-    all.forEach(function (f) {
-      var c = CATS[f.kat];
-      var icon = f.star
-        ? L.divIcon({ className: '', html: '<div class="pin-star">' + c.ico + '</div>', iconSize: [30, 30], iconAnchor: [15, 15] })
-        : L.divIcon({ className: '', html: '<div class="pin" style="background:' + c.farbe + '"></div>', iconSize: [14, 14], iconAnchor: [7, 7] });
-      var m = L.marker([f.lat, f.lon], { icon: icon, zIndexOffset: f.star ? 1000 : 0, title: f.name }).bindPopup(popup(f), { maxWidth: 280 });
-      markers[f.id] = m;
-    });
-    filtern();
-  }
-
+  // ---------- Filter & Liste ----------
   function passt(f, q) {
     if (aktiv && f.kat !== aktiv) return false;
     if (!q) return true;
-    var text = [f.name, art(f.t || {}), CATS[f.kat].name, (f.kann || []).join(' '), f.slogan, (f.t || {}).cuisine, (f.t || {}).description].join(' ').toLowerCase();
+    var text = [f.name, art(f), CATS[f.kat].name, (f.kann || []).join(' '), f.t.cuisine, f.t.description].join(' ').toLowerCase();
     return q.split(/\s+/).every(function (w) { return text.indexOf(w) !== -1; });
   }
-
-  function filtern() {
+  function treffer() {
     var q = $('q').value.trim().toLowerCase();
-    layer.clearLayers();
-    var treffer = all.filter(function (f) { return passt(f, q); });
-    treffer.forEach(function (f) { layer.addLayer(markers[f.id]); });
+    return all.filter(function (f) { return passt(f, q); });
+  }
 
-    // Zählung „In deiner Nähe“ pro Kategorie
-    var nah = all.filter(function (f) { return f.dist <= RADIUS; }), zahl = {};
-    nah.forEach(function (f) { zahl[f.kat] = (zahl[f.kat] || 0) + 1; });
+  function kartenDaten(liste) {
+    var src = map && map.getSource('firmen');
+    if (!src) return;
+    src.setData({ type: 'FeatureCollection', features: liste.filter(function (f) { return !f.star; }).map(function (f) {
+      return { type: 'Feature', id: f.n, properties: { id: f.id, farbe: CATS[f.kat].farbe, name: f.name }, geometry: { type: 'Point', coordinates: ll(f) } };
+    }) });
+    var sichtbar = {};
+    liste.forEach(function (f) { if (f.star) sichtbar[f.id] = 1; });
+    starMarkers.forEach(function (m) { m.getElement().style.display = sichtbar[m._id] ? '' : 'none'; });
+  }
+
+  function kategorien() {
+    var zahl = {};
+    all.forEach(function (f) { if (f.dist <= RADIUS) zahl[f.kat] = (zahl[f.kat] || 0) + 1; });
     $('cats').innerHTML = ORDER.filter(function (k) { return zahl[k] || aktiv === k; }).map(function (k) {
       return '<button class="cat" type="button" data-k="' + k + '" aria-pressed="' + (aktiv === k) + '">' + CATS[k].ico + ' ' + CATS[k].name + ' <b>' + (zahl[k] || 0) + '</b></button>';
     }).join('');
-    $('nearTitle').textContent = 'Im Umkreis von 1 km: ' + nah.length + ' Geschäfte';
+  }
 
-    var liste = treffer.slice().sort(function (a, b) { return (b.star - a.star) || (a.dist - b.dist); }).slice(0, 40);
-    $('status').textContent = treffer.length
-      ? treffer.length + ' Treffer' + (aktiv ? ' in „' + CATS[aktiv].name + '“' : '') + (q ? ' für „' + q + '“' : '') + ' – die nächsten zuerst.'
-      : 'Nichts gefunden. Probier ein anderes Wort oder eine andere Kategorie.';
-    $('list').innerHTML = liste.map(function (f) {
+  function liste() {
+    sel = null; routeWeg(); if (selMarker) { selMarker.remove(); selMarker = null; }
+    var tr = treffer(), q = $('q').value.trim();
+    kartenDaten(tr); kategorien();
+    var nah = tr.filter(function (f) { return f.dist <= RADIUS; }).length;
+    var sorted = tr.slice().sort(function (a, b) { return (b.star - a.star) || (a.dist - b.dist); }).slice(0, 60);
+    var titel = q ? '„' + esc(q) + '“' : aktiv ? CATS[aktiv].ico + ' ' + CATS[aktiv].name : 'In deiner Nähe';
+    var h = '<h2>' + titel + '</h2><p class="sum muted">' + (tr.length
+      ? nah + ' im Umkreis von 1 km' + (me ? '' : ' um die Innenstadt') + ' · ' + tr.length + ' in Erlangen'
+      : 'Nichts gefunden – probier ein anderes Wort.') + '</p>';
+    h += sorted.map(function (f) {
       var c = CATS[f.kat];
-      if (f.star) return '<button class="item star" type="button" data-id="' + f.id + '">' + (f.bild ? '<img src="' + esc(f.bild) + '" alt="">' : '') +
-        '<span class="badge">⭐ Schaufenster</span><h3>' + esc(f.name) + '</h3><p>' + esc(f.slogan || '') + '</p>' +
-        '<div class="kann">' + (f.kann || []).map(function (k) { return '<span>' + esc(k) + '</span>'; }).join('') + '</div>' +
-        (f.aktion ? '<div class="aktion">🔥 ' + esc(f.aktion) + '</div>' : '') + '<div class="meta">' + meter(f.dist) + ' entfernt</div></button>';
-      return '<button class="item" type="button" data-id="' + f.id + '"><h3>' + c.ico + ' ' + esc(f.name) + '</h3><p>' + esc(art(f.t)) + '</p><div class="meta">' + meter(f.dist) + ' entfernt</div></button>';
+      return '<button class="row' + (f.star ? ' star' : '') + '" type="button" data-id="' + f.id + '">' +
+        '<span class="ic" style="background:' + c.farbe + '22">' + (f.star ? '⭐' : c.ico) + '</span>' +
+        '<span class="tx"><b>' + esc(f.name) + '</b><span>' + esc(art(f)) + '</span></span>' +
+        '<span class="dist">' + meter(f.dist) + '</span></button>';
     }).join('');
+    h += '<button class="join-link" type="button" data-join>⭐ <b>Dein Geschäft hier zeigen?</b><br><span class="muted">Mit goldenem Pin, Foto und „Das kann ich“ – zum Start kostenlos.</span></button>';
+    $('sheetBody').innerHTML = h;
+    $('sheetBody').scrollTop = 0;
   }
 
-  function zeigen(id) {
-    var m = markers[id]; if (!m) return;
-    map.setView(m.getLatLng(), Math.max(map.getZoom(), 17));
-    m.openPopup();
-    $('map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // ---------- Detail & Weg ----------
+  function detail(id) {
+    var f = byId[id]; if (!f) return;
+    sel = f; routeWeg();
+    if (selMarker) selMarker.remove(); selMarker = null;
+    if (!f.star) {
+      var el = document.createElement('div'); el.className = 'pin-sel';
+      selMarker = new maplibregl.Marker({ element: el, anchor: 'bottom', offset: [0, 4] }).setLngLat(ll(f)).addTo(map);
+    }
+    blatt('52vh');
+    map.flyTo({ center: ll(f), zoom: Math.max(map.getZoom(), 16), padding: { bottom: window.innerHeight * 0.45 }, duration: 700 });
+    zeichneDetail();
   }
 
-  function neuerMittelpunkt(p) {
-    center = p;
-    all.forEach(function (f) { f.dist = abstand(center, [f.lat, f.lon]); });
-    filtern();
+  function zeichneDetail() {
+    var f = sel, t = f.t, c = CATS[f.kat];
+    var adr = [t['addr:street'] && (t['addr:street'] + ' ' + (t['addr:housenumber'] || '')).trim(), t['addr:city']].filter(Boolean).join(', ') || f.ort || '';
+    var web = f.web || t.website || t['contact:website'], tel = f.telefon || t.phone || t['contact:phone'];
+    var h = '<div class="det"><button class="back" type="button" data-back>‹ Zurück zur Liste</button>';
+    if (f.star && f.bild) h += '<img class="hero" src="' + esc(f.bild) + '" alt="">';
+    if (f.star) h += '<span class="badge">⭐ Schaufenster</span>';
+    h += '<h2>' + esc(f.name) + '</h2><p class="kind">' + c.ico + ' ' + esc(art(f)) + ' · ' + meter(f.dist) + '</p>';
+
+    h += '<div class="modes">' + Object.keys(MODES).map(function (k) {
+      var info = routeInfo && routeInfo.modus === k && routeInfo.dauer ? minuten(routeInfo.dauer) : MODES[k].name;
+      return '<button class="mode" type="button" data-mode="' + k + '" aria-pressed="' + (routeInfo && routeInfo.modus === k) + '"><span class="e">' + MODES[k].e + '</span><b>' + info + '</b></button>';
+    }).join('') + '</div>';
+    if (routeInfo && routeInfo.fehler) h += '<div class="route-info">' + esc(routeInfo.fehler) + '</div>';
+    else if (routeInfo && routeInfo.laedt) h += '<div class="route-info">Weg wird berechnet …</div>';
+    else if (routeInfo) h += '<div class="route-info"><b>' + minuten(routeInfo.dauer) + '</b> · ' + meter(routeInfo.strecke) + ' ' + MODES[routeInfo.modus].wie + '</div>';
+
+    var navUrl = IOS
+      ? 'https://maps.apple.com/?daddr=' + f.lat + ',' + f.lon + '&dirflg=' + MODES[modus].apple
+      : 'https://www.google.com/maps/dir/?api=1&destination=' + f.lat + ',' + f.lon + '&travelmode=' + MODES[modus].google;
+    h += '<div class="acts"><a class="act main" href="' + navUrl + '" target="_blank" rel="noopener">➤ Navigation starten</a>';
+    if (f.whatsapp) h += '<a class="act" href="https://wa.me/' + esc(f.whatsapp) + '">💬 WhatsApp</a>';
+    if (tel) h += '<a class="act" href="tel:' + esc(tel.replace(/[^+\d]/g, '')) + '">📞 Anrufen</a>';
+    if (web && /^https?:\/\//.test(web)) h += '<a class="act" href="' + esc(web) + '" target="_blank" rel="noopener">🌐 Website</a>';
+    h += '</div>';
+
+    if (f.star) {
+      if (f.aktion) h += '<p class="deal">🔥 ' + esc(f.aktion) + '</p>';
+      if (f.story) h += '<p>' + esc(f.story) + '</p>';
+      if (f.kann) h += '<p><b>Das kann ich:</b></p><div class="tags">' + f.kann.map(function (k) { return '<span>' + esc(k) + '</span>'; }).join('') + '</div>';
+    }
+    h += '<div class="info">';
+    if (adr) h += '<div>📍 ' + esc(adr) + '</div>';
+    if (t.opening_hours) h += '<div>🕒 ' + esc(t.opening_hours) + '</div>';
+    if (t.cuisine) h += '<div>🍴 ' + esc(t.cuisine.replace(/;/g, ', ').replace(/_/g, ' ')) + '</div>';
+    h += '</div>';
+    if (!f.star) h += '<a class="claim" href="https://wa.me/4917646188101?text=' + encodeURIComponent('Hallo SocialClip, ich bin von „' + f.name + '“ und möchte ein Schaufenster-Profil auf der SocialClip Map.') + '">Ist das dein Geschäft? Hol dir das ⭐ Schaufenster-Profil →</a>';
+    $('sheetBody').innerHTML = h + '</div>';
   }
 
-  function start() {
-    $('gate').hidden = true;
-    map = L.map('map', { zoomControl: true }).setView(START, 15);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
-    layer = L.layerGroup().addTo(map);
-    $('status').textContent = 'Lade Geschäfte aus Erlangen …';
+  function routeWeg() {
+    routeInfo = null;
+    var src = map && map.getSource('route');
+    if (src) src.setData({ type: 'FeatureCollection', features: [] });
+  }
 
-    Promise.all([
-      laden(),
-      fetch('/map/profile.json').then(function (r) { return r.json(); }).catch(function () { return []; })
-    ]).then(function (res) {
-      stars = res[1].map(function (p) { p.star = true; p.id = 'p-' + p.id; p.kat = CATS[p.kategorie] ? p.kategorie : 'sonst'; p.t = {}; return p; });
-      all = res[0].map(function (f) { f.star = false; f.kat = kategorie(f.t); return f; }).concat(stars);
-      all.forEach(function (f) { f.dist = abstand(center, [f.lat, f.lon]); });
-      zeichnen();
-    }).catch(function () {
-      $('status').textContent = 'Die Firmendaten konnten gerade nicht geladen werden. Bitte später noch einmal versuchen.';
+  function weg(k) {
+    if (!sel) return;
+    modus = k;
+    var ziel = sel;
+    var los = function () {
+      routeInfo = { modus: k, laedt: true }; zeichneDetail();
+      fetch(ROUTER + k + '/route/v1/driving/' + me.join(',') + ';' + ziel.lon + ',' + ziel.lat + '?overview=full&geometries=geojson')
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (sel !== ziel) return;
+          if (j.code !== 'Ok' || !j.routes.length) throw new Error(j.code);
+          var r = j.routes[0];
+          routeInfo = { modus: k, dauer: r.duration, strecke: r.distance };
+          map.getSource('route').setData({ type: 'Feature', properties: { modus: k }, geometry: r.geometry });
+          var b = new maplibregl.LngLatBounds();
+          r.geometry.coordinates.forEach(function (p) { b.extend(p); });
+          blatt('40vh');
+          map.fitBounds(b, { padding: { top: 130, bottom: window.innerHeight * 0.42, left: 40, right: 70 }, maxZoom: 17, duration: 800 });
+          zeichneDetail();
+        })
+        .catch(function () {
+          if (sel !== ziel) return;
+          routeInfo = { modus: k, fehler: 'Der Weg konnte gerade nicht berechnet werden. Tippe auf „Navigation starten“.' };
+          zeichneDetail();
+        });
+    };
+    if (me) return los();
+    routeInfo = { modus: k, laedt: true }; zeichneDetail();
+    standort(function (ok) {
+      if (ok) los();
+      else { routeInfo = { modus: k, fehler: 'Erlaube deinen Standort, damit wir den Weg berechnen können – oder tippe auf „Navigation starten“.' }; zeichneDetail(); }
     });
   }
 
+  // ---------- Standort ----------
+  function standort(fertig) {
+    if (!navigator.geolocation) return fertig && fertig(false);
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      me = [pos.coords.longitude, pos.coords.latitude];
+      if (!meMarker) {
+        var el = document.createElement('div'); el.className = 'me';
+        meMarker = new maplibregl.Marker({ element: el }).setLngLat(me).addTo(map);
+      } else meMarker.setLngLat(me);
+      // Nur innerhalb von Erlangen als Mittelpunkt nutzen
+      center = abstand(me, START) < 15000 ? me : START;
+      all.forEach(function (f) { f.dist = abstand(center, ll(f)); });
+      fertig && fertig(true);
+    }, function () { fertig && fertig(false); }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 });
+  }
+
+  // ---------- Karte ----------
+  function start() {
+    $('gate').hidden = true;
+    try { localStorage.setItem(OK_KEY, '1'); } catch (e) {}
+    blatt('34vh');
+    $('sheetBody').innerHTML = '<p class="muted">Lade Geschäfte aus Erlangen …</p>';
+    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 15, attributionControl: false, pitchWithRotate: false });
+    map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'Wege: <a href="https://routing.openstreetmap.de">FOSSGIS</a>' }), 'bottom-left');
+
+    var bereit = new Promise(function (ok) { map.on('load', ok); });
+    var daten = Promise.all([laden(), fetch('/map/profile.json').then(function (r) { return r.json(); }).catch(function () { return []; })]);
+
+    bereit.then(function () {
+      // Eingebaute POI-Symbole der Grundkarte ausblenden, damit unsere Punkte klar sind
+      map.getStyle().layers.forEach(function (l) { if (/poi/i.test(l.id)) map.setLayoutProperty(l.id, 'visibility', 'none'); });
+      map.addSource('route', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+      map.addLayer({ id: 'route-rand', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#0b57d0', 'line-width': 9 } });
+      map.addLayer({ id: 'route', type: 'line', source: 'route', filter: ['!=', ['get', 'modus'], 'foot'], layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': '#4f8ff7', 'line-width': 6 } });
+      // Zu Fuß: gepunktete Linie wie bei Google Maps
+      map.setFilter('route-rand', ['!=', ['get', 'modus'], 'foot']);
+      map.addLayer({ id: 'route-fuss', type: 'line', source: 'route', filter: ['==', ['get', 'modus'], 'foot'], layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': '#1a73e8', 'line-width': 7, 'line-dasharray': [0.1, 1.8] } });
+      map.addSource('firmen', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+      map.addLayer({ id: 'firmen', type: 'circle', source: 'firmen', paint: {
+        'circle-color': ['get', 'farbe'],
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 2.5, 14, 4.5, 17, 8],
+        'circle-stroke-color': '#fff', 'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 11, 0.5, 15, 1.5]
+      } });
+      map.addLayer({ id: 'firmen-name', type: 'symbol', source: 'firmen', minzoom: 16.5, layout: {
+        'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': 12, 'text-offset': [0, 1.1], 'text-anchor': 'top', 'text-optional': true
+      }, paint: { 'text-color': '#333', 'text-halo-color': '#fff', 'text-halo-width': 1.5 } });
+      map.on('click', 'firmen', function (e) { detail(e.features[0].properties.id); });
+      map.on('mouseenter', 'firmen', function () { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'firmen', function () { map.getCanvas().style.cursor = ''; });
+      return daten;
+    }).then(function (res) {
+      var stars = res[1].map(function (p) { p.star = true; p.id = 'p-' + p.id; p.kat = CATS[p.kategorie] ? p.kategorie : 'sonst'; p.t = {}; return p; });
+      all = res[0].map(function (f) { f.star = false; f.kat = kategorie(f.t); return f; }).concat(stars);
+      all.forEach(function (f, i) { f.n = i; f.dist = abstand(center, ll(f)); byId[f.id] = f; });
+      stars.forEach(function (f) {
+        var el = document.createElement('div'); el.className = 'pin-star'; el.innerHTML = '<span>' + CATS[f.kat].ico + '</span>';
+        el.title = f.name;
+        el.addEventListener('click', function (e) { e.stopPropagation(); detail(f.id); });
+        var m = new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat(ll(f)).addTo(map);
+        m._id = f.id; starMarkers.push(m);
+      });
+      liste();
+    }).catch(function () {
+      $('sheetBody').innerHTML = '<p class="muted">Die Geschäfte konnten gerade nicht geladen werden. Bitte später noch einmal versuchen.</p>';
+    });
+  }
+
+  // ---------- Bedienung ----------
   $('load').addEventListener('click', start);
-  $('q').addEventListener('input', function () { if (map) filtern(); });
+  $('grip').addEventListener('click', function () {
+    var jetzt = getComputedStyle(document.documentElement).getPropertyValue('--sheet').trim();
+    blatt(jetzt === '78vh' ? '34vh' : '78vh');
+  });
+  $('q').addEventListener('input', function () { if (all.length) { liste(); blatt('52vh'); } });
+  $('q').addEventListener('keydown', function (e) { if (e.key === 'Enter') e.target.blur(); });
   $('cats').addEventListener('click', function (e) {
     var b = e.target.closest('.cat'); if (!b) return;
-    aktiv = aktiv === b.dataset.k ? null : b.dataset.k; filtern();
+    aktiv = aktiv === b.dataset.k ? null : b.dataset.k; liste();
   });
-  $('list').addEventListener('click', function (e) { var b = e.target.closest('.item'); if (b) zeigen(b.dataset.id); });
+  $('sheetBody').addEventListener('click', function (e) {
+    var r = e.target.closest('.row'); if (r) return detail(r.dataset.id);
+    var m = e.target.closest('[data-mode]'); if (m) return weg(m.dataset.mode);
+    if (e.target.closest('[data-back]')) { blatt('34vh'); return liste(); }
+    if (e.target.closest('[data-join]')) $('join').hidden = false;
+  });
+  $('join').addEventListener('click', function (e) { if (e.target === this || e.target.closest('[data-close]')) this.hidden = true; });
   $('locate').addEventListener('click', function () {
-    if (!map) start();
-    if (!navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition(function (pos) {
-      var p = [pos.coords.latitude, pos.coords.longitude];
-      if (meMarker) meMarker.remove();
-      meMarker = L.marker(p, { icon: L.divIcon({ className: '', html: '<div class="me"></div>', iconSize: [16, 16], iconAnchor: [8, 8] }) }).addTo(map);
-      map.setView(p, 16);
-      if (all.length) neuerMittelpunkt(p); else center = p;
-    }, function () { $('status').textContent = 'Standort nicht freigegeben – wir zeigen Erlangen Mitte.'; });
+    if (!map) return start();
+    standort(function (ok) {
+      if (!ok) { alert('Standort nicht verfügbar. Bitte erlaube den Standortzugriff in deinem Browser.'); return; }
+      map.flyTo({ center: me, zoom: 16 });
+      if (sel) zeichneDetail(); else liste();
+    });
   });
   $('surprise').addEventListener('click', function () {
-    if (!map) { start(); return; }
+    if (!all.length) return;
     var nah = all.filter(function (f) { return f.dist <= RADIUS * 1.5 && f.kat !== 'sonst'; });
-    if (nah.length) zeigen(nah[Math.floor(Math.random() * nah.length)].id);
+    if (nah.length) detail(nah[Math.floor(Math.random() * nah.length)].id);
   });
+
+  // Wer schon einmal zugestimmt hat, sieht die Karte direkt
+  try { if (localStorage.getItem(OK_KEY)) start(); } catch (e) {}
 })();
