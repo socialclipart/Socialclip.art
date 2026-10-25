@@ -615,7 +615,7 @@
       if (plaetze.length >= 12) return false;
       var p = map.project(ll(f));
       // nicht unter der Liste oder unter Suche/Kategorien verstecken
-      if (p.y < oben || p.x < 95 || p.x > innerWidth - 95 || (p.x > liste.left && p.x < liste.right && p.y > liste.top)) return false;
+      if (p.y < oben || p.x < 95 || p.x > innerWidth - 95 || (p.x > liste.left - 100 && p.x < liste.right + 100 && p.y > liste.top - 60)) return false;
       if (plaetze.some(function (q) { return Math.abs(q.x - p.x) < 60 && Math.abs(q.y - p.y) < 30; })) return false;
       plaetze.push(p); return true;
     });
