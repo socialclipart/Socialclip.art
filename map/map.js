@@ -10,6 +10,8 @@
   var stadt = 'erlangen';
   try { if (STAEDTE[localStorage.getItem('scmap-stadt')]) stadt = localStorage.getItem('scmap-stadt'); } catch (e) {}
   var START = STAEDTE[stadt].mitte;
+  // Besuchszähler: zählt nur, wenn die Statistik erlaubt wurde (analytics-consent.js)
+  function zaehle(name) { try { if (window.gtag) window.gtag('event', name); } catch (e) {} }
   var RADIUS = 1000;                         // „In deiner Nähe“ in Metern
   var STYLE = 'https://tiles.openfreemap.org/styles/positron';   // schlichte Grundkarte, Farben setzt gestalten()
   // Kartenstile Tag (hell, Farben aus der VIERTEL-Designstudie) und Nacht (Neon).
@@ -607,6 +609,7 @@
   function navStart() {
     if (modus === 'bus') modus = 'foot';
     if (!sel || !routeInfo || !routeInfo.route) return weg(modus, navStart);
+    zaehle('map_navigation');
     nav = { ziel: sel, modus: routeInfo.modus, route: routeInfo.route, schritt: -1, jetzt: false, folgen: true };
     document.body.classList.add('navigating');
     $('nav').hidden = false; $('navMitte').hidden = true;
@@ -681,6 +684,7 @@
   function naechsteFahrt(ab) { var L = nav.reise.v.legs; for (var j = ab; j < L.length; j++) if (L[j].mode !== 'WALK') return L[j]; return null; }
 
   function reiseStart() {
+    zaehle('map_bus_bahn');
     var v = bus.verbindungen[bus.wahl];
     nav = { ziel: sel, zielEcht: sel, modus: 'foot', route: null, schritt: -1, jetzt: false, folgen: true,
       reise: { v: v, i: 0, gefragt: {}, phase: '' } };
@@ -1151,6 +1155,7 @@
   }
   // Bereich für Geschäftsführer im unteren Blatt
   function chefStart() {
+    zaehle('map_geschaeftsfuehrer');
     sel = null; routeWeg(); if (selMarker) { selMarker.remove(); selMarker = null; }
     blatt('52vh');
     $('sheetBody').innerHTML = '<div class="chef"><button class="back" type="button" data-alle>‹ Erst mal nur umschauen</button>' +

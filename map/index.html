@@ -162,7 +162,7 @@ try { if (localStorage.getItem('scmap-beta-ok') !== 'ac3dcd8395bd54240145346c441
       <li>💬 Ein Tipp zu WhatsApp, Anruf oder Weg</li>
     </ul>
     <p class="small">Zum Start kostenlos für die ersten Betriebe aus Nürnberg, Fürth und Erlangen – wir machen sogar das Foto.</p>
-    <form id="joinForm" class="form" action="https://formspree.io/f/xwlvlqwg" method="POST">
+    <form id="joinForm" onsubmit="window.gtag&&gtag('event','map_profil_anfrage')" class="form" action="https://formspree.io/f/xwlvlqwg" method="POST">
       <input type="hidden" name="_subject" value="SocialClip Map: Profil-Anfrage">
       <input type="hidden" name="quelle" value="SocialClip Map">
       <input type="hidden" name="eintrag">
@@ -183,6 +183,21 @@ try { if (localStorage.getItem('scmap-beta-ok') !== 'ac3dcd8395bd54240145346c441
 
 <noscript><p class="nojs">Die SocialClip Map braucht JavaScript.</p></noscript>
 <script src="/map/lib/maplibre-gl.js"></script>
-<script src="/map/map.js?v=15"></script>
+<script src="/map/map.js?v=16"></script>
+<style>
+  .sc-analytics-banner{position:fixed;z-index:9999;left:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);width:min(420px,calc(100vw - 32px));padding:18px;border-radius:20px;background:#203c32;color:#f4f6ec;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.5 system-ui,sans-serif;display:grid;gap:10px}
+  .sc-analytics-banner[hidden]{display:none}
+  .sc-analytics-heading{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .sc-analytics-banner h2{margin:0;font:600 17px/1.3 Georgia,serif}
+  .sc-analytics-banner p{margin:0;color:#cfd8c6}
+  .sc-analytics-actions{display:flex;flex-wrap:wrap;gap:8px}
+  .sc-analytics-actions button{flex:1 1 auto;min-height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#f4f6ec;font:500 15px system-ui,sans-serif;cursor:pointer}
+  .sc-analytics-actions button[data-analytics-allow]{background:#ddf77b;color:#203c32;border-color:#ddf77b}
+  .sc-analytics-status{font-size:13px}
+  .sc-analytics-links{display:flex;gap:14px;font-size:14px}.sc-analytics-links a{color:#cfd8c6}
+  .sc-analytics-close{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-size:20px;cursor:pointer}
+  body>.sc-analytics-settings{display:none}
+</style>
+<script src="/analytics-consent.js?v=1" defer></script>
 </body>
 </html>
