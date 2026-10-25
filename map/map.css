@@ -262,3 +262,47 @@ body.nacht .start-leiste { background: linear-gradient(rgba(22,19,46,0), var(--b
 .tempo button[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: var(--lime); }
 .stimme-wahl .menu-punkt { text-align: center; }
 body.nacht .stimme-wahl { background: #1c1838; }
+
+/* Menü-Knopf */
+.menu-ikon { color: var(--lime); }
+.menu-ikon svg { display: block; }
+body.nacht .menu-ikon { color: #0c0a1d; }
+
+/* Einstellungen im Menü */
+.einst-block { display: grid; gap: 8px; padding: 12px; border-radius: 16px; background: #f6f8ee; }
+.einst-block .frage { font-size: 17px; }
+.schalter { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 2px; font-size: 15px; cursor: pointer; }
+.schalter input { position: absolute; opacity: 0; pointer-events: none; }
+.schalter i { flex: none; position: relative; width: 46px; height: 28px; border-radius: 999px; background: #cfd6c4; transition: background .2s; }
+.schalter i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform .2s; }
+.schalter input:checked + i { background: var(--blue); }
+.schalter input:checked + i::after { transform: translateX(18px); }
+.schalter input:focus-visible + i { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ort-zeile { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+.ort-ic { font-size: 22px; }
+.ort-tx { flex: 1; min-width: 0; }
+.ort-tx b { display: block; font-size: 15px; }
+.ort-tx small { display: block; font-size: 12px; color: var(--soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ort-los { height: 34px; padding: 0 14px; border-radius: 999px; border: 0; background: var(--blue); color: var(--lime); font-weight: 600; cursor: pointer; }
+.ort-weg { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer; }
+body.nacht .einst-block { background: #1c1838; }
+body.nacht .ort-los { color: #0c0a1d; }
+
+/* Schnellknöpfe „Nach Hause / Zur Arbeit“, Speichern als, Pins */
+.schnell-reihe { display: flex; gap: 6px; margin: 2px 0 8px; }
+.schnell { flex: 1; height: 38px; border-radius: 12px; border: 0; background: var(--blue); color: var(--lime); font-weight: 600; font-size: 14px; cursor: pointer; }
+body.nacht .schnell { color: #0c0a1d; }
+.merken { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 12px 0 4px; font-size: 13px; color: var(--soft); }
+.merken button { height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font-size: 13px; cursor: pointer; }
+.merken button[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: var(--lime); }
+.ort-pin { width: 38px; height: 38px; border-radius: 50% 50% 50% 4px; transform: rotate(-45deg); border: 3px solid #fff; background: var(--blue); box-shadow: var(--shadow); font-size: 0; cursor: pointer; position: relative; }
+.ort-pin span { display: grid; place-items: center; width: 100%; height: 100%; transform: rotate(45deg); font-size: 17px; }
+.gate-card { grid-template-columns: minmax(0, 1fr); overflow-x: hidden; }
+.gate-card > * { min-width: 0; }
+.rollen.klein .rolle { min-width: 0; }
+.rollen.klein .rolle b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.einst-block, .stimme-wahl { grid-template-columns: minmax(0, 1fr); }
+.einst-block > *, .stimme-wahl > *, #meineOrte { min-width: 0; }
+.ort-zeile > button { flex: none; }
+.rollen.klein .rolle b { font-size: 14px; }
+.rollen.klein .rolle { padding: 10px; gap: 6px; }

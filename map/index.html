@@ -19,14 +19,14 @@
 <meta property="og:image" content="https://socialclip.art/og-image.png">
 <link rel="stylesheet" href="/fonts/fonts.css?v=1">
 <link rel="stylesheet" href="/map/lib/maplibre-gl.css">
-<link rel="stylesheet" href="/map/map.css?v=11">
+<link rel="stylesheet" href="/map/map.css?v=14">
 </head>
 <body>
 <h1 class="sr">SocialClip Map – Geschäfte in Nürnberg, Fürth und Erlangen entdecken</h1>
 <div id="map" aria-label="Karte mit Geschäften in Nürnberg, Fürth und Erlangen"></div>
 
 <header class="bar">
-  <button id="menuKnopf" class="logo" type="button" aria-label="Menü öffnen">S</button>
+  <button id="menuKnopf" class="logo menu-ikon" type="button" aria-label="Menü öffnen"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
   <label class="search">
     <span aria-hidden="true">🔍</span>
     <input id="q" type="search" placeholder="Geschäft, Adresse oder was du brauchst …" autocomplete="off" enterkeyhint="search">
@@ -98,6 +98,21 @@
       <button class="rolle" type="button" data-rolle="nutzer"><span>🧭</span><b>Nutzer</b></button>
       <button class="rolle" type="button" data-rolle="chef"><span>🏪</span><b>Geschäftsführer</b></button>
     </div>
+    <div class="einst-block">
+      <p class="frage">📍 Meine Orte</p>
+      <div id="meineOrte"></div>
+    </div>
+    <div class="einst-block">
+      <p class="frage">🗺️ Karte</p>
+      <div class="tempo" role="group" aria-label="Tag oder Nacht">
+        <button type="button" data-tagnacht="tag">☀️ Tag</button><button type="button" data-tagnacht="nacht">🌙 Nacht</button><button type="button" data-tagnacht="auto">🕒 Auto</button>
+      </div>
+      <label class="schalter"><span>🏙️ 3D-Ansicht</span><input type="checkbox" data-einst="dreiD"><i></i></label>
+      <label class="schalter"><span>🎨 Farbige Geschäftshäuser</span><input type="checkbox" data-einst="farben"><i></i></label>
+      <label class="schalter"><span>✨ Neon-Leuchten (nachts)</span><input type="checkbox" data-einst="neon"><i></i></label>
+      <label class="schalter"><span>🌳 Bäume</span><input type="checkbox" data-einst="baeume"><i></i></label>
+      <label class="schalter"><span>🏷️ Schilder mit Gehzeit</span><input type="checkbox" data-einst="schilder"><i></i></label>
+    </div>
     <div class="stimme-wahl">
       <p class="frage">🔊 Stimme für Ansagen</p>
       <select id="stimme" aria-label="Stimme auswählen"></select>
@@ -146,6 +161,6 @@
 
 <noscript><p class="nojs">Die SocialClip Map braucht JavaScript.</p></noscript>
 <script src="/map/lib/maplibre-gl.js"></script>
-<script src="/map/map.js?v=13"></script>
+<script src="/map/map.js?v=14"></script>
 </body>
 </html>

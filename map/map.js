@@ -54,8 +54,16 @@
       glow: true, theme: '#0c0a1d'
     }
   };
-  var stilName = 'tag';
-  try { stilName = localStorage.getItem('scmap-stil') || 'tag'; } catch (e) {}
+  // Einstellungen aus dem Menü (bleiben auf dem Gerät gespeichert)
+  var EIN = { tagNacht: 'tag', dreiD: true, farben: true, neon: true, baeume: true, schilder: true };
+  try {
+    var alt = localStorage.getItem('scmap-stil'); if (alt) EIN.tagNacht = alt;
+    var gesp = JSON.parse(localStorage.getItem('scmap-einst') || '{}');
+    for (var k in gesp) if (k in EIN) EIN[k] = gesp[k];
+  } catch (e) {}
+  function einstSpeichern() { try { localStorage.setItem('scmap-einst', JSON.stringify(EIN)); } catch (e) {} }
+  function tagOderNacht() { if (EIN.tagNacht !== 'auto') return EIN.tagNacht; var h = new Date().getHours(); return h >= 19 || h < 7 ? 'nacht' : 'tag'; }
+  var stilName = tagOderNacht();
   if (/[?&]stil=nacht/.test(location.search)) stilName = 'nacht';
   if (!STILE[stilName]) stilName = 'tag';
   var STIL = STILE[stilName];
@@ -198,7 +206,10 @@
 
   function kategorien() {
     var zahl = {};
-    all.forEach(function (f) { if (f.dist <= RADIUS) zahl[f.kat] = (zahl[f.kat] || 0) + 1; });
+    var mitte = map ? map.getCenter().toArray() : center, b = map && map.getBounds();
+    all.forEach(function (f) {
+      if (b ? b.contains(ll(f)) && abstand(mitte, ll(f)) < 1500 : f.dist <= RADIUS) zahl[f.kat] = (zahl[f.kat] || 0) + 1;
+    });
     $('cats').innerHTML = (aktiv ? '<button class="cat clear" type="button" data-alle>✕ Alle</button>' : '') + ORDER.filter(function (k) { return zahl[k] || aktiv === k; }).map(function (k) {
       return '<button class="cat" type="button" data-k="' + k + '" aria-pressed="' + (aktiv === k) + '">' + CATS[k].ico + ' ' + CATS[k].name + ' <b>' + (zahl[k] || 0) + '</b></button>';
     }).join('');
@@ -211,11 +222,12 @@
     kartenDaten(tr); kategorien();
     var nah = tr.filter(function (f) { return f.dist <= RADIUS; }).length;
     var sorted = tr.slice().sort(function (a, b) { return (b.star - a.star) || (a.dist - b.dist); }).slice(0, 60);
-    var titel = q ? '„' + esc(q) + '“' : aktiv ? CATS[aktiv].ico + ' ' + CATS[aktiv].name : 'In deiner Nähe';
-    var h = (aktiv || q ? '<button class="back" type="button" data-alle>‹ Alle Geschäfte</button>' : '<div class="staedte">' + Object.keys(STAEDTE).map(function (k) {
+    var titel = q ? '„' + esc(q) + '“' : aktiv ? CATS[aktiv].ico + ' ' + CATS[aktiv].name : me && abstand(me, center) < 50 ? 'In deiner Nähe' : center === START ? 'In ' + STAEDTE[stadt].name : 'Hier in der Gegend';
+    var schnell = Object.keys(orte).map(function (k) { return '<button class="schnell" type="button" data-ort-los="' + k + '">' + ORTE_NAME[k][0] + ' ' + ORTE_NAME[k][2] + '</button>'; }).join('');
+    var h = (aktiv || q ? '<button class="back" type="button" data-alle>‹ Alle Geschäfte</button>' : (schnell ? '<div class="schnell-reihe">' + schnell + '</div>' : '') + '<div class="staedte">' + Object.keys(STAEDTE).map(function (k) {
       return '<button class="stadt" type="button" data-stadt="' + k + '" aria-pressed="' + (k === stadt && !me) + '">' + STAEDTE[k].name + '</button>';
     }).join('') + '</div>') + '<h2>' + titel + '</h2><p class="sum muted">' + (tr.length
-      ? nah + ' im Umkreis von 1 km' + (me ? '' : ' um ' + STAEDTE[stadt].name + ' Mitte') + ' · ' + tr.length + ' insgesamt'
+      ? nah + ' im Umkreis von 1 km' + (me && abstand(me, center) < 50 ? ' um dich' : center === START ? ' um ' + STAEDTE[stadt].name + ' Mitte' : ' um die Kartenmitte') + ' · ' + tr.length + ' insgesamt'
       : 'Nichts gefunden – probier ein anderes Wort.') + '</p>';
     // Adressen oben, wenn man offenbar eine Adresse sucht (Hausnummer) oder kein Geschäft passt
     var adrOben = q.length >= 3 && (/\d/.test(q) || !tr.length);
@@ -323,6 +335,10 @@
     }
     h += '<div class="info">';
     if (adr) h += '<div>📍 ' + esc(adr) + '</div>';
+    h += '</div><div class="merken"><span>Speichern als</span>' + Object.keys(ORTE_NAME).map(function (k) {
+      var an = orte[k] && Math.abs(orte[k].lat - f.lat) < 1e-5 && Math.abs(orte[k].lon - f.lon) < 1e-5;
+      return '<button type="button" data-ort-setzen="' + k + '" aria-pressed="' + !!an + '">' + ORTE_NAME[k][0] + ' ' + ORTE_NAME[k][1] + '</button>';
+    }).join('') + '</div><div class="info">';
     if (t.opening_hours) h += '<div>🕒 ' + esc(t.opening_hours) + '</div>';
     if (t.cuisine) h += '<div>🍴 ' + esc(t.cuisine.replace(/;/g, ', ').replace(/_/g, ' ')) + '</div>';
     h += '</div>';
@@ -912,7 +928,7 @@
   }
 
   // Häuser mit Geschäft einfärben (das Haus unter dem Punkt suchen) – läuft, wenn die Karte ruht
-  var hausCache = {}, schilder = [], dreiD = true;
+  var hausCache = {}, schilder = [], dreiD = EIN.dreiD;
   function hell(hex, t) {
     var n = parseInt(hex.slice(1), 16), m = function (c) { return Math.round(c + (255 - c) * t); };
     return 'rgb(' + m(n >> 16) + ',' + m((n >> 8) & 255) + ',' + m(n & 255) + ')';
@@ -960,7 +976,7 @@
   function gehzeit(f) { return Math.max(1, Math.round(f.dist / 80)) + ' Min. zu Fuß'; }
   function schilderZeichnen() {
     schilder.forEach(function (m) { m.remove(); }); schilder = [];
-    if (!all.length || nav || map.getZoom() < 16) return;
+    if (!all.length || nav || !EIN.schilder || map.getZoom() < 16) return;
     var b = map.getBounds(), mitte = map.getCenter().toArray();
     var auswahl = treffer().filter(function (f) { return f.kat !== 'sonst' && f !== sel && b.contains(ll(f)); })
       .sort(function (x, y) { return (y.star - x.star) || (abstand(mitte, ll(x)) - abstand(mitte, ll(y))); }).slice(0, 30);
@@ -1027,14 +1043,14 @@
   // Tag/Nacht umschalten, ohne die Karte neu zu laden
   function setzeStil(name) {
     stilName = name; STIL = STILE[name];
-    try { localStorage.setItem('scmap-stil', name); } catch (e) {}
+
     var f = STIL.farben;
     Object.keys(f).forEach(function (id) {
       if (!map.getLayer(id)) return;
       for (var k in f[id]) map.setPaintProperty(id, k, f[id][k]);
     });
-    map.setLayoutProperty('neon-glow', 'visibility', STIL.glow ? 'visible' : 'none');
-    map.setLayoutProperty('firmen-glow', 'visibility', STIL.glow ? 'visible' : 'none');
+    map.setLayoutProperty('neon-glow', 'visibility', STIL.glow && EIN.neon ? 'visible' : 'none');
+    map.setLayoutProperty('firmen-glow', 'visibility', STIL.glow && EIN.neon ? 'visible' : 'none');
     map.setPaintProperty('gebaeude-3d', 'fill-extrusion-color', STIL.haus);
     map.setPaintProperty('gebaeude-wand', 'fill-extrusion-pattern', 'haus-' + name);
     map.setPaintProperty('gebaeude-dach', 'fill-extrusion-color', STIL.dach);
@@ -1043,8 +1059,9 @@
     map.setPaintProperty('laeden-3d', 'fill-extrusion-color', ['get', name === 'nacht' ? 'neon' : 'farbe']);
     map.setPaintProperty('laeden-3d', 'fill-extrusion-opacity', name === 'nacht' ? 0.8 : 1);
     map.setPaintProperty('gebaeude-3d', 'fill-extrusion-opacity', STIL.hausDeckkraft);
-    map.setLayoutProperty('baeume-tag', 'visibility', name === 'tag' ? 'visible' : 'none');
-    map.setLayoutProperty('baeume-nacht', 'visibility', name === 'nacht' ? 'visible' : 'none');
+    map.setLayoutProperty('baeume-tag', 'visibility', name === 'tag' && EIN.baeume ? 'visible' : 'none');
+    map.setLayoutProperty('baeume-nacht', 'visibility', name === 'nacht' && EIN.baeume ? 'visible' : 'none');
+    ['laeden-3d', 'laeden-wand', 'laeden-dach'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', EIN.farben ? 'visible' : 'none'); });
     map.setLight(STIL.licht);
     map.setPaintProperty('route-rand', 'line-color', STIL.wegRand);
     map.setPaintProperty('route', 'line-color', ['case', ['==', ['get', 'modus'], 'bus'], ['coalesce', ['get', 'farbe'], STIL.bus], STIL.weg]);
@@ -1062,7 +1079,7 @@
     if (map) return;
     blatt('34vh');
     $('sheetBody').innerHTML = '<p class="muted">Lade Geschäfte aus Nürnberg, Fürth und Erlangen …</p>';
-    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 16, pitch: 55, bearing: -20, maxPitch: 65, attributionControl: false });
+    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 16, pitch: dreiD ? 55 : 0, bearing: dreiD ? -20 : 0, maxPitch: 65, attributionControl: false });
     map.on('dragstart', function () { if (nav && nav.folgen) { nav.folgen = false; $('navMitte').hidden = false; } });
     map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'Wege: <a href="https://routing.openstreetmap.de">FOSSGIS</a> · Fahrplan: <a href="https://transitous.org/sources/">Transitous</a>' }), 'bottom-left');
 
@@ -1100,6 +1117,8 @@
       map.on('click', 'firmen', function (e) { detail(e.features[0].properties.id); });
       map.on('idle', haeuserFaerben);
       map.on('moveend', schilderZeichnen);
+      map.on('moveend', kartenBewegt);
+      ortMarker();
       map.on('mouseenter', 'firmen', function () { map.getCanvas().style.cursor = 'pointer'; });
       map.on('mouseleave', 'firmen', function () { map.getCanvas().style.cursor = ''; });
       return daten;
@@ -1126,6 +1145,7 @@
   var rolle = 'nutzer';
   function rolleSetzen(neu) {
     rolle = neu;
+    try { localStorage.setItem('scmap-rolle', neu); } catch (e) {}
     document.querySelectorAll('[data-rolle]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.rolle === neu); });
     $('q').placeholder = neu === 'chef' ? 'Name deines Geschäfts …' : 'Geschäft, Adresse oder was du brauchst …';
   }
@@ -1149,7 +1169,7 @@
     if (!map) start(); else if (all.length) { if (rolle === 'chef') chefStart(); else liste(); }
   });
   // Menü hinter dem „S“
-  $('menuKnopf').addEventListener('click', function () { stimmenListe(); $('menu').hidden = false; });
+  $('menuKnopf').addEventListener('click', function () { menuZeigen(); $('menu').hidden = false; });
   $('menu').addEventListener('click', function (e) {
     if (e.target === this || e.target.closest('[data-close]')) { this.hidden = true; return; }
     var b = e.target.closest('[data-rolle]');
@@ -1235,6 +1255,15 @@
   $('sheetBody').addEventListener('click', function (e) {
     var r = e.target.closest('.row'); if (r) return detail(r.dataset.id);
     var st = e.target.closest('[data-stadt]'); if (st) return stadtWaehlen(st.dataset.stadt);
+    var ol = e.target.closest('[data-ort-los]'); if (ol) return ortOeffnen(ol.dataset.ortLos);
+    var os = e.target.closest('[data-ort-setzen]');
+    if (os) {
+      var k = os.dataset.ortSetzen;
+      orte[k] = { name: sel.ort || [sel.name, sel.t['addr:street']].filter(Boolean).join(', ') || sel.name, lat: sel.lat, lon: sel.lon };
+      if (sel.adresse && sel.ort) orte[k].name = sel.name + (sel.ort ? ', ' + sel.ort : '');
+      orteSpeichern(); $('q').placeholder = rolle === 'chef' ? 'Name deines Geschäfts …' : 'Geschäft, Adresse oder was du brauchst …';
+      return zeichneDetail();
+    }
     var m = e.target.closest('[data-mode]'); if (m) return weg(m.dataset.mode);
     if (e.target.closest('[data-go]')) return navStart();
     var vb = e.target.closest('[data-verb]');
@@ -1262,13 +1291,85 @@
     ton = !ton; this.textContent = ton ? '🔊' : '🔇';
     if (!ton && window.speechSynthesis) speechSynthesis.cancel();
   });
-  $('dreiD').addEventListener('click', function () {
-    dreiD = !dreiD; this.setAttribute('aria-pressed', dreiD);
-    if (map) map.easeTo({ pitch: dreiD ? 55 : 0, bearing: dreiD ? -20 : 0, duration: 700 });
-  });
+  function dreiDSetzen(an) {
+    dreiD = EIN.dreiD = an; einstSpeichern();
+    $('dreiD').setAttribute('aria-pressed', an);
+    if (map) map.easeTo({ pitch: an ? 55 : 0, bearing: an ? -20 : 0, duration: 700 });
+  }
+  $('dreiD').setAttribute('aria-pressed', dreiD);
+  $('dreiD').addEventListener('click', function () { dreiDSetzen(!dreiD); });
   $('stilKnopf').addEventListener('click', function () {
-    if (map && map.getLayer('firmen')) setzeStil(stilName === 'nacht' ? 'tag' : 'nacht');
+    if (!map || !map.getLayer('firmen')) return;
+    EIN.tagNacht = stilName === 'nacht' ? 'tag' : 'nacht'; einstSpeichern();
+    setzeStil(EIN.tagNacht);
   });
+
+  // ---------- Menü: Einstellungen ----------
+  function menuZeigen() {
+    document.querySelectorAll('[data-einst]').forEach(function (c) { c.checked = !!EIN[c.dataset.einst]; });
+    document.querySelectorAll('[data-tagnacht]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.tagnacht === EIN.tagNacht); });
+    orteZeigen(); stimmenListe();
+  }
+  $('menu').addEventListener('change', function (e) {
+    var c = e.target.closest('[data-einst]'); if (!c) return;
+    var k = c.dataset.einst;
+    if (k === 'dreiD') return dreiDSetzen(c.checked);
+    EIN[k] = c.checked; einstSpeichern();
+    if (map && map.getLayer('firmen')) setzeStil(stilName);
+    if (k === 'schilder' && map) schilderZeichnen();
+  });
+  $('menu').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-tagnacht]'); if (!b) return;
+    EIN.tagNacht = b.dataset.tagnacht; einstSpeichern(); menuZeigen();
+    if (map && map.getLayer('firmen')) setzeStil(tagOderNacht());
+  });
+
+  // ---------- Meine Orte: Zuhause und Arbeit (nur auf diesem Gerät) ----------
+  var ORTE_NAME = { zuhause: ['🏠', 'Zuhause', 'Nach Hause'], arbeit: ['💼', 'Arbeit', 'Zur Arbeit'] }, orte = {}, ortMarkerListe = [];
+  try { orte = JSON.parse(localStorage.getItem('scmap-orte') || '{}'); } catch (e) {}
+  function orteSpeichern() { try { localStorage.setItem('scmap-orte', JSON.stringify(orte)); } catch (e) {} ortMarker(); }
+  function ortMarker() {
+    if (!map) return;
+    ortMarkerListe.forEach(function (m) { m.remove(); }); ortMarkerListe = [];
+    Object.keys(orte).forEach(function (k) {
+      var el = document.createElement('button'); el.type = 'button'; el.className = 'ort-pin'; el.innerHTML = '<span>' + ORTE_NAME[k][0] + '</span>';
+      el.title = ORTE_NAME[k][1];
+      el.addEventListener('click', function (e) { e.stopPropagation(); ortOeffnen(k); });
+      ortMarkerListe.push(new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat([orte[k].lon, orte[k].lat]).addTo(map));
+    });
+  }
+  function ortOeffnen(k) {
+    var o = orte[k]; if (!o) return;
+    var f = { id: 'ort-' + k, adresse: true, kat: 'sonst', t: {}, lat: o.lat, lon: o.lon, name: ORTE_NAME[k][1], ort: o.name };
+    f.dist = abstand(center, ll(f)); byId[f.id] = f;
+    $('menu').hidden = true;
+    detail(f.id);
+  }
+  function orteZeigen() {
+    $('meineOrte').innerHTML = Object.keys(ORTE_NAME).map(function (k) {
+      var o = orte[k], n = ORTE_NAME[k];
+      return '<div class="ort-zeile"><span class="ort-ic">' + n[0] + '</span><span class="ort-tx"><b>' + n[1] + '</b><small>' +
+        (o ? esc(o.name) : 'Noch nicht festgelegt – such deine Adresse und tippe dort auf „' + n[0] + ' ' + n[1] + '“') + '</small></span>' +
+        (o ? '<button type="button" class="ort-los" data-ort-los="' + k + '">Hin</button><button type="button" class="ort-weg" data-ort-weg="' + k + '" aria-label="' + n[1] + ' löschen">✕</button>'
+           : '<button type="button" class="ort-los" data-ort-such="' + k + '">Suchen</button>') + '</div>';
+    }).join('');
+  }
+  $('meineOrte').addEventListener('click', function (e) {
+    var los = e.target.closest('[data-ort-los]'), weg = e.target.closest('[data-ort-weg]'), such = e.target.closest('[data-ort-such]');
+    if (los) return ortOeffnen(los.dataset.ortLos);
+    if (weg) { delete orte[weg.dataset.ortWeg]; orteSpeichern(); return orteZeigen(); }
+    if (such) { $('menu').hidden = true; $('q').value = ''; $('q').placeholder = 'Adresse für ' + ORTE_NAME[such.dataset.ortSuch][1] + ' eingeben …'; $('q').focus(); }
+  });
+
+  // ---------- Karte verschoben: Liste und Kategorie-Zahlen passen sich automatisch an ----------
+  function kartenBewegt() {
+    if (!all.length || nav) return;
+    var mitte = map.getCenter().toArray();
+    if (sel || abstand(mitte, center) < 250) return kategorien();
+    center = mitte;
+    all.forEach(function (f) { f.dist = abstand(center, ll(f)); });
+    liste();
+  }
   $('navMitte').addEventListener('click', function () { if (!nav) return; nav.folgen = true; this.hidden = true; navPos(me); });
 
   // Firmen melden sich: Formular (Formspree) oder WhatsApp, bei „Ist das deine Firma?“ schon ausgefüllt
@@ -1306,6 +1407,10 @@
     if (nah.length) detail(nah[Math.floor(Math.random() * nah.length)].id);
   });
 
-  // Wer schon einmal zugestimmt hat: Karte lädt im Hintergrund, die Rollen-Frage kommt trotzdem jedes Mal
-  try { if (localStorage.getItem(OK_KEY)) start(); } catch (e) {}
+  // Wer schon eine Rolle gewählt hat, wird nicht mehr gefragt (wechseln geht im Menü)
+  try {
+    var gespeicherteRolle = localStorage.getItem('scmap-rolle');
+    if (localStorage.getItem(OK_KEY) && gespeicherteRolle) { rolleSetzen(gespeicherteRolle); $('gate').hidden = true; start(); }
+    else if (localStorage.getItem(OK_KEY)) start();
+  } catch (e) {}
 })();

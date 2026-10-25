@@ -95,6 +95,10 @@ Dann im Browser `http://localhost:8080` öffnen.
 - Reisebegleitung („Los geht’s – ich begleite dich“): Fußweg mit Pfeilen + Live-Abfahrt unten, an der Haltestelle
   Countdown, Fragen „Bist du an der Haltestelle / eingestiegen / ausgestiegen?“, Stationen-Zähler, Ansage
   „Nächste aussteigen“, minütlicher Echtzeit-Abgleich (Ausfall/verpasst → neue Verbindung). Code: `reise…` in `map.js`.
+- Menü (☰ oben links): Rolle, Meine Orte (🏠 Zuhause/💼 Arbeit, Pins + Knöpfe „Nach Hause/Zur Arbeit“), Karte
+  (Tag/Nacht/Auto, 3D, farbige Geschäftshäuser, Neon, Bäume, Schilder), Stimme + Tempo. Alles nur im Browser
+  gespeichert (`scmap-einst`, `scmap-orte`, `scmap-rolle`, `scmap-stimme`); Rollen-Frage nur beim ersten Mal.
+- Liste und Kategorie-Zahlen folgen automatisch dem Kartenausschnitt (`kartenBewegt` in `map.js`).
 - Unteres Blatt lässt sich am Handy ziehen (24/52/90 % Höhe), Start-Knopf klebt unten (`.start-leiste`).
 - Wunsch für später: Inhaber-Bereich, in dem z. B. der Chef einer Pizzeria nach Freischaltung sein
   Profil (Fotos, Angebote, Öffnungszeiten) selbst bearbeitet. Braucht Anmeldung + Datenbank (Backend).
