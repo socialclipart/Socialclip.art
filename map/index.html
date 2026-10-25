@@ -2,6 +2,10 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<script>
+// Beta: ohne Passwort (Prüfsumme gespeichert auf der Beta-Seite) geht es zur Beta-Seite
+try { if (localStorage.getItem('scmap-beta-ok') !== 'ac3dcd8395bd54240145346c441b9d0b612ef3444ed370baf1a2ca9cd489c912') location.replace('/map/beta/'); } catch (e) {}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#e9efdc">
 <title>SocialClip Map | Was gibt es in deiner Nähe? Geschäfte in Nürnberg, Fürth & Erlangen entdecken</title>
@@ -10,6 +14,11 @@
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/map/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SC Map">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <meta property="og:site_name" content="SocialClip">
@@ -19,7 +28,7 @@
 <meta property="og:image" content="https://socialclip.art/og-image.png">
 <link rel="stylesheet" href="/fonts/fonts.css?v=1">
 <link rel="stylesheet" href="/map/lib/maplibre-gl.css">
-<link rel="stylesheet" href="/map/map.css?v=14">
+<link rel="stylesheet" href="/map/map.css?v=15">
 </head>
 <body>
 <h1 class="sr">SocialClip Map – Geschäfte in Nürnberg, Fürth und Erlangen entdecken</h1>
@@ -85,6 +94,18 @@
       <button class="rolle" type="button" data-rolle="nutzer"><span>🧭</span><b>Nutzer</b><small>Geschäfte entdecken und hinfinden</small></button>
       <button class="rolle" type="button" data-rolle="chef"><span>🏪</span><b>Geschäftsführer</b><small>Mein Geschäft auf der Karte zeigen</small></button>
     </div>
+  </div>
+</div>
+
+<div id="home" class="gate" role="dialog" aria-modal="true" aria-labelledby="homeT" hidden>
+  <div class="gate-card">
+    <p class="gate-logo">Social<b>Clip</b> Map</p>
+    <h2 id="homeT">Hol dir die App auf deinen Home-Bildschirm 📲</h2>
+    <p class="small">Dann öffnest du die SocialClip Map mit einem Tipp – wie eine richtige App, ohne Browser-Leiste. Kostenlos, ohne App Store.</p>
+    <ol id="homeSchritte" class="home-schritte"></ol>
+    <button id="homeInstall" class="btn" type="button" hidden>📲 Jetzt installieren</button>
+    <button id="homeFertig" class="btn" type="button">✅ Ich hab’s gemacht</button>
+    <button id="homeSpaeter" class="btn alt" type="button">Später</button>
   </div>
 </div>
 
@@ -162,6 +183,6 @@
 
 <noscript><p class="nojs">Die SocialClip Map braucht JavaScript.</p></noscript>
 <script src="/map/lib/maplibre-gl.js"></script>
-<script src="/map/map.js?v=14"></script>
+<script src="/map/map.js?v=15"></script>
 </body>
 </html>

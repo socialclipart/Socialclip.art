@@ -98,6 +98,14 @@ Dann im Browser `http://localhost:8080` öffnen.
 - Menü (☰ oben links): Rolle, Meine Orte (🏠 Zuhause/💼 Arbeit, Pins + Knöpfe „Nach Hause/Zur Arbeit“), Karte
   (Tag/Nacht/Auto, 3D, farbige Geschäftshäuser, Neon, Bäume, Schilder), Stimme + Tempo. Alles nur im Browser
   gespeichert (`scmap-einst`, `scmap-orte`, `scmap-rolle`, `scmap-stimme`); Rollen-Frage nur beim ersten Mal.
+- Beta: App `/map/` nur mit Passwort (Inhaber kennt es, steht NICHT im Repo; im Code nur SHA-256-Prüfsumme,
+  gespeichert als `scmap-beta-ok`). Ohne Passwort → `/map/beta/` mit Passwort-Feld und WhatsApp-Knopf
+  „Fordere deinen Beta-Zugang an“. Menüpunkt „SocialClip Map · Beta“ in der Startseiten-Navigation.
+  Passwort ändern = neue Prüfsumme in `map/index.html` und `map/beta/index.html` eintragen.
+- Anleitung „Zum Home-Bildschirm“ (iPhone/Android, `map/manifest.webmanifest`) nach der Rollenwahl, bis
+  „Ich hab’s gemacht“ (`scmap-home`). Achtung: Als Home-Bildschirm-App hat iOS einen eigenen Speicher.
+- Werbe-Reel „Bald online“ entsteht außerhalb des Repos in `Desktop/SocialClip-Videos/map-beta-reel/`
+  (Sprecher: ElevenLabs-Stimme „Jan“, Soundeffekte selbst erzeugt, keine Musik).
 - Liste und Kategorie-Zahlen folgen automatisch dem Kartenausschnitt (`kartenBewegt` in `map.js`).
 - Unteres Blatt lässt sich am Handy ziehen (24/52/90 % Höhe), Start-Knopf klebt unten (`.start-leiste`).
 - Wunsch für später: Inhaber-Bereich, in dem z. B. der Chef einer Pizzeria nach Freischaltung sein

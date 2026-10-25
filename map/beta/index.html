@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#e9efdc">
-<title>SocialClip Map Beta | Jetzt als Beta-Tester eintragen</title>
-<meta name="description" content="Die SocialClip Map kommt bald: Geschäfte in Nürnberg, Fürth und Erlangen entdecken und mit Bus, Bahn oder zu Fuß hinfinden. Jetzt kostenlos als Beta-Tester eintragen.">
+<title>SocialClip Map Beta | Beta-Zugang per Passwort oder WhatsApp</title>
+<meta name="description" content="Die SocialClip Map kommt bald: Geschäfte in Nürnberg, Fürth und Erlangen entdecken und mit Bus, Bahn oder zu Fuß hinfinden. Beta-Zugang per Passwort – jetzt per WhatsApp anfragen.">
 <link rel="canonical" href="https://socialclip.art/map/beta/">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -46,6 +46,9 @@
   .danke { text-align: center; display: grid; gap: 12px; justify-items: center; }
   .danke .gross { font-size: 54px; line-height: 1; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .oder { display: flex; align-items: center; gap: 10px; color: var(--soft); font-size: 14px; margin-top: 6px; }
+  .oder::before, .oder::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .wa { display: flex; justify-content: center; align-items: center; gap: 10px; min-height: 56px; border-radius: 999px; background: #25d366; color: #fff; font: 700 17px var(--f); text-decoration: none; box-shadow: 0 8px 20px rgba(37,211,102,.35); }
   footer { font-size: 13px; color: var(--soft); text-align: center; }
   footer a { color: inherit; }
 </style>
@@ -53,7 +56,7 @@
 <body>
 <main>
   <a class="marke" href="/">Social<b>Clip</b> Map</a>
-  <span class="badge">BALD ONLINE · BETA</span>
+  <span class="badge">BETA · NUR MIT PASSWORT</span>
   <h1>Was gibt es in deiner Nähe?</h1>
   <p class="lead">Die SocialClip Map zeigt dir Geschäfte in Nürnberg, Fürth und Erlangen – und bringt dich hin.</p>
   <ul>
@@ -63,57 +66,40 @@
     <li>🏪 <span>Für Geschäftsführer: dein Geschäft im Schaufenster – zum Start kostenlos</span></li>
   </ul>
 
-  <section class="karte" id="anmeldung">
-    <h2>Jetzt Beta-Tester werden</h2>
-    <form id="beta" action="https://formspree.io/f/xwlvlqwg" method="POST">
-      <input type="hidden" name="_subject" value="SocialClip Map: Beta-Anmeldung">
-      <input type="hidden" name="quelle" value="SocialClip Map Beta">
-      <input type="text" name="_gotcha" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <section class="karte" id="zugang">
+    <h2>Beta-Zugang</h2>
+    <p class="klein">Die SocialClip Map ist gerade in der Beta-Phase. Mit deinem Passwort kannst du sie schon jetzt nutzen.</p>
+    <form id="pwForm" autocomplete="off">
       <div style="display:grid;gap:12px">
-        <label>Dein Name<input name="name" required autocomplete="name"></label>
-        <label>E-Mail<input name="email" type="email" required autocomplete="email"></label>
-        <label>Stadt
-          <select name="stadt">
-            <option>Nürnberg</option><option>Fürth</option><option>Erlangen</option><option>Andere Stadt</option>
-          </select>
-        </label>
-        <div class="rollen" role="radiogroup" aria-label="Ich bin">
-          <label><input type="radio" name="rolle" value="Nutzer" checked> 🧭 Nutzer</label>
-          <label><input type="radio" name="rolle" value="Geschäftsführer"> 🏪 Geschäftsführer</label>
-        </div>
-        <p class="klein">Wir nutzen deine Angaben nur, um dir den Beta-Zugang zu geben und dich über den Start zu informieren. Versand über Formspree, mehr in der <a href="/datenschutz.html#map">Datenschutzerklärung</a>.</p>
-        <p id="fehler" class="fehler" hidden>Das hat gerade nicht geklappt. Bitte versuch es gleich noch einmal.</p>
-        <button type="submit">Beta-Zugang sichern</button>
+        <label>Beta-Passwort<input id="pw" type="password" required autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Passwort eingeben"></label>
+        <p id="pwFehler" class="fehler" hidden>Das Passwort stimmt leider nicht. Frag deinen Zugang einfach per WhatsApp an.</p>
+        <button type="submit">🔓 SocialClip Map öffnen</button>
       </div>
     </form>
-    <div id="danke" class="danke" hidden>
-      <span class="gross">🎉</span>
-      <h2>Du bist dabei!</h2>
-      <p class="klein">Danke fürs Eintragen. Die Beta-Version kannst du ab sofort ausprobieren – sag uns gern, was dir fehlt.</p>
-      <a class="knopf" href="/map/" style="padding:0 28px">Zur Beta-Version</a>
-    </div>
+    <div class="oder"><span>Noch kein Passwort?</span></div>
+    <a class="wa" href="https://wa.me/4917646188101?text=Hallo%20SocialClip%2C%20ich%20m%C3%B6chte%20meinen%20Beta-Zugang%20f%C3%BCr%20die%20SocialClip%20Map.%20Mein%20Name%3A%20">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+      Fordere deinen Beta-Zugang an
+    </a>
+    <p class="klein" style="text-align:center">Du bekommst dein Passwort persönlich per WhatsApp – meist am selben Tag.</p>
   </section>
 
   <footer><a href="/">SocialClip</a> · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a></footer>
 </main>
 <script>
 (function () {
-  var form = document.getElementById('beta');
-  function fertig() { form.hidden = true; document.getElementById('danke').hidden = false; }
-  try { if (localStorage.getItem('scmap-beta')) fertig(); } catch (e) {}
-  form.addEventListener('submit', function (e) {
+  // Nur die SHA-256-Prüfsumme des Passworts steht hier, nicht das Passwort selbst
+  var PRUEF = 'ac3dcd8395bd54240145346c441b9d0b612ef3444ed370baf1a2ca9cd489c912';
+  function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
+  try { if (localStorage.getItem('scmap-beta-ok') === PRUEF) document.querySelector('#zugang h2').textContent = 'Du hast schon Zugang 🎉'; } catch (e) {}
+  document.getElementById('pwForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    var knopf = form.querySelector('button');
-    knopf.disabled = true; knopf.textContent = 'Wird gesendet …';
-    document.getElementById('fehler').hidden = true;
-    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
-      .then(function (r) {
-        if (!r.ok) throw new Error(r.status);
-        try { localStorage.setItem('scmap-beta', '1'); } catch (x) {}
-        fertig();
-      })
-      .catch(function () { document.getElementById('fehler').hidden = false; })
-      .then(function () { knopf.disabled = false; knopf.textContent = 'Beta-Zugang sichern'; });
+    var eingabe = document.getElementById('pw').value.trim().toLowerCase();
+    crypto.subtle.digest('SHA-256', new TextEncoder().encode(eingabe)).then(function (h) {
+      if (hex(h) !== PRUEF) { document.getElementById('pwFehler').hidden = false; return; }
+      try { localStorage.setItem('scmap-beta-ok', PRUEF); } catch (x) {}
+      location.href = '/map/';
+    });
   });
 })();
 </script>

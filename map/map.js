@@ -1167,7 +1167,36 @@
     rolleSetzen(b.dataset.rolle);
     $('gate').hidden = true;
     if (!map) start(); else if (all.length) { if (rolle === 'chef') chefStart(); else liste(); }
+    homeAnleitung();
   });
+
+  // ---------- Anleitung „Zum Home-Bildschirm hinzufügen“ (nur am Handy, nur bis man es gemacht hat) ----------
+  var installEvent = null;
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); installEvent = e; });
+  function alsAppGeoeffnet() { return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
+  function homeAnleitung() {
+    var handy = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    try { if (localStorage.getItem('scmap-home')) return; } catch (e) {}
+    if (!handy || alsAppGeoeffnet()) return;
+    var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var schritte = ios
+      ? (/CriOS|FxiOS/.test(ua)
+        ? ['Tippe oben rechts in der Adressleiste auf <b>Teilen</b> ' + TEILEN, 'Wähle <b>„Zum Home-Bildschirm“</b> ' + PLUS, 'Tippe oben rechts auf <b>„Hinzufügen“</b>']
+        : ['Tippe unten in der Leiste auf <b>Teilen</b> ' + TEILEN, 'Scroll etwas nach unten und tippe auf <b>„Zum Home-Bildschirm“</b> ' + PLUS, 'Tippe oben rechts auf <b>„Hinzufügen“</b> – fertig!'])
+      : ['Tippe oben rechts auf die <b>drei Punkte ⋮</b>', 'Wähle <b>„Zum Startbildschirm hinzufügen“</b> oder <b>„App installieren“</b>', 'Bestätige mit <b>„Installieren“</b> bzw. <b>„Hinzufügen“</b>'];
+    $('homeSchritte').innerHTML = schritte.map(function (t, i) { return '<li><span class="nr">' + (i + 1) + '</span><span>' + t + '</span></li>'; }).join('');
+    $('homeInstall').hidden = !installEvent;
+    $('home').hidden = false;
+  }
+  var TEILEN = '""" + TEILEN + """', PLUS = '""" + PLUS + """';
+  $('homeInstall').addEventListener('click', function () {
+    if (!installEvent) return;
+    installEvent.prompt();
+    installEvent.userChoice.then(function (w) { if (w.outcome === 'accepted') { try { localStorage.setItem('scmap-home', '1'); } catch (e) {} $('home').hidden = true; } });
+  });
+  $('homeFertig').addEventListener('click', function () { try { localStorage.setItem('scmap-home', '1'); } catch (e) {} $('home').hidden = true; });
+  $('homeSpaeter').addEventListener('click', function () { $('home').hidden = true; });
+  window.addEventListener('appinstalled', function () { try { localStorage.setItem('scmap-home', '1'); } catch (e) {} $('home').hidden = true; });
   // Menü hinter dem „S“
   $('menuKnopf').addEventListener('click', function () { menuZeigen(); $('menu').hidden = false; });
   $('menu').addEventListener('click', function (e) {
@@ -1410,7 +1439,7 @@
   // Wer schon eine Rolle gewählt hat, wird nicht mehr gefragt (wechseln geht im Menü)
   try {
     var gespeicherteRolle = localStorage.getItem('scmap-rolle');
-    if (localStorage.getItem(OK_KEY) && gespeicherteRolle) { rolleSetzen(gespeicherteRolle); $('gate').hidden = true; start(); }
+    if (localStorage.getItem(OK_KEY) && gespeicherteRolle) { rolleSetzen(gespeicherteRolle); $('gate').hidden = true; start(); homeAnleitung(); }
     else if (localStorage.getItem(OK_KEY)) start();
   } catch (e) {}
 })();
