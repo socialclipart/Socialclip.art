@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://socialclip.art/og-image.png">
 <link rel="stylesheet" href="/fonts/fonts.css?v=1">
 <link rel="stylesheet" href="/map/lib/maplibre-gl.css">
-<link rel="stylesheet" href="/map/map.css?v=3">
+<link rel="stylesheet" href="/map/map.css?v=4">
 </head>
 <body>
 <h1 class="sr">SocialClip Map – Geschäfte in Erlangen entdecken</h1>
@@ -48,6 +48,19 @@
   </div>
 </section>
 
+<div id="nav" class="nav" hidden>
+  <div class="nav-top">
+    <div id="navPfeil" class="nav-pfeil"></div>
+    <div class="nav-txt"><b id="navDist"></b><span id="navText"></span><small id="navStr"></small></div>
+  </div>
+  <button id="navMitte" class="fab nav-mitte" type="button" hidden>⌖ Zentrieren</button>
+  <div class="nav-bottom">
+    <div class="nav-rest"><b id="navZeit"></b><span id="navRest"></span></div>
+    <button id="navTon" class="nav-ton" type="button" aria-label="Sprachansage an oder aus">🔊</button>
+    <button id="navEnde" class="nav-ende" type="button">Beenden</button>
+  </div>
+</div>
+
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gateT">
   <div class="gate-card">
     <p class="gate-logo">Social<b>Clip</b> Map</p>
@@ -70,13 +83,27 @@
       <li>💬 Ein Tipp zu WhatsApp, Anruf oder Weg</li>
     </ul>
     <p class="small">Zum Start kostenlos für die ersten Erlanger Betriebe – wir machen sogar das Foto.</p>
-    <a class="btn" href="https://wa.me/4917646188101?text=Hallo%20SocialClip%2C%20ich%20m%C3%B6chte%20mein%20Gesch%C3%A4ft%20auf%20der%20SocialClip%20Map%20zeigen.">Per WhatsApp anmelden</a>
+    <form id="joinForm" class="form" action="https://formspree.io/f/xwlvlqwg" method="POST">
+      <input type="hidden" name="_subject" value="SocialClip Map: Profil-Anfrage">
+      <input type="hidden" name="quelle" value="SocialClip Map">
+      <input type="hidden" name="eintrag">
+      <input type="text" name="_gotcha" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label>Name der Firma<input name="firma" required autocomplete="organization"></label>
+      <label>Dein Name<input name="name" required autocomplete="name"></label>
+      <label>E-Mail oder Telefon<input name="kontakt" required autocomplete="email"></label>
+      <label>Was soll in dein Profil? <span class="muted">(freiwillig)</span><textarea name="nachricht" rows="2" placeholder="z. B. Angebote, Öffnungszeiten, Aktion"></textarea></label>
+      <p class="small">Deine Angaben gehen über Formspree per E-Mail an uns – nur, um dich zu kontaktieren. Mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>
+      <p id="joinErr" class="err" hidden>Das hat gerade nicht geklappt. Bitte versuch es noch einmal oder schreib uns per WhatsApp.</p>
+      <button class="btn" type="submit">Profil kostenlos ergänzen</button>
+    </form>
+    <div id="joinOk" class="ok" hidden><b>✅ Danke, angekommen!</b><br>Wir melden uns in den nächsten Tagen bei dir.</div>
+    <a id="joinWa" class="btn alt" href="https://wa.me/4917646188101?text=Hallo%20SocialClip%2C%20ich%20m%C3%B6chte%20mein%20Gesch%C3%A4ft%20auf%20der%20SocialClip%20Map%20zeigen.">💬 Lieber per WhatsApp</a>
     <p class="small links"><a href="/">SocialClip</a> · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a><br>Daten © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-Mitwirkende</a> · Karte <a href="https://openfreemap.org">OpenFreeMap</a> · Wege <a href="https://routing.openstreetmap.de">FOSSGIS</a></p>
   </div>
 </div>
 
 <noscript><p class="nojs">Die SocialClip Map braucht JavaScript.</p></noscript>
 <script src="/map/lib/maplibre-gl.js"></script>
-<script src="/map/map.js?v=3"></script>
+<script src="/map/map.js?v=4"></script>
 </body>
 </html>

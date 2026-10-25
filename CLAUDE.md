@@ -76,7 +76,16 @@ Dann im Browser `http://localhost:8080` öffnen.
 - Für Motion-Graphics-Videos gibt es die Skills „motion-video-director“ und „sound-effects“.
 - Werbe-Tipp für 30 €: Reel „Kamerafahrt“ bewerben, Erlangen + 20 km, 5 €/Tag für 6 Tage.
 
-### App-Idee „SocialClip Map“ (Stand 25.10.2026, noch nicht gebaut)
+### App „SocialClip Map“ (Version 1 gebaut, Ordner `map/`, Stand 25.10.2026)
+- Läuft: eigener warmer Kartenstil mit 3D-Gebäuden (OpenFreeMap „positron“, umgefärbt in `map.js`),
+  Kategorien mit „✕ Alle“/Zurück (auch Handy-Zurück-Taste), Suche mit Zusatzwörtern (z. B. „Nägel“),
+  Navigation Schritt für Schritt in der App mit Sprachansage (FOSSGIS-Routing, kein Google/Apple Maps),
+  Button „Ist das deine Firma? Profil kostenlos ergänzen“ → Formular über Formspree oder WhatsApp.
+- Firmendaten: `map/firmen.json` aus OpenStreetMap, wöchentlich per GitHub Actions. OSM kennt nur einen Teil
+  der Betriebe (z. B. nur ca. 8 Nagelstudios) – Lücken füllen Firmen über den Profil-Button.
+- Schaufenster-Profile (goldener Pin) stehen in `map/profile.json`.
+
+Ursprüngliche Idee:
 - Inhaber will eine eigene App fertigstellen. Gewählte Idee: Karte zum **Entdecken** statt Suchen –
   „In deiner Nähe gibt es 3 Webdesigner, 5 Friseure …“, mit Profilen, was jede Firma kann/anbietet.
 - Start nur Erlangen, als Web-App unter `socialclip.art/map/` (0 € Kosten, App Stores erst später).

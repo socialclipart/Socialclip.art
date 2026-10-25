@@ -21,7 +21,7 @@ QUERY = (
     + f'nwr["leisure"~"^(fitness_centre|sports_centre)$"]["name"]({BBOX});'
     + ");out center tags;"
 )
-TAGS = ["shop", "amenity", "craft", "office", "healthcare", "leisure", "addr:street", "addr:housenumber",
+TAGS = ["shop", "beauty", "amenity", "craft", "office", "healthcare", "leisure", "addr:street", "addr:housenumber",
         "addr:city", "opening_hours", "website", "contact:website", "phone", "contact:phone", "cuisine", "description"]
 
 
