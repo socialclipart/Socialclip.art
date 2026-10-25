@@ -77,8 +77,13 @@ Dann im Browser `http://localhost:8080` öffnen.
 - Werbe-Tipp für 30 €: Reel „Kamerafahrt“ bewerben, Erlangen + 20 km, 5 €/Tag für 6 Tage.
 
 ### App „SocialClip Map“ (Version 1 gebaut, Ordner `map/`, Stand 25.10.2026)
-- Läuft: eigener warmer Kartenstil mit 3D-Gebäuden (OpenFreeMap „positron“, umgefärbt in `map.js`),
-  Kategorien mit „✕ Alle“/Zurück (auch Handy-Zurück-Taste), Suche mit Zusatzwörtern (z. B. „Nägel“),
+- Kartenstil „Neon bei Nacht“ (vom Inhaber gewählt): dunkel, leuchtende Straßen, lila 3D-Häuser.
+  Grundkarte OpenFreeMap „positron“, umgefärbt über `STILE` in `map.js`. Weitere Entwürfe per
+  `?stil=warm|papier|spielzeug` (Idee offen: 🎨-Knopf, mit dem Besucher den Stil wählen).
+- Inhaber findet normale Karten „zu Standard/wie Google Maps“ – Look soll einzigartig sein.
+- Adresssuche (Photon/komoot) mit Navigation, „Geschäfte in der Nähe“ unter jedem Ziel; Fokus bleibt Geschäfte,
+  Ziel: App, die man jeden Tag nutzt. Kategorien am PC mit Pfeilen/Mausrad.
+- Kategorien mit „✕ Alle“/Zurück (auch Handy-Zurück-Taste), Suche mit Zusatzwörtern (z. B. „Nägel“),
   Navigation Schritt für Schritt in der App mit Sprachansage (FOSSGIS-Routing, kein Google/Apple Maps),
   Button „Ist das deine Firma? Profil kostenlos ergänzen“ → Formular über Formspree oder WhatsApp.
 - Firmendaten: `map/firmen.json` aus OpenStreetMap, wöchentlich per GitHub Actions. OSM kennt nur einen Teil

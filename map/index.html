@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0c0a1d">
 <title>SocialClip Map | Was gibt es in deiner Nähe? Geschäfte in Erlangen entdecken</title>
 <meta name="description" content="Entdecke Geschäfte und Firmen in Erlangen auf einer Karte: Friseure, Handwerker, Restaurants, Webdesigner und mehr – sieh, wer was kann, und lass dir den Weg zeigen.">
 <link rel="canonical" href="https://socialclip.art/map/">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://socialclip.art/og-image.png">
 <link rel="stylesheet" href="/fonts/fonts.css?v=1">
 <link rel="stylesheet" href="/map/lib/maplibre-gl.css">
-<link rel="stylesheet" href="/map/map.css?v=4">
+<link rel="stylesheet" href="/map/map.css?v=5">
 </head>
 <body>
 <h1 class="sr">SocialClip Map – Geschäfte in Erlangen entdecken</h1>
@@ -29,10 +29,14 @@
   <a class="logo" href="/" aria-label="Zur SocialClip-Startseite">S</a>
   <label class="search">
     <span aria-hidden="true">🔍</span>
-    <input id="q" type="search" placeholder="Was brauchst du? Logo, Haare, Reifen …" autocomplete="off" enterkeyhint="search">
+    <input id="q" type="search" placeholder="Geschäft, Adresse oder was du brauchst …" autocomplete="off" enterkeyhint="search">
   </label>
 </header>
-<nav id="cats" class="cats" aria-label="Kategorien"></nav>
+<div class="cats-wrap">
+  <button id="catsL" class="cats-pfeil links" type="button" aria-label="Kategorien nach links" hidden>‹</button>
+  <nav id="cats" class="cats" aria-label="Kategorien"></nav>
+  <button id="catsR" class="cats-pfeil rechts" type="button" aria-label="Kategorien nach rechts" hidden>›</button>
+</div>
 
 <div class="fabs">
   <button id="surprise" class="fab" type="button" title="Überrasch mich" aria-label="Zufälliges Geschäft in der Nähe zeigen">🎲</button>
@@ -104,6 +108,6 @@
 
 <noscript><p class="nojs">Die SocialClip Map braucht JavaScript.</p></noscript>
 <script src="/map/lib/maplibre-gl.js"></script>
-<script src="/map/map.js?v=4"></script>
+<script src="/map/map.js?v=5"></script>
 </body>
 </html>

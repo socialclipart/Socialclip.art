@@ -25,7 +25,11 @@ ul { list-style: none; }
 .logo { flex: none; width: 46px; height: 46px; border-radius: 50%; background: #111; color: #fff; display: grid; place-items: center; font-weight: 700; text-decoration: none; box-shadow: var(--shadow); }
 .search { flex: 1; display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 16px; background: var(--bg); border-radius: 999px; box-shadow: var(--shadow); }
 .search input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font-size: 16px; }
-.cats { position: fixed; z-index: 10; top: calc(var(--top) + 64px); left: 0; right: 0; display: flex; gap: 8px; padding: 0 12px 6px; overflow-x: auto; scrollbar-width: none; }
+.cats-wrap { position: fixed; z-index: 10; top: calc(var(--top) + 64px); left: 0; right: 0; }
+.cats-pfeil { position: absolute; z-index: 2; top: 0; width: 34px; height: 34px; border-radius: 50%; border: 0; background: #1d1d1f; color: #fff; font-size: 22px; line-height: 1; cursor: pointer; box-shadow: var(--shadow); }
+.cats-pfeil.links { left: 6px; } .cats-pfeil.rechts { right: 6px; }
+@media (hover: none) { .cats-pfeil { display: none; } }
+.cats { position: relative; display: flex; scroll-behavior: smooth; gap: 8px; padding: 0 12px 6px; overflow-x: auto; scrollbar-width: none; }
 .cats::-webkit-scrollbar { display: none; }
 .cat { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; background: var(--chip); border: 0; border-radius: 999px; box-shadow: 0 1px 4px rgba(0,0,0,.18); font-size: 14px; cursor: pointer; white-space: nowrap; }
 .cat b { font-weight: 600; color: var(--soft); font-size: 12px; }
@@ -92,7 +96,7 @@ ul { list-style: none; }
 .kreis { font-size: 20px; line-height: 1; }
 
 /* Navigation */
-.navigating .bar, .navigating .cats, .navigating .sheet, .navigating .fabs, .navigating .maplibregl-ctrl-bottom-left { display: none; }
+.navigating .bar, .navigating .cats-wrap, .navigating .sheet, .navigating .fabs, .navigating .maplibregl-ctrl-bottom-left { display: none; }
 .nav-top { position: fixed; z-index: 20; top: calc(var(--top) + 10px); left: 10px; right: 10px; max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 20px; background: #1f6b4f; color: #fff; box-shadow: 0 6px 24px rgba(0,0,0,.25); }
 .nav-pfeil { flex: none; width: 58px; height: 58px; display: grid; place-items: center; font-size: 34px; }
 .nav-pfeil svg { width: 52px; height: 52px; transition: transform .3s; }
@@ -146,3 +150,11 @@ ul { list-style: none; }
   .sheet-body { padding-top: 14px; }
   .fabs { bottom: 24px; }
 }
+
+/* Adressen und „Geschäfte in der Nähe“ */
+.adressen h3, .nah-titel { font-size: 15px; margin: 16px 0 2px; }
+.ic.adr { background: #fde8e6; }
+
+/* Stil „Papier“: leichte Papierstruktur über der Karte */
+.stil-papier #map::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: .35; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .45 0 0 0 0 .3 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }

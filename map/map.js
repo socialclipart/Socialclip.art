@@ -4,26 +4,99 @@
   var START = [11.0039, 49.5897];           // Erlangen Mitte [Länge, Breite]
   var RADIUS = 1000;                         // „In deiner Nähe“ in Metern
   var STYLE = 'https://tiles.openfreemap.org/styles/positron';   // schlichte Grundkarte, Farben setzt gestalten()
-  // Eigene SocialClip-Farben für die Grundkarte (Ebene: { Eigenschaft: Wert })
-  var FARBEN = {
-    background: { 'background-color': '#f7f2ea' },
-    landuse_residential: { 'fill-color': '#f2ebe0' },
-    park: { 'fill-color': '#d9ecd0' },
-    landcover_wood: { 'fill-color': '#cfe5c4' },
-    water: { 'fill-color': '#a9d6ee' },
-    waterway: { 'line-color': '#93c8e6' },
-    building: { 'fill-color': '#ece2d5', 'fill-outline-color': '#e0d3c3' },
-    highway_path: { 'line-color': '#e3d6c4' },
-    highway_minor: { 'line-color': '#ffffff' },
-    highway_major_casing: { 'line-color': '#eadccb' },
-    highway_major_inner: { 'line-color': '#fffaf4' },
-    highway_motorway_casing: { 'line-color': '#f0c9a4' },
-    highway_motorway_inner: { 'line-color': '#ffe3c8' },
-    railway: { 'line-color': '#d8cfc3' }, railway_transit: { 'line-color': '#d8cfc3' }, railway_service: { 'line-color': '#d8cfc3' },
-    'highway-name-minor': { 'text-color': '#7a6e62' }, 'highway-name-major': { 'text-color': '#6b5f53' },
-    'highway-name-path': { 'text-color': '#9a8d7f' },
-    water_name_point_label: { 'text-color': '#3f7fa8' }, water_name_line_label: { 'text-color': '#3f7fa8' }
+  // Kartenstile: Farben je Ebene der Grundkarte, 3D-Häuser, Extras. Standard ist „neon“, die anderen per ?stil=warm|papier|spielzeug
+  var GROSS = ['in', ['get', 'class'], ['literal', ['motorway', 'trunk', 'primary', 'secondary', 'tertiary']]];
+  function dunkel(farbe, halo) { return { 'text-color': farbe, 'text-halo-color': halo }; }
+  var STILE = {
+    warm: {
+      farben: {
+        background: { 'background-color': '#f7f2ea' }, landuse_residential: { 'fill-color': '#f2ebe0' },
+        park: { 'fill-color': '#d9ecd0' }, landcover_wood: { 'fill-color': '#cfe5c4' },
+        water: { 'fill-color': '#a9d6ee' }, waterway: { 'line-color': '#93c8e6' },
+        building: { 'fill-color': '#ece2d5', 'fill-outline-color': '#e0d3c3' },
+        highway_path: { 'line-color': '#e3d6c4' }, highway_minor: { 'line-color': '#ffffff' },
+        highway_major_casing: { 'line-color': '#eadccb' }, highway_major_inner: { 'line-color': '#fffaf4' },
+        highway_motorway_casing: { 'line-color': '#f0c9a4' }, highway_motorway_inner: { 'line-color': '#ffe3c8' },
+        railway: { 'line-color': '#d8cfc3' }, railway_transit: { 'line-color': '#d8cfc3' }, railway_service: { 'line-color': '#d8cfc3' },
+        'highway-name-minor': { 'text-color': '#7a6e62' }, 'highway-name-major': { 'text-color': '#6b5f53' }, 'highway-name-path': { 'text-color': '#9a8d7f' },
+        water_name_point_label: { 'text-color': '#3f7fa8' }, water_name_line_label: { 'text-color': '#3f7fa8' }
+      },
+      haus: { farbe: ['interpolate', ['linear'], ['coalesce', ['get', 'render_height'], 8], 0, '#f1e8dc', 40, '#e6d8c6'], deckkraft: 0.7 },
+      pitch: 40, route: '#1a73e8', rand: '#fff', text: '#333', halo: '#fff'
+    },
+
+    // Erlangen bei Nacht: dunkel, Hauptstraßen leuchten wie Neon
+    neon: {
+      farben: {
+        background: { 'background-color': '#0c0a1d' }, landuse_residential: { 'fill-color': '#131028' },
+        park: { 'fill-color': '#0d2a26' }, landcover_wood: { 'fill-color': '#0d2a26' },
+        water: { 'fill-color': '#071f3b' }, waterway: { 'line-color': '#0f5f95' },
+        building: { 'fill-color': '#1c1838', 'fill-outline-color': '#2c2557' },
+        highway_path: { 'line-color': '#3b2f72' }, highway_minor: { 'line-color': '#3a2c78' },
+        highway_major_casing: { 'line-color': '#ff3d9a' }, highway_major_inner: { 'line-color': '#ff9a4d' },
+        highway_motorway_casing: { 'line-color': '#ff3d9a' }, highway_motorway_inner: { 'line-color': '#ffd166' },
+        railway: { 'line-color': '#4d3f8f' }, railway_transit: { 'line-color': '#4d3f8f' }, railway_service: { 'line-color': '#4d3f8f' },
+        railway_dashline: { 'line-color': '#0c0a1d' }, railway_transit_dashline: { 'line-color': '#0c0a1d' }, railway_service_dashline: { 'line-color': '#0c0a1d' },
+        'highway-name-minor': dunkel('#b9b0ff', '#0c0a1d'), 'highway-name-major': dunkel('#ffd0a8', '#0c0a1d'), 'highway-name-path': dunkel('#8b80d6', '#0c0a1d'),
+        water_name_point_label: dunkel('#4fc3ff', '#0c0a1d'), water_name_line_label: dunkel('#4fc3ff', '#0c0a1d'),
+        label_other: dunkel('#e6e0ff', '#0c0a1d'), label_village: dunkel('#fff', '#0c0a1d'), label_town: dunkel('#fff', '#0c0a1d'), label_city: dunkel('#fff', '#0c0a1d')
+      },
+      extra: function () {
+        map.addLayer({ id: 'neon-glow', type: 'line', source: 'openmaptiles', 'source-layer': 'transportation', filter: GROSS,
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: { 'line-color': '#ff4f8b', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 6, 17, 34],
+            'line-blur': ['interpolate', ['linear'], ['zoom'], 12, 4, 17, 22], 'line-opacity': 0.45 } }, 'highway_major_casing');
+      },
+      haus: { farbe: ['interpolate', ['linear'], ['coalesce', ['get', 'render_height'], 8], 0, '#211c48', 30, '#3b2d82', 60, '#6a3fb0'], deckkraft: 0.92 },
+      glow: true, pitch: 50, route: '#22e6ff', rand: '#0c0a1d', text: '#f3eeff', halo: '#0c0a1d'
+    },
+
+    // Wie ein gezeichneter Stadtplan: Papier, Tinte, Pastellfarben
+    papier: {
+      farben: {
+        background: { 'background-color': '#f3e8d0' }, landuse_residential: { 'fill-color': '#efe2c4' },
+        park: { 'fill-color': '#c6d99a' }, landcover_wood: { 'fill-color': '#b3cf86' },
+        water: { 'fill-color': '#8cc6cf' }, waterway: { 'line-color': '#5aa6b3' },
+        building: { 'fill-color': '#fbf3e1', 'fill-outline-color': '#2d2420' },
+        highway_path: { 'line-color': '#9c8566' }, highway_minor: { 'line-color': '#fffaf0' },
+        highway_major_casing: { 'line-color': '#2d2420' }, highway_major_inner: { 'line-color': '#ffd27a' },
+        highway_motorway_casing: { 'line-color': '#2d2420' }, highway_motorway_inner: { 'line-color': '#ff9c68' },
+        railway: { 'line-color': '#2d2420' }, railway_transit: { 'line-color': '#2d2420' }, railway_service: { 'line-color': '#2d2420' },
+        'highway-name-minor': dunkel('#2d2420', '#f3e8d0'), 'highway-name-major': dunkel('#2d2420', '#f3e8d0'), 'highway-name-path': dunkel('#6b5a48', '#f3e8d0'),
+        water_name_point_label: dunkel('#245e6b', '#f3e8d0'), water_name_line_label: dunkel('#245e6b', '#f3e8d0')
+      },
+      extra: function (vor) {
+        map.addLayer({ id: 'tinte-wasser', type: 'line', source: 'openmaptiles', 'source-layer': 'water', paint: { 'line-color': '#2d2420', 'line-width': 1.2 } }, 'waterway');
+        map.addLayer({ id: 'tinte-strassen', type: 'line', source: 'openmaptiles', 'source-layer': 'transportation', minzoom: 13,
+          filter: ['in', ['get', 'class'], ['literal', ['minor', 'service']]], layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: { 'line-color': '#2d2420', 'line-width': ['interpolate', ['exponential', 1.55], ['zoom'], 13, 1.5, 18, 22] } }, 'highway_minor');
+        map.addLayer({ id: 'tinte-haeuser', type: 'line', source: 'openmaptiles', 'source-layer': 'building', minzoom: 14,
+          paint: { 'line-color': '#2d2420', 'line-width': ['interpolate', ['linear'], ['zoom'], 14, 0.4, 17, 1.4] } }, vor);
+      },
+      pitch: 0, route: '#d6453d', rand: '#2d2420', text: '#2d2420', halo: '#f3e8d0', koerper: 'stil-papier'
+    },
+
+    // Mini-Welt: bunte 3D-Häuser wie eine Spielzeugstadt
+    spielzeug: {
+      farben: {
+        background: { 'background-color': '#eaf4dd' }, landuse_residential: { 'fill-color': '#f4f0e4' },
+        park: { 'fill-color': '#93d977' }, landcover_wood: { 'fill-color': '#6dc45a' },
+        water: { 'fill-color': '#4cc6f2' }, waterway: { 'line-color': '#4cc6f2' },
+        building: { 'fill-color': '#ffffff', 'fill-outline-color': '#e6e0d4' },
+        highway_path: { 'line-color': '#e0d3b8' }, highway_minor: { 'line-color': '#ffffff' },
+        highway_major_casing: { 'line-color': '#d4cbbb' }, highway_major_inner: { 'line-color': '#ffffff' },
+        highway_motorway_casing: { 'line-color': '#e3b65a' }, highway_motorway_inner: { 'line-color': '#ffe08a' },
+        'highway-name-minor': { 'text-color': '#5b6b55' }, 'highway-name-major': { 'text-color': '#4c5a47' },
+        water_name_point_label: { 'text-color': '#0f6f99' }, water_name_line_label: { 'text-color': '#0f6f99' }
+      },
+      haus: { farbe: ['match', ['%', ['floor', ['*', ['coalesce', ['get', 'render_height'], 8], 3.7]], 6],
+        0, '#ff8fa3', 1, '#ffd36e', 2, '#8fd3ff', 3, '#b9a6ff', 4, '#8ee6b5', '#ffb38a'], deckkraft: 1 },
+      licht: true, pitch: 58, route: '#ff4f6d', rand: '#fff', text: '#2b3a28', halo: '#fff'
+    }
   };
+  var STIL_NAME = (location.search.match(/[?&]stil=(\w+)/) || [])[1];
+  var STIL = STILE[STIL_NAME] || STILE.neon;
+  var PHOTON = 'https://photon.komoot.io/api/';
   var ROUTER = 'https://routing.openstreetmap.de/routed-';
   var CACHE_KEY = 'scmap-v1', OK_KEY = 'scmap-ok';
   var SERVERS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'];
@@ -89,6 +162,7 @@
     return 'sonst';
   }
   function art(f) {
+    if (f.adresse) return 'Adresse';
     if (f.star) return f.slogan || CATS[f.kat].name;
     var t = f.t, v = (t.shop || t.amenity || t.craft || t.office || t.healthcare || t.leisure || '').split(';')[0];
     // Nagelstudios stehen in OSM meist als shop=beauty mit beauty=nails – oder man erkennt sie am Namen
@@ -163,6 +237,7 @@
     $('cats').innerHTML = (aktiv ? '<button class="cat clear" type="button" data-alle>✕ Alle</button>' : '') + ORDER.filter(function (k) { return zahl[k] || aktiv === k; }).map(function (k) {
       return '<button class="cat" type="button" data-k="' + k + '" aria-pressed="' + (aktiv === k) + '">' + CATS[k].ico + ' ' + CATS[k].name + ' <b>' + (zahl[k] || 0) + '</b></button>';
     }).join('');
+    catsPfeile();
   }
 
   function liste() {
@@ -175,16 +250,50 @@
     var h = (aktiv || q ? '<button class="back" type="button" data-alle>‹ Alle Geschäfte</button>' : '') + '<h2>' + titel + '</h2><p class="sum muted">' + (tr.length
       ? nah + ' im Umkreis von 1 km' + (me ? '' : ' um die Innenstadt') + ' · ' + tr.length + ' in Erlangen'
       : 'Nichts gefunden – probier ein anderes Wort.') + '</p>';
-    h += sorted.map(function (f) {
-      var c = CATS[f.kat];
-      return '<button class="row' + (f.star ? ' star' : '') + '" type="button" data-id="' + f.id + '">' +
-        '<span class="ic" style="background:' + c.farbe + '22">' + (f.star ? '⭐' : c.ico) + '</span>' +
-        '<span class="tx"><b>' + esc(f.name) + '</b><span>' + esc(art(f)) + '</span></span>' +
-        '<span class="dist">' + meter(f.dist) + '</span></button>';
-    }).join('');
+    // Adressen oben, wenn man offenbar eine Adresse sucht (Hausnummer) oder kein Geschäft passt
+    var adrOben = q.length >= 3 && (/\d/.test(q) || !tr.length);
+    if (q.length >= 3 && adrOben) h += '<div id="adressen" class="adressen"></div>';
+    h += sorted.map(function (f) { return zeile(f, f.dist); }).join('');
+    if (q.length >= 3 && !adrOben) h += '<div id="adressen" class="adressen"></div>';
     h += '<button class="join-link" type="button" data-join>⭐ <b>Dein Geschäft hier zeigen?</b><br><span class="muted">Mit goldenem Pin, Foto und „Das kann ich“ – zum Start kostenlos.</span></button>';
     $('sheetBody').innerHTML = h;
     $('sheetBody').scrollTop = 0;
+    if (q.length >= 3) adressenSuchen(q);
+  }
+
+  function zeile(f, d) {
+    var c = CATS[f.kat];
+    return '<button class="row' + (f.star ? ' star' : '') + '" type="button" data-id="' + f.id + '">' +
+      '<span class="ic" style="background:' + c.farbe + '22">' + (f.star ? '⭐' : c.ico) + '</span>' +
+      '<span class="tx"><b>' + esc(f.name) + '</b><span>' + esc(art(f)) + '</span></span>' +
+      '<span class="dist">' + meter(d) + '</span></button>';
+  }
+
+  // ---------- Adressen (Photon/OpenStreetMap), damit man überall hinfinden kann ----------
+  var adrTimer, adrNr = 0;
+  function adressenSuchen(q) {
+    clearTimeout(adrTimer);
+    adrTimer = setTimeout(function () {
+      fetch(PHOTON + '?q=' + encodeURIComponent(q) + '&lat=' + START[1] + '&lon=' + START[0] + '&limit=5&lang=de')
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          var box = $('adressen');
+          if (!box || $('q').value.trim() !== q) return;
+          var orte = j.features.map(function (p) {
+            var e = p.properties, strasse = [e.street, e.housenumber].filter(Boolean).join(' ');
+            var f = { id: 'adr-' + (++adrNr), adresse: true, kat: 'sonst', t: {}, lat: p.geometry.coordinates[1], lon: p.geometry.coordinates[0],
+              name: e.name || strasse || e.city || q,
+              ort: [e.name ? strasse : '', [e.postcode, e.city || e.town || e.village].filter(Boolean).join(' ')].filter(Boolean).join(', ') };
+            f.dist = abstand(center, ll(f)); byId[f.id] = f;
+            return f;
+          });
+          if (!orte.length) return;
+          box.innerHTML = '<h3>📍 Adressen & Orte</h3>' + orte.map(function (f) {
+            return '<button class="row" type="button" data-id="' + f.id + '"><span class="ic adr">📍</span>' +
+              '<span class="tx"><b>' + esc(f.name) + '</b><span>' + esc(f.ort) + '</span></span><span class="dist">' + meter(f.dist) + '</span></button>';
+          }).join('');
+        }).catch(function () {});
+    }, 400);
   }
 
   // ---------- Detail & Weg ----------
@@ -209,7 +318,7 @@
     var h = '<div class="det"><button class="back" type="button" data-back>‹ Zurück zur Liste</button>';
     if (f.star && f.bild) h += '<img class="hero" src="' + esc(f.bild) + '" alt="">';
     if (f.star) h += '<span class="badge">⭐ Schaufenster</span>';
-    h += '<h2>' + esc(f.name) + '</h2><p class="kind">' + c.ico + ' ' + esc(art(f)) + ' · ' + meter(f.dist) + '</p>';
+    h += '<h2>' + esc(f.name) + '</h2><p class="kind">' + (f.adresse ? '📍' : c.ico) + ' ' + esc(art(f)) + ' · ' + meter(f.dist) + '</p>';
 
     h += '<div class="modes">' + Object.keys(MODES).map(function (k) {
       var info = routeInfo && routeInfo.modus === k && routeInfo.dauer ? minuten(routeInfo.dauer) : MODES[k].name;
@@ -242,7 +351,12 @@
     if (t.opening_hours) h += '<div>🕒 ' + esc(t.opening_hours) + '</div>';
     if (t.cuisine) h += '<div>🍴 ' + esc(t.cuisine.replace(/;/g, ', ').replace(/_/g, ' ')) + '</div>';
     h += '</div>';
-    if (!f.star) h += '<button class="claim" type="button" data-claim><span>🏪</span><span><b>Ist das deine Firma?</b><br>Profil kostenlos ergänzen →</span></button>';
+    // Geschäfte in der Nähe des Ziels
+    var umgebung = all.filter(function (x) { return x !== f && x.kat !== 'sonst'; })
+      .map(function (x) { return { f: x, d: abstand(ll(f), ll(x)) }; })
+      .sort(function (a, b) { return a.d - b.d; }).slice(0, 6);
+    if (umgebung.length) h += '<h3 class="nah-titel">Geschäfte in der Nähe</h3>' + umgebung.map(function (u) { return zeile(u.f, u.d); }).join('');
+    if (!f.star && !f.adresse) h += '<button class="claim" type="button" data-claim><span>🏪</span><span><b>Ist das deine Firma?</b><br>Profil kostenlos ergänzen →</span></button>';
     $('sheetBody').innerHTML = h + '</div>';
   }
 
@@ -415,7 +529,7 @@
     document.body.classList.remove('navigating');
     $('nav').hidden = true;
     if (selMarker) selMarker.getElement().classList.remove('ziel');
-    map.easeTo({ pitch: 40, bearing: 0, padding: { top: 0, bottom: 0, left: 0, right: 0 }, duration: 600 });
+    map.easeTo({ pitch: STIL.pitch, bearing: 0, padding: { top: 0, bottom: 0, left: 0, right: 0 }, duration: 600 });
     if (sel) zeichneDetail();
   }
 
@@ -437,18 +551,22 @@
 
   // ---------- Karte ----------
   function gestalten() {
-    Object.keys(FARBEN).forEach(function (id) {
+    var f = STIL.farben;
+    Object.keys(f).forEach(function (id) {
       if (!map.getLayer(id)) return;
-      for (var k in FARBEN[id]) map.setPaintProperty(id, k, FARBEN[id][k]);
+      for (var k in f[id]) map.setPaintProperty(id, k, f[id][k]);
     });
+    var vor = map.getStyle().layers.filter(function (l) { return l.type === 'symbol'; })[0].id;
+    if (STIL.extra) STIL.extra(vor);
+    if (STIL.koerper) document.body.classList.add(STIL.koerper);
+    if (STIL.licht) map.setLight({ anchor: 'map', color: '#ffffff', intensity: 0.35, position: [1.4, 210, 50] });
     // Gebäude ab Zoom 15 in 3D, sanft eingeblendet
-    var vor = map.getStyle().layers.filter(function (l) { return l.type === 'symbol'; })[0];
-    map.addLayer({ id: 'gebaeude-3d', type: 'fill-extrusion', source: 'openmaptiles', 'source-layer': 'building', minzoom: 15, paint: {
-      'fill-extrusion-color': ['interpolate', ['linear'], ['coalesce', ['get', 'render_height'], 8], 0, '#f1e8dc', 40, '#e6d8c6'],
+    if (STIL.haus) map.addLayer({ id: 'gebaeude-3d', type: 'fill-extrusion', source: 'openmaptiles', 'source-layer': 'building', minzoom: 15, paint: {
+      'fill-extrusion-color': STIL.haus.farbe,
       'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], 15, 0, 16, ['coalesce', ['get', 'render_height'], 8]],
       'fill-extrusion-base': ['coalesce', ['get', 'render_min_height'], 0],
-      'fill-extrusion-opacity': 0.7
-    } }, vor && vor.id);
+      'fill-extrusion-opacity': STIL.haus.deckkraft
+    } }, vor);
   }
 
   function start() {
@@ -456,7 +574,7 @@
     try { localStorage.setItem(OK_KEY, '1'); } catch (e) {}
     blatt('34vh');
     $('sheetBody').innerHTML = '<p class="muted">Lade Geschäfte aus Erlangen …</p>';
-    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 15.5, pitch: 40, maxPitch: 65, attributionControl: false });
+    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 15.5, pitch: STIL.pitch, maxPitch: 65, attributionControl: false });
     map.on('dragstart', function () { if (nav && nav.folgen) { nav.folgen = false; $('navMitte').hidden = false; } });
     map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'Wege: <a href="https://routing.openstreetmap.de">FOSSGIS</a>' }), 'bottom-left');
 
@@ -466,22 +584,26 @@
     bereit.then(function () {
       gestalten();
       map.addSource('route', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-      map.addLayer({ id: 'route-rand', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#0b57d0', 'line-width': 9 } });
+      map.addLayer({ id: 'route-rand', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': STIL.rand, 'line-width': 10 } });
       map.addLayer({ id: 'route', type: 'line', source: 'route', filter: ['!=', ['get', 'modus'], 'foot'], layout: { 'line-cap': 'round', 'line-join': 'round' },
-        paint: { 'line-color': '#4f8ff7', 'line-width': 6 } });
+        paint: { 'line-color': STIL.route, 'line-width': 6 } });
       // Zu Fuß: gepunktete Linie wie bei Google Maps
       map.setFilter('route-rand', ['!=', ['get', 'modus'], 'foot']);
       map.addLayer({ id: 'route-fuss', type: 'line', source: 'route', filter: ['==', ['get', 'modus'], 'foot'], layout: { 'line-cap': 'round', 'line-join': 'round' },
-        paint: { 'line-color': '#1a73e8', 'line-width': 7, 'line-dasharray': [0.1, 1.8] } });
+        paint: { 'line-color': STIL.route, 'line-width': 7, 'line-dasharray': [0.1, 1.8] } });
       map.addSource('firmen', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+      if (STIL.glow) map.addLayer({ id: 'firmen-glow', type: 'circle', source: 'firmen', paint: {
+        'circle-color': ['get', 'farbe'], 'circle-blur': 1, 'circle-opacity': 0.7,
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 6, 14, 12, 17, 22]
+      } });
       map.addLayer({ id: 'firmen', type: 'circle', source: 'firmen', paint: {
         'circle-color': ['get', 'farbe'],
         'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 2.5, 14, 4.5, 17, 8],
-        'circle-stroke-color': '#fff', 'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 11, 0.5, 15, 1.5]
+        'circle-stroke-color': STIL.rand, 'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 11, 0.5, 15, 1.5]
       } });
       map.addLayer({ id: 'firmen-name', type: 'symbol', source: 'firmen', minzoom: 16.5, layout: {
         'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': 12, 'text-offset': [0, 1.1], 'text-anchor': 'top', 'text-optional': true
-      }, paint: { 'text-color': '#333', 'text-halo-color': '#fff', 'text-halo-width': 1.5 } });
+      }, paint: { 'text-color': STIL.text, 'text-halo-color': STIL.halo, 'text-halo-width': 1.5 } });
       map.on('click', 'firmen', function (e) { detail(e.features[0].properties.id); });
       map.on('mouseenter', 'firmen', function () { map.getCanvas().style.cursor = 'pointer'; });
       map.on('mouseleave', 'firmen', function () { map.getCanvas().style.cursor = ''; });
@@ -511,6 +633,19 @@
   });
   $('q').addEventListener('input', function () { if (all.length) { liste(); blatt('52vh'); } });
   $('q').addEventListener('keydown', function (e) { if (e.key === 'Enter') e.target.blur(); });
+  // Kategorien am PC: Pfeile und Mausrad schieben die Leiste seitlich
+  function catsPfeile() {
+    var c = $('cats');
+    $('catsL').hidden = c.scrollLeft < 5;
+    $('catsR').hidden = c.scrollLeft + c.clientWidth >= c.scrollWidth - 5;
+  }
+  $('cats').addEventListener('scroll', catsPfeile);
+  window.addEventListener('resize', catsPfeile);
+  $('catsL').addEventListener('click', function () { $('cats').scrollLeft -= $('cats').clientWidth * 0.7; });
+  $('catsR').addEventListener('click', function () { $('cats').scrollLeft += $('cats').clientWidth * 0.7; });
+  $('cats').addEventListener('wheel', function (e) {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { e.preventDefault(); this.scrollBy({ left: e.deltaY, behavior: 'auto' }); }
+  }, { passive: false });
   $('cats').addEventListener('click', function (e) {
     var b = e.target.closest('.cat'); if (!b) return;
     if (b.hasAttribute('data-alle') || aktiv === b.dataset.k) return zurueck();
