@@ -25,8 +25,8 @@ TAGS = ["shop", "beauty", "amenity", "craft", "office", "healthcare", "leisure",
         "addr:city", "opening_hours", "website", "contact:website", "phone", "contact:phone", "cuisine", "description"]
 
 
-def abrufen():
-    body = urllib.parse.urlencode({"data": QUERY}).encode()
+def abrufen(query=QUERY):
+    body = urllib.parse.urlencode({"data": query}).encode()
     for runde in range(3):
         for url in SERVERS:
             try:
@@ -55,6 +55,14 @@ def main():
     with open("map/firmen.json", "w", encoding="utf-8") as f:
         json.dump(daten, f, ensure_ascii=False, separators=(",", ":"))
     print(f"{len(daten)} Geschäfte gespeichert")
+
+    # Bäume für die Karte (nur Standorte, gerundet)
+    baeume = [[round(e["lon"], 5), round(e["lat"], 5)] for e in abrufen(f'[out:json][timeout:120];node["natural"="tree"]({BBOX});out;')["elements"]]
+    if len(baeume) > 100:
+        baeume.sort()
+        with open("map/baeume.json", "w", encoding="utf-8") as f:
+            json.dump(baeume, f, separators=(",", ":"))
+        print(f"{len(baeume)} Bäume gespeichert")
 
 
 main()

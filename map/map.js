@@ -4,98 +4,53 @@
   var START = [11.0039, 49.5897];           // Erlangen Mitte [Länge, Breite]
   var RADIUS = 1000;                         // „In deiner Nähe“ in Metern
   var STYLE = 'https://tiles.openfreemap.org/styles/positron';   // schlichte Grundkarte, Farben setzt gestalten()
-  // Kartenstile: Farben je Ebene der Grundkarte, 3D-Häuser, Extras. Standard ist „neon“, die anderen per ?stil=warm|papier|spielzeug
+  // Kartenstile Tag (hell, Farben aus der VIERTEL-Designstudie) und Nacht (Neon).
+  // Beide setzen dieselben Ebenen, damit setzeStil() jederzeit umschalten kann.
   var GROSS = ['in', ['get', 'class'], ['literal', ['motorway', 'trunk', 'primary', 'secondary', 'tertiary']]];
-  function dunkel(farbe, halo) { return { 'text-color': farbe, 'text-halo-color': halo }; }
+  function txt(farbe, halo) { return { 'text-color': farbe, 'text-halo-color': halo }; }
+  function stilFarben(c) {
+    return {
+      background: { 'background-color': c.grund }, landuse_residential: { 'fill-color': c.wohnen },
+      park: { 'fill-color': c.park }, landcover_wood: { 'fill-color': c.wald },
+      water: { 'fill-color': c.wasser }, waterway: { 'line-color': c.fluss },
+      building: { 'fill-color': c.haus, 'fill-outline-color': c.hausRand },
+      highway_path: { 'line-color': c.pfad }, highway_minor: { 'line-color': c.strasse },
+      highway_major_casing: { 'line-color': c.hauptRand }, highway_major_inner: { 'line-color': c.haupt },
+      highway_motorway_casing: { 'line-color': c.hauptRand }, highway_motorway_inner: { 'line-color': c.autobahn },
+      railway: { 'line-color': c.bahn }, railway_transit: { 'line-color': c.bahn }, railway_service: { 'line-color': c.bahn },
+      railway_dashline: { 'line-color': c.bahnStrich }, railway_transit_dashline: { 'line-color': c.bahnStrich }, railway_service_dashline: { 'line-color': c.bahnStrich },
+      'highway-name-minor': txt(c.schrift, c.halo), 'highway-name-major': txt(c.schrift, c.halo), 'highway-name-path': txt(c.schrift, c.halo),
+      water_name_point_label: txt(c.wasserSchrift, c.halo), water_name_line_label: txt(c.wasserSchrift, c.halo),
+      label_other: txt(c.ort, c.halo), label_village: txt(c.ort, c.halo), label_town: txt(c.ort, c.halo), label_city: txt(c.ort, c.halo)
+    };
+  }
   var STILE = {
-    warm: {
-      farben: {
-        background: { 'background-color': '#f7f2ea' }, landuse_residential: { 'fill-color': '#f2ebe0' },
-        park: { 'fill-color': '#d9ecd0' }, landcover_wood: { 'fill-color': '#cfe5c4' },
-        water: { 'fill-color': '#a9d6ee' }, waterway: { 'line-color': '#93c8e6' },
-        building: { 'fill-color': '#ece2d5', 'fill-outline-color': '#e0d3c3' },
-        highway_path: { 'line-color': '#e3d6c4' }, highway_minor: { 'line-color': '#ffffff' },
-        highway_major_casing: { 'line-color': '#eadccb' }, highway_major_inner: { 'line-color': '#fffaf4' },
-        highway_motorway_casing: { 'line-color': '#f0c9a4' }, highway_motorway_inner: { 'line-color': '#ffe3c8' },
-        railway: { 'line-color': '#d8cfc3' }, railway_transit: { 'line-color': '#d8cfc3' }, railway_service: { 'line-color': '#d8cfc3' },
-        'highway-name-minor': { 'text-color': '#7a6e62' }, 'highway-name-major': { 'text-color': '#6b5f53' }, 'highway-name-path': { 'text-color': '#9a8d7f' },
-        water_name_point_label: { 'text-color': '#3f7fa8' }, water_name_line_label: { 'text-color': '#3f7fa8' }
-      },
-      haus: { farbe: ['interpolate', ['linear'], ['coalesce', ['get', 'render_height'], 8], 0, '#f1e8dc', 40, '#e6d8c6'], deckkraft: 0.7 },
-      pitch: 40, route: '#1a73e8', rand: '#fff', text: '#333', halo: '#fff'
+    tag: {
+      farben: stilFarben({ grund: '#e9efdc', wohnen: '#e6ecd8', park: '#d3e3bd', wald: '#c6dbac', wasser: '#c3e2db', fluss: '#aad3ca',
+        haus: '#f1f4e8', hausRand: '#dfe6d0', pfad: '#d9e1c8', strasse: '#fafaf1', hauptRand: '#d6dec5', haupt: '#fffef8', autobahn: '#f6f8e4',
+        bahn: '#cfd8bf', bahnStrich: '#fafaf1', schrift: '#7d8a74', wasserSchrift: '#4e8a80', ort: '#203c32', halo: '#f4f7ec' }),
+      haus: '#f4f7ec', hausDeckkraft: 0.97, dach: '#fbfcf6',
+      licht: { anchor: 'viewport', color: '#fffdf2', intensity: 0.32, position: [1.5, 215, 35] },
+      baum: '#a9c78b', baumRand: '#8fb173',
+      weg: '#ddf77b', wegRand: '#203c32', wegStrich: '#203c32', rand: '#fffef8', text: '#203c32', halo: '#fffef8',
+      glow: false, theme: '#e9efdc'
     },
-
-    // Erlangen bei Nacht: dunkel, Hauptstraßen leuchten wie Neon
-    neon: {
-      farben: {
-        background: { 'background-color': '#0c0a1d' }, landuse_residential: { 'fill-color': '#131028' },
-        park: { 'fill-color': '#0d2a26' }, landcover_wood: { 'fill-color': '#0d2a26' },
-        water: { 'fill-color': '#071f3b' }, waterway: { 'line-color': '#0f5f95' },
-        building: { 'fill-color': '#1c1838', 'fill-outline-color': '#2c2557' },
-        highway_path: { 'line-color': '#3b2f72' }, highway_minor: { 'line-color': '#3a2c78' },
-        highway_major_casing: { 'line-color': '#ff3d9a' }, highway_major_inner: { 'line-color': '#ff9a4d' },
-        highway_motorway_casing: { 'line-color': '#ff3d9a' }, highway_motorway_inner: { 'line-color': '#ffd166' },
-        railway: { 'line-color': '#4d3f8f' }, railway_transit: { 'line-color': '#4d3f8f' }, railway_service: { 'line-color': '#4d3f8f' },
-        railway_dashline: { 'line-color': '#0c0a1d' }, railway_transit_dashline: { 'line-color': '#0c0a1d' }, railway_service_dashline: { 'line-color': '#0c0a1d' },
-        'highway-name-minor': dunkel('#b9b0ff', '#0c0a1d'), 'highway-name-major': dunkel('#ffd0a8', '#0c0a1d'), 'highway-name-path': dunkel('#8b80d6', '#0c0a1d'),
-        water_name_point_label: dunkel('#4fc3ff', '#0c0a1d'), water_name_line_label: dunkel('#4fc3ff', '#0c0a1d'),
-        label_other: dunkel('#e6e0ff', '#0c0a1d'), label_village: dunkel('#fff', '#0c0a1d'), label_town: dunkel('#fff', '#0c0a1d'), label_city: dunkel('#fff', '#0c0a1d')
-      },
-      extra: function () {
-        map.addLayer({ id: 'neon-glow', type: 'line', source: 'openmaptiles', 'source-layer': 'transportation', filter: GROSS,
-          layout: { 'line-cap': 'round', 'line-join': 'round' },
-          paint: { 'line-color': '#ff4f8b', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 6, 17, 34],
-            'line-blur': ['interpolate', ['linear'], ['zoom'], 12, 4, 17, 22], 'line-opacity': 0.45 } }, 'highway_major_casing');
-      },
-      haus: { farbe: ['interpolate', ['linear'], ['coalesce', ['get', 'render_height'], 8], 0, '#211c48', 30, '#3b2d82', 60, '#6a3fb0'], deckkraft: 0.92 },
-      glow: true, pitch: 50, route: '#22e6ff', rand: '#0c0a1d', text: '#f3eeff', halo: '#0c0a1d'
-    },
-
-    // Wie ein gezeichneter Stadtplan: Papier, Tinte, Pastellfarben
-    papier: {
-      farben: {
-        background: { 'background-color': '#f3e8d0' }, landuse_residential: { 'fill-color': '#efe2c4' },
-        park: { 'fill-color': '#c6d99a' }, landcover_wood: { 'fill-color': '#b3cf86' },
-        water: { 'fill-color': '#8cc6cf' }, waterway: { 'line-color': '#5aa6b3' },
-        building: { 'fill-color': '#fbf3e1', 'fill-outline-color': '#2d2420' },
-        highway_path: { 'line-color': '#9c8566' }, highway_minor: { 'line-color': '#fffaf0' },
-        highway_major_casing: { 'line-color': '#2d2420' }, highway_major_inner: { 'line-color': '#ffd27a' },
-        highway_motorway_casing: { 'line-color': '#2d2420' }, highway_motorway_inner: { 'line-color': '#ff9c68' },
-        railway: { 'line-color': '#2d2420' }, railway_transit: { 'line-color': '#2d2420' }, railway_service: { 'line-color': '#2d2420' },
-        'highway-name-minor': dunkel('#2d2420', '#f3e8d0'), 'highway-name-major': dunkel('#2d2420', '#f3e8d0'), 'highway-name-path': dunkel('#6b5a48', '#f3e8d0'),
-        water_name_point_label: dunkel('#245e6b', '#f3e8d0'), water_name_line_label: dunkel('#245e6b', '#f3e8d0')
-      },
-      extra: function (vor) {
-        map.addLayer({ id: 'tinte-wasser', type: 'line', source: 'openmaptiles', 'source-layer': 'water', paint: { 'line-color': '#2d2420', 'line-width': 1.2 } }, 'waterway');
-        map.addLayer({ id: 'tinte-strassen', type: 'line', source: 'openmaptiles', 'source-layer': 'transportation', minzoom: 13,
-          filter: ['in', ['get', 'class'], ['literal', ['minor', 'service']]], layout: { 'line-cap': 'round', 'line-join': 'round' },
-          paint: { 'line-color': '#2d2420', 'line-width': ['interpolate', ['exponential', 1.55], ['zoom'], 13, 1.5, 18, 22] } }, 'highway_minor');
-        map.addLayer({ id: 'tinte-haeuser', type: 'line', source: 'openmaptiles', 'source-layer': 'building', minzoom: 14,
-          paint: { 'line-color': '#2d2420', 'line-width': ['interpolate', ['linear'], ['zoom'], 14, 0.4, 17, 1.4] } }, vor);
-      },
-      pitch: 0, route: '#d6453d', rand: '#2d2420', text: '#2d2420', halo: '#f3e8d0', koerper: 'stil-papier'
-    },
-
-    // Mini-Welt: bunte 3D-Häuser wie eine Spielzeugstadt
-    spielzeug: {
-      farben: {
-        background: { 'background-color': '#eaf4dd' }, landuse_residential: { 'fill-color': '#f4f0e4' },
-        park: { 'fill-color': '#93d977' }, landcover_wood: { 'fill-color': '#6dc45a' },
-        water: { 'fill-color': '#4cc6f2' }, waterway: { 'line-color': '#4cc6f2' },
-        building: { 'fill-color': '#ffffff', 'fill-outline-color': '#e6e0d4' },
-        highway_path: { 'line-color': '#e0d3b8' }, highway_minor: { 'line-color': '#ffffff' },
-        highway_major_casing: { 'line-color': '#d4cbbb' }, highway_major_inner: { 'line-color': '#ffffff' },
-        highway_motorway_casing: { 'line-color': '#e3b65a' }, highway_motorway_inner: { 'line-color': '#ffe08a' },
-        'highway-name-minor': { 'text-color': '#5b6b55' }, 'highway-name-major': { 'text-color': '#4c5a47' },
-        water_name_point_label: { 'text-color': '#0f6f99' }, water_name_line_label: { 'text-color': '#0f6f99' }
-      },
-      haus: { farbe: ['match', ['%', ['floor', ['*', ['coalesce', ['get', 'render_height'], 8], 3.7]], 6],
-        0, '#ff8fa3', 1, '#ffd36e', 2, '#8fd3ff', 3, '#b9a6ff', 4, '#8ee6b5', '#ffb38a'], deckkraft: 1 },
-      licht: true, pitch: 58, route: '#ff4f6d', rand: '#fff', text: '#2b3a28', halo: '#fff'
+    nacht: {
+      farben: stilFarben({ grund: '#0c0a1d', wohnen: '#131028', park: '#0d2a26', wald: '#0d2a26', wasser: '#071f3b', fluss: '#0f5f95',
+        haus: '#1c1838', hausRand: '#2c2557', pfad: '#3b2f72', strasse: '#3a2c78', hauptRand: '#ff3d9a', haupt: '#ff9a4d', autobahn: '#ffd166',
+        bahn: '#4d3f8f', bahnStrich: '#0c0a1d', schrift: '#b9b0ff', wasserSchrift: '#4fc3ff', ort: '#ffffff', halo: '#0c0a1d' }),
+      haus: ['interpolate', ['linear'], ['coalesce', ['get', 'render_height'], 8], 0, '#211c48', 30, '#3b2d82', 60, '#6a3fb0'], hausDeckkraft: 0.92, dach: '#3a3270',
+      licht: { anchor: 'viewport', color: '#ffffff', intensity: 0.3, position: [1.15, 210, 30] },
+      baum: '#1f5c47', baumRand: '#2f8a68',
+      weg: '#22e6ff', wegRand: '#0c0a1d', wegStrich: '#0c0a1d', rand: '#0c0a1d', text: '#f3eeff', halo: '#0c0a1d',
+      glow: true, theme: '#0c0a1d'
     }
   };
-  var STIL_NAME = (location.search.match(/[?&]stil=(\w+)/) || [])[1];
-  var STIL = STILE[STIL_NAME] || STILE.neon;
+  var stilName = 'tag';
+  try { stilName = localStorage.getItem('scmap-stil') || 'tag'; } catch (e) {}
+  if (/[?&]stil=nacht/.test(location.search)) stilName = 'nacht';
+  if (!STILE[stilName]) stilName = 'tag';
+  var STIL = STILE[stilName];
   var PHOTON = 'https://photon.komoot.io/api/';
   var ROUTER = 'https://routing.openstreetmap.de/routed-';
   var CACHE_KEY = 'scmap-v1', OK_KEY = 'scmap-ok';
@@ -259,6 +214,7 @@
     $('sheetBody').innerHTML = h;
     $('sheetBody').scrollTop = 0;
     if (q.length >= 3) adressenSuchen(q);
+    if (map) schilderZeichnen();
   }
 
   function zeile(f, d) {
@@ -307,7 +263,7 @@
       selMarker = new maplibregl.Marker({ element: el, anchor: 'bottom', offset: [0, 4] }).setLngLat(ll(f)).addTo(map);
     }
     blatt('52vh');
-    map.flyTo({ center: ll(f), zoom: Math.max(map.getZoom(), 16), padding: { bottom: window.innerHeight * 0.45 }, duration: 700 });
+    map.flyTo({ center: ll(f), zoom: Math.max(map.getZoom(), 17), padding: { bottom: window.innerHeight * 0.45 }, duration: 700 });
     zeichneDetail();
   }
 
@@ -326,7 +282,7 @@
     }).join('') + '</div>';
     if (routeInfo && routeInfo.fehler) h += '<div class="route-info">' + esc(routeInfo.fehler) + '</div>';
     else if (routeInfo && routeInfo.laedt) h += '<div class="route-info">Weg wird berechnet …</div>';
-    else if (routeInfo) h += '<div class="route-info"><b>' + minuten(routeInfo.dauer) + '</b> · ' + meter(routeInfo.strecke) + ' ' + MODES[routeInfo.modus].wie + '</div>';
+    else if (routeInfo) h += '<div class="route-info"><span class="ri-ic">' + MODES[routeInfo.modus].e + '</span><span><b>Dein Weg zu ' + esc(f.name) + '</b><br>' + minuten(routeInfo.dauer) + ' · ' + meter(routeInfo.strecke) + ' ' + MODES[routeInfo.modus].wie + '</span></div>';
 
     var m = routeInfo ? routeInfo.modus : modus;
     h += '<div class="acts"><button class="act main" type="button" data-go>▶ ' + MODES[m].e + ' Los geht’s</button>';
@@ -364,6 +320,16 @@
     routeInfo = null;
     var src = map && map.getSource('route');
     if (src) src.setData({ type: 'FeatureCollection', features: [] });
+    if (src) map.getSource('schritte').setData({ type: 'FeatureCollection', features: [] });
+  }
+  function wegZeigen(r, k) {
+    map.getSource('route').setData({ type: 'Feature', properties: { modus: k }, geometry: r.geometry });
+    var st = r.legs[0].steps;
+    // Nummern nur an echten Abbiegungen (nicht bei „geradeaus weiter“)
+    var echte = st.slice(1, -1).filter(function (s) { return s.maneuver.modifier && s.maneuver.modifier !== 'straight' && s.maneuver.type !== 'new name'; });
+    map.getSource('schritte').setData({ type: 'FeatureCollection', features: echte.map(function (s, i) {
+      return { type: 'Feature', properties: { nr: String(i + 1) }, geometry: { type: 'Point', coordinates: s.maneuver.location } };
+    }) });
   }
 
   // Weg mit Abbiege-Schritten holen; s.km = wo der Schritt entlang der Strecke beginnt
@@ -390,13 +356,13 @@
         .then(function (r) {
           if (sel !== ziel) return;
           routeInfo = { modus: k, dauer: r.duration, strecke: r.distance, route: r };
-          map.getSource('route').setData({ type: 'Feature', properties: { modus: k }, geometry: r.geometry });
+          wegZeigen(r, k);
           zeichneDetail();
           if (danach) return danach();
           var b = new maplibregl.LngLatBounds();
           r.geometry.coordinates.forEach(function (p) { b.extend(p); });
           blatt('40vh');
-          map.fitBounds(b, { padding: { top: 130, bottom: window.innerHeight * 0.42, left: 40, right: 70 }, maxZoom: 17, pitch: 0, bearing: 0, duration: 800 });
+          map.fitBounds(b, { padding: { top: 130, bottom: window.innerHeight * 0.42, left: 40, right: 70 }, maxZoom: 17, duration: 800 });
         })
         .catch(function () {
           if (sel !== ziel) return;
@@ -481,7 +447,7 @@
       routeHolen(p, nav.ziel, nav.modus).then(function (neu) {
         if (!nav) return;
         nav.route = neu; nav.schritt = -1;
-        map.getSource('route').setData({ type: 'Feature', properties: { modus: nav.modus }, geometry: neu.geometry });
+        wegZeigen(neu, nav.modus);
         sprechen('Neue Route');
         navPos(me);
       }).catch(function () {}).then(function () { setTimeout(function () { if (nav) nav.neu = false; }, 12000); });
@@ -529,7 +495,7 @@
     document.body.classList.remove('navigating');
     $('nav').hidden = true;
     if (selMarker) selMarker.getElement().classList.remove('ziel');
-    map.easeTo({ pitch: STIL.pitch, bearing: 0, padding: { top: 0, bottom: 0, left: 0, right: 0 }, duration: 600 });
+    map.easeTo({ pitch: dreiD ? 55 : 0, bearing: dreiD ? -20 : 0, padding: { top: 0, bottom: 0, left: 0, right: 0 }, duration: 600 });
     if (sel) zeichneDetail();
   }
 
@@ -551,22 +517,189 @@
 
   // ---------- Karte ----------
   function gestalten() {
+    var vor = map.getStyle().layers.filter(function (l) { return l.type === 'symbol'; })[0].id;
+    // Straßennamen in gesperrten Großbuchstaben entlang der Straße
+    ['highway-name-minor', 'highway-name-major'].forEach(function (id) {
+      if (!map.getLayer(id)) return;
+      map.setLayoutProperty(id, 'text-transform', 'uppercase');
+      map.setLayoutProperty(id, 'text-letter-spacing', 0.28);
+      map.setLayoutProperty(id, 'text-size', ['interpolate', ['linear'], ['zoom'], 14, 9, 18, 12]);
+    });
+    map.addLayer({ id: 'neon-glow', type: 'line', source: 'openmaptiles', 'source-layer': 'transportation', filter: GROSS,
+      layout: { 'line-cap': 'round', 'line-join': 'round' },
+      paint: { 'line-color': '#ff4f8b', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 6, 17, 34],
+        'line-blur': ['interpolate', ['linear'], ['zoom'], 12, 4, 17, 22], 'line-opacity': 0.45 } }, 'highway_major_casing');
+    // Häuser als weiche 3D-Klötze (mindestens 6 m, damit alles plastisch wirkt)
+    fensterBilder();
+    var HOEHE = ['max', 6, ['coalesce', ['get', 'render_height'], 8]], BASIS = ['coalesce', ['get', 'render_min_height'], 0];
+    map.addLayer({ id: 'gebaeude-3d', type: 'fill-extrusion', source: 'openmaptiles', 'source-layer': 'building', minzoom: 14.5, maxzoom: 16, paint: {
+      'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], 14.5, 0, 15.5, ['max', 6, ['coalesce', ['get', 'render_height'], 8]]],
+      'fill-extrusion-base': ['coalesce', ['get', 'render_min_height'], 0],
+      'fill-extrusion-vertical-gradient': true
+    } }, vor);
+    // Häuser, in denen ein Geschäft ist, in der Farbe der Kategorie (füllt laedenFaerben())
+    map.addLayer({ id: 'gebaeude-wand', type: 'fill-extrusion', source: 'openmaptiles', 'source-layer': 'building', minzoom: 16, paint: {
+      'fill-extrusion-height': ['-', HOEHE, 0.05], 'fill-extrusion-base': BASIS, 'fill-extrusion-vertical-gradient': true
+    } }, vor);
+    map.addLayer({ id: 'gebaeude-dach', type: 'fill-extrusion', source: 'openmaptiles', 'source-layer': 'building', minzoom: 16, paint: {
+      'fill-extrusion-height': HOEHE, 'fill-extrusion-base': ['-', HOEHE, 0.5], 'fill-extrusion-vertical-gradient': false
+    } }, vor);
+    map.addSource('laeden', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+    map.addLayer({ id: 'laeden-wand', type: 'fill-extrusion', source: 'laeden', minzoom: 16, paint: {
+      'fill-extrusion-height': ['+', 0.5, ['get', 'h']], 'fill-extrusion-base': ['get', 'b'], 'fill-extrusion-vertical-gradient': true
+    } }, vor);
+    map.addLayer({ id: 'laeden-dach', type: 'fill-extrusion', source: 'laeden', minzoom: 16, paint: {
+      'fill-extrusion-height': ['+', 0.6, ['get', 'h']], 'fill-extrusion-base': ['+', 0.05, ['get', 'h']]
+    } }, vor);
+    map.addLayer({ id: 'laeden-3d', type: 'fill-extrusion', source: 'laeden', minzoom: 14.5, maxzoom: 16, paint: {
+      'fill-extrusion-color': ['get', 'farbe'],
+      'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], 14.5, 0, 15.5, ['+', 0.6, ['get', 'h']]],
+      'fill-extrusion-base': ['get', 'b'], 'fill-extrusion-opacity': 1
+    } }, vor);
+    // Bäume als kleine runde Kronen
+    map.addSource('baeume', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+    // Bäume als aufrechte kleine Bäume mit Stamm und runder Krone
+    map.addImage('baum-tag', baumBild('#9cc47a', '#7ea862', '#c4e0a4', '#8a6a4a'), { pixelRatio: 2 });
+    map.addImage('baum-nacht', baumBild('#1f6b52', '#164e3c', '#35a37c', '#3b2f5c'), { pixelRatio: 2 });
+    ['tag', 'nacht'].forEach(function (n) {
+      map.addLayer({ id: 'baeume-' + n, type: 'symbol', source: 'baeume', minzoom: 14.5, layout: {
+        'icon-image': 'baum-' + n, 'icon-anchor': 'bottom', 'icon-allow-overlap': true, 'icon-ignore-placement': true,
+        'icon-pitch-alignment': 'viewport', 'icon-rotation-alignment': 'viewport', visibility: 'none',
+        'icon-size': ['interpolate', ['exponential', 2], ['zoom'], 14.5, 0.25, 16, 0.5, 18, 1.4]
+      } });
+    });
+    fetch('/map/baeume.json').then(function (r) { return r.json(); }).then(function (b) {
+      map.getSource('baeume').setData({ type: 'FeatureCollection', features: b.map(function (p) { return { type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: p } }; }) });
+    }).catch(function () {});
+  }
+
+  // Häuser mit Geschäft einfärben (das Haus unter dem Punkt suchen) – läuft, wenn die Karte ruht
+  var hausCache = {}, schilder = [], dreiD = true;
+  function hell(hex, t) {
+    var n = parseInt(hex.slice(1), 16), m = function (c) { return Math.round(c + (255 - c) * t); };
+    return 'rgb(' + m(n >> 16) + ',' + m((n >> 8) & 255) + ',' + m(n & 255) + ')';
+  }
+  function pastell(hex) {
+    var n = parseInt(hex.slice(1), 16), m = function (c) { return Math.round(c + (255 - c) * 0.3); };
+    return 'rgb(' + m(n >> 16) + ',' + m((n >> 8) & 255) + ',' + m(n & 255) + ')';
+  }
+  function haeuserFaerben() {
+    if (!all.length || map.getZoom() < 15) return;
+    var b = map.getBounds(), neu = false;
+    all.forEach(function (f) {
+      if (f.kat === 'sonst' || f.adresse || hausCache[f.id] || !b.contains(ll(f))) return;
+      var h = map.queryRenderedFeatures(map.project(ll(f)), { layers: ['building'] })[0];
+      if (!h) return;
+      var g = h.geometry.coordinates, schluessel = JSON.stringify(g[0] && g[0][0] && g[0][0][0] !== undefined && g[0][0].length ? g[0][0] : g[0]);
+      if (hausCache[schluessel]) { hausCache[f.id] = true; return; }
+      hausCache[f.id] = true;
+      hausCache[schluessel] = { type: 'Feature', geometry: h.geometry, properties: { farbe: pastell(CATS[f.kat].farbe), neon: CATS[f.kat].farbe, kat: f.kat, dach: hell(CATS[f.kat].farbe, 0.6),
+        h: Math.max(6, h.properties.render_height || 8), b: h.properties.render_min_height || 0 } };
+      neu = true;
+    });
+    if (neu) map.getSource('laeden').setData({ type: 'FeatureCollection', features: Object.keys(hausCache).map(function (k) { return hausCache[k]; }).filter(function (x) { return x !== true; }) });
+  }
+
+  // Schwebende Schilder mit Gehzeit für die nächsten Geschäfte in der Bildmitte
+  function gehzeit(f) { return Math.max(1, Math.round(f.dist / 80)) + ' Min. zu Fuß'; }
+  function schilderZeichnen() {
+    schilder.forEach(function (m) { m.remove(); }); schilder = [];
+    if (!all.length || nav || map.getZoom() < 16) return;
+    var b = map.getBounds(), mitte = map.getCenter().toArray();
+    var auswahl = treffer().filter(function (f) { return f.kat !== 'sonst' && f !== sel && b.contains(ll(f)); })
+      .sort(function (x, y) { return (y.star - x.star) || (abstand(mitte, ll(x)) - abstand(mitte, ll(y))); }).slice(0, 30);
+    if (sel && b.contains(ll(sel))) auswahl.unshift(sel);
+    // Höchstens 5 Schilder, die sich auf dem Bildschirm nicht überdecken
+    var plaetze = [], liste = $('sheet').getBoundingClientRect(), oben = $('cats').getBoundingClientRect().bottom + 60;
+    auswahl = auswahl.filter(function (f) {
+      if (plaetze.length >= 12) return false;
+      var p = map.project(ll(f));
+      // nicht unter der Liste oder unter Suche/Kategorien verstecken
+      if (p.y < oben || p.x < 95 || p.x > innerWidth - 95 || (p.x > liste.left && p.x < liste.right && p.y > liste.top)) return false;
+      if (plaetze.some(function (q) { return Math.abs(q.x - p.x) < 60 && Math.abs(q.y - p.y) < 30; })) return false;
+      plaetze.push(p); return true;
+    });
+    auswahl.forEach(function (f) {
+      var el = document.createElement('button');
+      el.type = 'button'; el.className = 'schild' + (f === sel ? ' aktiv' : '');
+      el.innerHTML = '<span class="s-ic">' + (f.star ? '⭐' : f.adresse ? '📍' : CATS[f.kat].ico) + '</span><span class="s-tx"><b>' + esc(f.name) + '</b><small>' + gehzeit(f) + '</small></span>';
+      el.addEventListener('click', function (e) { e.stopPropagation(); detail(f.id); });
+      var m = new maplibregl.Marker({ element: el, anchor: 'bottom', offset: [0, -10] }).setLngLat(ll(f)).addTo(map);
+      // Überdeckt es ein schon gesetztes Schild? Dann weglassen (höchstens 5)
+      var a = el.getBoundingClientRect();
+      var frei = schilder.length < 5 && schilder.every(function (o) {
+        var c = o.getElement().getBoundingClientRect();
+        return a.right + 6 < c.left || c.right + 6 < a.left || a.bottom + 6 < c.top || c.bottom + 6 < a.top;
+      });
+      if (frei || f === sel) schilder.push(m); else m.remove();
+    });
+  }
+
+  // Wandmuster mit Fenstern (64×64 Pixel, wird auf die Hauswände gekachelt)
+  function fensterMuster(wand, fenster, rahmen, leuchten) {
+    var c = document.createElement('canvas'); c.width = c.height = 64;
+    var g = c.getContext('2d');
+    g.fillStyle = wand; g.fillRect(0, 0, 64, 64);
+    g.fillStyle = 'rgba(0,0,0,.06)'; g.fillRect(0, 60, 64, 4);           // Fuge zwischen Stockwerken
+    [[10, 16], [38, 16]].forEach(function (p, i) {
+      g.fillStyle = rahmen; g.fillRect(p[0] - 2, p[1] - 2, 20, 28);
+      g.fillStyle = leuchten && (i === 0) ? leuchten : fenster; g.fillRect(p[0], p[1], 16, 24);
+      g.fillStyle = 'rgba(255,255,255,.35)'; g.fillRect(p[0], p[1], 16, 3); // Lichtkante
+    });
+    return g.getImageData(0, 0, 64, 64);
+  }
+  function baumBild(krone, schatten, licht, stamm) {
+    var c = document.createElement('canvas'); c.width = 48; c.height = 64;
+    var g = c.getContext('2d');
+    g.fillStyle = 'rgba(32,60,50,.18)'; g.beginPath(); g.ellipse(24, 60, 13, 4, 0, 0, 7); g.fill();   // Schatten am Boden
+    g.fillStyle = stamm; g.fillRect(21, 34, 6, 26);                                                   // Stamm
+    g.fillStyle = schatten; g.beginPath(); g.arc(24, 24, 20, 0, 7); g.fill();                          // Krone (Schattenseite)
+    g.fillStyle = krone; g.beginPath(); g.arc(22, 22, 18, 0, 7); g.fill();                             // Krone
+    g.fillStyle = licht; g.beginPath(); g.arc(17, 16, 7, 0, 7); g.fill();                              // Lichtfleck
+    return g.getImageData(0, 0, 48, 64);
+  }
+  function fensterBilder() {
+    var opt = { pixelRatio: 2 };
+    map.addImage('haus-tag', fensterMuster('#eef2e4', '#bccbb2', '#f8faf2'), opt);
+    map.addImage('haus-nacht', fensterMuster('#241f4a', '#16123a', '#2e2860', '#ffd36b'), opt);
+    ORDER.forEach(function (k) {
+      map.addImage('w-' + k + '-tag', fensterMuster(pastell(CATS[k].farbe), '#5b6b62', '#fffef8'), opt);
+      map.addImage('w-' + k + '-nacht', fensterMuster(CATS[k].farbe, '#1a1640', '#fff', '#fff3b0'), opt);
+    });
+  }
+
+  // Tag/Nacht umschalten, ohne die Karte neu zu laden
+  function setzeStil(name) {
+    stilName = name; STIL = STILE[name];
+    try { localStorage.setItem('scmap-stil', name); } catch (e) {}
     var f = STIL.farben;
     Object.keys(f).forEach(function (id) {
       if (!map.getLayer(id)) return;
       for (var k in f[id]) map.setPaintProperty(id, k, f[id][k]);
     });
-    var vor = map.getStyle().layers.filter(function (l) { return l.type === 'symbol'; })[0].id;
-    if (STIL.extra) STIL.extra(vor);
-    if (STIL.koerper) document.body.classList.add(STIL.koerper);
-    if (STIL.licht) map.setLight({ anchor: 'map', color: '#ffffff', intensity: 0.35, position: [1.4, 210, 50] });
-    // Gebäude ab Zoom 15 in 3D, sanft eingeblendet
-    if (STIL.haus) map.addLayer({ id: 'gebaeude-3d', type: 'fill-extrusion', source: 'openmaptiles', 'source-layer': 'building', minzoom: 15, paint: {
-      'fill-extrusion-color': STIL.haus.farbe,
-      'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], 15, 0, 16, ['coalesce', ['get', 'render_height'], 8]],
-      'fill-extrusion-base': ['coalesce', ['get', 'render_min_height'], 0],
-      'fill-extrusion-opacity': STIL.haus.deckkraft
-    } }, vor);
+    map.setLayoutProperty('neon-glow', 'visibility', STIL.glow ? 'visible' : 'none');
+    map.setLayoutProperty('firmen-glow', 'visibility', STIL.glow ? 'visible' : 'none');
+    map.setPaintProperty('gebaeude-3d', 'fill-extrusion-color', STIL.haus);
+    map.setPaintProperty('gebaeude-wand', 'fill-extrusion-pattern', 'haus-' + name);
+    map.setPaintProperty('gebaeude-dach', 'fill-extrusion-color', STIL.dach);
+    map.setPaintProperty('laeden-wand', 'fill-extrusion-pattern', ['concat', 'w-', ['get', 'kat'], '-', name]);
+    map.setPaintProperty('laeden-dach', 'fill-extrusion-color', ['get', name === 'nacht' ? 'neon' : 'dach']);
+    map.setPaintProperty('laeden-3d', 'fill-extrusion-color', ['get', name === 'nacht' ? 'neon' : 'farbe']);
+    map.setPaintProperty('laeden-3d', 'fill-extrusion-opacity', name === 'nacht' ? 0.8 : 1);
+    map.setPaintProperty('gebaeude-3d', 'fill-extrusion-opacity', STIL.hausDeckkraft);
+    map.setLayoutProperty('baeume-tag', 'visibility', name === 'tag' ? 'visible' : 'none');
+    map.setLayoutProperty('baeume-nacht', 'visibility', name === 'nacht' ? 'visible' : 'none');
+    map.setLight(STIL.licht);
+    map.setPaintProperty('route-rand', 'line-color', STIL.wegRand);
+    map.setPaintProperty('route', 'line-color', STIL.weg);
+    map.setPaintProperty('route-strich', 'line-color', STIL.wegStrich);
+    map.setPaintProperty('firmen', 'circle-stroke-color', STIL.rand);
+    map.setPaintProperty('firmen-name', 'text-color', STIL.text);
+    map.setPaintProperty('firmen-name', 'text-halo-color', STIL.halo);
+    document.body.classList.toggle('nacht', name === 'nacht');
+    document.querySelector('meta[name=theme-color]').setAttribute('content', STIL.theme);
+    $('stilKnopf').textContent = name === 'nacht' ? '☀️' : '🌙';
+    $('stilKnopf').setAttribute('aria-label', name === 'nacht' ? 'Helle Karte' : 'Nachtkarte');
   }
 
   function start() {
@@ -574,7 +707,7 @@
     try { localStorage.setItem(OK_KEY, '1'); } catch (e) {}
     blatt('34vh');
     $('sheetBody').innerHTML = '<p class="muted">Lade Geschäfte aus Erlangen …</p>';
-    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 15.5, pitch: STIL.pitch, maxPitch: 65, attributionControl: false });
+    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 16, pitch: 55, bearing: -20, maxPitch: 65, attributionControl: false });
     map.on('dragstart', function () { if (nav && nav.folgen) { nav.folgen = false; $('navMitte').hidden = false; } });
     map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'Wege: <a href="https://routing.openstreetmap.de">FOSSGIS</a>' }), 'bottom-left');
 
@@ -584,27 +717,34 @@
     bereit.then(function () {
       gestalten();
       map.addSource('route', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-      map.addLayer({ id: 'route-rand', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': STIL.rand, 'line-width': 10 } });
-      map.addLayer({ id: 'route', type: 'line', source: 'route', filter: ['!=', ['get', 'modus'], 'foot'], layout: { 'line-cap': 'round', 'line-join': 'round' },
-        paint: { 'line-color': STIL.route, 'line-width': 6 } });
-      // Zu Fuß: gepunktete Linie wie bei Google Maps
-      map.setFilter('route-rand', ['!=', ['get', 'modus'], 'foot']);
-      map.addLayer({ id: 'route-fuss', type: 'line', source: 'route', filter: ['==', ['get', 'modus'], 'foot'], layout: { 'line-cap': 'round', 'line-join': 'round' },
-        paint: { 'line-color': STIL.route, 'line-width': 7, 'line-dasharray': [0.1, 1.8] } });
+      map.addLayer({ id: 'route-rand', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 13, 7, 18, 16] } });
+      map.addLayer({ id: 'route', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 13, 4.5, 18, 11] } });
+      map.addLayer({ id: 'route-strich', type: 'line', source: 'route', layout: { 'line-join': 'round' },
+        paint: { 'line-width': ['interpolate', ['linear'], ['zoom'], 13, 1, 18, 2.2], 'line-dasharray': [2, 2.5], 'line-opacity': 0.8 } });
+      map.addSource('schritte', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+      map.addLayer({ id: 'schritte', type: 'circle', source: 'schritte', minzoom: 16, paint: { 'circle-radius': 9, 'circle-color': '#203c32', 'circle-stroke-color': '#ddf77b', 'circle-stroke-width': 2 } });
+      map.addLayer({ id: 'schritte-nr', type: 'symbol', source: 'schritte', minzoom: 16, layout: { 'text-field': ['get', 'nr'], 'text-font': ['Noto Sans Bold'], 'text-size': 11, 'text-allow-overlap': true },
+        paint: { 'text-color': '#fff' } });
       map.addSource('firmen', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-      if (STIL.glow) map.addLayer({ id: 'firmen-glow', type: 'circle', source: 'firmen', paint: {
+      map.addLayer({ id: 'firmen-glow', type: 'circle', source: 'firmen', paint: {
         'circle-color': ['get', 'farbe'], 'circle-blur': 1, 'circle-opacity': 0.7,
         'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 6, 14, 12, 17, 22]
       } });
       map.addLayer({ id: 'firmen', type: 'circle', source: 'firmen', paint: {
         'circle-color': ['get', 'farbe'],
-        'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 2.5, 14, 4.5, 17, 8],
-        'circle-stroke-color': STIL.rand, 'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 11, 0.5, 15, 1.5]
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 2.5, 14, 4.5, 16, 5, 18, 6],
+        'circle-opacity': ['interpolate', ['linear'], ['zoom'], 15, 1, 17, 0.85],
+        'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 11, 0.5, 15, 1.5]
       } });
-      map.addLayer({ id: 'firmen-name', type: 'symbol', source: 'firmen', minzoom: 16.5, layout: {
+      map.addLayer({ id: 'firmen-name', type: 'symbol', source: 'firmen', minzoom: 18.5, layout: {
         'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': 12, 'text-offset': [0, 1.1], 'text-anchor': 'top', 'text-optional': true
-      }, paint: { 'text-color': STIL.text, 'text-halo-color': STIL.halo, 'text-halo-width': 1.5 } });
+      }, paint: { 'text-halo-width': 1.5 } });
+      setzeStil(stilName);
       map.on('click', 'firmen', function (e) { detail(e.features[0].properties.id); });
+      map.on('idle', haeuserFaerben);
+      map.on('moveend', schilderZeichnen);
       map.on('mouseenter', 'firmen', function () { map.getCanvas().style.cursor = 'pointer'; });
       map.on('mouseleave', 'firmen', function () { map.getCanvas().style.cursor = ''; });
       return daten;
@@ -676,6 +816,13 @@
   $('navTon').addEventListener('click', function () {
     ton = !ton; this.textContent = ton ? '🔊' : '🔇';
     if (!ton && window.speechSynthesis) speechSynthesis.cancel();
+  });
+  $('dreiD').addEventListener('click', function () {
+    dreiD = !dreiD; this.setAttribute('aria-pressed', dreiD);
+    if (map) map.easeTo({ pitch: dreiD ? 55 : 0, bearing: dreiD ? -20 : 0, duration: 700 });
+  });
+  $('stilKnopf').addEventListener('click', function () {
+    if (map && map.getLayer('firmen')) setzeStil(stilName === 'nacht' ? 'tag' : 'nacht');
   });
   $('navMitte').addEventListener('click', function () { if (!nav) return; nav.folgen = true; this.hidden = true; navPos(me); });
 

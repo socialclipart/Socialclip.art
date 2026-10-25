@@ -77,10 +77,16 @@ Dann im Browser `http://localhost:8080` öffnen.
 - Werbe-Tipp für 30 €: Reel „Kamerafahrt“ bewerben, Erlangen + 20 km, 5 €/Tag für 6 Tage.
 
 ### App „SocialClip Map“ (Version 1 gebaut, Ordner `map/`, Stand 25.10.2026)
-- Kartenstil „Neon bei Nacht“ (vom Inhaber gewählt): dunkel, leuchtende Straßen, lila 3D-Häuser.
-  Grundkarte OpenFreeMap „positron“, umgefärbt über `STILE` in `map.js`. Weitere Entwürfe per
-  `?stil=warm|papier|spielzeug` (Idee offen: 🎨-Knopf, mit dem Besucher den Stil wählen).
+- Look nach der Designstudie „VIERTEL“ des Inhabers (Bild + Übergabe-Text, Code selbst nicht im Repo):
+  hell (Salbeigrün `#e9efdc`, Dunkelgrün `#203c32`, Akzent `#ddf77b`, Georgia für Ortsnamen), schräge
+  Spielbrett-Ansicht, Häuser mit Fenstern und Dach (ab Zoom 16), Geschäftshäuser in Kategorie-Farbe,
+  Bäume mit Krone (`map/baeume.json`), schwebende Schilder mit Gehzeit, Weg als hellgrünes Band.
+  Knöpfe „3D“ und 🌙: Nacht = Neon-Stil. Stile in `STILE` (`tag`, `nacht`) in `map.js`.
 - Inhaber findet normale Karten „zu Standard/wie Google Maps“ – Look soll einzigartig sein.
+- SocialClip selbst sitzt in der Donato-Polli-Str. 38, 91056 Erlangen (Pin in `map/profile.json`).
+- Wunsch für später: Inhaber-Bereich, in dem z. B. der Chef einer Pizzeria nach Freischaltung sein
+  Profil (Fotos, Angebote, Öffnungszeiten) selbst bearbeitet. Braucht Anmeldung + Datenbank (Backend).
+- Ideen aus der Designstudie noch offen: Merkliste (Herz), Gehzeit-Filter 5/10/15 Min., „Streifzug“.
 - Adresssuche (Photon/komoot) mit Navigation, „Geschäfte in der Nähe“ unter jedem Ziel; Fokus bleibt Geschäfte,
   Ziel: App, die man jeden Tag nutzt. Kategorien am PC mit Pfeilen/Mausrad.
 - Kategorien mit „✕ Alle“/Zurück (auch Handy-Zurück-Taste), Suche mit Zusatzwörtern (z. B. „Nägel“),

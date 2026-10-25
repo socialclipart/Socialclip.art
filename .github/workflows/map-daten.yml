@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
-          git add map/firmen.json
+          git add map/firmen.json map/baeume.json
           git diff --cached --quiet && echo "Keine Änderungen" && exit 0
           git commit -m "Map-Daten aus OpenStreetMap aktualisieren"
           git push
