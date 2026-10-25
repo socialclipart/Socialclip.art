@@ -1,0 +1,38 @@
+# Aktualisiert die Geschäfte der SocialClip Map (map/firmen.json) aus OpenStreetMap.
+name: Map-Daten aktualisieren
+
+on:
+  schedule:
+    - cron: "17 3 * * 1"   # jeden Montag früh
+  workflow_dispatch:         # von Hand auf GitHub unter „Actions“ startbar
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/map_daten.py"
+      - ".github/workflows/map-daten.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: map-daten
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python .github/scripts/map_daten.py
+      - name: Änderungen speichern
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add map/firmen.json
+          git diff --cached --quiet && echo "Keine Änderungen" && exit 0
+          git commit -m "Map-Daten aus OpenStreetMap aktualisieren"
+          git push

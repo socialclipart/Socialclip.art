@@ -1,7 +1,6 @@
 /* SocialClip Map: Geschäfte in Erlangen entdecken (Daten: OpenStreetMap) */
 (function () {
   var START = [49.5897, 11.0039];          // Erlangen Mitte
-  var BBOX = '49.54,10.93,49.64,11.08';    // Süd, West, Nord, Ost
   var RADIUS = 1000;                        // „In deiner Nähe“ in Metern
   var CACHE_KEY = 'scmap-v1';
   var SERVERS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'];
@@ -68,21 +67,31 @@
   }
   function meter(m) { return m < 1000 ? Math.round(m / 10) * 10 + ' m' : (m / 1000).toFixed(1).replace('.', ',') + ' km'; }
 
-  // Daten laden: erst aus dem Zwischenspeicher (1 Tag), sonst von OpenStreetMap
+  // Daten laden: zuerst die fertige Datei (wöchentlich per GitHub Actions erzeugt),
+  // sonst Zwischenspeicher (1 Tag), sonst kleinere Live-Abfrage bei OpenStreetMap
   function laden() {
+    return fetch('/map/firmen.json', { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) { if (!d.length) throw new Error('leer'); return d; })
+      .catch(live);
+  }
+
+  function live() {
     try {
       var c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
       if (c && Date.now() - c.zeit < 864e5) return Promise.resolve(c.daten);
     } catch (e) {}
-    var q = '[out:json][timeout:60];(' +
-      ['shop', 'craft', 'office', 'healthcare'].map(function (k) { return 'nwr["' + k + '"]["name"](' + BBOX + ');'; }).join('') +
-      'nwr["amenity"~"^(restaurant|cafe|fast_food|bar|pub|ice_cream|biergarten|doctors|dentist|pharmacy|clinic|veterinary|car_wash|fuel|car_rental|bank|post_office|driving_school)$"]["name"](' + BBOX + ');' +
-      'nwr["leisure"~"^(fitness_centre|sports_centre)$"]["name"](' + BBOX + ');' +
+    var um = '(around:2000,' + START[0] + ',' + START[1] + ')';
+    var q = '[out:json][timeout:25];(' +
+      ['shop', 'craft', 'office', 'healthcare'].map(function (k) { return 'nwr["' + k + '"]["name"]' + um + ';'; }).join('') +
+      'nwr["amenity"~"^(restaurant|cafe|fast_food|bar|pub|ice_cream|biergarten|doctors|dentist|pharmacy|clinic|veterinary|car_wash|fuel|car_rental|bank|post_office|driving_school)$"]["name"]' + um + ';' +
       ');out center tags;';
     var versuch = function (i) {
-      return fetch(SERVERS[i], { method: 'POST', body: 'data=' + encodeURIComponent(q) })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .catch(function (e) { if (i + 1 < SERVERS.length) return versuch(i + 1); throw e; });
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var uhr = ctrl && setTimeout(function () { ctrl.abort(); }, 30000);
+      return fetch(SERVERS[i] + '?data=' + encodeURIComponent(q), ctrl ? { signal: ctrl.signal } : {})
+        .then(function (r) { clearTimeout(uhr); if (!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(function (e) { clearTimeout(uhr); if (i + 1 < SERVERS.length) return versuch(i + 1); throw e; });
     };
     return versuch(0).then(function (j) {
       var daten = j.elements.map(function (e) {
