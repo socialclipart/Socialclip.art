@@ -57,12 +57,22 @@
     }
   };
   // Einstellungen aus dem Menü (bleiben auf dem Gerät gespeichert)
-  var EIN = { tagNacht: 'tag', dreiD: true, farben: true, neon: true, baeume: true, schilder: true };
+  // City Mode verwendet dieselben OpenStreetMap-Daten und vorhandenen 3D-Layer.
+  STILE.city = {
+    farben: stilFarben({grund:'#071526',wohnen:'#0d2034',park:'#0a302b',wald:'#123d35',wasser:'#092c49',fluss:'#156184',haus:'#172b42',hausRand:'#426487',pfad:'#326278',strasse:'#c66942',hauptRand:'#ee532e',haupt:'#ff9b48',autobahn:'#ffc16d',bahn:'#296784',bahnStrich:'#071526',schrift:'#a1bfd2',wasserSchrift:'#6ecbe5',ort:'#f2f5ff',halo:'#08182b'}),
+    haus:['interpolate',['linear'],['coalesce',['get','render_height'],8],0,'#132c46',20,'#244264',65,'#394578'],
+    hausDeckkraft:0.97,dach:'#345478',
+    licht:{anchor:'viewport',color:'#ffd8ae',intensity:0.38,position:[1.3,225,48]},
+    weg:'#ffb15c',wegRand:'#0c2133',bus:'#60e5e9',wegStrich:'#112638',
+    rand:'#081a2c',text:'#eef5fc',halo:'#081525',glow:true,theme:'#081525'
+  };
+  var EIN = { tagNacht: 'tag', dreiD: true, farben: true, neon: true, baeume: true, schilder: true, cityMode: false };
   try {
     var alt = localStorage.getItem('scmap-stil'); if (alt) EIN.tagNacht = alt;
     var gesp = JSON.parse(localStorage.getItem('scmap-einst') || '{}');
     for (var k in gesp) if (k in EIN) EIN[k] = gesp[k];
   } catch (e) {}
+  try { if (new URLSearchParams(location.search).get('city') === '1') EIN.cityMode = true; } catch (e) {}
   function einstSpeichern() { try { localStorage.setItem('scmap-einst', JSON.stringify(EIN)); } catch (e) {} }
   function tagOderNacht() { if (EIN.tagNacht !== 'auto') return EIN.tagNacht; var h = new Date().getHours(); return h >= 19 || h < 7 ? 'nacht' : 'tag'; }
   var stilName = tagOderNacht();
@@ -221,6 +231,10 @@
   function liste() {
     sel = null; routeWeg(); if (selMarker) { selMarker.remove(); selMarker = null; }
     var tr = treffer(), q = $('q').value.trim();
+    var cityStat = $('cityHudStat');
+    if (cityStat) cityStat.textContent = all.filter(function(f){
+      return !f.adresse && f.dist <= 1000 && (!aktiv || f.kat === aktiv);
+    }).length.toLocaleString('de-DE');
     kartenDaten(tr); kategorien();
     var nah = tr.filter(function (f) { return f.dist <= RADIUS; }).length;
     var sorted = tr.slice().sort(function (a, b) { return (b.star - a.star) || (a.dist - b.dist); }).slice(0, 60);
@@ -1047,6 +1061,7 @@
   // Tag/Nacht umschalten, ohne die Karte neu zu laden
   function setzeStil(name) {
     stilName = name; STIL = STILE[name];
+    var dunkel = name !== 'tag', muster = dunkel ? 'nacht' : 'tag';
 
     var f = STIL.farben;
     Object.keys(f).forEach(function (id) {
@@ -1056,34 +1071,43 @@
     map.setLayoutProperty('neon-glow', 'visibility', STIL.glow && EIN.neon ? 'visible' : 'none');
     map.setLayoutProperty('firmen-glow', 'visibility', STIL.glow && EIN.neon ? 'visible' : 'none');
     map.setPaintProperty('gebaeude-3d', 'fill-extrusion-color', STIL.haus);
-    map.setPaintProperty('gebaeude-wand', 'fill-extrusion-pattern', 'haus-' + name);
+    map.setPaintProperty('gebaeude-wand', 'fill-extrusion-pattern', 'haus-' + muster);
     map.setPaintProperty('gebaeude-dach', 'fill-extrusion-color', STIL.dach);
-    map.setPaintProperty('laeden-wand', 'fill-extrusion-pattern', ['concat', 'w-', ['get', 'kat'], '-', name]);
-    map.setPaintProperty('laeden-dach', 'fill-extrusion-color', ['get', name === 'nacht' ? 'neon' : 'dach']);
-    map.setPaintProperty('laeden-3d', 'fill-extrusion-color', ['get', name === 'nacht' ? 'neon' : 'farbe']);
-    map.setPaintProperty('laeden-3d', 'fill-extrusion-opacity', name === 'nacht' ? 0.8 : 1);
+    map.setPaintProperty('laeden-wand', 'fill-extrusion-pattern', ['concat', 'w-', ['get', 'kat'], '-', muster]);
+    map.setPaintProperty('laeden-dach', 'fill-extrusion-color', ['get', dunkel ? 'neon' : 'dach']);
+    map.setPaintProperty('laeden-3d', 'fill-extrusion-color', ['get', dunkel ? 'neon' : 'farbe']);
+    map.setPaintProperty('laeden-3d', 'fill-extrusion-opacity', dunkel ? 0.86 : 1);
     map.setPaintProperty('gebaeude-3d', 'fill-extrusion-opacity', STIL.hausDeckkraft);
     map.setLayoutProperty('baeume-tag', 'visibility', name === 'tag' && EIN.baeume ? 'visible' : 'none');
-    map.setLayoutProperty('baeume-nacht', 'visibility', name === 'nacht' && EIN.baeume ? 'visible' : 'none');
+    map.setLayoutProperty('baeume-nacht', 'visibility', dunkel && EIN.baeume ? 'visible' : 'none');
     ['laeden-3d', 'laeden-wand', 'laeden-dach'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', EIN.farben ? 'visible' : 'none'); });
     map.setLight(STIL.licht);
+    map.setPaintProperty('neon-glow', 'line-color', name === 'city' ? '#ff752e' : '#ff4f8b');
+    map.setPaintProperty('neon-glow', 'line-opacity', name === 'city' ? 0.82 : 0.45);
+    map.setPaintProperty('neon-glow', 'line-width', name === 'city'
+      ? ['interpolate',['linear'],['zoom'],12,9,17,42]
+      : ['interpolate',['linear'],['zoom'],12,6,17,34]);
+    map.setPaintProperty('firmen-glow', 'circle-opacity', name === 'city' ? 0.88 : 0.7);
+    map.setPaintProperty('firmen', 'circle-radius', name === 'city'
+      ? ['interpolate',['linear'],['zoom'],11,3,14,5.8,16,7.2,18,8]
+      : ['interpolate',['linear'],['zoom'],11,2.5,14,4.5,16,5,18,6]);
     map.setPaintProperty('route-rand', 'line-color', STIL.wegRand);
     map.setPaintProperty('route', 'line-color', ['case', ['==', ['get', 'modus'], 'bus'], ['coalesce', ['get', 'farbe'], STIL.bus], STIL.weg]);
     map.setPaintProperty('route-strich', 'line-color', STIL.wegStrich);
     map.setPaintProperty('firmen', 'circle-stroke-color', STIL.rand);
     map.setPaintProperty('firmen-name', 'text-color', STIL.text);
     map.setPaintProperty('firmen-name', 'text-halo-color', STIL.halo);
-    document.body.classList.toggle('nacht', name === 'nacht');
+    document.body.classList.toggle('nacht', dunkel);
     document.querySelector('meta[name=theme-color]').setAttribute('content', STIL.theme);
-    $('stilKnopf').textContent = name === 'nacht' ? '☀️' : '🌙';
-    $('stilKnopf').setAttribute('aria-label', name === 'nacht' ? 'Helle Karte' : 'Nachtkarte');
+    $('stilKnopf').textContent = dunkel ? '☀️' : '🌙';
+    $('stilKnopf').setAttribute('aria-label', dunkel ? 'Helle Karte' : 'Nachtkarte');
   }
 
   function start() {
     if (map) return;
     blatt('34vh');
     $('sheetBody').innerHTML = '<p class="muted">Lade Geschäfte aus Nürnberg, Fürth und Erlangen …</p>';
-    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 16, pitch: dreiD ? 55 : 0, bearing: dreiD ? -20 : 0, maxPitch: 65, attributionControl: false });
+    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 16, pitch: EIN.cityMode ? 60 : dreiD ? 55 : 0, bearing: EIN.cityMode ? -30 : dreiD ? -20 : 0, maxPitch: 65, attributionControl: false });
     map.on('dragstart', function () { if (nav && nav.folgen) { nav.folgen = false; $('navMitte').hidden = false; } });
     map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'Wege: <a href="https://routing.openstreetmap.de">FOSSGIS</a> · Fahrplan: <a href="https://transitous.org/sources/">Transitous</a>' }), 'bottom-left');
 
@@ -1117,7 +1141,7 @@
       map.addLayer({ id: 'firmen-name', type: 'symbol', source: 'firmen', minzoom: 18.5, layout: {
         'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': 12, 'text-offset': [0, 1.1], 'text-anchor': 'top', 'text-optional': true
       }, paint: { 'text-halo-width': 1.5 } });
-      setzeStil(stilName);
+      setzeStil(EIN.cityMode ? 'city' : stilName);
       map.on('click', 'firmen', function (e) { detail(e.features[0].properties.id); });
       map.on('idle', haeuserFaerben);
       map.on('moveend', schilderZeichnen);
@@ -1330,10 +1354,31 @@
     $('dreiD').setAttribute('aria-pressed', an);
     if (map) map.easeTo({ pitch: an ? 55 : 0, bearing: an ? -20 : 0, duration: 700 });
   }
+  function cityModeSetzen(an) {
+    EIN.cityMode = !!an;
+    einstSpeichern();
+    document.body.classList.toggle('city-mode', EIN.cityMode);
+    $('cityKnopf').setAttribute('aria-pressed', String(EIN.cityMode));
+    $('cityKnopf').setAttribute('aria-label', EIN.cityMode ? 'City Mode beenden' : 'City Mode starten');
+    $('cityHud').hidden = !EIN.cityMode;
+    if (!map || !map.getLayer('firmen')) return;
+    setzeStil(EIN.cityMode ? 'city' : tagOderNacht());
+    map.easeTo({pitch:EIN.cityMode ? 60 : EIN.dreiD ? 55 : 0,
+      bearing:EIN.cityMode ? -30 : EIN.dreiD ? -20 : 0,
+      zoom:EIN.cityMode ? Math.max(15.8,map.getZoom()) : map.getZoom(),
+      duration:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 850});
+    schilderZeichnen();
+    liste();
+  }
+  document.body.classList.toggle('city-mode', !!EIN.cityMode);
+  $('cityHud').hidden = !EIN.cityMode;
+  $('cityKnopf').setAttribute('aria-pressed', String(!!EIN.cityMode));
+  $('cityKnopf').addEventListener('click', function(){cityModeSetzen(!EIN.cityMode);});
   $('dreiD').setAttribute('aria-pressed', dreiD);
-  $('dreiD').addEventListener('click', function () { dreiDSetzen(!dreiD); });
+  $('dreiD').addEventListener('click', function () { if(EIN.cityMode) cityModeSetzen(false); dreiDSetzen(!dreiD); });
   $('stilKnopf').addEventListener('click', function () {
     if (!map || !map.getLayer('firmen')) return;
+    if(EIN.cityMode) cityModeSetzen(false);
     EIN.tagNacht = stilName === 'nacht' ? 'tag' : 'nacht'; einstSpeichern();
     setzeStil(EIN.tagNacht);
   });
@@ -1347,13 +1392,14 @@
   $('menu').addEventListener('change', function (e) {
     var c = e.target.closest('[data-einst]'); if (!c) return;
     var k = c.dataset.einst;
-    if (k === 'dreiD') return dreiDSetzen(c.checked);
+    if (k === 'dreiD') { if(EIN.cityMode) cityModeSetzen(false); return dreiDSetzen(c.checked); }
     EIN[k] = c.checked; einstSpeichern();
     if (map && map.getLayer('firmen')) setzeStil(stilName);
     if (k === 'schilder' && map) schilderZeichnen();
   });
   $('menu').addEventListener('click', function (e) {
     var b = e.target.closest('[data-tagnacht]'); if (!b) return;
+    if(EIN.cityMode) cityModeSetzen(false);
     EIN.tagNacht = b.dataset.tagnacht; einstSpeichern(); menuZeigen();
     if (map && map.getLayer('firmen')) setzeStil(tagOderNacht());
   });
