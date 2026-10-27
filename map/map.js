@@ -75,6 +75,7 @@
     // Einmalig aktivieren, danach bleibt eine bewusste Nutzerwahl erhalten.
     if (localStorage.getItem('scmap-city-design-v2') !== '1') {
       EIN.cityMode = true;
+      localStorage.setItem('scmap-einst', JSON.stringify(EIN));
       localStorage.setItem('scmap-city-design-v2', '1');
     }
   } catch (e) {}
