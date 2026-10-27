@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f8f4">
+<meta name="description" content="SocialClip – entdecke Geschäfte in deiner Nähe, finde lokale Hilfe und gestalte unsere neue App mit.">
+<title>SocialClip — Deine Umgebung. Deine Möglichkeiten.</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/map/lib/maplibre-gl.css">
+<link rel="stylesheet" href="./styles.css">
+<script defer src="/map/lib/maplibre-gl.js"></script>
+<script defer src="./config.js"></script>
+<script defer src="./app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<header class="header">
+<div class="wrap headerinner"><a class="brand" href="#start" aria-label="SocialClip Startseite">socialclip<span>.</span><small>ONE APP <i>Beta</i></small></a>
+<nav class="topnav" aria-label="Hauptnavigation">
+<a data-nav="start" href="#start">Start</a><a data-nav="entdecken" href="#entdecken">Entdecken</a><a data-nav="live" href="#live">Hilfe finden</a><a data-nav="business" href="#business">Für Unternehmen</a><a data-nav="feedback" href="#feedback">Mitgestalten</a>
+</nav><a class="navcta" href="#feedback">Deine Meinung <span aria-hidden="true">↗</span></a>
+</div></header>
+<main id="main" class="wrap">
+<section class="page active" id="page-start" aria-labelledby="starttitle">
+<div class="hero">
+<div class="herotext"><div class="eyebrow"><span class="signal"></span> Ein neues Erlebnis für deine Stadt</div>
+<h1 id="starttitle">Mehr entdecken.<br><em>Weniger suchen.</em></h1>
+<p>Finde Geschäfte, die du noch nicht kennst. Und passende Hilfe, wenn du sie brauchst. <strong>Map und Live in einer App.</strong></p>
+<div class="buttons"><a class="btn bright" href="#entdecken">Umgebung entdecken <span>↗</span></a><a class="btn glass" href="#live">Ich brauche Hilfe <span>↗</span></a></div>
+<div class="hero-foot"><span>📍 Start in Erlangen</span><span>✦ Gemeinsam mit echten Menschen entwickeln</span></div></div>
+<div class="herovisual" aria-hidden="true">
+<div class="visualglass"><div class="mocklabel">DEINE STADT · DEINE MÖGLICHKEITEN</div><div class="visualmap">
+<div class="street one"></div><div class="street two"></div><div class="street three"></div><div class="park"></div>
+<div class="pin p1">☕</div><div class="pin p2">🛍️</div><div class="pin p3">🔧</div><div class="pin p4">🍽️</div><div class="pointme"></div>
+</div><div class="visualbottom"><strong>Was gibt es um dich herum?</strong><span>Entdecke echte Orte in deiner Nähe.</span></div></div>
+<div class="floating-notice"><b>⚡ SocialClip Live</b><span>Eine Anfrage. Passende Hilfe.</span></div></div>
+</div>
+<div class="sectiontop"><div><div class="eyebrow dark">ZWEI MÖGLICHKEITEN · EINE APP</div><h2>Für die Neugier.<br><em>Und für den Alltag.</em></h2></div><p>Ob du stöbern möchtest oder eine konkrete Lösung suchst: SocialClip verbindet dich mit deiner Umgebung.</p></div>
+<div class="featuregrid"><article class="feature green"><div class="featuretop"><span>01 / ENTDECKEN</span><span class="featureicon">⌖</span></div><h3>Map.</h3><p>Die Karte zeigt lokale Geschäfte rund um deinen gewählten oder freigegebenen Standort – auch solche, von denen du bisher nichts wusstest.</p><a class="textlink" href="#entdecken">Karte öffnen <span>↗</span></a><div class="featuremark" aria-hidden="true">✳</div></article>
+<article class="feature cream"><div class="featuretop"><span>02 / HILFE FINDEN</span><span class="featureicon">↗</span></div><h3>Live.</h3><p>Beschreibe dein Anliegen einmal. Später können passende Unternehmen in deiner Nähe antworten und ihre tatsächliche Verfügbarkeit bestätigen.</p><a class="textlink" href="#live">Live ausprobieren <span>↗</span></a><div class="featuremark pale" aria-hidden="true">↗</div></article></div>
+<div class="banner"><div><div class="eyebrow">FÜR ERLANGEN. MIT ERLANGEN.</div><h2>Wir bauen nicht einfach eine weitere App. <em>Wir hören zuerst zu.</em></h2></div><a class="btn dark" href="#feedback">Mitgestalten ↗</a></div>
+</section>
+<section class="page" id="page-entdecken" aria-labelledby="maptitle">
+<div class="pagehead"><div><div class="eyebrow dark">SOCIALCLIP MAP</div><h1 id="maptitle">Deine Umgebung.<br><em>Neu entdeckt.</em></h1><p>Orte und Unternehmen rund um dich finden. Standardmäßig zeigen wir Erlangen – deinen genauen Standort nutzen wir nur mit deiner Zustimmung.</p></div><div class="headstamp">ECHTE<br>GESCHÄFTE<br><span>KEINE DEMO-DATEN</span></div></div>
+<div class="maplayout"><div class="mapframe"><div id="realmap" class="mapcanvas" aria-label="Interaktive Karte von Erlangen"></div><div class="mapcontrols"><input id="mapsearch" type="search" placeholder="Wonach suchst du? Café, Werkstatt …" aria-label="Geschäfte durchsuchen"><button id="geo" class="mapbutton" type="button">⌖ Standort</button><button id="random" class="mapbutton" type="button">✳ Überrasch mich</button></div></div>
+<aside class="mapaside"><div class="asidehead"><div><span class="eyebrow dark">UM DICH HERUM</span><h2>Orte entdecken</h2></div><span class="count" id="placecount">–</span></div><label class="selectlabel">Stadt <select id="city"><option value="erlangen">Erlangen</option><option value="nuernberg">Nürnberg</option><option value="fuerth">Fürth</option></select></label>
+<div class="chips" id="categories" aria-label="Branchenfilter"></div><p class="subtle" id="mapstatus" role="status">Geschäfte werden geladen …</p><div id="placelist" class="places"></div><div id="placedetail" class="placedetail" hidden></div></aside></div>
+<div class="info-line"><span>Datengrundlage: OpenStreetMap / SocialClip Map</span><span>Kein Anspruch auf vollständige oder aktuelle Geschäftsangaben</span></div>
+</section>
+<section class="page" id="page-live" aria-labelledby="livetitle">
+<div class="pagehead"><div><div class="eyebrow dark">SOCIALCLIP LIVE · PROTOTYP</div><h1 id="livetitle">Schreib, was du brauchst.<br><em>Wir denken mit.</em></h1><p>Statt zehn Unternehmen anzurufen: Beschreibe dein Anliegen in einem Schritt. In dieser ersten Demo siehst du, wie eine Anfrage aussehen würde.</p></div><div class="headstamp">EINE<br>ANFRAGE<br><span>STATT VIELER ANRUFE</span></div></div>
+<div class="columns"><div class="formcard"><div class="cardtitle"><span class="number">01</span><h2>Deine Anfrage</h2></div>
+<form id="requestform"><div class="fields"><label>Kategorie<select name="category" required><option value="">Bitte auswählen</option><option>Autowerkstatt & Auto</option><option>Handwerker & Reparaturen</option><option>Friseur & Beauty</option><option>Geschäfte & Produkte</option><option>Andere Dienstleistungen</option></select></label><label>Ort<select name="location" required><option>Erlangen</option><option>Nürnberg</option><option>Fürth</option></select></label><label class="full">Was benötigst du?<textarea name="description" minlength="12" maxlength="900" required placeholder="Zum Beispiel: Mein Auto verliert Kühlmittel. Kann eine Werkstatt es diese Woche prüfen?"></textarea></label><label class="full">Wann?<select name="when"><option>So bald wie möglich</option><option>Heute</option><option>Morgen</option><option>Diese Woche</option><option>Ich bin flexibel</option></select></label></div>
+<button class="btn dark" type="submit">Anfrage-Vorschau erstellen ↗</button><p class="hint">Noch keine echte Vermittlung: Wir senden nichts an Unternehmen.</p></form><div id="requestresult" class="requestresult" hidden></div></div>
+<div class="rightstack"><article class="explainer"><span class="number">02</span><h3>Wir finden passende Betriebe.</h3><p>Im späteren Live-System sollen Betriebe eine passende Anfrage erhalten – nicht wahllos alle Unternehmen.</p></article><article class="explainer"><span class="number">03</span><h3>Der Betrieb antwortet.</h3><p>Preise und Termine werden erst angezeigt, wenn sie bestätigt wurden. Keine erfundenen Zusagen.</p></article><div class="caution"><b>Transparenz von Anfang an</b><p>Live ist hier ein interaktiver Prototyp. Für echte Vermittlungen brauchen wir Partnerbetriebe, sichere Speicherung und Benachrichtigungen.</p></div></div></div>
+</section>
+<section class="page" id="page-business" aria-labelledby="businesstitle">
+<div class="businesshero"><div class="eyebrow">SOCIALCLIP DIGITAL · FÜR UNTERNEHMEN</div><h1 id="businesstitle">Dein Unternehmen kann<br><em>digital mehr.</em></h1><p>Wir analysieren, wie dein Betrieb arbeitet, erkennen Schwachstellen und bauen passende digitale Lösungen. Nicht alles verkaufen – das Richtige verbessern.</p><a class="btn bright" href="mailto:socialclip.art@gmail.com?subject=SocialClip%20Digital%20%E2%80%93%20Erstgespr%C3%A4ch">Unverbindlich sprechen ↗</a></div>
+<div class="sectiontop"><div><div class="eyebrow dark">UNSER ANSATZ</div><h2>Erst verstehen.<br><em>Dann digitalisieren.</em></h2></div><p>Ein Partner für Sichtbarkeit, Kundenanfragen und bessere Abläufe – mit Lösungen, die zum Betrieb passen.</p></div>
+<div class="servicegrid"><article><span>01 / ANALYSE</span><h3>Potenziale erkennen</h3><p>Wo gehen Anfragen verloren? Welche Abläufe kosten zu viel Zeit? Wir prüfen, bevor wir etwas anbieten.</p></article><article><span>02 / WEB & SICHTBARKEIT</span><h3>Online überzeugen</h3><p>Website, Google-Präsenz, lokale Auffindbarkeit und Inhalte, die Vertrauen schaffen.</p></article><article><span>03 / PROZESSE</span><h3>Arbeit vereinfachen</h3><p>Kontaktformulare, Terminbuchungen, Kundenverwaltung und sinnvolle Automatisierungen.</p></article><article><span>04 / BETREUUNG</span><h3>Langfristig verbessern</h3><p>Technische Betreuung und Weiterentwicklung nach klar vereinbartem Leistungsumfang.</p></article></div>
+<div class="business-bottom"><div><span class="eyebrow dark">AUCH FÜR GESCHÄFTE AUF DER MAP</span><h2>Dein Geschäft soll entdeckt werden?</h2><p>SocialClip Map und Live können Unternehmen künftig zusätzlich mit Menschen in ihrer Umgebung verbinden. Die Basis-Teilnahme am Pilotprojekt soll kostenlos bleiben.</p></div><a class="btn dark" href="mailto:socialclip.art@gmail.com?subject=SocialClip%20Map%20%E2%80%93%20Betrieb%20interessiert">Als Betrieb Interesse anmelden ↗</a></div>
+</section>
+<section class="page" id="page-feedback" aria-labelledby="feedbacktitle">
+<div class="pagehead"><div><div class="eyebrow dark">GEMEINSAM ENTWICKELN</div><h1 id="feedbacktitle">Jetzt bist du gefragt.</h1><p>Was würdest du wirklich benutzen? Deine ehrliche Meinung ist uns wichtiger als ein nettes Kompliment.</p></div></div>
+<div id="backendstatus" class="status-banner" role="status"></div>
+<div class="feedbackgrid"><div class="formcard"><div class="cardtitle"><span class="number">01</span><h2>Was interessiert dich?</h2></div><p>Wähle deine bevorzugte Funktion. Du kannst deine Entscheidung später ändern.</p><div class="polloptions"><button type="button" data-vote="map" aria-pressed="false"><span>⌖</span><strong>Map</strong><small>Neues entdecken</small></button><button type="button" data-vote="live" aria-pressed="false"><span>↗</span><strong>Live</strong><small>Hilfe finden</small></button><button type="button" data-vote="both" aria-pressed="false"><span>✳</span><strong>Beides</strong><small>Alles in einer App</small></button></div><button class="btn dark" id="sendvote" type="button" disabled>Stimme abgeben</button><p id="votestatus" role="status" class="hint"></p><div class="results"><h3>Abstimmung</h3><div id="bars"></div><p id="totalvotes" class="hint"></p></div></div>
+<div class="formcard"><div class="cardtitle"><span class="number">02</span><h2>Was können wir besser machen?</h2></div><p>Welche Funktion fehlt? Wann würdest du SocialClip nutzen? Auch Kritik ist ausdrücklich willkommen.</p><form id="commentform"><div class="fields single"><label>Dein Anzeigename (freiwillig)<input name="display_name" maxlength="40" placeholder="z. B. Alex"></label><label>Deine Meinung<textarea name="body" required minlength="6" maxlength="700" placeholder="Meine Idee für SocialClip …"></textarea></label></div><label class="consent"><input type="checkbox" name="consent" required><span>Ich stimme zu, dass mein Kommentar und mein optionaler Anzeigename nach Prüfung öffentlich angezeigt werden können.</span></label><button class="btn dark" type="submit">Feedback senden ↗</button><p id="commentstatus" role="status" class="hint"></p></form></div></div>
+<div class="community"><div class="sectiontop compact"><div><div class="eyebrow dark">STIMMEN AUS DER COMMUNITY</div><h2>Was andere denken.</h2></div><button class="btn outline" id="refresh" type="button">Aktualisieren ↻</button></div><div id="comments" class="commentgrid"><p class="subtle">Noch keine veröffentlichten Beiträge.</p></div></div>
+</section>
+</main>
+<footer class="footer"><div class="wrap footerinner"><div><strong>socialclip<span>.</span></strong><p>Aus Erlangen. Für die Möglichkeiten von morgen.</p></div><div><a href="https://socialclip.art/" target="_blank" rel="noopener">SocialClip Digital</a><a href="https://socialclip.art/impressum.html" target="_blank" rel="noopener">Impressum</a><a href="https://socialclip.art/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a></div></div></footer>
+<nav class="bottomnav" aria-label="Mobile Navigation"><a data-nav="start" href="#start"><span>⌂</span>Start</a><a data-nav="entdecken" href="#entdecken"><span>⌖</span>Map</a><a data-nav="live" href="#live"><span>↗</span>Live</a><a data-nav="business" href="#business"><span>▣</span>Digital</a><a data-nav="feedback" href="#feedback"><span>✳</span>Feedback</a></nav>
+</body></html>
