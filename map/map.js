@@ -71,6 +71,13 @@
     var alt = localStorage.getItem('scmap-stil'); if (alt) EIN.tagNacht = alt;
     var gesp = JSON.parse(localStorage.getItem('scmap-einst') || '{}');
     for (var k in gesp) if (k in EIN) EIN[k] = gesp[k];
+    // Designrevision V2: vorhandene lokale Nacht-Wahl nicht mit der neuen City-Ansicht verwechseln.
+    // Einmalig aktivieren, danach bleibt eine bewusste Nutzerwahl erhalten.
+    if (localStorage.getItem('scmap-city-design-v2') !== '1') {
+      EIN.cityMode = true;
+      localStorage.setItem('scmap-einst', JSON.stringify(EIN));
+      localStorage.setItem('scmap-city-design-v2', '1');
+    }
   } catch (e) {}
   try { if (new URLSearchParams(location.search).get('city') === '1') EIN.cityMode = true; } catch (e) {}
   function einstSpeichern() { try { localStorage.setItem('scmap-einst', JSON.stringify(EIN)); } catch (e) {} }
@@ -901,6 +908,16 @@
       layout: { 'line-cap': 'round', 'line-join': 'round' },
       paint: { 'line-color': '#ff4f8b', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 6, 17, 34],
         'line-blur': ['interpolate', ['linear'], ['zoom'], 12, 4, 17, 22], 'line-opacity': 0.45 } }, 'highway_major_casing');
+    // Durchgehende leuchtende Straßen im City Mode; klassisches Rendering bleibt unverändert.
+    var CITY_ROADS = ['in', ['get', 'class'], ['literal', ['minor', 'residential', 'service', 'street', 'tertiary', 'secondary', 'primary']]];
+    map.addLayer({ id: 'city-strassen-licht', type: 'line', source: 'openmaptiles', 'source-layer': 'transportation',
+      filter: CITY_ROADS, minzoom: 12, layout: { 'line-cap': 'round', 'line-join': 'round', visibility: 'none' },
+      paint: { 'line-color': '#ff7935', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 2.5, 15, 10, 18, 25],
+        'line-blur': ['interpolate', ['linear'], ['zoom'], 12, 2, 15, 7, 18, 16], 'line-opacity': 0.64 } }, 'highway_major_casing');
+    map.addLayer({ id: 'city-strassen-kern', type: 'line', source: 'openmaptiles', 'source-layer': 'transportation',
+      filter: CITY_ROADS, minzoom: 12, layout: { 'line-cap': 'round', 'line-join': 'round', visibility: 'none' },
+      paint: { 'line-color': '#ff9e52', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 0.9, 15, 2.3, 18, 5.5],
+        'line-opacity': 0.77 } }, 'highway_major_casing');
     // Häuser als weiche 3D-Klötze (mindestens 6 m, damit alles plastisch wirkt)
     fensterBilder();
     var HOEHE = ['max', 6, ['coalesce', ['get', 'render_height'], 8]], BASIS = ['coalesce', ['get', 'render_min_height'], 0];
@@ -1052,16 +1069,27 @@
     var opt = { pixelRatio: 2 };
     map.addImage('haus-tag', fensterMuster('#eef2e4', '#bccbb2', '#f8faf2'), opt);
     map.addImage('haus-nacht', fensterMuster('#241f4a', '#16123a', '#2e2860', '#ffd36b'), opt);
+    // Ruhige navyfarbene Fassaden, warme Fenster statt knalliger pinker Dächer.
+    map.addImage('haus-city', fensterMuster('#12283c', '#30647e', '#091929', '#ffc77f'), opt);
+    var cityWands = ['#12344b', '#202d52', '#173e49', '#253554'];
     ORDER.forEach(function (k) {
       map.addImage('w-' + k + '-tag', fensterMuster(pastell(CATS[k].farbe), '#5b6b62', '#fffef8'), opt);
       map.addImage('w-' + k + '-nacht', fensterMuster(CATS[k].farbe, '#1a1640', '#fff', '#fff3b0'), opt);
+      map.addImage('w-' + k + '-city', fensterMuster(cityWands[ORDER.indexOf(k) % cityWands.length], '#39738f', '#142334', '#ffbe72'), opt);
     });
   }
 
   // Tag/Nacht umschalten, ohne die Karte neu zu laden
   function setzeStil(name) {
     stilName = name; STIL = STILE[name];
-    var dunkel = name !== 'tag', muster = dunkel ? 'nacht' : 'tag';
+    var dunkel = name !== 'tag', muster = name === 'city' ? 'city' : dunkel ? 'nacht' : 'tag';
+    // Bei Geschäftshäusern keine grellen Neon-/Pinkdächer: ein stimmiges Miniaturstadt-Farbsystem.
+    var cityRoof = ['match', ['get', 'kat'],
+      'essen', '#23546a', 'lebensm', '#344d70', 'schoen', '#36466d', 'gesund', '#1b5b66',
+      'handwerk', '#3b4a6d', 'auto', '#1f536a', 'mode', '#3e426f', 'wohnen', '#2b4b68',
+      'technik', '#164d65', 'web', '#3a486d', 'dienst', '#2b4661', 'freizeit', '#245966', '#293f5b'];
+    var cityWall = ['match', ['get', 'kat'],
+      'essen', '#244e60', 'lebensm', '#294361', 'gesund', '#1b515b', 'auto', '#1b475b', '#253c56'];
 
     var f = STIL.farben;
     Object.keys(f).forEach(function (id) {
@@ -1072,22 +1100,26 @@
     map.setLayoutProperty('firmen-glow', 'visibility', STIL.glow && EIN.neon ? 'visible' : 'none');
     map.setPaintProperty('gebaeude-3d', 'fill-extrusion-color', STIL.haus);
     map.setPaintProperty('gebaeude-wand', 'fill-extrusion-pattern', 'haus-' + muster);
-    map.setPaintProperty('gebaeude-dach', 'fill-extrusion-color', STIL.dach);
+    map.setPaintProperty('gebaeude-dach', 'fill-extrusion-color', name === 'city'
+      ? ['interpolate', ['linear'], ['coalesce', ['get', 'render_height'], 8], 0, '#263d56', 18, '#2e4b65', 40, '#415171']
+      : STIL.dach);
     map.setPaintProperty('laeden-wand', 'fill-extrusion-pattern', ['concat', 'w-', ['get', 'kat'], '-', muster]);
-    map.setPaintProperty('laeden-dach', 'fill-extrusion-color', ['get', dunkel ? 'neon' : 'dach']);
-    map.setPaintProperty('laeden-3d', 'fill-extrusion-color', ['get', dunkel ? 'neon' : 'farbe']);
+    map.setPaintProperty('laeden-dach', 'fill-extrusion-color', name === 'city' ? cityRoof : ['get', dunkel ? 'neon' : 'dach']);
+    map.setPaintProperty('laeden-3d', 'fill-extrusion-color', name === 'city' ? cityWall : ['get', dunkel ? 'neon' : 'farbe']);
     map.setPaintProperty('laeden-3d', 'fill-extrusion-opacity', dunkel ? 0.86 : 1);
     map.setPaintProperty('gebaeude-3d', 'fill-extrusion-opacity', STIL.hausDeckkraft);
     map.setLayoutProperty('baeume-tag', 'visibility', name === 'tag' && EIN.baeume ? 'visible' : 'none');
     map.setLayoutProperty('baeume-nacht', 'visibility', dunkel && EIN.baeume ? 'visible' : 'none');
     ['laeden-3d', 'laeden-wand', 'laeden-dach'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', EIN.farben ? 'visible' : 'none'); });
     map.setLight(STIL.licht);
+    map.setLayoutProperty('city-strassen-licht', 'visibility', name === 'city' ? 'visible' : 'none');
+    map.setLayoutProperty('city-strassen-kern', 'visibility', name === 'city' ? 'visible' : 'none');
     map.setPaintProperty('neon-glow', 'line-color', name === 'city' ? '#ff752e' : '#ff4f8b');
-    map.setPaintProperty('neon-glow', 'line-opacity', name === 'city' ? 0.82 : 0.45);
+    map.setPaintProperty('neon-glow', 'line-opacity', name === 'city' ? 0.65 : 0.45);
     map.setPaintProperty('neon-glow', 'line-width', name === 'city'
       ? ['interpolate',['linear'],['zoom'],12,9,17,42]
       : ['interpolate',['linear'],['zoom'],12,6,17,34]);
-    map.setPaintProperty('firmen-glow', 'circle-opacity', name === 'city' ? 0.88 : 0.7);
+    map.setPaintProperty('firmen-glow', 'circle-opacity', name === 'city' ? 0.69 : 0.7);
     map.setPaintProperty('firmen', 'circle-radius', name === 'city'
       ? ['interpolate',['linear'],['zoom'],11,3,14,5.8,16,7.2,18,8]
       : ['interpolate',['linear'],['zoom'],11,2.5,14,4.5,16,5,18,6]);
@@ -1105,9 +1137,9 @@
 
   function start() {
     if (map) return;
-    blatt('34vh');
+    blatt(EIN.cityMode && innerWidth < 900 ? '23vh' : '34vh');
     $('sheetBody').innerHTML = '<p class="muted">Lade Geschäfte aus Nürnberg, Fürth und Erlangen …</p>';
-    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: 16, pitch: EIN.cityMode ? 60 : dreiD ? 55 : 0, bearing: EIN.cityMode ? -30 : dreiD ? -20 : 0, maxPitch: 65, attributionControl: false });
+    map = new maplibregl.Map({ container: 'map', style: STYLE, center: START, zoom: EIN.cityMode ? 15.3 : 16, pitch: EIN.cityMode ? 56 : dreiD ? 55 : 0, bearing: EIN.cityMode ? -34 : dreiD ? -20 : 0, maxPitch: 65, attributionControl: false });
     map.on('dragstart', function () { if (nav && nav.folgen) { nav.folgen = false; $('navMitte').hidden = false; } });
     map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'Wege: <a href="https://routing.openstreetmap.de">FOSSGIS</a> · Fahrplan: <a href="https://transitous.org/sources/">Transitous</a>' }), 'bottom-left');
 
@@ -1363,9 +1395,9 @@
     $('cityHud').hidden = !EIN.cityMode;
     if (!map || !map.getLayer('firmen')) return;
     setzeStil(EIN.cityMode ? 'city' : tagOderNacht());
-    map.easeTo({pitch:EIN.cityMode ? 60 : EIN.dreiD ? 55 : 0,
-      bearing:EIN.cityMode ? -30 : EIN.dreiD ? -20 : 0,
-      zoom:EIN.cityMode ? Math.max(15.8,map.getZoom()) : map.getZoom(),
+    map.easeTo({pitch:EIN.cityMode ? 56 : EIN.dreiD ? 55 : 0,
+      bearing:EIN.cityMode ? -34 : EIN.dreiD ? -20 : 0,
+      zoom:EIN.cityMode ? Math.max(15.2,map.getZoom()) : map.getZoom(),
       duration:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 850});
     schilderZeichnen();
     liste();
