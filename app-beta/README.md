@@ -1,5 +1,8 @@
 # SocialClip One App — Entwicklungs-Beta
 
+Aktuelle Bestandsanalyse und Freigabegrenzen: [Technischer Entwurf](../docs/one/TECHNISCHER_ENTWURF.md).
+Der aktuelle Code bindet genau die vorhandene Map per iframe ein; die frühere Beschreibung einer eigenen Map-Ansicht unten ist historisch. Live bleibt eine lokale Vorschau. Der neue ONE-Navigationsadapter erhält das Karten-Dokument beim Wechsel zu Live/Feedback. Lokale Prüfungen: `node --test tests/one-navigation.test.mjs`.
+
 **Zweck:** Eine zusammenhängende App statt separater Map/Live-Projekte, plus eine Unternehmenswelt.
 
 ## Was implementiert ist
