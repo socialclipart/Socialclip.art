@@ -66,7 +66,7 @@
     weg:'#ffb15c',wegRand:'#0c2133',bus:'#60e5e9',wegStrich:'#112638',
     rand:'#081a2c',text:'#eef5fc',halo:'#081525',glow:true,theme:'#081525'
   };
-  var EIN = { tagNacht: 'tag', dreiD: true, farben: true, neon: true, baeume: true, schilder: true, cityMode: false };
+  var EIN = { tagNacht: 'tag', dreiD: true, farben: true, neon: true, baeume: true, schilder: true, cityMode: true };
   try {
     var alt = localStorage.getItem('scmap-stil'); if (alt) EIN.tagNacht = alt;
     var gesp = JSON.parse(localStorage.getItem('scmap-einst') || '{}');
