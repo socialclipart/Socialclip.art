@@ -7,9 +7,10 @@
 <meta name="description" content="SocialClip – entdecke Geschäfte in deiner Nähe, finde lokale Hilfe und gestalte unsere neue App mit.">
 <title>SocialClip — Deine Umgebung. Deine Möglichkeiten.</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="robots" content="noindex,nofollow">
 <link rel="stylesheet" href="./styles.css?v=2">
 <script defer src="./config.js"></script>
-<script defer src="./app.js?v=2"></script>
+<script defer src="./app.js?v=3"></script>
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
@@ -19,12 +20,13 @@
 <a data-nav="start" href="#start">Start</a><a data-nav="entdecken" href="#entdecken">Entdecken</a><a data-nav="live" href="#live">Hilfe finden</a><a data-nav="business" href="#business">Für Unternehmen</a><a data-nav="feedback" href="#feedback">Mitgestalten</a>
 </nav><a class="navcta" href="#feedback">Deine Meinung <span aria-hidden="true">↗</span></a>
 </div></header>
-<main id="main" class="wrap">
+<main id="main" class="wrap" tabindex="-1">
 <section class="page active" id="page-start" aria-labelledby="starttitle">
 <div class="hero">
 <div class="herotext"><div class="eyebrow"><span class="signal"></span> Ein neues Erlebnis für deine Stadt</div>
 <h1 id="starttitle">Mehr entdecken.<br><em>Weniger suchen.</em></h1>
 <p>Finde Geschäfte, die du noch nicht kennst. Und passende Hilfe, wenn du sie brauchst. <strong>Map und Live in einer App.</strong></p>
+<p class="hint">Entwicklungs-Beta: Die Map ist nutzbar mit Beta-Zugang. Live ist eine lokale Vorschau und vermittelt noch keine Anfragen.</p>
 <div class="buttons"><a class="btn bright" href="#entdecken">Umgebung entdecken <span>↗</span></a><a class="btn glass" href="#live">Ich brauche Hilfe <span>↗</span></a></div>
 <div class="hero-foot"><span>📍 Start in Erlangen</span><span>✦ Gemeinsam mit echten Menschen entwickeln</span></div></div>
 <div class="herovisual" aria-hidden="true">
@@ -49,7 +51,7 @@
 <div class="pagehead"><div><div class="eyebrow dark">SOCIALCLIP LIVE · PROTOTYP</div><h1 id="livetitle">Schreib, was du brauchst.<br><em>Wir denken mit.</em></h1><p>Statt zehn Unternehmen anzurufen: Beschreibe dein Anliegen in einem Schritt. In dieser ersten Demo siehst du, wie eine Anfrage aussehen würde.</p></div><div class="headstamp">EINE<br>ANFRAGE<br><span>STATT VIELER ANRUFE</span></div></div>
 <div class="columns"><div class="formcard"><div class="cardtitle"><span class="number">01</span><h2>Deine Anfrage</h2></div>
 <form id="requestform"><div class="fields"><label>Kategorie<select name="category" required><option value="">Bitte auswählen</option><option>Autowerkstatt & Auto</option><option>Handwerker & Reparaturen</option><option>Friseur & Beauty</option><option>Geschäfte & Produkte</option><option>Andere Dienstleistungen</option></select></label><label>Ort<select name="location" required><option>Erlangen</option><option>Nürnberg</option><option>Fürth</option></select></label><label class="full">Was benötigst du?<textarea name="description" minlength="12" maxlength="900" required placeholder="Zum Beispiel: Mein Auto verliert Kühlmittel. Kann eine Werkstatt es diese Woche prüfen?"></textarea></label><label class="full">Wann?<select name="when"><option>So bald wie möglich</option><option>Heute</option><option>Morgen</option><option>Diese Woche</option><option>Ich bin flexibel</option></select></label></div>
-<button class="btn dark" type="submit">Anfrage-Vorschau erstellen ↗</button><p class="hint">Noch keine echte Vermittlung: Wir senden nichts an Unternehmen.</p></form><div id="requestresult" class="requestresult" hidden></div></div>
+<button class="btn dark" type="submit">Anfrage-Vorschau erstellen ↗</button> <button class="btn outline" type="button" id="clearrequest">Eingaben löschen</button><p class="hint">Noch keine echte Vermittlung: Wir senden nichts an Unternehmen. Bitte verwende ein erfundenes Beispiel ohne persönliche oder vertrauliche Angaben.</p></form><div id="requestresult" class="requestresult" role="status" aria-live="polite" hidden></div></div>
 <div class="rightstack"><article class="explainer"><span class="number">02</span><h3>Wir finden passende Betriebe.</h3><p>Im späteren Live-System sollen Betriebe eine passende Anfrage erhalten – nicht wahllos alle Unternehmen.</p></article><article class="explainer"><span class="number">03</span><h3>Der Betrieb antwortet.</h3><p>Preise und Termine werden erst angezeigt, wenn sie bestätigt wurden. Keine erfundenen Zusagen.</p></article><div class="caution"><b>Transparenz von Anfang an</b><p>Live ist hier ein interaktiver Prototyp. Für echte Vermittlungen brauchen wir Partnerbetriebe, sichere Speicherung und Benachrichtigungen.</p></div></div></div>
 </section>
 <section class="page" id="page-business" aria-labelledby="businesstitle">

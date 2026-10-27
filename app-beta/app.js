@@ -8,6 +8,7 @@
  const state={page:'start',vote:null};
  const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function route(){
+  if(location.hash==='#main'){$('main').focus();return}
   const p=location.hash.slice(1).split(/[/?]/)[0]||'start';
   state.page=['start','entdecken','live','business','feedback'].includes(p)?p:'start';
   document.body.classList.toggle('map-section-active',state.page==='entdecken');
@@ -26,11 +27,28 @@
   window.scrollTo(0,0);
  }
  window.addEventListener('hashchange',route);
+ // Only the existing same-origin Map frame may request a ONE section change.
+ // Keep its document alive, including current search, selection and camera position.
+ window.addEventListener('message',event=>{
+  const frame=$('socialclip-map-frame'),data=event.data;
+  if(event.origin!==location.origin || !frame || event.source!==frame.contentWindow)return;
+  if(!data || data.type!=='sc-one:navigate' || !['live','feedback','business'].includes(data.page))return;
+  location.hash=data.page;
+ });
  $('requestform').addEventListener('submit',e=>{
-  e.preventDefault();const data=new FormData(e.currentTarget),desc=String(data.get('description')).trim();if(desc.length<12)return;
+  e.preventDefault();const data=new FormData(e.currentTarget),desc=String(data.get('description')||'').trim();
+  const description=e.currentTarget.elements.description;
+  description.setCustomValidity(desc.length<12?'Bitte beschreibe dein Anliegen mit mindestens 12 Zeichen.':'');
+  if(!e.currentTarget.reportValidity())return;
   const box=$('requestresult');box.hidden=false;
   box.innerHTML='<h3>So könnte deine Live-Anfrage aussehen</h3><p><b>'+escapeHTML(data.get('category'))+'</b> · '+escapeHTML(data.get('location'))+'</p><p>'+escapeHTML(desc)+'</p><small>Wunschtermin: '+escapeHTML(data.get('when'))+'</small><div class="caution" style="margin-top:15px"><b>Demo – nicht versendet</b><p>Es wurde noch kein Unternehmen kontaktiert und kein Termin reserviert. Deine Angaben bleiben in dieser Browseransicht.</p></div>';
   box.scrollIntoView({behavior:'smooth',block:'nearest'});
+ });
+ $('requestform').elements.description.addEventListener('input',e=>e.currentTarget.setCustomValidity(''));
+ $('clearrequest').addEventListener('click',()=>{
+  $('requestform').reset();$('requestform').elements.description.setCustomValidity('');
+  $('requestresult').replaceChildren();$('requestresult').hidden=true;
+  $('requestform').elements.category.focus();
  });
  const BASE=(config.supabaseUrl||'').replace(/\/+$/,'');
  async function db(path,options={}){
