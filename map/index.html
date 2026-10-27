@@ -29,6 +29,7 @@ try { if (localStorage.getItem('scmap-beta-ok') !== 'ac3dcd8395bd54240145346c441
 <link rel="stylesheet" href="/fonts/fonts.css?v=1">
 <link rel="stylesheet" href="/map/lib/maplibre-gl.css">
 <link rel="stylesheet" href="/map/map.css?v=15">
+<link rel="stylesheet" href="/map/city.css?v=1">
 </head>
 <body>
 <h1 class="sr">SocialClip Map – Geschäfte in Nürnberg, Fürth und Erlangen entdecken</h1>
@@ -48,9 +49,19 @@ try { if (localStorage.getItem('scmap-beta-ok') !== 'ac3dcd8395bd54240145346c441
 </div>
 
 <div class="ansicht">
+  <button id="cityKnopf" class="mini" type="button" aria-pressed="false" title="Erlebnis-Karte ein-/ausschalten" aria-label="City Mode starten">CITY<br>MODE ✦</button>
   <button id="dreiD" class="mini" type="button" aria-pressed="true" title="3D an/aus">3D</button>
   <button id="stilKnopf" class="mini" type="button" aria-label="Nachtkarte" title="Tag/Nacht">🌙</button>
 </div>
+<aside class="city-hud" id="cityHud" aria-label="SocialClip City Mode" hidden>
+  <div class="overline">SOCIALCLIP · CITY MODE</div>
+  <strong>Deine Stadt.<br>Anders gesehen.</strong>
+  <div class="city-count"><b id="cityHudStat">–</b> Orte im 1-km-Umkreis</div>
+  <div class="city-links">
+    <a href="/app-beta/#live">⚡ Live-Demo</a>
+    <a href="/app-beta/#feedback">✳ Feedback</a>
+  </div>
+</aside>
 
 <div class="fabs">
   <button id="surprise" class="fab" type="button" title="Überrasch mich" aria-label="Zufälliges Geschäft in der Nähe zeigen">🎲</button>
@@ -183,7 +194,7 @@ try { if (localStorage.getItem('scmap-beta-ok') !== 'ac3dcd8395bd54240145346c441
 
 <noscript><p class="nojs">Die SocialClip Map braucht JavaScript.</p></noscript>
 <script src="/map/lib/maplibre-gl.js"></script>
-<script src="/map/map.js?v=16"></script>
+<script src="/map/map.js?v=17"></script>
 <style>
   .sc-analytics-banner{position:fixed;z-index:9999;left:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);width:min(420px,calc(100vw - 32px));padding:18px;border-radius:20px;background:#203c32;color:#f4f6ec;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.5 system-ui,sans-serif;display:grid;gap:10px}
   .sc-analytics-banner[hidden]{display:none}
