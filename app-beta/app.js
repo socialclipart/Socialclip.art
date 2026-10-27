@@ -1,93 +1,31 @@
 'use strict';
-/* SocialClip One App – beta. Existing real OpenStreetMap data, Live demo, community feedback.
-   No private data is sent unless PUBLIC_BACKEND is configured. */
+/* SocialClip ONE App. Die Map wird NICHT dupliziert, sondern aus /map/ eingebunden.
+   Live bleibt eine klar gekennzeichnete Testvorschau; Community benötigt ein Backend. */
 (() => {
- const CITIES = {erlangen:{name:'Erlangen',lat:49.5897,lon:11.0039},nuernberg:{name:'Nürnberg',lat:49.4521,lon:11.0775},fuerth:{name:'Fürth',lat:49.4771,lon:10.9886}};
- const GROUPS = {all:['Alle','✳'],food:['Essen','☕'],auto:['Auto & Rad','🚗'],beauty:['Beauty','✂'],health:['Gesundheit','✚'],handwork:['Handwerk','🔧'],shopping:['Shopping','🛍️'],other:['Weitere','⌖']};
  const $=id=>document.getElementById(id);
  const config=window.SOCIALCLIP_CONFIG || {};
  const connected=!!(config.supabaseUrl && config.supabaseAnonKey);
- const state={page:'start',city:'erlangen',group:'all',query:'',map:null,mapLoaded:false,places:[],origin:[11.0039,49.5897],selected:null,vote:null,remoteVotes:[],remoteComments:[]};
+ const state={page:'start',vote:null};
  const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const safeUrl=url=>{try{const u=new URL(url);return ['http:','https:'].includes(u.protocol)?u.href:''}catch{return''}};
- const distance=(a,b)=>{const d=Math.PI/180,x=(b[1]-a[1])*d,y=(b[0]-a[0])*d, v=Math.sin(x/2)**2+Math.cos(a[1]*d)*Math.cos(b[1]*d)*Math.sin(y/2)**2;return Math.round(6371*2*Math.asin(Math.sqrt(v))*10)/10;};
- const classify=t=>{if(['cafe','restaurant','fast_food','bar','pub','biergarten','ice_cream'].includes(t.amenity)||['bakery','butcher','supermarket','convenience','deli','confectionery'].includes(t.shop))return 'food';if(['car','car_repair','car_parts','tyres','bicycle','motorcycle'].includes(t.shop)||['car_wash','car_rental','fuel'].includes(t.amenity))return 'auto';if(['hairdresser','beauty','cosmetics','massage','tattoo','nails'].includes(t.shop))return 'beauty';if(['doctors','dentist','pharmacy','clinic','veterinary'].includes(t.amenity)||t.healthcare||['optician','hearing_aids'].includes(t.shop))return'health';if(t.craft||['hardware','doityourself','locksmith'].includes(t.shop))return'handwork';if(t.shop)return'shopping';return'other';};
- const iconFor=g=>(GROUPS[g]||GROUPS.other)[1];
  function route(){
-  const p=location.hash.slice(1).split(/[/?]/)[0]||'start'; state.page=['start','entdecken','live','business','feedback'].includes(p)?p:'start';
+  const p=location.hash.slice(1).split(/[/?]/)[0]||'start';
+  state.page=['start','entdecken','live','business','feedback'].includes(p)?p:'start';
+  document.body.classList.toggle('map-section-active',state.page==='entdecken');
   document.querySelectorAll('.page').forEach(e=>e.classList.toggle('active',e.id==='page-'+state.page));
-  document.querySelectorAll('[data-nav]').forEach(e=>{const yes=e.dataset.nav===state.page;e.classList.toggle('on',yes);if(yes)e.setAttribute('aria-current','page');else e.removeAttribute('aria-current')});
-  if(state.page==='entdecken') initMap();
-  if(state.page==='feedback') refresh();
-  window.scrollTo({top:0,behavior:'instant'});
+  document.querySelectorAll('[data-nav]').forEach(e=>{
+   const yes=e.dataset.nav===state.page;
+   e.classList.toggle('on',yes);
+   if(yes)e.setAttribute('aria-current','page');else e.removeAttribute('aria-current');
+  });
+  if(state.page==='entdecken'){
+   // Load once, then preserve the real Map state when switching to Live or Feedback.
+   const frame=$('socialclip-map-frame');
+   if(frame && !frame.hasAttribute('src'))frame.src=frame.dataset.src;
+  }
+  if(state.page==='feedback')refresh();
+  window.scrollTo(0,0);
  }
  window.addEventListener('hashchange',route);
- function setStatus(s){$('mapstatus').textContent=s}
- async function loadPlaces(){
-  try{
-   const response=await fetch('/map/firmen.json',{cache:'force-cache'});
-   if(!response.ok)throw Error('HTTP '+response.status);
-   const raw=await response.json();
-   state.places=raw.filter(p=>p&&p.name&&Number.isFinite(+p.lon)&&Number.isFinite(+p.lat)).map(p=>({...p,id:String(p.id),group:classify(p.t||{})}));
-   setStatus('Echte Einträge aus der vorhandenen SocialClip Map. Angaben ohne Gewähr.');
-   renderPlaces();
-  }catch(e){setStatus('Geschäftsdaten konnten nicht geladen werden. Bitte die App auf derselben Domain wie /map/firmen.json öffnen.');$('placelist').innerHTML='<p>Geschäftsdaten sind derzeit nicht erreichbar.</p>'}
- }
- function filtered(){
-  let a=state.places.filter(p=>distance(state.origin,[+p.lon,+p.lat])<=8);
-  if(state.group!=='all')a=a.filter(p=>p.group===state.group);
-  if(state.query){const q=state.query.toLocaleLowerCase('de');a=a.filter(p=>[p.name,p.t?.description,p.t?.shop,p.t?.amenity,p.t?.craft].join(' ').toLocaleLowerCase('de').includes(q))}
-  return a.sort((a,b)=>distance(state.origin,[+a.lon,+a.lat])-distance(state.origin,[+b.lon,+b.lat])).slice(0,80)
- }
- function showDetail(p){
-  state.selected=p;const t=p.t||{},web=safeUrl(t.website||t['contact:website']);const url='https://www.openstreetmap.org/?mlat='+encodeURIComponent(p.lat)+'&mlon='+encodeURIComponent(p.lon)+'#map=17/'+encodeURIComponent(p.lat)+'/'+encodeURIComponent(p.lon);
-  $('placedetail').hidden=false;
-  $('placedetail').innerHTML='<b>'+escapeHTML(p.name)+'</b><p>'+escapeHTML([t['addr:street'],t['addr:housenumber'],t['addr:city']].filter(Boolean).join(' '))+'</p>'+(t.opening_hours?'<p>Öffnungszeiten (laut OSM): '+escapeHTML(t.opening_hours)+'</p>':'')+'<a href="'+url+'" target="_blank" rel="noopener noreferrer">Auf OpenStreetMap anzeigen ↗</a>'+(web?' · <a href="'+escapeHTML(web)+'" target="_blank" rel="noopener noreferrer">Website ↗</a>':'');
-  state.map?.flyTo({center:[+p.lon,+p.lat],zoom:15,duration:700});
- }
- function renderPlaces(){
-  const list=filtered();
-  $('placecount').textContent=list.length>=80?'80+':String(list.length);
-  const el=$('placelist');el.innerHTML='';
-  if(!list.length)el.innerHTML='<p class="subtle">Hier wurden keine passenden Orte gefunden. Probiere eine andere Kategorie oder Stadt.</p>';
-  list.slice(0,35).forEach(p=>{const btn=document.createElement('button');btn.type='button';btn.className='place';btn.innerHTML='<span class="emoji">'+iconFor(p.group)+'</span><span><span class="name">'+escapeHTML(p.name)+'</span><small>'+escapeHTML(GROUPS[p.group][0])+' · '+distance(state.origin,[p.lon,p.lat]).toLocaleString('de-DE')+' km entfernt</small></span>';btn.addEventListener('click',()=>showDetail(p));el.append(btn)});
-  if(state.mapLoaded){
-   const src=state.map.getSource('socialclip-businesses');
-   if(src)src.setData({type:'FeatureCollection',features:list.map(p=>({type:'Feature',properties:{name:p.name,group:p.group,id:p.id},geometry:{type:'Point',coordinates:[+p.lon,+p.lat]}}))});
-  }
- }
- function categories(){
-  const parent=$('categories');parent.innerHTML='';
-  Object.entries(GROUPS).forEach(([k,v])=>{const b=document.createElement('button');b.type='button';b.textContent=v[1]+' '+v[0];b.classList.toggle('selected',k===state.group);b.addEventListener('click',()=>{state.group=k;categories();renderPlaces()});parent.append(b)})
- }
- function initMap(){
-  if(state.map){setTimeout(()=>state.map.resize(),100);return}
-  if(!window.maplibregl){setStatus('Kartenmodul konnte nicht geladen werden.');return}
-  try{
-   state.map=new maplibregl.Map({container:'realmap',style:'https://tiles.openfreemap.org/styles/positron',center:state.origin,zoom:12,attributionControl:true});
-   state.map.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');
-   state.map.on('load',()=>{
-    state.mapLoaded=true;
-    state.map.addSource('socialclip-businesses',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
-    state.map.addLayer({id:'business-dots',type:'circle',source:'socialclip-businesses',paint:{'circle-radius':['interpolate',['linear'],['zoom'],10,3,14,6,17,9],'circle-color':'#164d3c','circle-stroke-color':'#e9faad','circle-stroke-width':2}});
-    state.map.on('click','business-dots',e=>{const id=e.features?.[0]?.properties?.id;const p=state.places.find(p=>p.id===id);if(p)showDetail(p)});
-    state.map.on('mouseenter','business-dots',()=>state.map.getCanvas().style.cursor='pointer');
-    state.map.on('mouseleave','business-dots',()=>state.map.getCanvas().style.cursor='');
-    renderPlaces();
-   });
-  }catch(err){setStatus('Karte derzeit nicht verfügbar: '+err.message)}
- }
- function changeCity(k){const c=CITIES[k];if(!c)return;state.city=k;state.origin=[c.lon,c.lat];state.map?.flyTo({center:state.origin,zoom:12});$('placedetail').hidden=true;renderPlaces()}
- $('city').addEventListener('change',e=>changeCity(e.target.value));
- $('mapsearch').addEventListener('input',e=>{state.query=e.target.value.trim();renderPlaces()});
- $('random').addEventListener('click',()=>{const list=filtered();if(list.length)showDetail(list[Math.floor(Math.random()*list.length)])});
- $('geo').addEventListener('click',()=>{
-  if(!navigator.geolocation){setStatus('Standortfunktion wird in diesem Browser nicht unterstützt.');return}
-  setStatus('Standortabfrage läuft – die Freigabe liegt bei dir.');
-  navigator.geolocation.getCurrentPosition(pos=>{
-   state.origin=[pos.coords.longitude,pos.coords.latitude];state.map?.flyTo({center:state.origin,zoom:13});setStatus('Standort wurde nur im Browser für die Kartensuche verwendet.');renderPlaces()
-  },()=>setStatus('Keine Standortfreigabe. Du kannst weiterhin eine Stadt auswählen.'),{timeout:9000,enableHighAccuracy:false});
- });
  $('requestform').addEventListener('submit',e=>{
   e.preventDefault();const data=new FormData(e.currentTarget),desc=String(data.get('description')).trim();if(desc.length<12)return;
   const box=$('requestresult');box.hidden=false;
@@ -151,5 +89,5 @@
   finally{button.disabled=false}
  });
  $('refresh').addEventListener('click',refresh);
- categories();loadPlaces();route();
+ route();
 })();
