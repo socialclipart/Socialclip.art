@@ -55,3 +55,6 @@ body.city-mode .info a{color:#ffc383}
 body.city-mode.navigating .city-hud{display:none}
 @media(max-width:899px){.city-hud{top:calc(var(--top) + 154px);left:9px;padding:11px 12px;max-width:190px}.city-hud strong{font-size:19px;margin:6px 0}.city-hud .overline{font-size:8px}.city-hud .city-count{font-size:11px}.city-hud .city-links{margin-top:8px}.city-hud .city-links a{padding:6px 7px;font-size:9px}#cityKnopf{width:48px;height:43px;font-size:9px}.ansicht{right:9px}}
 @media(prefers-reduced-motion:reduce){#cityKnopf,.city-hud{transition:none!important}}
+
+/* Desktop: HUD nicht über das vorhandene Geschäftsliste-Panel legen. */
+@media(min-width:900px){.city-hud{left:425px;top:calc(var(--top) + 130px)}}
