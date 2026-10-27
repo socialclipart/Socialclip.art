@@ -7,9 +7,7 @@
 <meta name="description" content="SocialClip – entdecke Geschäfte in deiner Nähe, finde lokale Hilfe und gestalte unsere neue App mit.">
 <title>SocialClip — Deine Umgebung. Deine Möglichkeiten.</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/map/lib/maplibre-gl.css">
 <link rel="stylesheet" href="./styles.css">
-<script defer src="/map/lib/maplibre-gl.js"></script>
 <script defer src="./config.js"></script>
 <script defer src="./app.js"></script>
 </head>
@@ -42,11 +40,10 @@
 <div class="banner"><div><div class="eyebrow">FÜR ERLANGEN. MIT ERLANGEN.</div><h2>Wir bauen nicht einfach eine weitere App. <em>Wir hören zuerst zu.</em></h2></div><a class="btn dark" href="#feedback">Mitgestalten ↗</a></div>
 </section>
 <section class="page" id="page-entdecken" aria-labelledby="maptitle">
-<div class="pagehead"><div><div class="eyebrow dark">SOCIALCLIP MAP</div><h1 id="maptitle">Deine Umgebung.<br><em>Neu entdeckt.</em></h1><p>Orte und Unternehmen rund um dich finden. Standardmäßig zeigen wir Erlangen – deinen genauen Standort nutzen wir nur mit deiner Zustimmung.</p></div><div class="headstamp">ECHTE<br>GESCHÄFTE<br><span>KEINE DEMO-DATEN</span></div></div>
-<div class="maplayout"><div class="mapframe"><div id="realmap" class="mapcanvas" aria-label="Interaktive Karte von Erlangen"></div><div class="mapcontrols"><input id="mapsearch" type="search" placeholder="Wonach suchst du? Café, Werkstatt …" aria-label="Geschäfte durchsuchen"><button id="geo" class="mapbutton" type="button">⌖ Standort</button><button id="random" class="mapbutton" type="button">✳ Überrasch mich</button></div></div>
-<aside class="mapaside"><div class="asidehead"><div><span class="eyebrow dark">UM DICH HERUM</span><h2>Orte entdecken</h2></div><span class="count" id="placecount">–</span></div><label class="selectlabel">Stadt <select id="city"><option value="erlangen">Erlangen</option><option value="nuernberg">Nürnberg</option><option value="fuerth">Fürth</option></select></label>
-<div class="chips" id="categories" aria-label="Branchenfilter"></div><p class="subtle" id="mapstatus" role="status">Geschäfte werden geladen …</p><div id="placelist" class="places"></div><div id="placedetail" class="placedetail" hidden></div></aside></div>
-<div class="info-line"><span>Datengrundlage: OpenStreetMap / SocialClip Map</span><span>Kein Anspruch auf vollständige oder aktuelle Geschäftsangaben</span></div>
+<h1 class="sr" id="maptitle">SocialClip Map – die echte 3D-City-Karte</h1>
+<div class="embedded-city-map">
+<iframe id="socialclip-map-frame" title="SocialClip Map – Entdecken, navigieren und Geschäfte finden" data-src="/map/?city=1" allow="geolocation" loading="eager"></iframe>
+</div>
 </section>
 <section class="page" id="page-live" aria-labelledby="livetitle">
 <div class="pagehead"><div><div class="eyebrow dark">SOCIALCLIP LIVE · PROTOTYP</div><h1 id="livetitle">Schreib, was du brauchst.<br><em>Wir denken mit.</em></h1><p>Statt zehn Unternehmen anzurufen: Beschreibe dein Anliegen in einem Schritt. In dieser ersten Demo siehst du, wie eine Anfrage aussehen würde.</p></div><div class="headstamp">EINE<br>ANFRAGE<br><span>STATT VIELER ANRUFE</span></div></div>
