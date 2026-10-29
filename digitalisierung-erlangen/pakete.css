@@ -15,3 +15,9 @@
 .dg-plan li::before { content: "✓"; position: absolute; left: 0; color: var(--orange2); font-weight: 600; }
 .sub-body .dg-plan .service-button { margin-top: auto; width: 100%; }
 .sub-body .dg-note { margin-top: 16px; font-size: 14.5px; color: var(--dim); max-width: none; }
+
+/* Erklärvideo im Handy-Rahmen */
+.sub-body .dg-video { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 36px; align-items: center; max-width: none; }
+.dg-phone { justify-self: center; width: min(300px, 100%); padding: 10px; border-radius: 44px; background: linear-gradient(160deg, #2a2a2e, #111113); border: 1px solid var(--line2); box-shadow: 0 40px 90px -40px rgba(0,0,0,.95), 0 0 70px -20px rgba(231,138,83,.35); }
+.dg-phone video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; border-radius: 34px; background: #0c0c0d; }
+@media (max-width: 760px) { .sub-body .dg-video { grid-template-columns: minmax(0, 1fr); gap: 26px; } .dg-phone { width: min(280px, 82vw); } }
