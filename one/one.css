@@ -1,0 +1,55 @@
+/* SocialClip ONE Beta – Vorstellungsseite, baut auf neu.css (Unterseiten-Stil) auf */
+.one-main { max-width: 1120px; }
+.one-main h1 em, .one-main h2 em { font-family: var(--f-serif); font-style: italic; font-weight: 400; color: var(--orange2); letter-spacing: -.01em; }
+
+.one-hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 40px; align-items: center; padding: 26px 0 50px; }
+.one-pill { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px; padding: 6px 14px; border-radius: 99px; border: 1px solid rgba(231,138,83,.4); background: rgba(231,138,83,.1); color: var(--orange2); font: 500 13px var(--f-mono); letter-spacing: .06em; }
+.one-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 0 rgba(231,138,83,.6); animation: one-pulse 2.4s infinite; }
+@keyframes one-pulse { 70% { box-shadow: 0 0 0 10px rgba(231,138,83,0); } 100% { box-shadow: 0 0 0 0 rgba(231,138,83,0); } }
+.one-hero h1 { margin-bottom: 18px; }
+.sub-body .one-note { margin-top: 14px; font-size: 15px; color: var(--dim); }
+
+.one-phone-wrap { display: grid; justify-items: center; gap: 14px; }
+.one-phone { position: relative; width: min(340px, 100%); aspect-ratio: 9 / 19; padding: 12px; border-radius: 48px; background: linear-gradient(160deg, #2a2a2e, #111113); border: 1px solid var(--line2); box-shadow: 0 50px 100px -40px rgba(0,0,0,.95), 0 0 80px -20px rgba(231,138,83,.35); }
+.one-phone iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 38px; background: #0c0c0d; }
+.one-notch { position: absolute; top: 22px; left: 50%; z-index: 2; width: 92px; height: 26px; border-radius: 99px; background: #000; transform: translateX(-50%); pointer-events: none; }
+.sub-body .one-phone-cap { margin: 0; font-size: 14px; color: var(--dim); text-align: center; }
+
+.one-section { padding: 52px 0; border-top: 1px solid var(--line); }
+.sub-body .one-intro { margin: -6px 0 22px; }
+
+.one-areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 8px; }
+.one-areas article { padding: 24px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); transition: border-color .3s, transform .3s; }
+.one-areas article:hover { border-color: rgba(231,138,83,.4); transform: translateY(-3px); }
+.one-areas h3 { margin: 18px 0 6px; }
+.one-areas p { margin: 0; font-size: 16px; }
+.one-ico { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: rgba(231,138,83,.14); color: var(--orange2); }
+.one-ico svg { width: 22px; height: 22px; }
+
+.one-status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.one-status { padding: 24px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); }
+.one-status.done { background: radial-gradient(90% 80% at 100% 0%, rgba(139,196,154,.10), transparent 60%), var(--card); }
+.one-status.beta { background: radial-gradient(90% 80% at 100% 0%, rgba(231,138,83,.12), transparent 60%), var(--card); }
+.one-status-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.one-badge { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px; border-radius: 99px; border: 1px solid var(--line2); font-size: 13px; font-weight: 500; color: var(--fg); }
+.one-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--dim); }
+.one-badge.done::before { background: var(--green); }
+.one-badge.beta::before { background: var(--orange); }
+.one-badge.work::before { background: var(--orange2); box-shadow: 0 0 0 3px rgba(242,180,138,.2); }
+.one-status h3 { margin: 0 0 6px; }
+.one-status p { margin: 0 0 12px; font-size: 16px; }
+.sub-body .one-status ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.one-status li { position: relative; padding-left: 24px; font-size: 15px; line-height: 1.5; }
+.one-status li::before { content: ""; position: absolute; left: 4px; top: .55em; width: 8px; height: 8px; border-radius: 50%; border: 2px solid var(--orange2); }
+.one-status.done li::before { border-color: var(--green); background: var(--green); }
+
+.one-road .is-now { border-color: rgba(231,138,83,.45); background: radial-gradient(90% 120% at 100% 0%, rgba(231,138,83,.12), transparent 60%), var(--card); }
+.one-road strong { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; color: var(--fg); }
+.pj-now { padding: 3px 10px; border-radius: 99px; background: rgba(231,138,83,.15); color: var(--orange2); font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; font-weight: 400; }
+
+@media (max-width: 860px) {
+  .one-hero { grid-template-columns: minmax(0, 1fr); gap: 34px; }
+  .one-phone { width: min(300px, 86vw); }
+}
+@media (prefers-reduced-motion: reduce) { .one-dot { animation: none; } .one-areas article { transition: none; } }
+.one-main .service-button svg { width: 18px; height: 18px; flex: none; }
