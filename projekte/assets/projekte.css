@@ -95,3 +95,8 @@
   .pj-gallery-car .tall { grid-row: auto; }
   .pj-gallery-pair { gap: 10px; }
 }
+
+/* Carzone: Handy-Screenshot schmal links, PC-Screenshots breit rechts */
+.pj-gallery-cz { grid-template-columns: minmax(0, .58fr) minmax(0, 1fr); }
+.pj-gallery-cz .tall img { object-position: top; }
+@media (max-width: 760px) { .pj-gallery-cz { grid-template-columns: minmax(0, 1fr); } .pj-gallery-cz .tall { max-width: 300px; justify-self: center; } }
