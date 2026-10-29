@@ -38,7 +38,8 @@ body.city-mode .logo{background:#ff9d52;color:#102030}
 body.city-mode .menu-ikon{color:#102030}
 body.city-mode .fab{background:#152c41;color:#ffb574;border:1px solid #426481}
 body.city-mode .mini{background:#152c41;color:#e6eef4;border:1px solid #426481}
-body.city-mode .city-hud{display:block}
+/* Infokasten im City Mode bewusst ausgeblendet */
+.city-hud,body.city-mode .city-hud{display:none!important}
 body.city-mode .gate-card,body.city-mode .stimme-wahl,body.city-mode .einst-block,body.city-mode .rolle{background:#142a3e;color:#eff7ff}
 body.city-mode .nav-top{background:#142a3e}
 body.city-mode .det .tags span{background:#2e455b}

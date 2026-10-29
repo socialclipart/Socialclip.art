@@ -285,3 +285,7 @@ body.map-section-active .footer{display:none}
   body.map-section-active .header{display:none}
   body.map-section-active #page-entdecken{height:calc(100dvh - 84px - env(safe-area-inset-bottom,0px))}
 }
+
+/* Handy-Vorschau auf /one/: ohne Bereich Digital */
+.is-preview [data-nav="business"]{display:none}
+@media(max-width:700px){.is-preview .bottomnav{grid-template-columns:repeat(4,1fr)}}
