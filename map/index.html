@@ -173,7 +173,9 @@ try { if (localStorage.getItem('scmap-beta-ok') !== 'ac3dcd8395bd54240145346c441
       <li>💬 Ein Tipp zu WhatsApp, Anruf oder Weg</li>
     </ul>
     <p class="small">Zum Start kostenlos für die ersten Betriebe aus Nürnberg, Fürth und Erlangen – wir machen sogar das Foto.</p>
-    <form id="joinForm" onsubmit="window.gtag&&gtag('event','map_profil_anfrage')" class="form" action="https://formspree.io/f/xwlvlqwg" method="POST">
+    <form id="joinForm" onsubmit="window.gtag&&gtag('event','map_profil_anfrage')" class="form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="570a04e0-9db2-4ac6-9663-354db5bcffb0">
+      <input type="hidden" name="subject" value="SocialClip Map: Profil-Anfrage">
       <input type="hidden" name="_subject" value="SocialClip Map: Profil-Anfrage">
       <input type="hidden" name="quelle" value="SocialClip Map">
       <input type="hidden" name="eintrag">
@@ -182,7 +184,7 @@ try { if (localStorage.getItem('scmap-beta-ok') !== 'ac3dcd8395bd54240145346c441
       <label>Dein Name<input name="name" required autocomplete="name"></label>
       <label>E-Mail oder Telefon<input name="kontakt" required autocomplete="email"></label>
       <label>Was soll in dein Profil? <span class="muted">(freiwillig)</span><textarea name="nachricht" rows="2" placeholder="z. B. Angebote, Öffnungszeiten, Aktion"></textarea></label>
-      <p class="small">Deine Angaben gehen über Formspree per E-Mail an uns – nur, um dich zu kontaktieren. Mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>
+      <p class="small">Deine Angaben gehen über Web3Forms per E-Mail an uns – nur, um dich zu kontaktieren. Mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>
       <p id="joinErr" class="err" hidden>Das hat gerade nicht geklappt. Bitte versuch es noch einmal oder schreib uns per WhatsApp.</p>
       <button class="btn" type="submit">Profil kostenlos ergänzen</button>
     </form>

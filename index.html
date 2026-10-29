@@ -1746,7 +1746,7 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
     <div class="stack" style="align-content:start">
       <p class="eyebrow rv"><i></i>Kontakt</p>
       <h2 class="h2 rv">Erzählen wir <em>deine Geschichte?</em></h2>
-      <form class="stack rv" id="contactForm" action="https://formspree.io/f/xwlvlqwg" method="POST" novalidate style="gap:16px;margin-top:10px">
+      <form class="stack rv" id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate style="gap:16px;margin-top:10px">
         <div class="contact-two"><label class="field"><span>Name</span><input id="kName" name="name" placeholder="Dein Name" autocomplete="name" required></label>
         <label class="field"><span>E-Mail</span><input id="kMail" name="email" type="email" placeholder="du@beispiel.de" autocomplete="email" required></label></div>
         <label class="field"><span>Deine Idee</span><textarea id="kIdea" name="message" rows="3" placeholder="Was möchtest du umsetzen?" required></textarea></label>
@@ -1926,7 +1926,8 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
     bs.addEventListener('pointerleave', () => book.style.removeProperty('--ry'));
   }
 
-  const sendForm = async data => { const r = await fetch('https://formspree.io/f/xwlvlqwg', { method: 'POST', body: data, headers: { Accept: 'application/json' } }); if (!r.ok) throw new Error('send failed'); };
+  const WEB3FORMS_KEY = '570a04e0-9db2-4ac6-9663-354db5bcffb0';
+  const sendForm = async data => { data.append('access_key', WEB3FORMS_KEY); if (data.has('_subject')) data.append('subject', data.get('_subject')); data.append('from_name', 'SocialClip Website'); const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data, headers: { Accept: 'application/json' } }); const j = await r.json().catch(() => ({})); if (!r.ok || !j.success) throw new Error('send failed'); };
   const FAIL = 'Das hat leider nicht geklappt. Bitte versuch es noch einmal oder schreib uns per WhatsApp oder an socialclip.art@gmail.com.';
   $('#contactForm').addEventListener('submit', async e => {
     e.preventDefault();
