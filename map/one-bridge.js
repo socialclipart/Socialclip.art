@@ -9,7 +9,7 @@
     var url = new URL(link.href, window.location.href);
     if (url.origin !== window.location.origin || url.pathname !== '/app-beta/' || url.search) return;
     var page = url.hash.slice(1);
-    if (['live', 'feedback', 'business'].indexOf(page) === -1) return;
+    if (['live', 'feedback'].indexOf(page) === -1) return;
     // A foreign embedding page must not suppress the standalone links.
     try {
       if (window.parent.location.origin !== window.location.origin || window.parent.location.pathname !== '/app-beta/') return;

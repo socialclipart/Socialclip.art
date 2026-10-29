@@ -6,14 +6,11 @@
  const config=window.SOCIALCLIP_CONFIG || {};
  const connected=!!(config.supabaseUrl && config.supabaseAnonKey);
  const state={page:'start',vote:null};
- // In der Handy-Vorschau auf /one/ (?vorschau=1) wird der Bereich Digital ausgeblendet.
- const preview=new URLSearchParams(location.search).has('vorschau');
- if(preview)document.documentElement.classList.add('is-preview');
  const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function route(){
   if(location.hash==='#main'){$('main').focus();return}
   const p=location.hash.slice(1).split(/[/?]/)[0]||'start';
-  state.page=['start','entdecken','live','business','feedback'].includes(p)&&!(preview&&p==='business')?p:'start';
+  state.page=['start','entdecken','live','feedback'].includes(p)?p:'start';
   document.body.classList.toggle('map-section-active',state.page==='entdecken');
   document.querySelectorAll('.page').forEach(e=>e.classList.toggle('active',e.id==='page-'+state.page));
   document.querySelectorAll('[data-nav]').forEach(e=>{
@@ -35,7 +32,7 @@
  window.addEventListener('message',event=>{
   const frame=$('socialclip-map-frame'),data=event.data;
   if(event.origin!==location.origin || !frame || event.source!==frame.contentWindow)return;
-  if(!data || data.type!=='sc-one:navigate' || !['live','feedback','business'].includes(data.page))return;
+  if(!data || data.type!=='sc-one:navigate' || !['live','feedback'].includes(data.page))return;
   location.hash=data.page;
  });
  $('requestform').addEventListener('submit',e=>{
