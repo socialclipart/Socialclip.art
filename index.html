@@ -1919,7 +1919,7 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
 
   /* Buch folgt der Maus */
   const book = $('#book'), bs = $('#bookSt');
-  if (!reduce && matchMedia('(hover: hover)').matches) {
+  if (book && bs && !reduce && matchMedia('(hover: hover)').matches) {
     bs.addEventListener('pointermove', e => { const r = bs.getBoundingClientRect(); book.style.setProperty('--ry', ((e.clientX - r.left) / r.width * 44 - 34) + 'deg'); });
     bs.addEventListener('pointerleave', () => book.style.removeProperty('--ry'));
   }
