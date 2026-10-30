@@ -1110,7 +1110,11 @@
   .ring .bgc { stroke: rgba(255,255,255,.07); }
   .ring .fgc { stroke: var(--orange); stroke-linecap: round; stroke-dasharray: 239; stroke-dashoffset: 239; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1) .4s; }
   .dash.live .ring .fgc { stroke-dashoffset: 48; }
-  .vis { display: flex; align-items: center; gap: 14px; }
+  .vis { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .vis .ring { flex: 0 1 92px; min-width: 48px; height: auto; aspect-ratio: 1; }
+  .vis > div { min-width: 0; }
+  .c { min-width: 0; }
+  .c .v { font-size: clamp(20px, 2.1vw, 30px); white-space: nowrap; }
   .rows { display: grid; gap: 2px; }
   .row { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 4px; border-bottom: 1px solid var(--line); font-size: 14px; opacity: 0; transform: translateX(-8px); transition: opacity .5s, transform .5s; }
   .dash.live .row { opacity: 1; transform: none; }
