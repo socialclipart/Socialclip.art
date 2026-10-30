@@ -15,8 +15,10 @@ oder lokal auf dem PC. Hier steht, was Claude über das Projekt wissen soll.
 - Leistungsseiten als Ordner mit eigener `index.html`, z. B. `webdesign-erlangen/`,
   `social-media-erlangen/`, `preise/`, `ratgeber/`.
 - `impressum.html`, `datenschutz.html` – Rechtstexte, Styles in `legal.css`.
-- `leads/` – interne, passwortgeschützte Lead-Zentrale mit verschlüsselten Daten
-  (`daten.enc.json`, `verschluesseln.mjs`). Niemals Klartext-Daten committen.
+- Lead-Zentrale wurde am 30.10.2026 von der Website entfernt (Sicherung lokal unter
+  `Documents/SocialClip/Lead-Zentrale (Sicherung)`, nicht im Repo).
+- robots.txt verbietet nichts mehr: interne Seiten schützen sich per noindex und Passwort,
+  nicht über robots.txt (das würde sie nur verraten).
 - `vorschau/` – passwortgeschützte Kunden-Vorschauen (z. B. `vorschau/carzone/`).
 - `chat-backend/` – separates Vercel-Backend für den Website-Chat, siehe dessen `README.md`.
 - `check-backend/`, `check/`, `check-tool/` – SocialClip Check (siehe unten).

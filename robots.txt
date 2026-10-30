@@ -1,8 +1,4 @@
 User-agent: *
-Disallow: /check-tool/
-Disallow: /check/
 Allow: /
-Disallow: /vorschau/
-Disallow: /leads/
 
 Sitemap: https://socialclip.art/sitemap.xml

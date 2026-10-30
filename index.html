@@ -274,6 +274,14 @@
   .dots button { width: 8px; height: 8px; border-radius: 99px; background: rgba(255,255,255,.22); transition: width .35s cubic-bezier(.2,.8,.2,1), background .3s; }
   .dots button:hover { background: rgba(255,255,255,.5); }
   .dots button.on { width: 26px; background: var(--orange); }
+  .legal-fix { position: fixed; z-index: 57; left: 18px; bottom: calc(env(safe-area-inset-bottom, 0px) + 30px); display: flex; gap: 14px; font-size: 12px; }
+  .legal-fix a { color: var(--soft); opacity: .65; text-decoration: none; }
+  .legal-fix a:hover, .legal-fix a:focus-visible { opacity: 1; text-decoration: underline; }
+  @media (max-width: 1100px) { .legal-fix { display: none; } }
+  .sheet-legal { margin: 18px 0 0; font-size: 13px; color: var(--soft); text-align: center; }
+  .sheet-legal a { color: inherit; }
+  .skip-home { position: fixed; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 99px; background: #fff; color: #111; font-weight: 600; text-decoration: none; }
+  .skip-home:focus { top: 12px; }
   .pg-lab { font-family: var(--f-mono); font-size: 13px; letter-spacing: .06em; color: var(--soft); min-width: 9.5em; text-align: center; }
   .pg-next { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px 0 20px; border-radius: 999px; background: var(--fg); color: #111; font-weight: 500; font-size: 15px; transition: transform .2s, box-shadow .3s; }
   .pg-next:hover { transform: translateX(2px); box-shadow: 0 10px 30px -10px rgba(231,138,83,.6); }
@@ -1305,6 +1313,7 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
 </style>
 </head>
 <body>
+<a class="skip-home" href="#start">Zum Inhalt</a>
 <!-- Icon-Sprite (eigene Linien-Icons) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -1396,6 +1405,7 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
       <a href="#faq" data-close><span class="ico"><svg><use href="#i-chat"/></svg></span>Häufige Fragen</a>
       <a href="#kontakt" data-close><span class="ico"><svg><use href="#i-mail"/></svg></span>Kontakt</a>
     </nav>
+    <p class="sheet-legal"><a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a><a href="/agb.html">AGB</a> · <a href="/agb.html">AGB</a></p>
     <a class="sheet-gift wa-sheet" href="https://wa.me/4917646188101?text=Hallo%20SocialClip%2C%20ich%20habe%20eine%20Frage%20zu%20meinem%20Projekt."><span class="ico"><svg><use href="#i-wa"/></svg></span><span><b>Per WhatsApp schreiben</b><small>Schnelle Antwort, ganz unkompliziert</small></span></a>
     <button class="sheet-gift" type="button" data-gift data-close><span class="ico o"><svg><use href="#i-gift"/></svg></span><span><b>Überraschung öffnen</b><small>Eine kostenlose Web-Vorschau wartet</small></span></button>
     <p class="sheet-foot"><span class="live-dot"></span><span id="sheetClock">Studio Erlangen</span> · 0176 46188101</p>
@@ -1490,7 +1500,7 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
         <div class="main">
           <div class="topbar">
             <div><h3 id="dTitle">Guten Morgen, Café Lena</h3><p id="dSub">So läuft dein Auftritt diese Woche.</p></div>
-            <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="live-pill"><span class="live-dot"></span>Live</span><span class="demo">Beispielansicht · Demo-Daten</span></span>
+            <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="demo">Beispielansicht · Demo-Daten</span></span>
           </div>
           <div class="panel on" id="p-uebersicht" role="tabpanel">
           <div class="cards">
@@ -1772,12 +1782,13 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
     </div>
     <div class="foot rv">
       <span>© 2026 SocialClip · Art · Media · Digital · Erlangen</span>
-      <nav aria-label="Rechtliches"><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a><button type="button" class="linkish" data-analytics-open>Cookie-Einstellungen</button></nav>
+      <nav aria-label="Rechtliches"><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a><a href="/agb.html">AGB</a><button type="button" class="linkish" data-analytics-open>Cookie-Einstellungen</button></nav>
     </div>
   </div>
 </section>
 </main>
 
+<nav class="legal-fix" aria-label="Rechtliches"><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a><a href="/agb.html">AGB</a></nav>
 <nav class="pager" id="pager" aria-label="Seiten">
   <button class="pg-btn" id="pgPrev" type="button" aria-label="Vorherige Seite"><svg aria-hidden="true" style="transform:rotate(180deg)"><use href="#i-arrow"/></svg></button>
   <div class="dots" id="dots"></div>
@@ -1875,7 +1886,7 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
 
   /* Bewertung zählt hoch */
   const rn = $('#rateNum');
-  if (!reduce && 'IntersectionObserver' in window) new IntersectionObserver((es, o) => es.forEach(en => { if (!en.isIntersecting) return; o.disconnect(); const t0 = performance.now(); const st = t => { const p = clamp((t - t0) / 1400, 0, 1); rn.textContent = (5 * (1 - Math.pow(1 - p, 3))).toFixed(1).replace('.', ','); if (p < 1) requestAnimationFrame(st); }; requestAnimationFrame(st); }), { threshold: .6 }).observe(rn);
+  if (!reduce && 'IntersectionObserver' in window) new IntersectionObserver((es, o) => es.forEach(en => { if (!en.isIntersecting) return; o.disconnect(); rn.textContent = '5,0'; }), { threshold: .6 }).observe(rn);
 
   /* Nova */
   const audio = $('#novaAudio'), wave = $('#wave'), sub = $('#novaSub');
@@ -2178,13 +2189,13 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
   const dotBtns = $$('button', dots);
   dotBtns.forEach((b, i) => b.addEventListener('click', () => go(IDS[i])));
   const pad2 = n => String(n).padStart(2, '0');
-  const countRate = () => { const rn = $('#rateNum'); if (reduce) return; const t0 = performance.now(); const st = t => { const p = clamp((t - t0) / 1300, 0, 1); rn.textContent = (5 * (1 - Math.pow(1 - p, 3))).toFixed(1).replace('.', ','); if (p < 1) requestAnimationFrame(st); }; requestAnimationFrame(st); };
+  const countRate = () => { const rn = $('#rateNum'); if (reduce) return; rn.textContent = '5,0'; };
   function go(id, opts = {}) {
     const i = IDS.indexOf(id); if (i < 0 || i === cur) return;
     const d = cur < 0 ? 1 : (i > cur ? 1 : -1);
     VIEWS.forEach((v, k) => v.style.setProperty('--d', k === cur ? -d : d));
     const prev = VIEWS[cur]; if (prev) { prev.classList.remove('on'); prev.setAttribute('aria-hidden', 'true'); prev.inert = true; }
-    const v = VIEWS[i]; cur = i; window.__view = id;
+    const first = cur < 0; const v = VIEWS[i]; cur = i; window.__view = id;
     v.scrollTop = 0; v.classList.add('on'); v.removeAttribute('aria-hidden'); v.inert = false;
     // Inhalte nacheinander einblenden
     const items = $$('.rv', v);
@@ -2199,7 +2210,7 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
     if (id === 'ablauf') countRate();
     if (id === 'cockpit') startDash();
     if (id !== 'start' && typeof clearHl === 'function') clearHl();
-    try { history.replaceState(null, '', '#' + id); } catch (e) {}
+    try { if (opts.push !== false && !first && location.hash !== '#' + id) history.pushState(null, '', '#' + id); else history.replaceState(null, '', '#' + id); } catch (e) {}
     if (opts.focus) { const h = $('h1, h2', v); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
     dispatchEvent(new Event('scroll'));
   }
@@ -2260,8 +2271,13 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
   let qi = 0; const vq = $('.voice-q');
   if (!reduce) setInterval(() => { if (window.__view !== 'ablauf') return; vq.classList.add('fade'); setTimeout(() => { qi = (qi + 1) % QUOTES.length; $('#qTxt').textContent = QUOTES[qi][0]; $('#qWho').textContent = QUOTES[qi][1]; vq.classList.remove('fade'); }, 400); }, 5000);
 
-  const startId = (location.hash || '').slice(1);
+  // Direktlinks (auch Kurzformen wie #preise) und Zurück-Taste des Browsers
+  const ALIAS = { preise: 'pakete', paket: 'pakete', leistung: 'leistungen', ki: 'nova', kontaktformular: 'kontakt', fragen: 'faq', blog: 'ratgeber', cockpit: 'cockpit' };
+  const fromHash = () => { const h = decodeURIComponent((location.hash || '').slice(1)).toLowerCase(); return ALIAS[h] || h; };
+  const startId = fromHash();
   go(IDS.includes(startId) ? startId : 'start');
+  addEventListener('popstate', () => { const id = fromHash(); if (IDS.includes(id)) go(id, { push: false }); else if (!location.hash) go('start', { push: false }); });
+  addEventListener('hashchange', () => { const id = fromHash(); if (IDS.includes(id)) go(id, { push: false }); });
   if (startId.startsWith('p-')) openSub(startId);
 
   if (!reduce) setInterval(() => { if (floatGift.classList.contains('show')) { floatGift.classList.remove('wig'); void floatGift.offsetWidth; floatGift.classList.add('wig'); } }, 7000);
