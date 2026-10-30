@@ -1,8 +1,0 @@
-{
-  "name": "socialclip-one-checks",
-  "private": true,
-  "type": "module",
-  "engines": {"node": ">=22"},
-  "scripts": {"test": "node --test tests/*.test.mjs"},
-  "devDependencies": {"@electric-sql/pglite": "0.5.12"}
-}

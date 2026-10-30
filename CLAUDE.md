@@ -76,59 +76,12 @@ Dann im Browser `http://localhost:8080` öffnen.
 - Für Motion-Graphics-Videos gibt es die Skills „motion-video-director“ und „sound-effects“.
 - Werbe-Tipp für 30 €: Reel „Kamerafahrt“ bewerben, Erlangen + 20 km, 5 €/Tag für 6 Tage.
 
-### App „SocialClip Map“ (Version 1 gebaut, Ordner `map/`, Stand 25.10.2026)
-- Look nach der Designstudie „VIERTEL“ des Inhabers (Bild + Übergabe-Text, Code selbst nicht im Repo):
-  hell (Salbeigrün `#e9efdc`, Dunkelgrün `#203c32`, Akzent `#ddf77b`, Georgia für Ortsnamen), schräge
-  Spielbrett-Ansicht, Häuser mit Fenstern und Dach (ab Zoom 16), Geschäftshäuser in Kategorie-Farbe,
-  Bäume mit Krone (`map/baeume.json`), schwebende Schilder mit Gehzeit, Weg als hellgrünes Band.
-  Knöpfe „3D“ und 🌙: Nacht = Neon-Stil. Stile in `STILE` (`tag`, `nacht`) in `map.js`.
-- Inhaber findet normale Karten „zu Standard/wie Google Maps“ – Look soll einzigartig sein.
-- SocialClip selbst sitzt in der Donato-Polli-Str. 38, 91056 Erlangen (Pin in `map/profile.json`).
-- Beim Start fragt die Map jedes Mal „Bist du Nutzer oder Geschäftsführer?“ (Inhaber-Wunsch). Geschäftsführer
-  bekommen einen eigenen Bereich (Geschäft suchen / neu eintragen, Profil-Knopf oben). Das „S“ öffnet ein Menü
-  (Rolle wechseln, Geschäft eintragen, Link zur SocialClip-Website, Impressum/Datenschutz).
-- Gebiet seit 25.10.2026: Nürnberg, Fürth und Erlangen (BBOX in `.github/scripts/map_daten.py`, Stadt-Auswahl
-  oben in der Liste, `STAEDTE` in `map.js`).
-- Bus & Bahn: Modus „🚆 Bus/Bahn“ (vorher nur Bus) fragt Transitous (api.transitous.org, offene VGN/DELFI-Daten, CORS erlaubt) ab,
-  zeigt bis zu 4 Verbindungen (Bus, Tram, U-/S-Bahn, RE, ICE) mit Linienfarbe, Steig/Gleis, Echtzeit (Verspätung/„Fällt aus“),
-  Störungsmeldungen falls vorhanden, und führt zu Fuß zur Haltestelle. Echtzeit nur so weit VGN/DB sie liefern.
-- Reisebegleitung („Los geht’s – ich begleite dich“): Fußweg mit Pfeilen + Live-Abfahrt unten, an der Haltestelle
-  Countdown, Fragen „Bist du an der Haltestelle / eingestiegen / ausgestiegen?“, Stationen-Zähler, Ansage
-  „Nächste aussteigen“, minütlicher Echtzeit-Abgleich (Ausfall/verpasst → neue Verbindung). Code: `reise…` in `map.js`.
-- Menü (☰ oben links): Rolle, Meine Orte (🏠 Zuhause/💼 Arbeit, Pins + Knöpfe „Nach Hause/Zur Arbeit“), Karte
-  (Tag/Nacht/Auto, 3D, farbige Geschäftshäuser, Neon, Bäume, Schilder), Stimme + Tempo. Alles nur im Browser
-  gespeichert (`scmap-einst`, `scmap-orte`, `scmap-rolle`, `scmap-stimme`); Rollen-Frage nur beim ersten Mal.
-- Beta: App `/map/` nur mit Passwort (Inhaber kennt es, steht NICHT im Repo; im Code nur SHA-256-Prüfsumme,
-  gespeichert als `scmap-beta-ok`). Ohne Passwort → `/map/beta/` mit Passwort-Feld und WhatsApp-Knopf
-  „Fordere deinen Beta-Zugang an“. Menüpunkt „SocialClip Map · Beta“ in der Startseiten-Navigation.
-  Passwort ändern = neue Prüfsumme in `map/index.html` und `map/beta/index.html` eintragen.
-- Anleitung „Zum Home-Bildschirm“ (iPhone/Android, `map/manifest.webmanifest`) nach der Rollenwahl, bis
-  „Ich hab’s gemacht“ (`scmap-home`). Achtung: Als Home-Bildschirm-App hat iOS einen eigenen Speicher.
-- Werbe-Reel „Bald online“ entsteht außerhalb des Repos in `Desktop/SocialClip-Videos/map-beta-reel/`
-  (Sprecher: ElevenLabs-Stimme „Jan“, Soundeffekte selbst erzeugt, keine Musik).
-- Liste und Kategorie-Zahlen folgen automatisch dem Kartenausschnitt (`kartenBewegt` in `map.js`).
-- Unteres Blatt lässt sich am Handy ziehen (24/52/90 % Höhe), Start-Knopf klebt unten (`.start-leiste`).
-- Wunsch für später: Inhaber-Bereich, in dem z. B. der Chef einer Pizzeria nach Freischaltung sein
-  Profil (Fotos, Angebote, Öffnungszeiten) selbst bearbeitet. Braucht Anmeldung + Datenbank (Backend).
-- Ideen aus der Designstudie noch offen: Merkliste (Herz), Gehzeit-Filter 5/10/15 Min., „Streifzug“.
-- Adresssuche (Photon/komoot) mit Navigation, „Geschäfte in der Nähe“ unter jedem Ziel; Fokus bleibt Geschäfte,
-  Ziel: App, die man jeden Tag nutzt. Kategorien am PC mit Pfeilen/Mausrad.
-- Kategorien mit „✕ Alle“/Zurück (auch Handy-Zurück-Taste), Suche mit Zusatzwörtern (z. B. „Nägel“),
-  Navigation Schritt für Schritt in der App mit Sprachansage (FOSSGIS-Routing, kein Google/Apple Maps),
-  Button „Ist das deine Firma? Profil kostenlos ergänzen“ → Formular über Formspree oder WhatsApp.
-- Firmendaten: `map/firmen.json` aus OpenStreetMap, wöchentlich per GitHub Actions. OSM kennt nur einen Teil
-  der Betriebe (z. B. nur ca. 8 Nagelstudios) – Lücken füllen Firmen über den Profil-Button.
-- Schaufenster-Profile (goldener Pin) stehen in `map/profile.json`.
+### SocialClip ONE / SocialClip Map – entfernt (30.10.2026)
+- Auf Wunsch des Inhabers komplett von der Website genommen (Ordner `one/`, `map/`, `app-beta/`,
+  `docs/one/`, Tests, Karten-Workflow, Menüpunkte, Datenschutz-Abschnitt, Sitemap-Einträge).
+  Der Code steckt noch in der Git-Historie, falls es später wieder gebraucht wird.
 
-Ursprüngliche Idee:
-- Inhaber will eine eigene App fertigstellen. Gewählte Idee: Karte zum **Entdecken** statt Suchen –
-  „In deiner Nähe gibt es 3 Webdesigner, 5 Friseure …“, mit Profilen, was jede Firma kann/anbietet.
-- Start nur Erlangen, als Web-App unter `socialclip.art/map/` (0 € Kosten, App Stores erst später).
-- Firmendaten aus OpenStreetMap (legal mit Hinweis „© OpenStreetMap-Mitwirkende“), nie von Google kopieren.
-- Version 1 = Karte mit Kategorien, Übersicht „In deiner Nähe“, Firmen-Infos, Button
-  „Ist das Ihre Firma? Profil kostenlos ergänzen“. Alles Weitere erst in Version 2.
-- Geld: Premium-Profil 15–29 €/Monat; Hauptnutzen am Anfang = Türöffner für Agentur-Aufträge.
-- Erfolgstest nach 30 Tagen: 10 Firmen wollen ihr Profil ergänzen, 1–2 Agentur-Anfragen.
+### Geschäftlicher Stand
 - Stand Inhaber: noch kein Umsatz, viel Zeit, Budget 150–300 €. Engpass = erste zahlende Kunden.
   Offen: Hat CarZone schon bezahlt?
 - Verworfene Alternativen: allgemeiner KI-Assistent (zu viel Konkurrenz), „SocialClip Check“
