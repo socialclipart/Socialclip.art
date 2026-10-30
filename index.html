@@ -1417,7 +1417,7 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
         <a class="btn btn-ghost" href="#leistungen">Einzelne Leistungen</a>
       </div>
       <a class="proof rv" href="#cockpit"><span class="new-dot"></span>Neu: Kunden-Cockpit zum Anklicken</a>
-      <a class="proof rv" href="#ablauf"><span class="stars sm" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><b>5,0</b> aus 13 Google-Bewertungen</a>
+      <a class="proof rv" href="#ablauf"><span class="stars sm" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><b>5,0</b> aus 18 Google-Bewertungen</a>
     </div>
     <div class="mx rv" id="mx" aria-label="Erklärvideo: So funktioniert unsere Website">
       <div class="mx-stage" id="mxStage" aria-hidden="true">
@@ -1639,8 +1639,8 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
       <div class="step rv" style="transition-delay:.3s"><div class="ico o"><svg><use href="#i-rocket"/></svg></div><p class="n">03 · Umsetzung</p><h3>Deine Idee wird sichtbar.</h3><p>Wir setzen die abgestimmten Leistungen um, prüfen das Ergebnis und stimmen die Veröffentlichung mit dir ab.</p></div>
     </div>
     <div class="voice rv">
-      <div class="voice-l"><p class="num" id="rateNum">5,0</p><div><div class="stars" aria-label="5 von 5 Sternen"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><p class="note">aus 13 Google-Bewertungen · Stand 21. Oktober 2026</p></div></div>
-      <figure class="voice-q" aria-live="polite"><blockquote id="qTxt">„Danke für das tolle Ergebnis, die Bilder sind genial. Preis und Leistung tip top Kann ich nur weiter empfehlen.“</blockquote><figcaption id="qWho">D Buzhala · Google · 12. Januar 2024</figcaption></figure>
+      <div class="voice-l"><p class="num" id="rateNum">5,0</p><div><div class="stars" aria-label="5 von 5 Sternen"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><p class="note">aus 18 Google-Bewertungen · Stand 30. Oktober 2026</p></div></div>
+      <figure class="voice-q" aria-live="polite"><blockquote id="qTxt">„Ich bin sehr froh, dass es so leicht funktioniert hat. Der nette Mitarbeiter hat für mich alles selber bearbeitet und noch mal verbessert. Ich kann euch nur weiterempfehlen, vom tiefsten Herzen.“</blockquote><figcaption id="qWho">Isabella Hidrit · Google · 30. Oktober 2026</figcaption></figure>
       <a class="btn btn-ghost" href="https://maps.google.com/maps?cid=14242139189001064114">Alle auf Google <svg aria-hidden="true"><use href="#i-out"/></svg></a>
     </div>
   </div>
@@ -2254,7 +2254,7 @@ body:has(#pakete.on) .float-gift,body:has(#pakete.on) .wa-float{display:none!imp
   if (matchMedia('(hover: hover)').matches && !reduce) $('#cockpit').addEventListener('pointermove', e => { dash.style.setProperty('--ry', ((e.clientX / innerWidth - .5) * -6).toFixed(2) + 'deg'); });
 
   // Bewertungen wechseln
-  const QUOTES = [['„Danke für das tolle Ergebnis, die Bilder sind genial. Preis und Leistung tip top Kann ich nur weiter empfehlen.“', 'D Buzhala · Google · 12. Januar 2024'], ['„Tolle Arbeit und schnelle Rückmeldung“', 'Andrei Parvu · Google · 5. Oktober 2026'], ['„Super kompetentes Team. Nur zum weiterempfehlen“', 'J D · Google · 5. Oktober 2026']];
+  const QUOTES = [['„Ich bin sehr froh, dass es so leicht funktioniert hat. Der nette Mitarbeiter hat für mich alles selber bearbeitet und noch mal verbessert. Ich kann euch nur weiterempfehlen, vom tiefsten Herzen.“', 'Isabella Hidrit · Google · 30. Oktober 2026'], ['„Danke für das tolle Ergebnis, die Bilder sind genial. Preis und Leistung tip top Kann ich nur weiter empfehlen.“', 'D Buzhala · Google · 12. Januar 2024'], ['„Tolle Arbeit und schnelle Rückmeldung“', 'Andrei Parvu · Google · 5. Oktober 2026'], ['„Super kompetentes Team. Nur zum weiterempfehlen“', 'J D · Google · 5. Oktober 2026']];
   let qi = 0; const vq = $('.voice-q');
   if (!reduce) setInterval(() => { if (window.__view !== 'ablauf') return; vq.classList.add('fade'); setTimeout(() => { qi = (qi + 1) % QUOTES.length; $('#qTxt').textContent = QUOTES[qi][0]; $('#qWho').textContent = QUOTES[qi][1]; vq.classList.remove('fade'); }, 400); }, 5000);
 
