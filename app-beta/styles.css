@@ -274,3 +274,28 @@ body.map-section-active .footer{display:none}
   body.map-section-active .header{display:none}
   body.map-section-active #page-entdecken{height:calc(100dvh - 84px - env(safe-area-inset-bottom,0px))}
 }
+
+/* Echte App-Optik auf dem Handy: angedockte Tab-Leiste, Tipp-Rückmeldung, App-Übergänge */
+@media(max-width:700px){
+  html,body{-webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+  body{-webkit-user-select:none;user-select:none}
+  input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text}
+  .header{background:rgba(12,12,13,.86)}
+  .bottomnav{left:0;right:0;bottom:0;padding:6px 8px calc(6px + env(safe-area-inset-bottom));border-radius:0;border:0;border-top:1px solid var(--line2);background:rgba(18,18,20,.88);box-shadow:none}
+  .bottomnav a{position:relative;padding:6px 2px 4px;border-radius:12px;font-size:10.5px;font-weight:500;letter-spacing:.01em;transition:color .2s,transform .12s}
+  .bottomnav a:active{transform:scale(.9)}
+  .bottomnav a svg{width:25px;height:25px;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+  .bottomnav a.on{background:none;color:var(--orange2)}
+  .bottomnav a.on svg{transform:translateY(-1px) scale(1.08)}
+  .bottomnav a.on::before{content:"";position:absolute;top:-7px;left:50%;width:22px;height:3px;border-radius:0 0 3px 3px;background:var(--orange);transform:translateX(-50%)}
+  .page.active{animation:appin .32s cubic-bezier(.2,.8,.2,1)}
+  a,button{touch-action:manipulation}
+
+  main{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+  body.map-section-active main{padding-bottom:0}
+}
+@keyframes appin{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@media(max-width:700px){
+  .footer{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+  body.map-section-active #page-entdecken{height:calc(100dvh - 64px - env(safe-area-inset-bottom,0px))}
+}
