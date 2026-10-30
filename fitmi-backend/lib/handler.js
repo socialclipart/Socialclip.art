@@ -25,7 +25,7 @@ export async function callClaude(messages, { apiKey = process.env.ANTHROPIC_API_
 // Ohne eigenen Schlüssel: über Vercel AI Gateway (Anmeldung automatisch auf Vercel, Gratis-Guthaben).
 export const GATEWAY_MODEL = 'anthropic/claude-haiku-5.5';
 export async function callGateway(messages, model = process.env.FITMI_GATEWAY_MODEL || GATEWAY_MODEL) {
-  const r = await generateText({ model, system: instructions, messages, maxOutputTokens: 600, maxRetries: 0, abortSignal: AbortSignal.timeout(25000) });
+  const r = await generateText({ model, system: instructions, messages, maxOutputTokens: 600, maxRetries: 0, providerOptions: { gateway: { models: ['anthropic/claude-haiku-4.5', 'google/gemini-3-flash'] } }, abortSignal: AbortSignal.timeout(25000) });
   return r.text;
 }
 
@@ -88,7 +88,7 @@ export function createHandler({ generate, env = process.env, now = Date.now } = 
       // Keine Chat-Inhalte, IP-Adressen oder Anbieter-Fehlertexte protokollieren.
       const s = error?.statusCode;
       const category = s === 401 ? 'authentication' : s === 400 || s === 402 || s === 403 ? 'billing_or_limit' : s === 429 ? 'provider_busy' : error?.name === 'TimeoutError' ? 'timeout' : 'upstream';
-      return respond({ error: 'temporarily_unavailable', category, message: 'FITMI kann gerade nicht antworten. Versuch es gleich noch einmal.' }, 503);
+      return respond({ error: 'temporarily_unavailable', category, status: typeof s === 'number' ? s : undefined, type: error?.name, message: 'FITMI kann gerade nicht antworten. Versuch es gleich noch einmal.' }, 503);
     }
   };
 }
