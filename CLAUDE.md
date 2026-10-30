@@ -19,6 +19,7 @@ oder lokal auf dem PC. Hier steht, was Claude über das Projekt wissen soll.
   (`daten.enc.json`, `verschluesseln.mjs`). Niemals Klartext-Daten committen.
 - `vorschau/` – passwortgeschützte Kunden-Vorschauen (z. B. `vorschau/carzone/`).
 - `chat-backend/` – separates Vercel-Backend für den Website-Chat, siehe dessen `README.md`.
+- `check-backend/`, `check/`, `check-tool/` – SocialClip Check (siehe unten).
 - `sitemap.xml` und `robots.txt` bei neuen Seiten mitpflegen.
 
 ## Lokal ansehen
@@ -81,8 +82,15 @@ Dann im Browser `http://localhost:8080` öffnen.
   `docs/one/`, Tests, Karten-Workflow, Menüpunkte, Datenschutz-Abschnitt, Sitemap-Einträge).
   Der Code steckt noch in der Git-Historie, falls es später wieder gebraucht wird.
 
+### SocialClip Check (gebaut 30.10.2026, Akquise-Werkzeug)
+- Inhaber prüft Betriebe (Website oder Firmenname) im internen Werkzeug `/check-tool/` (nicht verlinkt,
+  noindex) und schickt ihnen per WhatsApp einen Ergebnis-Link `/check/?f=…#…` mit Note 0–100.
+- Ausdrücklich OHNE KI: feste Prüfregeln mit Gewichten und Texten in `check/regeln.js`.
+- `check-backend/` (Vercel) sammelt nur Fakten; braucht `CHECK_TOKEN` und für Firmennamen/Tempo
+  `GOOGLE_PLACES_KEY`. Einrichtung in `check-backend/README.md`. Ergebnisse stecken komplett im Link.
+
 ### Geschäftlicher Stand
 - Stand Inhaber: noch kein Umsatz, viel Zeit, Budget 150–300 €. Engpass = erste zahlende Kunden.
   Offen: Hat CarZone schon bezahlt?
-- Verworfene Alternativen: allgemeiner KI-Assistent (zu viel Konkurrenz), „SocialClip Check“
-  (Online-Check als Kundenmagnet), Bewertungs-Helfer (Google-Bewertungen sammeln, 29 €/Monat).
+- Verworfene Alternativen: allgemeiner KI-Assistent (zu viel Konkurrenz), „SocialClip Check“ als öffentlicher
+  Kundenmagnet (jetzt stattdessen als internes Akquise-Werkzeug gebaut), Bewertungs-Helfer (Google-Bewertungen sammeln, 29 €/Monat).

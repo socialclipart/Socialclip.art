@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0c0c0d">
+<title>Check-Werkzeug | SocialClip intern</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css?v=1">
+<link rel="stylesheet" href="/check/check.css?v=1">
+<style>
+  .kopf h1 { font-size: clamp(26px, 5vw, 36px); margin: 4px 0 6px; }
+  .raster { display: grid; grid-template-columns: 1fr 200px; gap: 12px; align-items: end; margin-top: 14px; }
+  textarea { min-height: 120px; resize: vertical; line-height: 1.5; }
+  .leiste { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0 0; }
+  .leiste .platz { flex: 1; }
+  .einst { margin-top: 12px; } .einst summary { cursor: pointer; color: var(--soft); font-size: 14px; }
+  .einst .raster { grid-template-columns: 1fr 1fr; }
+  .status { font-size: 14px; margin-top: 10px; min-height: 22px; }
+  .status.fehler { color: var(--red); } .status.ok { color: var(--green); }
+  .filter { display: flex; flex-wrap: wrap; gap: 6px; margin: 26px 0 10px; align-items: center; }
+  .chip { min-height: 34px; padding: 0 13px; border-radius: 99px; border: 1px solid var(--line2); background: transparent; color: var(--soft); font: 500 13.5px var(--f); cursor: pointer; }
+  .chip[aria-pressed="true"] { background: var(--fg); color: #111; border-color: var(--fg); }
+  .zeilen { display: grid; gap: 8px; }
+  .zeile { display: grid; grid-template-columns: 54px 1fr auto; gap: 14px; align-items: center; padding: 12px 14px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); }
+  .zeile b { display: block; color: var(--fg); font-size: 16px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .zeile .info { min-width: 0; } .zeile .info span { display: block; font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .zeile .tasten { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .lade { width: 54px; height: 54px; border-radius: 50%; border: 4px solid rgba(255,255,255,.08); border-top-color: var(--orange); animation: dreh 1s linear infinite; }
+  .zeile.fehlgeschlagen .lade { animation: none; border-color: rgba(224,108,95,.4); }
+  @keyframes dreh { to { transform: rotate(360deg); } }
+  .leer { padding: 30px; text-align: center; border: 1px dashed var(--line2); border-radius: 18px; }
+  .zusammen { font-size: 14px; color: var(--soft); margin-left: auto; }
+  @media (max-width: 640px) {
+    .raster, .einst .raster { grid-template-columns: 1fr; }
+    .zeile { grid-template-columns: 54px 1fr; } .zeile .tasten { grid-column: 1 / -1; justify-content: flex-start; }
+  }
+</style>
+<script src="/check/regeln.js?v=1" defer></script>
+<script src="/check-tool/werkzeug.js?v=1" defer></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/"><svg viewBox="67 21 122 214" aria-hidden="true"><g transform="translate(128 128) scale(.9075) translate(-128 -128)"><path fill="currentColor" d="M146.10 66.74 L186.11 43.64 A67.10 67.10 0 1 0 94.45 135.30 L100.57 138.84 L146.77 112.16 L117.55 95.29 A20.90 20.90 0 1 1 146.10 66.74 Z"/><path fill="currentColor" d="M109.90 189.26 L69.89 212.36 A67.10 67.10 0 1 0 161.55 120.70 L155.43 117.16 L109.23 143.84 L138.45 160.71 A20.90 20.90 0 1 1 109.90 189.26 Z"/></g></svg>SocialClip <small>CHECK · INTERN</small></a>
+  </header>
+
+  <section class="card kopf">
+    <p class="eyebrow">Akquise-Werkzeug</p>
+    <h1>Betriebe <em class="s">prüfen.</em></h1>
+    <p>Eine Zeile pro Betrieb: Website (<code>mueller-friseur.de</code>) oder Firmenname (<code>Friseur Müller</code>).</p>
+    <div class="raster">
+      <div><label for="eingabe">Betriebe</label><textarea id="eingabe" placeholder="friseur-beispiel.de&#10;Bäckerei Muster&#10;autohaus-xy.de" spellcheck="false"></textarea></div>
+      <div><label for="ort">Ort</label><input id="ort" value="Erlangen" autocomplete="off"><div style="height:12px"></div><button class="btn main" id="los" type="button" style="width:100%">Jetzt prüfen</button></div>
+    </div>
+    <p class="status" id="status" role="status"></p>
+    <details class="einst" id="einst">
+      <summary>⚙️ Verbindung einrichten</summary>
+      <div class="raster">
+        <div><label for="server">Server-Adresse</label><input id="server" placeholder="https://dein-check.vercel.app/api/check" autocomplete="off" spellcheck="false"></div>
+        <div><label for="code">Zugangscode</label><input id="code" type="password" autocomplete="current-password"></div>
+      </div>
+      <div class="leiste"><button class="btn klein" id="testen" type="button">Verbindung testen</button><span class="muted" style="font-size:13px">Wird nur in diesem Browser gespeichert.</span></div>
+    </details>
+  </section>
+
+  <div class="filter" role="toolbar" aria-label="Filter">
+    <button class="chip" type="button" data-f="alle" aria-pressed="true">Alle</button>
+    <button class="chip" type="button" data-f="schwach">Größter Bedarf</button>
+    <button class="chip" type="button" data-f="ohne">Ohne Website</button>
+    <span class="zusammen" id="zusammen"></span>
+  </div>
+  <div class="zeilen" id="zeilen"></div>
+  <div class="leiste">
+    <span class="platz"></span>
+    <button class="btn klein" id="csv" type="button">Als Tabelle (CSV) speichern</button>
+    <button class="btn klein" id="leeren" type="button">Liste leeren</button>
+  </div>
+  <footer class="fuss">Nur für dich. Diese Seite ist nicht verlinkt und für Suchmaschinen gesperrt. Die Liste bleibt in diesem Browser gespeichert.</footer>
+</div>
+</body>
+</html>
