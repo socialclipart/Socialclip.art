@@ -55,3 +55,31 @@
 }
 @media (prefers-reduced-motion: reduce) { .one-dot { animation: none; } .one-areas article { transition: none; } }
 .one-main .service-button svg { width: 18px; height: 18px; flex: none; }
+
+/* Echte App-Optik: Statusleiste, Tasten, Home-Leiste, App-Karte */
+.one-phone { padding: 10px; border-radius: 54px; background: linear-gradient(145deg, #3a3a3f, #141416 40%, #2a2a2e); box-shadow: inset 0 0 0 2px #4a4a50, inset 0 0 0 4px #0a0a0b, 0 50px 100px -40px rgba(0,0,0,.95), 0 0 80px -20px rgba(231,138,83,.35); }
+.one-screen { border-radius: 44px; }
+.one-btn { position: absolute; width: 4px; border-radius: 2px; background: linear-gradient(90deg, #2a2a2e, #4a4a50); }
+.one-btn-l1 { left: -4px; top: 20%; height: 7%; }
+.one-btn-l2 { left: -4px; top: 30%; height: 11%; }
+.one-btn-r { right: -4px; top: 26%; height: 14%; }
+.one-notch { top: 19px; width: 31%; height: 27px; z-index: 3; }
+.one-status-bar { position: absolute; top: 10px; left: 10px; right: 10px; z-index: 2; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 34px; color: #fff; font: 600 14px/1 -apple-system, "SF Pro Text", system-ui, sans-serif; pointer-events: none; }
+.one-icons { display: flex; align-items: center; gap: 5px; }
+.one-icons svg { height: 11px; width: auto; fill: #fff; }
+.one-bat { position: relative; width: 23px; height: 11px; border: 1px solid rgba(255,255,255,.55); border-radius: 3.5px; padding: 1px; }
+.one-bat::after { content: ""; position: absolute; right: -3px; top: 3.5px; width: 1.5px; height: 4px; border-radius: 0 1px 1px 0; background: rgba(255,255,255,.55); }
+.one-bat i { display: block; width: 80%; height: 100%; border-radius: 2px; background: #fff; }
+.one-screen iframe { top: 44px; }
+.one-home { position: absolute; bottom: 18px; left: 50%; z-index: 3; width: 36%; height: 5px; border-radius: 99px; background: rgba(255,255,255,.85); transform: translateX(-50%); pointer-events: none; mix-blend-mode: difference; }
+.one-store { display: flex; align-items: center; gap: 12px; width: min(340px, 100%); padding: 12px 14px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); }
+.one-store-ico { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 13px; background: linear-gradient(140deg, #f2b48a, #e78a53 55%, #b85a2a); color: #1a0f08; font: 800 15px var(--f-mono, monospace); letter-spacing: .04em; box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
+.one-store-tx { flex: 1; display: grid; gap: 2px; min-width: 0; }
+.one-store-tx b { font-size: 16px; color: var(--fg); }
+.one-store-tx small { font-size: 13px; color: var(--dim); }
+.one-store-btn { flex: none; padding: 7px 18px; border-radius: 99px; background: var(--orange); color: #1a0f08; font-weight: 700; font-size: 14px; text-decoration: none; }
+@media (max-width: 860px) { .one-store { width: min(300px, 86vw); } }
+.sub-body .one-store-tx b, .sub-body .one-store-tx small { line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sub-body a.one-store-btn { padding: 6px 16px; line-height: 1.4; text-decoration: none; color: #1a0f08; }
+.one-main .one-store a.one-store-btn { text-decoration: none; }
+.one-main .one-store-tx b { font-size: 15px; }
