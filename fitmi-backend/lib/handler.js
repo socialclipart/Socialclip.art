@@ -23,7 +23,7 @@ export async function callClaude(messages, { apiKey = process.env.ANTHROPIC_API_
 }
 
 // Ohne eigenen Schlüssel: über Vercel AI Gateway (Anmeldung automatisch auf Vercel, Gratis-Guthaben).
-export const GATEWAY_MODEL = 'anthropic/claude-haiku-5-5';
+export const GATEWAY_MODEL = 'anthropic/claude-haiku-5.5';
 export async function callGateway(messages, model = process.env.FITMI_GATEWAY_MODEL || GATEWAY_MODEL) {
   const r = await generateText({ model, system: instructions, messages, maxOutputTokens: 600, maxRetries: 0, abortSignal: AbortSignal.timeout(25000) });
   return r.text;
