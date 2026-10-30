@@ -1,0 +1,37 @@
+# Gleicht die Autos auf der CarZone-Seite (vorschau/carzone/autos.json) mit mobile.de ab.
+name: CarZone-Autos aktualisieren
+
+on:
+  schedule:
+    - cron: "7 * * * *"      # jede Stunde
+  workflow_dispatch:         # von Hand auf GitHub unter „Actions“ startbar
+
+permissions:
+  contents: write
+
+concurrency:
+  group: carzone-autos
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python .github/scripts/carzone_autos.py
+        env:
+          MOBILEDE_USER: ${{ secrets.MOBILEDE_USER }}
+          MOBILEDE_PASS: ${{ secrets.MOBILEDE_PASS }}
+          MOBILEDE_KUNDENNR: ${{ secrets.MOBILEDE_KUNDENNR }}
+      - name: Änderungen speichern
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add vorschau/carzone/autos.json 2>/dev/null || true
+          git diff --cached --quiet && echo "Keine Änderungen" && exit 0
+          git commit -m "CarZone-Autos von mobile.de aktualisieren"
+          git pull --rebase && git push
