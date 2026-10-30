@@ -36,3 +36,6 @@ test('Begrenzung pro Minute und pro Tag', async () => {
   assert.equal((await d(req())).status, 429);
 });
 test('Anweisungen verlangen Ehrlichkeit bei fehlenden Angaben', () => { assert.match(instructions, /fehlen/); assert.match(instructions, /keine Diät/); });
+test('Auf Vercel ohne eigenen Schlüssel ist der Chat über das Gateway verfügbar', async () => {
+  assert.equal((await (await createHandler({ env: { VERCEL: '1' } })(new Request('https://x/api/chat'))).json()).available, true);
+});

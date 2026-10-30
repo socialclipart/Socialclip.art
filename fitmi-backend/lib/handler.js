@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { generateText } from 'ai';
 
 export const MODEL = 'claude-haiku-5-5';
 const defaultOrigins = ['https://socialclip.art', 'https://www.socialclip.art'];
@@ -21,6 +22,13 @@ export async function callClaude(messages, { apiKey = process.env.ANTHROPIC_API_
   return (data.content || []).filter((b) => b.type === 'text').map((b) => b.text).join('\n');
 }
 
+// Ohne eigenen Schlüssel: über Vercel AI Gateway (Anmeldung automatisch auf Vercel, Gratis-Guthaben).
+export const GATEWAY_MODEL = 'anthropic/claude-haiku-5-5';
+export async function callGateway(messages, model = process.env.FITMI_GATEWAY_MODEL || GATEWAY_MODEL) {
+  const r = await generateText({ model, system: instructions, messages, maxOutputTokens: 600, maxRetries: 0, abortSignal: AbortSignal.timeout(25000) });
+  return r.text;
+}
+
 // Lokaler Testmodus ohne Kosten: FITMI_FAKE=1
 export async function fakeReply(messages) {
   const last = messages.at(-1).content;
@@ -33,7 +41,7 @@ let day = { date: '', count: 0 };
 export function createHandler({ generate, env = process.env, now = Date.now } = {}) {
   const origins = new Set([...defaultOrigins, ...(env.ALLOWED_ORIGINS || '').split(',').map((s) => s.trim()).filter(Boolean)]);
   const dailyLimit = Number(env.FITMI_DAILY_LIMIT || 300);
-  const gen = generate || (env.FITMI_FAKE === '1' ? fakeReply : env.ANTHROPIC_API_KEY ? (m) => callClaude(m, { apiKey: env.ANTHROPIC_API_KEY, model: env.FITMI_MODEL || MODEL }) : null);
+  const gen = generate || (env.FITMI_FAKE === '1' ? fakeReply : env.ANTHROPIC_API_KEY ? (m) => callClaude(m, { apiKey: env.ANTHROPIC_API_KEY, model: env.FITMI_MODEL || MODEL }) : env.VERCEL || env.AI_GATEWAY_API_KEY ? (m) => callGateway(m, env.FITMI_GATEWAY_MODEL || GATEWAY_MODEL) : null);
   return async function handle(request) {
     const origin = request.headers.get('origin');
     const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', Vary: 'Origin', 'X-Content-Type-Options': 'nosniff' };

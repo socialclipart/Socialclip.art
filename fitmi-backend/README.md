@@ -2,15 +2,15 @@
 
 Kleiner Server für den Fit-Chat auf der FITMI-Vorschau (`vorschau/fitmi/`). Er nimmt den Chatverlauf entgegen, fragt Claude (Anthropic) und schickt die Antwort zurück. Keine Zusatzpakete, nichts wird gespeichert.
 
-## Einrichten (einmalig)
+## Einrichten (einmalig, ohne eigenen KI-Schlüssel)
 
-1. **KI-Schlüssel holen:** Auf https://console.anthropic.com anmelden → „Billing“: kleines Guthaben aufladen (z. B. 5 €) und unter „Limits“ ein **monatliches Ausgabenlimit** setzen (z. B. 10 $). Das ist die harte Kostenbremse. → „API Keys“ → „Create Key“ → Schlüssel kopieren.
-2. **Vercel-Projekt anlegen:** Vercel → „Add New… → Project“ → Repo `socialclipart/Socialclip.art` → Projektname `fitmi-backend`, **Root Directory `fitmi-backend`**, Framework „Other“.
-3. **Umgebungsvariable** (Settings → Environment Variables): `ANTHROPIC_API_KEY` = der Schlüssel. Nie ins Repo schreiben.
-4. „Deploy“. Danach muss `https://fitmi-backend.vercel.app/api/chat` `{"available":true,…}` zeigen.
-   Heißt das Projekt anders, die Adresse in der Seite anpassen (Konstante `API`).
+1. Vercel → „Add New… → Project“ → Repo `socialclipart/Socialclip.art` → Projektname `fitmi-backend`, **Root Directory `fitmi-backend`**, Framework „Other“ → „Deploy“.
+2. Vercel → links „AI Gateway“ öffnen und aktivieren. Vercel schenkt dort ein kleines monatliches Gratis-Guthaben; der Server meldet sich automatisch an (kein Schlüssel nötig). Ist das Guthaben leer, antwortet der Chat einfach nicht mehr – es entstehen keine Kosten, solange du kein Geld auflädst.
+3. Prüfen: `https://fitmi-backend.vercel.app/api/chat` zeigt `{"available":true,…}`. Heißt das Projekt anders, die Adresse in der Seite anpassen (Konstante `API`).
 
-Optional: `FITMI_MODEL` (Standard `claude-haiku-5-5`), `FITMI_DAILY_LIMIT` (Standard 300 Antworten/Tag), `ALLOWED_ORIGINS` (weitere erlaubte Seiten, kommagetrennt).
+Später, für mehr Gespräche: eigenen Schlüssel von https://console.anthropic.com (mit Ausgabenlimit) als Umgebungsvariable `ANTHROPIC_API_KEY` eintragen – dann wird er statt des Gateways benutzt.
+
+Optional: `FITMI_GATEWAY_MODEL` (Standard `anthropic/claude-haiku-5-5`), `FITMI_MODEL` (Standard `claude-haiku-5-5`), `FITMI_DAILY_LIMIT` (Standard 300 Antworten/Tag), `ALLOWED_ORIGINS` (weitere erlaubte Seiten, kommagetrennt).
 
 ## Schutz
 
