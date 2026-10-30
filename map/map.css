@@ -314,3 +314,10 @@ body.nacht .schnell { color: #0c0a1d; }
 .home-schritte svg { vertical-align: -4px; color: #0a84ff; }
 body.nacht .home-schritte li { background: #1c1838; }
 body.nacht .home-schritte .nr { color: #0c0a1d; }
+
+/* Öffnungszeiten */
+.auf { color: #2e9e5b; font-weight: 600; }
+.zu { color: #c0504d; font-weight: 600; }
+.row .tx .auf, .row .tx .zu { font-size: 12px; margin-left: 4px; }
+.zeiten { margin: 4px 0 10px; font-size: 14px; }
+.cat.offen-chip[aria-pressed="true"] { background: #2e9e5b; color: #fff; }

@@ -200,9 +200,66 @@
     });
   }
 
+  // ---------- Öffnungszeiten (OSM opening_hours, häufige Schreibweisen) ----------
+  // Gibt true/false zurück, oder null wenn unbekannt bzw. zu kompliziert zum sicheren Lesen
+  var TAGE = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
+  function offen(f, jetzt) {
+    var oh = f.t && f.t.opening_hours;
+    if (!oh) return null;
+    if (f._oh === undefined) f._oh = ohLesen(oh);
+    if (!f._oh) return null;
+    var d = jetzt || new Date(), tag = (d.getDay() + 6) % 7, min = d.getHours() * 60 + d.getMinutes();
+    var heute = f._oh[tag], gestern = f._oh[(tag + 6) % 7];
+    // Zeiten über Mitternacht (z. B. 18:00-02:00) zählen auch noch am Folgetag
+    return heute.some(function (z) { return min >= z[0] && min < z[1]; }) ||
+      gestern.some(function (z) { return z[1] > 1440 && min < z[1] - 1440; });
+  }
+  function ohLesen(oh) {
+    oh = oh.trim().toLowerCase();
+    if (oh === '24/7') return TAGE.map(function () { return [[0, 1440]]; });
+    var woche = TAGE.map(function () { return []; }), ok = false;
+    var teile = oh.split(/\s*;\s*/);
+    for (var i = 0; i < teile.length; i++) {
+      var t = teile[i].replace(/"[^"]*"/g, '').trim();
+      if (!t) continue;
+      if (/^(ph|sh)\b/.test(t)) continue; // Feiertage/Ferien ignorieren
+      var m = t.match(/^((?:(?:mo|tu|we|th|fr|sa|su)(?:\s*-\s*(?:mo|tu|we|th|fr|sa|su))?\s*,?\s*)+)?(?:,?\s*ph)?\s*(.*)$/);
+      if (!m) return null;
+      var tage = [];
+      if (m[1]) {
+        m[1].split(',').forEach(function (b) {
+          b = b.trim(); if (!b) return;
+          var r = b.split(/\s*-\s*/), a = TAGE.indexOf(r[0]), e = TAGE.indexOf(r[1] || r[0]);
+          for (var k = a; ; k = (k + 1) % 7) { tage.push(k); if (k === e) break; }
+        });
+      } else tage = [0, 1, 2, 3, 4, 5, 6];
+      var rest = m[2].trim();
+      if (rest === 'off' || rest === 'closed') { tage.forEach(function (k) { woche[k] = []; }); ok = true; continue; }
+      if (rest === '24/7' || rest === '00:00-24:00') rest = '00:00-24:00';
+      var zeiten = [], bad = false;
+      rest.split(/\s*,\s*/).forEach(function (z) {
+        var zm = z.match(/^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})\+?$/);
+        if (!zm) { bad = true; return; }
+        var von = +zm[1] * 60 + +zm[2], bis = +zm[3] * 60 + +zm[4];
+        if (bis <= von) bis += 1440;
+        zeiten.push([von, bis]);
+      });
+      if (bad || !zeiten.length) return null;
+      tage.forEach(function (k) { woche[k] = zeiten; });
+      ok = true;
+    }
+    return ok ? woche : null;
+  }
+  function offenText(f) {
+    var o = offen(f);
+    return o === null ? '' : o ? '<span class="auf">Geöffnet</span>' : '<span class="zu">Geschlossen</span>';
+  }
+  var nurOffen = false;
+
   // ---------- Filter & Liste ----------
   function passt(f, q) {
     if (aktiv && f.kat !== aktiv) return false;
+    if (nurOffen && !f.star && !f.adresse && offen(f) !== true) return false;
     if (!q) return true;
     var a = art(f), text = [f.name, a, SUCHE[a], CATS[f.kat].name, (f.kann || []).join(' '), f.t.cuisine, f.t.description].join(' ').toLowerCase();
     return q.split(/\s+/).every(function (w) { return text.indexOf(w) !== -1; });
@@ -215,7 +272,8 @@
   function kartenDaten(liste) {
     var src = map && map.getSource('firmen');
     if (!src) return;
-    src.setData({ type: 'FeatureCollection', features: liste.filter(function (f) { return !f.star; }).map(function (f) {
+    var q = $('q').value.trim();
+    src.setData({ type: 'FeatureCollection', features: liste.filter(function (f) { return !f.star && (aktiv || q || f.kat !== 'sonst'); }).map(function (f) {
       return { type: 'Feature', id: f.n, properties: { id: f.id, farbe: CATS[f.kat].farbe, name: f.name }, geometry: { type: 'Point', coordinates: ll(f) } };
     }) });
     var sichtbar = {};
@@ -227,9 +285,10 @@
     var zahl = {};
     var mitte = map ? map.getCenter().toArray() : center, b = map && map.getBounds();
     all.forEach(function (f) {
+      if (nurOffen && !f.star && offen(f) !== true) return;
       if (b ? b.contains(ll(f)) && abstand(mitte, ll(f)) < 1500 : f.dist <= RADIUS) zahl[f.kat] = (zahl[f.kat] || 0) + 1;
     });
-    $('cats').innerHTML = (aktiv ? '<button class="cat clear" type="button" data-alle>✕ Alle</button>' : '') + ORDER.filter(function (k) { return zahl[k] || aktiv === k; }).map(function (k) {
+    $('cats').innerHTML = '<button class="cat offen-chip" type="button" data-offen aria-pressed="' + nurOffen + '">🟢 Jetzt offen</button>' + (aktiv ? '<button class="cat clear" type="button" data-alle>✕ Alle</button>' : '') + ORDER.filter(function (k) { return zahl[k] || aktiv === k; }).map(function (k) {
       return '<button class="cat" type="button" data-k="' + k + '" aria-pressed="' + (aktiv === k) + '">' + CATS[k].ico + ' ' + CATS[k].name + ' <b>' + (zahl[k] || 0) + '</b></button>';
     }).join('');
     catsPfeile();
@@ -268,7 +327,7 @@
     var c = CATS[f.kat];
     return '<button class="row' + (f.star ? ' star' : '') + '" type="button" data-id="' + f.id + '">' +
       '<span class="ic" style="background:' + c.farbe + '22">' + (f.star ? '⭐' : c.ico) + '</span>' +
-      '<span class="tx"><b>' + esc(f.name) + '</b><span>' + esc(art(f)) + '</span></span>' +
+      '<span class="tx"><b>' + esc(f.name) + '</b><span>' + esc(art(f)) + (f.adresse ? '' : ' ' + offenText(f)) + '</span></span>' +
       '<span class="dist">' + meter(d) + '</span></button>';
   }
 
@@ -322,6 +381,7 @@
     if (f.star && f.bild) h += '<img class="hero" src="' + esc(f.bild) + '" alt="">';
     if (f.star) h += '<span class="badge">⭐ Schaufenster</span>';
     h += '<h2>' + esc(f.name) + '</h2><p class="kind">' + (f.adresse ? '📍' : c.ico) + ' ' + esc(art(f)) + ' · ' + meter(f.dist) + '</p>';
+    if (t.opening_hours) h += '<p class="zeiten">' + offenText(f) + ' <span class="muted">' + esc(t.opening_hours.replace(/\bMo\b/g, 'Mo').replace(/\bTu\b/g, 'Di').replace(/\bWe\b/g, 'Mi').replace(/\bTh\b/g, 'Do').replace(/\bFr\b/g, 'Fr').replace(/\bSa\b/g, 'Sa').replace(/\bSu\b/g, 'So').replace(/\boff\b/g, 'geschlossen').replace(/\bPH\b/g, 'Feiertag')) + '</span></p>';
     var kannClaim = !f.star && !f.adresse;
     if (kannClaim && rolle === 'chef') h += '<button class="claim" type="button" data-claim><span>🏪</span><span><b>Ist das deine Firma?</b><br>Profil kostenlos ergänzen →</span></button>';
 
@@ -1159,18 +1219,34 @@
       map.addLayer({ id: 'schritte', type: 'circle', source: 'schritte', minzoom: 16, paint: { 'circle-radius': 9, 'circle-color': '#203c32', 'circle-stroke-color': '#ddf77b', 'circle-stroke-width': 2 } });
       map.addLayer({ id: 'schritte-nr', type: 'symbol', source: 'schritte', minzoom: 16, layout: { 'text-field': ['get', 'nr'], 'text-font': ['Noto Sans Bold'], 'text-size': 11, 'text-allow-overlap': true },
         paint: { 'text-color': '#fff' } });
-      map.addSource('firmen', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-      map.addLayer({ id: 'firmen-glow', type: 'circle', source: 'firmen', paint: {
+      map.addSource('firmen', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, cluster: true, clusterRadius: 80, clusterMaxZoom: 16 });
+      // Viele Punkte nah beieinander werden zu einem Kreis mit Zahl zusammengefasst
+      map.addLayer({ id: 'firmen-cluster', type: 'circle', source: 'firmen', filter: ['has', 'point_count'], paint: {
+        'circle-color': '#1f3a5f', 'circle-opacity': 0.88, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2,
+        'circle-radius': ['step', ['get', 'point_count'], 14, 20, 18, 100, 23, 500, 28]
+      } });
+      map.addLayer({ id: 'firmen-cluster-zahl', type: 'symbol', source: 'firmen', filter: ['has', 'point_count'], layout: {
+        'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['Noto Sans Bold'], 'text-size': 12, 'text-allow-overlap': true
+      }, paint: { 'text-color': '#fff' } });
+      map.on('click', 'firmen-cluster', function (e) {
+        var c = e.features[0];
+        map.getSource('firmen').getClusterExpansionZoom(c.properties.cluster_id).then(function (z) {
+          map.easeTo({ center: c.geometry.coordinates, zoom: z + 0.3 });
+        });
+      });
+      map.on('mouseenter', 'firmen-cluster', function () { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'firmen-cluster', function () { map.getCanvas().style.cursor = ''; });
+      map.addLayer({ id: 'firmen-glow', type: 'circle', source: 'firmen', filter: ['!', ['has', 'point_count']], paint: {
         'circle-color': ['get', 'farbe'], 'circle-blur': 1, 'circle-opacity': 0.7,
         'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 6, 14, 12, 17, 22]
       } });
-      map.addLayer({ id: 'firmen', type: 'circle', source: 'firmen', paint: {
+      map.addLayer({ id: 'firmen', type: 'circle', source: 'firmen', filter: ['!', ['has', 'point_count']], paint: {
         'circle-color': ['get', 'farbe'],
         'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 2.5, 14, 4.5, 16, 5, 18, 6],
         'circle-opacity': ['interpolate', ['linear'], ['zoom'], 15, 1, 17, 0.85],
         'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 11, 0.5, 15, 1.5]
       } });
-      map.addLayer({ id: 'firmen-name', type: 'symbol', source: 'firmen', minzoom: 18.5, layout: {
+      map.addLayer({ id: 'firmen-name', type: 'symbol', source: 'firmen', minzoom: 17, filter: ['!', ['has', 'point_count']], layout: {
         'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': 12, 'text-offset': [0, 1.1], 'text-anchor': 'top', 'text-optional': true
       }, paint: { 'text-halo-width': 1.5 } });
       setzeStil(EIN.cityMode ? 'city' : stilName);
@@ -1338,6 +1414,7 @@
   }
   $('cats').addEventListener('click', function (e) {
     var b = e.target.closest('.cat'); if (!b) return;
+    if (b.hasAttribute('data-offen')) { nurOffen = !nurOffen; zaehle('map_jetzt_offen'); return liste(); }
     if (b.hasAttribute('data-alle') || aktiv === b.dataset.k) return zurueck();
     if (!aktiv) merken();
     aktiv = b.dataset.k; liste();
