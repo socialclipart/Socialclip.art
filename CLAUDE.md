@@ -93,6 +93,8 @@ Dann im Browser `http://localhost:8080` öffnen.
 
 ### Geschäftlicher Stand
 - Stand Inhaber: noch kein Umsatz, viel Zeit, Budget 150–300 €. Engpass = erste zahlende Kunden.
-  Offen: Hat CarZone schon bezahlt?
+  Stand 31.10.2026: CarZone (Leon) 250 € vereinbart, noch NICHT bezahlt („meldet sich“).
+  FITMI (Milli & Iris, Nürnberg): 300 € nur für die Vorschau-Datei, ohne Hosting; Seite ist
+  nicht mehr online, fertige Fassung in Git-Historie (PR #85). Datei erst nach Zahlung übergeben.
 - Verworfene Alternativen: allgemeiner KI-Assistent (zu viel Konkurrenz), „SocialClip Check“ als öffentlicher
   Kundenmagnet (jetzt stattdessen als internes Akquise-Werkzeug gebaut), Bewertungs-Helfer (Google-Bewertungen sammeln, 29 €/Monat).
